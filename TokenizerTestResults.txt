@@ -83,3 +83,19 @@
   rest of string      | rest of string
   false               | false
   ===============================================
+  4                   | 4
+  testing             | testing
+  4                   | 4
+  testing             | testing
+  3                   | 3
+  the                 | the
+  the                 | the
+  the                 | the
+  peek                | peek
+  peek                | peek
+  true                | true
+  method              | method
+  true                | true
+  method              | method
+  false               | false
+  ===============================================

@@ -177,6 +177,24 @@ class TokenizerTests{
 		compareAndPrint("rest of string", newTok.restOfText());
 		compareAndPrint("false", "" + newTok.hasMoreTokens());
 		System.out.println("  ===============================================");
+        token = "testing the peek method";
+        newTok = new com.Ostermiller.util.StringTokenizer(token);
+        compareAndPrint("4", "" + newTok.countTokens());
+        compareAndPrint("testing", newTok.peek());
+        compareAndPrint("4", "" + newTok.countTokens());
+        compareAndPrint("testing", newTok.nextToken());
+        compareAndPrint("3", "" + newTok.countTokens());
+        compareAndPrint("the", newTok.peek());
+        compareAndPrint("the", newTok.peek());
+        compareAndPrint("the", newTok.nextToken());
+        compareAndPrint("peek", newTok.peek());
+        compareAndPrint("peek", newTok.nextToken());
+        compareAndPrint("true", "" + newTok.hasMoreTokens());
+        compareAndPrint("method", newTok.peek());        
+        compareAndPrint("true", "" + newTok.hasMoreTokens());
+        compareAndPrint("method", newTok.nextToken());        
+        compareAndPrint("false", "" + newTok.hasMoreTokens());
+        System.out.println("  ===============================================");
 
 
     }
