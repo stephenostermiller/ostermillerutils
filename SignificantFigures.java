@@ -79,6 +79,9 @@ package com.Ostermiller.util;
  * number = new SignificantFigures(result);
  * number.setLMSD(lsd, msd);
  * System.out.println(number);</pre>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class SignificantFigures extends Number {
 
@@ -86,24 +89,34 @@ public class SignificantFigures extends Number {
 	 * In the case the a number
 	 * could not be parsed, the original is stored
 	 * for toString purposes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private String original;
 	/**
 	 * Buffer of the significant digits.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private StringBuffer digits;
 	/**
 	 * The exponent of the digits if a
 	 * decimal place were inserted after
 	 * the first digit.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int mantissa = -1;
 	/**
 	 * positive if true, negative if false.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private boolean sign = true;
 	/**
 	 * True if this number has no non-zero digits.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private boolean isZero = false;
 
@@ -112,6 +125,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param number String representation of the number.
 	 * @throws NumberFormatException if the String is not a valid number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(String number) throws NumberFormatException {
 		original = number;
@@ -122,6 +137,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from a byte.
 	 *
 	 * @param number an 8 bit integer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(byte number){
 		original = Byte.toString(number);
@@ -136,6 +153,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from a short.
 	 *
 	 * @param number a 16 bit integer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	 public SignificantFigures(short number){
 		original = Short.toString(number);
@@ -150,6 +169,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from an integer.
 	 *
 	 * @param number a 32 bit integer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(int number){
 		original = Integer.toString(number);
@@ -164,6 +185,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from a long.
 	 *
 	 * @param number a 64 bit integer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(long number){
 		original = Long.toString(number);
@@ -178,6 +201,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from a float.
 	 *
 	 * @param number a 32 bit floating point.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(float number){
 		original = Float.toString(number);
@@ -192,6 +217,8 @@ public class SignificantFigures extends Number {
 	 * Create a SignificantFigures object from a double.
 	 *
 	 * @param number a 64 bit floating point.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(double number){
 		original = Double.toString(number);
@@ -208,6 +235,8 @@ public class SignificantFigures extends Number {
 	 * Short.
 	 *
 	 * @param number a number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(Number number){
 		original = number.toString();
@@ -250,7 +279,10 @@ public class SignificantFigures extends Number {
 	 * <p>
 	 * If this number is not a number or infinity zero
 	 * will be returned.
+	 *
 	 * @return the number of significant digits in this number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getNumberSignificantFigures() {
 		if (digits == null) return 0;
@@ -275,6 +307,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param place the desired place of the least significant digit.
 	 * @return this number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures setLSD(int place){
 		setLMSD(place, Integer.MIN_VALUE);
@@ -296,6 +330,8 @@ public class SignificantFigures extends Number {
 	 * @param leastPlace the desired place of the least significant digit or Integer.MIN_VALUE to ignore.
 	 * @param mostPlace the desired place of the most significant digit or Integer.MIN_VALUE to ignore.
 	 * @return this number
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures setLMSD(int leastPlace, int mostPlace){
 		if (digits != null && leastPlace != Integer.MIN_VALUE){
@@ -333,6 +369,8 @@ public class SignificantFigures extends Number {
 	 * will be returned.
 	 *
 	 * @return the decimal place of the least significant digit.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getLSD(){
 		if (digits == null) return Integer.MIN_VALUE;
@@ -346,6 +384,8 @@ public class SignificantFigures extends Number {
 	 * will be returned.
 	 *
 	 * @return the decimal place of the least significant digit.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getMSD(){
 		if (digits == null) return Integer.MIN_VALUE;
@@ -361,6 +401,8 @@ public class SignificantFigures extends Number {
 	 * A string such as "NaN" or "Infinity" may be returned by this method.
 	 *
 	 * @return representation of this number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String toString() {
 		if (digits == null) return original;
@@ -405,6 +447,8 @@ public class SignificantFigures extends Number {
 	 * A string such as "NaN" or "Infinity" may be returned by this method.
 	 *
 	 * @return representation of this number in scientific notation.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String toScientificNotation() {
 		if (digits == null) return original;
@@ -425,12 +469,16 @@ public class SignificantFigures extends Number {
 	/**
 	 * Parsing state:
 	 * Initial state before anything read.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int INITIAL = 0;
 	/**
 	 * Parsing state:
 	 * State in which a possible sign and
 	 * possible leading zeros have been read.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int LEADZEROS = 1;
 	/**
@@ -440,6 +488,8 @@ public class SignificantFigures extends Number {
 	 * has been read followed by some number of
 	 * zeros.  The decimal place has no
 	 * been encountered yet.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int MIDZEROS = 2;
 	/**
@@ -448,6 +498,8 @@ public class SignificantFigures extends Number {
 	 * at least one non-zero digit
 	 * has been read.  The decimal place has no
 	 * been encountered yet.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int DIGITS = 3;
 	/**
@@ -455,6 +507,8 @@ public class SignificantFigures extends Number {
 	 * State in which only a possible sign,
 	 * leading zeros, and a decimal point
 	 * have been encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int LEADZEROSDOT = 4;
 	/**
@@ -462,12 +516,16 @@ public class SignificantFigures extends Number {
 	 * State in which a possible sign,
 	 * at least one nonzero digit and a
 	 * decimal point have been encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int DIGITSDOT = 5;
 	/**
 	 * Parsing state:
 	 * State in which the exponent symbol
 	 * 'E' has been encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int MANTISSA = 6;
 	/**
@@ -476,6 +534,8 @@ public class SignificantFigures extends Number {
 	 * 'E' has been encountered followed
 	 * by a possible sign or some number
 	 * of digits.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int MANTISSADIGIT = 7;
 
@@ -488,6 +548,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param number String representation of a number.
 	 * @throws NumberFormatException if the string is not a valid number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void parse(String number) throws NumberFormatException {
 		int length = number.length();
@@ -714,6 +776,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param significantFigures desired number of significant figures.
 	 * @return This number.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures setNumberSignificantFigures(int significantFigures){
 		if (significantFigures <= 0) throw new IllegalArgumentException("Desired number of significant figures must be positive.");
@@ -778,6 +842,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type byte.
 	 * @throws NumberFormatException if this number cannot be converted to a byte.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public byte byteValue() throws NumberFormatException {
 		return Byte.parseByte(original);
@@ -788,6 +854,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type double.
 	 * @throws NumberFormatException if this number cannot be converted to a double.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public double doubleValue() throws NumberFormatException {
 		return Double.parseDouble(original);
@@ -798,6 +866,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type float.
 	 * @throws NumberFormatException if this number cannot be converted to a float.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public float floatValue() throws NumberFormatException {
 		return Float.parseFloat(original);
@@ -808,6 +878,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type int.
 	 * @throws NumberFormatException if this number cannot be converted to a int.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int intValue() throws NumberFormatException {
 		return Integer.parseInt(original);
@@ -818,6 +890,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type long.
 	 * @throws NumberFormatException if this number cannot be converted to a long.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public long longValue() throws NumberFormatException {
 		return Long.parseLong(original);
@@ -828,6 +902,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @return the numeric value represented by this object after conversion to type short.
 	 * @throws NumberFormatException if this number cannot be converted to a short.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public short shortValue() throws NumberFormatException {
 		return Short.parseShort(original);
@@ -839,6 +915,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(byte number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -852,6 +930,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(double number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -865,6 +945,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(float number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -878,6 +960,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(int number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -891,6 +975,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(long number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -904,6 +990,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(Number number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -917,6 +1005,8 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(short number, int significantFigures){
 		SignificantFigures sf = new SignificantFigures(number);
@@ -931,6 +1021,8 @@ public class SignificantFigures extends Number {
 	 * @param num the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 * @param throws NumberFormatException if the String is not a valid number.
+	 *
+	 * @since ostermillerutils 1.02.07
 	 */
 	public static String format(String number, int significantFigures) throws NumberFormatException {
 		SignificantFigures sf = new SignificantFigures(number);
