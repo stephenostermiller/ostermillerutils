@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1188
+personal_ws-1.1 en 1189
 aa
 aA
 aaa
@@ -406,6 +406,7 @@ getHeight
 getID
 getInputStream
 getKeyCode
+getLabelIdx
 getLabelIndex
 getLabels
 getLastLineNumber
