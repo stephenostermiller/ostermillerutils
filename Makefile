@@ -28,3 +28,11 @@ build:
 	cp *.* Makefile com/Ostermiller/util/
 	jar cfv utils.jar com/
 	rm -rf com/
+
+test:
+	$(JAVA) com.Ostermiller.util.TokenizerTests > out.txt
+	diff out.txt TokenizerTestResults.txt
+	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
+	diff out.txt CSVRegressionTestResults.txt
+	rm out.txt
+
