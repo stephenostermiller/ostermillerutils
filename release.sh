@@ -34,7 +34,7 @@ if [ "$FILES" ]
 then
 	echo Make: Uploading to web site: $FILES
     chmod -x install.sh
-	scp -r $FILES deadsea@ostermiller.org:www/utils
+	cp -r $FILES /home/steveo/pub/www/utils
     chmod +x install.sh
 fi
 
