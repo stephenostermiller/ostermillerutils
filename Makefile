@@ -39,7 +39,7 @@ javadocclean: junkclean
 	rm -rf doc/
 
 htmlsourceclean: junkclean
-	rm -f *.java.html *.properties.html syntax.css source.html
+	rm -f *.*.html syntax.css source.html
         
 testclean: junkclean
 	rm -f CircularBufferTests*.class CSVTest.class TokenizerTests.class
