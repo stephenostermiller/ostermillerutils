@@ -26,6 +26,9 @@ font-size:22pt;
 h2 {
 font-size:18pt;
 }
+h3 {
+font-size:14pt;
+}
 ul {
 list-style-position:inside;
 list-style-type:circle;
@@ -33,6 +36,16 @@ padding-left:0;
 padding-right:0;
 padding-top:.2cm;
 padding-bottom:.2cm;
+margin:0;
+}
+
+ul ul {
+list-style-position:inside;
+list-style-type:square;
+padding-left:1cm;
+padding-right:0;
+padding-top:0;
+padding-bottom:0;
 margin:0;
 }
 
@@ -64,11 +77,17 @@ width:13cm;
 overflow:scroll;
 }
 
-div.examplecode pre {
+div.examplecode pre, div.programinstructions pre {
 padding-top:.3cm;
 padding-bottom:.3cm;
 border-top:thin black ridge;
 border-bottom:thin black ridge;
+}
+
+div.programinstructions {
+border:thin black ridge;
+margin:.3cm;
+padding:.3cm;
 }
 
 div.i18n {
