@@ -24,7 +24,7 @@ all:
 	@$(MAKE) -s --no-print-directory htmlsource
 
 spell: *.html *.java
-	@echo Make: Running spell check.
+	@echo Make: Running spell check.$?
 	@./spell.sh $?
 	@touch spell
 
@@ -167,7 +167,7 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
 	@mkdir -p com/Ostermiller/util
-	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile Makefile com/Ostermiller/util/
+	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile com/Ostermiller/util/
 	@rm -f `find com/Ostermiller/util -name "*.lex" | sed s/.lex/.java/`
 	@rm -f com/Ostermiller/util/CircularBufferTests*.class com/Ostermiller/util/CSVTest.class com/Ostermiller/util/TokenizerTests.class
 	@mkdir -p gnu/getopt		
