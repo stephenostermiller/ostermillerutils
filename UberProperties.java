@@ -595,10 +595,10 @@ public class UberProperties {
 	 * UberProperties.
 	 *
 	 * @param in InputStream containing properties.
+	 * @param add whether parameters should add to parameters with the same name or replace them.
 	 * @throws IOException if an error occurs when reading.
 	 */
-	public void load(InputStream in) throws IOException {
-		PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
+	public void load(InputStream in, boolean add) throws IOException {PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
 		PropertiesToken t;
 		HashSet names = new HashSet();
 		StringBuffer comment = new StringBuffer();
@@ -637,7 +637,7 @@ public class UberProperties {
 					atStart = false;
 				}
 				String stName = unescape(name.toString());
-				if (names.contains(stName)){
+				if (add | names.contains(stName)){
 					addProperty(stName, unescape(value.toString()));
 				} else {
 					setProperty(stName, unescape(value.toString()));
@@ -650,6 +650,20 @@ public class UberProperties {
 				foundComment = false;
 			}
 		}
+	}
+
+	/**
+	 * Add the properties from the input stream to this
+	 * UberProperties.
+	 * <p>
+	 * Properties that are found replace any properties that
+	 * were there before.
+	 *
+	 * @param in InputStream containing properties.
+	 * @throws IOException if an error occurs when reading.
+	 */
+	public void load(InputStream in) throws IOException {
+		load(in, false);
 	}
 
 	/**
