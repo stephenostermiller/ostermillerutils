@@ -80,10 +80,7 @@ classes and connecting them.</p>
 <hr>
 
 <div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Create the buffer.</span><span class=whitespace>
-</span><span class=identifier>CircularByteBuffer</span><span class=whitespace> </span><span class=identifier>cbb</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CircularByteBuffer</span><span class=separator>();</span><span class=whitespace>
-
-</span><span class=comment>// Create the buffer.
+<pre><span class=comment>// Create the buffer.
 </span><span class=identifier>CircularByteBuffer cbb </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>CircularByteBuffer</span><span class=separator>();
 
 </span><span class=comment>// Fill the buffer.
