@@ -23,6 +23,9 @@ import java.io.*;
  * Regression test for CSV.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 class CSVTest {
 	public static void main (String[] args) throws IOException{

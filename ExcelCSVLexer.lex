@@ -69,6 +69,9 @@ import java.io.*;
  * scientific notation form.</li></ul>
  * This parser does not attempt to fix these excel conversions, but users should be aware
  * of them.</li></ul>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 
 %%
@@ -83,6 +86,8 @@ import java.io.*;
 	 * the name of the file to use as input
 	 *
 	 * @param args program arguments, of which the first is a filename
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args) {
 		InputStream in;
@@ -117,6 +122,8 @@ import java.io.*;
 	/** Checks that yycmap_instance is an instance variable (not just
 	 * a pointer to a static variable).  If it is a pointer to a static
 	 * variable, it will be cloned.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void ensureCharacterMapIsInstance(){
 		if (yycmap == yycmap_instance){
@@ -130,6 +137,8 @@ import java.io.*;
 	 * in parsing.  This method should be called before setting some character
 	 * to be a delimiter so that the parsing doesn't break.  Examples of bad
 	 * characters are quotes, commas, and whitespace.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private boolean charIsSafe(char c){
 		// There are two character classes that one could use as a delimiter.
@@ -145,6 +154,8 @@ import java.io.*;
 	 *
 	 * @param old the old character, its value will be returned to initial
 	 * @param two second character
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void updateCharacterClasses(char oldChar, char newChar){
 		// before modifying the character map, make sure it isn't static.
@@ -175,6 +186,8 @@ import java.io.*;
 	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		if (newDelim == delimiter) return; // no need to do anything.
@@ -194,6 +207,8 @@ import java.io.*;
 	 *
 	 * @param newQuote character to use for quoting.
 	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException {
 		if (newQuote == quote) return; // no need to do anything.
@@ -236,6 +251,8 @@ import java.io.*;
 	 * used to indicate comment lines.
 	 *
 	 * @param commentDelims list of characters a comment line may start with.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setCommentStart(String commentDelims){
 		this.commentDelims = commentDelims;
@@ -253,6 +270,8 @@ import java.io.*;
 	 * If no tokens have been returned, the line number is undefined.
 	 *
 	 * @return line number of the last token.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getLineNumber(){
 		return lines;
