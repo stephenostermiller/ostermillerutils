@@ -2,7 +2,7 @@
  * MD5 implementation
  * written Santeri Paavolainen, Helsinki Finland 1996
  * (c) Santeri Paavolainen, Helsinki Finland 1996
- * modifications Copyright (C) 2002-2004 Stephen Ostermiller 
+ * modifications Copyright (C) 2002-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,12 +16,12 @@
  * GNU General Public License for more details.
  *
  * See COPYING.TXT for details.
- * 
+ *
  * The original work by Santeri Paavolainen can be found at
  * http://www.helsinki.fi/~sjpaavol/programs/md5/
- * 
- * This Java class has been derived from the RSA Data Security, Inc. MD5 
- * Message-Digest Algorithm and its reference implementation. 
+ *
+ * This Java class has been derived from the RSA Data Security, Inc. MD5
+ * Message-Digest Algorithm and its reference implementation.
  */
 package com.Ostermiller.util;
 
@@ -60,7 +60,7 @@ public class MD5 {
 	 */
 	public MD5 () {
 		reset();
-	} 
+	}
 
 	/**
 	 * Command line program that will take files as arguments
@@ -96,13 +96,13 @@ public class MD5 {
 			finalState.copy(workingState);
 			long bitCount = finalState.bitCount;
 			// Compute the number of left over bits
-			int leftOver = (int) (((bitCount >>> 3)) & 0x3f); 
+			int leftOver = (int) (((bitCount >>> 3)) & 0x3f);
 			// Compute the amount of padding to add based on number of left over bits.
 			int padlen = (leftOver < 56) ? (56 - leftOver) : (120 - leftOver);
 			// add the padding
 			update(finalState, padding, 0, padlen);
 			// add the length (computed before padding was added)
-			update(finalState, encode(bitCount), 0, 8);   
+			update(finalState, encode(bitCount), 0, 8);
 			finalState.valid = true;
 		}
 		// make a copy of the hash before returning it.
@@ -122,7 +122,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given byte array.
-	 * 
+	 *
 	 * @param b byte array for which an MD5 hash is desired.
 	 * @return Array of 16 bytes, the hash of all updated bytes.
 	 *
@@ -136,7 +136,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given byte array.
-	 * 
+	 *
 	 * @param b byte array for which an MD5 hash is desired.
 	 * @return 32-character hex representation the data's MD5 hash.
 	 *
@@ -150,7 +150,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash the data on the given InputStream.
-	 * 
+	 *
 	 * @param in byte array for which an MD5 hash is desired.
 	 * @return Array of 16 bytes, the hash of all updated bytes.
 	 * @throws IOException if an I/O error occurs.
@@ -165,11 +165,11 @@ public class MD5 {
 			md5.update(buffer, read);
 		}
 		return md5.getHash();
-	}   
+	}
 
 	/**
 	 * Gets the MD5 hash the data on the given InputStream.
-	 * 
+	 *
 	 * @param in byte array for which an MD5 hash is desired.
 	 * @return 32-character hex representation the data's MD5 hash.
 	 * @throws IOException if an I/O error occurs.
@@ -188,7 +188,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given file.
-	 * 
+	 *
 	 * @param f file for which an MD5 hash is desired.
 	 * @return Array of 16 bytes, the hash of all updated bytes.
 	 * @throws IOException if an I/O error occurs.
@@ -201,7 +201,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given file.
-	 * 
+	 *
 	 * @param f file array for which an MD5 hash is desired.
 	 * @return 32-character hex representation the data's MD5 hash.
 	 * @throws IOException if an I/O error occurs.
@@ -216,7 +216,7 @@ public class MD5 {
 	 * Gets the MD5 hash of the given String.
 	 * The string is converted to bytes using the current
 	 * platform's default character encoding.
-	 * 
+	 *
 	 * @param s String for which an MD5 hash is desired.
 	 * @return Array of 16 bytes, the hash of all updated bytes.
 	 *
@@ -232,7 +232,7 @@ public class MD5 {
 	 * Gets the MD5 hash of the given String.
 	 * The string is converted to bytes using the current
 	 * platform's default character encoding.
-	 * 
+	 *
 	 * @param s String for which an MD5 hash is desired.
 	 * @return 32-character hex representation the data's MD5 hash.
 	 *
@@ -247,7 +247,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given String.
-	 * 
+	 *
 	 * @param s String for which an MD5 hash is desired.
 	 * @param enc The name of a supported character encoding.
 	 * @return Array of 16 bytes, the hash of all updated bytes.
@@ -263,7 +263,7 @@ public class MD5 {
 
 	/**
 	 * Gets the MD5 hash of the given String.
-	 * 
+	 *
 	 * @param s String for which an MD5 hash is desired.
 	 * @param enc The name of a supported character encoding.
 	 * @return 32-character hex representation the data's MD5 hash.
@@ -299,7 +299,7 @@ public class MD5 {
 		return getHashString();
 	}
 
-	/** 
+	/**
 	 * Update this hash with the given data.
 	 * <p>
 	 * A state may be passed into this method so that we can add padding
@@ -325,15 +325,15 @@ public class MD5 {
 			length = buffer.length - offset;
 		}
 
-		// compute number of bytes mod 64 
-		// this is what we have sitting in a buffer 
+		// compute number of bytes mod 64
+		// this is what we have sitting in a buffer
 		// that have not been hashed yet
 		int index = (int) (state.bitCount >>> 3) & 0x3f;
 
 		// add the length to the count (translate bytes to bits)
 		state.bitCount += length << 3;
 
-		int partlen = 64 - index;        
+		int partlen = 64 - index;
 
 		int i = 0;
 		if (length >= partlen) {
@@ -384,7 +384,7 @@ public class MD5 {
 		update(buffer, 0, length);
 	}
 
-	/** 
+	/**
 	 * Update this hash with the given data.
 	 *
 	 * @param buffer Array of bytes to be hashed.
@@ -419,7 +419,7 @@ public class MD5 {
 	 */
 	private void update (MD5State state, long l) {
 		update(
-			state, 
+			state,
 			new byte[] {
 				(byte)((l >>> 0) & 0xff),
 				(byte)((l >>> 8) & 0xff),
@@ -439,18 +439,18 @@ public class MD5 {
 	 * Update this hash with a String.
 	 * The string is converted to bytes using the current
 	 * platform's default character encoding.
-	 * 
+	 *
 	 * @param s String to be hashed.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void update (String s) {
 		update(s.getBytes());
-	}   
+	}
 
 	/**
 	 * Update this hash with a String.
-	 * 
+	 *
 	 * @param s String to be hashed.
 	 * @param enc The name of a supported character encoding.
 	 * @throws UnsupportedEncodingException If the named encoding is not supported.
@@ -482,23 +482,23 @@ public class MD5 {
 	 * Temporary buffer cached here for performance reasons.
 	 *
 	 * @since ostermillerutils 1.00.00
-	 */   
+	 */
 	private int[] decodeBuffer = new int[16];
 
-	/** 
+	/**
 	 * 64 bytes of padding that can be added if the length
 	 * is not divisible by 64.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	private static final byte padding[] = {
-		(byte) 0x80, 0, 0, 0, 0, 0, 0, 0, 
-				0, 0, 0, 0, 0, 0, 0, 0, 
-				0, 0, 0, 0, 0, 0, 0, 0, 
-				0, 0, 0, 0, 0, 0, 0, 0, 
-				0, 0, 0, 0, 0, 0, 0, 0, 
+		(byte) 0x80, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0, 0, 0, 0, 0,
 	};
 
@@ -532,7 +532,7 @@ public class MD5 {
 		}
 
 		/**
-		 * 128-byte state 
+		 * 128-byte state
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
@@ -542,7 +542,7 @@ public class MD5 {
 		 * 64-bit count of the number of bits that have been hashed.
 		 *
 		 * @since ostermillerutils 1.00.00
-		 */        
+		 */
 		public long bitCount;
 
 		/**
@@ -552,11 +552,11 @@ public class MD5 {
 		 */
 		public byte buffer[] = new byte[64];
 
-		public MD5State() { 
+		public MD5State() {
 			reset();
 		}
 
-		/** 
+		/**
 		 * Set this state to be exactly the same as some other.
 		 *
 		 * @param from state to copy from.
@@ -579,7 +579,7 @@ public class MD5 {
 	/**
 	 * Turns array of bytes into string representing each byte as
 	 * a two digit unsigned hex number.
-	 * 
+	 *
 	 * @param hash Array of bytes to convert to hex-string
 	 * @return  Generated hex string
 	 *
@@ -590,7 +590,7 @@ public class MD5 {
 		for (int i=0; i<hash.length; i++){
 			int intVal = hash[i] & 0xff;
 			if (intVal < 0x10){
-				// append a zero before a one digit hex 
+				// append a zero before a one digit hex
 				// number to make it two digits.
 				buf.append("0");
 			}
@@ -600,7 +600,7 @@ public class MD5 {
 	}
 
 	private static int FF (int a, int b, int c, int d, int x, int s, int ac) {
-		a += ((b & c) | (~b & d)); 
+		a += ((b & c) | (~b & d));
 		a += x;
 		a += ac;
 		//return rotateLeft(a, s) + b;
@@ -609,7 +609,7 @@ public class MD5 {
 	}
 
 	private static int GG (int a, int b, int c, int d, int x, int s, int ac) {
-		a += ((b & d) | (c & ~d)); 
+		a += ((b & d) | (c & ~d));
 		a += x;
 		a += ac;
 		//return rotateLeft(a, s) + b;
@@ -617,8 +617,8 @@ public class MD5 {
 		return a + b;
 	}
 
-	private static int HH (int a, int b, int c, int d, int x, int s, int ac) { 
-		a += (b ^ c ^ d); 
+	private static int HH (int a, int b, int c, int d, int x, int s, int ac) {
+		a += (b ^ c ^ d);
 		a += x;
 		a += ac;
 		//return rotateLeft(a, s) + b;
@@ -627,9 +627,9 @@ public class MD5 {
 	}
 
 	private static int II (int a, int b, int c, int d, int x, int s, int ac) {
-		a += (c ^ (b | ~d)); 
+		a += (c ^ (b | ~d));
 		a += x;
-		a += ac;        
+		a += ac;
 		//return rotateLeft(a, s) + b;
 		a = (a << s) | (a >>> (32 - s));
 		return a + b;
@@ -664,16 +664,16 @@ public class MD5 {
 		int i, j;
 		for (i = j = 0; j < len; i++, j += 4) {
 			decodeBuffer[i] = (
-				(int) (buffer[j + offset] & 0xff)) | 
+				(int) (buffer[j + offset] & 0xff)) |
 				(((int) (buffer[j + 1 + offset] & 0xff)) << 8) |
-				(((int) (buffer[j + 2 + offset] & 0xff)) << 16) | 
+				(((int) (buffer[j + 2 + offset] & 0xff)) << 16) |
 				(((int) (buffer[j + 3 + offset] & 0xff)) << 24
 			);
 		}
 		return decodeBuffer;
 	}
 
-	private static void transform(MD5State state, int[] x){         
+	private static void transform(MD5State state, int[] x){
 		int a = state.state[0];
 		int b = state.state[1];
 		int c = state.state[2];
