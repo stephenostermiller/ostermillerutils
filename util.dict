@@ -1,4 +1,4 @@
-personal_ws-1.1 english 851
+personal_ws-1.1 english 859
 aa
 aaa
 AAAAAABB
@@ -46,6 +46,7 @@ AstringB
 asymp
 atilde
 atStart
+auml
 availableInd
 avoidRepetition
 badcfe
@@ -204,6 +205,7 @@ eldagx
 eldagxfqQvV
 elementAt
 emptyReturned
+emsp
 endian
 endsWith
 ensp
@@ -636,6 +638,8 @@ returnEmptyTokens
 retval
 reversebase
 reverseBase
+rfloor
+rlm
 rotateLeft
 RSA
 rsaquo
@@ -721,7 +725,10 @@ stringLength
 StringReader
 StringTokenizer
 strLength
+sube
+supe
 systemResource
+szlig
 tabInd
 tabStops
 tabWidth
@@ -775,6 +782,7 @@ uml
 un
 unencoded
 unescape
+unescaped
 unescapeHTML
 unexpectedchar
 unexpectedcharforce
