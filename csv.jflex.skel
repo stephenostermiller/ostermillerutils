@@ -132,50 +132,7 @@
       return false;
     }
   }
-
-    
-  /**
-   * Closes the input stream.
-   */
-  private final void yyclose() throws java.io.IOException {
-    yy_atEOF = true;            /* indicate end of file */
-    yy_endRead = yy_startRead;  /* invalidate buffer    */
-
-    if (yy_reader != null)
-      yy_reader.close();
-  }
-
-
-  /**
-   * Closes the current stream, and resets the
-   * scanner to read from a new input stream.
-   *
-   * All internal variables are reset, the old input stream 
-   * <b>cannot</b> be reused (internal buffer is discarded and lost).
-   * Lexical state is set to <tt>YY_INITIAL</tt>.
-   *
-   * @param reader   the new input stream 
-   */
-  private final void yyreset(java.io.Reader reader) throws java.io.IOException {
-    yyclose();
-    yy_reader = reader;
-    yy_atBOL  = true;
-    yy_atEOF  = false;
-    yy_endRead = yy_startRead = 0;
-    yy_currentPos = yy_markedPos = yy_pushbackPos = 0;
-    yyline = yychar = yycolumn = 0;
-    yy_lexical_state = YYINITIAL;
-  }
-
-
-  /**
-   * Returns the current lexical state.
-   */
-  private final int yystate() {
-    return yy_lexical_state;
-  }
-
-
+  
   /**
    * Enters a new lexical state
    *
@@ -185,30 +142,12 @@
     yy_lexical_state = newState;
   }
 
-
   /**
    * Returns the text matched by the current regular expression.
    */
   private final String yytext() {
     return new String( yy_buffer, yy_startRead, yy_markedPos-yy_startRead );
   }
-
-
-  /**
-   * Returns the character at position <tt>pos</tt> from the 
-   * matched text. 
-   * 
-   * It is equivalent to yytext().charAt(pos), but faster
-   *
-   * @param pos the position of the character to fetch. 
-   *            A value from 0 to yylength()-1.
-   *
-   * @return the character at position pos
-   */
-  private final char yycharat(int pos) {
-    return yy_buffer[yy_startRead+pos];
-  }
-
 
   /**
    * Returns the length of the matched text region.
@@ -259,7 +198,6 @@
 
     yy_markedPos -= number;
   }
-
 
 --- yy_doEof
   /**
