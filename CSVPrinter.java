@@ -107,6 +107,14 @@ public class CSVPrinter {
     }
 
     /**
+     * Output a blank line
+     */
+    public void println(){
+        out.println();
+        newLine = true;
+    }
+
+    /**
      * Print a single line of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
      * newLine characters will be escaped.
