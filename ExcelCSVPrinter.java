@@ -515,7 +515,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private String escapeAndQuote(String value){
-		String s = StringHelper.replace(value, Character.toString(quoteChar), Character.toString(quoteChar) + Character.toString(quoteChar));
+		String s = StringHelper.replace(value, String.valueOf(quoteChar), String.valueOf(quoteChar) + String.valueOf(quoteChar));
 		return (new StringBuffer(2 + s.length())).append(quoteChar).append(s).append(quoteChar).toString();
 	}
 
