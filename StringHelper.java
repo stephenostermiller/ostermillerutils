@@ -389,7 +389,7 @@ public class StringHelper {
 	public static String escapeHTML(String s){
 		int length = s.length();
 		int newLength = length;
-		  boolean someCharacterEscaped = false;
+		boolean someCharacterEscaped = false;
 		// first check for characters that might
 		// be dangerous and calculate a length
 		// of the string that has escapes.
