@@ -29,7 +29,7 @@ ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
 junkclean:
-	rm -f *~ ~* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
+	rm -rf *~ ~* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
 
 buildclean: junkclean
 	rm -f utils.jar
@@ -38,13 +38,13 @@ javadocclean: junkclean
 	rm -rf doc/
 
 htmlsourceclean: junkclean
-	rm -rf *.java.html syntax.css
+	rm -f *.java.html *.properties.html syntax.css source.html
 
 clean: buildclean javadocclean htmlsourceclean
 	rm -f *.class
         
 allclean: clean
-	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
+	rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
 
 javadoc: javadocclean
 	mv -f package.html temp
@@ -86,10 +86,13 @@ install:
 	./install.sh
 
 htmlsource:
+	rm -rf src/
 	mkdir src
-	cp *.java src
+	cp *.java *.properties *.lex src
+	rm -f `find src -name "*.lex" | sed s/.lex/.java/`
 	$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
-	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.java
-	mv src/*.java.html src/*.css .
+	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.java src/*.properties
+	mv src/*.*.html src/*.css .
 	rm -rf src
+	./source.sh
 	
