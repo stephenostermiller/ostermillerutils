@@ -41,6 +41,15 @@ public class StraightStreamReader extends Reader{
     private InputStream in;
 
     /**
+     * A byte array to be used for calls to the InputStream.  This
+     * is cached as a class variable to avoid object creation and
+     * deletion each time a read is called.  This buffer may be
+     * null and may not be large enough.  Make sure to check it
+     * before using it.
+     */
+    private byte[] buffer;
+
+    /**
      * Create a StraightStreamReader from an InputStream
      *
      * @param in InputStream to wrap a Reader around.
@@ -116,7 +125,12 @@ public class StraightStreamReader extends Reader{
 	 * @throws IOException If an I/O error occurs
      */
   	public int read(char[] cbuf, int off, int len) throws IOException {
-		byte[] buffer = new byte[len];
+        // ensure the capacity of the buffer that we will be using
+        // to read from the input stream
+		if (buffer == null || buffer.length < len){
+			buffer = new byte[len];
+        }
+        // read from the input stream and copy it to the character array
         int length = in.read(buffer, 0, len);
         for (int i=0; i<length; i++){
             cbuf[off+i] = (char)(0xFF & buffer[i]);
