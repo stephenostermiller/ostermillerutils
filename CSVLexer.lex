@@ -185,14 +185,14 @@ import java.io.*;
 	 * to a quote or other character that has special meaning in CSV.
 	 *
 	 * @param newDelim delimiter to which to switch.
-	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void changeDelimiter(char newDelim) throws BadDelimeterException {
+	public void changeDelimiter(char newDelim) throws BadDelimiterException {
 		if (newDelim == delimiter) return; // no need to do anything.
 		if (!charIsSafe(newDelim)){
-			throw new BadDelimeterException(newDelim + " is not a safe delimiter.");
+			throw new BadDelimiterException(newDelim + " is not a safe delimiter.");
 		}
 		updateCharacterClasses(delimiter, newDelim);
 		// keep a record of the current delimiter.
