@@ -105,6 +105,18 @@ border-top:thin black ridge;
 border-bottom:thin black ridge;
 }
 
+div.securityalert {
+float:left;
+border:thin black ridge;
+margin:.3cm;
+padding:.3cm;
+width:5cm;
+}
+
+div.securityalert h3 {
+color:red;
+}
+
 div.programinstructions {
 border:thin black ridge;
 margin:.3cm;

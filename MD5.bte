@@ -12,6 +12,12 @@
 );</span></pre>
 </div>
 
+<div class=securityalert><h3>Security Alert</h3>
+The MD5 class had a bug in version 1.02.23 and earlier that miscalculated MD5 sums for inputs
+of certain odd byte lengths.  Please consider the implications for your application and
+upgrade to the most recent version.
+</div>
+
 
 <p>This class takes as input a message of arbitrary length and produces as output
 a 128-bit "fingerprint" or "message digest" of the input. It is conjectured that 
@@ -21,7 +27,7 @@ digest. The MD5 algorithm is intended for digital signature applications, where
 a large file must be "compressed" in a secure manner before being encrypted with 
 a private (secret) key under a public-key cryptosystem such as RSA.</p>
 
-<p>This class is based on work by <a href="http://www.cs.hut.fi/~santtu/java/">Santeri Paavolainen</a>.
+<p>This class is based on work by <a href="http://www.helsinki.fi/~sjpaavol/programs/md5/">Santeri Paavolainen</a>.
 and <a href="http://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.  This implementation is several times
 faster and much more memory efficient than Santeri's implementation.</p>
 

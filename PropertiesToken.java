@@ -88,6 +88,6 @@ class PropertiesToken {
 				case VALUE: idString = "VALUE"; break;
 			}
 			idString = StringHelper.postpad(idString, 21);
-		return idString + contents;
+		return idString + '"' + contents + '"';
 	}
 }

@@ -784,6 +784,9 @@ public class Browser {
 	 * if (ok_pressed){
 	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
 	 * }
+	 *
+	 * @param parent window into which panel with eventually be placed.
+	 * @since ostermillerutils 1.02.22
 	 */
 	public static JPanel getDialogPanel(Window parent){
 		dialogParent = parent;
@@ -1040,6 +1043,8 @@ public class Browser {
 	 * if (ok_pressed){
 	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
 	 * }
+	 *
+	 * @since ostermillerutils 1.02.22
 	 */
 	public static void initPanel(){
 		setCommands(exec);
@@ -1055,6 +1060,8 @@ public class Browser {
 	 * if (ok_pressed){
 	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
 	 * }
+	 *
+	 * @since ostermillerutils 1.02.22
 	 */
 	public static void userOKedPanelChanges(){
 		java.util.StringTokenizer tok = new java.util.StringTokenizer(commandLinesArea.getText(), "\r\n", false);

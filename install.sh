@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash --noprofile
 
 directory=/usr/local/bin
 utils=utils.jar
@@ -34,58 +34,62 @@ fi
 
 if [ ! -w "$directory" ]
 then
+    directory=~/bin
+fi
+
+if [ ! -w "$directory" ]
+then
     echo "You do not have permission to write in"
     echo "$directory"
-    echo "Please become superuser."
     exit 1
 fi
 
 if [ ! -e $directory/$RandPass ] || [ ! -z $1 ]
 then
-    echo "#!/bin/bash" > $directory/$RandPass
+    echo "#!/bin/bash --noprofile" > $directory/$RandPass
     echo "java -classpath $workingdir/$utils com.Ostermiller.util.RandPass \"\$@\"" >> $directory/$RandPass
     chmod 755 $directory/$RandPass
-    echo "$RandPass installed."
+    echo "$RandPass installed in $directory."
 else
     echo "$directory/$RandPass already exists.  Use -f to overwrite."
 fi
 
 if [ ! -e $directory/$LineEnds ] || [ ! -z $1 ]
 then
-    echo "#!/bin/bash" > $directory/$LineEnds
+    echo "#!/bin/bash --noprofile" > $directory/$LineEnds
     echo "java -classpath $workingdir/$utils com.Ostermiller.util.LineEnds \"\$@\"" >> $directory/$LineEnds
     chmod 755 $directory/$LineEnds
-    echo "$LineEnds installed."
+    echo "$LineEnds installed in $directory."
 else
     echo "$directory/$LineEnds already exists.  Use -f to overwrite."
 fi
 
 if [ ! -e $directory/$MD5 ] || [ ! -z $1 ]
 then
-    echo "#!/bin/bash" > $directory/$MD5
+    echo "#!/bin/bash --noprofile" > $directory/$MD5
     echo "java -classpath $workingdir/$utils com.Ostermiller.util.MD5 \"\$@\"" >> $directory/$MD5
     chmod 755 $directory/$MD5
-    echo "$MD5 installed."
+    echo "$MD5 installed in $directory."
 else
     echo "$directory/$MD5 already exists.  Use -f to overwrite."
 fi
 
 if [ ! -e $directory/$Tabs ] || [ ! -z $1 ]
 then
-    echo "#!/bin/bash" > $directory/$Tabs
+    echo "#!/bin/bash --noprofile" > $directory/$Tabs
     echo "java -classpath $workingdir/$utils com.Ostermiller.util.Tabs \"\$@\"" >> $directory/$Tabs
     chmod 755 $directory/$Tabs
-    echo "$Tabs installed."
+    echo "$Tabs installed in $directory."
 else
     echo "$directory/$Tabs already exists.  Use -f to overwrite."
 fi
 
 if [ ! -e $directory/$Base64 ] || [ ! -z $1 ]
 then
-    echo "#!/bin/bash" > $directory/$Base64
+    echo "#!/bin/bash --noprofile" > $directory/$Base64
     echo "java -classpath $workingdir/$utils com.Ostermiller.util.Base64 \"\$@\"" >> $directory/$Base64
     chmod 755 $directory/$Base64
-    echo "$Base64 installed."
+    echo "$Base64 installed in $directory."
 else
     echo "$directory/$Base64 already exists.  Use -f to overwrite."
 fi

@@ -258,7 +258,7 @@ import java.io.*;
 		this.commentDelims = commentDelims;
 	}
 	
-	private boolean addLine = true;
+	private int addLine = 1;
 	private int lines = 0;
 	
 	/**
@@ -300,10 +300,8 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 %%
 
 <YYINITIAL> {Value} {
-	if (addLine) {
-		lines++;
-		addLine = false;
-	}
+	lines+=addLine;
+	addLine = 0;
 	String text = yytext();
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
@@ -313,26 +311,20 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 	}
 }
 <YYINITIAL> {Separator} {
-	if (addLine) {
-		lines++;
-		addLine = false;
-	}
+	lines+=addLine;
+	addLine = 0;
 	yybegin(BEFORE);
 	return("");
 }
 <YYINITIAL> {StringLiteral} {
-	if (addLine) {
-		lines++;
-		addLine = false;
-	}
+	lines+=addLine;
+	addLine = 0;
 	yybegin(AFTER);
 	return(unescape(yytext()));	
 }
 <YYINITIAL> {FalseLiteral} {
-	if (addLine) {
-		lines++;
-		addLine = false;
-	}
+	lines+=addLine;
+	addLine = 0;
 	yybegin(YYINITIAL);
 	return(yytext());	
 }
@@ -354,19 +346,19 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 }
 <BEFORE> ({EOL}) {
 	yybegin(YYINITIAL);
-	addLine = true;
+	addLine++;
 	return("");
 }
 <BEFORE> <<EOF>> {
 	yybegin(YYINITIAL);
-	addLine = true;
+	addLine++;
 	return("");
 }
 <AFTER> {Separator} {
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({EOL}) {
-	addLine = true;
+	addLine++;
 	yybegin(YYINITIAL);
 }
 <AFTER> {IgnoreAfter} {

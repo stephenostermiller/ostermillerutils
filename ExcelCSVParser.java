@@ -1,6 +1,6 @@
 /*
  * Read files in Excel comma separated value format.
- * Copyright (C) 2001-2003 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -10,7 +10,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * See COPYING.TXT for details.
@@ -33,9 +33,9 @@ import java.util.*;
  * When the field is in quotes, any quote literals must be escaped by two quotes ("").
  * Text that comes after quotes that have been closed but come before the next comma will be ignored.
  * <P>
- * Empty fields are returned as as String of length zero: "".  The following line has three empty
- * fields and three non-empty fields in it.  There is an empty field on each end, and one in the
- * middle.  One token is returned as a space.<br>
+ * Empty fields are returned as as String of length zero: "". The following line has three empty
+ * fields and three non-empty fields in it. There is an empty field on each end, and one in the
+ * middle. One token is returned as a space.<br>
  * <pre>,second,, ,fifth,</pre>
  * <P>
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
@@ -45,8 +45,8 @@ import java.util.*;
  * <pre>
  * ExcelCSVParser shredder = new ExcelCSVParser(System.in);
  * String t;
- * while ((t = shredder.nextValue()) != null) {
- *	   System.out.println("" + shredder.lastLineNumber() + " " + t);
+ * while ((t = shredder.nextValue()) != null){
+ *     System.out.println("" + shredder.lastLineNumber() + " " + t);
  * }
  * </pre>
  * <P>
@@ -95,7 +95,7 @@ public class ExcelCSVParser implements CSVParse {
 	private ExcelCSVLexer lexer;
 
 	/**
-	 * Token cache.  Used for when we request a token
+	 * Token cache. Used for when we request a token
 	 * from the lexer but can't return it because its
 	 * on the next line.
 	 *
@@ -121,6 +121,22 @@ public class ExcelCSVParser implements CSVParse {
 	private int lastLine = -1;
 
 	/**
+	 * Create a parser to parse delimited values from
+	 * an InputStream.
+	 *
+	 * @param in stream that contains comma separated values.
+	 * @param delimiter record separator
+	 *
+	 * @throws BadDelimiterException if the specified delimiter cannot be used
+	 *
+	 * @since ostermillerutils 1.02.24
+	 */
+	public ExcelCSVParser(InputStream in, char delimiter) throws BadDelimiterException {
+		lexer = new ExcelCSVLexer(in);
+		changeDelimiter(delimiter);
+	}
+
+	/**
 	 * Create a parser to parse comma separated values from
 	 * an InputStream.
 	 *
@@ -128,8 +144,24 @@ public class ExcelCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public ExcelCSVParser(InputStream in) {
+	public ExcelCSVParser(InputStream in){
 		lexer = new ExcelCSVLexer(in);
+	}
+
+	/**
+	 * Create a parser to parse delimited values from
+	 * a Reader.
+	 *
+	 * @param in reader that contains comma separated values.
+	 * @param delimiter record separator
+	 *
+	 * @throws BadDelimiterException if the specified delimiter cannot be used
+	 *
+	 * @since ostermillerutils 1.02.24
+	 */
+	public ExcelCSVParser(Reader in, char delimiter) throws BadDelimiterException {
+		lexer = new ExcelCSVLexer(in);
+		changeDelimiter(delimiter);
 	}
 
 	/**
@@ -140,7 +172,7 @@ public class ExcelCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public ExcelCSVParser(Reader in) {
+	public ExcelCSVParser(Reader in){
 		lexer = new ExcelCSVLexer(in);
 	}
 
@@ -207,7 +239,7 @@ public class ExcelCSVParser implements CSVParse {
 			lineNumber = lineCache;
 		}
 		while ((tokenCache = lexer.getNextToken()) != null
-				&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)) {
+				&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)){
 			v.add(tokenCache);
 			lineNumber = lexer.getLineNumber();
 		}
@@ -227,7 +259,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * values that have not already been read will be included.
 	 * <p>
 	 * Each line of the file that has at least one value will be
-	 * represented.  Comments and empty lines are ignored.
+	 * represented. Comments and empty lines are ignored.
 	 * <p>
 	 * The resulting double array may be jagged.
 	 *
@@ -286,7 +318,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * <pre> # Comment
 	 * ; Another Comment
 	 * ! Yet another comment</pre>
-	 * By default there are no comments in CVS files.  Commas and quotes may not be
+	 * By default there are no comments in CVS files. Commas and quotes may not be
 	 * used to indicate comment lines.
 	 *
 	 * @param commentDelims list of characters a comment line may start with.
@@ -312,11 +344,11 @@ public class ExcelCSVParser implements CSVParse {
 	 * Parse the given file for comma separated values and print the results
 	 * to System.out.
 	 *
-	 * @param args First argument is the file name.  System.in used if no filename given.
+	 * @param args First argument is the file name. System.in used if no filename given.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	private static void main(String[] args) {
+	private static void main(String[] args){
 		InputStream in;
 		try {
 			if (args.length > 0){
@@ -333,9 +365,9 @@ public class ExcelCSVParser implements CSVParse {
 			} else {
 				in = System.in;
 			}
-			ExcelCSVParser p  = new ExcelCSVParser(in);
+			ExcelCSVParser p = new ExcelCSVParser(in);
 			String[] t;
-			while ((t = p.getLine()) != null) {
+			while ((t = p.getLine()) != null){
 				for (int i=0; i<t.length; i++){
 					System.out.print('"' + t[i] + '"');
 					if (i<t.length-1){
@@ -366,6 +398,24 @@ public class ExcelCSVParser implements CSVParse {
 	}
 
 	/**
+	 * Parse the delimited data from a string.
+	 *
+	 * @param s string with delimited data to parse.
+	 * @param delimiter record separator
+	 * @return parsed data.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
+	 *
+	 * @since ostermillerutils 1.02.24
+	 */
+	public static String[][] parse(String s, char delimiter) throws BadDelimiterException {
+		try {
+			return (new ExcelCSVParser(new StringReader(s), delimiter)).getAllValues();
+		} catch (IOException x){
+			return null;
+		}
+	}
+
+	/**
 	 * Parse the comma delimited data from a stream.
 	 *
 	 * @param in Reader with comma delimited data to parse.
@@ -376,5 +426,21 @@ public class ExcelCSVParser implements CSVParse {
 	 */
 	public static String[][] parse(Reader in) throws IOException {
 		return (new ExcelCSVParser(in)).getAllValues();
+	}
+
+
+	/**
+	 * Parse the delimited data from a stream.
+	 *
+	 * @param in Reader with delimited data to parse.
+	 * @param delimiter record separator
+	 * @return parsed data.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.02.24
+	 */
+	public static String[][] parse(Reader in, char delimiter) throws IOException, BadDelimiterException {
+		return (new ExcelCSVParser(in, delimiter)).getAllValues();
 	}
 }

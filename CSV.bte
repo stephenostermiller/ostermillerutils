@@ -10,7 +10,7 @@
 </span><span class=separator>);
 
 </span><span class=comment>// Write to the printer
-</span><span class=identifier>csvp</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(
+</span><span class=identifier>csvp</span><span class=separator>.</span><span class=identifier>writeln</span><span class=separator>(
     </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
         </span><span class=literal>&quot;hello&quot;</span><span class=separator>,</span><span class=literal>&quot;world&quot;
     </span><span class=separator>}
@@ -23,7 +23,7 @@ escape special characters.  Comments can easily be written and correct line begi
 
 <p>Some applications do not accept CSV input according to the generally accepted standards.  One such application is the Microsoft Excel 
 spreadsheet.  A separate class must be use to write 
-<a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.  Both CSVPrinter and ExcelCSVPrinter
+<a href="ExcelCSV.html">Excel CSV</a>.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |
@@ -65,6 +65,8 @@ not be able to handle it.  One such application is the Microsoft Excel spreadshe
 separate class must be use to read 
 <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.  Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.</p>
+
+<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
 
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVParser.java/0">Version History</a> |

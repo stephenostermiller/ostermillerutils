@@ -53,7 +53,7 @@ import java.io.*;
 	 *
 	 * @since ostermillerutils 1.00.00
      */
-    private static void main(String[] args) {
+    public static void main(String[] args) {
         InputStream in;
         try {
             if (args.length > 0){
@@ -85,54 +85,13 @@ import java.io.*;
 
 %unicode
 
-%state VALUE
-
-Escape=("%"[0-9A-Fa-f][0-9A-Fa-f])
-AnyChar=([A]|[^A])
+NameValue=([^\&\=]*(\=[^&]*)?)
 
 %%
 
-<YYINITIAL> ([\=]) {
-    String s = token.toString();
-    token.setLength(0);
-    yybegin(VALUE);
-    return (s);
+<YYINITIAL> {NameValue} {
+    return yytext();
 }
 
-<VALUE> ([\&]) {
-    String s = token.toString();
-    token.setLength(0);
-    yybegin(YYINITIAL);
-    return (s);
+<YYINITIAL> (\&) {
 }
-
-<YYINITIAL, VALUE> {Escape} {
-    token.append((char)(Integer.parseInt(yytext().substring(1),16)));
-}
-
-<YYINITIAL, VALUE> ([\+]) {
-    token.append(" ");
-}
-
-<YYINITIAL, VALUE> {AnyChar} {
-    token.append(yytext());
-}
-
-<YYINITIAL> <<EOF>> {
-    if (token.length() > 0) {
-        String s = token.toString();
-        token.setLength(0);
-        yybegin(VALUE);        
-        return (s);
-    } else {
-        return null;
-    }
-}
-
-<VALUE> <<EOF>> {
-    String s = token.toString();
-    token.setLength(0);
-    yybegin(YYINITIAL);
-    return (s);
-}
-

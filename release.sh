@@ -1,7 +1,25 @@
 #!/bin/bash
 
-size=`ls -lah utils.jar`
-size=${size:38:4}
+hr[0]='b'
+hr[1]='k'
+hr[2]='M'
+hr[3]='G'
+hr[4]='T'
+
+humanreadable () {
+  s=$1;
+  i=0;
+  while [[ $s -ge 1024 ]]
+  do
+    let s=s/1024
+    let i=i+1
+  done
+  echo $s${hr[$i]}
+}
+
+size=`wc -c utils.jar`
+size=`humanreadable $size`
+
 if [ -z "`grep -i $size download.html`" ]
 then
     echo "utils.jar size is $size but download.html does not show that."

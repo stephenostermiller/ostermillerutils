@@ -1041,27 +1041,27 @@ public class UberProperties {
 	public int getPropertyNameCount(){
 		return properties.keySet().size();
 	}
-    
-    /**
-     * Save these properties to a string.
-     * 
-     * @return Serialized String version of these properties.
+
+	/**
+	 * Save these properties to a string.
+	 *
+	 * @return Serialized String version of these properties.
 	 *
 	 * @since ostermillerutils 1.02.23
-     */
-    public String toString(){
-    	ByteArrayOutputStream out = new ByteArrayOutputStream();
-        try {
-        	this.save(out);
-        } catch (IOException iox){
-        	throw new Error("IO constructed on memory, this shouldn't happen.", iox);
-        }
-        String s = null;
-        try {
-        	s = new String(out.toByteArray(), "ISO-8859-1");
-        } catch (UnsupportedEncodingException uee){
-        	throw new Error("ISO-8859-1 should be recognized.", uee);
-        }
-        return s;
-    }
+	 */
+	public String toString(){
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		try {
+			this.save(out);
+		} catch (IOException iox){
+			throw new Error("IO constructed on memory, this shouldn't happen.", iox);
+		}
+		String s = null;
+		try {
+			s = new String(out.toByteArray(), "ISO-8859-1");
+		} catch (UnsupportedEncodingException uee){
+			throw new Error("ISO-8859-1 should be recognized.", uee);
+		}
+		return s;
+	}
 }

@@ -8,19 +8,36 @@
 <div class=examplecode><h3>Example</h3>
 <pre><span class=reservedWord>public void </span><span class=identifier>doGet </span><span class=separator>(</span><span class=identifier>HttpServletRequest request</span><span class=separator>, </span><span class=identifier>HttpServletResponse response</span><span class=separator>)
     </span><span class=reservedWord>throws </span><span class=identifier>ServletException</span><span class=separator>, </span><span class=identifier>IOException </span><span class=separator>{ 
-    </span><span class=identifier>String query </span><span class=operator>= </span><span class=identifier>request</span><span class=separator>.</span><span class=identifier>getQueryString</span><span class=separator>();
-    </span><span class=identifier>doPostGet</span><span class=separator>(</span><span class=identifier>request</span><span class=separator>, </span><span class=identifier>response</span><span class=separator>, </span><span class=reservedWord>new </span><span class=identifier>CGIParser</span><span class=separator>(</span><span class=identifier>query</span><span class=operator>==</span><span class=literal>null</span><span class=operator>?</span><span class=literal>&quot;&quot;</span><span class=operator>:</span><span class=identifier>query</span><span class=separator>));
+    </span><span class=identifier>doPostGet</span><span class=separator>(
+        </span><span class=identifier>request</span><span class=separator>, 
+        </span><span class=identifier>response</span><span class=separator>, 
+        </span><span class=reservedWord>new </span><span class=identifier>CGIParser</span><span class=separator>(
+            </span><span class=identifier>request</span><span class=separator>.</span><span class=identifier>getQueryString</span><span class=separator>(),
+            </span><span class=comment>// Use the same character set
+            // used in response.setContentType
+            </span><span class=literal>&quot;UTF-8&quot;
+        </span><span class=separator>)
+    );
 }
 
 </span><span class=reservedWord>public void </span><span class=identifier>doPost</span><span class=separator>(</span><span class=identifier>HttpServletRequest request</span><span class=separator>, </span><span class=identifier>HttpServletResponse response</span><span class=separator>)
     </span><span class=reservedWord>throws </span><span class=identifier>ServletException</span><span class=separator>, </span><span class=identifier>IOException </span><span class=separator>{
-    </span><span class=identifier>doPostGet</span><span class=separator>(</span><span class=identifier>request</span><span class=separator>, </span><span class=identifier>response</span><span class=separator>, </span><span class=reservedWord>new </span><span class=identifier>CGIParser</span><span class=separator>(</span><span class=identifier>request</span><span class=separator>.</span><span class=identifier>getReader</span><span class=separator>()));
+    </span><span class=identifier>doPostGet</span><span class=separator>(
+        </span><span class=identifier>request</span><span class=separator>, 
+        </span><span class=identifier>response</span><span class=separator>, 
+        </span><span class=reservedWord>new </span><span class=identifier>CGIParser</span><span class=separator>(
+            </span><span class=identifier>request</span><span class=separator>.</span><span class=identifier>getReader</span><span class=separator>(),
+            </span><span class=comment>// Use the same character set
+            // used in response.setContentType
+            </span><span class=literal>&quot;UTF-8&quot;
+        </span><span class=separator>)
+    );
 }
 
 </span><span class=reservedWord>private void </span><span class=identifier>doPostGet</span><span class=separator>(</span><span class=identifier>HttpServletRequest request</span><span class=separator>, </span><span class=identifier>HttpServletResponse response</span><span class=separator>, </span><span class=identifier>CGIParser params</span><span class=separator>)
     </span><span class=reservedWord>throws </span><span class=identifier>ServletException</span><span class=separator>, </span><span class=identifier>IOException </span><span class=separator>{
     ...
-}</pre>
+}</span></pre>
 If using this class in servlets, you would request the parameters from the params object rather than from the request.
 </div>
 

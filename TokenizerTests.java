@@ -29,216 +29,206 @@
 class TokenizerTests {
 
 	public static void main(String args[]){
-		java.util.StringTokenizer oldTok;
-		com.Ostermiller.util.StringTokenizer newTok;
-		String token;
+		try {
+			java.util.StringTokenizer oldTok;
+			com.Ostermiller.util.StringTokenizer newTok;
+			String token;
 
-		//newTok.test();
-		System.out.println("  ===============================================");
-		token = "this is a test";
-		oldTok = new java.util.StringTokenizer(token);
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		compareState("Test 1", oldTok, newTok);
-		while (oldTok.hasMoreTokens()){
-			compareAndPrint(oldTok.nextToken(), newTok.nextToken());
+			//newTok.test();
+
+			token = "this is a test";
+			oldTok = new java.util.StringTokenizer(token);
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
 			compareState("Test 1", oldTok, newTok);
-		}
-		System.out.println("  ===============================================");
-		token = "";
-		oldTok = new java.util.StringTokenizer(token);
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "no delims";
-		oldTok = new java.util.StringTokenizer(token, "");
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "");
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		while (oldTok.hasMoreTokens()){
-			compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-			compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		}
-		System.out.println("  ===============================================");
-		token = "AstringB";
-		oldTok = new java.util.StringTokenizer(token, "AB");
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "AB");
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		while (oldTok.hasMoreTokens()){
-			compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		}
-		System.out.println("  ===============================================");
-		token = "AstringB";
-		oldTok = new java.util.StringTokenizer(token, "AB", true);
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "AB", true);
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		while (oldTok.hasMoreTokens()){
-			compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		}
-		System.out.println("  ===============================================");
-		token = "someURL?name=value&name=value";
-		oldTok = new java.util.StringTokenizer(token);
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint(oldTok.nextToken("?"), newTok.nextToken("?"));
-		compareAndPrint(oldTok.nextToken("=&"), newTok.nextToken("=&"));
-		compareAndPrint(oldTok.nextToken("=&"), newTok.nextToken("=&"));
-		compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		System.out.println("  ===============================================");
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint("someURL", newTok.nextToken("?"));
-		newTok.skipDelimiters();
-		compareAndPrint("name", newTok.nextToken("=&"));
-		compareAndPrint("value", newTok.nextToken("=&"));
-		compareAndPrint("name", newTok.nextToken());
-		compareAndPrint("value", newTok.nextToken());
-		System.out.println("  ===============================================");
-		token = "  (   aaa	\t	* (b+c1 ))";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, " \t\n\r\f", "()+*");
-		compareAndPrint("9", "" + newTok.countTokens());
-		compareAndPrint("(", newTok.nextToken());
-		compareAndPrint("aaa", newTok.nextToken());
-		compareAndPrint("*", newTok.nextToken());
-		compareAndPrint("(", newTok.nextToken());
-		compareAndPrint("b", newTok.nextToken());
-		compareAndPrint("+", newTok.nextToken());
-		compareAndPrint("c1", newTok.nextToken());
-		compareAndPrint(")", newTok.nextToken());
-		compareAndPrint(")", newTok.nextToken());
-		System.out.println("  ===============================================");
-		token = "one,two,,four,five,,,eight,";
-		oldTok = new java.util.StringTokenizer(token, ",");
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
-		compareAndPrint("" + oldTok.countTokens(), "" + newTok.countTokens());
-		while (oldTok.hasMoreTokens()){
-			compareAndPrint(oldTok.nextToken(), newTok.nextToken());
-		}
-		System.out.println("  ===============================================");
-		token = "one,two,,four,five,,,eight";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("8", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = ",two,,four,five,,,eight,";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("9", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = ",";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("2", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("1", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = ",two,,four,five,,,eight,";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",", true);
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("17", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = ",one,,,four,";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, ",", null, false);
-		compareAndPrint("one", newTok.nextToken());
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("4", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "list=";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("list", newTok.nextToken());
-		newTok.skipDelimiters();
-		compareAndPrint("", newTok.nextToken(","));
-		compareAndPrint("0", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "list=,";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("list", newTok.nextToken());
-		newTok.skipDelimiters();
-		compareAndPrint("", newTok.nextToken(","));
-		compareAndPrint("1", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "list=,two,";
-		newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
-		newTok.setReturnEmptyTokens(true);
-		compareAndPrint("list", newTok.nextToken());
-		newTok.skipDelimiters();
-		compareAndPrint("", newTok.nextToken(","));
-		compareAndPrint("2", "" + newTok.countTokens());
-		System.out.println("  ===============================================");
-		token = "this is a test";
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		String[] tokens = newTok.toArray();
-		newTok.setText(token);
-		for (int i=0; i<tokens.length; i++){
-			compareAndPrint(tokens[i], newTok.nextToken());
-		}
-		System.out.println("  ===============================================");
-		token = "token rest of string";
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint("token", newTok.nextToken());
-		newTok.skipDelimiters();
-		compareAndPrint("rest of string", newTok.restOfText());
-		compareAndPrint("false", "" + newTok.hasMoreTokens());
-		System.out.println("  ===============================================");
-		token = "testing the peek method";
-		newTok = new com.Ostermiller.util.StringTokenizer(token);
-		compareAndPrint("4", "" + newTok.countTokens());
-		compareAndPrint("testing", newTok.peek());
-		compareAndPrint("4", "" + newTok.countTokens());
-		compareAndPrint("testing", newTok.nextToken());
-		compareAndPrint("3", "" + newTok.countTokens());
-		compareAndPrint("the", newTok.peek());
-		compareAndPrint("the", newTok.peek());
-		compareAndPrint("the", newTok.nextToken());
-		compareAndPrint("peek", newTok.peek());
-		compareAndPrint("peek", newTok.nextToken());
-		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.peek());
-		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.nextToken());
-		compareAndPrint("false", "" + newTok.hasMoreTokens());
-		System.out.println("  ===============================================");
-	}
+			while (oldTok.hasMoreTokens()){
+				assertEqual(oldTok.nextToken(), newTok.nextToken());
+				compareState("Test 1", oldTok, newTok);
+			}
 
-	private static void compareAndPrint(String one, String two){
-		 System.out.print((one.equals(two) ? "  " : "* "));
-		 System.out.print(one);
-		 for (int i=0; i < 20 - one.length(); i++){
-			 System.out.print(" ");
-		 }
-		 System.out.println("| " + two);
-	}
+			token = "";
+			oldTok = new java.util.StringTokenizer(token);
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
 
-	private static boolean compareState(String testName, java.util.StringTokenizer oldTok, com.Ostermiller.util.StringTokenizer newTok){
-		boolean success = true;
-		// count the number of tokens left in each first.
-		success &= compareState(testName, newTok, oldTok.countTokens());
-		if (!success){
+			token = "no delims";
+			oldTok = new java.util.StringTokenizer(token, "");
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "");
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
+			while (oldTok.hasMoreTokens()){
+				assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
+				assertEqual(oldTok.nextToken(), newTok.nextToken());
+			}
+
+			token = "AstringB";
+			oldTok = new java.util.StringTokenizer(token, "AB");
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "AB");
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
+			while (oldTok.hasMoreTokens()){
+				assertEqual(oldTok.nextToken(), newTok.nextToken());
+			}
+
+			token = "AstringB";
+			oldTok = new java.util.StringTokenizer(token, "AB", true);
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "AB", true);
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
+			while (oldTok.hasMoreTokens()){
+				assertEqual(oldTok.nextToken(), newTok.nextToken());
+			}
+
+			token = "someURL?name=value&name=value";
+			oldTok = new java.util.StringTokenizer(token);
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual(oldTok.nextToken("?"), newTok.nextToken("?"));
+			assertEqual(oldTok.nextToken("=&"), newTok.nextToken("=&"));
+			assertEqual(oldTok.nextToken("=&"), newTok.nextToken("=&"));
+			assertEqual(oldTok.nextToken(), newTok.nextToken());
+			assertEqual(oldTok.nextToken(), newTok.nextToken());
+
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual("someURL", newTok.nextToken("?"));
+			newTok.skipDelimiters();
+			assertEqual("name", newTok.nextToken("=&"));
+			assertEqual("value", newTok.nextToken("=&"));
+			assertEqual("name", newTok.nextToken());
+			assertEqual("value", newTok.nextToken());
+
+			token = "  (   aaa	\t	* (b+c1 ))";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, " \t\n\r\f", "()+*");
+			assertEqual("9", "" + newTok.countTokens());
+			assertEqual("(", newTok.nextToken());
+			assertEqual("aaa", newTok.nextToken());
+			assertEqual("*", newTok.nextToken());
+			assertEqual("(", newTok.nextToken());
+			assertEqual("b", newTok.nextToken());
+			assertEqual("+", newTok.nextToken());
+			assertEqual("c1", newTok.nextToken());
+			assertEqual(")", newTok.nextToken());
+			assertEqual(")", newTok.nextToken());
+
+			token = "one,two,,four,five,,,eight,";
+			oldTok = new java.util.StringTokenizer(token, ",");
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
+			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
+			while (oldTok.hasMoreTokens()){
+				assertEqual(oldTok.nextToken(), newTok.nextToken());
+			}
+
+			token = "one,two,,four,five,,,eight";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("8", "" + newTok.countTokens());
+
+			token = ",two,,four,five,,,eight,";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("9", "" + newTok.countTokens());
+
+			token = ",";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("2", "" + newTok.countTokens());
+
+			token = "";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("1", "" + newTok.countTokens());
+
+			token = ",two,,four,five,,,eight,";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",", true);
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("17", "" + newTok.countTokens());
+
+			token = ",one,,,four,";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, ",", null, false);
+			assertEqual("one", newTok.nextToken());
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("4", "" + newTok.countTokens());
+
+			token = "list=";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("list", newTok.nextToken());
+			newTok.skipDelimiters();
+			assertEqual("", newTok.nextToken(","));
+			assertEqual("0", "" + newTok.countTokens());
+
+			token = "list=,";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("list", newTok.nextToken());
+			newTok.skipDelimiters();
+			assertEqual("", newTok.nextToken(","));
+			assertEqual("1", "" + newTok.countTokens());
+
+			token = "list=,two,";
+			newTok = new com.Ostermiller.util.StringTokenizer(token, "=");
+			newTok.setReturnEmptyTokens(true);
+			assertEqual("list", newTok.nextToken());
+			newTok.skipDelimiters();
+			assertEqual("", newTok.nextToken(","));
+			assertEqual("2", "" + newTok.countTokens());
+
+			token = "this is a test";
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			String[] tokens = newTok.toArray();
+			newTok.setText(token);
+			for (int i=0; i<tokens.length; i++){
+				assertEqual(tokens[i], newTok.nextToken());
+			}
+
+			token = "token rest of string";
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual("token", newTok.nextToken());
+			newTok.skipDelimiters();
+			assertEqual("rest of string", newTok.restOfText());
+			assertEqual("false", "" + newTok.hasMoreTokens());
+
+			token = "testing the peek method";
+			newTok = new com.Ostermiller.util.StringTokenizer(token);
+			assertEqual("4", "" + newTok.countTokens());
+			assertEqual("testing", newTok.peek());
+			assertEqual("4", "" + newTok.countTokens());
+			assertEqual("testing", newTok.nextToken());
+			assertEqual("3", "" + newTok.countTokens());
+			assertEqual("the", newTok.peek());
+			assertEqual("the", newTok.peek());
+			assertEqual("the", newTok.nextToken());
+			assertEqual("peek", newTok.peek());
+			assertEqual("peek", newTok.nextToken());
+			assertEqual("true", "" + newTok.hasMoreTokens());
+			assertEqual("method", newTok.peek());
+			assertEqual("true", "" + newTok.hasMoreTokens());
+			assertEqual("method", newTok.nextToken());
+			assertEqual("false", "" + newTok.hasMoreTokens());
+
+		} catch (Exception x){
+			x.printStackTrace();
 			System.exit(1);
 		}
-		return success;
+		System.exit(0);
 	}
 
-	private static boolean compareState(String testName, com.Ostermiller.util.StringTokenizer newTok, int tokenCount){
-		boolean success = true;
+	private static void assertEqual(String one, String two) throws Exception {
+		 if (one == null || !one.equals(two)){
+			throw new Exception ("Expected equal: " + one + ", " + two);
+		 }
+	}
+
+	private static void compareState(String testName, java.util.StringTokenizer oldTok, com.Ostermiller.util.StringTokenizer newTok) throws Exception {
+		compareState(testName, newTok, oldTok.countTokens());
+	}
+
+	private static void compareState(String testName, com.Ostermiller.util.StringTokenizer newTok, int tokenCount) throws Exception {
 		// count the number of tokens left first.
 		int newNumTokens = newTok.countTokens();
 		if (tokenCount != newNumTokens){
-			System.err.println(testName + ": TokenCount does not match. " + tokenCount + " vs " + newNumTokens);
-			success = false;
+			throw new Exception(testName + ": TokenCount does not match. " + tokenCount + " vs " + newNumTokens);
 		}
 		boolean hasMoreTokens = (tokenCount > 0);
 		boolean newTokHasMoreTokens = newTok.hasMoreTokens();
 		if (hasMoreTokens != newTokHasMoreTokens){
-			System.err.println(testName + ": hasMoreTokens does not match. " + hasMoreTokens + " vs " + newTokHasMoreTokens);
-			success = false;
+			throw new Exception(testName + ": hasMoreTokens does not match. " + hasMoreTokens + " vs " + newTokHasMoreTokens);
 		}
-		if (!success){
-			System.exit(1);
-		}
-		return success;
 	}
 }

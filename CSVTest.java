@@ -1,6 +1,6 @@
 /*
  * CSV Regression test.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,48 +22,49 @@ import java.io.*;
 /**
  * Regression test for CSV.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 class CSVTest {
-	public static void main (String[] args) throws IOException{
-		File f = new File("CSVTest.txt");
-		FileOutputStream out = new FileOutputStream(f);
-		CSVPrinter csvOut = new CSVPrinter(out, '#');
-
-		csvOut.printlnComment("Comma Separated Value Test");
-		csvOut.println();
-		csvOut.printlnComment("Five Cities");
-		csvOut.println(new String[] {
-			"Boston",
-			"San Francisco",
-			"New York",
-			"Chicago",
-			"Houston",
-		});
-		csvOut.println();
-		csvOut.println(""); // an empty value on a line by itself.
-		csvOut.println(new String[] {
-			"Two\nTokens",
-			"On the\nSame Line"
-		});
-		csvOut.printlnComment("A two line comment\njust to see that it works");
-
-		CSVParser shredder = new CSVParser(new StraightStreamReader(new FileInputStream(f)));
-		shredder.setCommentStart("#;!");
-		shredder.setEscapes("nrtf", "\n\r\t\f");
-		String t;
-		while ((t = shredder.nextValue()) != null) {
-			if (t.length() == 1){
-				System.out.println("" + shredder.lastLineNumber() + " " + (int)(t.charAt(0)));
-			} else {
-				System.out.println("" + shredder.lastLineNumber() + " " + t);
-			}
-		}
-
+	public static void main(String[] args){
 		try {
+			StringWriter sw = new StringWriter();
+			CSVPrinter csvOut = new CSVPrinter(sw, '#');
+
+			csvOut.printlnComment("Comma Separated Value Test");
+			csvOut.println();
+			csvOut.printlnComment("Five Cities");
+			csvOut.println(new String[] {
+				"Boston",
+				"San Francisco",
+				"New York",
+				"Chicago",
+				"Houston",
+			});
+			csvOut.println();
+			csvOut.println(""); // an empty value on a line by itself.
+			csvOut.println(new String[] {
+				"Two\nTokens",
+				"On the\nSame Line"
+			});
+			csvOut.printlnComment("A two line comment\njust to see that it works");
+
+			CSVParser shredder = new CSVParser(new StringReader(sw.toString()));
+			shredder.setCommentStart("#;!");
+			shredder.setEscapes("nrtf", "\n\r\t\f");
+			String t;
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "Boston", 4);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "San Francisco", 4);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "New York", 4);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "Chicago", 4);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "Houston", 4);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "", 6);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "Two\nTokens", 7);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), "On the\nSame Line", 7);
+            compare(shredder.nextValue(), shredder.lastLineNumber(), null, 9);
+            
 			String normalInput = ",\"a\",\",\t'\\\"\"";
 			String[][] normalOutput = new String[][]{{"", "a", ",\t'\""}};
 			shredder = new CSVParser(new StringReader(normalInput));
@@ -85,8 +86,8 @@ class CSVTest {
 			shredder.changeQuote(',');
 			shredder.changeDelimiter('"');
 			compare("commas and quotes swapped", normalOutput, shredder.getAllValues());
-                        
-            normalInput = "\"test\\\\\",test";
+
+			normalInput = "\"test\\\\\",test";
 			normalOutput = new String[][]{{"test\\", "test"}};
 			shredder = new CSVParser(new StringReader(normalInput));
 			compare("backslash at end of quoted", normalOutput, shredder.getAllValues());
@@ -94,25 +95,34 @@ class CSVTest {
 			System.err.println(x.getMessage());
 			System.exit(1);
 		}
-
+		System.exit(0);
 	}
 
-	private static void compare(String testName, String[][] a, String[][] b){
+	private static void compare(String value, int line, String expectedValue, int expectedLine) throws Exception {
+		if (line != expectedLine) {
+            throw new Exception("Line numbers do not match");
+        }
+        if (expectedValue == null && value == null){
+            return;
+        }
+        if (!value.equals(expectedValue)){
+            throw new Exception("Value and expected value do not match");
+        }
+	}
+
+	private static void compare(String testName, String[][] a, String[][] b) throws Exception {
 		if (a.length != b.length) {
-			System.err.println(testName + ": unexpected number of lines");
-			System.exit(1);
+			throw new Exception(testName + ": unexpected number of lines");
 		}
 		for(int i=0; i<a.length; i++){
 			if (a[i].length != b[i].length) {
-				System.err.println(testName + ": unexpected number of values in line: " + b[i].length);
-				System.exit(1);
+				throw new Exception(testName + ": unexpected number of values in line: " + b[i].length);
 			}
 			for (int j=0; j<a[i].length; j++){
 				if (!a[i][j].equals(b[i][j])) {
-                	System.err.println(a[i][j]);
-                    System.err.println(b[i][j]);
-					System.err.println(testName + ": values do not match.");
-					System.exit(1);
+					System.err.println(a[i][j]);
+					System.err.println(b[i][j]);
+					throw new Exception(testName + ": values do not match.");
 				}
 			}
 		}

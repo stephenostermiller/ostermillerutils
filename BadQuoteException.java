@@ -1,6 +1,6 @@
 /*
  * Binary data exception.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@ package com.Ostermiller.util;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.02.16
  */
-public class BadQuoteException extends Exception {
+public class BadQuoteException extends RuntimeException {
 
 	/**
 	 * Constructs an IOException with null as its error detail message.

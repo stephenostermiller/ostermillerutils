@@ -2,7 +2,7 @@
  * MD5 implementation
  * written Santeri Paavolainen, Helsinki Finland 1996
  * (c) Santeri Paavolainen, Helsinki Finland 1996
- * modifications Copyright (C) 2002 Stephen Ostermiller 
+ * modifications Copyright (C) 2002-2004 Stephen Ostermiller 
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -95,17 +95,14 @@ public class MD5 {
 		if (!finalState.valid) {
 			finalState.copy(workingState);
 			long bitCount = finalState.bitCount;
-			// compute the number of bytes we have sitting waiting to be hashed                       
-			// add 8 bytes for the length that will be appended,
-			// and 1 byte for good measure 
-			int leftOver = (int) (((finalState.bitCount >>> 3) + 9) & 0x3f); 
-			// pad what we have left so it comes out evenly with 64
-			// always add at least one byte of padding
-			int padlen = 65 - leftOver;
+			// Compute the number of left over bits
+			int leftOver = (int) (((bitCount >>> 3)) & 0x3f); 
+			// Compute the amount of padding to add based on number of left over bits.
+			int padlen = (leftOver < 56) ? (56 - leftOver) : (120 - leftOver);
 			// add the padding
 			update(finalState, padding, 0, padlen);
 			// add the length (computed before padding was added)
-			update(finalState, bitCount);   
+			update(finalState, encode(bitCount), 0, 8);   
 			finalState.valid = true;
 		}
 		// make a copy of the hash before returning it.
@@ -337,10 +334,11 @@ public class MD5 {
 		state.bitCount += length << 3;
 
 		int partlen = 64 - index;        
+
 		int i = 0;
 		if (length >= partlen) {
 			System.arraycopy(buffer, offset, state.buffer, index, partlen);
-			transform(state, decode(state.buffer, 64, offset));
+			transform(state, decode(state.buffer, 64, 0));
 			for (i = partlen; (i + 63) < length; i+= 64){
 				transform(state, decode(buffer, 64, i));
 			}
@@ -571,6 +569,10 @@ public class MD5 {
 			this.valid = from.valid;
 			this.bitCount = from.bitCount;
 		}
+
+		public String toString(){
+			return state[0] + " " + state[1] + " " + state[2] + " " + state[3];
+		}
 	}
 
 
@@ -631,6 +633,19 @@ public class MD5 {
 		//return rotateLeft(a, s) + b;
 		a = (a << s) | (a >>> (32 - s));
 		return a + b;
+	}
+
+	private static byte[] encode(long l){
+		byte[] out = new byte[8];
+		out[0] = (byte) (l & 0xff);
+		out[1] = (byte) ((l >>> 8) & 0xff);
+		out[2] = (byte) ((l >>> 16) & 0xff);
+		out[3] = (byte) ((l >>> 24) & 0xff);
+		out[4] = (byte) ((l >>> 32) & 0xff);
+		out[5] = (byte) ((l >>> 40) & 0xff);
+		out[6] = (byte) ((l >>> 48) & 0xff);
+		out[7] = (byte) ((l >>> 56) & 0xff);
+		return out;
 	}
 
 	private static byte[] encode(int input[], int len){

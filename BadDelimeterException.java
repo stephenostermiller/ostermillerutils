@@ -1,6 +1,6 @@
 /*
  * Binary data exception.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,7 +29,7 @@ package com.Ostermiller.util;
  * @since ostermillerutils 1.02.08
  * @see BadDelimiterException
  */
-public class BadDelimeterException extends Exception {
+public class BadDelimeterException extends RuntimeException {
 
 	/**
 	 * Constructs an IOException with null as its error detail message.

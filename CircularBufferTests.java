@@ -71,6 +71,11 @@ class CircularBufferTests {
 		"this nation shall have a new birth of freedom; and that this government of the " +
 		"people, by the people, for the people, shall not perish from the earth.";
 
+	private StringWriter tgbaWriter = new StringWriter();
+	private StringWriter tgbaWriter2 = new StringWriter();
+
+	private ByteArrayOutputStream piOutputStream = new ByteArrayOutputStream();
+
 	private Random rand = new Random();
 
 	private CircularCharBuffer ccb = new CircularCharBuffer(20);
@@ -83,23 +88,17 @@ class CircularBufferTests {
 
 	private CircularObjectBuffer cob = new CircularObjectBuffer(20);
 
-	public static void main(String args[]) throws Exception {
-		new CircularBufferTests();
+	public static void main(String args[]){
+		try {
+			new CircularBufferTests();
+		} catch (Exception x){
+			x.printStackTrace();
+			System.exit(1);
+		}
+		System.exit(0);
 	}
 
 	private CircularBufferTests() throws Exception{
-		// write expected results
-		Writer fout = new BufferedWriter(new FileWriter("CircularBufferTestResults.txt"));
-		fout.write(theGettysburgAddress);
-		fout.write(System.getProperty("line.separator"));
-		for (int i=0; i<pi.length; i++){
-			fout.write(Byte.toString(pi[i]));
-		}
-		fout.write(System.getProperty("line.separator"));
-		fout.write(theGettysburgAddress);
-		fout.write(System.getProperty("line.separator"));
-		fout.flush();
-		fout.close();
 
 		ccbin = ccb.getReader();
 		ccbout = ccb.getWriter();
@@ -114,7 +113,11 @@ class CircularBufferTests {
 				return;
 			}
 		}
-		System.out.println();
+		String s1 = tgbaWriter.toString();
+		if (!theGettysburgAddress.equals(s1)){
+			throw new Exception(s1);
+		}
+
 		cbbin = cbb.getInputStream();
 		cbbout = cbb.getOutputStream();
 		CBBProducer cbbp = new CBBProducer();
@@ -128,7 +131,8 @@ class CircularBufferTests {
 				return;
 			}
 		}
-		System.out.println();
+		assertEqual(pi, piOutputStream.toByteArray());
+
 		COBProducer cobp = new COBProducer();
 		COBConsumer cobc = new COBConsumer();
 		cobc.start();
@@ -140,7 +144,19 @@ class CircularBufferTests {
 				return;
 			}
 		}
-		System.out.println();
+		String s2 = tgbaWriter2.toString();
+		if (!theGettysburgAddress.equals(s2)){
+			throw new Exception(s2);
+		}
+	}
+
+	private static void assertEqual(byte[] b1, byte[] b2) throws Exception {
+		if (b1.length != b2.length) throw new Exception ("Length mismatch: " + b1.length + ", " + b2.length);
+		for (int i=0; i<b1.length; i++){
+			if (b1[i] != b2[i]){
+				throw new Exception("Mismatch at position " + i + ": " + b1[i] + ", " + b2[i]);
+			}
+		}
 	}
 
 	private class CCBProducer extends Thread {
@@ -206,7 +222,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i]);
+									tgbaWriter.write(readBuf[i]);
 								}
 							}
 						} break;
@@ -217,7 +233,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i+off]);
+									tgbaWriter.write(readBuf[i+off]);
 								}
 							}
 						} break;
@@ -228,7 +244,7 @@ class CircularBufferTests {
 								if (read == -1){
 									done = true;
 								} else {
-									System.out.print((char)read);
+									tgbaWriter.write((char)read);
 								}
 							}
 						} break;
@@ -302,7 +318,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i]);
+									piOutputStream.write(readBuf[i]);
 								}
 							}
 						} break;
@@ -313,7 +329,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i+off]);
+									piOutputStream.write(readBuf[i+off]);
 								}
 							}
 						} break;
@@ -324,7 +340,7 @@ class CircularBufferTests {
 								if (read == -1){
 									done = true;
 								} else {
-									System.out.print((byte)read);
+									piOutputStream.write((byte)read);
 								}
 							}
 						} break;
@@ -398,7 +414,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i]);
+									tgbaWriter2.write((String)readBuf[i]);
 								}
 							}
 						} break;
@@ -409,7 +425,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									System.out.print(readBuf[i+off]);
+									tgbaWriter2.write((String)readBuf[i+off]);
 								}
 							}
 						} break;
@@ -420,7 +436,7 @@ class CircularBufferTests {
 								if (read == null){
 									done = true;
 								} else {
-									System.out.print(read);
+									tgbaWriter2.write((String)read);
 								}
 							}
 						} break;

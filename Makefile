@@ -155,7 +155,7 @@ javadoc: *.java
 	@mv -f package.html temp
 	@mkdir doc
 	@$(JAVADOC) \
-		-bottom '<p>Copyright (c) 2001-2003 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
+		-bottom '<p>Copyright (c) 2001-2004 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
 		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>" \
 		-link http://java.sun.com/j2se/1.4.2/docs/api/ -d doc/ \
 		com.Ostermiller.util > /dev/null
@@ -178,18 +178,17 @@ utils.jar: *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv
 
 .PHONY: test
 test: 
-	$(JAVA) com.Ostermiller.util.TokenizerTests > out.txt
-	@diff out.txt TokenizerTestResults.txt
+	$(JAVA) com.Ostermiller.util.TokenizerTests
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
 	@diff out.txt CSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.ExcelCSVLexer ExcelCSVRegressionTest.csv > out.txt
 	@diff out.txt ExcelCSVRegressionTestResults.txt
-	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
-	@diff out.txt CSVTestResults.txt
-	$(JAVA) com.Ostermiller.util.CircularBufferTests > out.txt
-	@diff out.txt CircularBufferTestResults.txt
-	@rm out.txt CSVTest.txt CircularBufferTestResults.txt
+	$(JAVA) com.Ostermiller.util.CSVTest
+	$(JAVA) com.Ostermiller.util.CircularBufferTests
 	$(JAVA) com.Ostermiller.util.UberPropertiesTests
+	$(JAVA) com.Ostermiller.util.LabeledCSVParserTests
+	$(JAVA) com.Ostermiller.util.Base64Tests
+	$(JAVA) com.Ostermiller.util.MD5Tests
         
 .PHONY: update
 update: 

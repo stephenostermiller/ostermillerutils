@@ -1,6 +1,6 @@
 /*
  * Base64 encoding and decoding.
- * Copyright (C) 2001-2002 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -596,11 +596,55 @@ public class Base64 {
 	 * No line breaks or other white space are inserted into the encoded data.
 	 *
 	 * @param bytes The data to encode.
+	 * @return String with Base64 encoded data.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public static String encodeToString(byte[] bytes){
+		return encodeToString(bytes, false);
+	}
+
+	/**
+	 * Encode bytes in Base64.
+	 *
+	 * @param bytes The data to encode.
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @return String with Base64 encoded data.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public static String encodeToString(byte[] bytes, boolean lineBreaks){
+		try {
+			return new String(encode(bytes, lineBreaks), "ASCII");
+		} catch (UnsupportedEncodingException iex){
+			// ASCII should be supported
+			throw new RuntimeException(iex);
+		}
+	}
+
+	/**
+	 * Encode bytes in Base64.
+	 * No line breaks or other white space are inserted into the encoded data.
+	 *
+	 * @param bytes The data to encode.
 	 * @return Encoded bytes.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static byte[] encode(byte[] bytes){
+		return encode(bytes, false);
+	}
+
+	/**
+	 * Encode bytes in Base64.
+	 *
+	 * @param bytes The data to encode.
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @return Encoded bytes.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public static byte[] encode(byte[] bytes, boolean lineBreaks){
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 		// calculate the length of the resulting output.
 		// in general it will be 4/3 the size of the input
@@ -615,7 +659,7 @@ public class Base64 {
 		length = length * 4 / 3;
 		ByteArrayOutputStream out = new ByteArrayOutputStream(length);
 		try {
-			encode(in, out, false);
+			encode(in, out, lineBreaks);
 		} catch (IOException x){
 			// This can't happen.
 			// The input and output streams were constructed
