@@ -15,7 +15,7 @@ add utils.jar to your classpath:
 <li>Include the contents of utils.jar in your program's jar file.</li>
 <li>Reference utils.jar from the manifest file in your program's jar file.</li>
 </ul>
-You can extract the contents of utils.jar either with the jar tool that comes with java or by 
+You can extract the contents of utils.jar either with the jar tool that comes with Java or by 
 renaming utils.jar to utils.zip and using any zip file extractor.</p>
 <p>If you have a Unix compatible system and you want to have easy access to the Base64, LineEnds, MD5Sum, RandPass, and Tabs
 command line programs that come in these utilities, run this <a href="install.sh">install shell script.</a></p>
@@ -30,9 +30,9 @@ size
 description
 </th></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_02_19.jar">utils.jar</a>
+<a name="download" href="ostermillerutils_1_02_21.jar">utils.jar</a>
 </td><td>
-376k
+370k
 </td><td>
 The latest version of the com.Ostermiller.util utilities including source code.
 </td></tr></table>
@@ -41,11 +41,11 @@ The latest version of the com.Ostermiller.util utilities including source code.
 
 <div class=history>
 <h2>Version History</h2>
-<p>The current version of utils.jar is <b>1.02.18</b>. The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
+<p>The current version of utils.jar is <b>1.02.21</b>. The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
+<li>Version 1.02.21 - BadDelimiterException neglected for use in one place.</li>
 <li>Version 1.02.20 - Fixed crash when loading some properties files with the UberProperties class, BadDelimiterException class created to fix spelling error.</li>
 <li>Version 1.02.19 - CSV Printers no longer throw an exception when changing delimiters to the current delimiter.</li>
-<li>Version 1.02.18 - Ability to change quotes and delimiters on all CSVPrinters; @since tags on all javadoc.</li>
 <li><a href="history.html">Older Changes...</a></li>
 </ul>
 </div>
