@@ -39,6 +39,9 @@ javadocclean: junkclean
 
 htmlsourceclean: junkclean
 	rm -f *.java.html *.properties.html syntax.css source.html
+        
+testclean: junkclean
+	rm -f CircularBufferTests*.class CSVTest.class TokenizerTests.class
 
 clean: buildclean javadocclean htmlsourceclean
 	rm -f *.class
@@ -52,7 +55,7 @@ javadoc: javadocclean
 	$(JAVADOC) -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
 	mv -f temp package.html
 
-build: buildclean compile
+build: clean compile testclean
 	mkdir -p com/Ostermiller/util
 	cp *.* Makefile com/Ostermiller/util/
 	mkdir -p gnu/getopt		
