@@ -1,0 +1,16 @@
+<%bte.doc super="page.bte" %>
+<%bte.tpl name=pageTitle%>Significant Figures<%/bte.tpl%>
+<%bte.tpl name=description%>Handles parsing, rounding, and displaying numbers for scientific applications.<%/bte.tpl%>
+<%bte.tpl name=keywords%>significant, figure, figures, significant figures, digit, digits, science, scientific, round, rounding<%/bte.tpl%>
+<%bte.tpl name=content%>
+<p>A Java number class for figuring out how many significant figures each of the
+numbers in a calculation has and displaying the result appropriately.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/SignificantFigures.java/0">Version History</a> | 
+<a href="SignificantFigures.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/SignificantFigures.html">Documentation</a>]</p>
+
+<p>See also: <a href="/calc/sigfig.html">JavaScript routines and an HTML interface for significant figures calculations</a>.</p>
+<%/bte.tpl%>
+<%/bte.doc%>

@@ -1,0 +1,41 @@
+<%bte.doc super="page.bte" %>
+<%bte.tpl name=pageTitle%>MD5<%/bte.tpl%>
+<%bte.tpl name=description%>Generate MD5 hash sums.<%/bte.tpl%>
+<%bte.tpl name=keywords%>md5, hash, sum, checksum, check sum, message digest, fingerprint, signature, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc, encoding, decoding, encoder, decoder, stream, streams, inputstream, outputstream, array, arrays, string, strings<%/bte.tpl%>
+<%bte.tpl name=content%>
+<p>This class takes as input a message of arbitrary length and produces as output
+a 128-bit "fingerprint" or "message digest" of the input. It is conjectured that 
+it is computationally infeasible to produce two messages having the same message 
+digest, or to produce any message having a given pre-specified target message 
+digest. The MD5 algorithm is intended for digital signature applications, where 
+a large file must be "compressed" in a secure manner before being encrypted with 
+a private (secret) key under a public-key cryptosystem such as RSA.</p>
+
+<p>This class is based on work by <a href="http://www.cs.hut.fi/~santtu/java/">Santeri Paavolainen</a>.
+and <a href="http://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.  This implementation is several times
+faster and much more memory efficient than Santeri's implementation.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5.java/0">Version History</a> |
+<a href="MD5.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5.html">Documentation</a>]</p>
+
+<H2>Input Stream</h2>
+
+<p>A filtered input stream that computes an MD5 sum for anything read.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5InputStream.java/0">Version History</a> |
+<a href="MD5InputStream.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5InputStream.html">Documentation</a>]</p>
+
+<H2>Output Stream</h2>
+
+<p>A filtered output stream that computes an MD5 sum for anything written.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5OutputStream.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/MD5OutputStream.java/HEAD">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5OutputStream.html">Documentation</a>]</p>
+<%/bte.tpl%>
+<%/bte.doc%>

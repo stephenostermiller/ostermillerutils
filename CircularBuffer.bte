@@ -1,0 +1,60 @@
+<%bte.doc super="page.bte" %>
+<%bte.tpl name=pageTitle%>Circular Buffers<%/bte.tpl%>
+<%bte.tpl name=description%>Implements the circular buffer producer/consumer model for streams or Objects.<%/bte.tpl%>
+<%bte.tpl name=keywords%>buffer, buffer, circular, cirular, object, objects, buffers, inputstream, outputstream, pipedinputstream, pipedoutputstream, producer, producers, consumer, consumers, thread, threads, overflow, overflows<%/bte.tpl%>
+<%bte.tpl name=content%>
+<h2><a name="circularobjectbuffer">Circular Object Buffer</a></h2>
+
+<p>Implements the circular buffer producer/consumer model for Objects.
+
+<p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
+implements the circular buffer producer/consumer model for characters and the <a href="CircularByteBuffer.html">CircularByteBuffer</a> which 
+implements the circular buffer producer/consumer model for bytes.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularObjectBuffer.java/0">Version History</a> |
+<a href="CircularObjectBuffer.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/CircularObjectBuffer.html">Documentation</a>]</p>
+
+<h2><a name="circularcharbuffer">Circular Character Buffer</a></h2>
+
+<p>Implements the circular buffer producer/consumer model for characters. 
+Filling and emptying the buffer is done with standard Java Readers and Writers.</p>
+
+<p>Using this class is a simpler alternative to using a PipedReader
+and a PipedWriter. PipedReaders and PipedWriters don't support the
+mark operation, don't allow you to control buffer sizes that they use,
+and have a more complicated API that requires a instantiating two
+classes and connecting them.</p>
+ 
+<p>This class is similar to the <a href="CircularByteBuffer.html">CircularByteBuffer</a> which 
+implements the circular buffer producer/consumer model for bytes and the <a href="CircularObjectBuffer.html">CircularObjectBuffer</a> which 
+implements the circular buffer producer/consumer model for Objects.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularCharBuffer.java/0">Version History</a> |
+<a href="CircularCharBuffer.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/CircularCharBuffer.html">Documentation</a>]</p>
+
+<h2><a name="circularbytebuffer">Circular Byte Buffer</a></h2>
+
+<p>Implements the circular buffer producer/consumer model for bytes.
+Filling and emptying the buffer is done with standard Java InputStreams and OutputStreams.</p>
+
+<p>Using this class is a simpler alternative to using a PipedInputStream
+and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
+mark operation, don't allow you to control buffer sizes that they use,
+and have a more complicated API that requires a instantiating two
+classes and connecting them.</p>
+ 
+<p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
+implements the circular buffer producer/consumer model for characters and the <a href="CircularObjectBuffer.html">CircularObjectBuffer</a> which 
+implements the circular buffer producer/consumer model for Objects.</p>
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularByteBuffer.java/0">Version History</a> |
+<a href="CircularByteBuffer.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/CircularByteBuffer.html">Documentation</a>]</p>
+
+
+<%/bte.tpl%>
+<%/bte.doc%>
