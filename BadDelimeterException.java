@@ -23,14 +23,14 @@ package com.Ostermiller.util;
  * with a text operation would likely corrupt the data.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @since ostermillerutils 1.00.00
+ * @since ostermillerutils 1.02.08
  */
 public class BadDelimeterException extends Exception {
 
 	/**
 	 * Constructs an IOException with null as its error detail message.
 	 *
-	 * @since ostermillerutils 1.00.00
+	 * @since ostermillerutils 1.02.08
 	 */
 	public BadDelimeterException(){
 		super();
@@ -43,7 +43,7 @@ public class BadDelimeterException extends Exception {
 	 *
 	 * @param s the detail message.
 	 *
-	 * @since ostermillerutils 1.00.00
+	 * @since ostermillerutils 1.02.08
 	 */
 	public BadDelimeterException(String s){
 		super(s);
