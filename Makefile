@@ -70,7 +70,7 @@ javafiles: $(LEXFILES:.lex=.java)
 .PHONY: javafilesclean
 javafilesclean: 
 	@echo Make: Removing generated Lexer java files.
-	@rm -f `find . -name "*.lex" | sed s/.lex/.java/`
+	@rm -f *Lexer.java
 
 JAVAFILES=$(wildcard *.java)
 .PHONY: classes
@@ -101,7 +101,7 @@ classes: javafiles $(JAVAFILES:.java=.class)
 
 .PHONY: classesclean
 classesclean: junkclean
-	@echo Make: Removing Lexer class files
+	@echo Make: Removing generated class files
 	@rm -f *.class
 
 .PHONY: junkclean	        
@@ -112,8 +112,7 @@ junkclean:
 .PHONY: buildclean	        
 buildclean: junkclean
 	@echo Make: Removing generated jar files.
-	@rm -f utils.jar
-	@rm -f randpass.jar
+	@rm -f utils.jar randpass.jar
         
 .PHONY: javadocclean	        
 javadocclean: junkclean
@@ -124,11 +123,6 @@ javadocclean: junkclean
 htmlsourceclean: junkclean
 	@echo Make: Removing generated html source.
 	@rm -rf src/ htmlsource
-        
-.PHONY: testclean	        
-testclean: junkclean
-	@echo Make: Removing compiled tests.
-	@rm -f CircularBufferTests*.class CSVTest.class TokenizerTests.class
 
 .PHONY: clean	        
 clean: buildclean javadocclean htmlsourceclean
@@ -136,9 +130,12 @@ clean: buildclean javadocclean htmlsourceclean
 	@rm -f *.class
 
 .PHONY: allclean        
-allclean: clean
+allclean: clean javafilesclean
 	@echo Make: Removing all files not in CVS.
-	@rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java neaten spell release
+	@rm -rf neaten spell release javadoc htmlsource src/
+	
+.PHONY: cleanall        
+cleanall: allclean
 
 javadoc: *.java
 	@echo Make: Generating javadoc
@@ -168,8 +165,8 @@ utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte
 	@echo Make: Building jar file.
 	@mkdir -p com/Ostermiller/util
 	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile com/Ostermiller/util/
-	@rm -f `find com/Ostermiller/util -name "*.lex" | sed s/.lex/.java/`
-	@rm -f com/Ostermiller/util/CircularBufferTests*.class com/Ostermiller/util/CSVTest.class com/Ostermiller/util/TokenizerTests.class
+	@rm -f com/Ostermiller/util/*Test*.class
+	@rm -f com/Ostermiller/util/*Lexer.java
 	@mkdir -p gnu/getopt		
 	@cp ../../../gnu/getopt/*.* gnu/getopt
 	@jar cfv utils.jar com/ gnu/ > /dev/null
@@ -210,7 +207,7 @@ htmlsource: *.java *.properties *.lex
 	@rm -rf srcbuild/
 	@mkdir srcbuild
 	@cp $? src.bte srcbuild
-	@rm -f `find srcbuild -name "*.lex" | sed s/.lex/.java/`
+	@rm -f srcbuild/*Lexer.java
 	@touch srcbuild/tempdummy.java srcbuild/tempdummy.lex srcbuild/tempdummy.properties
 	@echo "cd srcbuild" > srcbuild/temp.sh
 	@echo "$(JAVA)/.. com.Ostermiller.util.Tabs -s 4 *.java" >> srcbuild/temp.sh
