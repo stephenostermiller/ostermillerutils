@@ -6,7 +6,8 @@ JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 
 all: CSVLexer.java \
 	BrowserCommandLexer.java \
-		CGILexer.java
+	CGILexer.java \
+	ExcelCSVLexer.java
 	$(JAVAC) $(JFLAGS) *.java
 
 CSVLexer.java: CSVLexer.lex
@@ -17,6 +18,9 @@ CGILexer.java: CGILexer.lex
 
 BrowserCommandLexer.java: BrowserCommandLexer.lex
 	$(JLEX) BrowserCommandLexer.lex
+        
+ExcelCSVLexer.java: ExcelCSVLexer.lex
+	$(JLEX) ExcelCSVLexer.lex
 
 clean:
 	rm -rf docs/ gnu/ com/
@@ -24,7 +28,7 @@ clean:
 	rm -f *~
 	rm -f ~*
 	rm -f *.jar
-	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java
+	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
 	rm -f CSVTest.txt
 
 docs:

@@ -1,0 +1,44 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="description" content="Java libraries to read and write files in Excel Comma Separated Value (CSV) format.">
+   <meta name="keywords" content="csv, csv, csv, excel, excel, microsoft excel, excel spreadsheet, spreadsheet, spread sheet, microsoft, comma, separated, value, values, comma, separated, value, values comma separated value, values, java, util, utility, utilities, class, classes, library, libraries, source, code, open source, gpl, write, print, output, input, array, string, read, reader, reading, write, writer, writing, parse, parser, parsing, lex, lexer, lexing, print, printer, printing, handle, handler, handling, seperated, file, files, format, data, file format, data format, javadoc ">
+   <title>Comma Separated Values (CSV) in Java</title>
+   <base href="http://ostermiller.org/utils/">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<h1>Excel Comma Separated Values (CSV) in Java</h1>
+
+<h2><a name="csv_parser">Reading Exel CSV files: ExcelCSVParser</a></h2>
+
+<p>Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
+However it fails to use the <a href="CSVLexer.html">standard CSV file format</a>.  Excel does
+not use the backslash as an escape character, but instead escapes quote literals with two quotes.
+It also does not quote values that have leading or trailing whitespace.  This special CSV parser
+can read Excel format CSV files.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ExcelCSVParser.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/ExcelCSVParser.java/HEAD">Browse Source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/ExcelCSVParser.html">Documentation</a>]</p>
+
+<hr>
+
+<h2><a name="license">License</a></h2>
+
+<P>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+(utils@Ostermiller.com)</P>
+
+<p>This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation; either version 2 of the License or (at
+your option) any later version.</P>
+
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+</body>
+</html>

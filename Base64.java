@@ -254,6 +254,7 @@ public class Base64{
      * @param in Stream from which to read data that needs to be encoded.
      * @param out Stream to which to write encoded data.
      * @param lineBreaks Whether to insert line breaks every 76 characters in the output.
+     * @throws IOException if there is a problem reading or writing.
      */
     public static void encode(InputStream in, OutputStream out, boolean lineBreaks) throws IOException {
         // Base64 encoding converts three bytes of input to

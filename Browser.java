@@ -203,7 +203,7 @@ public class Browser {
      * the exec command by URLEncoding the URL before passing it.
      *
      * @param url the url to display
-     * @param throws IOException if the url is not valid or the browser fails to start
+     * @throws IOException if the url is not valid or the browser fails to start
      */
     public static void displayURL(String url) throws IOException {
         if (exec == null || exec.length == 0){
@@ -365,7 +365,7 @@ public class Browser {
 	 * open the rest of the urls.
 	 *
 	 * @param urls the list of urls to display
-	 * @param throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to start
 	 */
 	public static void displayURLs(String[] urls) throws IOException {
 		if (urls == null || urls.length == 0){
@@ -438,7 +438,7 @@ public class Browser {
 	 * open all the urls.
 	 *
 	 * @param urls the list of urls to display
-	 * @param throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to start
 	 */
 	public static void displayURLsinNew(String[] urls) throws IOException {
 		if (urls == null || urls.length == 0){

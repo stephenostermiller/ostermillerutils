@@ -31,6 +31,11 @@ Strings in quotes that have commas inside them.  This CSV parser takes care of t
 support line numbering, escape characters, and comments.  Each line of values can be returned as an array, or 
 the values can be returned individually with the number of the line from which they came.</p>
 
+<p>Some applications do not output CSV according to the ISO standards and this parse may
+not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A 
+separate class must be use to read 
+<a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.</p>
+
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVParser.java/0">Version History</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CSVParser.java/HEAD">Browse Source</a> |
