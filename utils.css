@@ -1,0 +1,142 @@
+a:link {
+text-decoration:none;
+color:#000099;
+}
+a:visited{
+font-weight:bold;
+text-decoration:none;
+color:#000099;
+}
+a:hover {
+text-decoration:underline;
+}
+
+body {
+font-family:sans-serif;
+font-size:12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family:serif;
+}
+
+h1 {
+font-size:22pt;
+}
+h2 {
+font-size:18pt;
+}
+ul {
+list-style-position:inside;
+list-style-type:circle;
+padding-left:0;
+padding-right:0;
+padding-top:.2cm;
+padding-bottom:.2cm;
+margin:0;
+}
+
+div.install {
+position:relative;
+float:right;
+width:25%;
+border-left:thin inset #000099;
+border-bottom:thin inset #000099;
+margin-left:1cm;
+margin-bottom:1cm;
+padding-left:15px;
+padding-bottom:15px;
+}
+
+div.utillist, div.download, div.license div.modifications {
+margin-right:1cm;
+margin-bottom:0.2cm;
+padding-right:15px;
+padding-bottom:15px;
+}
+
+div.examplecode {
+float:right;
+border:thin black ridge;
+margin:.3cm;
+padding:.3cm;
+width:13cm;
+overflow:scroll;
+}
+
+div.examplecode pre {
+padding-top:.3cm;
+padding-bottom:.3cm;
+border-top:thin black ridge;
+border-bottom:thin black ridge;
+}
+
+div.i18n {
+float:right;
+border:thin black ridge;
+margin:.3cm;
+padding:.3cm;
+width:5cm;
+}
+
+hr {
+color:black;
+height:1px;
+}
+
+/* Syntax Highlighting */
+body {
+	background:white;
+}
+.tag{
+	font-weight:bold;
+	color:blue;
+}
+.endtag{
+	color:blue;	
+}
+.reference{
+	color:black;
+}
+.name{
+	font-weight:bold;
+	color:maroon;
+}
+.value{
+	font-style: italic;
+	color:maroon;
+}
+.text{
+	font-weight:bold;
+	color:black;
+}
+.reservedWord{
+	color:blue;
+}
+.identifier{
+	color:black;
+}
+.literal{
+	color:maroon;
+}
+.separator{
+	color:navy;
+}
+.operator{
+    font-weight:bold;
+    color:navy;
+}
+.comment{
+	color:green;
+}
+.preprocessor{
+	color:purple;
+}
+.whitespace{
+}
+.error{
+	color:red;
+}
+.unknown{
+	color:orange;
+}

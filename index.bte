@@ -3,42 +3,6 @@
 <%bte.tpl name=firstLine%>com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=description%>Open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
 <%bte.tpl name=keywords%>util, util, util, utils, utils, utils, utilities, utilities, base64, base64, base64, md5, md5, md5, significant, figures, encode, encoding, decode, decoding, password, username, dialog, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, cgi, csv, csv, browser, random, password, generate, generator, pass, launcher, browser control, launch, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl, javadoc<%/bte.tpl%>
-<%bte.tpl name=extraheader%><script language="JavaScript"><!--
-var agt=navigator.userAgent.toLowerCase();
-var is_major = parseInt(navigator.appVersion);
-var is_nav  = ((agt.indexOf('mozilla')!=-1) && (agt.indexOf('msie')==-1) &&
-  (agt.indexOf('spoofer')==-1) && (agt.indexOf('compatible') == -1) && 
-  (agt.indexOf('opera')==-1) && (agt.indexOf('webtv')==-1) && 
-  (agt.indexOf('hotjava')==-1));
-var styleok=(!(is_nav && (is_major <= 4)));
-if (!styleok){
-    document.write("<" + "!" + "-" + "-");
-}
-//--></script>
-<style>
-div.install {
-position:relative;
-float:right;
-width:25%;
-border-left:thin inset #000099;
-border-bottom:thin inset #000099;
-margin-left:1cm;
-margin-bottom:1cm;
-padding-left:15px;
-padding-bottom:15px;
-}
-div.utillist, div.download, div.license div.modifications {
-margin-right:1cm;
-margin-bottom:0.2cm;
-padding-right:15px;
-padding-bottom:15px;
-}
-</style>
-<script language="JavaScript"><!--
-if (!styleok){
-    document.write("-" + "-" + ">");
-}
-//--></script><%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class="install"><h3>Installation</h3>
 <p>The utilities are pre-compiled and ready to use. Simply use one of the following to
@@ -69,8 +33,7 @@ command line programs that come in these utilities, run this <a href="install.sh
 <li><a name="browser" href="Browser.html">Browser</a> - Open a browser from an application on Windows, Unix, or Macintosh.</li>
 <li><a name="cgi_parser" href="CGIParser.html">CGI Query String Parser</a> - Libraries to to parse the query data supplied by HTTP GET or POST requests.</li>
 <li><a name="circularbuffer" href="CircularBuffer.html">Circular Buffers</a> - Implements the circular buffer producer/consumer model for bytes.</li>
-<li><a name="csv_parser" href="CSV.html">Comma Separated Values (CSV)</a> - Libraries to read and write files in Comma Separated Value (CSV) format.</li>
-<li><a name="excel_csv_parser" href="ExcelCSV.html">Comma Separated Values (CSV) Excel Format</a> - Libraries to read files in Comma Separated Value (CSV) format exported from Excel spreadsheet.</li>
+<li><a name="csv_parser" href="CSV.html">Comma Separated Values (CSV)</a> - Libraries to read and write files in Comma Separated Value (CSV) format. (<a name="excel_csv_parser" href="ExcelCSV.html">Excel CSV Format</a> also available)</li>
 <li><a name="file_helper" href="FileHelper.html">File Helper</a> - Methods for manipulating files.</li>
 <li><a name="line_ends" href="LineEnds.html">Line Ends</a> - Converts text files between various system formats.</li>
 <li><a name="md5" href="MD5.html">MD5 Sums</a> - Classes for generating MD5 checksums on String, Byte arrays, Streams, or Files.</li>

@@ -14,7 +14,7 @@ for these classes.</p>
 
 <hr>
 
-<div style="float:right;border:thin black ridge;margin:.3cm;padding:.3cm;width:13cm;"><h3>Example</h3>
+<div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the buffer.
 </span><span class=identifier>CircularObjectBuffer cob </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>CircularObjectBuffer</span><span class=separator>();
 
@@ -41,7 +41,7 @@ get around this by making the buffer infinite size or emptying the buffer in ano
 <br clear=all>
 <hr>
 
-<div style="float:right;border:thin black ridge;margin:.3cm;padding:.3cm;width:13cm;"><h3>Example</h3>
+<div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the buffer.
 </span><span class=identifier>CircularCharBuffer ccb </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>CircularCharBuffer</span><span class=separator>();
 
@@ -79,7 +79,7 @@ classes and connecting them.</p>
 <br clear=all>
 <hr>
 
-<div style="float:right;border:thin black ridge;margin:.3cm;padding:.3cm;width:13cm;"><h3>Example</h3>
+<div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the buffer.</span><span class=whitespace>
 </span><span class=identifier>CircularByteBuffer</span><span class=whitespace> </span><span class=identifier>cbb</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CircularByteBuffer</span><span class=separator>();</span><span class=whitespace>
 
