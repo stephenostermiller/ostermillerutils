@@ -2,14 +2,15 @@
  * edit BrowserCommandLexer to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
  * <a href="http://www.jflex.de">the JFlex website</a>.
- * Once JFlex is in your classpath run<br>
- * java --skel browser.jflex.skel JFlex.Main BrowserCommandLexer<br>
+ * Jflex 1.4 or later is required.
+ * Run:<br>
+ * jflex BrowserCommandLexer<br>
  * You will then have a file called BrowserCommandLexer.java
  */
 
 /*
  * Tokenize a command line into application and arguments.
- * Copyright (C) 2001 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
