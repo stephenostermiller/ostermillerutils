@@ -1,4 +1,4 @@
-personal_ws-1.1 english 706
+personal_ws-1.1 english 717
 aa
 aaa
 AAAAAABB
@@ -34,6 +34,7 @@ ArrayIndexOutOfBoundsException
 ArrayList
 ascii
 AstringB
+atStart
 availableInd
 avoidRepetition
 badcfe
@@ -118,6 +119,7 @@ commandLinesArea
 commandLinesLabel
 commentDelims
 commentStart
+commentText
 compareAndPrint
 compareState
 containsKey
@@ -212,7 +214,9 @@ firstInSig
 firstLen
 floatValue
 forceDecode
+foundComment
 foundMantissaDigit
+foundUnicode
 fout
 fOut
 fOUt
@@ -291,6 +295,7 @@ hasMoreElements
 hasMoreTokens
 hasNext
 helpFlags
+hexDigitValue
 HH
 hlength
 href
@@ -299,6 +304,7 @@ http
 HttpServletRequest
 HttpServletResponse
 HttpURLConnection
+idString
 ie
 iff
 IllegalArgumentException
@@ -497,6 +503,7 @@ println
 printlnComment
 printMessages
 PrintWriter
+PropertiesLexer
 PropertiesToken
 propertyNames
 px
@@ -593,6 +600,7 @@ spaceLeft
 spaceUsed
 SQL
 startsWith
+stName
 str
 StraightStreamReader
 StreamTokenizer
@@ -602,7 +610,6 @@ stringLength
 StringReader
 StringTokenizer
 strLength
-SuperProperties
 tabInd
 tabStops
 tabWidth
@@ -641,11 +648,15 @@ transferFocus
 tt
 ttab
 txt
+Uber
+UberProperties
 ul
 un
 unencoded
+unescape
 unexpectedchar
 unexpectedcharforce
+unicodeValue
 unix
 unmapping
 UnsupportedEncodingException
@@ -676,7 +687,10 @@ workingEmptyReturned
 workingPosition
 workingState
 writeBuf
+writeComment
+writeEscapedISO
 writePosition
+writeProperty
 writerClosed
 xa
 xab
