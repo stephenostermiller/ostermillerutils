@@ -1,4 +1,4 @@
-personal_ws-1.1 english 683
+personal_ws-1.1 english 703
 aa
 aaa
 AAAAAABB
@@ -58,6 +58,8 @@ browseButton
 BrowserCommandLexer
 BrowserDialog
 buf
+BufferedInputStream
+BufferedOutputStream
 BufferedReader
 BufferedWriter
 BufferOverflowException
@@ -137,7 +139,10 @@ CVS
 CVSLexer
 Cygwin
 Dansk
+decodeall
 decodeBuffer
+decodegood
+DecodingException
 defaultCommands
 defaultValue
 defaultValues
@@ -165,7 +170,10 @@ doPost
 doPostGet
 doubleValue
 ec
+edgx
 ef
+eldagx
+eldagxfqQvV
 elementAt
 emptyReturned
 endian
@@ -186,6 +194,7 @@ extraSpaces
 faf
 fbc
 FFFFFF
+fileAction
 fileChooser
 FileHelper
 FileInputStream
@@ -194,6 +203,7 @@ FileProtocolHandler
 FileWriter
 FilterInputStream
 FilterOutputStream
+fIn
 finalState
 findLength
 findRep
@@ -201,8 +211,12 @@ firstAlphabet
 firstInSig
 firstLen
 floatValue
+forceDecode
 foundMantissaDigit
 fout
+fOut
+fOUt
+fqQvV
 Français
 fufilledInd
 fVvqQ
@@ -212,6 +226,7 @@ getAvailable
 getBytes
 getCanonicalFile
 getCanonicalPath
+getChar
 getComment
 getContentPane
 getContents
@@ -407,6 +422,7 @@ nline
 nLine
 nocommand
 noforce
+nolines
 NONCONFUSING
 nontoken
 nontokenDelims
@@ -435,6 +451,8 @@ openConnection
 OpenInBrowser
 openURL
 Ostermiller
+outFile
+outName
 outputstream
 OutputStream
 outputStreamClosed
@@ -623,6 +641,8 @@ txt
 ul
 un
 unencoded
+unexpectedchar
+unexpectedcharforce
 unix
 unmapping
 UnsupportedEncodingException
