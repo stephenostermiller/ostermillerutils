@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Excel Comma Separated Values (CSV) in Java<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to read and write files in Excel Comma Separated Value (CSV) format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>csv, csv, csv, excel, excel, microsoft excel, excel spreadsheet, spreadsheet, spread sheet, microsoft, comma, separated, value, values, comma, separated, value, values comma separated value, values<%/bte.tpl%>
@@ -8,7 +8,7 @@
 escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
 
 <p>To write standard CSV files that most applications other than Excel can understand use the 
-<a href="http://ostermiller.org/utils/CSVLexer.html">standard CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
+<a href="http://ostermiller.org/utils/CSV.html">standard CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |
@@ -21,13 +21,13 @@ implement the CSVPrint interface.</p>
 <h2><a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a></h2>
 
 <p>Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
-However it fails to use the <a href="CSVLexer.html">standard CSV file format</a>.  Excel does
+However it fails to use the <a href="CSV.html">standard CSV file format</a>.  Excel does
 not use the backslash as an escape character, but instead escapes quote literals with two quotes.
 It also does not quote values that have leading or trailing whitespace.  This special CSV parser
 can read Excel format CSV files.</p>
 
 <p>To read standard CSV files that most applications other than Excel can understand use the 
-<a href="http://ostermiller.org/utils/CSVLexer.html">standard CSV</a> format.    Both CSVParser and ExcelCSVParser
+<a href="http://ostermiller.org/utils/CSV.html">standard CSV</a> format.    Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |

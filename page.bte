@@ -1,13 +1,13 @@
 <%bte.doc output="false"%>
 <%bte.tpl name=page %><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
-<head><title><%bte.inc name=pageTitle %> - com.Ostermiller.util Java Utilities</title><%bte.grp onNoResolve=warning %>
+<head><title><%bte.inc name=pageTitle %></title><%bte.grp onNoResolve=warning %>
 <meta name="description" content="<%bte.inc name=description %>"><%/bte.grp %><%bte.grp onNoResolve=warning %>
 <meta name="keywords" content="<%bte.inc name=keywords %>,java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc"><%/bte.grp %>
 <link rel="stylesheet" media="screen" title="Syntax Highlighting" href="syntax.css" type="text/css">
 <%bte.grp onNoResolve=ok %><%bte.inc name=extraheader %><%/bte.grp %></head>
 <body>
-<h1><%bte.inc name=pageTitle %> - <a href="./">com.Ostermiller.util Java Utilities</a></h1>
+<h1><%bte.inc name=firstLine %></h1>
 <%bte.inc name=content %>
 <hr>
 

@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Uber Properties<%/bte.tpl%>
 <%bte.tpl name=description%>A replacement for the java.utils.Properties class with enhancements.<%/bte.tpl%>
 <%bte.tpl name=keywords%>properties, properties, uberproperties, uber properties, property, property, uber, uber, replacement, token, tokens<%/bte.tpl%>

@@ -1,0 +1,35 @@
+<%bte.doc super="item.bte" %>
+<%bte.tpl name=pageTitle%>CGI Query String Parser<%/bte.tpl%>
+<%bte.tpl name=description%>Java libraries to to parse the query data supplied by HTTP GET or POST requests.<%/bte.tpl%>
+<%bte.tpl name=keywords%>cgi, cgi, cgi, common, gateway, interface, query, query, data, string, string, strings, name, names, value, values, pair, pairs, parse, parser, parses, parsing, token, tokenize, tokenizes, tokenizer, tokenizing, split, splits, urlencode, urlencodes, urlencoded, urldecode, urldecodes, encoded, url, url, get, get, post, post, servlet, servlets, http, http, http, protocol, protocal<%/bte.tpl%>
+<%bte.tpl name=content%>
+<p>The servlet implementation that I am using does not parse the CGI name value pairs correctly for either POST or GET requests when there is a large amount of query data.  Luckily, you can parse the query data yourself.  I have written a class to do so.  Its methods for retrieving the name value pairs are identical to the three methods in the http request of the servlet.  The class can be created from the string of the GET request or the stream of the POST request.</p>
+
+<p>
+If using this class in servlets, you might use it something like this:<br>
+<code><pre>
+public void doGet (HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException { 
+    String query = request.getQueryString();
+    doPostGet(request, response, new CGIParser(query==null?"":query));
+}
+
+public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+    doPostGet(request, response, new CGIParser(request.getReader()));
+}
+
+private void doPostGet(HttpServletRequest request, HttpServletResponse response, CGIParser params)
+    throws ServletException, IOException {
+    ...
+}
+</pre></code>
+You would request the parameters from the params object rather than from the request.
+</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CGIParser.java/0">Version History</a> |
+<a href="CGIParser.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/CGIParser.html">Documentation</a>]</p>
+<%/bte.tpl%>
+<%/bte.doc%>

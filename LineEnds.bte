@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Line Ending Conversion<%/bte.tpl%>
 <%bte.tpl name=description%>Line separator adjuster that can convert text files to DOS, Windows, Unix, Java, or Macintosh format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>line, ending, end, separator, text, txt, adjust, converter, convert, format, carriage return, new line, cr, file, files, dos, windows, unix, java, macintosh, mac<%/bte.tpl%>

@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Random Password Generator<%/bte.tpl%>
 <%bte.tpl name=description%>Java library to generate a random String using a cryptographically secure random number generator.<%/bte.tpl%>
 <%bte.tpl name=keywords%>random, rand, pass, password, passwords, generate, generator, generater, secure, securely, securly, string, strings, char, chars, array, alphabet, alphabets<%/bte.tpl%>

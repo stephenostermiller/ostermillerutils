@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>NoClose Streams<%/bte.tpl%>
 <%bte.tpl name=description%>Create streams that cannot be closed with the regular close() mechanism.<%/bte.tpl%>
 <%bte.tpl name=keywords%>stream, outputstream, inputstream, reader, writer, close, closed<%/bte.tpl%>

@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>File Helper<%/bte.tpl%>
 <%bte.tpl name=description%>Methods for manipulating Files.<%/bte.tpl%>
 <%bte.tpl name=keywords%>file, file, helper, helper, file helper, filehelper, split, splitting, pad, padding, tokenize, token<%/bte.tpl%>

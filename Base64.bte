@@ -1,0 +1,78 @@
+<%bte.doc super="item.bte" %>
+<%bte.tpl name=pageTitle%>Base64<%/bte.tpl%>
+<%bte.tpl name=description%>ncode and decode base 64 in Java.<%/bte.tpl%>
+<%bte.tpl name=keywords%>base, 64, base64, base, 64, base64, base, 64, base64, encode, decode, encode, decode<%/bte.tpl%>
+<%bte.tpl name=content%>
+<table align=right border=1 width=150 hspace=10 vspace=10 cellpadding=10><tr><td>
+    Internationalization - included languages:
+    <ul>	
+    <li>English</li> 
+    </ul>
+    Translations gladly accepted.  Please translate
+    <a href="Base64.properties.html">Base64.properties</a>.<br>
+	You may want to use: 
+	<a href="http://ostermiller.org/attesoro/">Attesoro - A Java Translation Editor</a>
+</td></tr></table>
+
+<p>Bas64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
+
+<p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
+It can be used anytime binary or arbitrary data needs to be represented in
+common printable characters.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
+<blockquote><pre><span class=reservedWord>import</span><span class=whitespace> </span><span class=identifier>com</span><span class=separator>.</span><span class=identifier>Ostermiller</span><span class=separator>.</span><span class=identifier>util</span><span class=separator>.</span><span class=identifier>Base64</span><span class=separator>;</span><span class=whitespace>
+</span><span class=separator>...</span><span class=whitespace>
+</span><span class=identifier>URL</span><span class=whitespace> </span><span class=identifier>url</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>URL</span><span class=separator>(</span><span class=literal>&quot;http://....&quot;</span><span class=separator>);</span><span class=whitespace>
+</span><span class=identifier>HttpURLConnection</span><span class=whitespace> </span><span class=identifier>connection</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>HttpURLConnection</span><span class=separator>)</span><span class=identifier>url</span><span class=separator>.</span><span class=identifier>openConnection</span><span class=separator>();</span><span class=whitespace>
+</span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>setRequestProperty</span><span class=separator>(</span><span class=whitespace>
+    </span><span class=literal>&quot;Authorization&quot;</span><span class=separator>,</span><span class=whitespace> 
+    </span><span class=literal>&quot;Basic &quot;</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=identifier>Base64</span><span class=separator>.</span><span class=identifier>encode</span><span class=separator>(</span><span class=whitespace>
+        </span><span class=identifier>username</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=literal>&quot;:&quot;</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=identifier>password</span><span class=whitespace>
+    </span><span class=separator>)</span><span class=whitespace>
+</span><span class=separator>);</span><span class=whitespace>      
+</span><span class=identifier>InputStream</span><span class=whitespace> </span><span class=identifier>in</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>getInputStream</span><span class=separator>();</span><span class=whitespace>
+</span></pre></blockquote></p>
+
+<p>Be aware that Base64 encoding in <i>not</i> encryption.  Base64 scrambles the
+output and it may appear to be unreadable, but it is easily deciphered by
+anybody with a little experience or time.  Base64 encoded strings will often end
+in one or two equal signs, and they will have only letters, numbers, pluses, and slashes.
+Once somebody figures out that it is in Base64, it is just a matter of running
+the decode method on it.  Furthermore, real encryption algorithms will change
+the entire output if one bit in the input changes.  If you change a letter in a
+your message and then re-encode it with Base64, only a few characters will
+change.  Base64 is not a substitute for encryption.  Base64 used this way is
+obfuscation, and rather poor obfuscation at that.  It may be a disservice to your
+users to use Base64 as obfuscation because it gives them the impression that
+their data is encrypted when it really isn't.</p>
+
+<p>To run Base64 as a stand alone program use the following command line:<br>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Base64&nbsp;&lt;files&gt;</b></p>
+
+<pre>Base64 [-eldagxfqQvV] &lt;files&gt;
+Encode or decode using the base64 format.
+  If no files are specified standard input and output will be used.
+  --help            Print this help message.
+  --version         Print out the version number.
+  --about           Print out license and contact info.
+  -g --guess        Guess from contents whether to decode or encode. (default)
+  -e --encode       Apply base64 encoding.
+  -l --lines        Insert line breaks when encoding. (default)
+  --nolines         Insert no line breaks when encoding.
+  -d --decode       Remove base64 encoding.
+  -a --decodeall    When decoding, attempt badly formatted files.
+  --decodegood      Don't decode badly formatted files.  (default)
+  -x --ext &lt;ext&gt;    File extension to use. (default: base64)
+  -f --force        Overwrite files without prompting
+  --noforce         Don't overwrite files.  (default)
+  -v --verbose      Print a message for each file encoded or decoded. (default)
+  -q --quiet        Print error messages.
+  -Q --reallyquiet  Print nothing.
+</pre>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">Version History</a> |
+<a href="Base64.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/Base64.html">Documentation</a>]</p>
+
+<%/bte.tpl%>
+<%/bte.doc%>

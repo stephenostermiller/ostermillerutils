@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Circular Buffers<%/bte.tpl%>
 <%bte.tpl name=description%>Implements the circular buffer producer/consumer model for streams or Objects.<%/bte.tpl%>
 <%bte.tpl name=keywords%>buffer, buffer, circular, cirular, object, objects, buffers, inputstream, outputstream, pipedinputstream, pipedoutputstream, producer, producers, consumer, consumers, thread, threads, overflow, overflows<%/bte.tpl%>
@@ -7,8 +7,8 @@
 
 <p>Implements the circular buffer producer/consumer model for Objects.
 
-<p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
-implements the circular buffer producer/consumer model for characters and the <a href="CircularByteBuffer.html">CircularByteBuffer</a> which 
+<p>This class is similar to the <a href="#circularcharbuffer">CircularCharBuffer</a> which 
+implements the circular buffer producer/consumer model for characters and the <a href="#circularbytebuffer">CircularByteBuffer</a> which 
 implements the circular buffer producer/consumer model for bytes.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |
@@ -27,8 +27,8 @@ mark operation, don't allow you to control buffer sizes that they use,
 and have a more complicated API that requires a instantiating two
 classes and connecting them.</p>
  
-<p>This class is similar to the <a href="CircularByteBuffer.html">CircularByteBuffer</a> which 
-implements the circular buffer producer/consumer model for bytes and the <a href="CircularObjectBuffer.html">CircularObjectBuffer</a> which 
+<p>This class is similar to the <a href="#circularbytebuffer">CircularByteBuffer</a> which 
+implements the circular buffer producer/consumer model for bytes and the <a href="#circularobjectbuffer">CircularObjectBuffer</a> which 
 implements the circular buffer producer/consumer model for Objects.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |
@@ -47,8 +47,8 @@ mark operation, don't allow you to control buffer sizes that they use,
 and have a more complicated API that requires a instantiating two
 classes and connecting them.</p>
  
-<p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
-implements the circular buffer producer/consumer model for characters and the <a href="CircularObjectBuffer.html">CircularObjectBuffer</a> which 
+<p>This class is similar to the <a href="#circularcharbuffer">CircularCharBuffer</a> which 
+implements the circular buffer producer/consumer model for characters and the <a href="#circularobjectbuffer">CircularObjectBuffer</a> which 
 implements the circular buffer producer/consumer model for Objects.</p>
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularByteBuffer.java/0">Version History</a> |

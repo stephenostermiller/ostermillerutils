@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>String Helper<%/bte.tpl%>
 <%bte.tpl name=description%>Methods for formatting, manipulating, and querying Java Strings.<%/bte.tpl%>
 <%bte.tpl name=keywords%>string, string, helper, helper, string helper, stringhelper, split, splitting, pad, padding, tokenize, token<%/bte.tpl%>

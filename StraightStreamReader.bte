@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Straight Stream Reader<%/bte.tpl%>
 <%bte.tpl name=description%>An input stream reader that does no character class translation.<%/bte.tpl%>
 <%bte.tpl name=keywords%>staightstreamreader, staightstreamreader, staightstreamreader, stream, reader, stream, reader, stream reader, character, characters, char, binary, 0xff, 0x<%/bte.tpl%>

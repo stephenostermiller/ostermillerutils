@@ -1,4 +1,4 @@
-<%bte.doc super="page.bte" %>
+<%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>String Tokenizer<%/bte.tpl%>
 <%bte.tpl name=description%>A StringTokenizer replacement with enhancements.<%/bte.tpl%>
 <%bte.tpl name=keywords%>stringtokenizer, stringtokenizer, stringtokenizer, string, string, string, tokenizer, tokenizer, tokenizer, replacement<%/bte.tpl%>
