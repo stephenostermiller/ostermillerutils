@@ -51,7 +51,7 @@
  * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(st.nextToken());<br>
  * };
  * </code></blockquote> 
- * <p> 
+ * <p>
  * prints the following output:
  * <blockquote>
  * (<br>
@@ -130,12 +130,12 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     protected int strLength;
 
     /**
-     * the set of nontoken delimiters.
+     * The set of nontoken delimiters.
      */
     protected String nontokenDelims;
 
     /**
-     * the set of token delimiters.
+     * The set of token delimiters.
      */
     protected String tokenDelims;
 
@@ -163,7 +163,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     protected boolean emptyReturned;
 
     /**
-     * maxDelimChar stores the value of the delimiter character with the
+     * Stores the value of the delimiter character with the
      * highest value. It is used to optimize the detection of delimiter
      * characters.  The common case will be that the int values of delimiters
      * will be less than that of most characters in the string (, or space less 
@@ -178,7 +178,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     protected char maxDelimChar;
     
     /**
-     * whether empty tokens should be returned.
+     * Whether empty tokens should be returned.
      * ie if "" sholud be returned when text starts with 
      * a delim, has two delims next to each other, or
      * ends with a delim.
@@ -193,6 +193,13 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * at the very beginning.
      */
     protected int delimsChangedPosition;
+
+    /**
+     * A cache of the token count.  This variable should be -1 if the token
+     * have not yet been counted. It should be greater than or equal to zero
+     * if the tokens have been counted.
+     */
+    protected int tokenCount;
 
     /**
      * Constructs a string tokenizer for the specified string. Both token and
@@ -317,6 +324,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         // because the text was changed since the last time the delimiters
         // were changed we need to set the delimiter changed position
         delimsChangedPosition = 0;
+        // The token count changes when the text changes
+        tokenCount = -1;
     }
     
     /**
@@ -346,6 +355,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 		        maxDelimChar = tokenDelims.charAt(i); 
             }
         }
+        // Changing the delimeters may change the number of tokens
+        tokenCount = -1;
     }
 
 
@@ -359,7 +370,16 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * @return <code>true</code> if and only if there is at least one token in the
      *          string after the current position; <code>false</code> otherwise.
      */
-    public boolean hasMoreTokens(){                 
+    public boolean hasMoreTokens(){
+
+        // handle the easy case in which the number
+        // of tokens has been counted.
+        if (tokenCount == 0){
+            return false;
+        } else if (tokenCount > 0){
+            return true;
+        }
+
         // copy over state variables from the class to local 
         // variables so that the state of this object can be
         // restored to the state that it was in before this 
@@ -369,7 +389,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
                
         int workingPosition = position;
         boolean workingEmptyReturned = emptyReturned;
-        boolean onToken = advancePosition(); 
+        boolean onToken = advancePosition();
         while(position != workingPosition || 
             emptyReturned != workingEmptyReturned){
             if (onToken){
@@ -398,13 +418,14 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
      */
     public String nextToken(){
-        //System.out.println("" + position + " " + emptyReturned + " " + delimsChangedPosition);
-        int workingPosition = position;
+		int workingPosition = position;
         boolean workingEmptyReturned = emptyReturned;
-        boolean onToken = advancePosition(); 
+        boolean onToken = advancePosition();
         while(position != workingPosition || 
             emptyReturned != workingEmptyReturned){
             if (onToken){
+        		// returning a token decreases the token count
+                tokenCount--;
                 return (emptyReturned ? "" : text.substring(workingPosition, (position != -1) ? position : strLength));
             }
             workingPosition = position;
@@ -430,6 +451,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         int workingPosition = position;
         boolean workingEmptyReturned = emptyReturned;
         boolean onToken = advancePosition(); 
+
+        // skipping delimiters may cause the number of tokens to change
+        tokenCount = -1;
+
         while(position != workingPosition || 
             emptyReturned != workingEmptyReturned){
             if (onToken){
@@ -460,6 +485,12 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      */
     public int countTokens(){
 
+        // return the cached token count if a cache
+        // is available.
+        if (this.tokenCount >=0){
+            return this.tokenCount;
+        }
+
         int tokenCount = 0;
 
         // copy over state variables from the class to local
@@ -485,6 +516,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         // restore object state
         position = savedPosition;
         emptyReturned = savedEmptyReturned;
+
+        // Save the token count in case this is called again
+        // so we wouldn't have to do so much work.
+        this.tokenCount = tokenCount;
 
         return tokenCount;
     }
@@ -771,10 +806,25 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     /**
      * Set whether empty tokens should be returned from this point in
 	 * in the tokenizing process onward.
+     * <P>
+     * Empty tokens occur when two delimiters are next to each other
+     * or a delimiter occurs at the beginning or end of a string. If
+     * empty tokens are set to be returned, and a comma is the non token
+     * delimiter, the following table shows how many tokens are in each
+     * string.<br>
+     * <table><tr><th>String<th><th>Number of tokens<th></tr>
+     * <tr><td align=right>"one,two"<td><td>2 - normal case with no empty tokens.<td></tr>
+     * <tr><td align=right>"one,,three"<td><td>3 including the empty token in the middle.<td></tr>
+     * <tr><td align=right>"one,"<td><td>2 including the empty token at the end.<td></tr>
+     * <tr><td align=right>",two"<td><td>2 including the empty token at the beginning.<td></tr>
+     * <tr><td align=right>","<td><td>2 including the empty tokens at the beginning and the ends.<td></tr>
+     * <tr><td align=right>""<td><td>1 - all strings will have at least one token if empty tokens are returned.<td></tr></table>
      *
      * @param returnEmptyTokens true iff empty tokens should be returned.
      */
     public void setReturnEmptyTokens(boolean returnEmptyTokens){
+        // this could effect the number of tokens
+        tokenCount = -1;
         this.returnEmptyTokens = returnEmptyTokens;
     }
 
