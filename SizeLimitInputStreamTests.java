@@ -58,10 +58,37 @@ class SizeLimitInputStreamTests {
 			if (slis.read(new byte[4]) != 1) throw new Exception("Expected 2 read");
 			if (slis.read() != -1) throw new Exception ("Expected -1");
 
+			InputStream in = new ByteArrayInputStream(
+				"onetwothreefourfivesixseven".getBytes("ASCII")
+			);
+			compare("one", readFully(new SizeLimitInputStream(in,3)));
+			compare("", readFully(new SizeLimitInputStream(in,0)));
+			compare("two", readFully(new SizeLimitInputStream(in,3)));
+			compare("three", readFully(new SizeLimitInputStream(in,5)));
+			compare("four", readFully(new SizeLimitInputStream(in,4)));
+			compare("five", readFully(new SizeLimitInputStream(in,4)));
+			compare("six", readFully(new SizeLimitInputStream(in,3)));
+			compare("s", readFully(new SizeLimitInputStream(in,1)));
+			compare("even", readFully(new SizeLimitInputStream(in,4)));
+
 		} catch (Exception x){
 			System.err.println(x.getMessage());
 			System.exit(1);
 		}
 
 	}
+
+	private static String readFully(InputStream in) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		int read;
+		while ((read = in.read()) != -1){
+			sb.append((char)read);
+		}
+		return sb.toString();
+	}
+
+	private static void compare(String s1, String s2) throws Exception {
+		if (!s1.equals(s2)) throw new Exception ("Expected " + s1 + " but got " + s2);
+	}
+
 }

@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1265
+personal_ws-1.1 en 1276
 aa
 aA
 aaa
@@ -185,6 +185,7 @@ CircularCharBuffer's
 CircularCharBufferWriter
 CircularObjectBuffer
 cirular
+cis
 classLoader
 classpath
 clearButton
@@ -202,8 +203,12 @@ commentStart
 commentText
 compareAndPrint
 compareState
+concat
+concatinputstream
 ConcatInputStream
+concatreader
 ConcatReader
+ConcatTests
 configPanel
 cong
 containsAny
@@ -368,6 +373,7 @@ firebird
 firstAlphabet
 firstInSig
 firstLen
+fivesi
 floatValue
 FlowLayout
 fnof
@@ -812,6 +818,7 @@ ol
 oldTok
 oline
 oneLetterOptions
+onetwothreefourfivesixseven
 onload
 onToken
 onTrack
@@ -927,6 +934,7 @@ readASCIILine
 readBase
 readBuf
 readerClosed
+readFully
 readlimit
 readLine
 readPosition
@@ -1052,6 +1060,7 @@ sim
 SimpleDateFormat
 Sinotar
 sixsix
+sizelimitinputstream
 SizeLimitInputStream
 SizeLimitInputStreams
 SizeLimitInputStreamTests
@@ -1139,6 +1148,7 @@ tokenizing
 toolbar
 toScientificNotation
 toString
+totalRead
 totInd
 totRead
 toURL
@@ -1250,6 +1260,7 @@ xFF
 xffeff
 xfffa
 xffff
+xseven
 xxAAAAAA
 xxBBBBBB
 xxCCCCCC

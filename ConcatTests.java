@@ -20,7 +20,7 @@ package com.Ostermiller.util;
 import java.io.*;
 
 /**
- * Regression test for Concatination Streams.
+ * Regression test for Concatenation Streams.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/Conact.html">ostermiller.org</a>.
  *
@@ -30,47 +30,47 @@ import java.io.*;
 class ConcatTests {
 	public static void main(String[] args){
 		try {
-            ConcatReader cr = new ConcatReader(
-                new Reader[]{
-                    new StringReader("1"),
-                    new StringReader("two"),
-                    new StringReader(""),
-                    new StringReader("4"),
-                    new StringReader("five"),
-                    new StringReader("six"),
-                    new StringReader("seven"),
-                }
-            );
-            read(cr, '1');
-            read(cr, 't');
-            read(cr, 'w');
-            read(cr, 'o');
-            read(cr, '4');
-            read(cr, "fivesi");
-            read(cr, "xseven");
-            if (cr.read() != -1) throw new Exception ("Read did not terminate");
-            
-            
-            ConcatInputStream cis = new ConcatInputStream(
-                new InputStream[]{
-                    new ByteArrayInputStream(new byte[]{'1'}),
-                    new ByteArrayInputStream(new byte[]{'t','w','o'}),
-                    new ByteArrayInputStream(new byte[]{}),
-                    new ByteArrayInputStream(new byte[]{'4'}),
-                    new ByteArrayInputStream(new byte[]{'f','i','v','e'}),
-                    new ByteArrayInputStream(new byte[]{'s','i','x'}),
-                    new ByteArrayInputStream(new byte[]{'s','e','v','e','n'}),
-                }
-            );
-            read(cis, '1');
-            read(cis, 't');
-            read(cis, 'w');
-            read(cis, 'o');
-            read(cis, '4');
-            read(cis, "fivesi");
-            read(cis, "xseven");
-            if (cr.read() != -1) throw new Exception ("Read did not terminate");
-            
+			ConcatReader cr = new ConcatReader(
+				new Reader[]{
+					new StringReader("1"),
+					new StringReader("two"),
+					new StringReader(""),
+					new StringReader("4"),
+					new StringReader("five"),
+					new StringReader("six"),
+					new StringReader("seven"),
+				}
+			);
+			read(cr, '1');
+			read(cr, 't');
+			read(cr, 'w');
+			read(cr, 'o');
+			read(cr, '4');
+			read(cr, "fivesi");
+			read(cr, "xseven");
+			if (cr.read() != -1) throw new Exception ("Read did not terminate");
+
+
+			ConcatInputStream cis = new ConcatInputStream(
+				new InputStream[]{
+					new ByteArrayInputStream(new byte[]{'1'}),
+					new ByteArrayInputStream(new byte[]{'t','w','o'}),
+					new ByteArrayInputStream(new byte[]{}),
+					new ByteArrayInputStream(new byte[]{'4'}),
+					new ByteArrayInputStream(new byte[]{'f','i','v','e'}),
+					new ByteArrayInputStream(new byte[]{'s','i','x'}),
+					new ByteArrayInputStream(new byte[]{'s','e','v','e','n'}),
+				}
+			);
+			read(cis, '1');
+			read(cis, 't');
+			read(cis, 'w');
+			read(cis, 'o');
+			read(cis, '4');
+			read(cis, "fivesi");
+			read(cis, "xseven");
+			if (cr.read() != -1) throw new Exception ("Read did not terminate");
+
 		} catch (Exception x){
 			System.err.println(x.getMessage());
 			x.printStackTrace();
@@ -78,41 +78,41 @@ class ConcatTests {
 		}
 		System.exit(0);
 	}
-    
-    private static void read(Reader in, char expected) throws Exception {
-        int c = in.read();
-        if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
-    }
 
-    private static void read(InputStream in, char expected) throws Exception {
-        int c = in.read();
-        if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
-    }
+	private static void read(Reader in, char expected) throws Exception {
+		int c = in.read();
+		if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
+	}
 
-    private static void read(Reader in, String expected) throws Exception {
-        int totalRead = 0;
-        while (totalRead < expected.length()){
-            char[] buffer = new char[expected.length()-totalRead];
-            int read = in.read(buffer);
-            if (read == -1) throw new Exception("Read terminated early");
-            if (!expected.substring(totalRead, totalRead+read).equals(new String(buffer,0,read))){
-                throw new Exception ("Expected to read " + expected.substring(totalRead, totalRead+read) + " but read " + new String(buffer,0,read));
-            }
-            totalRead+=read;
-        }
-    }
-    
-     private static void read(InputStream in, String expected) throws Exception {
-        int totalRead = 0;
-        while (totalRead < expected.length()){
-            byte[] buffer = new byte[expected.length()-totalRead];
-            int read = in.read(buffer);
-            if (read == -1) throw new Exception("Read terminated early");
-            if (!expected.substring(totalRead, totalRead+read).equals(new String(buffer,0,read,"ASCII"))){
-                throw new Exception ("Expected to read " + expected.substring(totalRead, totalRead+read) + " but read " + new String(buffer,0,read,"ASCII"));
-            }
-            totalRead+=read;
-        }
-    }
+	private static void read(InputStream in, char expected) throws Exception {
+		int c = in.read();
+		if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
+	}
+
+	private static void read(Reader in, String expected) throws Exception {
+		int totalRead = 0;
+		while (totalRead < expected.length()){
+			char[] buffer = new char[expected.length()-totalRead];
+			int read = in.read(buffer);
+			if (read == -1) throw new Exception("Read terminated early");
+			if (!expected.substring(totalRead, totalRead+read).equals(new String(buffer,0,read))){
+				throw new Exception ("Expected to read " + expected.substring(totalRead, totalRead+read) + " but read " + new String(buffer,0,read));
+			}
+			totalRead+=read;
+		}
+	}
+
+	 private static void read(InputStream in, String expected) throws Exception {
+		int totalRead = 0;
+		while (totalRead < expected.length()){
+			byte[] buffer = new byte[expected.length()-totalRead];
+			int read = in.read(buffer);
+			if (read == -1) throw new Exception("Read terminated early");
+			if (!expected.substring(totalRead, totalRead+read).equals(new String(buffer,0,read,"ASCII"))){
+				throw new Exception ("Expected to read " + expected.substring(totalRead, totalRead+read) + " but read " + new String(buffer,0,read,"ASCII"));
+			}
+			totalRead+=read;
+		}
+	}
 
 }
