@@ -86,14 +86,42 @@ class ConcatTests {
 					new ByteArrayInputStream(new byte[]{'s','e','v','e','n'}),
 				}
 			);
+			if (cis.available() <= 0) throw new Exception ("Not Ready");
 			read(cis, '1');
 			read(cis, 't');
 			read(cis, 'w');
 			read(cis, 'o');
 			read(cis, '4');
 			read(cis, "fivesi");
+			if (cis.available() <= 0) throw new Exception ("Not Ready");
 			read(cis, "xseven");
 			if (cis.read() != -1) throw new Exception ("Read did not terminate");
+			if (cis.read() != -1) throw new Exception ("Didn't stay closed");
+
+			final ConcatInputStream cis1 = new ConcatInputStream();
+			if (cis.available() != 0) throw new Exception ("Ready");
+			cis1.addInputStream(new ByteArrayInputStream("one".getBytes("ASCII")));
+			read(cis1, 'o');
+			cis1.addInputStream(new ByteArrayInputStream("two".getBytes("ASCII")));
+			read(cis1, "netwo");
+			new Thread(){
+				public void run(){
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException ix){
+					}
+					try {
+						cis1.addInputStream(new ByteArrayInputStream("three".getBytes("ASCII")));
+					} catch (Exception x){
+						System.err.println(x.getMessage());
+						x.printStackTrace();
+						System.exit(1);
+					}
+				}
+			}.start();
+			read(cis1, "three");
+			cis1.lastInputStreamAdded();
+			if (cis1.read() != -1) throw new Exception ("Read did not terminate");
 
 		} catch (Exception x){
 			System.err.println(x.getMessage());

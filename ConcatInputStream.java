@@ -17,6 +17,7 @@
 package com.Ostermiller.util;
 
 import java.io.*;
+import java.util.*;
 
 /**
  * An input stream which reads sequentially from multiple sources.
@@ -28,19 +29,112 @@ import java.io.*;
  */
 public class ConcatInputStream extends InputStream {
 
-	/**
-	 * List of sources.
-	 *
-	 * @since ostermillerutils 1.04.00
-	 */
-	private InputStream[] in;
 
 	/**
-	 * Current index to the InputStream[] in
+	 * Current index to inputStreamQueue
 	 *
-	 * @since ostermillerutils 1.04.00
+	 * @since ostermillerutils 1.04.01
 	 */
-	private int inIndex = 0;
+	private int inputStreamQueueIndex = 0;
+
+	/**
+	 * Queue of inputStreams that have yet to be read from.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private ArrayList inputStreamQueue = new ArrayList();
+
+	/**
+	 * A cache of the current inputStream from the inputStreamQueue
+	 * to avoid unneeded access to the queue which must
+	 * be synchronized.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private InputStream currentInputStream = null;
+
+	/**
+	 * true iff the client may add more inputStreams.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private boolean doneAddingInputStreams = false;
+
+	/**
+	 * Causes the addInputStream method to throw IllegalStateException
+	 * and read() methods to return -1 (end of stream)
+	 * when there is no more available data.
+	 * <p>
+	 * Calling this method when this class is no longer accepting
+	 * more inputStreams has no effect.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void lastInputStreamAdded(){
+		doneAddingInputStreams = true;
+	}
+
+	/**
+	 * Add the given inputStream to the queue of inputStreams from which to
+	 * concatenate data.
+	 *
+	 * @param in InputStream to add to the concatenation.
+	 * @throws IllegalStateException if more inputStreams can't be added because lastInputStreamAdded() has been called, close() has been called, or a constructor with inputStream parameters was used.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void addInputStream(InputStream in){
+		synchronized(inputStreamQueue){
+			if (in == null) throw new NullPointerException();
+			if (closed) throw new IllegalStateException("ConcatInputStream has been closed");
+			if (doneAddingInputStreams) throw new IllegalStateException("Cannot add more inputStreams - the last inputStream has already been added.");
+			inputStreamQueue.add(in);
+		}
+	}
+
+	/**
+	 * Add the given inputStream to the queue of inputStreams from which to
+	 * concatenate data.
+	 *
+	 * @param in InputStream to add to the concatenation.
+	 * @throws IllegalStateException if more inputStreams can't be added because lastInputStreamAdded() has been called, close() has been called, or a constructor with inputStream parameters was used.
+	 * @throws NullPointerException the array of inputStreams, or any of the contents is null.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void addInputStreams(InputStream[] in){
+		for (int i=0; i<in.length; i++){
+			addInputStream(in[i]);
+		}
+	}
+
+	/**
+	 * Gets the current inputStream, looking at the next
+	 * one in the list if the current one is null.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private InputStream getCurrentInputStream(){
+		if (currentInputStream == null && inputStreamQueueIndex < inputStreamQueue.size()){
+			synchronized(inputStreamQueue){
+				// inputStream queue index is advanced only by the nextInputStream()
+				// method.  Don't do it here.
+				currentInputStream = (InputStream)inputStreamQueue.get(inputStreamQueueIndex);
+			}
+		}
+		return currentInputStream;
+	}
+
+	/**
+	 * Indicate that we are done with the current inputStream and we should
+	 * advance to the next inputStream.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private void advanceToNextInputStream(){
+		currentInputStream = null;
+		inputStreamQueueIndex++;
+	}
 
 	/**
 	 * True iff this the close() method has been called on this stream.
@@ -48,6 +142,21 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	private boolean closed = false;
+
+
+	/**
+	 * Create a new input stream that can dynamically accept new sources.
+	 * <p>
+	 * New sources should be added using the addInputStream() method.
+	 * When all sources have been added the lastInputStreamAdded() should
+	 * be called so that read methods can return -1 (end of stream).
+	 * <p>
+	 * Adding new sources may by interleaved with read calls.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public ConcatInputStream(){
+	}
 
 	/**
 	 * Create a new InputStream with one source.
@@ -59,7 +168,8 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatInputStream(InputStream in){
-		this(new InputStream[]{in});
+		addInputStream(in);
+		lastInputStreamAdded();
 	}
 
 	/**
@@ -73,7 +183,9 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatInputStream(InputStream in1, InputStream in2){
-		this(new InputStream[]{in1, in2});
+		addInputStream(in1);
+		addInputStream(in2);
+		lastInputStreamAdded();
 	}
 
 	/**
@@ -86,11 +198,8 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatInputStream(InputStream[] in){
-		if (in == null) throw new NullPointerException();
-		for (int i=0; i<in.length; i++){
-			if (in[i] == null) throw new NullPointerException();
-		}
-		this.in = in;
+		addInputStreams(in);
+		lastInputStreamAdded();
 	}
 
 	/**
@@ -99,6 +208,10 @@ public class ConcatInputStream extends InputStream {
 	 * the end of the stream has been reached, the value -1 is returned. This method
 	 * blocks until input data is available, the end of the stream is detected, or
 	 * an exception is thrown.
+	 * <p>
+	 * If this class in not done accepting inputstreams and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds an inputstream or interrupts.
 	 *
 	 * @return the next byte of data, or -1 if the end of the stream is reached.
 	 *
@@ -107,9 +220,19 @@ public class ConcatInputStream extends InputStream {
 	public int read() throws IOException {
 		if (closed) throw new IOException("InputStream closed");
 		int r = -1;
-		while (r == -1 && inIndex < in.length){
-			r = in[inIndex].read();
-			if (r == -1) inIndex++;
+		while (r == -1){
+			InputStream in = getCurrentInputStream();
+			if (in == null){
+				if (doneAddingInputStreams) return -1;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				r = in.read();
+				if (r == -1) advanceToNextInputStream();
+			}
 		}
 		return r;
 	}
@@ -126,6 +249,10 @@ public class ConcatInputStream extends InputStream {
 	 * <p>
 	 * The read(b) method for class InputStream has the same effect as:<br>
 	 * read(b, 0, b.length)
+	 * <p>
+	 * If this class in not done accepting inputstreams and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds an inputstream or interrupts.
 	 *
 	 * @param b - Destination buffer
 	 * @return The number of bytes read, or -1 if the end of the stream has been reached
@@ -149,6 +276,10 @@ public class ConcatInputStream extends InputStream {
 	 * to read at least one byte.
 	 * <p>
 	 * This method blocks until input data is available
+	 * <p>
+	 * If this class in not done accepting inputstreams and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds an inputstream or interrupts.
 	 *
 	 * @param b Destination buffer
 	 * @param off Offset at which to start storing bytes
@@ -163,9 +294,19 @@ public class ConcatInputStream extends InputStream {
 		if (off < 0 || len < 0 || off + len > b.length) throw new IllegalArgumentException();
 		if (closed) throw new IOException("InputStream closed");
 		int r = -1;
-		while (r == -1 && inIndex < in.length){
-			r = in[inIndex].read(b, off, len);
-			if (r == -1) inIndex++;
+		while (r == -1){
+			InputStream in = getCurrentInputStream();
+			if (in == null){
+				if (doneAddingInputStreams) return -1;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				r = in.read(b, off, len);
+				if (r == -1) advanceToNextInputStream();
+			}
 		}
 		return r;
 	}
@@ -176,6 +317,10 @@ public class ConcatInputStream extends InputStream {
 	 * possibly 0. This may result from any of a number of conditions; reaching end of
 	 * file before n bytes have been skipped is only one possibility. The actual number
 	 * of bytes skipped is returned. If n is negative, no bytes are skipped.
+	 * <p>
+	 * If this class in not done accepting inputstreams and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds an inputstream or interrupts.
 	 *
 	 * @param n he number of characters to skip
 	 * @return The number of characters actually skipped
@@ -188,23 +333,33 @@ public class ConcatInputStream extends InputStream {
 		if (closed) throw new IOException("InputStream closed");
 		if (n <= 0) return 0;
 		long s = -1;
-		while (s <= 0 && inIndex < in.length){
-			s = in[inIndex].skip(n);
-			// When nothing was skipped it is a bit of a puzzle.
-			// The most common cause is that the end of the underlying
-			// stream was reached.  In which case calling skip on it
-			// will always return zero.  If somebody were calling skip
-			// until it skipped everything they needed, there would
-			// be an infinite loop if we were to return zero here.
-			// If we get zero, let us try to read one character so
-			// we can see if we are at the end of the stream.  If so,
-			// we will move to the next.
-			if (s == 0) {
-				// read() will adjust inIndex for us, so don't do it again
-				s = ((read()==-1)?-1:1);
+		while (s <= 0){
+			InputStream in = getCurrentInputStream();
+			if (in == null){
+				if (doneAddingInputStreams) return 0;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				s = in.skip(n);
+				// When nothing was skipped it is a bit of a puzzle.
+				// The most common cause is that the end of the underlying
+				// stream was reached.  In which case calling skip on it
+				// will always return zero.  If somebody were calling skip
+				// until it skipped everything they needed, there would
+				// be an infinite loop if we were to return zero here.
+				// If we get zero, let us try to read one character so
+				// we can see if we are at the end of the stream.  If so,
+				// we will move to the next.
+				if (s <= 0) {
+					// read() will advance to the next stream for us, so don't do it again
+					s = ((read()==-1)?-1:1);
+				}
 			}
+
 		}
-		if (s == -1) s = 0;
 		return s;
 	}
 
@@ -219,7 +374,9 @@ public class ConcatInputStream extends InputStream {
 	 */
 	public int available() throws IOException {
 		if (closed) throw new IOException("InputStream closed");
-		return in[inIndex].available();
+		InputStream in = getCurrentInputStream();
+		if (in == null) return 0;
+		return in.available();
 	}
 
 	/**
@@ -228,11 +385,11 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public void close() throws IOException {
-		for (int i=0; i<in.length; i++){
-			in[i].close();
+		if (closed) return;
+		for (Iterator i=inputStreamQueue.iterator(); i.hasNext();){
+			((InputStream)i.next()).close();
 		}
 		closed = true;
-		inIndex = in.length;
 	}
 
 	/**
@@ -240,7 +397,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void mark(int readlimit) {
+	public void mark(int readlimit){
 	}
 
 	/**
@@ -264,5 +421,4 @@ public class ConcatInputStream extends InputStream {
 	public boolean markSupported(){
 		return false;
 	}
-
 }
