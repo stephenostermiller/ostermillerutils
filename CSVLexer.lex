@@ -114,12 +114,12 @@ import java.io.*;
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private char delimiter = ',';
 	private char quote = '\"';
-	
-	/** 
-     * Checks that yycmap_instance is an instance variable (not just
+
+	/**
+	 * Checks that yycmap_instance is an instance variable (not just
 	 * a pointer to a static variable).  If it is a pointer to a static
 	 * variable, it will be cloned.
 	 *
@@ -131,7 +131,7 @@ import java.io.*;
 			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
 		}
 	}
-	
+
 	/**
 	 * Ensures that the given character is not used for some special purpose
 	 * in parsing.  This method should be called before setting some character
@@ -146,7 +146,7 @@ import java.io.*;
 		// are normally data.  The second is the class that the tab is usually in.
 		return (yycmap_instance[c] == yycmap['a'] || yycmap_instance[c] == yycmap['\t']);
 	}
-	
+
 	/**
 	 * Change the character classes of the two given characters.  This
 	 * will make the state machine behave as if the characters were switched
@@ -177,7 +177,7 @@ import java.io.*;
 			} break;
 		}
 	}
-	
+
 	/**
 	 * Change this Lexer so that it uses a new delimiter.
 	 * <p>
@@ -198,7 +198,7 @@ import java.io.*;
 		// keep a record of the current delimiter.
 		delimiter = newDelim;
 	}
-	
+
 	/**
 	 * Change this Lexer so that it uses a new character for quoting.
 	 * <p>
@@ -220,8 +220,21 @@ import java.io.*;
 		quote = newQuote;
 	}
 
+	/**
+	 * If return empty as null is set, unquoted, zero length tokens will
+	 * be returned as null rather than the empty string.
+	 *
+	 * @param returnEmptyAsNull whether or not to return empty tokens as null.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public void setReturnEmptyAsNull(boolean returnEmptyAsNull){
+		this.returnEmptyAsNull = returnEmptyAsNull;
+	}
+
 	private String escapes = "";
 	private String replacements = "";
+	private boolean returnEmptyAsNull = false;
 
 	/**
 	 * Specify escape sequences and their replacements.
@@ -267,16 +280,16 @@ import java.io.*;
 					sb.append(replacements.charAt(index));
 				} else {
 					sb.append(c1);
-				}				
+				}
 			} else {
 				sb.append(c);
 			}
 		}
 		return sb.toString();
 	}
-		
+
 	private String commentDelims = "";
-	
+
 	/**
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
@@ -294,10 +307,10 @@ import java.io.*;
 	public void setCommentStart(String commentDelims){
 		this.commentDelims = commentDelims;
 	}
-	
+
 	private int addLine = 1;
 	private int lines = 0;
-	
+
 	/**
 	 * Get the line number that the last token came from.
 	 * <p>
@@ -349,7 +362,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 <YYINITIAL> {Value} {
 	lines+=addLine;
 	addLine = 0;
-	String text = yytext();	
+	String text = yytext();
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
 		return(text);
@@ -361,31 +374,31 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	lines+=addLine;
 	addLine = 0;
 	yybegin(BEFORE);
-	return("");
+	return(returnEmptyAsNull?null:"");
 }
 <YYINITIAL> {StringLiteral} {
 	lines+=addLine;
 	addLine = 0;
 	yybegin(AFTER);
-	return(unescape(yytext()));	
+	return(unescape(yytext()));
 }
 <YYINITIAL> {FalseLiteral} {
 	lines+=addLine;
 	addLine = 0;
 	yybegin(YYINITIAL);
-	return(yytext());	
+	return(yytext());
 }
 <BEFORE> {Separator} {
 	yybegin(BEFORE);
-	return("");
+	return(returnEmptyAsNull?null:"");
 }
 <BEFORE> {StringLiteral} {
 	yybegin(AFTER);
-	return(unescape(yytext()));	
+	return(unescape(yytext()));
 }
 <BEFORE> {FalseLiteral} {
 	yybegin(YYINITIAL);
-	return(yytext());	
+	return(yytext());
 }
 <BEFORE> {Value} {
 	yybegin(AFTER);
@@ -396,12 +409,12 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 <BEFORE> ({EOL}) {
 	addLine++;
 	yybegin(YYINITIAL);
-	return("");
+	return(returnEmptyAsNull?null:"");
 }
 <BEFORE> <<EOF>> {
 	yybegin(YYINITIAL);
 	addLine++;
-	return("");
+	return(returnEmptyAsNull?null:"");
 }
 <AFTER> {Separator} {
 	yybegin(BEFORE);
