@@ -92,5 +92,49 @@ and its use is recommended.</p>
 
 <p>A CSVLexer <a href="CSVRegressionTest.csv">regression test</a> and the expected
 <a href="CSVRegressionTestResults.txt">results</a> of that test are available.</p>
+
+<h2><name="links">Links</a></h2>
+<table border=2 cellpadding=5>
+<tr><th>Author</th><th>License</th><th>Features</th></tr>
+
+<tr><td>
+Stephen Ostermiller<br>
+<a href="http://ostermiller.org/utils/CSV.html">ostermillerutils CSV and ExcelCSV for Java</a>
+</td><td>
+Open source, GPL
+</td><td>
+Parses CSV streams into Java Strings or arrays of Strings.
+</td></tr>
+
+<tr><td>
+Ricebridge<br>
+<a href="http://www.ricebridge.com/products/csvman/index.htm">CSV Manager</a>
+</td><td>
+Commercial, with various license price points.
+</td><td>
+Parses CSV streams with callback methods when data is found. Single CSV parsing class can be
+configured to parse standard CSV, Excel CSV, or other user specified variants.
+</td></tr>
+
+<tr><td>
+E.Allen Soard<br>
+<a href="http://sourceforge.net/projects/javacsv/"> Java CSV Library</a>
+</td><td>
+Open source, LGPL
+</td><td>
+Parses CSV files into Java objects contained entirely in memory.
+</td></tr>
+
+<tr><td>
+Nilo de Roock<br>
+<a href="http://nilostep.com/">xlSQL </a>
+</td><td>
+Open source, GPL
+</td><td>
+Provides a JDBC interface for accessing CSV files.
+</td></tr>
+
+</table>
+
 <%/bte.tpl%>
 <%/bte.doc%>
