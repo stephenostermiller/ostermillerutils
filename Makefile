@@ -11,7 +11,7 @@ clean:
 	rm -f *.class
 	rm -f *~
 	rm -f ~*
-	rm -f utils.jar
+	rm -f *.jar
 
 docs:
 	rm -rf doc/
@@ -26,5 +26,5 @@ build:
 	mkdir com/Ostermiller
 	mkdir com/Ostermiller/util
 	cp *.* Makefile com/Ostermiller/util/
-	jar cfv util.jar com/
+	jar cfv utils.jar com/
 	rm -rf com/
