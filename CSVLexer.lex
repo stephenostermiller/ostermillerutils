@@ -335,7 +335,7 @@ NotCommaSpace=([^\t\f\r\n\, ])
 NotCommaEOL=([^\,\r\n])
 IgnoreAfter=(([^\r\n\,])*)
 
-FalseLiteral=([\"]([^\"]|[\\][\"])*)
+FalseLiteral=([\"]([^\"\\]|([\\][^]))*)
 StringLiteral=({FalseLiteral}[\"])
 Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 

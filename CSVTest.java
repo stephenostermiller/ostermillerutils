@@ -85,6 +85,11 @@ class CSVTest {
 			shredder.changeQuote(',');
 			shredder.changeDelimiter('"');
 			compare("commas and quotes swapped", normalOutput, shredder.getAllValues());
+                        
+            normalInput = "\"test\\\\\",test";
+			normalOutput = new String[][]{{"test\\", "test"}};
+			shredder = new CSVParser(new StringReader(normalInput));
+			compare("backslash at end of quoted", normalOutput, shredder.getAllValues());
 		} catch (Exception x){
 			System.err.println(x.getMessage());
 			System.exit(1);
@@ -104,6 +109,8 @@ class CSVTest {
 			}
 			for (int j=0; j<a[i].length; j++){
 				if (!a[i][j].equals(b[i][j])) {
+                	System.err.println(a[i][j]);
+                    System.err.println(b[i][j]);
 					System.err.println(testName + ": values do not match.");
 					System.exit(1);
 				}
