@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Circular Buffers<%/bte.tpl%>
 <%bte.tpl name=description%>Implements the circular buffer producer/consumer model for streams or Objects.<%/bte.tpl%>
-<%bte.tpl name=keywords%>buffer, buffer, circular, cirular, object, objects, buffers, inputstream, outputstream, pipedinputstream, pipedoutputstream, producer, producers, consumer, consumers, thread, threads, overflow, overflows<%/bte.tpl%>
+<%bte.tpl name=keywords%>java circular buffers, circular buffer,circular object buffer, circularobjectbuffer, circular char buffer, circularcharbuffer, circular byte buffer, circularbytebuffer, pipedinputstream replacement, pipedoutputstream replacement, pipedwriter replacement, pipedreader replacement<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <p><a href="#circularobjectbuffer">CircularObjectBuffer</a> | <a href="#circularcharbuffer">CircularCharBuffer</a> | <a href="#circularbytebuffer">CircularByteBuffer</a></p>

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>MD5<%/bte.tpl%>
 <%bte.tpl name=description%>Generate MD5 hash sums.<%/bte.tpl%>
-<%bte.tpl name=keywords%>md5, hash, sum, checksum, check sum, message digest, fingerprint, signature, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc, encoding, decoding, encoder, decoder, stream, streams, inputstream, outputstream, array, arrays, string, strings<%/bte.tpl%>
+<%bte.tpl name=keywords%>md5, md5 hash generator, md5 checksum, md5 library, java md5, check sum md5, message digest, fingerprint md5, signature md5, md5 input stream, md5inputstream, md5 output stream, md5outputstream<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>

@@ -2,7 +2,7 @@
 <%bte.tpl name=pageTitle%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=firstLine%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=description%>Download open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
-<%bte.tpl name=keywords%>history, jar, util, util, util, utils, utils, utils, utilities, utilities, base64, base64, base64, md5, md5, md5, significant, figures, encode, encoding, decode, decoding, password, username, dialog, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, cgi, csv, csv, browser, random, password, generate, generator, pass, launcher, browser control, launch, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl, javadoc<%/bte.tpl%>
+<%bte.tpl name=keywords%>history of utilities, changelog of utilities, utilities history, java utilities history, ostermillerutils history<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=history>
 <h2>Version History</h2>

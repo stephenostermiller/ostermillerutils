@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Labeled Comma Separated Values (CSV)<%/bte.tpl%>
 <%bte.tpl name=description%>Read a CSV file and treat the first line as column titles.<%/bte.tpl%>
-<%bte.tpl name=keywords%>labeled, labels, label, column, heading, headers, title, titles, csv, comma, separated, value, values, comma, separated, value, values comma separated value, values, java, util, utility, utilities, class, classes, library, libraries, source, code, open source, gpl<%/bte.tpl%>
+<%bte.tpl name=keywords%>labeled csv parser, labeledcsvparser, java labeled csv, comma separated values with labels, java csv labeled, column headings on csv<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>

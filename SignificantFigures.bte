@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Significant Figures<%/bte.tpl%>
 <%bte.tpl name=description%>Handles parsing, rounding, and displaying numbers for scientific applications.<%/bte.tpl%>
-<%bte.tpl name=keywords%>significant, figure, figures, significant figures, digit, digits, science, scientific, round, rounding<%/bte.tpl%>
+<%bte.tpl name=keywords%>significant figures java library, significant digits java library, scientific rounding java library, java siginificant figures<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>CGI Query String Parser<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to to parse the query data supplied by HTTP GET or POST requests.<%/bte.tpl%>
-<%bte.tpl name=keywords%>cgi, cgi, cgi, common, gateway, interface, query, query, data, string, string, strings, name, names, value, values, pair, pairs, parse, parser, parses, parsing, token, tokenize, tokenizes, tokenizer, tokenizing, split, splits, urlencode, urlencodes, urlencoded, urldecode, urldecodes, encoded, url, url, get, get, post, post, servlet, servlets, http, http, http, protocol, protocal<%/bte.tpl%>
+<%bte.tpl name=keywords%>cgi parser, parse cgi, java cgi parser, common gateway interface parser<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Comma Separated Values (CSV)<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to read and write files in Comma Separated Value (CSV) format.<%/bte.tpl%>
-<%bte.tpl name=keywords%>csv, csv, csv, comma, separated, value, values, comma, separated, value, values comma separated value, values, java, util, utility, utilities, class, classes, library, libraries, source, code, open source, gpl, write, print, output, input, array, string, read, reader, reading, write, writer, writing, parse, parser, parsing, lex, lexer, lexing, print, printer, printing, handle, handler, handling, seperated, file, files, format, data, file format, data format<%/bte.tpl%>
+<%bte.tpl name=keywords%>csv, comma separated values, java csv library, library for csv, utilities csv java, csv file format java<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the printer

@@ -2,7 +2,7 @@
 <%bte.tpl name=pageTitle%>com.Ostermiller.util License FAQ<%/bte.tpl%>
 <%bte.tpl name=firstLine%>com.Ostermiller.util License FAQ<%/bte.tpl%>
 <%bte.tpl name=description%>Why the GPL is used as the license for the com.Ostermiller.util Java utilities.<%/bte.tpl%>
-<%bte.tpl name=keywords%>util, util, util, utils, utils, utils, utilities, utilities, GPL, LGPL, java, license, GNU, BSD<%/bte.tpl%>
+<%bte.tpl name=keywords%>ostermillerutils license, license for ostermillerutils, why gpl license<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <h2>Why is the GPL used?</h2>

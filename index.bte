@@ -2,7 +2,7 @@
 <%bte.tpl name=pageTitle%>com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=firstLine%>com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=description%>Open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
-<%bte.tpl name=keywords%>util, util, util, utils, utils, utils, utilities, utilities, base64, base64, base64, md5, md5, md5, significant, figures, encode, encoding, decode, decoding, password, username, dialog, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, cgi, csv, csv, browser, random, password, generate, generator, pass, launcher, browser control, launch, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl, javadoc<%/bte.tpl%>
+<%bte.tpl name=keywords%>ostermillerutils, ostermillerutil, ostermiller utils, ostermiller utilities, java utils, java utilities<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=utillist>

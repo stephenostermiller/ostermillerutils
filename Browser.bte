@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Browser Opener<%/bte.tpl%>
 <%bte.tpl name=description%>Open a browser from a Java application on Windows, Unix, or Macintosh.<%/bte.tpl%>
-<%bte.tpl name=keywords%>open, open, url, url, uri, browser, browser, web, web, web browser, system, system browser, launch, launcher, openurl, mrjfileutils, mrj, windows, mac, macintosh, linux, unix, solaris, ie, internet explorer, netscape, mozilla, lynx<%/bte.tpl%>
+<%bte.tpl name=keywords%>open url in browser from java, java open url, browser open from java, <%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=i18n>
     Internationalization - included languages:

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>String Tokenizer<%/bte.tpl%>
 <%bte.tpl name=description%>A StringTokenizer replacement with enhancements.<%/bte.tpl%>
-<%bte.tpl name=keywords%>stringtokenizer, stringtokenizer, stringtokenizer, string, string, string, tokenizer, tokenizer, tokenizer, replacement<%/bte.tpl%>
+<%bte.tpl name=keywords%>stringtokenizer, string tokenizer, replacement stringtokenizer, java stringtokenizer<%/bte.tpl%>
 <%bte.tpl name=content%>
 <P>A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.  This implementation of StringTokenizer tries to fix the following bugs:<ul>
     <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4086845.html">Bug 4086845</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4140850.html">Bug 4140850</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4233089.html">Bug 4233089</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4287338.html">Bug 4287338</a> Report empty/null tokens</b> - It would be nice to have the string "one,two,,four" have four tokens.  This implementation has the option to return empty tokens as an empty string ("").</li>

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>File Helper<%/bte.tpl%>
 <%bte.tpl name=description%>Methods for manipulating Files.<%/bte.tpl%>
-<%bte.tpl name=keywords%>file, file, helper, helper, file helper, filehelper, split, splitting, pad, padding, tokenize, token<%/bte.tpl%>
+<%bte.tpl name=keywords%>file helper, filehelper, java filehelper, move file in java<%/bte.tpl%>
 <%bte.tpl name=content%>
 <p>Includes a method to move a file, even when it can't be renamed.</p>
 

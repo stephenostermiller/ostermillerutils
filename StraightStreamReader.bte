@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Straight Stream Reader<%/bte.tpl%>
 <%bte.tpl name=description%>An input stream reader that does no character class translation.<%/bte.tpl%>
-<%bte.tpl name=keywords%>staightstreamreader, staightstreamreader, staightstreamreader, stream, reader, stream, reader, stream reader, character, characters, char, binary, 0xff, 0x<%/bte.tpl%>
+<%bte.tpl name=keywords%>staightstreamreader, straight stream reader, reader without character set<%/bte.tpl%>
 <%bte.tpl name=content%>
 <P>An input stream reader that does not character class translation.  You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some <a href="http://www.jflex.de/manual.html#SECTION00063000000000000000">discussion</a> in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
 

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Base64<%/bte.tpl%>
 <%bte.tpl name=description%>Encode and decode base 64 in Java.<%/bte.tpl%>
-<%bte.tpl name=keywords%>base, 64, base64, base, 64, base64, base, 64, base64, encode, decode, encode, decode<%/bte.tpl%>
+<%bte.tpl name=keywords%>base 64, base64, encode base64, decode base64, java base64<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=i18n>
     Internationalization - included languages:

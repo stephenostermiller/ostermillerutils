@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Tabs<%/bte.tpl%>
 <%bte.tpl name=description%>Tab adjuster that can convert tabs to spaces and vice versa.<%/bte.tpl%>
-<%bte.tpl name=keywords%>tab, tabs, space, spaces, source, file, files<%/bte.tpl%>
+<%bte.tpl name=keywords%>adjust tabs, modify tabs, tabs to spaces, spaces to tabs, java tabs library, library for tabs, tabs utility<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=i18n>

@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>NoClose Streams<%/bte.tpl%>
 <%bte.tpl name=description%>Create streams that cannot be closed with the regular close() mechanism.<%/bte.tpl%>
-<%bte.tpl name=keywords%>stream, outputstream, inputstream, reader, writer, close, closed<%/bte.tpl%>
+<%bte.tpl name=keywords%>no close stream, noclosestream, unclosable stream library, java stream that can't be closed<%/bte.tpl%>
 <%bte.tpl name=content%>
 <p>Create streams that cannot be closed with the normal close() mechanism.  Instead, a reallyClose() method is provided while the close() method does nothing.</p>
 
