@@ -77,7 +77,7 @@ commit: clean
 
 release: update test build javadoc commit
 	mv -f package.html temp
-	./release
+	./release.sh
 	mv -f temp package.html
 
 install:
