@@ -2,14 +2,15 @@
  * edit CGILexer.lex to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
  * <a href="http://jflex.de">the JFlex website</a>.
- * Once JFlex is in your classpath run<br>
- * java --skel cgi.jflex.skel JFlex.Main CGILexer.lex<br>
+ * JFlex 1.4 or later is required.
+ * Run:<br>
+ * jflex CGILexer.lex<br>
  * You will then have a file called CGILexer.java
  */
 
 /*
  * Parse CGI query data.
- * Copyright (C) 2001 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,7 +41,8 @@ import java.io.*;
  */
 %%
 %class CGILexer
-%function nextToken
+%apiprivate
+%function getToken
 %type String
 %{
 	/**
@@ -79,6 +81,17 @@ import java.io.*;
 			System.out.println(e.getMessage());
 		}
 	}
+
+    
+    /**
+     * Return the next token from the cgi data.
+     *
+     * @return the next token
+     * @throws IOException if an error occurs while reading the cgi data.
+     */
+    public String nextToken() throws IOException {
+        return getToken();
+    }
 
 	private StringBuffer token = new StringBuffer();
 %}

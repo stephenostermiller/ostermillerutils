@@ -12,8 +12,8 @@
   <target name="javafiles" depends="init" description="Create lexical source files." >
     <jflex file="BrowserCommandLexer.lex" destdir="${top}" />
     <jflex file="CSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
-    <jflex file="PropertiesLexer.lex" skeleton="properties.jflex.skel" destdir="${top}" />
-    <jflex file="CGILexer.lex" skeleton="cgi.jflex.skel" destdir="${top}" />
+    <jflex file="PropertiesLexer.lex" destdir="${top}" />
+    <jflex file="CGILexer.lex" destdir="${top}" />
     <jflex file="ExcelCSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
   </target>
 

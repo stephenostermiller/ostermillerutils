@@ -1,15 +1,17 @@
 /* PropertiesLexer.java is a generated file.  You probably want to
  * edit PropertiesLexer.lex to make changes.  Use JFlex to generate it.
  * To generate PropertiesLexer.java
- * Install <a href="http://jflex.de/">JFlex</a> v1.3.2 or later.
- * Once JFlex is in your classpath run<br>
- * <code>java --skel properties.jflex.skel JFlex.Main PropertiesLexer.lex</code><br>
+ * JFlex may be obtained from
+ * <a href="http://jflex.de">the JFlex website</a>.
+ * JFlex 1.4 or later is required.
+ * Run:<br>
+ * jflex  PropertiesLexer.lex<br>
  * You will then have a file called PropertiesLexer.java
  */
 
 /*
  * Goes with UberProperties
- * Copyright (C) 2002 Stephen Ostermiller 
+ * Copyright (C) 2002-2004 Stephen Ostermiller 
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -49,7 +51,8 @@ import java.io.*;
 %%
 
 %class PropertiesLexer
-%function getNextToken
+%apiprivate
+%function getToken
 %type PropertiesToken
 %unicode
 
@@ -95,6 +98,17 @@ import java.io.*;
 			System.err.println(e.getMessage());
 		}
 	}  
+
+    /**
+     * Return the next token from the properties.
+     *
+     * @return the next token
+     * @throws IOException if an error occurs while reading the properties.
+     */
+    public PropertiesToken getNextToken() throws IOException {
+        return getToken();
+    }
+
 %}
 
 %full
@@ -264,5 +278,5 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
 	}
 	System.err.println("State: '" + state + "'");
 	System.err.println("Text: '" + text + "'");
-	yy_ScanError(YY_NO_MATCH);
+	zzScanError(ZZ_NO_MATCH);
 }

@@ -6,10 +6,9 @@ JAVAC=javac $(JFLAGS)
 OPTIMIZE=-g:none
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
-JLEXFLAGS=-q -skel csv.jflex.skel
-JLEX=jflex $(JLEXFLAGS)
 CVS=cvs -q
 BTE=bte
+ANT=classic-ant
 
 .SUFFIXES:
 .SUFFIXES: .lex .java
@@ -174,7 +173,7 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	
 utils.jar: *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
-	@ant dist > /dev/null
+	@$(ANT) dist > /dev/null
 
 .PHONY: test
 test: 
