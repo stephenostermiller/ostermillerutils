@@ -18,6 +18,12 @@
 <li><b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.</li>
 </ul>
 
+<p>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
+on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be 
+annoying for developers trying to open a bunch of urls using this class, but have each url in its own
+window.  As a workaround, displayURLs(String[] urls) can be called with an array of urls to be opened
+and javascript will be used to get each of the urls into its own window.</p>
+
 <p>There is also a configuration dialog box (Swing) that can be used in GUI applications that use this class.  This allows users to choose their own browser or command line which should be used to open the url.  The default command line parsing in Java tokenizes only on spaces.  This class uses a custom command line parser that allows quoted strings and escape characters so that the command line to the browser can be specified more easily on a variety of platforms. </p>
 
 <p><img src="BrowserDialog.png" alt="Browser Configuration Dialog" width="490" height="345"></p>

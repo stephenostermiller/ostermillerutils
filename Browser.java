@@ -263,6 +263,60 @@ public class Browser {
             }
         }
     }
+    
+    /**
+     * Display the URLs, each in their own window, in the system browser.
+     *
+     * Browser.init() should be called before calling this function or
+     * Browser.exec should be set explicitly.
+     *
+     * If more than one URL is given an html page containing javascript will 
+     * be written to the local drive, that page will be opened, and it will
+     * open the rest of the urls.
+     *
+     * @param urls the list of urls to display
+     * @param throws IOException if the url is not valid or the browser fails to start
+     */
+    public static void displayURLs(String[] urls) throws IOException {
+        if (urls == null || urls.length == 0){
+            return;
+        } 
+        if (urls.length == 1){
+            displayURL(urls[0]);
+            return;
+        }
+        File shortcut = new File(System.getProperty("user.home"), "java");
+        shortcut = new File(shortcut, "Browser");
+        shortcut.mkdirs();
+        shortcut = new File(shortcut, "DisplayURLs.html");
+        shortcut = shortcut.getCanonicalFile();
+        if (shortcut.exists()) shortcut.delete();
+        shortcut.createNewFile();
+        PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Open URLs</title>");
+        out.println("<script language=\"javascript\" type=\"text/javascript\">");
+        out.println("function displayURLs(){");    
+        for (int i=0; i<urls.length-1; i++){
+            out.println("window.open(\"" + urls[i] + "\", \"_blank\", \"toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes\");");
+        }
+        out.println("location.href=\"" + urls[urls.length-1] + "\";");
+        out.println("}");
+        out.println("</script>");
+        out.println("</head>");
+        out.println("<body onload=\"javascript:displayURLs()\">");     
+        out.println("<noscript>");
+        for (int i=0; i<urls.length; i++){
+            out.println("<a target=\"_blank\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
+        }
+        out.println("</noscript>");
+        out.println("</body>");
+        out.println("</html>");
+        out.close();
+        displayURL(shortcut.toURL().toString());
+    
+    }
 
     /**
      * Open the url(s) specified on the command line in your browser.
@@ -274,7 +328,11 @@ public class Browser {
             Browser.init();
             Browser.dialogConfiguration(null);
             if (args.length == 0){
-        	    Browser.displayURL("http://www.javaworld.com/");
+        	    Browser.displayURLs(new String[]{
+                    "http://www.javaworld.com/",
+                    "http://www.cnn.com/",
+                    "http://www.gjt.org",
+                });
             } else {
                 for (int i=0; i<args.length; i++){
                     Browser.displayURL(args[i]);
