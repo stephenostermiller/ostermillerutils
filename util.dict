@@ -1,8 +1,10 @@
-personal_ws-1.1 en 1210
+personal_ws-1.1 en 1246
 aa
+aA
 aaa
 AAAAAABB
 aacute
+aaf
 ababab
 abcabc
 acirc
@@ -68,6 +70,7 @@ ArrayIterator
 ArrayList
 ArrayOutOfBoundsException
 ascii
+assertEqual
 AstringB
 asymp
 atilde
@@ -119,6 +122,8 @@ buildFindAnyPattern
 buttonPanel
 ByteArrayInputStream
 ByteArrayOutputStream
+byteArraysEqual
+bytesToString
 byteValue
 cancelButton
 canRead
@@ -126,6 +131,7 @@ cantguess
 cantread
 cantwrite
 canWrite
+cb
 cbb
 cbbc
 CBBConsumer
@@ -134,6 +140,7 @@ cbbout
 cbbp
 CBBProducer
 cbuf
+cca
 ccb
 ccbc
 CCBConsumer
@@ -191,6 +198,8 @@ commentStart
 commentText
 compareAndPrint
 compareState
+ConcatInputStream
+ConcatReader
 configPanel
 cong
 containsAny
@@ -223,6 +232,7 @@ currentHeaderName
 CVS
 CVSLexer
 Cygwin
+da
 Dansk
 darr
 dArr
@@ -249,6 +259,8 @@ delimiterLength
 delims
 delimsAreTokens
 delimsChangedPosition
+dfb
+dGU
 dialogConfiguration
 dialogInit
 dialogPanel
@@ -275,8 +287,10 @@ dtext
 eacute
 ec
 ecc
+ecf
 ecirc
 ecsvp
+edf
 edgx
 editMenu
 EEE
@@ -288,6 +302,7 @@ elementAt
 emptyReturned
 emsp
 encIn
+encodeToString
 encodingarg
 encOut
 endian
@@ -318,10 +333,13 @@ ExcelCSVParser
 ExcelCSVPrinter
 exitCond
 exitValue
+expectedLine
+expectedValue
 extraSpaces
 faf
 fb
 fbc
+fcd
 FFFFFF
 fieldIndex
 fileAction
@@ -470,6 +488,8 @@ harr
 hArr
 HashMap
 HashSet
+hashSting
+hashString
 hashtable
 hasMoreElements
 hasMoreTokens
@@ -504,7 +524,9 @@ IllegalThreadStateException
 inBuffer
 indexOf
 indexOfNextDelimiter
+IndexOutOfBoundsException
 infin
+inIndex
 init
 initConfigPanel
 initPanel
@@ -680,6 +702,7 @@ MultiLineResponseInputStream
 multipart
 mydialog
 nabla
+nafter
 namedWindow
 namedWindows
 nameLabel
@@ -691,6 +714,7 @@ nameValuePairsList
 NaN
 nAthree
 nAtwo
+nbefore
 nBfour
 nbsp
 nBthree
@@ -833,6 +857,7 @@ permil
 perp
 PID
 pierre
+piOutputStream
 pipedinputstream
 PipedInputStream
 PipedInputStreams
@@ -875,6 +900,7 @@ px
 qtext
 quoteChar
 radic
+randBytes
 randpass
 randPass
 RandPassApplet
@@ -898,6 +924,7 @@ reallyClose
 reallyquiet
 reallyverbose
 ree
+reencode
 removeAll
 renameTo
 replaceLength
@@ -913,6 +940,7 @@ resizable
 ResourceBundle
 restOfText
 RETR
+returnEmptyAsNull
 returnEmptyTokens
 retval
 retVal
@@ -992,6 +1020,7 @@ setProps
 setRandomGenerator
 setRepetition
 setRequestProperty
+setReturnEmptyAsNull
 setReturnEmptyTokens
 setSize
 setText
@@ -1040,10 +1069,12 @@ stringLength
 StringReader
 stringtokenizer
 StringTokenizer
+StringWriter
 strLength
 stValue
 sube
 supe
+sw
 swappedInput
 systemResource
 szlig
@@ -1054,7 +1085,10 @@ tabWidth
 td
 tecnosoft
 tempdeleteerror
+TestCase
+testCases
 testName
+tgbaWriter
 theGettysburgAddress
 theHeaders
 thetasym
@@ -1207,5 +1241,7 @@ yyyy
 zA
 Za
 zeroCount
+zeroLengthInput
+zeroLengthOutput
 zwj
 zwnj
