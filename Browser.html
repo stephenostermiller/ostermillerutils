@@ -1,8 +1,8 @@
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
-   <meta name="description" content="Open a browser from your Java application on Windows, Unix, or Macintosh.">
-   <meta name="keywords" content="open, open, url, url, browser, browser, web, web, web browser, launch, launcher, openurl, mrjfiletils, mrj, windows, mac, macintosh, linux, unix, solaris, ie, internet explorer, netscape, mozilla, lynx, java, util, utility, utilities, class, jar, jars, classes, library, libraries, source, code, open source, gpl">
+   <meta name="description" content="Open a browser from a Java application on Windows, Unix, or Macintosh.">
+   <meta name="keywords" content="open, open, url, url, browser, browser, web, web, web browser, launch, launcher, openurl, mrjfileutils, mrj, windows, mac, macintosh, linux, unix, solaris, ie, internet explorer, netscape, mozilla, lynx, java, util, utility, utilities, class, jar, jars, classes, library, libraries, source, code, open source, gpl, javadoc, http, file, web page, webpage"> 
    <title>Browser</title>
    <base href="http://ostermiller.org/utils/">
 </head>
@@ -10,7 +10,7 @@
 
 <h1><a name="browser">Browser</a></h1>
 
-<p>Allows URLs to be opened in the system browser from a Java application on Windows, Unix, and Macintosh.</p>
+<p>Open a browser from a Java application on Windows, Unix, or Macintosh.</p>
 
 <ul>
 <li><b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.</li>
@@ -20,7 +20,7 @@
 
 <p>There is also a configuration dialog box (Swing) that can be used in GUI applications that use this class.  This allows users to choose their own browser or command line which should be used to open the url.  The default command line parsing in Java tokenizes only on spaces.  This class uses a custom command line parser that allows quoted strings and escape characters so that the command line to the browser can be specified more easily on a variety of platforms. </p>
 
-<p><img src="BrowserDialog.png" alt="Browser Configuration Dialog" width="531" height="280"></p>
+<p><img src="BrowserDialog.png" alt="Browser Configuration Dialog" width="489" height="344"></p>
 
 <p> The original idea for this class came from a JavaWorld <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip66.html">Java Tip</a>.  That  implementation has some serious problems:
 <ol>
@@ -29,7 +29,21 @@
     <li>Blocking - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing. com.Ostermiller.util.Browser waits for one second to check if it is still running rather than blocking.</li>
 </ol></p>
 
-<p>[<a href="./#download">Download /w Source Code</a> |
+<h3>Example</h3>
+<p>Open this page from a java application</p>
+
+<p><code>
+import com.Ostermiller.util.Browser;<br>
+...<br>
+Browser.init();  // only needs to be called once.<br>
+...<br>
+try {<br>
+&nbsp;&nbsp;Browser.displayURL("http://ostermiller.org/utils/Browser.html");<br>
+} catch (IOException x){<br>
+&nbsp;&nbsp;System.err.println(x.getMessage());<br>
+}</code></p>
+
+<p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">Version History</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Browser.java/HEAD">Browse Source</a> |
 <a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">Documentation</a>]</p>
@@ -38,13 +52,13 @@
 
 <h2><a name="license">License</a></h2>
 
-<P>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
-(utils@Ostermiller.com)</P>
+<p>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+(utils@Ostermiller.com)</p>
 
 <p>This library is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published
 by the Free Software Foundation; either version 2 of the License or (at
-your option) any later version.</P>
+your option) any later version.</p>
 
 <p>This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
