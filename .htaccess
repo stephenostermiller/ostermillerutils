@@ -1,33 +1,33 @@
 AddType application/octet-stream jar
-AddType text/plain csv
+AddType text/plain;charset=iso-8859-1 csv
 AddType text/plain;charset=GB2312 gb2312csv
-AddType text/x-java java
-AddType text/x-bash sh
+AddType text/x-java;charset=iso-8859-1 java
+AddType text/x-bash;charset=iso-8859-1 sh
 
-Redirect permanent /utils/csvlexer.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CSVLexor.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CSVlexor.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csvlexor.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CVSLexer.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvslexer.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CSVParser.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csvparser.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CVSParser.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvsparser.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CSVReader.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csvreader.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CVSReader.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvsreader.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CSV.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csv.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/CVS.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvs.html http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csv http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvs/ http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/cvs http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSVLexer.html
-Redirect permanent /utils/csv http://ostermiller.org/utils/CSVLexer.html
+Redirect permanent /utils/csvlexer.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVLexor.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVlexor.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csvlexor.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CVSLexer.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvslexer.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVParser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csvparser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CVSParser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvsparser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVReader.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csvreader.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CVSReader.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvsreader.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVLexer.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csv.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CVS.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvs.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csv http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvs/ http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/cvs http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/csv http://ostermiller.org/utils/CSV.html
 
 Redirect permanent /utils/excel.html http://ostermiller.org/utils/ExcelCSV.html
 Redirect permanent /utils/Excel.html http://ostermiller.org/utils/ExcelCSV.html
@@ -66,3 +66,7 @@ Redirect permanent /utils/tokenizer.html http://ostermiller.org/utils/StringToke
 Redirect permanent /utils/tokenizer/ http://ostermiller.org/utils/StringTokenizer.html
 Redirect permanent /utils/tokenizer http://ostermiller.org/utils/StringTokenizer.html
 Redirect permanent /utils/CSVCharsetTest.csv http://ostermiller.org/utils/CSVCharsetTest.gb2312csv
+
+Redirect permanent /utils/CircularCharBuffer.html http://ostermiller.org/utils/CircularBuffer.html
+Redirect permanent /utils/CircularByteBuffer.html http://ostermiller.org/utils/CircularBuffer.html
+Redirect permanent /utils/CircularObjectBuffer.html http://ostermiller.org/utils/CircularBuffer.html

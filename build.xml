@@ -31,7 +31,7 @@
   <target name="dist" depends="compile,init" description="Create distributable archive." >
     <jar 
 	  destfile="utils.jar" basedir="${top}"
-	  includes="gnu/getopt/*.* ${proj}/*.java ${proj}/*.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml"
+	  includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte"
 	  excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
 	  defaultexcludes="no" duplicate="fail" index="true" compress="true"
 	/>

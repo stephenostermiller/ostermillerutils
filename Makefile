@@ -8,11 +8,11 @@ JAVADOC=javadoc $(JDFLAGS)
 JLEXFLAGS=-q
 JLEX=$(JAVA) JFlex.Main  $(JLEXFLAGS)
 CVS=cvs -q
+BTE=bte
 
 .SUFFIXES:
 .SUFFIXES: .lex .java
 .SUFFIXES: .java .class
-.SUFFIXES: .bte .html
 
 all:
 	@$(MAKE) -s --no-print-directory junkclean
@@ -21,9 +21,10 @@ all:
 	@$(MAKE) -s --no-print-directory compile
 	@$(MAKE) -s --no-print-directory build
 	@$(MAKE) -s --no-print-directory javadoc
+	@$(MAKE) -s --no-print-directory htmlfiles
 	@$(MAKE) -s --no-print-directory htmlsource
 
-spell: *.html *.java
+spell: *.bte *.java
 	@echo Make: Running spell check.$?
 	@./spell.sh $?
 	@touch spell
@@ -34,6 +35,16 @@ compile: javafiles classes
 neaten: *.java
 	@./neaten.sh $?
 	@touch neaten
+	
+.PHONY: htmlfiles
+htmlfiles: *.bte
+	@echo Make: Compiling web pages.
+	@bte .
+
+.PHONY: htmlfilesclean
+htmlfilesclean: 
+	@echo Make: Removing generated html files.
+	@rm -f `ls *.html | grep -v package` 
 	
 LEXFILES=$(wildcard *.lex)
 .PHONY: javafiles
@@ -69,7 +80,7 @@ javafiles: $(LEXFILES:.lex=.java)
 
 .PHONY: javafilesclean
 javafilesclean: 
-	@echo Make: Removing generated Lexer java files.
+	@echo Make: Removing generated java files.
 	@rm -f *Lexer.java
 
 JAVAFILES=$(wildcard *.java)
@@ -125,7 +136,7 @@ htmlsourceclean: junkclean
 	@rm -rf src/ htmlsource
 
 .PHONY: clean	        
-clean: buildclean javadocclean htmlsourceclean
+clean: buildclean javadocclean htmlsourceclean htmlfilesclean
 	@echo Make: Removing generated class files.
 	@rm -f *.class
 
@@ -161,10 +172,10 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	@jar cfv randpass.jar com/ > /dev/null
 	@rm -rf com/
 
-utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
+utils.jar: *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
 	@mkdir -p com/Ostermiller/util
-	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml com/Ostermiller/util/
+	@cp *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml com/Ostermiller/util/
 	@rm -f com/Ostermiller/util/*Test*.class
 	@rm -f com/Ostermiller/util/*Lexer.java
 	@mkdir -p gnu/getopt		
