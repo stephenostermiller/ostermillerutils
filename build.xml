@@ -10,7 +10,7 @@
   <!-- http://jflex.de/jflex_anttask.html -->
   <taskdef classname="JFlex.anttask.JFlexTask" name="jflex" />
   <target name="javafiles" depends="init" description="Create lexical source files." >
-    <jflex file="BrowserCommandLexer.lex" skeleton="browser.jflex.skel" destdir="${top}" />
+    <jflex file="BrowserCommandLexer.lex" destdir="${top}" />
     <jflex file="CSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
     <jflex file="PropertiesLexer.lex" skeleton="properties.jflex.skel" destdir="${top}" />
     <jflex file="CGILexer.lex" skeleton="cgi.jflex.skel" destdir="${top}" />

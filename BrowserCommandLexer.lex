@@ -36,7 +36,8 @@ import java.io.*;
  */
 %%
 %class BrowserCommandLexer
-%function getNextToken
+%apiprivate
+%function getToken
 %type String
 %{
 	/**
@@ -75,6 +76,16 @@ import java.io.*;
 			System.out.println(e.getMessage());
 		}
 	}
+    
+    /**
+     * Return the next token from the browser command.
+     *
+     * @return the next token
+     * @throws IOException if a error occurs while reading the command.
+     */
+    public String getNextToken() throws IOException {
+        return getToken();
+    }
 
 	private static String unescape(String s){
 		StringBuffer sb = new StringBuffer(s.length());
