@@ -190,7 +190,7 @@ import java.io.*;
 %}
 %line
 %char
-%full
+%unicode
 
 %state BEFORE
 %state AFTER
