@@ -198,12 +198,13 @@ public class Browser {
                         }
                         String[] args = new String[argsVector.size()];
                         args = (String[])argsVector.toArray(args);
-                        // the windows urlprotocol handler doesn't work with file urls
-                        // correct those problems here before continuing
-                        // it wants two slashes after the file, not just one
-                        // it doesn't like  escape characters,
-                        // and it doesn't like spaces. (I don't know of anything
-                        // I can do about that.)
+                        // the windows urlprotocol handler doesn't work well with file urls.
+                        // Correct those problems here before continuing
+                        // Java File.toURL() gives only one / following file: but
+                        // we need two.
+                        // If there are escaped characters in the url, we will have
+                        // to create an internet shortcut and open that, as the command
+                        // line version of the rundll doesn't like them.
                         if (args[0].equals("rundll32") &&
 							args[1].equals("url.dll,FileProtocolHandler") &&
                             args[2].startsWith("file:/")){
@@ -226,8 +227,6 @@ public class Browser {
                                 out.close();
                                 args[2] = shortcut.getCanonicalPath();
                             }
-                            //args[2] = URLDecoder.decode(args[2]);
-                            System.out.println(args[2]);
 						}
                         // start the browser
                         Process p = Runtime.getRuntime().exec(args);
