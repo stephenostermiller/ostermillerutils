@@ -1,8 +1,10 @@
 /*
  * A souped up version of the Java Properties format which can
  * handle multiple properties with the same name.
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ *
+ * Copyright (C) 2003 Carlo Magnaghi <software at tecnosoft dot net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -707,15 +709,17 @@ public class UberProperties {
 				}
 				String stName = unescape(name.toString());
 				String stValue = unescape(value.toString());
-				if (stName.length() != 0 || stValue.length() != 0 || lastSeparator != null){
-					if (add | names.contains(stName)){
-						addProperty(stName, stValue);
-					} else {
-						setProperty(stName, stValue);
-						names.add(stName);
+				if (stName.length() != 0){
+					if (stValue.length() != 0 || lastSeparator != null){
+						if (add | names.contains(stName)){
+							addProperty(stName, stValue);
+						} else {
+							setProperty(stName, stValue);
+							names.add(stName);
+						}
 					}
+					if (foundComment) setComment(stName, unescape(comment.toString()));
 				}
-				if (foundComment) setComment(stName, unescape(comment.toString()));
 				comment.setLength(0);
 				name.setLength(0);
 				value.setLength(0);
