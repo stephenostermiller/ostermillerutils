@@ -19,8 +19,12 @@ package com.Ostermiller.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -220,8 +224,8 @@ public class UberProperties {
 
 		/**
 		 * Get the last value for this property.
-				 *
-				 * @return the last value.
+		 *
+		 * @return the last value.
 		 */
 		public String getValue(){
 			return (String)list.get(list.size() - 1);
@@ -229,8 +233,8 @@ public class UberProperties {
 
 		/**
 		 * Get all the values for this property.
-				 *
-				 * @return a list of all the values.
+		 *
+		 * @return a list of all the values.
 		 */
 		public String[] getValues(){
 			return (String[])list.toArray(new String[list.size()]);
@@ -254,10 +258,10 @@ public class UberProperties {
 	}
 
 	/**
-		 * Put all the properties from the defaults in this.
-		 * Calling this from a constructor will clone (deep)
-		 * the default properties.
-		 */
+	 * Put all the properties from the defaults in this.
+	 * Calling this from a constructor will clone (deep)
+	 * the default properties.
+	 */
 	private void merge(UberProperties defaults){
 		setComment(defaults.getComment());
 		String[] names = defaults.propertyNames();
@@ -265,6 +269,31 @@ public class UberProperties {
 			setProperties(names[i], defaults.getProperties(names[i]));
 			setComment(names[i], defaults.getComment(names[i]));
 		}
+	}
+
+	/**
+	 * Test to see if a property with the given name exists.
+	 *
+	 * @param name the name of the property.
+	 * @return true if the property existed and was removed, false if it did not exist.
+	 * @throws NullPointerException if name is null.
+	 */
+	public boolean contains(String name){
+		if (name == null) throw new NullPointerException();
+		return properties.containsKey(name);
+	}
+
+	/**
+	 * Remove any property with the given name.
+	 *
+	 * @param name the name of the property.
+	 * @return true if the property existed and was removed, false if it did not exist.
+	 * @throws NullPointerException if name is null.
+	 */
+	public boolean remove(String name){
+		if (!contains(name)) return false;
+		properties.remove(name);
+		return true;
 	}
 
 	/**
@@ -522,6 +551,43 @@ public class UberProperties {
 	}
 
 	/**
+	 * Load these properties from a user file with default properties
+	 * from a system resource.
+	 * <p>
+	 * Ex:
+	 * <pre>load(
+	 *     new String(){".java","tld","company","package","component.properties"}
+		 *     "tld/company/package/component.properties",
+	 * )</pre>
+	 * This will load the properties file relative to the classpath as the
+	 * defaults and the file &lt;%userhome%&gt;/.java/tld/company/package/component.properties
+	 * if the file exists.  The .java directory is recommended as it is a common,
+	 * possibly hidden, directory in the users home directory commonly used by
+	 * Java programs.
+	 *
+	 * This method is meant to be used with the save(String systemResource) method
+	 * which will save modified properties back to the user directory.
+	 *
+	 * @param userFile array of Strings representing a path and file name relative to the user home directory.
+	 * @param systemResource name relative to classpath of default properties, or null to ignore.
+	 * @throws IOException if an error occurs when reading.
+	 * @throws NullPointerException if userFile is null.
+	 * @throws IllegalArgumentException if userFile is empty.
+	 */
+	public void load(String[] userFile, String systemResource) throws IOException {
+		int length = userFile.length;
+		if (userFile.length == 0) throw new IllegalArgumentException();
+		InputStream in = ClassLoader.getSystemResourceAsStream(systemResource);
+		if (in==null) throw new FileNotFoundException(systemResource);
+		if (systemResource != null) load(in);
+		File f = new File(System.getProperty("user.home"));
+		for (int i=0; i<length; i++){
+			f = new File(f, userFile[i]);
+		}
+		if (f.exists()) load(new FileInputStream(f));
+	}
+
+	/**
 	 * Add the properties from the input stream to this
 	 * UberProperties.
 	 *
@@ -584,6 +650,37 @@ public class UberProperties {
 	}
 
 	/**
+	 * Save these properties from a user file.
+	 * <p>
+	 * Ex:
+	 * <pre>save(
+	 *     new String(){"tld","company","package","component.properties"}
+	 * )</pre>
+	 * This will save the properties file relative to the user directory:
+	 * &lt;%userhome%&gt;/tld/company/package/component.properties
+	 * Directories will be created as needed.
+	 *
+	 * @param userFile array of Strings representing a path and file name relative to the user home directory.
+	 * @throws IOException if an error occurs when reading.
+	 * @throws NullPointerException if userFile is null.
+	 * @throws IllegalArgumentException if userFile is empty.
+	 */
+	public void save(String[] userFile) throws IOException {
+		int length = userFile.length;
+		if (length == 0) throw new IllegalArgumentException();
+		File f = new File(System.getProperty("user.home"));
+		for (int i=0; i<length; i++){
+			f = new File(f, userFile[i]);
+			if (i == length - 2 && !f.exists()){
+				f.mkdirs();
+			}
+		}
+		OutputStream out = new FileOutputStream(f);
+		save(out);
+		out.close();
+	}
+
+	/**
 	 * Save these properties to the given stream.
 	 *
 	 * @param out OutputStream to which these properties should be written.
@@ -601,6 +698,7 @@ public class UberProperties {
 				writeProperty(out, names[i], values[j]);
 			}
 		}
+		out.flush();
 	}
 
 	private static void writeProperty(OutputStream out, String name, String value) throws IOException {
@@ -819,5 +917,15 @@ public class UberProperties {
 	 */
 	public String getComment(){
 		return this.comment;
+	}
+
+	/**
+	 * Get the number of unique names for properties stored
+	 * in this UberProperties.
+	 *
+	 * @return number of names.
+	 */
+	public int getPropertyNameCount(){
+		return properties.keySet().size();
 	}
 }
