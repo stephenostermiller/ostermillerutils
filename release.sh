@@ -2,7 +2,6 @@
 
 size=`ls -lah utils.jar`
 size=${size:38:4}
-echo $size
 if [ -z "`grep $size index.html`" ]
 then
     echo "utils.jar size is $size but index.html does not show that."
