@@ -25,6 +25,7 @@ clean:
 	rm -f ~*
 	rm -f *.jar
 	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java
+	rm -f CSVTest.txt
 
 docs:
 	rm -rf docs/
