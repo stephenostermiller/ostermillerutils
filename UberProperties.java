@@ -584,7 +584,7 @@ public class UberProperties {
 		if (in==null) throw new FileNotFoundException(systemResource);
 		if (systemResource != null) load(in);
 		File f = new File(System.getProperty("user.home"));
-		for (int i=0; i<length; i++){
+		for (int i=0; f.exists() && i<length; i++){
 			f = new File(f, userFile[i]);
 		}
 		if (f.exists()) load(new FileInputStream(f));

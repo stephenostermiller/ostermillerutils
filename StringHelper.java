@@ -394,18 +394,32 @@ public class StringHelper {
 		// of the string that has escapes.
 		for (int i=0; i<length; i++){
 			char c = s.charAt(i);
-			switch(c){
-				case '\"':{
-					newLength += 5;
-				} break;
-				case '&':
-				case '\'':{
-					newLength += 4;
-				} break;
-				case '<':
-				case '>':{
-					newLength += 3;
-				} break;
+			int cint = 0xffff & c;
+			if (cint < 32){
+				switch(c){
+					case '\r':
+					case '\n':
+					case '\t':
+					case '\f':{
+					} break;
+					default: {
+						newLength -= 1;
+					}
+				}
+			} else {
+				switch(c){
+					case '\"':{
+						newLength += 5;
+					} break;
+					case '&':
+					case '\'':{
+						newLength += 4;
+					} break;
+					case '<':
+					case '>':{
+						newLength += 3;
+					} break;
+				}
 			}
 		}
 		if (length == newLength){
@@ -415,24 +429,39 @@ public class StringHelper {
 		StringBuffer sb = new StringBuffer(newLength);
 		for (int i=0; i<length; i++){
 			char c = s.charAt(i);
-			switch(c){
-				case '\"':{
-					sb.append("&quot;");
-				} break;
-				case '\'':{
-					sb.append("&#39;");
-				} break;
-				case '&':{
-					sb.append("&amp;");
-				} break;
-				case '<':{
-					sb.append("&lt;");
-				} break;
-				case '>':{
-					sb.append("&gt;");
-				} break;
-				default: {
-					sb.append(c);
+			int cint = 0xffff & c;
+			if (cint < 32){
+				switch(c){
+					case '\r':
+					case '\n':
+					case '\t':
+					case '\f':{
+						sb.append(c);
+					} break;
+					default: {
+						// Remove this character
+					}
+				}
+			} else {
+				switch(c){
+					case '\"':{
+						sb.append("&quot;");
+					} break;
+					case '\'':{
+						sb.append("&#39;");
+					} break;
+					case '&':{
+						sb.append("&amp;");
+					} break;
+					case '<':{
+						sb.append("&lt;");
+					} break;
+					case '>':{
+						sb.append("&gt;");
+					} break;
+					default: {
+						sb.append(c);
+					}
 				}
 			}
 		}
