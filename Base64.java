@@ -1330,7 +1330,7 @@ public class Base64 {
 		out.flush();
 	}
 
-		/**
+	/**
 	 * Determines if the byte array is in base64 format.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
@@ -1363,7 +1363,7 @@ public class Base64 {
 		}
 	}
 
-		/**
+	/**
 	 * Determines if the String is in base64 format.
 	 * The String is converted to and from bytes according to the platform's
 	 * default character encoding.
