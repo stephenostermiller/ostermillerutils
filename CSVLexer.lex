@@ -10,40 +10,44 @@
 /*
  * Read files in comma separated value format.
  * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * See COPYING.TXT for details.
  */
- 
+
 package com.Ostermiller.util;
 import java.io.*;
 
 /**
  * Read files in comma separated value format.
  *
- * CSV is a file format used as a portable representation of a database. 
- * Each line is one entry or record and the fields in a record are separated by commas. 
- * Commas may be preceded or followed by arbitrary space and/or tab characters which are 
+ * The use of this class is no longer recommended.  It is now recommended that you use
+ * com.Ostermiller.util.CSVParser instead.  That class, has a cleaner API, and methods
+ * for returning all the values on a line in a String array.
+ *
+ * CSV is a file format used as a portable representation of a database.
+ * Each line is one entry or record and the fields in a record are separated by commas.
+ * Commas may be preceded or followed by arbitrary space and/or tab characters which are
  * ignored.
  * <P>
  * If field includes a comma or a new line, the whole field must be surrounded with double quotes.
- * When the field is in quotes, any quote literals must be escaped by \" Backslash 
+ * When the field is in quotes, any quote literals must be escaped by \" Backslash
  * literals must be escaped by \\.  Otherwise a backslash an the character following it
  * will be treated as the following character, ie."\n" is equivelent to "n".  Other escape
  * sequences may be set using the setEscapes() method.  Text that comes after quotes that have
  * been closed but come before the next comma will be ignored.
  * <P>
  * Empty fields are returned as as String of length zero: "".  The following line has four empty
- * fields and two non-empty fields in it.  There is an empty field on each end, and two in the 
+ * fields and two non-empty fields in it.  There is an empty field on each end, and two in the
  * middle.<br>
  * <pre>,second,, ,fifth,</pre>
  * <P>
@@ -60,14 +64,14 @@ import java.io.*;
  *     System.out.println("" + shredder.getLineNumber() + " " + t);
  * }
  * </pre>
- * 
+ *
  */
 
 %%
 %public
 %class CSVLexer
 %function getNextToken
-%type String 
+%type String
 %{
     /**
      * Prints out tokens and line numbers from a file or System.in.
@@ -90,10 +94,10 @@ import java.io.*;
                     }
                 } else {
                     throw new IOException("Could not find " + args[0]);
-                }                   
+                }
             } else {
                 in = System.in;
-            }       
+            }
             CSVLexer shredder = new CSVLexer(in);
             shredder.setCommentStart("#;!");
             shredder.setEscapes("nrtf", "\n\r\t\f");
@@ -105,10 +109,10 @@ import java.io.*;
             System.out.println(e.getMessage());
         }
     }
-    
+
     private String escapes = "";
     private String replacements = "";
-    
+
     /**
      * Specify escape sequences and their replacements.
      * Escape sequences set here are in addition to \\ and \".
@@ -117,10 +121,10 @@ import java.io.*;
      * "\n" can be set to be a newline rather than an 'n'.
      * A common way to call this method might be:<br>
      * <code>setEscapes("nrtf", "\n\r\t\f");</code><br>
-     * which would set the escape sequences to be the Java escape 
-     * sequences.  Characters that follow a \ that are not escape 
+     * which would set the escape sequences to be the Java escape
+     * sequences.  Characters that follow a \ that are not escape
      * sequences will still be interpreted as that character.<br>
-     * The two arguemnts to this method must be the same length.  If 
+     * The two arguemnts to this method must be the same length.  If
      * they are not, the longer of the two will be truncated.
      *
      * @param escapes a list of characters that will represent escape sequences.
@@ -133,8 +137,8 @@ import java.io.*;
         }
         this.escapes = escapes.substring(0, length);
         this.replacements = replacements.substring(0, length);
-    } 
-    
+    }
+
     private String unescape(String s){
         if (s.indexOf('\\') == -1){
             return s.substring(1, s.length()-1);
