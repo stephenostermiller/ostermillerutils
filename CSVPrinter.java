@@ -2,6 +2,7 @@
  * Write files in comma separated value format.
  * Copyright (C) 2001,2002 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,23 +24,71 @@ import java.io.*;
  * Print values as a comma separated list.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+ * @since ostermillerutils 1.00.00
  */
 public class CSVPrinter implements CSVPrint {
 
 	/**
+	 * Delimiter character written.
+	 *
+	 * @since ostermillerutils 1.02.18
+	 */
+	protected char delimiterChar = ',';
+
+	/**
+	 * Quoting character written.
+	 *
+	 * @since ostermillerutils 1.02.18
+	 */
+	protected char quoteChar = '"';
+
+	/**
 	 * The place that the values get written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected PrintWriter out;
 
 	/**
 	 * True iff we just began a new line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean newLine = true;
 
 	/**
 	 * Character used to start comments. (Default is '#')
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char commentStart = '#';
+
+	/**
+	 * Change this printer so that it uses a new delimiter.
+	 *
+	 * @param newDelimiter The new delimiter character to use.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeDelimiter(char newDelimiter){
+		delimiterChar = newDelimiter;
+	}
+
+	/**
+	 * Change this printer so that it uses a new character for quoting.
+	 *
+	 * @param newDelimiter The new character to use for quoting.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeQuote(char newQuote){
+		quoteChar = newQuote;
+	}
 
 	/**
 	 * Create a printer that will print values to the given
@@ -48,6 +97,8 @@ public class CSVPrinter implements CSVPrint {
 	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter (OutputStream out){
 		this.out = new PrintWriter(out);
@@ -59,6 +110,8 @@ public class CSVPrinter implements CSVPrint {
 	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter (Writer out){
 		if (out instanceof PrintWriter){
@@ -75,6 +128,8 @@ public class CSVPrinter implements CSVPrint {
 	 *
 	 * @param out stream to which to print.
 	 * @param commentStart Character used to start comments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter (OutputStream out, char commentStart){
 		this(out);
@@ -87,6 +142,8 @@ public class CSVPrinter implements CSVPrint {
 	 *
 	 * @param out stream to which to print.
 	 * @param commentStart Character used to start comments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter (Writer out, char commentStart){
 		this(out);
@@ -98,6 +155,8 @@ public class CSVPrinter implements CSVPrint {
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String value){
 		print(value);
@@ -107,7 +166,9 @@ public class CSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * Output a blank line
+	 * Output a blank line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(){
 		out.println();
@@ -121,6 +182,8 @@ public class CSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[] values){
 		for (int i=0; i<values.length; i++){
@@ -137,6 +200,8 @@ public class CSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[][] values){
 		for (int i=0; i<values.length; i++){
@@ -156,7 +221,9 @@ public class CSVPrinter implements CSVPrint {
 	 * comments and a space will be inserted at the beginning of
 	 * each new line in the comment.
 	 *
-	 * @param comment the comment to output
+	 * @param comment the comment to output.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void printlnComment(String comment){
 		if (!newLine){
@@ -192,6 +259,8 @@ public class CSVPrinter implements CSVPrint {
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void print(String value){
 		boolean quote = false;
@@ -205,7 +274,7 @@ public class CSVPrinter implements CSVPrint {
 			}
 			for (int i=0; i<value.length(); i++){
 				c = value.charAt(i);
-				if (c=='"' || c==',' || c=='\n' || c=='\r'){
+				if (c==quoteChar || c==delimiterChar || c=='\n' || c=='\r'){
 					quote = true;
 				}
 			}
@@ -222,7 +291,7 @@ public class CSVPrinter implements CSVPrint {
 		if (newLine){
 			newLine = false;
 		} else {
-			out.print(",");
+			out.print(delimiterChar);
 		}
 		if (quote){
 			out.print(escapeAndQuote(value));
@@ -233,29 +302,34 @@ public class CSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * enclose the value in quotes and escape the quote
+	 * Enclose the value in quotes and escape the quote
 	 * and comma characters that are inside.
 	 *
 	 * @param value needs to be escaped and quoted
 	 * @return the value, escaped and quoted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
-	private static String escapeAndQuote(String value){
+	private String escapeAndQuote(String value){
 		int count = 2;
 		for (int i=0; i<value.length(); i++){
-			switch(value.charAt(i)){
-				case '\"': case '\n': case '\r': case '\\': {
+			char c = value.charAt(i);
+			switch(c){
+				case '\n': case '\r': case '\\': {
 					count ++;
+				} break;
+				default: {
+					if (c == quoteChar){
+						count++;
+					}
 				} break;
 			}
 		}
 		StringBuffer sb = new StringBuffer(value.length() + count);
-		sb.append('"');
+		sb.append(quoteChar);
 		for (int i=0; i<value.length(); i++){
 			char c = value.charAt(i);
 			switch(c){
-				case '\"': {
-					sb.append("\\\"");
-				} break;
 				case '\n': {
 					sb.append("\\n");
 				} break;
@@ -266,11 +340,15 @@ public class CSVPrinter implements CSVPrint {
 					sb.append("\\\\");
 				} break;
 				default: {
-					sb.append(c);
+					if (c == quoteChar){
+						sb.append("\\" + quoteChar);
+					} else {
+						sb.append(c);
+					}
 				}
 			}
 		}
-		sb.append('"');
+		sb.append(quoteChar);
 		return (sb.toString());
 	}
 
@@ -278,6 +356,8 @@ public class CSVPrinter implements CSVPrint {
 	 * Write some test data to the given file.
 	 *
 	 * @param args First argument is the file name.  System.out used if no filename given.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static void main(String[] args) {
 		OutputStream out;

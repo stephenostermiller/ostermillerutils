@@ -2,6 +2,7 @@
  * Write files in Excel comma separated value format.
  * Copyright (C) 2001,2002 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,16 +25,38 @@ import java.io.*;
  * Excel spreadsheet.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+ * @since ostermillerutils 1.00.00
  */
 public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
+	 * Delimiter character written.
+	 *
+	 * @since ostermillerutils 1.02.18
+	 */
+	protected char delimiterChar = ',';
+
+	/**
+	 * Quoting character written.
+	 *
+	 * @since ostermillerutils 1.02.18
+	 */
+	protected char quoteChar = '"';
+
+	/**
 	 * The place that the values get written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected PrintWriter out;
 
 	/**
 	 * True iff we just began a new line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean newLine = true;
 
@@ -44,6 +67,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public ExcelCSVPrinter (OutputStream out){
 		this.out = new PrintWriter(out);
@@ -55,6 +80,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public ExcelCSVPrinter (Writer out){
 		if (out instanceof PrintWriter){
@@ -65,10 +92,36 @@ public class ExcelCSVPrinter implements CSVPrint {
 	}
 
 	/**
+	 * Change this printer so that it uses a new delimiter.
+	 *
+	 * @param newDelimiter The new delimiter character to use.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeDelimiter(char newDelimiter){
+		delimiterChar = newDelimiter;
+	}
+
+	/**
+	 * Change this printer so that it uses a new character for quoting.
+	 *
+	 * @param newDelimiter The new character to use for quoting.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeQuote(char newQuote){
+		quoteChar = newQuote;
+	}
+
+	/**
 	 * Print the string as the last value on the line.	The value
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String value){
 		print(value);
@@ -78,7 +131,9 @@ public class ExcelCSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * Output a blank line
+	 * Output a blank line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(){
 		out.println();
@@ -92,6 +147,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[] values){
 		for (int i=0; i<values.length; i++){
@@ -108,6 +165,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[][] values){
 		for (int i=0; i<values.length; i++){
@@ -125,7 +184,9 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * this method will ignore the comment and star
 	 * a new row.
 	 *
-	 * @param comment the comment to output (ignored)
+	 * @param comment the comment to output (ignored).
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void printlnComment(String comment){
 		println();
@@ -136,13 +197,15 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void print(String value){
 		boolean quote = false;
 		if (value.length() > 0){
 			for (int i=0; i<value.length(); i++){
 				char c = value.charAt(i);
-				if (c=='"' || c==',' || c=='\n' || c=='\r'){
+				if (c==quoteChar || c==delimiterChar || c=='\n' || c=='\r'){
 					quote = true;
 				}
 			}
@@ -156,7 +219,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 		if (newLine){
 			newLine = false;
 		} else {
-			out.print(",");
+			out.print(delimiterChar);
 		}
 		if (quote){
 			out.print(escapeAndQuote(value));
@@ -167,21 +230,25 @@ public class ExcelCSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * enclose the value in quotes and escape the quote
+	 * Enclose the value in quotes and escape the quote
 	 * and comma characters that are inside.
 	 *
-	 * @param value needs to be escaped and quoted
+	 * @param value needs to be escaped and quoted.
+	 *
 	 * @return the value, escaped and quoted.
+	 * @since ostermillerutils 1.00.00
 	 */
-	private static String escapeAndQuote(String value){
-		String s = StringHelper.replace(value, "\"", "\"\"");
-		return (new StringBuffer(2 + s.length())).append("\"").append(s).append("\"").toString();
+	private String escapeAndQuote(String value){
+		String s = StringHelper.replace(value, Character.toString(quoteChar), Character.toString(quoteChar) + Character.toString(quoteChar));
+		return (new StringBuffer(2 + s.length())).append(quoteChar).append(s).append(quoteChar).toString();
 	}
 
 	/**
 	 * Write some test data to the given file.
 	 *
 	 * @param args First argument is the file name.  System.out used if no filename given.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static void main(String[] args) {
 		OutputStream out;

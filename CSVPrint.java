@@ -1,7 +1,8 @@
 /*
  * Write files in comma separated value format.
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,19 +27,47 @@ import java.io.*;
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
  * CSV printers should implement.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+ * @since ostermillerutils 1.00.00
  */
 public interface CSVPrint {
+
+	/**
+	 * Change this printer so that it uses a new delimiter.
+	 *
+	 * @param newDelimiter The new delimiter character to use.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeDelimiter(char newDelimiter);
+
+	/**
+	 * Change this printer so that it uses a new character for quoting.
+	 *
+	 * @param newDelimiter The new character to use for quoting.
+	 *
+	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+	 * @since ostermillerutils 1.02.18
+	 */
+	public void changeQuote(char newQuote);
 
 	/**
 	 * Print the string as the last value on the line.	The value
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String value);
 
 	/**
-	 * Output a blank line
+	 * Output a blank line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println();
 
@@ -48,6 +77,8 @@ public interface CSVPrint {
 	 * and other characters that need it will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[] values);
 
@@ -58,6 +89,8 @@ public interface CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void println(String[][] values);
 
@@ -65,7 +98,9 @@ public interface CSVPrint {
 	 * If the CSV format supports comments, write the comment
 	 * to the file on its own line, otherwise, start a new line.
 	 *
-	 * @param comment the comment to output
+	 * @param comment the comment to output.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void printlnComment(String comment);
 
@@ -74,6 +109,8 @@ public interface CSVPrint {
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void print(String value);
 
