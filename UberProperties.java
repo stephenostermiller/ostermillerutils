@@ -712,7 +712,9 @@ public class UberProperties {
 			writeComment(out, getComment(names[i]));
 			String[] values = getProperties(names[i]);
 			for (int j=0; j<values.length; j++){
-				writeProperty(out, names[i], values[j]);
+				if (names[i].length() > 0 || values[j].length() > 0){
+					writeProperty(out, names[i], values[j]);
+				}
 			}
 		}
 		out.flush();
