@@ -109,13 +109,13 @@ class CSVTests {
 
 			normalInput = "!comment\n !field1\n;comment\n ;field2\n#comment\n #field3";
 			normalOutput = new String[][]{{"!field1"},{";field2"},{"#field3"}};
-			shredder = new CSVParser(new StringReader(normalInput));            
+			shredder = new CSVParser(new StringReader(normalInput));
 			shredder.setCommentStart("#;!");
 			compare("comment must start at beginning of line", normalOutput, shredder.getAllValues());
 
 		} catch (Exception x){
 			System.err.println(x.getMessage());
-            x.printStackTrace();
+			x.printStackTrace();
 			System.exit(1);
 		}
 		System.exit(0);
