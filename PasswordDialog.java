@@ -45,8 +45,18 @@ public class PasswordDialog extends JDialog {
     /**
      * Locale specific strings displayed to the user.
      */
- 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  Locale.getDefault());
+ 	protected ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  Locale.getDefault());
 
+    /**
+     * Set the locale used for getting localized 
+     * strings.
+     *
+     * @param locale Locale used to for i18n.
+     */
+    public void setLocale(Locale locale){
+        labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  locale);
+    }
+    
     /**
      * Where the name is typed.
      */

@@ -48,6 +48,16 @@ public class Browser {
  	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  Locale.getDefault());
     
     /**
+     * Set the locale used for getting localized 
+     * strings.
+     *
+     * @param locale Locale used to for i18n.
+     */
+    public static void setLocale(Locale locale){
+        labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  locale);
+    }
+    
+    /**
      * A list of commands to try in order to display the url.
      * The url is put into the command using MessageFormat, so
      * the URL will be specified as {0} in the command.
