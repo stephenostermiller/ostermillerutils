@@ -101,6 +101,7 @@ import java.io.*;
 %state SEPARATOR
 %state VALUE
 %state MID_VALUE
+%state DONE
 
 HexDigit=([0-9a-fA-F])
 BLANK=([ ])
@@ -156,6 +157,16 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     PropertiesToken t = new PropertiesToken(lastToken,text);
     yybegin(nextState);
     return (t);
+}
+<YYINITIAL, LINE_END, NAME, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> <<EOF>> {
+    nextState = DONE;
+    lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
+    PropertiesToken t = new PropertiesToken(lastToken,"");
+    yybegin(nextState);
+    return (t);
+}
+<DONE> ([^]*) {
+	return null;
 }
 <YYINITIAL, WHITE_SPACE, MID_NAME, MID_NAME_NEW_LINE> {Name} {
     nextState = NAME;
