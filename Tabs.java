@@ -104,7 +104,7 @@ public class Tabs {
                     }
                     maxLength += 2;
                 	System.out.println(
-                        labels.getString("tabs") + " [-" + StringHelper.replace(oneLetterOptions,":","") + "] <" + labels.getString("files") + "\n" +
+                        labels.getString("tabs") + " [-" + StringHelper.replace(oneLetterOptions,":","") + "] <" + labels.getString("files") +  ">" + "\n" +
                         labels.getString("purpose.message") + "\n" +
                         "  " + labels.getString("stdin.message") + "\n" +
                         "  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
@@ -347,16 +347,15 @@ public class Tabs {
                 }
                 switch (b){
                     case ' ': {
-                        if (state < STATE_SOMETHING) {
+                        if (state == STATE_INIT) {
                             spaces++;
-                            state = STATE_SPACE;
                         } else {
                             out.write(b);
                         }
                     } break;
                     case '\t': {
-                        if (state < STATE_SOMETHING) {
-                            if (state == STATE_SPACE){
+                        if (state == STATE_INIT) {
+                            if (spaces > 0){
                                 // put tabs before spaces
                                 modified = true; 
                             }
@@ -469,7 +468,7 @@ public class Tabs {
             in = new FileInputStream(f);  
             temp = File.createTempFile("LineEnds", null, null);
             out = new FileOutputStream(temp);
-            modified = convert (in, out, inputTabWidth, outputTabWidth, binaryException);
+            modified = convert(in, out, inputTabWidth, outputTabWidth, binaryException);
             in.close();
             in = null;
             out.flush();
@@ -544,8 +543,7 @@ public class Tabs {
      */
     private final static int BUFFER_SIZE = 1024;
     private final static int STATE_INIT = 0;
-    private final static int STATE_SPACE = 0;
-    private final static int STATE_SOMETHING = 2;
+    private final static int STATE_SOMETHING = 1;
 
     final private static int MAX_SPACES = 128;
     final private static int MAX_TABS = 16;
@@ -553,7 +551,7 @@ public class Tabs {
     /**
      * Guess the number of spaces per tab at the beginning of each line.
      * 
-     * @return the least value which has some line that starts with n times spaces for n zero to max spaces starting a line.
+     * @return the least value (two or greater) which has some line that starts with n times spaces for n zero to max spaces starting a line.
      */
     public static int guessTabWidth(InputStream in) throws IOException {
         byte[] buffer = new byte[BUFFER_SIZE];
@@ -592,7 +590,7 @@ public class Tabs {
                 }
             }
         }
-        for (int tabWidth=1; tabWidth<=20; tabWidth++){
+        for (int tabWidth=2; tabWidth<=20; tabWidth++){
             int mostCombined=0;
             for (int tabInd=0; tabInd <= mostTabs; tabInd++){
                 for (int spaceInd=0; spaceInd <= mostSpaces; spaceInd++){
