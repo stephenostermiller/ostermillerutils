@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files=$@
+files="$@"
 
 for file in $files
 do
