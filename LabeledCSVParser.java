@@ -142,11 +142,11 @@ public class LabeledCSVParser implements CSVParse {
 	 */
 	public String[][] getAllValues() throws IOException {
 		String[][] allValues = parse.getAllValues();
-        if (allValues == null){
-            lastLine = null;
-        } else {
-		    lastLine = allValues[allValues.length-1];
-        }
+		if (allValues == null){
+			lastLine = null;
+		} else {
+			lastLine = allValues[allValues.length-1];
+		}
 		return allValues;
 	}
 
@@ -187,9 +187,9 @@ public class LabeledCSVParser implements CSVParse {
 
 	/**
 	 * Get all the values from a line.
-	 * <p> 
+	 * <p>
 	 * If the line has already been partially read, only the values that have not
-	 * already been read will be included. 
+	 * already been read will be included.
 	 * <p>
 	 * In addition to returning all the values from a line, LabeledCSVParser
 	 * maintains a buffer of the values.  This feature allows
