@@ -775,7 +775,6 @@ public class RandPass {
 	 * the password should be overwritten in memory as soon as possible after i
 	 * is no longer in use.
 	 *
-	 * @param length The desired length of the generated password.
 	 * @return a random password
 	 *
 	 * @since ostermillerutils 1.00.00

@@ -895,7 +895,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * <p>
 	 * Is equivalent to <code>nextToken(delims, null)</code>.
 	 *
-	 * @param   delims the new set of nontoken delimiters (the set of
+	 * @param nontokenDelims the new set of nontoken delimiters (the set of
 	 *     token delimiters will be empty).
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this

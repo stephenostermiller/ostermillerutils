@@ -92,14 +92,14 @@ public class MD5InputStream extends FilterInputStream {
 	 * Reads up to len bytes of data from this input stream into an
 	 * array of bytes. This method blocks until some input is available.
 	 *
-	 * @param b the buffer into which the data is read.
-	 * @param off the start offset of the data.
-	 * @param len the maximum number of bytes read.
+	 * @param bytes the buffer into which the data is read.
+	 * @param offset the start offset of the data.
+	 * @param length the maximum number of bytes read.
 	 * @throws IOException if an I/O error occurs.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(byte bytes[], int offset, int length) throws IOException {
+	public int read(byte[] bytes, int offset, int length) throws IOException {
 		int	r;
 		if ((r = in.read(bytes, offset, length)) == -1) {
 			return r;

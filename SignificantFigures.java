@@ -913,7 +913,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -928,7 +928,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -943,7 +943,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -958,7 +958,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -973,7 +973,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -988,7 +988,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -1003,7 +1003,7 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
 	 *
 	 * @since ostermillerutils 1.02.07
@@ -1018,9 +1018,9 @@ public class SignificantFigures extends Number {
 	 * Convenience method to display a number with the correct
 	 * significant digits.
 	 *
-	 * @param num the number to display
+	 * @param number the number to display
 	 * @param significantFigures the number of significant figures to display.
-	 * @param throws NumberFormatException if the String is not a valid number.
+	 * @throws NumberFormatException if the String is not a valid number.
 	 *
 	 * @since ostermillerutils 1.02.07
 	 */
