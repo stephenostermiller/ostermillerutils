@@ -1084,7 +1084,6 @@ public class Base64 {
 	 * @param bytes The data to decode.
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
-	 * @return Decoded bytes.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -1101,7 +1100,6 @@ public class Base64 {
 	 * @param bytes The data to decode.
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
-	 * @return Decoded bytes.
 	 *
 	 * @since ostermillerutils 1.02.16
 	 */
