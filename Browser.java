@@ -16,9 +16,10 @@
  */
 package com.Ostermiller.util;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.MessageFormat;
 import java.net.URL;
+import java.net.URLDecoder;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -197,6 +198,37 @@ public class Browser {
                         }
                         String[] args = new String[argsVector.size()];
                         args = (String[])argsVector.toArray(args);
+                        // the windows urlprotocol handler doesn't work with file urls
+                        // correct those problems here before continuing
+                        // it wants two slashes after the file, not just one
+                        // it doesn't like  escape characters,
+                        // and it doesn't like spaces. (I don't know of anything
+                        // I can do about that.)
+                        if (args[0].equals("rundll32") &&
+							args[1].equals("url.dll,FileProtocolHandler") &&
+                            args[2].startsWith("file:/")){
+                            if (args[2].charAt(6) != '/'){
+            					args[2] = "file://" + args[2].substring(6);
+        					} 
+							if (args[2].indexOf("%") != -1){
+                                if (args[2].charAt(7) != '/'){
+                                    args[2] = "file:///" + args[2].substring(7);
+                                }
+                                File shortcut = new File(System.getProperty("user.home"), "java");
+                                shortcut = new File(shortcut, "Browser");
+                                shortcut.mkdirs();
+                                shortcut = new File(shortcut, "TempShortcut.url");
+                                if (shortcut.exists()) shortcut.delete();
+                                shortcut.createNewFile();
+                                PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+                                out.println("[InternetShortcut]");
+                                out.println("URL=" + args[2]);
+                                out.close();
+                                args[2] = shortcut.getCanonicalPath();
+                            }
+                            //args[2] = URLDecoder.decode(args[2]);
+                            System.out.println(args[2]);
+						}
                         // start the browser
                         Process p = Runtime.getRuntime().exec(args);
 
