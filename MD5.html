@@ -1,0 +1,68 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="description" content="Generate MD5 hash sums.">
+   <meta name="keywords" content="md5, hash, sum, checksum, check sum, message digest, fingerprint, signature, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc, encoding, decoding, encoder, decoder, stream, streams, inputstream, outputstream, array, arrays, string, strings">
+   <title>MD5</title>
+   <base href="http://ostermiller.org/utils/">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<h1><a name="md5">MD5</a></h1>
+
+<H2>Hash Generator</h2>
+
+<p>This class takes as input a message of arbitrary length and produces as output
+a 128-bit "fingerprint" or "message digest" of the input. It is conjectured that 
+it is computationally infeasible to produce two messages having the same message 
+digest, or to produce any message having a given prespecified target message 
+digest. The MD5 algorithm is intended for digital signature applications, where 
+a large file must be "compressed" in a secure manner before being encrypted with 
+a private (secret) key under a public-key cryptosystem such as RSA.</p>
+
+<p>This class is based on work by <a href="http://www.cs.hut.fi/~santtu/java/">Santeri Paavolainen</a>.
+and <a href="http://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.  This implementation is several times
+faster and much more memory efficient than Santeri's implementation.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/MD5.java/HEAD">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5.html">Documentation</a>]</p>
+
+<H2>Input Stream</h2>
+
+<p>A filtered input stream that computes an MD5 sum for anything read.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5InputStream.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/MD5InputStream.java/HEAD">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5InputStream.html">Documentation</a>]</p>
+
+<H2>Output Stream</h2>
+
+<p>A filtered output stream that computes an MD5 sum for anything written.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5OutputStream.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/MD5OutputStream.java/HEAD">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/MD5OutputStream.html">Documentation</a>]</p>
+
+<hr>
+
+<h2><a name="license">License</a></h2>
+
+<P>Copyright (c) 2002 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+(utils@Ostermiller.com)</P>
+
+<p>This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation; either version 2 of the License or (at
+your option) any later version.</P>
+
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+</body>
+</html>
