@@ -538,7 +538,7 @@ public class RandPass {
             }
             if (requirements != null) applyRequirements(pass);
             verified = true;
-            for (int i=0; verified && i<verifiers.size(); i++){
+            for (int i=0; verified && verifiers != null && i<verifiers.size(); i++){
                 verified = ((PasswordVerifier)verifiers.elementAt(i)).verify(pass);
             }
         }        
