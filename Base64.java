@@ -347,13 +347,13 @@ public class Base64 {
 				} break;
 				case 2:{
 					// print out the version message
-					System.out.println(MessageFormat.format(labels.getString("version"), new String[] {version}));
+					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
 				case 3:{
 					System.out.println(
 						labels.getString("base64") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
@@ -460,12 +460,12 @@ public class Base64 {
 				}
 			} else 	if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {args[i]}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantread"), new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {args[i]}));
 				}
 				exitCond = 1;
 			} else {
@@ -491,23 +491,23 @@ public class Base64 {
 					File outFile = new File(outName);
 					if (!force && outFile.exists()){
 						if(printErrors){
-							System.err.println(MessageFormat.format(labels.getString("overwrite"), new String[] {outName}));
+							System.err.println(MessageFormat.format(labels.getString("overwrite"), (Object[])new String[] {outName}));
 						}
 						exitCond = 1;
 					} else if (!(outFile.exists() || outFile.createNewFile()) || !outFile.canWrite()){
 						if(printErrors){
-							System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {outName}));
+							System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {outName}));
 						}
 						exitCond = 1;
 					} else {
 						if (fileAction == ACTION_ENCODE){
 							if (printMessages){
-								System.out.println(MessageFormat.format(labels.getString("encoding"), new String[] {args[i], outName}));
+								System.out.println(MessageFormat.format(labels.getString("encoding"), (Object[])new String[] {args[i], outName}));
 							}
 							encode(source, outFile, lineBreaks);
 						} else {
 							if (printMessages){
-								System.out.println(MessageFormat.format(labels.getString("decoding"), new String[] {args[i], outName}));
+								System.out.println(MessageFormat.format(labels.getString("decoding"), (Object[])new String[] {args[i], outName}));
 							}
 							decode(source, outFile, !forceDecode);
 						}
@@ -1233,7 +1233,7 @@ public class Base64 {
 				throw new Base64DecodingException (
 					MessageFormat.format(
 						labels.getString("unexpectedchar"),
-						new String[] {
+						(Object[])new String[] {
 							"'" + (char)read + "' (0x" + Integer.toHexString(read) + ")"
 						}
 					),

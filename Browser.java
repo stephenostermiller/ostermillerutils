@@ -108,7 +108,7 @@ public class Browser {
 				"rundll32 url.dll,FileProtocolHandler {0}",
 			};
 		} else if (System.getProperty("os.name").startsWith("Mac")){
-			Vector browsers = new Vector();
+			Vector<String> browsers = new Vector<String>();
 			try {
 				Process p = Runtime.getRuntime().exec("which open");
 				if (p.waitFor() == 0){
@@ -123,7 +123,7 @@ public class Browser {
 				exec = (String[])browsers.toArray(new String[0]);
 			}
 		} else {
-			Vector browsers = new Vector();
+			Vector<String> browsers = new Vector<String>();
 			try {
 				Process p = Runtime.getRuntime().exec("which firebird");
 				if (p.waitFor() == 0){
@@ -348,9 +348,9 @@ public class Browser {
 				for (int i=0; i<exec.length && !found; i++){
 					try {
 						// stick the url into the command
-						command = MessageFormat.format(exec[i], messageArray);
+						command = MessageFormat.format(exec[i], (Object[])messageArray);
 						// parse the command line.
-						Vector argsVector = new Vector();
+						Vector<String> argsVector = new Vector<String>();
 						BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
 						String t;
 						while ((t = lex.getNextToken()) != null) {
@@ -993,7 +993,7 @@ public class Browser {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					pressed_OK = true;
-					BrowserDialog.this.hide();
+					BrowserDialog.this.setVisible(false);
 				}
 			});
 			panel.add(okButton);
@@ -1001,7 +1001,7 @@ public class Browser {
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
 					pressed_OK = false;
-					BrowserDialog.this.hide();
+					BrowserDialog.this.setVisible(false);
 				}
 			});
 			panel.add(cancelButton);
@@ -1015,14 +1015,25 @@ public class Browser {
 		 * Shows the dialog.
 		 *
 		 * @since ostermillerutils 1.00.00
+         * @deprecated use setVisible(true);
 		 */
 		public void show(){
-			initPanel();
-			super.show();
-			if (pressed_OK){
-				userOKedPanelChanges();
-			}
+            setVisible(true);
 		}
+        
+        public void setVisible(boolean visible){
+            if (visible){                
+			    initPanel();
+			    super.setVisible(true);
+			    if (pressed_OK){
+				    userOKedPanelChanges();
+			    }
+            } else {
+                super.setVisible(false);
+            }
+        }
+        
+        
 	}
 
 	private static void setCommands(String[] newExec){

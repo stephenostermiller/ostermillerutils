@@ -36,12 +36,12 @@ public class CGIParser {
 	/**
 	 * Hash of names to Array Lists of values.
 	 */
-	private HashMap nameValuePairHash = new HashMap();
+	private HashMap<String,ArrayList<String>> nameValuePairHash = new HashMap<String,ArrayList<String>>();
 
 	/**
 	 * Array list of NameValuePair objects.
 	 */
-	private LinkedList nameValuePairList = new LinkedList();
+	private LinkedList<NameValuePair> nameValuePairList = new LinkedList<NameValuePair>();
 
 	/**
 	 * Extract the name, value pairs from the given input stream and
@@ -190,9 +190,9 @@ public class CGIParser {
 			}
 
 			// Hash
-			ArrayList values = (ArrayList)nameValuePairHash.get(name);
+			ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
 			if (values == null){
-				values = new ArrayList();
+				values = new ArrayList<String>();
 			}
 			values.add(value);
 			nameValuePairHash.put(name, values);
@@ -213,7 +213,7 @@ public class CGIParser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getParameterValues(String name){
-		ArrayList values = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
 		if (values == null){
 			return null;
 		}
@@ -244,9 +244,9 @@ public class CGIParser {
 			nameValuePairHash.remove(name);
 			return;
 		}
-		ArrayList values = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
 		if (values == null){
-			values = new ArrayList();
+			values = new ArrayList<String>();
 		}
 		values.clear();
 		values.add(value);
@@ -281,9 +281,9 @@ public class CGIParser {
 		for (int i=0; i<values.length; i++){
 			if (values[i] == null) throw new NullPointerException();
 		}
-		ArrayList valuesVec = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> valuesVec = (ArrayList<String>)nameValuePairHash.get(name);
 		if (valuesVec == null){
-			valuesVec = new ArrayList();
+			valuesVec = new ArrayList<String>();
 		}
 		valuesVec.clear();
 		for (int i=0; i<values.length; i++){
@@ -307,9 +307,9 @@ public class CGIParser {
 		if (value == null){
 			return;
 		}
-		ArrayList values = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
 		if (values == null){
-			values = new ArrayList();
+			values = new ArrayList<String>();
 		}
 		values.add(value);
 		nameValuePairHash.put(name, values);
@@ -334,9 +334,9 @@ public class CGIParser {
 		for (int i=0; i<values.length; i++){
 			if (values[i] == null) throw new NullPointerException();
 		}
-		ArrayList valuesVec = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> valuesVec = (ArrayList<String>)nameValuePairHash.get(name);
 		if (valuesVec == null){
-			valuesVec = new ArrayList();
+			valuesVec = new ArrayList<String>();
 		}
 		for (int i=0; i<values.length; i++){
 			valuesVec.add(values[i]);
@@ -361,7 +361,7 @@ public class CGIParser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String getParameter(String name){
-		ArrayList values = (ArrayList)nameValuePairHash.get(name);
+		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
 		if (values == null){
 			return null;
 		}

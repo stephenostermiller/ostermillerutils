@@ -61,7 +61,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	private Map labelMap;
+	private Map<String,Integer> labelMap;
 
 	/**
 	 * The last line read from the CSV file.  Saved for getValueByLabel().
@@ -244,7 +244,7 @@ public class LabeledCSVParser implements CSVParse {
 	private void setLabels() throws IOException {
 		labels = parse.getLine();
 		if (labels == null) return;
-		labelMap = new HashMap();
+		labelMap = new HashMap<String,Integer>();
 		for (int i = 0; i < labels.length; i++){
 			labelMap.put(labels[i], new Integer(i));
 		}
@@ -316,7 +316,13 @@ public class LabeledCSVParser implements CSVParse {
 	public String getValueByLabel(String label) throws IllegalStateException {
 		if (nextValueLine == getLastLineNumber()) throw new IllegalStateException("nextValue() was used to get values from this line.");
 		if (lastLine == null) return null;
-		int fieldIndex = getLabelIndex(label);
+        int fieldIndex;
+        try {
+		    fieldIndex = getLabelIdx(label);
+        } catch (IOException iox){
+            // Can't happen here because the labels have been read before the first line.
+            throw new RuntimeException(iox);
+        }
 		if (fieldIndex == -1) return null;
 		if (fieldIndex >= lastLine.length) return null;
 		return lastLine[fieldIndex];

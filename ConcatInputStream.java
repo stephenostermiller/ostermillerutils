@@ -42,7 +42,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.01
 	 */
-	private ArrayList inputStreamQueue = new ArrayList();
+	private ArrayList<InputStream> inputStreamQueue = new ArrayList<InputStream>();
 
 	/**
 	 * A cache of the current inputStream from the inputStreamQueue

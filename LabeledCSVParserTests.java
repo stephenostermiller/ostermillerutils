@@ -103,16 +103,16 @@ class LabeledCSVParserTests {
 		if (labels.length != 3 || !"FIELD01".equals(labels[0]) || !"FIELD02".equals(labels[1]) || !"FIELD03".equals(labels[2])){
 			throw new Exception("Didn't get expected labels.");
 		}
-		if (parse.getLabelIndex("FIELD01") != 0){
+		if (parse.getLabelIdx("FIELD01") != 0){
 			throw new Exception("FIELD01 expected index of zero");
 		}
-		if (parse.getLabelIndex("FIELD02") != 1){
+		if (parse.getLabelIdx("FIELD02") != 1){
 			throw new Exception("FIELD02 expected index of one");
 		}
-		if (parse.getLabelIndex("FIELD03") != 2){
+		if (parse.getLabelIdx("FIELD03") != 2){
 			throw new Exception("FIELD03 expected index of two");
 		}
-		if (parse.getLabelIndex("FIELD04") != -1){
+		if (parse.getLabelIdx("FIELD04") != -1){
 			throw new Exception("FIELD04 expected not to be present");
 		}
 		if (parse.getValueByLabel("FIELD01") != null){

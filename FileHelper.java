@@ -75,7 +75,7 @@ public class FileHelper {
 					throw new IOException(
 						MessageFormat.format(
 							labels.getString("deleteerror"),
-							new String[] {
+							(Object[])new String[] {
 								to.toString()
 							}
 						)
@@ -85,7 +85,7 @@ public class FileHelper {
 				throw new IOException(
 					MessageFormat.format(
 						labels.getString("alreadyexistserror"),
-						new String[] {
+						(Object[])new String[] {
 							to.toString()
 						}
 					)
@@ -110,7 +110,7 @@ public class FileHelper {
 				throw new IOException(
 					MessageFormat.format(
 						labels.getString("deleteoriginalerror"),
-						new String[] {
+						(Object[])new String[] {
 							from.toString(),
 							to.toString()
 						}

@@ -130,13 +130,13 @@ public class LineEnds {
 				} break;
 				case 2:{
 					// print out the version message
-					System.out.println(MessageFormat.format(labels.getString("version"), new String[] {version}));
+					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
 				case 3:{
 					System.out.println(
 						labels.getString("lineends") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), new String[] {"2001", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
@@ -193,28 +193,28 @@ public class LineEnds {
 			File source = new File(args[i]);
 			if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {args[i]}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantread"), new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {args[i]}));
 				}
 				exitCond = 1;
 			} else if (!source.canWrite()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {args[i]}));
 				}
 				exitCond = 1;
 			} else {
 				try {
 					if(convert (source, style, !force)){
 						if (printMessages){
-							System.out.println(MessageFormat.format(labels.getString("modified"), new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("modified"), (Object[])new String[] {args[i]}));
 						}
 					} else {
 						if (printExtraMessages){
-							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), (Object[])new String[] {args[i]}));
 						}
 					}
 				} catch (IOException x){
@@ -525,7 +525,7 @@ public class LineEnds {
 					throw new IOException(
 						MessageFormat.format(
 							labels.getString("tempdeleteerror"),
-							new String[] {temp.toString()}
+							(Object[])new String[] {temp.toString()}
 						)
 					);
 				}

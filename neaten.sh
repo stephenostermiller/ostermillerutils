@@ -2,7 +2,7 @@
 
 if [ ! -e Tabs.class ]
 then
-    javac Tabs.java
+    javac -classpath ../../.. Tabs.java
 fi
 
 tablist=""

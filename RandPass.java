@@ -329,8 +329,8 @@ public class RandPass {
 		char[] alphabet = NONCONFUSING_ALPHABET;
 		char[] firstAlphabet = null;
 		char[] lastAlphabet = null;
-		Vector reqs = new Vector();
-		Vector ver = new Vector();
+		Vector<String> reqs = new Vector<String>();
+		Vector<String> ver = new Vector<String>();
 		int maxreps = 0;
 		int length = 8;
 		int c;
@@ -375,13 +375,13 @@ public class RandPass {
 				} break;
 				case 2:{
 					// print out the version message
-					System.out.println(MessageFormat.format(labels.getString("version"), new String[] {version}));
+					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
 				case 3:{
 					System.out.println(
 						labels.getString("randpass") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
@@ -468,7 +468,7 @@ public class RandPass {
 	}
 
 
-	private Vector requirements = null;
+	private Vector<Requirement> requirements = null;
 
 	/**
 	 * Require that a certain number of characters from an
@@ -480,7 +480,7 @@ public class RandPass {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void addRequirement(char[] alphabet, int num){
-		if (requirements == null) requirements = new Vector();
+		if (requirements == null) requirements = new Vector<Requirement>();
 		requirements.add(new Requirement(alphabet, num));
 	}
 
@@ -610,7 +610,7 @@ public class RandPass {
 		return(pass);
 	}
 
-	private Vector verifiers = null;
+	private Vector<PasswordVerifier> verifiers = null;
 
 	/**
 	 * Add a class that will verify passwords.  No password
@@ -621,7 +621,7 @@ public class RandPass {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void addVerifier(PasswordVerifier verifier){
-		if (verifiers == null) verifiers = new Vector();
+		if (verifiers == null) verifiers = new Vector<PasswordVerifier>();
 		verifiers.add(verifier);
 	}
 

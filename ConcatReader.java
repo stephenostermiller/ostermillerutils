@@ -41,7 +41,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.01
 	 */
-	private ArrayList readerQueue = new ArrayList();
+	private ArrayList<Reader> readerQueue = new ArrayList<Reader>();
 
 	/**
 	 * A cache of the current reader from the readerQueue

@@ -130,7 +130,7 @@ public class UberProperties {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	private HashMap properties = new HashMap();
+	private HashMap<String,Property> properties = new HashMap<String,Property>();
 
 	/**
 	 * Comment for this set of properties.
@@ -153,7 +153,7 @@ public class UberProperties {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		private ArrayList list;
+		private ArrayList<String> list;
 
 		/**
 		 * Comment for this set of properties.
@@ -193,7 +193,7 @@ public class UberProperties {
 		 * @since ostermillerutils 1.00.00
 		 */
 		public Property(String value){
-			list = new ArrayList(1);
+			list = new ArrayList<String>(1);
 			add(value);
 		}
 
@@ -205,7 +205,7 @@ public class UberProperties {
 		 * @since ostermillerutils 1.00.00
 		 */
 		public Property(String[] values){
-			list = new ArrayList(values.length);
+			list = new ArrayList<String>(values.length);
 			add(values);
 		}
 
@@ -670,7 +670,7 @@ public class UberProperties {
 	public void load(InputStream in, boolean add) throws IOException {
 		PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
 		PropertiesToken t;
-		HashSet names = new HashSet();
+		HashSet<String> names = new HashSet<String>();
 		StringBuffer comment = new StringBuffer();
 		boolean foundComment = false;
 		StringBuffer name = new StringBuffer();
@@ -1004,7 +1004,7 @@ public class UberProperties {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] propertyNames(){
-		Set names = properties.keySet();
+		Set<String> names = properties.keySet();
 		return (String[])names.toArray(new String[names.size()]);
 	}
 

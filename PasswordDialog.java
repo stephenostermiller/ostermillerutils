@@ -295,12 +295,12 @@ public class PasswordDialog extends JDialog {
 						(e.getSource() == cancelButton
 						&& e.getKeyCode() == KeyEvent.VK_ENTER)){
 					pressed_OK = false;
-					PasswordDialog.this.hide();
+					PasswordDialog.this.setVisible(false);
 				}
 				if (e.getSource() == okButton &&
 						e.getKeyCode() == KeyEvent.VK_ENTER){
 					pressed_OK = true;
-					PasswordDialog.this.hide();
+					PasswordDialog.this.setVisible(false);
 				}
 			}
 		});
@@ -315,7 +315,7 @@ public class PasswordDialog extends JDialog {
 				} else {
 					// other actions close the dialog.
 					pressed_OK = (source == pass || source == okButton);
-					PasswordDialog.this.hide();
+					PasswordDialog.this.setVisible(false);
 				}
 			}
 		};
@@ -372,7 +372,7 @@ public class PasswordDialog extends JDialog {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean showDialog(){
-		show();
+		setVisible(true);
 		return okPressed();
 	}
 

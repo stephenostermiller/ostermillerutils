@@ -237,7 +237,7 @@ public class ExcelCSVParser implements CSVParse {
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
-		Vector v = new Vector();
+		Vector<String> v = new Vector<String>();
 		if (tokenCache != null){
 			v.add(tokenCache);
 			lineNumber = lineCache;
@@ -273,7 +273,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[][] getAllValues() throws IOException {
-		Vector v = new Vector();
+		Vector<String[]> v = new Vector<String[]>();
 		String[] line;
 		while((line = getLine()) != null){
 			v.add(line);
