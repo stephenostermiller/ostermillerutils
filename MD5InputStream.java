@@ -19,7 +19,7 @@
  * See COPYING.TXT for details.
  *
  * The original work by Santeri Paavolainen can be found a
- * http://www.cs.hut.fi/~santtu/java/
+ * http://www.helsinki.fi/~sjpaavol/programs/md5/
  */
 package com.Ostermiller.util;
 
@@ -44,6 +44,10 @@ import java.io.*;
  *
  * @see MD5
  * @see MD5OutputStream
+ *
+ * @author Santeri Paavolainen http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class MD5InputStream extends FilterInputStream {
 	/**
@@ -71,6 +75,8 @@ public class MD5InputStream extends FilterInputStream {
 	 *
 	 * @return the next byte of data, or -1 if the end of the stream is reached.
 	 * @throws IOException if an I/O error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read() throws IOException {
 		int c = in.read();
@@ -90,6 +96,8 @@ public class MD5InputStream extends FilterInputStream {
 	 * @param off the start offset of the data.
 	 * @param len the maximum number of bytes read.
 	 * @throws IOException if an I/O error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read(byte bytes[], int offset, int length) throws IOException {
 		int	r;
@@ -105,6 +113,8 @@ public class MD5InputStream extends FilterInputStream {
 	 * Returns array of bytes representing hash of the stream so far.
 	 *
 	 * @return Array of 16 bytes, the hash of all read bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public byte[] getHash(){
 		return md5.getHash();
@@ -114,6 +124,8 @@ public class MD5InputStream extends FilterInputStream {
 	 * Get a 32-character hex representation representing hash of the stream so far.
 	 *
 	 * @return A string containing  the hash of all written bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getHashString(){
 		return md5.getHashString();

@@ -19,7 +19,7 @@
  * See COPYING.TXT for details.
  *
  * The original work by Santeri Paavolainen can be found a
- * http://www.cs.hut.fi/~santtu/java/
+ * http://www.helsinki.fi/~sjpaavol/programs/md5/
  */
 package com.Ostermiller.util;
 
@@ -44,6 +44,10 @@ import java.io.*;
  *
  * @see MD5
  * @see MD5InputStream
+ *
+ * @author Santeri Paavolainen http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class MD5OutputStream extends FilterOutputStream {
 
@@ -55,6 +59,8 @@ public class MD5OutputStream extends FilterOutputStream {
 	/**
 	 * Creates MD5OutputStream
 	 * @param out	The output stream
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public MD5OutputStream(OutputStream out) {
 		super(out);
@@ -66,6 +72,8 @@ public class MD5OutputStream extends FilterOutputStream {
 	 *
 	 * @param b the byte.
 	 * @throws IOException if an I/O error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void write(int b) throws IOException {
 		out.write(b);
@@ -80,6 +88,8 @@ public class MD5OutputStream extends FilterOutputStream {
 	 * @param off the start offset in the data.
 	 * @param len the number of bytes to write.
 	 * @throws IOException if an I/O error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void write(byte b[], int off, int len) throws IOException {
 		out.write(b, off, len);
@@ -90,6 +100,8 @@ public class MD5OutputStream extends FilterOutputStream {
 	 * Returns array of bytes representing hash of the stream so far.
 	 *
 	 * @return Array of 16 bytes, the hash of all written bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public byte[] getHash(){
 		return md5.getHash();
@@ -99,6 +111,8 @@ public class MD5OutputStream extends FilterOutputStream {
 	 * Get a 32-character hex representation representing hash of the stream so far.
 	 *
 	 * @return A string containing  the hash of all written bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getHashString(){
 		return md5.getHashString();
