@@ -131,7 +131,7 @@ public class Tabs {
 				case 3:{
 					System.out.println(
 						labels.getString("tabs") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), new String[] {"2001", "Stephen Ostermiller (utils@ostermiller.com)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), new String[] {"2002", "Stephen Ostermiller (utils@ostermiller.com)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
