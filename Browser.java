@@ -298,15 +298,21 @@ public class Browser {
 						// If there are escaped characters in the url, we will have
 						// to create an Internet shortcut and open that, as the command
 						// line version of the rundll doesn't like them.
-						if (args[0].equals("rundll32") &&
-								args[1].equals("url.dll,FileProtocolHandler") &&
-								args[2].startsWith("file:/")){
-							if (args[2].charAt(6) != '/'){
-								args[2] = "file://" + args[2].substring(6);
+						boolean useShortCut = false;
+						if (args[0].equals("rundll32") && args[1].equals("url.dll,FileProtocolHandler")){
+							if (args[2].startsWith("file:/")){
+								if (args[2].charAt(6) != '/'){
+									args[2] = "file://" + args[2].substring(6);
+								}
+								if (args[2].charAt(7) != '/'){
+									args[2] = "file:///" + args[2].substring(7);
+								}
+								useShortCut = true;
+							} else if (args[2].toLowerCase().endsWith("html") || args[2].toLowerCase().endsWith("htm")){
+								useShortCut = true;
 							}
-							if (args[2].charAt(7) != '/'){
-								args[2] = "file:///" + args[2].substring(7);
-							}
+						}
+						if (useShortCut){
 							File shortcut = File.createTempFile("OpenInBrowser", ".url");
 							shortcut = shortcut.getCanonicalFile();
 							shortcut.deleteOnExit();
