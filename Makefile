@@ -50,7 +50,7 @@ javadoc: javadocclean
 	$(JAVADOC) -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
 	mv -f temp package.html
 
-build: junkclean
+build: buildclean compile
 	mkdir -p com/Ostermiller/util
 	cp *.* Makefile com/Ostermiller/util/
 	mkdir -p gnu/getopt		
@@ -58,7 +58,7 @@ build: junkclean
 	jar cfv utils.jar com/ gnu/
 	rm -rf com/ gnu/
 
-test:
+test: compile
 	$(JAVA) com.Ostermiller.util.TokenizerTests > out.txt
 	diff out.txt TokenizerTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
@@ -67,7 +67,7 @@ test:
 	diff out.txt ExcelCSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
 	diff out.txt CSVTestResults.txt
-	rm out.txt
+	rm out.txt CSVTest.txt
         
 update: clean
 	$(CVS) update
@@ -75,9 +75,9 @@ update: clean
 commit: clean
 	$(CVS) commit
 
-release: compile build javadoc test
+release: update test build javadoc commit
 	mv -f package.html temp
-	scp -r *.html utils.jar doc/ deadsea@ostermiller.org:www/utils
+	./release
 	mv -f temp package.html
 
 install:
