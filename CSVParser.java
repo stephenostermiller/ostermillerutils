@@ -50,8 +50,8 @@ import java.util.*;
  * shredder.setCommentStart("#;!");
  * shredder.setEscapes("nrtf", "\n\r\t\f");
  * String t;
- * while ((t = shredder.getNextToken()) != null) {
- *     System.out.println("" + shredder.getLineNumber() + " " + t);
+ * while ((t = shredder.nextValue()) != null) {
+ *     System.out.println("" + shredder.lastLineNumber() + " " + t);
  * }
  * </pre>
  *
