@@ -392,11 +392,11 @@ public class StringHelper {
         for (int i=0; i<length; i++){
             char c = s.charAt(i);
             switch(c){
-                case '\"':
-                case '\'':{
+                case '\"':{
                     newLength += 5;
                 } break;
-                case '&':{
+                case '&':
+                case '\'':{
                     newLength += 4;
                 } break;   
                 case '<':
@@ -417,7 +417,7 @@ public class StringHelper {
                     sb.append("&quot;");
                 } break;
                 case '\'':{
-                    sb.append("&apos;");
+                    sb.append("&#39;");
                 } break;
                 case '&':{
                     sb.append("&amp;");
