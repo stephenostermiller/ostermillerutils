@@ -117,12 +117,17 @@
  * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(st.nextToken(","));<br>
  * };
  * </code></blockquote>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class StringTokenizer implements java.util.Enumeration, java.util.Iterator {
 
 	/**
 	 * The string to be tokenized.
 	 * The code relies on this to never be null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected String text;
 
@@ -130,16 +135,22 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * The length of the text.
 	 * Cached for performance.  This should be set whenever the
 	 * string we are working with is changed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected int strLength;
 
 	/**
 	 * The set of nontoken delimiters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected String nontokenDelims;
 
 	/**
 	 * The set of token delimiters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected String tokenDelims;
 
@@ -151,6 +162,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * the next token(the position of the character immediately
 	 * following the end of the last token, or 0 to start), or
 	 * -1 if the entire string has been examined.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected int position;
 
@@ -163,6 +176,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * <p>
 	 * If returnEmptyTokens in false, then this variable will
 	 * always be false.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean emptyReturned;
 
@@ -178,6 +193,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * search the delimiter string.)  This will reduce the running time of
 	 * the algorithm not to depend on the length of the delimiter string
 	 * for the common case.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char maxDelimChar;
 
@@ -186,6 +203,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * ie if "" should be returned when text starts with
 	 * a delim, has two delims next to each other, or
 	 * ends with a delim.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean returnEmptyTokens;
 
@@ -195,6 +214,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * time that delimiters are changed, the string will be treated as if
 	 * it is being parsed from position zero, ie, null strings are possible
 	 * at the very beginning.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected int delimsChangedPosition;
 
@@ -202,6 +223,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * A cache of the token count.  This variable should be -1 if the token
 	 * have not yet been counted. It should be greater than or equal to zero
 	 * if the tokens have been counted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected int tokenCount;
 
@@ -217,6 +240,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param tokenDelims the token delimiters, i.e. delimiters that both separate tokens,
 	 *     and are themselves returned as tokens.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StringTokenizer(String text, String nontokenDelims, String tokenDelims){
 		this(text, nontokenDelims, tokenDelims, false);
@@ -241,6 +266,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *     and are themselves returned as tokens.
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StringTokenizer(String text, String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
 		setDelims(nontokenDelims, tokenDelims);
@@ -269,6 +296,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *     empty; <code>true</code> -- the second parameter specifies token
 	 *     delimiters, the set of nontoken delimiters is empty.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StringTokenizer(String text, String delims, boolean delimsAreTokens){
 		this(text, (delimsAreTokens ? null : delims), (delimsAreTokens ? delims : null));
@@ -284,6 +313,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param text a string to be parsed.
 	 * @param nontokenDelims the nontoken delimiters.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StringTokenizer(String text, String nontokenDelims){
 		this(text, nontokenDelims, null);
@@ -298,6 +329,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param text a string to be parsed.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StringTokenizer(String text){
 		this(text, " \t\n\r\f", null);
@@ -313,6 +346,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param text a string to be parsed.
 	 * @throws NullPointerException if text is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setText(String text){
 		if (text == null){
@@ -339,6 +374,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param nontokenDelims delimiters that should not be returned as tokens.
 	 * @param tokenDelims delimiters that should be returned as tokens.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void setDelims(String nontokenDelims, String tokenDelims){
 		this.nontokenDelims = nontokenDelims;
@@ -374,6 +411,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return <code>true</code> if and only if there is at least one token in the
 	 *          string after the current position; <code>false</code> otherwise.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean hasMoreTokens(){
 
@@ -421,6 +460,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return the next token from this string tokenizer.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextToken(){
 		int workingPosition = position;
@@ -451,6 +492,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return <code>true</code> if there are more tokens, <code>false</code> otherwise.
 	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean skipDelimiters(){
 		int workingPosition = position;
@@ -486,7 +528,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return the number of tokens remaining in the string using the current
 	 *    delimiter set.
+	 *
 	 * @see #nextToken()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int countTokens(){
 
@@ -533,6 +577,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * Set the delimiters used to this set of (nontoken) delimiters.
 	 *
 	 * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setDelimiters(String delims){
 		setDelims(delims, null);
@@ -546,6 +592,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *    token or nontoken delimiters: false -- the first parameter specifies nontoken
 	 *    delimiters, the set of token delimiters is empty; true -- the first parameter
 	 *    specifies token delimiters, the set of nontoken delimiters is empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setDelimiters(String delims, boolean delimsAreTokens){
 		setDelims((delimsAreTokens ? null : delims), (delimsAreTokens ? delims : null));
@@ -556,6 +604,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param nontokenDelims the new set of nontoken delimiters.
 	 * @param tokenDelims the new set of token delimiters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setDelimiters(String nontokenDelims, String tokenDelims){
 		setDelims(nontokenDelims, tokenDelims);
@@ -567,6 +617,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param nontokenDelims the new set of nontoken delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setDelimiters(String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
 		setDelims(nontokenDelims, tokenDelims);
@@ -583,7 +635,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
+	 *
 	 * @see #countTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int countTokens(String delims){
 		setDelims(delims, null);
@@ -604,7 +658,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *    specifies token delimiters, the set of nontoken delimiters is empty.
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
+	 *
 	 * @see #countTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int countTokens(String delims, boolean delimsAreTokens){
 		setDelims((delimsAreTokens ? null : delims), (delimsAreTokens ? delims : null));
@@ -622,7 +678,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param tokenDelims the new set of token delimiters.
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
+	 *
 	 * @see #countTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int countTokens(String nontokenDelims, String tokenDelims){
 		setDelims(nontokenDelims, tokenDelims);
@@ -641,7 +699,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
+	 *
 	 * @see #countTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int countTokens(String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
 		setDelims(nontokenDelims, tokenDelims);
@@ -656,6 +716,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * If there are no more tokens, the state of these variables does not change at all.
 	 *
 	 * @return true if we are at a juncture at which a token may be emitted, false otherwise.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private boolean advancePosition(){
 		// if we are returning empty tokens, we are just starting to tokenizer
@@ -763,6 +825,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
 	 * @see #nextToken()
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextToken(String nontokenDelims, String tokenDelims){
 		setDelims(nontokenDelims, tokenDelims);
@@ -789,6 +853,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
 	 * @see #nextToken()
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextToken(String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
 		setDelims(nontokenDelims, tokenDelims);
@@ -816,7 +882,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *     delimiters, the set of nontoken delimiters is empty.
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+	 *
 	 * @see #nextToken(String,String)
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextToken(String delims, boolean delimsAreTokens){
 		return (delimsAreTokens ? nextToken(null, delims) : nextToken(delims, null));
@@ -832,7 +900,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this
 	 *     tokenizer's string.
+	 *
 	 * @see #nextToken(String,String)
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextToken(String nontokenDelims){
 		return nextToken(nontokenDelims, null);
@@ -845,6 +915,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @param start index in text at which to begin the search
 	 * @return index of the first delimiter from the start index (inclusive), or -1
 	 *     if there are no more delimiters in the string
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int indexOfNextDelimiter(int start){
 		char c;
@@ -867,8 +939,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return <code>true</code> if there are more tokens;
 	 *    <code>false</code> otherwise.
+	 *
 	 * @see java.util.Enumeration
 	 * @see #hasMoreTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean hasMoreElements(){
 		return hasMoreTokens();
@@ -882,8 +956,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return the next token in the string.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+	 *
 	 * @see java.util.Enumeration
 	 * @see #nextToken()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Object nextElement(){
 		return nextToken();
@@ -895,8 +971,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return <code>true</code> if there are more tokens;
 	 *     <code>false</code> otherwise.
+	 *
 	 * @see java.util.Iterator
 	 * @see #hasMoreTokens()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean hasNext(){
 		return hasMoreTokens();
@@ -910,8 +988,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return the next token in the string.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+	 *
 	 * @see java.util.Iterator
 	 * @see #nextToken()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Object next(){
 		return nextToken();
@@ -922,7 +1002,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * It exists so that this class can implement the <code>Iterator</code> interface.
 	 *
 	 * @throws UnsupportedOperationException always is thrown.
+	 *
 	 * @see java.util.Iterator
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void remove(){
 		throw new UnsupportedOperationException();
@@ -946,6 +1028,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * <tr><td align=right>""<td><td>1 - all strings will have at least one token if empty tokens are returned.<td></tr></table>
 	 *
 	 * @param returnEmptyTokens true iff empty tokens should be returned.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setReturnEmptyTokens(boolean returnEmptyTokens){
 		// this could effect the number of tokens
@@ -959,6 +1043,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * for the next token when a <code>nextToken()</code> method is invoked.
 	 *
 	 * @return the current position or -1 if the entire string has been tokenized.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getCurrentPosition(){
 		return this.position;
@@ -971,6 +1057,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * such that <code>hasMoreTokens()</code> will return false.
 	 *
 	 * @return an array of tokens from this tokenizer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] toArray(){
 		String[] tokenArray = new String[countTokens()];
@@ -985,6 +1073,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * After calling this method hasMoreTokens() will always return false.
 	 *
 	 * @return any part of the text that has not yet been tokenized.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String restOfText(){
 		return nextToken(null, null);
@@ -998,6 +1088,8 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @return the next token from this string tokenizer.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String peek(){
 		// copy over state variables from the class to local
