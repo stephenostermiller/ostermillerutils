@@ -298,7 +298,7 @@ public class Tabs {
 	 * @param in stream that contains the text which needs line number conversion.
 	 * @param out stream where converted text is written.
 	 * @param inputTabWidth number of spaces used instead of a tab in the input.
-	 * @param outputTabWidth true if tabs should be used, false if spaces should be used.
+	 * @param outputTabWidth TABS if tabs should be used, otherwise, numbor of spaces to use.
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
@@ -309,7 +309,7 @@ public class Tabs {
 
 	/**
 	 * Read form the input stream, changing the tabs at the beginning of each line
-	 * to the specified number of spaces or the other way around, write the resul
+	 * to the specified number of spaces or the other way around, write the result
 	 * to the output stream.
 	 *
 	 * The current system's line separator is used.
@@ -317,9 +317,9 @@ public class Tabs {
 	 * @param in stream that contains the text which needs line number conversion.
 	 * @param out stream where converted text is written.
 	 * @param inputTabWidth number of spaces used instead of a tab in the input.
-	 * @param outputTabWidth true if tabs should be used, false if spaces should be used.
+	 * @param outputTabWidth TABS if tabs should be used, otherwise, numbor of spaces to use.
 	 * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
-	 * @return true if the output was modified from the input, false if it is exactly the same
+	 * @return true if the output was modified from the input, false if it is exactly the same.
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 */
@@ -333,6 +333,8 @@ public class Tabs {
 		int state = STATE_INIT;
 		int spaces = 0;
 		int tabs = 0;
+		int tabStops = 0;
+		int extraSpaces = 0;
 		boolean modified = false;
 
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -347,6 +349,11 @@ public class Tabs {
 					case ' ': {
 						if (state == STATE_INIT) {
 							spaces++;
+							extraSpaces++;
+							if (extraSpaces == inputTabWidth){
+								tabStops++;
+								extraSpaces = 0;
+							}
 						} else {
 							out.write(b);
 						}
@@ -358,6 +365,8 @@ public class Tabs {
 								modified = true;
 							}
 							tabs++;
+							tabStops++;
+							extraSpaces = 0;
 						} else {
 							out.write(b);
 						}
@@ -366,26 +375,24 @@ public class Tabs {
 						out.write(b);
 						spaces = 0;
 						tabs = 0;
+						tabStops = 0;
+						extraSpaces = 0;
 						state = STATE_INIT;
 					} break;
 					default: {
 						if (state == STATE_INIT){
-							int oldTabs = tabs + spaces / inputTabWidth;
-							int oldSpaces = spaces % inputTabWidth;
-							int newTabs = oldTabs;
-							int newSpaces = oldSpaces;
 							if (outputTabWidth == TABS){
-								for (int j=0; j<newTabs; j++){
+								for (int j=0; j<tabStops; j++){
 									out.write((byte)'\t');
 								}
 							} else {
-								newSpaces += newTabs * outputTabWidth;
-								newTabs = 0;
+								extraSpaces += tabStops * outputTabWidth;
+								tabStops = 0;
 							}
-							for (int j=0; j<newSpaces; j++){
+							for (int j=0; j<extraSpaces; j++){
 								out.write((byte)' ');
 							}
-							if (newSpaces != spaces || newTabs != tabs) modified = true;
+							if (extraSpaces != spaces || tabStops != tabs) modified = true;
 						}
 						out.write(b);
 						state = STATE_SOMETHING;
