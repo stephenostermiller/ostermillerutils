@@ -256,7 +256,7 @@ public class Browser {
 				char c = url.charAt(i);
 				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
 						|| c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
-						|| c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
+						|| c == '%' || c =='+' || c == '=' || c == '#' || c == '-' || c == '\\'){
 					//characters that are necessary for URLs and should be safe
 					//to pass to exec.  Exec uses a default string tokenizer with
 					//the default arguments (whitespace) to separate command line
