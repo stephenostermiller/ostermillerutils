@@ -54,7 +54,7 @@ public class RandPass {
 	/**
 	 * Locale specific strings displayed to the user.
 	 */
-	 protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.RandPass",  Locale.getDefault());
+	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.RandPass",  Locale.getDefault());
 
 
 	/**
@@ -712,7 +712,7 @@ public class RandPass {
 	 * @return a random password
 	 */
 	public char[] getPassChars(){
-		 return(getPassChars(DEFAULT_PASSWORD_LENGTH));
+		return(getPassChars(DEFAULT_PASSWORD_LENGTH));
 	}
 
 	/**
