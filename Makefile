@@ -5,7 +5,7 @@ JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
 JAVAC=javac $(JFLAGS) -g:none
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
-JLEXFLAGS=-q
+JLEXFLAGS=-q -skel csv.jflex.skel
 JLEX=$(JAVA) JFlex.Main  $(JLEXFLAGS)
 CVS=cvs -q
 BTE=bte
@@ -157,7 +157,7 @@ javadoc: *.java
 		-quiet \
 		-bottom '<p>Copyright (c) 2001-2003 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
 		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>" \
-		-link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ \
+		-link http://java.sun.com/j2se/1.4.1/docs/api/ -d doc/ \
 		com.Ostermiller.util > /dev/null
 	@mv -f temp package.html
 	@touch javadoc

@@ -11,10 +11,10 @@
   <taskdef classname="JFlex.anttask.JFlexTask" name="jflex" />
   <target name="javafiles" depends="init" description="Create lexical source files." >
     <jflex file="BrowserCommandLexer.lex" destdir="${top}" />
-    <jflex file="CSVLexer.lex" destdir="${top}" />
+    <jflex file="CSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
     <jflex file="PropertiesLexer.lex" destdir="${top}" />
     <jflex file="CGILexer.lex" destdir="${top}" />
-    <jflex file="ExcelCSVLexer.lex" destdir="${top}" />
+    <jflex file="ExcelCSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
   </target>
 
   <!-- http://ostermiller.org/syntax/ant.html -->
@@ -66,7 +66,7 @@
 	  packagenames="com.Ostermiller.util" 
 	  bottom="&lt;p&gt;Copyright (c) 2001-2003 by &lt;a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'&gt;Stephen Ostermiller&lt;/a&gt;&lt;/p&gt;"
 	  header="&lt;h1&gt;&lt;a target=\'_top\' href='http://ostermiller.org/utils/'&gt;com.Ostermiller.util&lt;/a&gt; Java Utilities&lt;/h1&gt;"
-	  link="http://java.sun.com/j2se/1.3/docs/api/"
+	  link="http://java.sun.com/j2se/1.4.1/docs/api/"
 	  failonerror="true"
 	/>
 	<move file="temp" tofile="package.html" />
