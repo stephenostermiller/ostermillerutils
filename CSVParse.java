@@ -26,6 +26,9 @@ import java.io.*;
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
  * CSV parsers should implement.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public interface CSVParse {
 
@@ -33,7 +36,9 @@ public interface CSVParse {
 	 * get the next value.
 	 *
 	 * @return the next value or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextValue() throws IOException;
 
@@ -41,6 +46,8 @@ public interface CSVParse {
 	 * Get the line number that the last token came from.
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int lastLineNumber();
 
@@ -51,7 +58,9 @@ public interface CSVParse {
 	 * values that have not already been read will be included.
 	 *
 	 * @return all the values from the line or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getLine() throws IOException;
 
@@ -62,6 +71,8 @@ public interface CSVParse {
 	 * counted in the line number count.
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getLastLineNumber();
 
@@ -77,7 +88,9 @@ public interface CSVParse {
 	 * The resulting double array may be jagged.
 	 *
 	 * @return all the values from the file or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[][] getAllValues() throws IOException;
 
@@ -90,6 +103,8 @@ public interface CSVParse {
 	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 *
+	 * @since ostermillerutils 1.02.08
 	 */
 	public void changeDelimiter(char newDelim) throws BadDelimeterException;
 
@@ -101,6 +116,8 @@ public interface CSVParse {
 	 *
 	 * @param newQuote character to use for quoting.
 	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException;
 }

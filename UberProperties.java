@@ -113,6 +113,9 @@ import java.util.Arrays;
  * specifies that the key is "cheeses" and the associated element is the empty
  * string.
  * </blockquote>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class UberProperties {
 
@@ -120,29 +123,39 @@ public class UberProperties {
 	 * A hash map that contains all the properties.
 	 * This should never be null, but may be empty.
 	 * This should hold objects of type Property.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private HashMap properties = new HashMap();
 
 	/**
 	 * Comment for this set of properties.
 	 * This may be either null or empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private String comment = null;
 
 	/**
 	 * The object type that goes in the HashMap.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private class Property {
 
 		/**
 		 * List of values for this property.
 		 * This should never be null or empty.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		private ArrayList list;
 
 		/**
 		 * Comment for this set of properties.
 		 * This may be either null or empty.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		private String comment = null;
 
@@ -150,6 +163,8 @@ public class UberProperties {
 		 * Set the comment associated with this property.
 		 *
 		 * @param comment the comment for this property, or null to clear.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void setComment(String comment){
 			this.comment = comment;
@@ -159,6 +174,8 @@ public class UberProperties {
 		 * Get the comment associated with this property.
 		 *
 		 * @return comment for this property, or null if none is set.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public String getComment(){
 			return this.comment;
@@ -168,6 +185,8 @@ public class UberProperties {
 		 * Construct a new property with the given value.
 		 *
 		 * @param value initial value for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public Property(String value){
 			list = new ArrayList(1);
@@ -178,6 +197,8 @@ public class UberProperties {
 		 * Construct a new property with the given values.
 		 *
 		 * @param values initial values for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public Property(String[] values){
 			list = new ArrayList(values.length);
@@ -188,6 +209,8 @@ public class UberProperties {
 		 * Set this property to have this single value.
 		 *
 		 * @param value lone value for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void set(String value){
 			list.clear();
@@ -198,6 +221,8 @@ public class UberProperties {
 		 * Set this property to have only these values.
 		 *
 		 * @param values lone values for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void set(String[] values){
 			list.clear();
@@ -208,6 +233,8 @@ public class UberProperties {
 		 * Add this value to the list of values for this property.
 		 *
 		 * @param value another value for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void add(String value){
 			list.add(value);
@@ -217,6 +244,8 @@ public class UberProperties {
 		 * Add these values to the list of values for this property.
 		 *
 		 * @param values other values for this property.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void add(String[] values){
 			list.ensureCapacity(list.size() + values.length);
@@ -229,6 +258,8 @@ public class UberProperties {
 		 * Get the last value for this property.
 		 *
 		 * @return the last value.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public String getValue(){
 			return (String)list.get(list.size() - 1);
@@ -238,6 +269,8 @@ public class UberProperties {
 		 * Get all the values for this property.
 		 *
 		 * @return a list of all the values.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public String[] getValues(){
 			return (String[])list.toArray(new String[list.size()]);
@@ -246,6 +279,8 @@ public class UberProperties {
 
 	/**
 	 * Creates an empty property list with no default values.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public UberProperties(){
 	}
@@ -255,6 +290,8 @@ public class UberProperties {
 	 *
 	 * @param defaults the defaults.
 	 * @throws NullPointerException if defaults is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public UberProperties(UberProperties defaults){
 		merge(defaults);
@@ -264,6 +301,8 @@ public class UberProperties {
 	 * Put all the properties from the defaults in this.
 	 * Calling this from a constructor will clone (deep)
 	 * the default properties.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void merge(UberProperties defaults){
 		setComment(defaults.getComment());
@@ -280,6 +319,8 @@ public class UberProperties {
 	 * @param name the name of the property.
 	 * @return true if the property existed and was removed, false if it did not exist.
 	 * @throws NullPointerException if name is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean contains(String name){
 		if (name == null) throw new NullPointerException();
@@ -292,6 +333,8 @@ public class UberProperties {
 	 * @param name the name of the property.
 	 * @return true if the property existed and was removed, false if it did not exist.
 	 * @throws NullPointerException if name is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean remove(String name){
 		if (!contains(name)) return false;
@@ -306,6 +349,8 @@ public class UberProperties {
 	 * @param name the name of the property.
 	 * @param value the value of the property, or null to remove it.
 	 * @throws NullPointerException if name is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setProperty(String name, String value){
 		if (name == null) throw new NullPointerException();
@@ -332,6 +377,8 @@ public class UberProperties {
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if values is null.
 	 * @throws IllegalArgumentException if values is empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setProperties(String name, String[] values){
 		if (name == null) throw new NullPointerException();
@@ -355,6 +402,8 @@ public class UberProperties {
 	 * @param comment the comment for the property, or null to remove it.
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if comment is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setProperty(String name, String value, String comment){
 		if (name == null) throw new NullPointerException();
@@ -376,6 +425,8 @@ public class UberProperties {
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if values is null.
 	 * @throws IllegalArgumentException if values is empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setProperties(String name, String[] values, String comment){
 		if (name == null) throw new NullPointerException();
@@ -393,6 +444,8 @@ public class UberProperties {
 	 * @param comment the comment for the property, or null to remove it.
 	 * @throws NullPointerException if name is null.
 	 * @throws IllegalArgumentException if name is not a known key.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void setComment(String name, String comment){
 		if (name == null) throw new NullPointerException();
@@ -409,6 +462,8 @@ public class UberProperties {
 	 * @param comment the comment for the property, or null to remove it.
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if value is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addProperty(String name, String value, String comment){
 		if (name == null) throw new NullPointerException();
@@ -426,6 +481,8 @@ public class UberProperties {
 	 * @param comment the comment for the property, or null to remove it.
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if values is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addProperties(String name, String[] values, String comment){
 		if (name == null) throw new NullPointerException();
@@ -442,6 +499,8 @@ public class UberProperties {
 	 * @param value the values for the property.
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if value is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addProperty(String name, String value){
 		if (name == null) throw new NullPointerException();
@@ -464,6 +523,8 @@ public class UberProperties {
 	 * @param values the values for the property.
 	 * @throws NullPointerException if name is null.
 	 * @throws NullPointerException if values is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addProperties(String name, String[] values){
 		if (name == null) throw new NullPointerException();
@@ -576,6 +637,8 @@ public class UberProperties {
 	 * @throws IOException if an error occurs when reading.
 	 * @throws NullPointerException if userFile is null.
 	 * @throws IllegalArgumentException if userFile is empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void load(String[] userFile, String systemResource) throws IOException {
 		int length = userFile.length;
@@ -597,6 +660,8 @@ public class UberProperties {
 	 * @param in InputStream containing properties.
 	 * @param add whether parameters should add to parameters with the same name or replace them.
 	 * @throws IOException if an error occurs when reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void load(InputStream in, boolean add) throws IOException {
 		PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
@@ -669,6 +734,8 @@ public class UberProperties {
 	 *
 	 * @param in InputStream containing properties.
 	 * @throws IOException if an error occurs when reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void load(InputStream in) throws IOException {
 		load(in, false);
@@ -689,6 +756,8 @@ public class UberProperties {
 	 * @throws IOException if an error occurs when reading.
 	 * @throws NullPointerException if userFile is null.
 	 * @throws IllegalArgumentException if userFile is empty.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void save(String[] userFile) throws IOException {
 		int length = userFile.length;
@@ -710,6 +779,8 @@ public class UberProperties {
 	 *
 	 * @param out OutputStream to which these properties should be written.
 	 * @throws IOException if an error occurs when writing.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void save(OutputStream out) throws IOException {
 		writeComment(out, comment);
@@ -830,8 +901,9 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
-	 * @return the first value of this property, or null if the property does
-	 *    not exist.
+	 * @return the first value of this property, or null if the property does not exist.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getProperty(String name){
 		String value = null;
@@ -848,7 +920,9 @@ public class UberProperties {
 	 * UberProperties is consulted, otherwise, the supplied
 	 * default is used.
 	 *
-	 * @return the first value of this property
+	 * @return the first value of this property.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getProperty(String name, String defaultValue){
 		String value = getProperty(name);
@@ -865,8 +939,9 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
-	 * @return all the values associated with the given key, or null if the
-	 *    property does not exist.
+	 * @return all the values associated with the given key, or null if the property does not exist.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getProperties(String name){
 		String[] values = null;
@@ -886,8 +961,9 @@ public class UberProperties {
 	 * UberProperties is consulted, otherwise, the supplied
 	 * defaults are used.
 	 *
-	 * @return all the values associated with the given key, or null if the
-	 *    property does not exist.
+	 * @return all the values associated with the given key, or null if the property does not exist.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getProperties(String name, String[] defaultValues){
 		String[] values = getProperties(name);
@@ -902,8 +978,9 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
-	 * @return the comment for this property, or null if there is no comment or
-	 *    the property does not exist.
+	 * @return the comment for this property, or null if there is no comment or the property does not exist.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getComment(String name){
 		String comment = null;
@@ -918,8 +995,9 @@ public class UberProperties {
 	 * distinct keys in the default property list if a key of the same name has
 	 * not already been found from the main properties list.
 	 *
-	 * @return an enumeration of all the keys in this property list, including
-	 *     the keys in the default property list.
+	 * @return an enumeration of all the keys in this property list, including the keys in the default property list.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] propertyNames(){
 		Set names = properties.keySet();
@@ -930,6 +1008,8 @@ public class UberProperties {
 	 * Set the comment associated with this set of properties.
 	 *
 	 * @param comment the comment for entire set of properties, or null to clear.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setComment(String comment){
 		this.comment = comment;
@@ -939,6 +1019,8 @@ public class UberProperties {
 	 * Get the comment associated with this set of properties.
 	 *
 	 * @return comment for entire set of properties, or null if there is no comment.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getComment(){
 		return this.comment;
@@ -949,6 +1031,8 @@ public class UberProperties {
 	 * in this UberProperties.
 	 *
 	 * @return number of names.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getPropertyNameCount(){
 		return properties.keySet().size();

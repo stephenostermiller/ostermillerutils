@@ -62,6 +62,9 @@ import java.util.*;
  * <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.
  *
  * @see com.Ostermiller.util.ExcelCSVParser
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class CSVParser implements CSVParse {
 
@@ -69,6 +72,8 @@ public class CSVParser implements CSVParse {
 	 * Does all the dirty work.
 	 * Calls for new tokens are routed through
 	 * this object.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private CSVLexer lexer;
 
@@ -76,6 +81,8 @@ public class CSVParser implements CSVParse {
 	 * Token cache.  Used for when we request a token
 	 * from the lexer but can't return it because its
 	 * on the next line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private String tokenCache;
 
@@ -83,12 +90,16 @@ public class CSVParser implements CSVParse {
 	 * Line cache.	The line number that goes along with
 	 * the tokenCache.	Not valid if the tokenCache is
 	 * null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int lineCache;
 
 	/**
 	 * The line number the last token came from, or -1 if
 	 * no tokens have been returned.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int lastLine = -1;
 
@@ -100,6 +111,8 @@ public class CSVParser implements CSVParse {
 	 * default locale.
 	 *
 	 * @param in stream that contains comma separated values.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVParser(java.io.InputStream in){
 		lexer = new CSVLexer(in);
@@ -110,6 +123,8 @@ public class CSVParser implements CSVParse {
 	 * a Reader.
 	 *
 	 * @param in reader that contains comma separated values.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVParser(java.io.Reader in){
 		lexer = new CSVLexer(in);
@@ -126,6 +141,8 @@ public class CSVParser implements CSVParse {
 	 * @param escapes a list of characters that will represent escape sequences.
 	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
 		lexer = new CSVLexer(in);
@@ -141,6 +158,8 @@ public class CSVParser implements CSVParse {
 	 * @param escapes a list of characters that will represent escape sequences.
 	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
 		lexer = new CSVLexer(in);
@@ -152,7 +171,9 @@ public class CSVParser implements CSVParse {
 	 * get the next value.
 	 *
 	 * @return the next value or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String nextValue() throws IOException {
 		if (tokenCache == null){
@@ -172,6 +193,8 @@ public class CSVParser implements CSVParse {
 	 * counted in the line number count.
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int lastLineNumber(){
 		return lastLine;
@@ -184,7 +207,9 @@ public class CSVParser implements CSVParse {
 	 * values that have not already been read will be included.
 	 *
 	 * @return all the values from the line or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
@@ -219,7 +244,9 @@ public class CSVParser implements CSVParse {
 	 * The resulting double array may be jagged.
 	 *
 	 * @return all the values from the file or null if there are no more values.
-	 * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[][] getAllValues() throws IOException {
 		Vector v = new Vector();
@@ -250,6 +277,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param escapes a list of characters that will represent escape sequences.
 	 * @param replacements the list of replacement characters for those escape sequences.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setEscapes(String escapes, String replacements){
 		lexer.setEscapes(escapes, replacements);
@@ -263,6 +292,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 *
+	 * @since ostermillerutils 1.02.08
 	 */
 	public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		lexer.changeDelimiter(newDelim);
@@ -276,6 +307,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param newQuote character to use for quoting.
 	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException {
 		lexer.changeQuote(newQuote);
@@ -292,6 +325,8 @@ public class CSVParser implements CSVParse {
 	 * used to indicate comment lines.
 	 *
 	 * @param commentDelims list of characters a comment line may start with.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setCommentStart(String commentDelims){
 		lexer.setCommentStart(commentDelims);
@@ -301,6 +336,8 @@ public class CSVParser implements CSVParse {
 	 * Get the number of the line from which the last value was retrieved.
 	 *
 	 * @return line number or -1 if no tokens have been returned.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getLastLineNumber(){
 		return lastLine;
@@ -311,6 +348,8 @@ public class CSVParser implements CSVParse {
 	 * to System.out.
 	 *
 	 * @param args First argument is the file name.  System.in used if no filename given.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static void main(String[] args) {
 		InputStream in;
@@ -354,6 +393,8 @@ public class CSVParser implements CSVParse {
 	 * The data will be treated as having no comments.
 	 *
 	 * @param s string with comma delimited data to parse.
+	 *
+	 * @since ostermillerutils 1.02.03
 	 */
 	public static String[][] parse(String s){
 		try {
@@ -371,6 +412,9 @@ public class CSVParser implements CSVParse {
 	 * @param escapes a list of additional characters that will represent escape sequences.
 	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
+	 * @return parsed data.
+	 *
+	 * @since ostermillerutils 1.02.03
 	 */
 	public static String[][] parse(String s, String escapes, String replacements, String commentDelims){
 		try {
@@ -387,7 +431,10 @@ public class CSVParser implements CSVParse {
 	 * The data will be treated as having no comments.
 	 *
 	 * @param in Reader with comma delimited data to parse.
-	 * @throws IOException if an error occurs while reading
+	 * @return parsed data.
+	 * @throws IOException if an error occurs while reading.
+	 *
+	 * @since ostermillerutils 1.02.03
 	 */
 	public static String[][] parse(Reader in) throws IOException {
 		return (new CSVParser(in)).getAllValues();
@@ -401,6 +448,9 @@ public class CSVParser implements CSVParse {
 	 * @param escapes a list of additional characters that will represent escape sequences.
 	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
+	 * @return parsed data.
+	 *
+	 * @since ostermillerutils 1.02.03
 	 */
 	public static String[][] parse(Reader in, String escapes, String replacements, String commentDelims) throws IOException {
 		return (new CSVParser(in, escapes, replacements, commentDelims)).getAllValues();
