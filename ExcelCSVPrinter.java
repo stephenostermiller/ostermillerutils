@@ -1,6 +1,6 @@
 /*
  * Write files in Excel comma separated value format.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001, 2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import java.io.*;
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/ExcelCSVLexer.html">ostermiller.org</a>.
  */
-public class ExcelCSVPrinter {
+public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
 	 * The place that the values get written.

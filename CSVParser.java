@@ -62,7 +62,7 @@ import java.util.*;
  *
  * @see com.Ostermiller.util.ExcelCSVParser 
  */
-public class CSVParser {
+public class CSVParser implements CSVParse {
 
 	/**
 	 * Does all the dirty work.

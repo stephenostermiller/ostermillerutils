@@ -17,7 +17,8 @@
 escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
 
 <p>To write ISO CSV files that most applications other than Excel can understand use the 
-<a href="http://ostermiller.org/utils/CSVLexer.html">ISO CSV</a> format.</p>
+<a href="http://ostermiller.org/utils/CSVLexer.html">ISO CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
+implement the CSVPrint interface.</p>
 
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ExcelCSVPrinter.java/0">Version History</a> |
@@ -34,6 +35,10 @@ not use the backslash as an escape character, but instead escapes quote literals
 It also does not quote values that have leading or trailing whitespace.  This special CSV parser
 can read Excel format CSV files.</p>
 
+<p>To read ISO CSV files that most applications other than Excel can understand use the 
+<a href="http://ostermiller.org/utils/CSVLexer.html">ISO CSV</a> format.    Both CSVParser and ExcelCSVParser
+implement the CSVParse interface.</p>
+
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ExcelCSVParser.java/0">Version History</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/ExcelCSVParser.java/HEAD">Browse Source</a> |
@@ -43,7 +48,7 @@ can read Excel format CSV files.</p>
 
 <h2><a name="license">License</a></h2>
 
-<P>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+<P>Copyright (c) 2001, 2002 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
 (utils@Ostermiller.com)</P>
 
 <p>This library is free software; you can redistribute it and/or modify
