@@ -41,6 +41,11 @@ public class CircularCharBuffer {
      * The default size for a circular character buffer.
      */
     private final static int DEFAULT_SIZE = 1024;
+    
+    /**
+     * A buffer that will grow as things are added.
+     */
+    public final static int INFINITE_SIZE = -1;
 
     /**
      * The circular buffer.
@@ -81,6 +86,10 @@ public class CircularCharBuffer {
      */
     protected volatile int markSize = 0;
     /**
+     * If this buffer is infinite (should resize itself when full)
+     */
+    protected volatile boolean infinite = false;
+    /**
      * True if a write to a full buffer should block until the buffer
      * has room, false if the write method should throw an IOException
      */
@@ -101,6 +110,21 @@ public class CircularCharBuffer {
      * true if the close() method has been called on the writer
      */
     protected boolean writerClosed = false;
+    
+    /**
+     * Make this buffer ready for reuse.  The contents of the buffer 
+     * will be cleared and the streams associated with this buffer
+     * will be reopened if they had been closed.
+     */
+    public void clear(){
+        synchronized (this){
+            readPosition = 0;
+            writePosition = 0;
+            markPosition = 0;
+            readerClosed = false;
+            writerClosed = false;
+        }
+    }
 
     /**
      * Retrieve a Writer that can be used to fill
@@ -202,6 +226,31 @@ public class CircularCharBuffer {
     }
     
     /**
+     * double the size of the buffer
+     */
+    private void resize(){
+        char[] newBuffer = new char[buffer.length * 2];
+        int marked = marked();
+        int available = available();
+        if (markPosition <= writePosition){            
+            // any space between the mark and
+            // the first write needs to be saved.
+            // In this case it is all in one piece.
+            int length = writePosition - markPosition;
+            System.arraycopy(buffer, markPosition, newBuffer, 0, length);
+        } else {
+            int length1 = buffer.length - markPosition;
+            System.arraycopy(buffer, markPosition, newBuffer, 0, length1);
+            int length2 = writePosition;
+            System.arraycopy(buffer, 0, newBuffer, length1, length2);            
+        }
+        buffer = newBuffer;
+        markPosition = 0;
+        readPosition = marked;
+        writePosition = marked + available;
+    }
+    
+    /**
      * Space available in the buffer which can be written.
      */
     private int spaceLeft(){
@@ -274,8 +323,12 @@ public class CircularCharBuffer {
      * Note that the buffer may reserve some characters for
      * special purposes and capacity number of characters may
      * not be able to be written to the buffer.
+     * <p> 
+     * Note that if the buffer is of INFINITE_SIZE it will
+     * neither block or throw exceptions, but rather grow
+     * without bound.
      *
-     * @param size desired capacity of the buffer in characters.
+     * @param size desired capacity of the buffer in characters or CircularCharBuffer.INFINITE_SIZE
      */
     public CircularCharBuffer(int size){
         this (size, true);
@@ -300,14 +353,24 @@ public class CircularCharBuffer {
      * Note that the buffer may reserve some characters for
      * special purposes and capacity number of characters may
      * not be able to be written to the buffer.
+     * <p> 
+     * Note that if the buffer is of CircularCharBuffer.INFINITE_SIZE it will
+     * neither block or throw exceptions, but rather grow
+     * without bound.
      *
-     * @param size desired capacity of the buffer in characters.
+     * @param size desired capacity of the buffer in characters or CircularCharBuffer.INFINITE_SIZE
      * @param blockingWrite true writing to a full buffer should block
      *        until space is available, false if an exception should
      *        be thrown instead.
      */
     public CircularCharBuffer(int size, boolean blockingWrite){
-        buffer = new char[size];
+        if (size == INFINITE_SIZE){
+            buffer = new char[DEFAULT_SIZE];
+            infinite = true;
+        } else {
+            buffer = new char[size];
+            infinite = false;
+        }
         this.blockingWrite = blockingWrite;
     }
 
@@ -595,6 +658,10 @@ public class CircularCharBuffer {
                     if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
                     if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
                     int spaceLeft = spaceLeft();
+                    while (infinite && spaceLeft < len){
+                        resize();
+                        spaceLeft = spaceLeft();
+                    }
                     if (!blockingWrite && spaceLeft < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
                     int realLen = Math.min(len, spaceLeft);
                     int firstLen = Math.min(realLen, buffer.length - writePosition);
@@ -644,6 +711,10 @@ public class CircularCharBuffer {
                     if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
                     if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
                     int spaceLeft = spaceLeft();
+                    while (infinite && spaceLeft < 1){
+                        resize();
+                        spaceLeft = spaceLeft();
+                    }
                     if (!blockingWrite && spaceLeft < 1) throw new BufferOverflowException("CircularCharBuffer is full; cannot write 1 character");
                     if (spaceLeft > 0){
                         buffer[writePosition] = (char)(c & 0xffff);
@@ -698,6 +769,10 @@ public class CircularCharBuffer {
                     if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
                     if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
                     int spaceLeft = spaceLeft();
+                    while (infinite && spaceLeft < len){
+                        resize();
+                        spaceLeft = spaceLeft();                     
+                    }
                     if (!blockingWrite && spaceLeft < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
                     int realLen = Math.min(len, spaceLeft);
                     int firstLen = Math.min(realLen, buffer.length - writePosition);
