@@ -30,8 +30,8 @@ package com.Ostermiller.util;
  * these rules are used:
  * <ul>
  * <li>Non-zero digits are always significant.</li>
- * <li>All zeros between other significant digits or between a significant
- * digit and the decimal point are significant.</li>
+ * <li>All zeros between other significant digits are significant.</li>
+ * <li>All zeros left of the decimal point between a significant digit and the decimal point are significant.</li>
  * <li>All trailing zeros to the right of the decimal point are significant.</li>
  * <li>If the number is contains no digits other than zero, every zero is significant.</li>
  * </ul>
