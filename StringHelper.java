@@ -22,6 +22,19 @@ package com.Ostermiller.util;
  */
 public class StringHelper {
 
+    /**
+	 * Pad the beginning of the given String with spaces until
+     * the String is of the given length.
+	 *
+	 * @param s String to be padded.
+	 * @param length desired length of result.
+	 * @return padded String.
+	 * @throws NullPointerException if s is null.
+	 */
+	public static String prepad(String s, int length){
+		return prepad(s, length, ' ');
+	}
+
 	/**
 	 * Prepend the given character to the String until
 	 * the result is the desired length.
@@ -48,6 +61,20 @@ public class StringHelper {
 		sb.append(s);
 		return (sb.toString());
 	}
+    
+    /**
+	 * Pad the end of the given String with spaces until
+     * the String is of the given length.
+	 *
+	 * @param s String to be padded.
+	 * @param length desired length of result.
+	 * @return padded String.
+	 * @throws NullPointerException if s is null.
+	 */
+	public static String postpad(String s, int length){
+		return postpad(s, length, ' ');
+	}
+    
 	/**
 	 * Append the given character to the String until
 	 * the result is  the desired length.
@@ -250,4 +277,162 @@ public class StringHelper {
 
 		return (sb.toString());
 	}
+    
+    /** 
+     * Replaces characters that may be confused by a HTML
+     * parser with their equivalent character entity references.
+     * <p>
+     * Any data that will appear as text on a web page should
+     * be be escaped.  This is especially important for data 
+     * that comes from untrusted sources such as internet users.
+     * A common mistake in CGI programming is to ask a user for
+     * data and then put that data on a web page.  For example:<pre>
+     * Server: What is your name?
+     * User: &lt;b&gt;Joe&lt;b&gt;
+     * Server: Hello <b>Joe</b>, Welcome</pre>
+     * If the name is put on the page without checking that it doesn't
+     * contain HTML code or without sanitizing that HTML code, the user
+     * could reformat the page, insert scripts, and control the the
+     * content on your webserver.
+     * <p>
+     * This method will replace HTML characters such as &gt; with their
+     * HTML entity reference (&amp;gt;) so that the html parser will
+     * be sure to interpret them as plain text rather than HTML or script.
+     * <p>
+     * This method should be used for both data to be displayed in text
+     * in the html document, and data put in form elements. For example:<br>
+     * <code>&lt;html&gt;&lt;body&gt;<i>This in not a &amp;lt;tag&amp;gt; 
+     * in HTML</i>&lt;/body&gt;&lt;/html&gt;</code><br>
+     * and<br>
+     * <code>&lt;form&gt;&lt;input type="hidden" name="date" value="<i>This data could
+     * be &amp;quot;malicious&amp;quot;</i>"&gt;&lt;/form&gt;</code><br>
+     * In the second example, the form data would be properly be resubmitted
+     * to your cgi script in the URLEncoded format:<br>
+     * <code><i>This data could be %22malicious%22</i></code>
+     * 
+     * @param s String to be escaped
+     * @return escaped String
+	 * @throws NullPointerException if s is null.
+     */
+    public static String escapeHTML(String s){
+        int length = s.length();
+        int newLength = length;
+        // first check for characters that might
+        // be dangerous and calculate a length
+        // of the string that has escapes.
+        for (int i=0; i<length; i++){
+            char c = s.charAt(i);
+            switch(c){
+                case '\"':
+                case '\'':{
+                    newLength += 5;
+                } break;
+                case '&':{
+                    newLength += 4;
+                } break;   
+                case '<':
+                case '>':{
+                    newLength += 3;
+                } break;             
+            }
+        }
+        if (length == newLength){
+            // nothing to escape in the string
+            return s;
+        }
+        StringBuffer sb = new StringBuffer(newLength);
+        for (int i=0; i<length; i++){
+            char c = s.charAt(i);
+            switch(c){
+                case '\"':{
+                    sb.append("&quot;");
+                } break;
+                case '\'':{
+                    sb.append("&apos;");
+                } break;
+                case '&':{
+                    sb.append("&amp;");
+                } break; 
+                case '<':{
+                    sb.append("&lt;");
+                } break;
+                case '>':{
+                    sb.append("&gt;");
+                } break;
+                default: {
+                    sb.append(c);
+                }               
+            }
+        }
+        return sb.toString();
+    }
+    
+    /** 
+     * Replaces characters that may be confused by an SQL
+     * parser with their equivalent escape characters.
+     * <p>
+     * Any data that will be put in an SQL query should
+     * be be escaped.  This is especially important for data 
+     * that comes from untrusted sources such as internet users.
+     * <p>
+     * For example if you had the following SQL query:<br>
+     * <code>"SELECT * FROM adresses WHERE name='" + name + "' AND private='N'"</code><br>
+     * Without this function a user could give <code>" OR 1=1 OR ''='"</code>
+     * as their name causing the query to be:<br>
+     * <code>"SELECT * FROM adresses WHERE name='' OR 1=1 OR ''='' AND private='N'"</code><br>
+     * which will give all adresses, including private ones.<br>
+     * Correct usage would be:<br>
+     * <code>"SELECT * FROM adresses WHERE name='" + StringHelper.escapeSQL(name) + "' AND private='N'"</code><br>
+     * <p>
+     * Another way to avoid this problem is to use a PreparedStatement 
+     * with appropriate placeholders.
+     * 
+     * @param s String to be escaped
+     * @return escaped String
+	 * @throws NullPointerException if s is null.
+     */
+    public static String escapeSQL(String s){
+        int length = s.length();
+        int newLength = length;
+        // first check for characters that might
+        // be dangerous and calculate a length
+        // of the string that has escapes.
+        for (int i=0; i<length; i++){
+            char c = s.charAt(i);
+            switch(c){
+                case '\\':
+                case '\"':
+                case '\'':
+                case '0':{
+                    newLength += 1;
+                } break; 
+            }
+        }
+        if (length == newLength){
+            // nothing to escape in the string
+            return s;
+        }
+        StringBuffer sb = new StringBuffer(newLength);
+        for (int i=0; i<length; i++){
+            char c = s.charAt(i);
+            switch(c){                
+                case '\\':{
+                    sb.append("\\\"");
+                } break;
+                case '\"':{
+                    sb.append("\\\"");
+                } break;
+                case '\'':{
+                    sb.append("\\\'");
+                } break;
+                case '0':{
+                    sb.append("\\0");
+                } break; 
+                default: {
+                    sb.append(c);
+                }               
+            }
+        }
+        return sb.toString();
+    }
 }
