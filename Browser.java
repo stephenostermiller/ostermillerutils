@@ -20,6 +20,7 @@ import java.io.*;
 import java.text.MessageFormat;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLClassLoader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -207,19 +208,22 @@ public class Browser {
     public static void displayURL(String url) throws IOException {
         if (exec == null || exec.length == 0){
         	if (System.getProperty("os.name").startsWith("Mac")){
-        		boolean success = false;
+        		boolean success = false;                
 				try {
-					Class nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
-        			Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
+                    Class nSWorkspace;
+                    if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
+                        // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
+                        ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
+                        nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
+        			} else {
+                        nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
+        			}
+                    Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
         			Object workspace = sharedWorkspace.invoke(null, new Object[] {});
         			Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
-        			Boolean suc = (Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)});		
-					success = suc.booleanValue();
+        			success = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();		
 					//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
-				} catch (Exception x) {
-					System.err.println(x);
-					success = false;
-				}
+				} catch (Exception x) {}
 				if (!success){
         			try {
         				Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");

@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta name="description" content="Open a browser from a Java application on Windows, Unix, or Macintosh.">
-   <meta name="keywords" content="open, open, url, url, browser, browser, web, web, web browser, launch, launcher, openurl, mrjfileutils, mrj, windows, mac, macintosh, linux, unix, solaris, ie, internet explorer, netscape, mozilla, lynx, java, util, utility, utilities, class, jar, jars, classes, library, libraries, source, code, open source, gpl, javadoc, http, file, web page, webpage"> 
+   <meta name="keywords" content="open, open, url, url, uri, browser, browser, web, web, web browser, system, system browser, launch, launcher, openurl, mrjfileutils, mrj, windows, mac, macintosh, linux, unix, solaris, ie, internet explorer, netscape, mozilla, lynx, java, util, utility, utilities, class, jar, jars, classes, library, libraries, source, code, open source, gpl, javadoc, http, file, web page, webpage, web site, website"> 
    <title>Browser</title>
    <base href="http://ostermiller.org/utils/">
 </head>
@@ -14,11 +14,18 @@
 
 <ul>
 <li><b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.</li>
-<li><b>Macintosh</b> -  Opens the url trying first the using the <a href="http://developer.apple.com/techpubs/macosx/Cocoa/Reference/ApplicationKit/Java/Classes/NSWorkspace.html">Cocoa NSWorkspace</a> and then the <a href="http://developer.apple.com/qa/java/java12.html">MRJ</a> classes provided by Apple.  Both of these have some problems.  The MRJ toolkit for Mac OS X <a href="http://developer.apple.com/techpubs/macosx/ReleaseNotes/JavaGMWebReleaseNotes.html#MRJToolkit">does not implement</a> openURL() yet and the class for NSWorkspace is not in the classpath by default.  As a result, to open a url on Mac OS X you must add /System/Library/Java to the classpath.   This class links to the Cocoa NSWorkspace and the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the Cocoa NSWorkspace and the MRJ and  installed.</li>
+<li><b>Macintosh</b> -  Opens the url trying first the using the <a href="http://developer.apple.com/techpubs/macosx/Cocoa/Reference/ApplicationKit/Java/Classes/NSWorkspace.html">Cocoa NSWorkspace</a> and then the <a href="http://developer.apple.com/qa/java/java12.html">MRJ</a> classes provided by Apple.  NSWorkspace is used because the MRJ toolkit for Mac OS X <a href="http://developer.apple.com/techpubs/macosx/ReleaseNotes/JavaGMWebReleaseNotes.html#MRJToolkit">does not implement</a> openURL() yet.  This class links to the Cocoa NSWorkspace and the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the Cocoa NSWorkspace and the MRJ and  installed.</li>
 <li><b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.</li>
 </ul>
 
-<p>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
+<p><table align=right border=1 width=150 hspace=10 vspace=10 cellpadding=10><tr><td>
+    Internationalization - included languages:
+    <ul>
+    <li>Dansk</li>
+    <li>Deutsch</li>
+    <li>English</li> 
+    </ul>
+</td></tr></table>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
 on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be 
 annoying for developers trying to open a bunch of urls using this class, but have each url in its own
 window.  Workaround methods that use Javascript to try and open urls in new windows have been provided for
