@@ -43,9 +43,9 @@ The latest version of the com.Ostermiller.util utilities including source code.
 <h2>Version History</h2>
 <p>The current version of utils.jar is <b>1.02.18</b>. The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
+<li>Version 1.02.20 - Fixed crash when loading some properties files with the UberProperties class, BadDelimiterException class created to fix spelling error.</li>
 <li>Version 1.02.19 - CSV Printers no longer throw an exception when changing delimiters to the current delimiter.</li>
 <li>Version 1.02.18 - Ability to change quotes and delimiters on all CSVPrinters; @since tags on all javadoc.</li>
-<li>Version 1.02.17 - UberProperties ignore blank lines when reading, can save empty name value pairs.</li>
 <li><a href="history.html">Older Changes...</a></li>
 </ul>
 </div>
