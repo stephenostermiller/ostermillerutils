@@ -2,21 +2,29 @@ JFLAGS=
 JAVAC=javac
 JAVA=java
 JAVADOC=javadoc
+JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 
-all: 
+all: CSVLexer.java \
+	BrowserCommandLexer.java
 	$(JAVAC) $(JFLAGS) *.java
 
+CSVLexer.java: CSVLexer
+	$(JLEX) CSVLexer
+
+BrowserCommandLexer.java: BrowserCommandLexer.lex
+	$(JLEX) BrowserCommandLexer.lex
+
 clean:
-	rm -rf doc/
+	rm -rf docs/
 	rm -f *.class
 	rm -f *~
 	rm -f ~*
 	rm -f *.jar
 
 docs:
-	rm -rf doc/
-	mkdir doc
-	$(JAVADOC) -d doc/ com.Ostermiller.util
+	rm -rf docs/
+	mkdir docs
+	$(JAVADOC) -d docs/ com.Ostermiller.util
 
 build:
 	rm -f utils.jar
@@ -35,4 +43,3 @@ test:
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
 	diff out.txt CSVRegressionTestResults.txt
 	rm out.txt
-

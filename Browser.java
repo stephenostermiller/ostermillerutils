@@ -23,6 +23,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Properties;
+import java.util.Vector;
+import java.io.StringReader;
+import java.lang.reflect.*;
 
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
@@ -70,50 +73,44 @@ public class Browser {
         if ( System.getProperty("os.name").startsWith("Windows")){
             exec = new String[1];
             exec[0] = "rundll32 url.dll,FileProtocolHandler {0}";
+        } else if (System.getProperty("os.name").startsWith("Mac")){
+             exec = null; 
         } else {
-            boolean found = false;
-            if (!found){
-                try {
-                    Process p = Runtime.getRuntime().exec("which mozilla");
-                    if (p.waitFor() == 0){
-                        exec = new String[1];
-                        exec[0] = "mozilla {0}";
-                        found = true;
-                    }
-                } catch (IOException e){
-                } catch (InterruptedException e){
+            Vector browsers = new Vector();
+            try {
+                Process p = Runtime.getRuntime().exec("which mozilla");
+                if (p.waitFor() == 0){
+                    browsers.add("mozilla -remote openURL({0})");
+                    browsers.add("mozilla {0}");
                 }
+            } catch (IOException e){
+            } catch (InterruptedException e){
             }
-            if (!found){
-                try {
-                    Process p = Runtime.getRuntime().exec("which netscape");
-                    if (p.waitFor() == 0){
-                        exec = new String[2];
-                        exec[0] = "netscape -remote openURL({0})";
-                        exec[1] = "netscape {0}";
-                        found = true;
-                    }
-                } catch (IOException e){
-                } catch (InterruptedException e){
+            try {
+                Process p = Runtime.getRuntime().exec("which netscape");
+                if (p.waitFor() == 0){
+                    browsers.add("netscape -remote openURL({0})");
+                    browsers.add("netscape {0}");
                 }
+            } catch (IOException e){
+            } catch (InterruptedException e){
             }
-            if (!found){
-                try {
-                    Process p = Runtime.getRuntime().exec("which xterm");
+            try {
+                Process p = Runtime.getRuntime().exec("which xterm");
+                if (p.waitFor() == 0){
+                    p = Runtime.getRuntime().exec("which lynx");
                     if (p.waitFor() == 0){
-                        p = Runtime.getRuntime().exec("which lynx");
-                        if (p.waitFor() == 0){
-                            exec = new String[1];
-                            exec[0] = "xterm -e lynx {0}";
-                            found = true;
-                        }
+                        browsers.add("xterm -e lynx {0}");
                     }
-                } catch (IOException e){
-                } catch (InterruptedException e){
                 }
+            } catch (IOException e){
+            } catch (InterruptedException e){
             }
-            if (!found){
+            if (browsers.size() == 0){
                 exec = null;
+            } else {
+                exec = new String[browsers.size()];
+                exec = (String[])browsers.toArray(exec);
             }
         }
         return exec;
@@ -134,7 +131,19 @@ public class Browser {
      */
     public static void displayURL(String url) throws IOException {
         if (exec == null || exec.length == 0){
-            throw new IOException("Browser execute command not defined");
+        	if (System.getProperty("os.name").startsWith("Mac")){
+        		try {
+        			Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
+        			Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")}); 
+        			openURL.invoke(null, new Object[] {url});
+        			//com.apple.mrj.MRJFileUtils.openURL(url);
+        		} catch (Exception x){
+        			System.err.println(x.getMessage());
+        			throw new IOException("Browser launch failed");
+        		}        		
+        	} else {
+            	throw new IOException("Browser execute command not defined");
+            }
         } else {
             // for security, see if the url is valid.
             // this is primarily to catch an attack in which the url
@@ -152,7 +161,7 @@ public class Browser {
                 char c = url.charAt(i);
                 if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
                     || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
-                    || c == '%' || c =='+' || c == '='){
+                    || c == '%' || c =='+' || c == '=' || c == '#'){
                     //characters that are nessesary for urls and should be safe
                     //to pass to exec.  Exec uses a default string tokenizer with
                     //the default arguments (whitespace) to separate command line
@@ -176,27 +185,42 @@ public class Browser {
             // try each of the exec commands until something works
             try {
                 for (int i=0; i<exec.length && !found; i++){
-                    // stick the url into the command
-                    command = MessageFormat.format(exec[i], messageArray);
-                    // start the browser
-                    Process p = Runtime.getRuntime().exec(command);
-                    // give the browser a bit of time to fail.
-                    // I have found that sometimes sleep doesn't work
-                    // the first time, so do it twice.  My tests
-                    // seem to show that 1000 milisec is enough 
-                    // time for the browsers I'm using.
-                    for (int j=0; j<2; j++){
-                        try{
-            	            Thread.currentThread().sleep(1000);
-                        } catch (InterruptedException inte){
+                    try {
+                        // stick the url into the command
+                        command = MessageFormat.format(exec[i], messageArray);
+                        // parse the command line.
+                        Vector argsVector = new Vector();
+                        BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
+                        String t;
+                        while ((t = lex.getNextToken()) != null) {
+                            argsVector.add(t);
                         }
-                    }
-                    if (p.exitValue() == 0){
-                        // this is a weird case.  The browser exited after 
-                        // a couple seconds saying that it successfully
-                        // displayed the url.  Either the browser is lying
-                        // or the user closed it *really* quickly.  Oh well.
-                        found = true;
+                        String[] args = new String[argsVector.size()];
+                        args = (String[])argsVector.toArray(args);
+                        // start the browser
+                        Process p = Runtime.getRuntime().exec(args);
+
+                        // give the browser a bit of time to fail.
+                        // I have found that sometimes sleep doesn't work
+                        // the first time, so do it twice.  My tests
+                        // seem to show that 1000 milisec is enough 
+                        // time for the browsers I'm using.
+                        for (int j=0; j<2; j++){
+                            try{
+            	                Thread.currentThread().sleep(1000);
+                            } catch (InterruptedException inte){
+                            }
+                        }
+                        if (p.exitValue() == 0){
+                            // this is a weird case.  The browser exited after 
+                            // a couple seconds saying that it successfully
+                            // displayed the url.  Either the browser is lying
+                            // or the user closed it *really* quickly.  Oh well.
+                            found = true;
+                        }
+                    } catch (IOException x){
+                        // the command was not a valid command.
+                        System.err.println("Warning: " + x.getMessage());
                     }
                 }
                 if (!found){
@@ -255,6 +279,7 @@ public class Browser {
      * com.Ostermiller.util.BrowserDialog.description
      * com.Ostermiller.util.BrowserDialog.label
      * com.Ostermiller.util.BrowserDialog.defaults
+     * com.Ostermiller.util.BrowserDialog.browse
      * com.Ostermiller.util.BrowserDialog.ok
      * com.Ostermiller.util.BrowserDialog.cancel
      *
@@ -282,6 +307,7 @@ public class Browser {
          * com.Ostermiller.util.BrowserDialog.description
          * com.Ostermiller.util.BrowserDialog.label
          * com.Ostermiller.util.BrowserDialog.defaults
+         * com.Ostermiller.util.BrowserDialog.browse
          * com.Ostermiller.util.BrowserDialog.ok
          * com.Ostermiller.util.BrowserDialog.cancel
          */
@@ -297,6 +323,9 @@ public class Browser {
             }
             if (props.containsKey("com.Ostermiller.util.BrowserDialog.defaults")){
                 resetButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.defaults"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.browse")){
+                browseButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.browse"));
             }
             if (props.containsKey("com.Ostermiller.util.BrowserDialog.ok")){
                 okButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.ok"));
@@ -321,6 +350,11 @@ public class Browser {
          * The reset button.
          */
         private JButton resetButton;
+        
+        /**
+         * The browse button.
+         */
+        private JButton browseButton;
 
         /**
          * The OK button.
@@ -341,6 +375,11 @@ public class Browser {
          * update this variable when the user makes an action
          */
         private boolean pressed_OK = false;
+        
+        /**
+         * File dialog for choosing a browser
+         */
+        private JFileChooser fileChooser;
 
         /**
          * Create this dialog with the given parent and title.
@@ -364,6 +403,7 @@ public class Browser {
             okButton = new JButton("OK");
             cancelButton = new JButton("Cancel");
             resetButton = new JButton("Defaults");
+            browseButton = new JButton("Browse");
             commandLinesLabel = new JLabel("Command lines: ");
             description = new JTextArea("When a web browser needs to be opened, these command lines will be\n" +
                 "executed in the order they appear here until one of them works.\n" +
@@ -379,6 +419,31 @@ public class Browser {
                     Object source = e.getSource();
                     if (source == resetButton){
                         setCommands(Browser.defaultCommands());
+                    } else if (source == browseButton){
+                        if (fileChooser == null){
+                            fileChooser = new JFileChooser();
+                        }
+                        if (fileChooser.showOpenDialog(BrowserDialog.this) == JFileChooser.APPROVE_OPTION){
+                            String app = fileChooser.getSelectedFile().getPath();
+                            StringBuffer sb = new StringBuffer(2 * app.length());
+                            for (int i=0; i<app.length(); i++){
+                                char c = app.charAt(i);
+                                // escape these two characters so that we can later parse the stuff
+                                if (c == '\"' || c == '\\') {
+                                    sb.append('\\');
+                                }
+                                sb.append(c);
+							}
+                            app = sb.toString();
+                            if (app.indexOf(" ") != -1){
+                                app = '"' + app + '"';
+                            }
+                            String commands = commandLinesArea.getText();
+                            if (commands.length() != 0 && !commands.endsWith("\n") && !commands.endsWith("\r")){
+                                commands += "\n";
+                            }
+                            commandLinesArea.setText(commands + app + " {0}");                            
+                        }
                     } else {
                         pressed_OK = (source == okButton);
                         BrowserDialog.this.hide();
@@ -404,10 +469,14 @@ public class Browser {
             c.gridwidth = GridBagConstraints.RELATIVE;
             gridbag.setConstraints(commandLinesLabel, c);
             pane.add(commandLinesLabel);
-            c.anchor = GridBagConstraints.EAST;
-            gridbag.setConstraints(resetButton, c);
+            JPanel buttonPanel = new JPanel(); 
+            c.anchor = GridBagConstraints.EAST;           
+            browseButton.addActionListener(actionListener);
+            buttonPanel.add(browseButton);            
             resetButton.addActionListener(actionListener);
-            pane.add(resetButton);
+            buttonPanel.add(resetButton);
+            gridbag.setConstraints(buttonPanel, c);
+            pane.add(buttonPanel);
 
             c.gridy = 2;
             c.gridwidth = GridBagConstraints.REMAINDER;
@@ -456,3 +525,4 @@ public class Browser {
         }
     }
 }
+

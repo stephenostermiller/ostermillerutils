@@ -1,0 +1,46 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="description" content="Encode and decode base 64 in Java.">
+   <meta name="keywords" content="base, 64, base64, base, 64, base64,base, 64, base64, encode, decode, encode, decode, java, util, utility, class, library, libraries, source, code, open source, gpl">
+   <title>Base64</title>
+   <base href="http://www.smo.f2s.com/utils/">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<h1><a name="base64">Base64</a></h1>
+
+<p>Bas64 encoding and decoding of data.  Encode and decode methods for Strings, byte arrays, and streams.</p>
+
+<p>Base64 is needed in many places other than its original use as an encoding format for transfering attachements in email.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
+<blockquote><code>
+import com.Ostermiller.util.Base64;<br>
+URL url = new URL("http://....");<br>
+HttpURLConnection connection = (HttpURLConnection)url.openConnection();<br>
+connection.setRequestProperty("Authorization", "Basic " + Base64.encode(username + ":" + password));<br>        
+InputStream in = connection.getInputStream();<br>
+</code></blockquote></p>
+
+<p>[<a href="./#download">download</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Base64.html">documentation</a>]</p>
+
+<hr>
+
+<h2><a name="license">License</a></h2>
+
+<P>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+(utils@Ostermiller.com)</P>
+
+<p>This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation; either version 2 of the License or (at
+your option) any later version.</P>
+
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+</body>
+</html>

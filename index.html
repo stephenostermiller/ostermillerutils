@@ -10,131 +10,19 @@
 
 <h1>Java Utilities</h1>
 
-<P><big><a name="download" href="utils.jar">Download</a></big> the latest version of these utilities including source code.  (Jar - 61k)</p>
+<P><big><a name="download" href="utils.jar">Download</a></big> the latest version of these utilities including source code.  (Jar - 85k)</p>
 <p>[<a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">Browse</a> the source code. |
 <a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a> the JavaDoc.]</p>
 
-<ul>
-<li><a href="#base64">Base64</a></li>
-<li><a href="#browser">Browser</a></li>
-<li><a href="#csv_parser">CSV Parser</a></li>
-<li><a href="#password_dialog">Password Dialog</a></li>
-<li><a href="#string_tokenizer">String Tokenizer</a></li>
-<li><a href="#straight_stream_reader">Straight Stream Reader</a></li>
-</ul>
-
-<hr>
-
-<h2><a name="base64">Base64</a></h2>
-
-<p>Bas64 encoding and decoding of data.  Encode and decode methods for Strings, byte arrays, and streams.</p>
-
-<p>Base64 is needed in many places other than its original use as an encoding format for transfering attachements in email.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
-<blockquote><code>
-import com.Ostermiller.util.Base64;<br>
-URL url = new URL("http://....");<br>
-HttpURLConnection connection = (HttpURLConnection)url.openConnection();<br>
-connection.setRequestProperty("Authorization", "Basic " + Base64.encode(username + ":" + password));<br>        
-InputStream in = connection.getInputStream();<br>
-</code></blockquote></p>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Base64.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
-<hr>
-
-<h2><a name="browser">Browser</a></h2>
-
-<P>Allows URLs to be opened in the system browser on Windows and Unix.
-JavaWorld has a <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip66.html">Java Tip</a> which shows how to open a URL in the system browser.  That  implementation has some serious problems:
-<ol>
-    <li><b>Security</b> - You must rely on the Runtime.exec() method to open another program in java.  You must stick the URL into the command line that you use to open the browser.  If you do not check for it, somebody could craft a URL that messes up the command line.  This is possible either by adding whitespace to the url (so it is interpreted as more than one argument) or by prepending the url with a '-' so that it is interpretted not as a url but as an option by the browser.  This would be an issue if you were writing an instant messenger and were opening URLs sent to in a special URL field.  A malicious hacker could exploit this by sending you a URL allowing them to access or crash your computer.</li>
-    <li><b>Out of date</b> - There are a variety of browsers available on Linux.  It would be nice to check for something better than Netscape.  (I prefer Mozilla)</li>
-    <li><b>Blocking</b> - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing.</li>
-</ol></p>
-
-<p>All of these problems are solved in the com.Ostermiller.util.Browser implementation.</p>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
-<hr>
-
-<h2><a name="csv_parser">CSV Parser</a></h2>
-
-<P>Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
-First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get
-Strings in quotes that have commas inside them.  This CSV parser takes care of those issues and
-support line numbering, escape characters, and comments.</P>
-
-<P>There is also a <a href="CSVRegressionTest.csv">regression test</a> and the expected
-<a href="CSVRegressionTestResults.txt">results</a> of that test available.</P>
-
-<P>This parser was created using <a href="http://www.jflex.de/">JFlex</a> and you will need to have
-it if you want to modify the parser.</P>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVLexer.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVLexer.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
-<hr>
-
-<h2><a name="password_dialog">Password Dialog</a></h2>
-
-<P><img align=left src="dialog.png" hspace="10">The Java APIs didn't have an easy to use password dialog box that I could find.  This one is written for swing, it extends JDialog.</p>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/PasswordDialog.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/PasswordDialog.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
-<br clear="all">
-<hr>
-
-<h2><a name="string_tokenizer">String Tokenizer</a></h2>
-
-<P>A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.  This implementation of StringTokenizer tries to fix the following bugs:<ul>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4086845.html">Bug 4086845</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4140850.html">Bug 4140850</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4233089.html">Bug 4233089</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4287338.html">Bug 4287338</a> Report empty/null tokens</b> - It would be nice to have the string "one,two,,four" have four tokens.  This implementations has the option to return empty tokens as an empty string ("").</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4232593.html">Bug 4232593</a> Performance improvements</b> - StringTokenizer can be optimized for some common cases.  The optimizations that were implemented in java.util.StringTokenizer involving maximum characters from this suggestion have also been implemented here.  Also token count is cached between calls.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4232770.html">Bug 4232770</a> Null parameter handling not specified</b> - The string to parse should not be null, but the delimiter lists may be null in this implementation.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4229450.html">Bug 4229450</a> Add a String[] toArray method</b> - Convenience method added for returning all the tokens as an array of Strings.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4391919.html">Bug 4391919</a> getPosition() method</b> - Exposes the internal state of the StringTokenizer.  In addition, other internal state variables are protected and well documented so this class can be easily subclassed.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4228047.html">Bug 4228047</a> Allow re-use to minimize heap activity</b> - A setText() method was added for this purpose.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4238266.html">Bug 4238266</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4080058.html">Bug 4080058</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4280213.html">Bug 4280213</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4310962.html">Bug 4310962</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4338282.html">Bug 4338282</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4377004.html">Bug 4377004</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359719.html">Bug 4359719</a> Fixed hasMoreElements() side-effect (no easy way to deal with code broken by this fix)</b> - hasMoreElements() had an unexpected side-effect.  Some people relied on this and the fix broke their code.  In the fixed version there was no good way to recover the functionality of the broken code.  Methods are introduced here to correct that (API taken from <a href="http://developer.java.sun.com/developer/bugParade/bugs/4359719.html">Bug 4359719</a>).</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4359719.html">Bug 4359719</a> token delimiters and nontoken delimiters</b> - Some delimiters may be returned as tokens and at the same time, other should not be returned.  This bug report contains code with a nice API that I have used for this implementation.</li>
-    <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4215241.html">Bug 4215241</a> restOfText() method</b> - It is there.</li>
-</ul></p>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StringTokenizer.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StringTokenizer.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
-<hr>
-
-<h2><a name="straight_stream_reader">Straight Stream Reader</a></h2>
-
-<P>An input stream reader that does not character class translation.  You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some <a href="http://www.jflex.de/manual.html#SECTION00063000000000000000">discussion</a> in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
-
-<p>[<a href="#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StraightStreamReader.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StraightStreamReader.html">documentation</a> | 
-<a href="#license">License</a>]</p>
-
 <hr>
 
 <ul>
-<li><a href="#base64">Base64</a></li>
-<li><a href="#browser">Browser</a></li>
-<li><a href="#csv_parser">CSV Parser</a></li>
-<li><a href="#password_dialog">Password Dialog</a></li>
-<li><a href="#string_tokenizer">String Tokenizer</a></li>
-<li><a href="#straight_stream_reader">Straight Stream Reader</a></li>
+<li><a name="base64" href="Base64.html">Base64</a> -  Encode and decode base 64 in Java.</li>
+<li><a name="browser" href="Browser.html">Browser</a> - Open a browser from your Java application on Windows, Unix, or Macintosh.</li>
+<li><a name="csv_parser" href="CSVLexer.html">CSV Parser</a> - Java library to read values from a file that is in Comma Separated Value (CSV) format.</li>
+<li><a name="password_dialog" href="PasswordDialog.html">Password Dialog</a> -  A password dialog box written for Java Swing.</li>
+<li><a name="string_tokenizer" href="StringTokenizer.html">String Tokenizer</a> - A StringTokenizer replacement with enhancements.</li>
+<li><a name="straight_stream_reader" href="StraightStreamReader.html">Straight Stream Reader</a> - An input stream reader that does not character class translation.</li>
 </ul>
 
 <hr>

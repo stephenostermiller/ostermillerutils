@@ -251,7 +251,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * Is equivalent to:
      * <ul> 
      * <li> If the third parameter is <code>false</code> --
-     *      <code>StringTokenizer(text,delims, null)</code> 
+     *      <code>StringTokenizer(text,delims, null)</code>
      * <li> If the third parameter is <code>true</code> --
      *      <code>StringTokenizer(text, null ,delims)</code> 
      * </ul> 
@@ -331,6 +331,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     /**
      * Set the delimiters for this StringTokenizer.
      * The position must be initilized before this method is used.
+     * (setText does this and it is called from the constructor)
      * 
      * @param nontokenDelims delimiters that should not be returned as tokens.
      * @param tokenDelims delimiters that should be returned as tokens.
@@ -413,7 +414,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * Returns the next token from this string tokenizer.
      * <p> 
      * The current position is set after the token returned.
-     * 
+     *
      * @return the next token from this string tokenizer.
      * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
      */
@@ -421,7 +422,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 		int workingPosition = position;
         boolean workingEmptyReturned = emptyReturned;
         boolean onToken = advancePosition();
-        while(position != workingPosition || 
+        while(position != workingPosition ||
             emptyReturned != workingEmptyReturned){
             if (onToken){
         		// returning a token decreases the token count
@@ -434,23 +435,23 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         }
         throw new java.util.NoSuchElementException();
     }
-    
+
     /**
      * Advances the current position so it is before the next token.
-     * <p> 
-     * This method skips nontoken delimiters but does not skip 
+     * <p>
+     * This method skips nontoken delimiters but does not skip
      * token delimiters.
      * <p>
      * This method is useful when switching to the new delimiter sets (see the
      * second example in the class comment.)
-     * 
+     *
      * @return <code>true</code> if there are more tokens, <code>false</code> otherwise.
      *
      */
-    public boolean skipDelimiters(){               
+    public boolean skipDelimiters(){
         int workingPosition = position;
         boolean workingEmptyReturned = emptyReturned;
-        boolean onToken = advancePosition(); 
+        boolean onToken = advancePosition();
 
         // skipping delimiters may cause the number of tokens to change
         tokenCount = -1;
@@ -468,9 +469,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
             workingEmptyReturned = emptyReturned;
             onToken = advancePosition();
         }
-        
+
         // the end of the string was reached 
-        // without finding any tokens        
+        // without finding any tokens
         return false;
     }
 
@@ -478,7 +479,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      * Calculates the number of times that this tokenizer's <code>nextToken</code>
      * method can be called before it generates an exception. The current position
      * is not advanced.
-     * 
+     *
      * @return the number of tokens remaining in the string using the current
      *    delimiter set.
      * @see #nextToken()
@@ -525,6 +526,126 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     }
 
     /**
+     * Set the delimiters used to this set of (nontoken) delimiters.
+     *
+     * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
+     */
+    public void setDelimiters(String delims){
+        setDelims(delims, null);
+    }
+
+    /**
+     * Set the delimiters used to this set of delimiters.
+     *
+     * @param delims the new set of delimiters.
+     * @param delimsAreTokens flag indicating whether the first parameter specifies
+     *    token or nontoken delimiters: false -- the first parameter specifies nontoken
+     *    delimiters, the set of token delimiters is empty; true -- the first parameter
+     *    specifies token delimiters, the set of nontoken delimiters is empty.
+     */
+    public void setDelimiters(String delims, boolean delimsAreTokens){
+        setDelims((delimsAreTokens ? null : delims), (delimsAreTokens ? delims : null));
+    }
+
+    /**
+     * Set the delimiters used to this set of delimiters.
+     *
+     * @param nontokenDelims the new set of nontoken delimiters.
+     * @param tokenDelims the new set of token delimiters.
+     */
+    public void setDelimiters(String nontokenDelims, String tokenDelims){
+        setDelims(nontokenDelims, tokenDelims);
+    }
+
+    /**
+     * Set the delimiters used to this set of delimiters.
+     *
+     * @param nontokenDelims the new set of nontoken delimiters.
+     * @param tokenDelims the new set of token delimiters.
+     * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
+     */
+    public void setDelimiters(String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
+        setDelims(nontokenDelims, tokenDelims);
+        setReturnEmptyTokens(returnEmptyTokens);
+    }
+
+    /**
+     * Calculates the number of times that this tokenizer's <code>nextToken</code>
+     * method can be called before it generates an exception using the given set of
+     * (nontoken) delimeters.  The delimeters given will be used for future calls to
+     * nextToken() unless new delimiters are given. The current position
+     * is not advanced.
+     *
+     * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
+     * @return the number of tokens remaining in the string using the new
+     *    delimiter set.
+     * @see #countTokens()
+     */
+    public int countTokens(String delims){
+        setDelims(delims, null);
+        return countTokens();
+    }
+
+    /**
+     * Calculates the number of times that this tokenizer's <code>nextToken</code>
+     * method can be called before it generates an exception using the given set of
+     * delimeters.  The delimeters given will be used for future calls to 
+     * nextToken() unless new delimiters are given. The current position
+     * is not advanced.
+     *
+     * @param delims the new set of delimiters.
+     * @param delimsAreTokens flag indicating whether the first parameter specifies
+     *    token or nontoken delimiters: false -- the first parameter specifies nontoken
+     *    delimiters, the set of token delimiters is empty; true -- the first parameter
+     *    specifies token delimiters, the set of nontoken delimiters is empty.
+     * @return the number of tokens remaining in the string using the new
+     *    delimiter set.
+     * @see #countTokens()
+     */
+    public int countTokens(String delims, boolean delimsAreTokens){
+        setDelims((delimsAreTokens ? null : delims), (delimsAreTokens ? delims : null));
+        return countTokens();
+    }
+
+    /**
+     * Calculates the number of times that this tokenizer's <code>nextToken</code>
+     * method can be called before it generates an exception using the given set of
+     * delimeters.  The delimeters given will be used for future calls to
+     * nextToken() unless new delimiters are given. The current position
+     * is not advanced.
+     *
+     * @param nontokenDelims the new set of nontoken delimiters.
+     * @param tokenDelims the new set of token delimiters.
+     * @return the number of tokens remaining in the string using the new
+     *    delimiter set.
+     * @see #countTokens()
+     */
+    public int countTokens(String nontokenDelims, String tokenDelims){
+        setDelims(nontokenDelims, tokenDelims);
+        return countTokens();
+    }
+
+    /**
+     * Calculates the number of times that this tokenizer's <code>nextToken</code>
+     * method can be called before it generates an exception using the given set of
+     * delimeters.  The delimeters given will be used for future calls to
+     * nextToken() unless new delimiters are given. The current position
+     * is not advanced.
+     *
+     * @param nontokenDelims the new set of nontoken delimiters.
+     * @param tokenDelims the new set of token delimiters.
+     * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
+     * @return the number of tokens remaining in the string using the new
+     *    delimiter set.
+     * @see #countTokens()
+     */
+    public int countTokens(String nontokenDelims, String tokenDelims, boolean returnEmptyTokens){
+        setDelims(nontokenDelims, tokenDelims);
+        setReturnEmptyTokens(returnEmptyTokens);
+        return countTokens();
+    }
+
+    /**
      * Advances the state of the tokenizer to the next token or delimiter.  This method only
      * modifies the class variables position, and emptyReturned.  The type of token that
      * should be emitted can be deduced by examining the changes to these two variables.
@@ -532,18 +653,18 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
      *
      * @return true if we are at a juncture at which a token may be emitted, false otherwise.
      */
-    private boolean advancePosition(){        
+    private boolean advancePosition(){
         // if we are returning empty tokens, we are just starting to tokenize
         // and there is a delimiter ar the beginning of the string or the string
         // is empty we need to indicate that there is an empty token at the beginning.
         // The beginning is defined as where the delimiters were last changed.
-        if (returnEmptyTokens && !emptyReturned && 
-            (delimsChangedPosition == position || 
-            (position == -1 && strLength == delimsChangedPosition))){            
-            if (strLength == delimsChangedPosition){ 
+        if (returnEmptyTokens && !emptyReturned &&
+            (delimsChangedPosition == position ||
+            (position == -1 && strLength == delimsChangedPosition))){
+            if (strLength == delimsChangedPosition){
                 // Case in which the string (since delim change)
-                // is empty, but because we are returning empty 
-                // tokens, a single empty token should be returned.        
+                // is empty, but because we are returning empty
+                // tokens, a single empty token should be returned.
                 emptyReturned = true;
                 /*System.out.println("Empty token for empty string.");*/
                 return true;
@@ -551,10 +672,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
                 char c = text.charAt(position);
                 if (c <= maxDelimChar &&
                     (nontokenDelims != null && nontokenDelims.indexOf(c) != -1) ||
-                    (tokenDelims != null && tokenDelims.indexOf(c) != -1)){  
+                    (tokenDelims != null && tokenDelims.indexOf(c) != -1)){
                     // There is delimiter at the very start of the string
                     // so we must return an empty token at the beginning.
-                    emptyReturned = true;          
+                    emptyReturned = true;
                     /*System.out.println("Empty token at beginning.");*/
                     return true;
                 }
@@ -562,10 +683,10 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         }
         // The main loop
         // Do this as long as parts of the string have yet to be examined
-        while (position != -1){  
-            char c = text.charAt(position);                           
+        while (position != -1){
+            char c = text.charAt(position);
             if (returnEmptyTokens && !emptyReturned && position > delimsChangedPosition){
-                char c1 = text.charAt(position - 1); 
+                char c1 = text.charAt(position - 1);
                 // Examine the current character and the one before it.
                 // If both of them are delimiters, then we need to return
                 // an empty delimiter.  Note that characters that were examined
@@ -574,53 +695,53 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
                     ((nontokenDelims != null && nontokenDelims.indexOf(c) != -1) ||
                     (tokenDelims != null && tokenDelims.indexOf(c) != -1)) &&
                     ((nontokenDelims != null && nontokenDelims.indexOf(c1) != -1) ||
-                    (tokenDelims != null && tokenDelims.indexOf(c1) != -1))){                                        
-                    emptyReturned = true; 
+                    (tokenDelims != null && tokenDelims.indexOf(c1) != -1))){
+                    emptyReturned = true;
                     /*System.out.println("Empty token.");*/
                     return true;
                 }
             }
-            
+
             int nextDelimiter = (position < strLength - 1 ? indexOfNextDelimiter(position + 1) : -1);
-            if (c > maxDelimChar || 
+            if (c > maxDelimChar ||
                 ((nontokenDelims == null || nontokenDelims.indexOf(c) == -1) &&
                 (tokenDelims == null || tokenDelims.indexOf(c) == -1))){
                 // token found
-                /*System.out.println("Token: '" + 
+                /*System.out.println("Token: '" +
                     text.substring(position, (nextDelimiter == -1 ? strLength : nextDelimiter)) +
-                    "' at " + position + ".");*/ 
-                position = nextDelimiter;                  
-                emptyReturned = false;                  
-                return true;              
-            } else if (tokenDelims != null && tokenDelims.indexOf(c) != -1) { 
-                // delimiter that can be returned as a token found                              
-                emptyReturned = false;                 
-                /*System.out.println("Delimiter: '" + c + "' at " + position + ".");*/                
+                    "' at " + position + ".");*/
+                position = nextDelimiter;
+                emptyReturned = false;
+                return true;
+            } else if (tokenDelims != null && tokenDelims.indexOf(c) != -1) {
+                // delimiter that can be returned as a token found
+                emptyReturned = false;
+                /*System.out.println("Delimiter: '" + c + "' at " + position + ".");*/
                 position = (position < strLength -1 ? position +1 : -1);
                 return true;
-            } else {  
-                // delimiter that is not a token found.                          
-                emptyReturned = false;    
+            } else {
+                // delimiter that is not a token found.
+                emptyReturned = false;
                 position = (position < strLength -1 ? position +1 : -1);
                 return false;
-            }   
-        } 
+            }
+        }
         // handle the case that a token is at the end of the string and we should
         // return empty tokens.
         if (returnEmptyTokens && !emptyReturned && strLength > 0){
             char c = text.charAt(strLength - 1);
             if (c <= maxDelimChar &&
                 (nontokenDelims != null && nontokenDelims.indexOf(c) != -1) ||
-                (tokenDelims != null && tokenDelims.indexOf(c) != -1)){ 
-                // empty token at the end of the string found.               
-                emptyReturned = true; 
+                (tokenDelims != null && tokenDelims.indexOf(c) != -1)){
+                // empty token at the end of the string found.
+                emptyReturned = true;
                 /*System.out.println("Empty token at end.");*/
                 return true;
             }
         }
         return false;
     }
-    
+
     /**
      * Returns the next token in this string tokenizer's string.
      * <p>
@@ -865,4 +986,5 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
         return nextToken(null, null);
     }
 }
+
 
