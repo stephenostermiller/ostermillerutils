@@ -724,8 +724,8 @@ public class Browser {
 		Browser.dialog.show();
 		return Browser.dialog.changed();
 	}
-    
-    /**
+
+	/**
 	 * Where the command lines are typed.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -766,27 +766,27 @@ public class Browser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private static JFileChooser fileChooser;
-     
- 	/**
-     * A panel used in the options dialog.  Null until getDialogPanel() is called.
-     */
+
+	/**
+	 * A panel used in the options dialog.  Null until getDialogPanel() is called.
+	 */
 	private static JPanel dialogPanel = null;
-    private static Window dialogParent = null;
-    
-    /**
-     * If you wish to add to your own dialog box rather than have a separate
-     * one just for the browser, use this method to get a JPanel that can
-     * be added to your own dialog.
-     *
-     * mydialog.add(Browser.getDialogPanel(mydialog));
-     * Browser.initPanel();
-     * mydialog.show();
-     * if (ok_pressed){
-     * &nbsp;&nbsp;Browser.userOKedPanelChanges();
-     * }
-     */
+	private static Window dialogParent = null;
+
+	/**
+	 * If you wish to add to your own dialog box rather than have a separate
+	 * one just for the browser, use this method to get a JPanel that can
+	 * be added to your own dialog.
+	 *
+	 * mydialog.add(Browser.getDialogPanel(mydialog));
+	 * Browser.initPanel();
+	 * mydialog.show();
+	 * if (ok_pressed){
+	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
+	 * }
+	 */
 	public static JPanel getDialogPanel(Window parent){
-    	dialogParent = parent;
+		dialogParent = parent;
 		if (dialogPanel == null){
 			commandLinesArea = new JTextArea("", 8, 40);
 			JScrollPane scrollpane = new JScrollPane(commandLinesArea);
@@ -827,7 +827,7 @@ public class Browser {
 							}
 							commandLinesArea.setText(commands + app + " {0}");
 						}
-					} 
+					}
 				}
 			};
 
@@ -874,74 +874,74 @@ public class Browser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private static class BrowserDialog extends JDialog {
-    
-	    /**
-	     * The OK button.
-	     *
-	     * @since ostermillerutils 1.00.00
-	     */
-	    private JButton okButton;
 
-	    /**
-	     * The cancel button.
-	     *
-	     * @since ostermillerutils 1.00.00
-	     */
-	    private JButton cancelButton;
+		/**
+		 * The OK button.
+		 *
+		 * @since ostermillerutils 1.00.00
+		 */
+		private JButton okButton;
 
-	    /**
-	     * The label for the field in which the name is typed.
-	     *
-	     * @since ostermillerutils 1.00.00
-	     */
-	    private JLabel commandLinesLabel;
+		/**
+		 * The cancel button.
+		 *
+		 * @since ostermillerutils 1.00.00
+		 */
+		private JButton cancelButton;
 
-	    /**
-	     * update this variable when the user makes an action
-	     *
-	     * @since ostermillerutils 1.00.00
-	     */
-	    private boolean pressed_OK = false;
+		/**
+		 * The label for the field in which the name is typed.
+		 *
+		 * @since ostermillerutils 1.00.00
+		 */
+		private JLabel commandLinesLabel;
 
-    	
-        /**
-         * Properties that are used:
-         * com.Ostermiller.util.BrowserDialog.title<br>
-         * com.Ostermiller.util.BrowserDialog.description<br>
-         * com.Ostermiller.util.BrowserDialog.label<br>
-         * com.Ostermiller.util.BrowserDialog.defaults<br>
-         * com.Ostermiller.util.BrowserDialog.browse<br>
-         * com.Ostermiller.util.BrowserDialog.ok<br>
-         * com.Ostermiller.util.BrowserDialog.cancel<br>
-         *
-         * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
-         *
-         * @since ostermillerutils 1.00.00
-         */
-        private void setProps(Properties props){
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.title")){
-		        setTitle(props.getProperty("com.Ostermiller.util.BrowserDialog.title"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.description")){
-		        description.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.description"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.label")){
-		        commandLinesLabel.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.label"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.defaults")){
-		        resetButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.defaults"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.browse")){
-		        browseButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.browse"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.ok")){
-		        okButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.ok"));
-	        }
-	        if (props.containsKey("com.Ostermiller.util.BrowserDialog.cancel")){
-		        cancelButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.cancel"));
-	        }
-	        pack();
-        }   
+		/**
+		 * update this variable when the user makes an action
+		 *
+		 * @since ostermillerutils 1.00.00
+		 */
+		private boolean pressed_OK = false;
+
+
+		/**
+		 * Properties that are used:
+		 * com.Ostermiller.util.BrowserDialog.title<br>
+		 * com.Ostermiller.util.BrowserDialog.description<br>
+		 * com.Ostermiller.util.BrowserDialog.label<br>
+		 * com.Ostermiller.util.BrowserDialog.defaults<br>
+		 * com.Ostermiller.util.BrowserDialog.browse<br>
+		 * com.Ostermiller.util.BrowserDialog.ok<br>
+		 * com.Ostermiller.util.BrowserDialog.cancel<br>
+		 *
+		 * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
+		 *
+		 * @since ostermillerutils 1.00.00
+		 */
+		private void setProps(Properties props){
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.title")){
+				setTitle(props.getProperty("com.Ostermiller.util.BrowserDialog.title"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.description")){
+				description.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.description"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.label")){
+				commandLinesLabel.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.label"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.defaults")){
+				resetButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.defaults"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.browse")){
+				browseButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.browse"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.ok")){
+				okButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.ok"));
+			}
+			if (props.containsKey("com.Ostermiller.util.BrowserDialog.cancel")){
+				cancelButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.cancel"));
+			}
+			pack();
+		}
 
 		/**
 		 * Whether the user pressed the applied changes.
@@ -980,11 +980,11 @@ public class Browser {
 		protected void dialogInit(){
 
 			super.dialogInit();
-            
-            getContentPane().setLayout(new BorderLayout());
 
-			getContentPane().add(getDialogPanel(this), BorderLayout.CENTER); 
-            
+			getContentPane().setLayout(new BorderLayout());
+
+			getContentPane().add(getDialogPanel(this), BorderLayout.CENTER);
+
 			JPanel panel = new JPanel(new FlowLayout());
 			okButton = new JButton(labels.getString("dialog.ok"));
 			okButton.addActionListener(new ActionListener() {
@@ -993,7 +993,7 @@ public class Browser {
 					BrowserDialog.this.hide();
 				}
 			});
-			panel.add(okButton);            
+			panel.add(okButton);
 			cancelButton = new JButton(labels.getString("dialog.cancel"));
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e){
@@ -1003,11 +1003,11 @@ public class Browser {
 			});
 			panel.add(cancelButton);
 
-			getContentPane().add(panel, BorderLayout.SOUTH); 
+			getContentPane().add(panel, BorderLayout.SOUTH);
 
 			pack();
 		}
-        
+
 		/**
 		 * Shows the dialog.
 		 *
@@ -1017,11 +1017,11 @@ public class Browser {
 			initPanel();
 			super.show();
 			if (pressed_OK){
-            	userOKedPanelChanges();
+				userOKedPanelChanges();
 			}
 		}
 	}
-        
+
 	private static void setCommands(String[] newExec){
 		StringBuffer sb = new StringBuffer();
 		for (int i=0; newExec != null && i < newExec.length; i++){
@@ -1029,34 +1029,34 @@ public class Browser {
 		}
 		commandLinesArea.setText(sb.toString());
 	}
-    
-    /**
-     * If you are using the getDialogPanel() method to create your own dialog, this
-     * method should be called every time before you display the dialog.
-     *
-     * mydialog.add(Browser.getDialogPanel(mydialog));
-     * Browser.initPanel();
-     * mydialog.show();
-     * if (ok_pressed){
-     * &nbsp;&nbsp;Browser.userOKedPanelChanges();
-     * }
-     */
+
+	/**
+	 * If you are using the getDialogPanel() method to create your own dialog, this
+	 * method should be called every time before you display the dialog.
+	 *
+	 * mydialog.add(Browser.getDialogPanel(mydialog));
+	 * Browser.initPanel();
+	 * mydialog.show();
+	 * if (ok_pressed){
+	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
+	 * }
+	 */
 	public static void initPanel(){
 		setCommands(exec);
 	}
-    
-    /**
-     * If you are using the getDialogPanel() method to create your own dialog, this
-     * method should be called after you display the dialog if the user pressed ok.
-     *
-     * mydialog.add(Browser.getDialogPanel(mydialog));
-     * Browser.initPanel();
-     * mydialog.show();
-     * if (ok_pressed){
-     * &nbsp;&nbsp;Browser.userOKedPanelChanges();
-     * }
-     */
-    public static void userOKedPanelChanges(){
+
+	/**
+	 * If you are using the getDialogPanel() method to create your own dialog, this
+	 * method should be called after you display the dialog if the user pressed ok.
+	 *
+	 * mydialog.add(Browser.getDialogPanel(mydialog));
+	 * Browser.initPanel();
+	 * mydialog.show();
+	 * if (ok_pressed){
+	 * &nbsp;&nbsp;Browser.userOKedPanelChanges();
+	 * }
+	 */
+	public static void userOKedPanelChanges(){
 		java.util.StringTokenizer tok = new java.util.StringTokenizer(commandLinesArea.getText(), "\r\n", false);
 		int count = tok.countTokens();
 		String[] exec = new String[count];
@@ -1064,5 +1064,5 @@ public class Browser {
 			exec[i] = tok.nextToken();
 		}
 		Browser.exec = exec;
-    }
+	}
 }
