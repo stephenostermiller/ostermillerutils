@@ -52,6 +52,9 @@ your option) any later version.</p>
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE. See the
 <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+<p><a href="licenseFAQ.html">License FAQs</a> - Why GPL? How about the LGPL or something else?</p>
+
 </body>
 </html><%/bte.tpl%>
 <%bte.tpl name=linkutilies%><a href="./">Utilities</a><%/bte.tpl%>
