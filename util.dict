@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1246
+personal_ws-1.1 en 1258
 aa
 aA
 aaa
@@ -31,6 +31,7 @@ agrave
 ais
 alefsym
 alink
+allBytesRead
 allHeaders
 allValues
 alph
@@ -123,6 +124,9 @@ buttonPanel
 ByteArrayInputStream
 ByteArrayOutputStream
 byteArraysEqual
+bytesJustRead
+bytesLeft
+bytesRead
 bytesToString
 byteValue
 cancelButton
@@ -393,6 +397,8 @@ getAppletInfo
 getAvailable
 getBundle
 getBytes
+getBytesLeft
+getBytesRead
 getCanonicalFile
 getCanonicalPath
 getChar
@@ -428,6 +434,7 @@ getLastLineNumber
 getLine
 getLineNumber
 getLSD
+getMaxBytesToRead
 getMessage
 getMethod
 getMSD
@@ -663,6 +670,7 @@ markPosition
 markPostion
 markSize
 markSupported
+maxBytesToRead
 maxDelimChar
 maxEncodeOutLength
 maxLength
@@ -1038,7 +1046,11 @@ sigs
 sim
 SimpleDateFormat
 Sinotar
+SizeLimitInputStream
+SizeLimitInputStreams
+SizeLimitInputStreamTests
 skipDelimiters
+slis
 solaris
 somebodyelse
 someCharacterEscaped

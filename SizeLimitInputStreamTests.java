@@ -32,31 +32,31 @@ class SizeLimitInputStreamTests {
 		try {
 			SizeLimitInputStream slis;
 
-            slis = new SizeLimitInputStream(
-                new ByteArrayInputStream(
-                    new byte[] {
-                        1,2,3,4
-                    }
-                ),
-                3
-            );
-            if (slis.read() != 1) throw new Exception ("Expected 1");
-            if (slis.read() != 2) throw new Exception ("Expected 2");
-            if (slis.read() != 3) throw new Exception ("Expected 3");
-            if (slis.read() != -1) throw new Exception ("Expected -1");
+			slis = new SizeLimitInputStream(
+				new ByteArrayInputStream(
+					new byte[] {
+						1,2,3,4
+					}
+				),
+				3
+			);
+			if (slis.read() != 1) throw new Exception ("Expected 1");
+			if (slis.read() != 2) throw new Exception ("Expected 2");
+			if (slis.read() != 3) throw new Exception ("Expected 3");
+			if (slis.read() != -1) throw new Exception ("Expected -1");
 
-            slis = new SizeLimitInputStream(
-                new ByteArrayInputStream(
-                    new byte[] {
-                        1,2,3,4,5,6,7,8,9
-                    }
-                ),
-                6
-            );
-            if (slis.read() != 1) throw new Exception ("Expected 1");
-            if (slis.read(new byte[4]) != 4) throw new Exception("Expected 4 read");
-            if (slis.read(new byte[4]) != 1) throw new Exception("Expected 2 read");
-            if (slis.read() != -1) throw new Exception ("Expected -1");
+			slis = new SizeLimitInputStream(
+				new ByteArrayInputStream(
+					new byte[] {
+						1,2,3,4,5,6,7,8,9
+					}
+				),
+				6
+			);
+			if (slis.read() != 1) throw new Exception ("Expected 1");
+			if (slis.read(new byte[4]) != 4) throw new Exception("Expected 4 read");
+			if (slis.read(new byte[4]) != 1) throw new Exception("Expected 2 read");
+			if (slis.read() != -1) throw new Exception ("Expected -1");
 
 		} catch (Exception x){
 			System.err.println(x.getMessage());
