@@ -43,7 +43,7 @@ public class Tabs {
 
 
 	/**
-	 * Can be passed insead of a spaces argument to use tabs instead.
+	 * Can be passed instead of a spaces argument to use tabs instead.
 	 */
 	public final static int TABS = -1;
 
@@ -290,7 +290,7 @@ public class Tabs {
 
 	/**
 	 * Read form the input stream, changing the tabs at the beginning of each line
-	 * to the specified number of spaces or the other way around, write the resul
+	 * to the specified number of spaces or the other way around, write the result
 	 * to the output stream.
 	 *
 	 * The current system's line separator is used.
@@ -298,7 +298,7 @@ public class Tabs {
 	 * @param in stream that contains the text which needs line number conversion.
 	 * @param out stream where converted text is written.
 	 * @param inputTabWidth number of spaces used instead of a tab in the input.
-	 * @param outputTabWidth TABS if tabs should be used, otherwise, numbor of spaces to use.
+	 * @param outputTabWidth TABS if tabs should be used, otherwise, number of spaces to use.
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
@@ -317,7 +317,7 @@ public class Tabs {
 	 * @param in stream that contains the text which needs line number conversion.
 	 * @param out stream where converted text is written.
 	 * @param inputTabWidth number of spaces used instead of a tab in the input.
-	 * @param outputTabWidth TABS if tabs should be used, otherwise, numbor of spaces to use.
+	 * @param outputTabWidth TABS if tabs should be used, otherwise, number of spaces to use.
 	 * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
 	 * @return true if the output was modified from the input, false if it is exactly the same.
 	 * @throws BinaryDataException if non-text data is encountered.
@@ -408,7 +408,7 @@ public class Tabs {
 	 * Guess the tab width of the input file.
 	 *
 	 * @param f File to be converted.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 */
@@ -454,7 +454,7 @@ public class Tabs {
 	 * @param inputTabWidth number of spaces used instead of a tab in the input, or TABS to guess.
 	 * @param outputTabWidth true if tabs should be used, false if spaces should be used.
 	 * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if tab widths are not between 1 and 20 or TABS.

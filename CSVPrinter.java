@@ -44,7 +44,7 @@ public class CSVPrinter implements CSVPrint {
 	 * Create a printer that will print values to the given
 	 * stream.	 Character to byte conversion is done using
 	 * the default character encoding.	Comments will be
-	 * written using the delault comment character '#'.
+	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
 	 */
@@ -55,7 +55,7 @@ public class CSVPrinter implements CSVPrint {
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.	Comments will be
-	 * written using the delault comment character '#'.
+	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
 	 */
@@ -149,13 +149,13 @@ public class CSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * Put a comment amoung the comma separated values.
+	 * Put a comment among the comma separated values.
 	 * Comments will always begin on a new line and occupy a
 	 * least one full line. The character specified to star
 	 * comments and a space will be inserted at the beginning of
 	 * each new line in the comment.
 	 *
-	 * @param comment the comment to outpu
+	 * @param comment the comment to output
 	 */
 	public void printlnComment(String comment){
 		if (!newLine){

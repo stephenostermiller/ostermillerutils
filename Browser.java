@@ -71,11 +71,11 @@ public class Browser {
 	public static String[] exec = null;
 
 	/**
-	 * Determine appropriate commands to start a browser on the curren
+	 * Determine appropriate commands to start a browser on the current
 	 * operating system.  On windows: <br>
 	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
 	 * On other operating systems, the "which" command is used to
-	 * test if mozilla, netscape, and lynx(xterm) are available (in tha
+	 * test if Mozilla, netscape, and lynx(xterm) are available (in that
 	 * order).
 	 */
 	public static void init(){
@@ -256,7 +256,7 @@ public class Browser {
 				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
 						|| c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
 						|| c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
-					//characters that are nessesary for urls and should be safe
+					//characters that are necessary for URLs and should be safe
 					//to pass to exec.  Exec uses a default string tokenizer with
 					//the default arguments (whitespace) to separate command line
 					//arguments, so there should be no problem with anything bu
@@ -290,12 +290,12 @@ public class Browser {
 						}
 						String[] args = new String[argsVector.size()];
 						args = (String[])argsVector.toArray(args);
-						// the windows urlprotocol handler doesn't work well with file urls.
+						// the windows url protocol handler doesn't work well with file URLs.
 						// Correct those problems here before continuing
 						// Java File.toURL() gives only one / following file: bu
 						// we need two.
 						// If there are escaped characters in the url, we will have
-						// to create an internet shortcut and open that, as the command
+						// to create an Internet shortcut and open that, as the command
 						// line version of the rundll doesn't like them.
 						if (args[0].equals("rundll32") &&
 								args[1].equals("url.dll,FileProtocolHandler") &&
@@ -321,7 +321,7 @@ public class Browser {
 						// give the browser a bit of time to fail.
 						// I have found that sometimes sleep doesn't work
 						// the first time, so do it twice.  My tests
-						// seem to show that 1000 millisec is enough
+						// seem to show that 1000 milliseconds is enough
 						// time for the browsers I'm using.
 						for (int j=0; j<2; j++){
 							 try{
@@ -358,9 +358,9 @@ public class Browser {
 	 * Browser.init() should be called before calling this function or
 	 * Browser.exec should be set explicitly.
 	 *
-	 * If more than one URL is given an html page containing javascript will
+	 * If more than one URL is given an HTML page containing JavaScript will
 	 * be written to the local drive, that page will be opened, and it will
-	 * open the rest of the urls.
+	 * open the rest of the URLs.
 	 *
 	 * @param urls the list of urls to display
 	 * @throws IOException if the url is not valid or the browser fails to star
@@ -408,7 +408,7 @@ public class Browser {
 	 * new window already.  If it did, the url is shown in that window, if not, it is
 	 * shown in new window.
 	 *
-	 * Some browsers do not allow the length of history to be viewed by a web page.  In tha
+	 * Some browsers do not allow the length of history to be viewed by a web page.  In that
 	 * case, the url will be displayed in the current window.
 	 *
 	 * Browser.init() should be called before calling this function or
@@ -609,7 +609,7 @@ public class Browser {
 	 * command lines used for starting a browser on their system.
 	 * String used in the dialog are taken from the given
 	 * properties.  This dialog can be customized or displayed in
-	 * multipl languages.
+	 * multiple languages.
 	 * <P>
 	 * Properties that are used:
 	 * com.Ostermiller.util.BrowserDialog.title<br>
@@ -679,7 +679,7 @@ public class Browser {
 
 		/**
 		 * Whether the user pressed the applied changes.
-		 * true if ok was pressed or the user otherwise applied new changes,
+		 * true if OK was pressed or the user otherwise applied new changes,
 		 * false if cancel was pressed or dialog was closed with no changes.
 		 * If called before the dialog is displayed and closed, the results
 		 * are not defined.

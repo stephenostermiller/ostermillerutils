@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.Locale;
 
 /**
- * A modal dialog that asks the user for a username and password.
+ * A modal dialog that asks the user for a user name and password.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/PasswordDialog.html">ostermiller.org</a>.
  *
@@ -105,7 +105,7 @@ public class PasswordDialog extends JDialog {
 	}
 
 	/**
-	 * Set the label on the ok button.
+	 * Set the label on the OK button.
 	 * The default is a localized string.
 	 *
 	 * @param ok label for the ok button.
@@ -169,13 +169,13 @@ public class PasswordDialog extends JDialog {
 	}
 
 	/**
-	 * Finds out if user used the OK button or an equivelant action
+	 * Finds out if user used the OK button or an equivalent action
 	 * to close the dialog.
 	 * Pressing enter in the password field may be the same as
 	 * 'OK' but closing the dialog and pressing the cancel button
 	 * are not.
 	 *
-	 * @return true if the the user hit OK, false if the user cancelled.
+	 * @return true if the the user hit OK, false if the user canceled.
 	 */
 	public boolean okPressed(){
 		return pressed_OK;
@@ -321,7 +321,7 @@ public class PasswordDialog extends JDialog {
 	/**
 	 * Shows the dialog and returns true if the user pressed ok.
 	 *
-	 * @return true if the the user hit OK, false if the user cancelled.
+	 * @return true if the the user hit OK, false if the user canceled.
 	 */
 	public boolean showDialog(){
 		show();

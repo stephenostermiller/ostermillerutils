@@ -409,7 +409,7 @@ public class LineEnds {
 	 * The current system's line separator is used.
 	 *
 	 * @param f File to be converted.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 */
@@ -422,7 +422,7 @@ public class LineEnds {
 	 *
 	 * @param f File to be converted.
 	 * @param style line separator style.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.
@@ -438,7 +438,7 @@ public class LineEnds {
 	 *
 	 * @param f File to be converted.
 	 * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 */
@@ -452,7 +452,7 @@ public class LineEnds {
 	 * @param f File to be converted.
 	 * @param style line separator style.
 	 * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
-	 * @return true if the file was modified, false if it was already in the correct forma
+	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.

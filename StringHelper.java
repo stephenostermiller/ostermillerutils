@@ -29,7 +29,7 @@ public class StringHelper {
 	 * the String is of the given length.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -42,11 +42,11 @@ public class StringHelper {
 	}
 
 	/**
-	 * Prepend the given character to the String until
+	 * Pre-pend the given character to the String until
 	 * the result is the desired length.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -73,7 +73,7 @@ public class StringHelper {
 	 * the String is of the given length.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -90,7 +90,7 @@ public class StringHelper {
 	 * the result is  the desired length.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -122,7 +122,7 @@ public class StringHelper {
 	 * the extra character will be added to the end.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -144,7 +144,7 @@ public class StringHelper {
 	 * the extra character will be added to the end.
 	 * <p>
 	 * If a String is longer than the desired length,
-	 * it will not be trunkated, however no padding
+	 * it will not be truncated, however no padding
 	 * will be added.
 	 *
 	 * @param s String to be padded.
@@ -174,7 +174,7 @@ public class StringHelper {
 	/**
 	 * Split the given String into tokens.
 	 * <P>
-	 * This method is meant to be similar to the spli
+	 * This method is meant to be similar to the split
 	 * function in other programming languages but it does
 	 * not use regular expressions.  Rather the String is
 	 * split on a single String literal.
@@ -256,7 +256,7 @@ public class StringHelper {
 	}
 
 	/**
-	 * Replace occurances of a substring.
+	 * Replace occurrences of a substring.
 	 *
 	 * StringHelper.replace("1-2-3", "-", "|");<br>
 	 * result: "1|2|3"<br>
@@ -272,7 +272,7 @@ public class StringHelper {
 	 * @param s String to be modified.
 	 * @param find String to find.
 	 * @param replace String to replace.
-	 * @return a string with all the occurances of the string to find replaced.
+	 * @return a string with all the occurrences of the string to find replaced.
 	 * @throws NullPointerException if s is null.
 	 */
 	public static String replace(String s, String find, String replace){
@@ -353,22 +353,22 @@ public class StringHelper {
 	 * <p>
 	 * Any data that will appear as text on a web page should
 	 * be be escaped.  This is especially important for data
-	 * that comes from untrusted sources such as internet users.
+	 * that comes from untrusted sources such as Internet users.
 	 * A common mistake in CGI programming is to ask a user for
 	 * data and then put that data on a web page.  For example:<pre>
 	 * Server: What is your name?
 	 * User: &lt;b&gt;Joe&lt;b&gt;
 	 * Server: Hello <b>Joe</b>, Welcome</pre>
-	 * If the name is put on the page without checking that it doesn'
+	 * If the name is put on the page without checking that it doesn't
 	 * contain HTML code or without sanitizing that HTML code, the user
 	 * could reformat the page, insert scripts, and control the the
-	 * content on your webserver.
+	 * content on your web server.
 	 * <p>
 	 * This method will replace HTML characters such as &gt; with their
 	 * HTML entity reference (&amp;gt;) so that the html parser will
 	 * be sure to interpret them as plain text rather than HTML or script.
 	 * <p>
-	 * This method should be used for both data to be displayed in tex
+	 * This method should be used for both data to be displayed in text
 	 * in the html document, and data put in form elements. For example:<br>
 	 * <code>&lt;html&gt;&lt;body&gt;<i>This in not a &amp;lt;tag&amp;gt;
 	 * in HTML</i>&lt;/body&gt;&lt;/html&gt;</code><br>
@@ -386,7 +386,7 @@ public class StringHelper {
 	public static String escapeHTML(String s){
 		int length = s.length();
 		int newLength = length;
-		// first check for characters that migh
+		// first check for characters that might
 		// be dangerous and calculate a length
 		// of the string that has escapes.
 		for (int i=0; i<length; i++){
@@ -442,18 +442,18 @@ public class StringHelper {
 	 * <p>
 	 * Any data that will be put in an SQL query should
 	 * be be escaped.  This is especially important for data
-	 * that comes from untrusted sources such as internet users.
+	 * that comes from untrusted sources such as Internet users.
 	 * <p>
 	 * For example if you had the following SQL query:<br>
-	 * <code>"SELECT * FROM adresses WHERE name='" + name + "' AND private='N'"</code><br>
+	 * <code>"SELECT * FROM addresses WHERE name='" + name + "' AND private='N'"</code><br>
 	 * Without this function a user could give <code>" OR 1=1 OR ''='"</code>
 	 * as their name causing the query to be:<br>
-	 * <code>"SELECT * FROM adresses WHERE name='' OR 1=1 OR ''='' AND private='N'"</code><br>
-	 * which will give all adresses, including private ones.<br>
+	 * <code>"SELECT * FROM addresses WHERE name='' OR 1=1 OR ''='' AND private='N'"</code><br>
+	 * which will give all addresses, including private ones.<br>
 	 * Correct usage would be:<br>
-	 * <code>"SELECT * FROM adresses WHERE name='" + StringHelper.escapeSQL(name) + "' AND private='N'"</code><br>
+	 * <code>"SELECT * FROM addresses WHERE name='" + StringHelper.escapeSQL(name) + "' AND private='N'"</code><br>
 	 * <p>
-	 * Another way to avoid this problem is to use a PreparedStatemen
+	 * Another way to avoid this problem is to use a PreparedStatement
 	 * with appropriate placeholders.
 	 *
 	 * @param s String to be escaped
@@ -463,7 +463,7 @@ public class StringHelper {
 	public static String escapeSQL(String s){
 		int length = s.length();
 		int newLength = length;
-		// first check for characters that migh
+		// first check for characters that might
 		// be dangerous and calculate a length
 		// of the string that has escapes.
 		for (int i=0; i<length; i++){
@@ -518,7 +518,7 @@ public class StringHelper {
 	public static String escapeJavaLiteral(String s){
 		int length = s.length();
 		int newLength = length;
-		// first check for characters that migh
+		// first check for characters that might
 		// be dangerous and calculate a length
 		// of the string that has escapes.
 		for (int i=0; i<length; i++){
@@ -569,7 +569,7 @@ public class StringHelper {
 	}
 
 	/**
-	 * Trim any of the chracters contained in the second
+	 * Trim any of the characters contained in the second
 	 * string from the beginning and end of the first.
 	 *
 	 * @param s String to be trimmed.
@@ -588,10 +588,10 @@ public class StringHelper {
 		}
 		int start = 0;
 		int end = length;
-		boolean found; // trimmable character found.
+		boolean found; // trim-able character found.
 		int i;
 		// Start from the beginning and find the
-		// first non-trimmable character.
+		// first non-trim-able character.
 		found = false;
 		for (i=0; !found && i<length; i++){
 			char ch = s.charAt(i);
@@ -600,11 +600,11 @@ public class StringHelper {
 				if (c.charAt(j) == ch) found = false;
 			}
 		}
-		// if all characters are trimmable.
+		// if all characters are trim-able.
 		if (!found) return "";
 		start = i-1;
 		// Start from the end and find the
-		// last non-trimmable character.
+		// last non-trim-able character.
 		found = false;
 		for (i=length-1; !found && i>=0; i--){
 			char ch = s.charAt(i);

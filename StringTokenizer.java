@@ -34,7 +34,7 @@
  * A token is either one token delimiter character, or a maximal sequence of
  * consecutive characters that are not delimiters.
  * <p>
- * A <code>StringTokenizer</code> object internally maintains a curren
+ * A <code>StringTokenizer</code> object internally maintains a current
  * position within the string to be tokenized. Some operations advance this
  * current position past the characters processed.
  * <p>
@@ -120,7 +120,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * The string to be tokenized.
-	 * The code relys on this to never be null.
+	 * The code relies on this to never be null.
 	 */
 	protected String text;
 
@@ -146,7 +146,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * the tokenizing process.
 	 * <P>
 	 * Represents the position at which we should start looking for
-	 * the next token(the position of the character immediatly
+	 * the next token(the position of the character immediately
 	 * following the end of the last token, or 0 to start), or
 	 * -1 if the entire string has been examined.
 	 */
@@ -181,7 +181,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Whether empty tokens should be returned.
-	 * ie if "" sholud be returned when text starts with
+	 * ie if "" should be returned when text starts with
 	 * a delim, has two delims next to each other, or
 	 * ends with a delim.
 	 */
@@ -289,7 +289,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Constructs a string tokenizer for the specified string. The tokenizer uses
-	 * " \t\n\r\f" as a delimeter set of nontoken delimiters, and an empty token
+	 * " \t\n\r\f" as a delimiter set of nontoken delimiters, and an empty token
 	 * delimiter set.
 	 * <p>
 	 * Is equivalent to <code>StringTokenizer(text, " \t\n\r\f", null);
@@ -332,7 +332,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Set the delimiters for this StringTokenizer.
-	 * The position must be initilized before this method is used.
+	 * The position must be initialized before this method is used.
 	 * (setText does this and it is called from the constructor)
 	 *
 	 * @param nontokenDelims delimiters that should not be returned as tokens.
@@ -358,7 +358,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 				maxDelimChar = tokenDelims.charAt(i);
 			}
 		}
-		// Changing the delimeters may change the number of tokens
+		// Changing the delimiters may change the number of tokens
 		tokenCount = -1;
 	}
 
@@ -427,7 +427,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 		while(position != workingPosition ||
 			emptyReturned != workingEmptyReturned){
 			if (onToken){
-				// returning a token decreases the token coun
+				// returning a token decreases the token count
 				tokenCount--;
 				return (emptyReturned ? "" : text.substring(workingPosition, (position != -1) ? position : strLength));
 			}
@@ -482,7 +482,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * method can be called before it generates an exception. The current position
 	 * is not advanced.
 	 *
-	 * @return the number of tokens remaining in the string using the curren
+	 * @return the number of tokens remaining in the string using the current
 	 *    delimiter set.
 	 * @see #nextToken()
 	 */
@@ -574,7 +574,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Calculates the number of times that this tokenizer's <code>nextToken</code>
 	 * method can be called before it generates an exception using the given set of
-	 * (nontoken) delimeters.  The delimeters given will be used for future calls to
+	 * (nontoken) delimiters.  The delimiters given will be used for future calls to
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
@@ -591,7 +591,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Calculates the number of times that this tokenizer's <code>nextToken</code>
 	 * method can be called before it generates an exception using the given set of
-	 * delimeters.  The delimeters given will be used for future calls to
+	 * delimiters.  The delimiters given will be used for future calls to
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
@@ -612,7 +612,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Calculates the number of times that this tokenizer's <code>nextToken</code>
 	 * method can be called before it generates an exception using the given set of
-	 * delimeters.  The delimeters given will be used for future calls to
+	 * delimiters.  The delimiters given will be used for future calls to
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
@@ -630,7 +630,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Calculates the number of times that this tokenizer's <code>nextToken</code>
 	 * method can be called before it generates an exception using the given set of
-	 * delimeters.  The delimeters given will be used for future calls to
+	 * delimiters.  The delimiters given will be used for future calls to
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
@@ -649,15 +649,15 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Advances the state of the tokenizer to the next token or delimiter.  This method only
-	 * modifies the class variables position, and emptyReturned.  The type of token tha
+	 * modifies the class variables position, and emptyReturned.  The type of token that
 	 * should be emitted can be deduced by examining the changes to these two variables.
 	 * If there are no more tokens, the state of these variables does not change at all.
 	 *
 	 * @return true if we are at a juncture at which a token may be emitted, false otherwise.
 	 */
 	private boolean advancePosition(){
-		// if we are returning empty tokens, we are just starting to tokenize
-		// and there is a delimiter ar the beginning of the string or the string
+		// if we are returning empty tokens, we are just starting to tokenizer
+		// and there is a delimiter at the beginning of the string or the string
 		// is empty we need to indicate that there is an empty token at the beginning.
 		// The beginning is defined as where the delimiters were last changed.
 		if (returnEmptyTokens && !emptyReturned &&
@@ -851,7 +851,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 			((nontokenDelims == null || nontokenDelims.indexOf(c) == -1) &&
 			(tokenDelims == null || tokenDelims.indexOf(c) == -1)); next++){
 			if (next == strLength - 1){
-				// we have reached the end of the string withou
+				// we have reached the end of the string without
 				// finding a delimiter
 				return (-1);
 			}
@@ -873,7 +873,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	}
 
 	/**
-	 * Returns the same value as the <code>nextToken()</code> method, except tha
+	 * Returns the same value as the <code>nextToken()</code> method, except that
 	 * its declared return value is <code>Object</code> rather than
 	 * <code>String</code>. It exists so that this class can implement the
 	 * <code>Enumeration</code> interface.
@@ -901,7 +901,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	}
 
 	/**
-	 * Returns the same value as the <code>nextToken()</code> method, except tha
+	 * Returns the same value as the <code>nextToken()</code> method, except that
 	 * its declared return value is <code>Object</code> rather than
 	 * <code>String</code>. It exists so that this class can implement the
 	 * <code>Iterator</code> interface.

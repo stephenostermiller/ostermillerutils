@@ -31,7 +31,7 @@ import java.io.*;
  * all data written to this stream.
  * It is conjectured that it is computationally infeasible to produce
  * two messages having the same message digest, or to produce any
- * message having a given prespecified target message digest. The MD5
+ * message having a given pre-specified target message digest. The MD5
  * algorithm is intended for digital signature applications, where a
  * large file must be "compressed" in a secure manner before being
  * encrypted with a private (secret) key under a public-key cryptosystem
@@ -45,7 +45,7 @@ import java.io.*;
 public class MD5OutputStream extends FilterOutputStream {
 
 	/**
-	 * MD5 contex
+	 * MD5 context
 	 */
 	private MD5	md5;
 

@@ -14,7 +14,20 @@ CVS=cvs -q
 .SUFFIXES: .java .class
 .SUFFIXES: .bte .html
 
-all: junkclean neaten compile build javadoc htmlsource
+all:
+	@$(MAKE) -s --no-print-directory junkclean
+	@$(MAKE) -s --no-print-directory spell
+	@$(MAKE) -s --no-print-directory neaten
+	@$(MAKE) -s --no-print-directory compile
+	@$(MAKE) -s --no-print-directory build
+	@$(MAKE) -s --no-print-directory javadoc
+	@$(MAKE) -s --no-print-directory htmlsource
+	@$(MAKE) -s --no-print-directory release
+
+spell: *.bte *.java
+	@echo Make: Running spell check.
+	@./spell.sh $?
+	@touch spell
 
 .PHONY : compile
 compile: javafiles classes
@@ -95,7 +108,7 @@ classesclean: junkclean
 .PHONY: junkclean	        
 junkclean:
 	@echo Make: Removing utilites detritus.
-	@rm -rf *~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
+	@rm -rf *~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ srcbuild/
 
 .PHONY: buildclean	        
 buildclean: junkclean
@@ -105,12 +118,12 @@ buildclean: junkclean
 .PHONY: javadocclean	        
 javadocclean: junkclean
 	@echo Make: Removing generated documentation.
-	@rm -rf doc/
+	@rm -rf doc/ javadoc
 
 .PHONY: htmlsourceclean	        
 htmlsourceclean: junkclean
 	@echo Make: Removing generated html source.
-	@rm -f *.*.html syntax.css source.html
+	@rm -rf src/ htmlsource
         
 .PHONY: testclean	        
 testclean: junkclean
@@ -125,7 +138,7 @@ clean: buildclean javadocclean htmlsourceclean
 .PHONY: allclean        
 allclean: clean
 	@echo Make: Removing all files not in CVS.
-	@rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java javadoc htmlsource neaten
+	@rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java neaten spell release
 
 javadoc: *.java
 	@echo Make: Generating javadoc
@@ -139,10 +152,10 @@ javadoc: *.java
 .PHONY: build
 build: utils.jar
 
-utils.jar: *.java *.class *.html *.sh *.lex *.properties *.txt *.TXT *.csv *.bte Makefile ../../../gnu/getopt/*.*
+utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
 	@mkdir -p com/Ostermiller/util
-	@cp *.java *.class *.html *.sh *.lex *.properties *.txt *.TXT *.csv *.bte Makefile Makefile com/Ostermiller/util/
+	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile Makefile com/Ostermiller/util/
 	@rm -f `find com/Ostermiller/util -name "*.lex" | sed s/.lex/.java/`
 	@rm -f com/Ostermiller/util/CircularBufferTests*.class com/Ostermiller/util/CSVTest.class com/Ostermiller/util/TokenizerTests.class
 	@mkdir -p gnu/getopt		
@@ -172,24 +185,30 @@ update:
 commit: 
 	@$(CVS) commit
 
-.PHONY: release
-release: 
-	@./release.sh
+release: *.html src/* utils.jar .htaccess install.sh doc/
+	@./release.sh $?
+	@touch release
 
 .PHONY: install
 install:
 	@./install.sh
 
-htmlsource: *.java *.lex
-	@echo Make: Generating colored html source.
-	@rm -rf src/
-	@mkdir src
-	@cp *.java *.properties *.lex src
-	@rm -f `find src -name "*.lex" | sed s/.lex/.java/`
-	@$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
-	@$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.lex src/*.java src/*.properties
-	@mv src/*.*.html src/*.css .
-	@rm -rf src
-	@./source.sh
-	@./cleansource.sh
+htmlsource: *.java *.properties *.lex
+	@echo Make: Generating colored html source: $?
+	@rm -rf srcbuild/
+	@mkdir srcbuild
+	@cp $? source.sh cleansource.sh src.bte srcbuild
+	@rm -f `find srcbuild -name "*.lex" | sed s/.lex/.java/`
+	@touch srcbuild/tempdummy.java srcbuild/tempdummy.lex srcbuild/tempdummy.properties
+	@echo "cd srcbuild" > srcbuild/temp.sh
+	@echo "$(JAVA)/.. com.Ostermiller.util.Tabs -s 4 *.java" >> srcbuild/temp.sh
+	@echo "$(JAVA)/.. com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace *.lex *.java *.properties" >> srcbuild/temp.sh
+	@echo "rm -rf tempdummy*" >> srcbuild/temp.sh
+	@echo "./cleansource.sh" >> srcbuild/temp.sh
+	@echo "./source.sh" >> srcbuild/temp.sh
+	@chmod +x srcbuild/temp.sh
+	@srcbuild/temp.sh
+	@mkdir -p src/
+	@mv srcbuild/*.*.html srcbuild/*.css src/
+	@rm -rf srcbuild
 	@touch htmlsource

@@ -20,7 +20,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Read files in comma separated value format as outputted by the Microsof
+ * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
@@ -57,8 +57,8 @@ import java.util.*;
  * <li>Quotes inside quoted strings are escaped with a double quote rather than a backslash.</li>
  * <li>Excel may convert data before putting it in CSV format:<ul>
  * <li>Tabs are converted to a single space.</li>
- * <li>New lines in the data are always represented as the unix new line. ("\n")</li>
- * <li>Numbers that are greater than 12 digits may be represented in trunkated
+ * <li>New lines in the data are always represented as the UNIX new line. ("\n")</li>
+ * <li>Numbers that are greater than 12 digits may be represented in truncated
  * scientific notation form.</li></ul>
  * This parser does not attempt to fix these excel conversions, but users should be aware
  * of them.</li></ul>
@@ -204,8 +204,8 @@ public class ExcelCSVParser implements CSVParse {
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
 	 * would be comments:<br>
-	 * <pre> # Commen
-	 * ; Another Commen
+	 * <pre> # Comment
+	 * ; Another Comment
 	 * ! Yet another comment</pre>
 	 * By default there are no comments in CVS files.  Commas and quotes may not be
 	 * used to indicate comment lines.
@@ -217,7 +217,7 @@ public class ExcelCSVParser implements CSVParse {
 	}
 
 	/**
-	 * Get the number of the line from which the last value was retreived.
+	 * Get the number of the line from which the last value was retrieved.
 	 *
 	 * @return line number or -1 if no tokens have been returned.
 	 */
@@ -226,7 +226,7 @@ public class ExcelCSVParser implements CSVParse {
 	}
 
 	/**
-	 * Parse the given file for comma separatad values and print the results
+	 * Parse the given file for comma separated values and print the results
 	 * to System.out.
 	 *
 	 * @param args First argument is the file name.  System.in used if no filename given.

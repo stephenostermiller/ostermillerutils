@@ -22,7 +22,7 @@ import java.io.*;
 /**
  * A StraightStreamReader is a bridge from byte streams to character streams: It reads bytes
  * and translates them into characters without using a character encoding.  The characters
- * that a StraightStreamReader returns may not be valid unicode characters but they are
+ * that a StraightStreamReader returns may not be valid Unicode characters but they are
  * guaranteed to be in the 0x00 to 0xFF range.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/StraightStreamReader.html">ostermiller.org</a>.
@@ -182,7 +182,7 @@ public class StraightStreamReader extends Reader{
 	 * Regression test for this class.  If this class is working, this should
 	 * run and print no errors.
 	 * <P>
-	 * This method creates a tempory file in the working directory called "test.txt".
+	 * This method creates a temporary file in the working directory called "test.txt".
 	 * This file should not exist before hand, and the program should have create,
 	 * read, write, and delete access to this file.
 	 *

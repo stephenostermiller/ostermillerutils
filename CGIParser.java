@@ -93,7 +93,7 @@ public class CGIParser{
 	}
 
 	/**
-	 * Returns an array of String objects containing all of the values the given reques
+	 * Returns an array of String objects containing all of the values the given request
 	 * parameter has, or null if the parameter does not exist.
 	 * <p>
 	 * If the parameter has a single value, the array has a length of 1.

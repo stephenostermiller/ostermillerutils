@@ -8,6 +8,10 @@ then
     exit 1
 fi
 
-mv -f package.html temp
-scp -r *.html *.css utils.jar .htaccess install.sh doc/ deadsea@ostermiller.org:www/utils
-mv -f temp package.html
+FILES=$@
+FILES=${FILES/package.html/} 
+if [ "$FILES" ]
+then
+	echo Make: Uploading to web site: $FILES
+	scp -r $FILES deadsea@ostermiller.org:www/utils
+fi

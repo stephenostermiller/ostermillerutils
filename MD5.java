@@ -33,7 +33,7 @@ import java.io.*;
  * as output a 128-bit "fingerprint" or "message digest" of the input.
  * It is conjectured that it is computationally infeasible to produce
  * two messages having the same message digest, or to produce any
- * message having a given prespecified target message digest. The MD5
+ * message having a given pre-specified target message digest. The MD5
  * algorithm is intended for digital signature applications, where a
  * large file must be "compressed" in a secure manner before being
  * encrypted with a private (secret) key under a public-key cryptosystem
@@ -484,7 +484,7 @@ public class MD5 {
 		}
 
 		/** 
-		 * Set this state to be exacly the same as some other.
+		 * Set this state to be exactly the same as some other.
 		 *
 		 * @param from state to copy from.
 		 */

@@ -520,7 +520,7 @@ public class CircularCharBuffer {
 		 * Tell whether this stream is ready to be read.
 		 *
 		 * @return True if the next read() is guaranteed not to block for input,
-		 *    false otherwise. Note that returning false does not guarantee tha
+		 *    false otherwise. Note that returning false does not guarantee that
 		 *    the next read will block.
 		 * @throws IOException if the stream is closed.
 		 */

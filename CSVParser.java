@@ -32,7 +32,7 @@ import java.util.*;
  * If field includes a comma or a new line, the whole field must be surrounded with double quotes.
  * When the field is in quotes, any quote literals must be escaped by \" Backslash
  * literals must be escaped by \\.	Otherwise a backslash an the character following i
- * will be treated as the following character, ie."\n" is equivelent to "n".  Other escape
+ * will be treated as the following character, IE."\n" is equivalent to "n".  Other escape
  * sequences may be set using the setEscapes() method.	Text that comes after quotes that have
  * been closed but come before the next comma will be ignored.
  * <P>
@@ -123,7 +123,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param in stream that contains comma separated values.
 	 * @param escapes a list of characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
@@ -138,7 +138,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param in reader that contains comma separated values.
 	 * @param escapes a list of characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
@@ -244,11 +244,11 @@ public class CSVParser implements CSVParse {
 	 * which would set the escape sequences to be the Java escape
 	 * sequences.  Characters that follow a \ that are not escape
 	 * sequences will still be interpreted as that character.<br>
-	 * The two arguemnts to this method must be the same length.  If
+	 * The two arguments to this method must be the same length.  If
 	 * they are not, the longer of the two will be truncated.
 	 *
 	 * @param escapes a list of characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
 	 */
 	public void setEscapes(String escapes, String replacements){
 		lexer.setEscapes(escapes, replacements);
@@ -258,8 +258,8 @@ public class CSVParser implements CSVParse {
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
 	 * would be comments:<br>
-	 * <pre> # Commen
-	 * ; Another Commen
+	 * <pre> # Comment
+	 * ; Another Comment
 	 * ! Yet another comment</pre>
 	 * By default there are no comments in CVS files.  Commas and quotes may not be
 	 * used to indicate comment lines.
@@ -271,7 +271,7 @@ public class CSVParser implements CSVParse {
 	}
 
 	/**
-	 * Get the number of the line from which the last value was retreived.
+	 * Get the number of the line from which the last value was retrieved.
 	 *
 	 * @return line number or -1 if no tokens have been returned.
 	 */
@@ -280,7 +280,7 @@ public class CSVParser implements CSVParse {
 	}
 
 	/**
-	 * Parse the given file for comma separatad values and print the results
+	 * Parse the given file for comma separated values and print the results
 	 * to System.out.
 	 *
 	 * @param args First argument is the file name.  System.in used if no filename given.
@@ -342,7 +342,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param s string with comma delimited data to parse.
 	 * @param escapes a list of additional characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public static String[][] parse(String s, String escapes, String replacements, String commentDelims){

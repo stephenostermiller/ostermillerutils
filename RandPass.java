@@ -430,7 +430,7 @@ public class RandPass {
 	 * Require that a certain number of characters from an
 	 * alphabet be present in generated passwords.
 	 *
-	 * @param alphabet set of letters that must be presen
+	 * @param alphabet set of letters that must be present
 	 * @param num number of letters from the alphabet that must be present.
 	 */
 	public void addRequirement(char[] alphabet, int num){
@@ -506,7 +506,7 @@ public class RandPass {
 	 * abcabc.
 	 * <p>
 	 * Using this method can greatly reduce the pool of passwords that are generated.
-	 * For exmaple if only one repetition is allowed then the pool of passwords
+	 * For example if only one repetition is allowed then the pool of passwords
 	 * is the permutation of the alphabet rather than the combination.
 	 *
 	 * @param rep Maximum character repetition.
@@ -581,8 +581,8 @@ public class RandPass {
 				Requirement req = (Requirement)requirements.elementAt(reqNum);
 				// set the portion of this alphabet available for use.
 				int reqUsedInd = req.alphabet.length;
-				// figure out how much of this requirement is alread fufilled
-				// and what is available to fufill the rest of it.
+				// figure out how much of this requirement is already fulfilled
+				// and what is available to fulfill the rest of it.
 				int fufilledInd = 0;
 				int availableInd = 0;
 				for (int i=0; i<length; i++){
@@ -601,11 +601,11 @@ public class RandPass {
 						availableInd++;
 					}
 				}
-				// fufill the requiremen
+				// fulfill the requirement
 				int toDo = req.num - fufilledInd;
 				for (int i=0; i<toDo && availableInd>0; i++){
-					// pick a random available slo
-					// and a random member of the available alphabe
+					// pick a random available slot
+					// and a random member of the available alphabet
 					int slot = rand.nextInt(availableInd);
 					char passChar = req.alphabet[rand.nextInt(reqUsedInd)];
 					pass[available[slot]] = passChar;
@@ -633,12 +633,12 @@ public class RandPass {
 	}
 
 	/**
-	 * Avoid reptition (if possible) by moving all characters that would cause repetition to
+	 * Avoid repetition (if possible) by moving all characters that would cause repetition to
 	 * the end of the alphabet and returning the size of the alphabet that may be used.
 	 */
 	private static int avoidRepetition(char[] alph, char[] pass, int passSize, int repetition, int alphSize){
 		if (repetition > -1){
-			// limit the alphabet to those characters tha
+			// limit the alphabet to those characters that
 			// will not cause repeating sequences
 			int repPos = 0;
 			while ((repPos = findRep(pass, repPos, passSize, repetition)) != -1){
@@ -669,7 +669,7 @@ public class RandPass {
 	}
 
 	/**
-	 * mave all of the given character to the end of the array
+	 * move all of the given character to the end of the array
 	 * and return the number of characters moved.
 	 */
 	private static int moveto(char[] alph, int numGood, char c){

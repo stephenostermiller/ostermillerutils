@@ -8,6 +8,6 @@ do
   if [ ! -e "doc/com/Ostermiller/util/${file%.*.html}.html" ]
     then
     mv  "$file" temp
-    sed "s/<small.*javadoc.*small>/\1/g" temp > $file
+	sed "s/<small.*JavaDoc.*small>//g" temp > $file
   fi
 done

@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.Locale;
 
 /**
- * Utilities for File maniputlation.
+ * Utilities for File manipulation.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/FileHelper.html">ostermiller.org</a>.
  */

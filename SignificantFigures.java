@@ -20,7 +20,7 @@ package com.Ostermiller.util;
 /**
  * A number with an associated number of significant figures.
  * This class handles parsing numbers, determining the number
- * of significant figures, adjusting the number of significan
+ * of significant figures, adjusting the number of significant
  * figures (including scientific rounding), and displaying the number.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/SignificantFigures.html">ostermiller.org</a>.
@@ -29,7 +29,7 @@ package com.Ostermiller.util;
  * these rules are used:
  * <ul>
  * <li>Non-zero digits are always significant.</li>
- * <li>All zeros between other significant digits or between a significan
+ * <li>All zeros between other significant digits or between a significant
  * digit and the decimal point are significant.</li>
  * <li>All trailing zeros to the right of the decimal point are significant.</li>
  * <li>If the number is contains no digits other than zero, every zero is significant.</li>
@@ -40,14 +40,14 @@ package com.Ostermiller.util;
  * <li>If the greatest insignificant digit is less than five, round down.</li>
  * <li>If the greatest insignificant digit is greater than five, round up.</li>
  * <li>If the greatest insignificant digit is five and followed by some non-zero digit, round up.</li>
- * <li>If the greatest insignificant digit is five and followed only by zeros, and the least significan
+ * <li>If the greatest insignificant digit is five and followed only by zeros, and the least significant
  * digit is odd, round up.</li>
- * <li>If the greatest insignificant digit is five and followed only by zeros, and the least significan
+ * <li>If the greatest insignificant digit is five and followed only by zeros, and the least significant
  * digit is even, round down.</li>
  * </ul>
  *
  * <p>
- * Example of using this class to muliply numbers and display the resul
+ * Example of using this class to multiply numbers and display the result
  * with the proper number of significant figures:<br>
  * <pre> String[] args = {"1.0", "2.0", ...}
  * SignificantFigures number;
@@ -62,7 +62,7 @@ package com.Ostermiller.util;
  * number.setNumberSignificantFigures(sigs);
  * System.out.println(number);</pre>
  * <p>
- * Example of using this class to add numbers and display the resul
+ * Example of using this class to add numbers and display the result
  * with the proper number of significant figures:<br>
  * <pre> String[] args = {"1.0", "2.0", ...}
  * SignificantFigures number;
@@ -83,7 +83,7 @@ public class SignificantFigures extends Number {
 
 	/**
 	 * In the case the a number
-	 * could not be parsed, the orginial is stored
+	 * could not be parsed, the original is stored
 	 * for toString purposes.
 	 */
 	private String original;
@@ -259,7 +259,7 @@ public class SignificantFigures extends Number {
 	/**
 	 * Adjust the number of significant figures such that the leas
 	 * significant digit is at the given place.  This method may add
-	 * significant zeros to the end of this number, or remove significan
+	 * significant zeros to the end of this number, or remove significant
 	 * digits from this number.
 	 * <p>
 	 * It is possible to remove all significant digits from this number which
@@ -282,18 +282,18 @@ public class SignificantFigures extends Number {
 	/**
 	 * Adjust the number of significant figures such that the leas
 	 * significant digit is at the given place.  This method may add
-	 * significant zeros to the end of this number, or remove significan
+	 * significant zeros to the end of this number, or remove significant
 	 * digits from this number.
 	 * <p>
-	 * If all significant digits are removed from this number by trunkating to
+	 * If all significant digits are removed from this number by truncating to
 	 * the least significant place, a zero will be created with significant figures
 	 * from the least to most significant places.
 	 * <p>
 	 * This method has no effect if this number is not a number or infinity.
 	 *
 	 * @param leastPlace the desired place of the least significant digit or Integer.MIN_VALUE to ignore.
-	 * @param mostPlace the desired place of the most significant digitor Integer.MIN_VALUE to ignore.
-	 * @return the decimal place of the least significant digi
+	 * @param mostPlace the desired place of the most significant digit or Integer.MIN_VALUE to ignore.
+	 * @return the decimal place of the least significant digit
 	 */
 	public void setLMSD(int leastPlace, int mostPlace){
 		if (digits != null && leastPlace != Integer.MIN_VALUE){
@@ -433,7 +433,7 @@ public class SignificantFigures extends Number {
 	/**
 	 * Parsing state:
 	 * State in which a possible sign and
-	 * at least one non-zero digi
+	 * at least one non-zero digit
 	 * has been read followed by some number of
 	 * zeros.  The decimal place has no
 	 * been encountered yet.
@@ -442,7 +442,7 @@ public class SignificantFigures extends Number {
 	/**
 	 * Parsing state:
 	 * State in which a possible sign and
-	 * at least one non-zero digi
+	 * at least one non-zero digit
 	 * has been read.  The decimal place has no
 	 * been encountered yet.
 	 */
@@ -450,7 +450,7 @@ public class SignificantFigures extends Number {
 	/**
 	 * Parsing state:
 	 * State in which only a possible sign,
-	 * leading zeros, and a decimal poin
+	 * leading zeros, and a decimal point
 	 * have been encountered.
 	 */
 	private final static int LEADZEROSDOT = 4;
@@ -494,7 +494,7 @@ public class SignificantFigures extends Number {
 		boolean foundMantissaDigit = false;
 		// sometimes we don't know if a zero will be
 		// significant or not when it is encountered.
-		// keep track of the number of them so tha
+		// keep track of the number of them so that
 		// the all can be made significant if we find
 		// out that they are.
 		int zeroCount = 0;
@@ -747,7 +747,7 @@ public class SignificantFigures extends Number {
 					addOne = true;
 				}
 				// loop to add one (and carry a one if added to a nine)
-				// to the last significant digi
+				// to the last significant digit
 				for (int i=significantFigures-1; addOne && i>=0; i--){
 					char digit = digits.charAt(i);
 					if (digit < '9'){

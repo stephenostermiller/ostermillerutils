@@ -19,13 +19,13 @@ package com.Ostermiller.util;
 import java.io.*;
 
 /**
- * Implements Base64 encoding and decoding as defined by RFC 2045: "Multipurpose Interne
+ * Implements Base64 encoding and decoding as defined by RFC 2045: "Multipurpose Internet
  * Mail Extensions (MIME) Part One: Format of Internet Message Bodies" page 23.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
  *
  * <blockquote>
- * <p>The Base64 Content-Transfer-Encoding is designed to represen
+ * <p>The Base64 Content-Transfer-Encoding is designed to represent
  * arbitrary sequences of octets in a form that need not be humanly
  * readable.  The encoding and decoding algorithms are simple, but the
  * encoded data are consistently only about 33 percent larger than the
@@ -45,7 +45,7 @@ import java.io.*;
  * share these properties, and thus do not fulfill the portability
  * requirements a binary transport encoding for mail must meet.</p>
  *
- * <p>The encoding process represents 24-bit groups of input bits as outpu
+ * <p>The encoding process represents 24-bit groups of input bits as output
  * strings of 4 encoded characters.  Proceeding from left to right, a
  * 24-bit input group is formed by concatenating 3 8bit input groups.
  * These 24 bits are then treated as 4 concatenated 6-bit groups, each
@@ -64,7 +64,7 @@ import java.io.*;
  * and to the multipart boundary delimiters defined in RFC 2046 (e.g.,
  * "-").</p>
  * <pre>
- *                  Table 1: The Base64 Alphabe
+ *                  Table 1: The Base64 Alphabet
  *
  *   Value Encoding  Value Encoding  Value Encoding  Value Encoding
  *       0 A            17 R            34 i            51 z
@@ -166,7 +166,7 @@ public class Base64{
 		for (int i=0; i<reverseBase64Chars.length; i++){
 			reverseBase64Chars[i] = -1;
 		}
-		// For characters that are base64Chars, adjus
+		// For characters that are base64Chars, adjust
 		// the reverse lookup table.
 		for (byte i=0; i < base64Chars.length; i++){
 			reverseBase64Chars[base64Chars[i]] = i;
@@ -227,7 +227,7 @@ public class Base64{
 	public static byte[] encode(byte[] bytes){
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 		// calculate the length of the resulting output.
-		// in general it will be 4/3 the size of the inpu
+		// in general it will be 4/3 the size of the input
 		// but the input length must be divisible by three.
 		// If it isn't the next largest size that is divisible
 		// by three is used.
@@ -258,7 +258,7 @@ public class Base64{
 	 */
 	public static void encode(InputStream in, OutputStream out, boolean lineBreaks) throws IOException {
 		// Base64 encoding converts three bytes of input to
-		// four bytes of outpu
+		// four bytes of output
 		int[] inBuffer = new int[3];
 		int lineCount = 0;
 
@@ -268,7 +268,7 @@ public class Base64{
 			inBuffer[1] = in.read();
 			inBuffer[2] = in.read();
 
-			// Calculate the outBuffer
+			// Calculate the out Buffer
 			// The first byte of our in buffer will always be valid
 			// but we must check to make sure the other two bytes
 			// are not -1 before using them.
@@ -351,7 +351,7 @@ public class Base64{
 	public static byte[] decode(byte[] bytes){
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 		// calculate the length of the resulting output.
-		// in general it will be at most 3/4 the size of the inpu
+		// in general it will be at most 3/4 the size of the input
 		// but the input length must be divisible by four.
 		// If it isn't the next largest size that is divisible
 		// by four is used.
@@ -410,7 +410,7 @@ public class Base64{
 	 * @throws IOException if an IO occurs or unexpected data is encountered.
 	 */
 	public static void decode(InputStream in, OutputStream out, boolean throwExceptions) throws IOException {
-		// Base64 decoding converts four bytes of input to three bytes of outpu
+		// Base64 decoding converts four bytes of input to three bytes of output
 		int[] inBuffer = new int[4];
 
 		// read bytes unmapping them from their ASCII encoding in the process
@@ -422,7 +422,7 @@ public class Base64{
 			inBuffer[2] = readBase64(in, throwExceptions);
 			inBuffer[3] = readBase64(in, throwExceptions);
 
-			// Calculate the outpu
+			// Calculate the output
 			// The first two bytes of our in buffer will always be valid
 			// but we must check to make sure the other two bytes
 			// are not -1 before using them.

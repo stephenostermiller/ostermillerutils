@@ -40,7 +40,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * Create a printer that will print values to the given
 	 * stream.	 Character to byte conversion is done using
 	 * the default character encoding.	Comments will be
-	 * written using the delault comment character '#'.
+	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
 	 */
@@ -51,7 +51,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.	Comments will be
-	 * written using the delault comment character '#'.
+	 * written using the default comment character '#'.
 	 *
 	 * @param out stream to which to print.
 	 */

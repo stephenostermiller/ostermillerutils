@@ -382,7 +382,7 @@ public class CircularByteBuffer {
 
 		/**
 		 * Returns the number of bytes that can be read (or skipped over) from this
-		 * input stream without blocking by the next caller of a method for this inpu
+		 * input stream without blocking by the next caller of a method for this input
 		 * stream. The next caller might be the same thread or or another thread.
 		 *
 		 * @return the number of bytes that can be read from this input stream without blocking.

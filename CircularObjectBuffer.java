@@ -74,7 +74,7 @@ public class CircularObjectBuffer {
 	protected boolean blockingWrite = true;
 
 	/**
-	 * True when no more input is coming into this buffer.  At tha
+	 * True when no more input is coming into this buffer.  At that
 	 * point reading from the buffer may return  null if the buffer
 	 * is empty, otherwise a read will block until an Object is available.
 	 */
@@ -408,7 +408,7 @@ public class CircularObjectBuffer {
 	 * that the producer is done producing objects and that the consumer
 	 * should stop asking for objects once it has used up buffered objects.
 	 * <p>
-	 * Once the producer has signalled that it is done, further write() invocations
+	 * Once the producer has signaled that it is done, further write() invocations
 	 * will cause an IllegalStateException to be thrown. Calling done() multiple times,
 	 * however, has no effect.
 	 */
