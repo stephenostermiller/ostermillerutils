@@ -206,148 +206,148 @@ public class Browser {
 		* @throws IOException if the url is not valid or the browser fails to star
 		*/
 	 public static void displayURL(String url) throws IOException {
-		if (exec == nu ll || exec.length == 0){
-			if (System .getProperty("os.name").startsWith("Mac")){
-				boolea n success = false;
+		if (exec == null || exec.length == 0){
+			if (System.getProperty("os.name").startsWith("Mac")){
+				boolean success = false;
 			try {
-				Class  nSWorkspace;
-					if  (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
+				Class nSWorkspace;
+					if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
 						 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
 						 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
 						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
-					}  else {
+					} else {
 						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
 					}
-					Me thod sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
-					Ob ject workspace = sharedWorkspace.invoke(null, new Object[] {});
-					Me thod openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
-					su ccess = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();
-				//succ ess = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
-			} catch (E xception x) {}
-				if (!s uccess){
-					tr y {
+					Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
+					Object workspace = sharedWorkspace.invoke(null, new Object[] {});
+					Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
+					success = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();
+				//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
+			} catch (Exception x) {}
+				if (!success){
+					try {
 						 Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
 						 Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
 						 openURL.invoke(null, new Object[] {url});
 						 //com.apple.mrj.MRJFileUtils.openURL(url);
-					}  catch (Exception x){
+					} catch (Exception x){
 						 System.err.println(x.getMessage());
 						 throw new IOException(labels.getString("failed"));
 					}
 				}
 			} else {
-				throw  new IOException(labels.getString("nocommand"));
+				throw new IOException(labels.getString("nocommand"));
 			}
 		} else {
-			// for sec urity, see if the url is valid.
-			// this is  primarily to catch an attack in which the url
-			// starts  with a - to fool the command line flags, bu
-			// it coul d catch other stuff as well, and will throw a
-			// Malform edURLException which will give the caller of this
-			// functio n useful information.
-			new URL(ur l);
-			// escape  any weird characters in the url.  This is primarily
-			// to prev ent an attacker from putting in spaces
-			// that mi ght fool exec into allowing
-			// the att acker to execute arbitrary code.
-			StringBuff er sb = new StringBuffer(url.length());
-			for (int i =0; i<url.length(); i++){
-				char c  = url.charAt(i);
-				if ((c  >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
-						 || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
-						 || c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
-					// characters that are nessesary for urls and should be safe
-					// to pass to exec.  Exec uses a default string tokenizer with
-					// the default arguments (whitespace) to separate command line
-					// arguments, so there should be no problem with anything bu
-					// whitespace.
-					sb .append(c);
-				} else  {
-					c  = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)
-					if  (c < 0x10){
-						 sb.append("%0" + Integer.toHexString(c));
-					}  else {
-						 sb.append("%" + Integer.toHexString(c));
+			// for security, see if the url is valid.
+			// this is primarily to catch an attack in which the url
+			// starts with a - to fool the command line flags, bu
+			// it could catch other stuff as well, and will throw a
+			// MalformedURLException which will give the caller of this
+			// function useful information.
+			new URL(url);
+			// escape any weird characters in the url.  This is primarily
+			// to prevent an attacker from putting in spaces
+			// that might fool exec into allowing
+			// the attacker to execute arbitrary code.
+			StringBuffer sb = new StringBuffer(url.length());
+			for (int i=0; i<url.length(); i++){
+				char c = url.charAt(i);
+				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+						|| c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
+						|| c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
+					//characters that are nessesary for urls and should be safe
+					//to pass to exec.  Exec uses a default string tokenizer with
+					//the default arguments (whitespace) to separate command line
+					//arguments, so there should be no problem with anything bu
+					//whitespace.
+					sb.append(c);
+				} else {
+					c = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)
+					if (c < 0x10){
+						sb.append("%0" + Integer.toHexString(c));
+					} else {
+						sb.append("%" + Integer.toHexString(c));
 					}
 				}
 			}
-			String[] m essageArray = new String[1];
-			messageArr ay[0] = sb.toString();
-			String com mand = null;
-			boolean fo und = false;
-			// try eac h of the exec commands until something works
+			String[] messageArray = new String[1];
+			messageArray[0] = sb.toString();
+			String command = null;
+			boolean found = false;
+			// try each of the exec commands until something works
 			try {
-				for (i nt i=0; i<exec.length && !found; i++){
-					tr y {
-						 // stick the url into the command
-						 command = MessageFormat.format(exec[i], messageArray);
-						 // parse the command line.
-						 Vector argsVector = new Vector();
-						 BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
-						 String t;
-						 while ((t = lex.getNextToken()) != null) {
-							 argsVector.add(t);
-						 }
-						 String[] args = new String[argsVector.size()];
-						 args = (String[])argsVector.toArray(args);
-						 // the windows urlprotocol handler doesn't work well with file urls.
-						 // Correct those problems here before continuing
-						 // Java File.toURL() gives only one / following file: bu
-						 // we need two.
-						 // If there are escaped characters in the url, we will have
-						 // to create an internet shortcut and open that, as the command
-						 // line version of the rundll doesn't like them.
-						 if (args[0].equals("rundll32") &&
-								 args[1].equals("url.dll,FileProtocolHandler") &&
-								 args[2].startsWith("file:/")){
-							 if (args[2].charAt(6) != '/'){
-								 args[2] = "file://" + args[2].substring(6);
-							 }
-							 if (args[2].charAt(7) != '/'){
-								 args[2] = "file:///" + args[2].substring(7);
-							 }
-							 File shortcut = File.createTempFile("OpenInBrowser", ".url");
-							 shortcut = shortcut.getCanonicalFile();
-							 shortcut.deleteOnExit();
-							 PrintWriter out = new PrintWriter(new FileWriter(shortcut));
-							 out.println("[InternetShortcut]");
-							 out.println("URL=" + args[2]);
-							 out.close();
-							 args[2] = shortcut.getCanonicalPath();
-						 }
-						 // start the browser
-						 Process p = Runtime.getRuntime().exec(args);
+					for (int i=0; i<exec.length && !found; i++){
+						try {
+							// stick the url into the command
+						command = MessageFormat.format(exec[i], messageArray);
+						// parse the command line.
+						Vector argsVector = new Vector();
+						BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
+						String t;
+						while ((t = lex.getNextToken()) != null) {
+								argsVector.add(t);
+						}
+						String[] args = new String[argsVector.size()];
+						args = (String[])argsVector.toArray(args);
+						// the windows urlprotocol handler doesn't work well with file urls.
+						// Correct those problems here before continuing
+						// Java File.toURL() gives only one / following file: bu
+						// we need two.
+						// If there are escaped characters in the url, we will have
+						// to create an internet shortcut and open that, as the command
+						// line version of the rundll doesn't like them.
+						if (args[0].equals("rundll32") &&
+								args[1].equals("url.dll,FileProtocolHandler") &&
+								args[2].startsWith("file:/")){
+							if (args[2].charAt(6) != '/'){
+									args[2] = "file://" + args[2].substring(6);
+							}
+							if (args[2].charAt(7) != '/'){
+									args[2] = "file:///" + args[2].substring(7);
+							}
+							File shortcut = File.createTempFile("OpenInBrowser", ".url");
+							shortcut = shortcut.getCanonicalFile();
+							shortcut.deleteOnExit();
+							PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+							out.println("[InternetShortcut]");
+							out.println("URL=" + args[2]);
+							out.close();
+							args[2] = shortcut.getCanonicalPath();
+						}
+						// start the browser
+						Process p = Runtime.getRuntime().exec(args);
 
-						 // give the browser a bit of time to fail.
-						 // I have found that sometimes sleep doesn't work
-						 // the first time, so do it twice.  My tests
-						 // seem to show that 1000 millisec is enough
-						 // time for the browsers I'm using.
-						 for (int j=0; j<2; j++){
+						// give the browser a bit of time to fail.
+						// I have found that sometimes sleep doesn't work
+						// the first time, so do it twice.  My tests
+						// seem to show that 1000 millisec is enough
+						// time for the browsers I'm using.
+						for (int j=0; j<2; j++){
 							 try{
-								 Thread.currentThread().sleep(1000);
+									Thread.currentThread().sleep(1000);
 							 } catch (InterruptedException inte){
 							 }
-						 }
-						 if (p.exitValue() == 0){
+						}
+						if (p.exitValue() == 0){
 							 // this is a weird case.  The browser exited after
 							 // a couple seconds saying that it successfully
 							 // displayed the url.  Either the browser is lying
 							 // or the user closed it *really* quickly.  Oh well.
 							 found = true;
-						 }
-					}  catch (IOException x){
-						 // the command was not a valid command.
-						 System.err.println(labels.getString("warning") + " " + x.getMessage());
+						}
+					} catch (IOException x){
+						// the command was not a valid command.
+						System.err.println(labels.getString("warning") + " " + x.getMessage());
 					}
 				}
-				if (!f ound){
-					//  we never found a command that didn't terminate with an error.
-					th row new IOException(labels.getString("failed"));
+				if (!found){
+					// we never found a command that didn't terminate with an error.
+					throw new IOException(labels.getString("failed"));
 				}
-			} catch (I llegalThreadStateException e){
-				// the  browser is still running.  This is a good sign.
-				// let s just say that it is displaying the url right now!
+			} catch (IllegalThreadStateException e){
+				// the browser is still running.  This is a good sign.
+				// lets just say that it is displaying the url right now!
 			}
 		}
 	}
