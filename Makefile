@@ -18,7 +18,7 @@ CGILexer.java: CGILexer.lex
 
 BrowserCommandLexer.java: BrowserCommandLexer.lex
 	$(JLEX) BrowserCommandLexer.lex
-        
+		
 ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
@@ -55,5 +55,7 @@ test:
 	diff out.txt TokenizerTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
 	diff out.txt CSVRegressionTestResults.txt
+	$(JAVA) com.Ostermiller.util.ExcelCSVLexer ExcelCSVRegressionTest.csv > out.txt
+	diff out.txt ExcelCSVRegressionTestResults.txt
 	rm out.txt
 

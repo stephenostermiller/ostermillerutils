@@ -42,7 +42,7 @@ import java.io.*;
  * <P>
  * Empty fields are returned as as String of length zero: "".  The following line has three empty
  * fields and three non-empty fields in it.  There is an empty field on each end, and one in the
- * middle.  One token is returned as a space.<br>
+ * middle.	One token is returned as a space.<br>
  * <pre>,second,, ,fifth,</pre>
  * <P>
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
@@ -83,7 +83,7 @@ import java.io.*;
 	 *
 	 * @param args program arguments, of which the first is a filename
 	 */
-	private static void main(String[] args) {
+	public static void main(String[] args) {
 		InputStream in;
 		try {
 			if (args.length > 0){
@@ -169,7 +169,7 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 %%
 
 <YYINITIAL> {Value} {
-	String text = yytext();    
+	String text = yytext();
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
 		return(text);
