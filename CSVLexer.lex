@@ -275,6 +275,11 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	yybegin(YYINITIAL);
 	return("");
 }
+<BEFORE> <<EOF>> {
+	yybegin(YYINITIAL);
+    addLine = true;
+	return("");
+}
 <AFTER> ([\,]) {
 	yybegin(BEFORE);
 }
