@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1187
+personal_ws-1.1 en 1188
 aa
 aA
 aaa
@@ -1134,6 +1134,7 @@ uuencode
 uuml
 uxxxx
 valArray
+valueOf
 valuesVec
 ver
 versioned
