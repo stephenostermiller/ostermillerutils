@@ -207,14 +207,29 @@ public class Browser {
     public static void displayURL(String url) throws IOException {
         if (exec == null || exec.length == 0){
         	if (System.getProperty("os.name").startsWith("Mac")){
-        		try {
-        			Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
-        			Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
-        			openURL.invoke(null, new Object[] {url});
-        			//com.apple.mrj.MRJFileUtils.openURL(url);
-        		} catch (Exception x){
-        			System.err.println(x.getMessage());
-        			throw new IOException(labels.getString("failed"));
+        		boolean success = false;
+				try {
+					Class nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
+        			Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
+        			Object workspace = sharedWorkspace.invoke(null, new Object[] {});
+        			Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
+        			Boolean suc = (Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)});		
+					success = suc.booleanValue();
+					//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
+				} catch (Exception x) {
+					System.err.println(x);
+					success = false;
+				}
+				if (!success){
+        			try {
+        				Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
+        				Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
+        				openURL.invoke(null, new Object[] {url});
+        				//com.apple.mrj.MRJFileUtils.openURL(url);
+        			} catch (Exception x){
+        				System.err.println(x.getMessage());
+        				throw new IOException(labels.getString("failed"));
+        			}
         		}
         	} else {
             	throw new IOException(labels.getString("nocommand"));
