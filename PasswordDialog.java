@@ -23,6 +23,8 @@ import java.awt.event.*;
 
 /**
  * A modal dialog that asks the user for a username and password.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/PasswordDialog.html">ostermiller.org</a>.
  *
  * <code>
  * <pre>

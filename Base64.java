@@ -21,6 +21,9 @@ import java.io.*;
 /**
  * Implements Base64 encoding and decoding as defined by RFC 2045: "Multipurpose Internet
  * Mail Extensions (MIME) Part One: Format of Internet Message Bodies" page 23.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
+ *
  * <blockquote>
  * <p>The Base64 Content-Transfer-Encoding is designed to represent
  * arbitrary sequences of octets in a form that need not be humanly

@@ -24,6 +24,8 @@ import java.io.*;
  * and translates them into characters without using a character encoding.  The characters
  * that a StraightStreamReader returns may not be valid unicode characters but they are
  * guaranteed to be in the 0x00 to 0xFF range.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/StraightStreamReader.html">ostermiller.org</a>.
  * <P>
  * Most of the time you want to do character encoding translation when translating bytes to
  * characters.  If you are planning on displaying the text, you should always do this and should
