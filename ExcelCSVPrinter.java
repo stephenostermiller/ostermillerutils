@@ -95,16 +95,16 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * Change this printer so that it uses a new delimiter.
 	 *
 	 * @param newDelimiter The new delimiter character to use.
-	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
 	 *
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
-	public void changeDelimiter(char newDelimiter) throws BadDelimeterException {
+	public void changeDelimiter(char newDelimiter) throws BadDelimiterException {
 		if (delimiterChar == newDelimiter) return; // no need to do anything.
 		if (newDelimiter == '\n' || newDelimiter == '\r' ||
 				newDelimiter == delimiterChar || newDelimiter == quoteChar){
-			throw new BadDelimeterException();
+			throw new BadDelimiterException();
 		}
 		delimiterChar = newDelimiter;
 	}
