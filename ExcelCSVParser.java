@@ -263,4 +263,17 @@ public class ExcelCSVParser implements CSVParse {
 			System.out.println(e.getMessage());
 		}
 	}
+    
+    /**
+	 * Parse the comma delimited data from a string.
+	 *
+	 * @param s string with comma delimited data to parse.
+	 */
+	public static String[][] parse(String s){
+        try {
+		    return (new ExcelCSVParser(new StringReader(s))).getAllValues();
+        } catch (IOException x){
+            return null;
+        }
+    }
 }

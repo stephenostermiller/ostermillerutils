@@ -99,7 +99,36 @@ public class ExcelCSVPrinter implements CSVPrint {
 		out.println();
         out.flush();
 		newLine = true;
+	}    
+    
+    /**
+	 * Print several lines of comma separated values.
+	 * The values will be quoted if needed.  Quotes and
+	 * newLine characters will be escaped.
+	 *
+	 * @param values values to be outputted.
+	 */
+	public void println(String[][] values){
+		for (int i=0; i<values.length; i++){
+            println(values[i]);
+		}
+        if (values.length == 0){
+		    out.println();
+        }
+        out.flush();
+		newLine = true;
 	}
+    
+    /**
+	 * Since ExcelCSV format does not support comments,
+     * this method will ignore the comment and start
+     * a new row.
+	 *
+	 * @param comment the comment to output (ignored)
+	 */
+	public void printlnComment(String comment){
+        println();
+    }
     
 	/**
 	 * Print the string as the next value on the line.	The value

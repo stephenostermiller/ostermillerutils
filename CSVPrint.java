@@ -24,7 +24,7 @@ import java.io.*;
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
- * CSV parsers should implement.
+ * CSV printers should implement.
  */
 public interface CSVPrint {
 
@@ -44,11 +44,29 @@ public interface CSVPrint {
     /**
 	 * Print a single line of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
+	 * and other characters that need it will be escaped.
+	 *
+	 * @param values values to be outputted.
+	 */
+	public void println(String[] values);    
+    
+    
+    /**
+	 * Print several lines of comma separated values.
+	 * The values will be quoted if needed.  Quotes and
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
 	 */
-	public void println(String[] values);
+	public void println(String[][] values);
+    
+    /**
+	 * If the CSV format supports comments, write the comment
+     * to the file on its own line, otherwise, start a new line.
+	 *
+	 * @param comment the comment to output
+	 */
+	public void printlnComment(String comment);
     
     /**
 	 * Print the string as the next value on the line.	The value

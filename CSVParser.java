@@ -55,7 +55,7 @@ import java.util.*;
  * }
  * </pre>
  * <P>
- * Some applications do not output CSV according to the ISO standards and this parse may
+ * Some applications do not output CSV according to the generally accepted standards and this parse may
  * not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A 
  * separate class must be use to read 
  * <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>. 
@@ -94,10 +94,13 @@ public class CSVParser implements CSVParse {
 	/**
 	 * Create a parser to parse comma separated values from
 	 * an InputStream.
+     * <p>
+     * Byte to character conversion is done using the platform
+     * default locale.
 	 *
 	 * @param in stream that contains comma separated values.
 	 */
-	public CSVParser(java.io.InputStream in) {
+	public CSVParser(java.io.InputStream in){
 		lexer = new CSVLexer(in);
 	}
 
@@ -107,8 +110,41 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param in reader that contains comma separated values.
 	 */
-	public CSVParser(java.io.Reader in) {
+	public CSVParser(java.io.Reader in){
 		lexer = new CSVLexer(in);
+	}
+    
+    /**
+	 * Create a parser to parse comma separated values from
+	 * an InputStream.
+     * <p>
+     * Byte to character conversion is done using the platform
+     * default locale.
+	 *
+	 * @param in stream that contains comma separated values.
+     * @param escapes a list of characters that will represent escape sequences.
+	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param commentDelims list of characters a comment line may start with.
+	 */
+	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
+		lexer = new CSVLexer(in);
+        setEscapes(escapes, replacements);
+        setCommentStart(commentDelims);
+	}
+
+	/**
+	 * Create a parser to parse comma separated values from
+	 * a Reader.
+	 *
+	 * @param in reader that contains comma separated values.
+     * @param escapes a list of characters that will represent escape sequences.
+	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param commentDelims list of characters a comment line may start with.
+	 */
+	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
+		lexer = new CSVLexer(in);
+        setEscapes(escapes, replacements);
+        setCommentStart(commentDelims);
 	}
 
 	/**
@@ -283,4 +319,37 @@ public class CSVParser implements CSVParse {
 			System.out.println(e.getMessage());
 		}
 	}
+    
+    /**
+	 * Parse the comma delimited data from a string.
+     * <p>
+     * Only escaped backslashes and quotes will be recognized as escape sequences.
+     * The data will be treated as having no comments.
+	 *
+	 * @param s string with comma delimited data to parse.
+	 */
+	public static String[][] parse(String s){
+        try {
+		    return (new CSVParser(new StringReader(s))).getAllValues();
+        } catch (IOException x){
+            return null;
+        }
+    }
+    
+    /**
+	 * Parse the comma delimited data from a string.
+     * Escaped backslashes and quotes will always recognized as escape sequences.
+	 *
+	 * @param s string with comma delimited data to parse.
+     * @param escapes a list of additional characters that will represent escape sequences.
+	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param commentDelims list of characters a comment line may start with.
+	 */
+	public static String[][] parse(String s, String escapes, String replacements, String commentDelims){
+		try {
+            return (new CSVParser(new StringReader(s), escapes, replacements, commentDelims)).getAllValues();
+        } catch (IOException x){
+            return null;
+        }
+    }
 }

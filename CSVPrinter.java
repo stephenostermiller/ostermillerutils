@@ -1,6 +1,6 @@
 /*
  * Write files in comma separated value format.
- * Copyright (C) 2001, 2002 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -126,6 +126,24 @@ public class CSVPrinter implements CSVPrint {
 			print(values[i]);
 		}
 		out.println();
+        out.flush();
+		newLine = true;
+	}
+    
+    /**
+	 * Print several lines of comma separated values.
+	 * The values will be quoted if needed.  Quotes and
+	 * newLine characters will be escaped.
+	 *
+	 * @param values values to be outputted.
+	 */
+	public void println(String[][] values){
+		for (int i=0; i<values.length; i++){
+            println(values[i]);
+		}
+        if (values.length == 0){
+		    out.println();
+        }
         out.flush();
 		newLine = true;
 	}

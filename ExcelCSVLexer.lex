@@ -57,7 +57,7 @@ import java.io.*;
  * }
  * </pre>
  * <P>
- * The CSV that Excel outputs differs from the ISO CSV standard in several respects:
+ * The CSV that Excel outputs differs from the genrally accepted standard CSV standard in several respects:
  * <ul><li>Leading and trailing whitespace is significant.</li>
  * <li>A backslash is not a special character and is not used to escape anything.</li>
  * <li>Quotes inside quoted strings are escaped with a double quote rather than a backslash.</li>

@@ -1,6 +1,6 @@
 /*
  * CSV Regression test.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
