@@ -1,6 +1,6 @@
 /*
  * A password dialog box.
- * Copyright (C) 2001, 2002 Stephen Ostermiller 
+ * Copyright (C) 2001, 2002 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -54,7 +54,7 @@ public class PasswordDialog extends JDialog {
 	protected ResourceBundle labels;
 
 	/**
-	 * Set the locale used for getting localized 
+	 * Set the locale used for getting localized
 	 * strings.
 	 *
 	 * @param locale Locale used to for i18n.
