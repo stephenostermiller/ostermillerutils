@@ -88,7 +88,6 @@ public class LabeledCSVParser implements CSVParse {
 	 */
 	public LabeledCSVParser(CSVParse parse) throws IOException {
 		this.parse = parse;
-		setLabels();
 	}
 
 	/**
@@ -141,6 +140,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.03.00
 	 */
 	public String[][] getAllValues() throws IOException {
+		if (labels == null) setLabels();
 		String[][] allValues = parse.getAllValues();
 		if (allValues == null){
 			lastLine = null;
@@ -208,6 +208,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.03.00
 	 */
 	public String[] getLine() throws IOException {
+		if (labels == null) setLabels();
 		lastLine = parse.getLine();
 		return lastLine;
 	}
@@ -226,6 +227,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.03.00
 	 */
 	public String nextValue() throws IOException {
+		if (labels == null) setLabels();
 		String nextValue = parse.nextValue();
 		nextValueLine = getLastLineNumber();
 		return nextValue;
@@ -257,6 +259,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.03.00
 	 */
 	public String[] getLabels() throws IOException {
+		if (labels == null) setLabels();
 		return labels;
 	}
 
@@ -269,10 +272,32 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @param label The field name.
 	 * @return The index of the field name, or -1 if the label does not exist.
+	 * @deprecated may swallow an IOException while reading the labels - please use getLabelIdx()
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
 	public int getLabelIndex(String label){
+		try {
+			return getLabelIdx(label);
+		} catch (IOException iox){
+			return -1;
+		}
+	}
+
+	/**
+	 * Get the index of the column having the given label.
+	 * The {@link #getLine()} method returns an
+	 * array of field values for a single record of data.  This method returns
+	 * the index of a member of that array based on the specified field name.
+	 * The first field has the index 0.
+	 *
+	 * @param label The field name.
+	 * @return The index of the field name, or -1 if the label does not exist.
+	 *
+	 * @since ostermillerutils 1.04.02
+	 */
+	public int getLabelIdx(String label) throws IOException {
+		if (labels == null) setLabels();
 		if (labelMap == null) return -1;
 		if (!labelMap.containsKey(label)) return -1;
 		return ((Integer)labelMap.get(label)).intValue();
@@ -284,6 +309,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @param label The field name.
 	 * @throws IllegalStateException if nextValue has been called as part of getting the last line.  nextValue is not compatible with this method.
+	 * @return the value from the last line read or null if there is no such value
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
