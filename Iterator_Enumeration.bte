@@ -1,7 +1,7 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Basic Iterators and Enumerations<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to provide basic iterator and enumerations: convert between iterators and enumerations and convert an array to an iterator or enumeration..<%/bte.tpl%>
-<%bte.tpl name=keywords%>enumerationiterator, enumeration iterator, arrayiterator, array iterator, arrayenumeration, array enumeration, iterator enumeration, iteratorenumeration, convert iterator to enumeration, java iterator to enumeration, convert enumeration to iterator, java enumeration to iterator, convert array to iterator, java array to iterator, conver array to enumeration java array to iterator<%/bte.tpl%>
+<%bte.tpl name=keywords%>enumerationiterator, enumeration iterator, arrayiterator, array iterator, arrayenumeration, array enumeration, iterator enumeration, iteratorenumeration, convert iterator to enumeration, java iterator to enumeration, convert enumeration to iterator, java enumeration to iterator, convert array to iterator, java array to iterator, convert array to enumeration java array to iterator<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>
