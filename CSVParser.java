@@ -256,6 +256,16 @@ public class CSVParser implements CSVParse {
 	}
 
 	/**
+	 * Change this parser so that it uses a new delimeter.
+	 * 
+	 * @param newDelim delimiter to which to switch.
+	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 */
+    public void changeDelimiter(char newDelim) throws BadDelimeterException {
+		lexer.changeDelimiter(newDelim);
+	}
+
+	/**
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
 	 * would be comments:<br>

@@ -82,7 +82,7 @@ import java.io.*;
 	 *
 	 * @param args program arguments, of which the first is a filename
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		InputStream in;
 		try {
 			if (args.length > 0){
@@ -109,6 +109,24 @@ import java.io.*;
 		} catch (IOException e){
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	private char delimiter = ',';
+	/**
+	 * Change this Lexer so that it uses a new delimeter.
+	 * 
+	 * @param newDelim delimiter to which to switch.
+	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 */
+	public void changeDelimiter(char newDelim) throws BadDelimeterException {
+		if (newDelim == delimiter) return; // no need to do anything.
+		// 'a' and 'b' should always be safe delimiters unless already the delimiter.
+		if (yycmap[newDelim] != yycmap[(delimiter == 'a')?'b':'a']){
+			throw new BadDelimeterException(newDelim + " is not a safe delimiter.");
+		}
+		char temp = yycmap[newDelim];
+		yycmap[newDelim] = yycmap[delimiter];
+		yycmap[delimiter] = temp;
 	}
 
 	private String escapes = "";
@@ -213,9 +231,13 @@ LF=([\n])
 EOL=({CR}|{LF}|{CR}{LF})
 NonBreakingWS=({Blank}|{Tab}|{FF})
 
+/* To change the default delimeter, change the comma in the next five lines */
+Separator=([\,])
 NotCommaSpaceQuote=([^\t\f\r\n\,\" ])
 NotCommaSpace=([^\t\f\r\n\, ])
 NotCommaEOL=([^\,\r\n])
+IgnoreAfter=(([^\r\n\,])*)
+
 FalseLiteral=([\"]([^\"]|[\\][\"])*)
 StringLiteral=({FalseLiteral}[\"])
 Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
@@ -242,7 +264,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 		yybegin(COMMENT);
 	}
 }
-<YYINITIAL> ([\,]) {
+<YYINITIAL> {Separator} {
     if (addLine) {
         lines++;
         addLine = false;
@@ -266,7 +288,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	yybegin(YYINITIAL);  
 	return(yytext());    
 }
-<BEFORE> ([\,]) {
+<BEFORE> {Separator} {
 	yybegin(BEFORE);   
 	return("");
 }
@@ -294,14 +316,14 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
     addLine = true;
 	return("");
 }
-<AFTER> ([\,]) {
+<AFTER> {Separator} {
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({NonBreakingWS}*{EOL}) {
     addLine = true;
 	yybegin(YYINITIAL);
 }
-<AFTER> (([^\r\n\,])*) {
+<AFTER> {IgnoreAfter} {
 }
 <COMMENT> (([^\r\n])*) {
 }

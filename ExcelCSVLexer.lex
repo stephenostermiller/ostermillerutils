@@ -110,6 +110,24 @@ import java.io.*;
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	private char delimiter = ',';
+	/**
+	 * Change this Lexer so that it uses a new delimeter.
+	 * 
+	 * @param newDelim delimiter to which to switch.
+	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 */
+	public void changeDelimiter(char newDelim) throws BadDelimeterException {
+		if (newDelim == delimiter) return; // no need to do anything.
+		// 'a' and 'b' should always be safe delimiters unless already the delimiter.
+		if (yycmap[newDelim] != yycmap[(delimiter == 'a')?'b':'a']){
+			throw new BadDelimeterException(newDelim + " is not a safe delimiter.");
+		}
+		char temp = yycmap[newDelim];
+		yycmap[newDelim] = yycmap[delimiter];
+		yycmap[delimiter] = temp;
+	}
 
 	private String unescape(String s){       
 		if (s.indexOf('\"', 1) == s.length()-1){
@@ -174,8 +192,12 @@ CR=([\r])
 LF=([\n])
 EOL=({CR}|{LF}|{CR}{LF})
 
+/* To change the default delimeter, change the comma in the next four lines */
+Separator=([\,])
 NotCommaEOLQuote=([^\r\n\,\"])
 NotCommaEOL=([^\,\r\n])
+IgnoreAfter=(([^\r\n\,])*)
+
 FalseLiteral=([\"]([^\"]|[\"][\"])*)
 StringLiteral=({FalseLiteral}[\"])
 Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
@@ -195,7 +217,7 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 		yybegin(COMMENT);
 	}
 }
-<YYINITIAL> ([\,]) {
+<YYINITIAL> {Separator} {
     if (addLine) {
         lines++;
         addLine = false;
@@ -219,7 +241,7 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 	yybegin(YYINITIAL);  
 	return(yytext());    
 }
-<BEFORE> ([\,]) {
+<BEFORE> {Separator} {
 	yybegin(BEFORE);   
 	return("");
 }
@@ -245,14 +267,14 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
     addLine = true;
 	return("");
 }
-<AFTER> ([\,]) {
+<AFTER> {Separator} {
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({EOL}) {
     addLine = true;
 	yybegin(YYINITIAL);
 }
-<AFTER> (([^\r\n\,])*) {
+<AFTER> {IgnoreAfter} {
 }
 <COMMENT> (([^\r\n])*) {
 }
