@@ -102,11 +102,11 @@ public interface CSVParse {
 	 * to a quote or other character that has special meaning in CSV.
 	 *
 	 * @param newDelim delimiter to which to switch.
-	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
 	 *
 	 * @since ostermillerutils 1.02.08
 	 */
-	public void changeDelimiter(char newDelim) throws BadDelimeterException;
+	public void changeDelimiter(char newDelim) throws BadDelimiterException;
 
 	/**
 	 * Change this parser so that it uses a new character for quoting.

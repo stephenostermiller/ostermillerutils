@@ -21,22 +21,21 @@ package com.Ostermiller.util;
 /**
  * Signals that binary data was encountered and continuing
  * with a text operation would likely corrupt the data.
- *
- * This class has been replaced by BadDelimiterException.  It is not deprecated,
- * and it may be used, however the name of this class contains a spelling error.
+ * <p>
+ * This class exists to fix a spelling error in BadDelimeterException.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @since ostermillerutils 1.02.08
- * @see BadDelimiterException
+ * @since ostermillerutils 1.02.20
+ * @see BadDelimeterException
  */
-public class BadDelimeterException extends Exception {
+public class BadDelimiterException extends BadDelimeterException {
 
 	/**
 	 * Constructs an IOException with null as its error detail message.
 	 *
-	 * @since ostermillerutils 1.02.08
+	 * @since ostermillerutils 1.02.20
 	 */
-	public BadDelimeterException(){
+	public BadDelimiterException(){
 		super();
 	}
 
@@ -47,9 +46,9 @@ public class BadDelimeterException extends Exception {
 	 *
 	 * @param s the detail message.
 	 *
-	 * @since ostermillerutils 1.02.08
+	 * @since ostermillerutils 1.02.20
 	 */
-	public BadDelimeterException(String s){
+	public BadDelimiterException(String s){
 		super(s);
 	}
 }
