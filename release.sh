@@ -9,5 +9,5 @@ then
 fi
 
 mv -f package.html temp
-scp -r *.html utils.jar doc/ deadsea@ostermiller.org:www/utils
+scp -r *.html *.css utils.jar doc/ deadsea@ostermiller.org:www/utils
 mv -f temp package.html
