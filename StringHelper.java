@@ -321,7 +321,7 @@ public class StringHelper {
 				// to be replaced.  No need to do a second pass or create a string buffer.
 				return s;
 			}
-			length = stringLength - (count * (replaceLength - findLength));
+			length = stringLength - (count * (findLength - replaceLength));
 		}
 
 		int start = 0;
