@@ -6,6 +6,7 @@
 <div class=i18n>
     Internationalization - included languages:
     <ul>
+    <li>&#268;esky</li>
     <li>Dansk</li>
     <li>Deutsch</li>
     <li>English</li>
@@ -16,7 +17,7 @@
     </ul>
     Translations gladly accepted.  Please translate
     <a href="Browser.properties.html">Browser.properties</a>.<br>
-	You may want to use: 
+	You may want to use:
 	<a href="http://ostermiller.org/attesoro/">Attesoro - A Java Translation Editor</a>
 </div>
 <p>Open a browser from a Java application on Windows, Unix, or Macintosh.</p>
@@ -28,7 +29,7 @@
 </ul>
 
 <p>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
-on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be 
+on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be
 annoying for developers trying to open a bunch of urls using this class, but have each url in its own
 window.  Workaround methods that use Javascript to try and open urls in new windows have been provided for
 cases in which all in the same window is not desirable.</p>
