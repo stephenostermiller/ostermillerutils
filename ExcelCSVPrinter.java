@@ -1,6 +1,6 @@
 /*
  * Write files in Excel comma separated value format.
- * Copyright (C) 2001, 2002 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,8 +50,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
 	 * Create a printer that will print values to the given
-	 * stream.	 Character to byte conversion is done using
-	 * the default character encoding.	 Comments will be
+	 * stream.	Comments will be
 	 * written using the delault comment character '#'.
 	 *
 	 * @param out stream to which to print.
@@ -117,7 +116,13 @@ public class ExcelCSVPrinter implements CSVPrint {
 					quote = true;
 				}
 			}
-		}
+		} else if (newLine) {
+            // always quote an empty token that is the first
+            // on the line, as it may be the only thing on the 
+            // line.  If it were not quoted in that case,
+            // an empty line has no tokens.
+            quote = true;
+        }
 		if (newLine){
 			newLine = false;
 		} else {
