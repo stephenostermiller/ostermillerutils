@@ -27,7 +27,7 @@ import java.io.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
-class CSVTest {
+class CSVTests {
 	public static void main(String[] args){
 		try {
 			StringWriter sw = new StringWriter();
@@ -91,8 +91,31 @@ class CSVTest {
 			normalOutput = new String[][]{{"test\\", "test"}};
 			shredder = new CSVParser(new StringReader(normalInput));
 			compare("backslash at end of quoted", normalOutput, shredder.getAllValues());
+
+			normalInput = "field1,field2 ,    field3,field4   ,  field5   ,field6";
+			normalOutput = new String[][]{{"field1", "field2", "field3", "field4", "field5", "field6"}};
+			shredder = new CSVParser(new StringReader(normalInput));
+			compare("white space around fields", normalOutput, shredder.getAllValues());
+
+			normalInput = ",field2,, ,field5,";
+			normalOutput = new String[][]{{"", "field2", "", "", "field5", ""}};
+			shredder = new CSVParser(new StringReader(normalInput));
+			compare("empty fields", normalOutput, shredder.getAllValues());
+
+			normalInput = "1,to,tre,four,five5,sixsix";
+			normalOutput = new String[][]{{"1", "to", "tre", "four", "five5", "sixsix"}};
+			shredder = new CSVParser(new StringReader(normalInput));
+			compare("various lengths", normalOutput, shredder.getAllValues());
+
+			normalInput = "!comment\n !field1\n;comment\n ;field2\n#comment\n #field3";
+			normalOutput = new String[][]{{"!field1"},{";field2"},{"#field3"}};
+			shredder = new CSVParser(new StringReader(normalInput));            
+			shredder.setCommentStart("#;!");
+			compare("comment must start at beginning of line", normalOutput, shredder.getAllValues());
+
 		} catch (Exception x){
 			System.err.println(x.getMessage());
+            x.printStackTrace();
 			System.exit(1);
 		}
 		System.exit(0);
@@ -112,7 +135,7 @@ class CSVTest {
 
 	private static void compare(String testName, String[][] a, String[][] b) throws Exception {
 		if (a.length != b.length) {
-			throw new Exception(testName + ": unexpected number of lines");
+			throw new Exception(testName + ": unexpected number of lines " + a.length + " found " + b.length + " expected");
 		}
 		for(int i=0; i<a.length; i++){
 			if (a[i].length != b[i].length) {
@@ -126,6 +149,5 @@ class CSVTest {
 				}
 			}
 		}
-
 	}
 }
