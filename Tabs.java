@@ -29,22 +29,31 @@ import java.util.Locale;
  * that of a given platform.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class Tabs {
 
 	/**
 	 * Version number of this program
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final String version = "1.0";
 
 	/**
 	 * Locale specific strings displayed to the user.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	 protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Tabs",  Locale.getDefault());
 
 
 	/**
 	 * Can be passed instead of a spaces argument to use tabs instead.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int TABS = -1;
 
@@ -53,6 +62,8 @@ public class Tabs {
 	 * Run with --help argument for more information.
 	 *
 	 * @param args Command line arguments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
 		// create the command line options that we are looking for
@@ -268,6 +279,8 @@ public class Tabs {
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out) throws IOException {
 		return convert(in, out, DEFAULT_INPUT_TAB_WIDTH, DEFAULT_OUTPUT_TAB_WIDTH, DEFAULT_MODIFY_BINARY);
@@ -284,6 +297,8 @@ public class Tabs {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if tab widths are not between 1 and 20 or TABS.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, int inputTabWidth) throws IOException {
 		return convert(in, out, inputTabWidth, DEFAULT_OUTPUT_TAB_WIDTH, DEFAULT_MODIFY_BINARY);
@@ -303,6 +318,8 @@ public class Tabs {
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, int inputTabWidth, int outputTabWidth) throws IOException {
 		return convert(in, out, inputTabWidth, outputTabWidth, DEFAULT_MODIFY_BINARY);
@@ -323,6 +340,8 @@ public class Tabs {
 	 * @return true if the output was modified from the input, false if it is exactly the same.
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, int inputTabWidth, int outputTabWidth, boolean binaryException) throws IOException {
 		if ((inputTabWidth < 1 || inputTabWidth > 20) && inputTabWidth != TABS){
@@ -412,6 +431,8 @@ public class Tabs {
 	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f) throws IOException {
 		return convert(f, DEFAULT_INPUT_FILE_TAB_WIDTH, DEFAULT_OUTPUT_TAB_WIDTH, DEFAULT_MODIFY_BINARY);
@@ -427,6 +448,8 @@ public class Tabs {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if tab widths are not between 1 and 20 or TABS.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, int inputTabWidth) throws IOException {
 		return convert(f, inputTabWidth, DEFAULT_OUTPUT_TAB_WIDTH, DEFAULT_MODIFY_BINARY);
@@ -442,6 +465,8 @@ public class Tabs {
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, int inputTabWidth, int outputTabWidth) throws IOException {
 		return convert(f, inputTabWidth, outputTabWidth, DEFAULT_MODIFY_BINARY);
@@ -459,6 +484,8 @@ public class Tabs {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if tab widths are not between 1 and 20 or TABS.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, int inputTabWidth, int outputTabWidth, boolean binaryException) throws IOException {
 		File temp = null;
@@ -506,6 +533,8 @@ public class Tabs {
 
 	/**
 	 * Buffer size when reading from input stream.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int BUFFER_SIZE = 1024;
 	private final static int STATE_INIT = 0;
@@ -518,6 +547,8 @@ public class Tabs {
 	 * Guess the number of spaces per tab at the beginning of each line.
 	 *
 	 * @return the least value (two or greater) which has some line that starts with n times spaces for n zero to max spaces starting a line.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static int guessTabWidth(InputStream in) throws IOException {
 		byte[] buffer = new byte[BUFFER_SIZE];

@@ -29,6 +29,9 @@ import java.io.*;
  * and may erroneously close it.  This class is a workaround
  * when the method cannot be modified because it is in a
  * library.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.01.00
  */
 public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 
@@ -38,6 +41,8 @@ public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 	 * except for the close method, which should
 	 * do nothing.  The reallyClose method should
 	 * actually close this stream.
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	protected OutputStream out;
 
@@ -45,6 +50,8 @@ public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 	 * Protect a new output stream.
 	 *
 	 * @param out The output stream that is being protected.
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	public NoCloseOutputStream(OutputStream out){
 		this.out = out;
@@ -82,6 +89,8 @@ public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 	 * Has no effect.
 	 *
 	 * @see #reallyClose()
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	public void close() throws IOException {
 	}

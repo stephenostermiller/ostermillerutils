@@ -24,6 +24,9 @@ import java.io.*;
  * which has a close method with no effect.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.01.00
  */
 public interface NoCloseStream {
 
@@ -33,6 +36,8 @@ public interface NoCloseStream {
 	 * the close() method, which does nothing.
 	 *
 	 * @throws IOException if an I/O error occurs.
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	public void reallyClose() throws IOException;
 

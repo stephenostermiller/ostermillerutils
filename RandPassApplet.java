@@ -25,6 +25,9 @@ import com.Ostermiller.util.*;
 
 /**
  * An applet that will let the user generate random passwords.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.02.00
  */
 public class RandPassApplet extends JApplet {
 
@@ -45,6 +48,8 @@ public class RandPassApplet extends JApplet {
 
 	/**
 	 * Start the applet (to be called by the appletviewer)
+	 *
+	 * @since ostermillerutils 1.02.00
 	 */
 	public void init() {
 		getContentPane().removeAll();
@@ -146,6 +151,8 @@ public class RandPassApplet extends JApplet {
 	 * this applet, and a description of this applet.
 	 *
 	 * @return a string with the information about this applet.
+	 *
+	 * @since ostermillerutils 1.02.00
 	 */
 	public String getAppletInfo() {
 		return (

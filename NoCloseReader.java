@@ -29,6 +29,9 @@ import java.io.*;
  * and may erroneously close it.  This class is a workaround
  * when the method cannot be modified because it is in a
  * library.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.01.00
  */
 public class NoCloseReader extends Reader implements NoCloseStream {
 
@@ -38,6 +41,8 @@ public class NoCloseReader extends Reader implements NoCloseStream {
 	 * except for the close method, which should
 	 * do nothing.  The reallyClose method should
 	 * actually close this stream.
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	protected Reader in;
 
@@ -45,6 +50,8 @@ public class NoCloseReader extends Reader implements NoCloseStream {
 	 * Protect a new reader.
 	 *
 	 * @param in The reader that is being protected.
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	public NoCloseReader(Reader in){
 		this.in = in;
@@ -89,6 +96,8 @@ public class NoCloseReader extends Reader implements NoCloseStream {
 	 * Has no effect.
 	 *
 	 * @see #reallyClose()
+	 *
+	 * @since ostermillerutils 1.01.00
 	 */
 	public void close() throws IOException {
 	}
