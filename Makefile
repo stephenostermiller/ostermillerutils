@@ -95,4 +95,4 @@ htmlsource:
 	mv src/*.*.html src/*.css .
 	rm -rf src
 	./source.sh
-	
+	./cleansource.sh
