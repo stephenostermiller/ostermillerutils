@@ -9,7 +9,7 @@
  
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -181,15 +181,23 @@ import java.io.*;
 		this.commentDelims = commentDelims;
 	}
 	
+	private boolean addLine = true;
+    private int lines = 0;
+    
 	/**
-	 * Get the number of the line from which the last value was retreived.
+	 * Get the line number that the last token came from.
+     * <p>
+     * New line breaks that occur in the middle of a token are not
+     * counted in the line number count.
+     * <p> 
+     * If no tokens have been returned, the line number is undefined. 
+	 *
+	 * @return line number of the last token.
 	 */
 	public int getLineNumber(){
-		return yyline + 1;
+		return lines;
 	}
 %}
-%line
-%char
 %unicode
 
 %state BEFORE
@@ -203,12 +211,9 @@ CR=([\r])
 LF=([\n])
 EOL=({CR}|{LF}|{CR}{LF})
 NonBreakingWS=({Blank}|{Tab}|{FF})
-WhiteSpace=({NonBreakingWS}|{EOL})
-AnyChar=([A]|[^A])
 
 NotCommaSpaceQuote=([^\t\f\r\n\,\" ])
 NotCommaSpace=([^\t\f\r\n\, ])
-NotCommaQuote=([^\,\"])
 NotCommaEOL=([^\,\r\n])
 StringLiteral=(([\"]([^\"]|[\\][\"])*[\"]))
 Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
@@ -216,9 +221,17 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 %%
 
 <YYINITIAL> ({NonBreakingWS}) {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
 	yybegin(BEFORE);
 }
 <YYINITIAL> {Value} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
 	String text = yytext();    
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
@@ -227,11 +240,27 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 		yybegin(COMMENT);
 	}
 }
-<YYINITIAL, BEFORE> ([\,]) {
+<YYINITIAL> ([\,]) {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
 	yybegin(BEFORE);   
 	return("");
 }
-<YYINITIAL, BEFORE> {StringLiteral} {
+<YYINITIAL> {StringLiteral} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
+	yybegin(AFTER);  
+	return(unescape(yytext()));    
+}
+<BEFORE> ([\,]) {
+	yybegin(BEFORE);   
+	return("");
+}
+<BEFORE> {StringLiteral} {
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
 }
@@ -241,7 +270,8 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 }
 <BEFORE> ({NonBreakingWS}*) {
 }
-<BEFORE> ({EOL}) { 
+<BEFORE> ({EOL}) {
+    addLine = true; 
 	yybegin(YYINITIAL);
 	return("");
 }
@@ -249,6 +279,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({NonBreakingWS}*{EOL}) {
+    addLine = true;
 	yybegin(YYINITIAL);
 }
 <AFTER> (([^\r\n\,])*) {

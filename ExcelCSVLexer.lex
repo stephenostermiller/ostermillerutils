@@ -9,7 +9,7 @@
  
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import java.io.*;
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
- * <P>-
+ * <P>
  * Excel CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.
  * <P>
@@ -110,7 +110,10 @@ import java.io.*;
 		}
 	}
 
-	private String unescape(String s){
+	private String unescape(String s){       
+		if (s.indexOf('\"', 1) == s.length()-1){
+			return s.substring(1, s.length()-1);
+		}
 		StringBuffer sb = new StringBuffer(s.length());
 		for (int i=1; i<s.length()-1; i++){
 			char c = s.charAt(i);
@@ -143,14 +146,23 @@ import java.io.*;
 		this.commentDelims = commentDelims;
 	}
 	
+    private boolean addLine = true;
+    private int lines = 0;
+    
 	/**
-	 * Get the number of the line from which the last value was retreived.
+	 * Get the line number that the last token came from.
+     * <p>
+     * New line breaks that occur in the middle of a token are not
+     * counted in the line number count.
+     * <p> 
+     * If no tokens have been returned, the line number is undefined. 
+	 *
+	 * @return line number of the last token.
 	 */
 	public int getLineNumber(){
-		return yyline + 1;
+		return lines;
 	}
 %}
-%line
 %unicode
 
 %state BEFORE
@@ -169,6 +181,10 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 %%
 
 <YYINITIAL> {Value} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
 	String text = yytext();
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
@@ -177,11 +193,27 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 		yybegin(COMMENT);
 	}
 }
-<YYINITIAL, BEFORE> ([\,]) {
+<YYINITIAL> ([\,]) {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
 	yybegin(BEFORE);   
 	return("");
 }
-<YYINITIAL, BEFORE> {StringLiteral} {
+<YYINITIAL> {StringLiteral} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
+	yybegin(AFTER);  
+	return(unescape(yytext()));    
+}
+<BEFORE> ([\,]) {
+	yybegin(BEFORE);   
+	return("");
+}
+<BEFORE> {StringLiteral} {
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
 }
@@ -189,14 +221,16 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 	yybegin(AFTER);  
 	return(yytext());
 }
-<BEFORE> ({EOL}) { 
+<BEFORE> ({EOL}) {
 	yybegin(YYINITIAL);
+    addLine = true;
 	return("");
 }
 <AFTER> ([\,]) {
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({EOL}) {
+    addLine = true;
 	yybegin(YYINITIAL);
 }
 <AFTER> (([^\r\n\,])*) {
