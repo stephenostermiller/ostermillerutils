@@ -8,8 +8,8 @@ all: CSVLexer.java \
 	BrowserCommandLexer.java
 	$(JAVAC) $(JFLAGS) *.java
 
-CSVLexer.java: CSVLexer
-	$(JLEX) CSVLexer
+CSVLexer.java: CSVLexer.lex
+	$(JLEX) CSVLexer.lex
 
 BrowserCommandLexer.java: BrowserCommandLexer.lex
 	$(JLEX) BrowserCommandLexer.lex

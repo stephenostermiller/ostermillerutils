@@ -1,9 +1,9 @@
 /* CSVLexer.java is a generated file.  You probably want to
- * edit CSVLexer to make changes.  Use JFlex to generate it.
+ * edit CSVLexer.lex to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from 
- * <a href="http://www.jflex.de">the JFlex website</a>.
+ * <a href="http://jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
- * java JFlex.Main CSVLexer<br>
+ * java JFlex.Main CSVLexer.lex<br>
  * You will then have a file called CSVLexer.java
  */
  

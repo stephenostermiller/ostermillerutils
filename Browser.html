@@ -4,7 +4,7 @@
    <meta name="description" content="Open a browser from your Java application on Windows, Unix, or Macintosh.">
    <meta name="keywords" content="open, open, url, url, browser, browser, web, web, web browser, openurl, mrjfiletils, mrj, windows, mac, macintosh, linux, unix, solaris, web browser, ie, internet explorer, netscape, mozilla, lynx, java, util, utility, utilities, class, jar, jars, classes, library, libraries, source, code, open source, gpl">
    <title>Browser</title>
-   <base href="http://www.smo.f2s.com/utils/">
+   <base href="http://ostermiller.org/utils/">
 </head>
 <body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
 
@@ -13,7 +13,7 @@
 <p>Allows URLs to be opened in the system browser from a Java application on Windows, Unix, and Macintosh.</p>
 
 <ul>
-<li><b>Windows</b> -  Opens the url in the system browser by calling a dll that opens the url.</li>
+<li><b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.</li>
 <li><b>Macintosh</b> -  Opens the url using the <a href="http://developer.apple.com/qa/java/java12.html">MRJ</a> classes provided by Apple.  The MRJ toolkit for Mac OS X <a href="http://developer.apple.com/techpubs/macosx/ReleaseNotes/JavaGMWebReleaseNotes.html#MRJToolkit">does not implement</a> openURL() yet, so this class will not work with Mac OS X at the current time.  When Apple implements this function, it will start working again.   In the meantime, it might be possible to find a command line that will work.  This class links to the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the MRJ installed.</li>
 <li><b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.</li>
 </ul>
@@ -29,9 +29,10 @@
     <li>Blocking - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing. com.Ostermiller.util.Browser waits for one second to check if it is still running rather than blocking.</li>
 </ol></p>
 
-<p>[<a href="./#download">download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">documentation</a>]</p>
+<p>[<a href="./#download">Download</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/HEAD">Browse Source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">Documentation</a>]</p>
 
 <hr>
 
