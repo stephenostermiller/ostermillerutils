@@ -27,6 +27,13 @@
 package com.Ostermiller.util;
 import java.io.*;
 
+/**
+ * Parses query string data from a CGI request into name value pairs.
+ * <p>
+ * This class has a <a href="http://ostermiller.org/utils/CGIParser.html">website</a>
+ * where more information and examples are
+ * available.
+ */
 %%
 %class CGILexer
 %function nextToken
