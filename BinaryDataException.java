@@ -14,32 +14,32 @@
  *
  * See COPYING.TXT for details.
  */
- 
+
 package com.Ostermiller.util;
 
 import java.io.IOException;
 
 /**
- * Signals that binary data was encountered and continuing 
+ * Signals that binary data was encountered and continuing
  * with a text operation would likely corrupt the data.
  */
 public class BinaryDataException extends IOException {
-    
-    /**
-     * Constructs an IOException with null  as its error detail message.
-     */
-    public BinaryDataException(){
-        super();
-    }
-    
-    /**
-     * Constructs an IOException with the specified detail message. 
-     * The error message string s can later be retrieved by the 
-     * Throwable.getMessage()  method of class java.lang.Throwable.
-     *
-     * @param s the detail message.
-     */
-    public BinaryDataException(String s){
-        super(s);
-    }    
+
+	/**
+	 * Constructs an IOException with null  as its error detail message.
+	 */
+	public BinaryDataException(){
+		super();
+	}
+
+	/**
+	 * Constructs an IOException with the specified detail message.
+	 * The error message string s can later be retrieved by the
+	 * Throwable.getMessage()  method of class java.lang.Throwable.
+	 *
+	 * @param s the detail message.
+	 */
+	public BinaryDataException(String s){
+		super(s);
+	}
 }
