@@ -23,11 +23,16 @@ import java.io.IOException;
 /**
  * Signals that binary data was encountered and continuing
  * with a text operation would likely corrupt the data.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class BinaryDataException extends IOException {
 
 	/**
 	 * Constructs an IOException with null  as its error detail message.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public BinaryDataException(){
 		super();
@@ -39,6 +44,8 @@ public class BinaryDataException extends IOException {
 	 * Throwable.getMessage()  method of class java.lang.Throwable.
 	 *
 	 * @param s the detail message.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public BinaryDataException(String s){
 		super(s);

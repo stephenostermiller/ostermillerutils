@@ -21,11 +21,16 @@ package com.Ostermiller.util;
 /**
  * Signals that binary data was encountered and continuing
  * with a text operation would likely corrupt the data.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class BadDelimeterException extends Exception {
 
 	/**
 	 * Constructs an IOException with null as its error detail message.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public BadDelimeterException(){
 		super();
@@ -37,6 +42,8 @@ public class BadDelimeterException extends Exception {
 	 * Throwable.getMessage()  method of class java.lang.Throwable.
 	 *
 	 * @param s the detail message.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public BadDelimeterException(String s){
 		super(s);

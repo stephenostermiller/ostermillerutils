@@ -34,6 +34,9 @@ import java.io.*;
  * This class has a <a href="http://ostermiller.org/utils/CGIParser.html">website</a>
  * where more information and examples are
  * available.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 %%
 %class CGILexer
@@ -47,6 +50,8 @@ import java.io.*;
      * the name of the file to use as input
      *
      * @param args program arguments, of which the first is a filename
+	 *
+	 * @since ostermillerutils 1.00.00
      */
     private static void main(String[] args) {
         InputStream in;

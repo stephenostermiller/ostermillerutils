@@ -26,16 +26,23 @@ package com.Ostermiller.util;
  *
  * @see CircularCharBuffer
  * @see CircularByteBuffer
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class CircularObjectBuffer {
 
 	/**
 	 * The default size for a circular object buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int DEFAULT_SIZE = 1024;
 
 	/**
 	 * A buffer that will grow as things are added.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int INFINITE_SIZE = -1;
 
@@ -54,23 +61,33 @@ public class CircularObjectBuffer {
 	 * wrapping around the end of the buffer.  The space available for writing
 	 * goes from the write position to one less than the readPosition,
 	 * wrapping around the end of the buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected Object[] buffer;
 	/**
 	 * Index of the first Object available to be read.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int readPosition = 0;
 	/**
 	 * Index of the first Object available to be written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int writePosition = 0;
 	/**
 	 * If this buffer is infinite (should resize itself when full)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile boolean infinite = false;
 	/**
 	 * True if a write to a full buffer should block until the buffer
 	 * has room, false if the write method should throw an IOException
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean blockingWrite = true;
 
@@ -78,6 +95,8 @@ public class CircularObjectBuffer {
 	 * True when no more input is coming into this buffer.  At that
 	 * point reading from the buffer may return  null if the buffer
 	 * is empty, otherwise a read will block until an Object is available.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean inputDone = false;
 
@@ -85,6 +104,8 @@ public class CircularObjectBuffer {
 	 * Make this buffer ready for reuse.  The contents of the buffer
 	 * will be cleared and the streams associated with this buffer
 	 * will be reopened if they had been closed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void clear(){
 		synchronized (this){
@@ -103,6 +124,8 @@ public class CircularObjectBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the size in Objects of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getAvailable(){
 		synchronized (this){
@@ -120,6 +143,8 @@ public class CircularObjectBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the available space in Objects of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getSpaceLeft(){
 		synchronized (this){
@@ -136,6 +161,8 @@ public class CircularObjectBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the size in Objects of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getSize(){
 		synchronized (this){
@@ -145,6 +172,8 @@ public class CircularObjectBuffer {
 
 	/**
 	 * double the size of the buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void resize(){
 		Object[] newBuffer = new Object[buffer.length * 2];
@@ -168,6 +197,8 @@ public class CircularObjectBuffer {
 
 	/**
 	 * Space available in the buffer which can be written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int spaceLeft(){
 		if (writePosition < readPosition){
@@ -183,6 +214,8 @@ public class CircularObjectBuffer {
 
 	/**
 	 * Objects available for reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int available(){
 		if (readPosition <= writePosition){
@@ -200,6 +233,8 @@ public class CircularObjectBuffer {
 	 * Create a new buffer with a default capacity.
 	 * Writing to a full buffer will block until space
 	 * is available rather than throw an exception.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularObjectBuffer(){
 		this (DEFAULT_SIZE, true);
@@ -219,6 +254,8 @@ public class CircularObjectBuffer {
 	 * without bound.
 	 *
 	 * @param size desired capacity of the buffer in Objects or CircularObjectBuffer.INFINITE_SIZE.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularObjectBuffer(int size){
 		this (size, true);
@@ -231,6 +268,8 @@ public class CircularObjectBuffer {
 	 * @param blockingWrite true writing to a full buffer should block
 	 *        until space is available, false if an exception should
 	 *        be thrown instead.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularObjectBuffer(boolean blockingWrite){
 		this (DEFAULT_SIZE, blockingWrite);
@@ -252,6 +291,8 @@ public class CircularObjectBuffer {
 	 * @param blockingWrite true writing to a full buffer should block
 	 *        until space is available, false if an exception should
 	 *        be thrown instead.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularObjectBuffer(int size, boolean blockingWrite){
 		if (size == INFINITE_SIZE){
@@ -273,6 +314,8 @@ public class CircularObjectBuffer {
 	 *
 	 * @return The Object read, or null if there are no more objects
 	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Object read() throws InterruptedException {
 		while (true){
@@ -303,6 +346,8 @@ public class CircularObjectBuffer {
 	 * @return The number of Objects read, or -1 there will
 	 *     be no more objects available.
 	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read(Object[] buf) throws InterruptedException {
 		return read(buf, 0, buf.length);
@@ -320,6 +365,8 @@ public class CircularObjectBuffer {
 	 * @return The number of Objects read, or -1 there will
 	 *     be no more objects available.
 	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read(Object[] buf, int off, int len) throws InterruptedException {
 		while (true){
@@ -359,6 +406,8 @@ public class CircularObjectBuffer {
 	 * @return The number of Objects actually skipped
 	 * @throws IllegalArgumentException if n is negative.
 	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public long skip(long n) throws InterruptedException, IllegalArgumentException {
 		while (true){
@@ -393,6 +442,8 @@ public class CircularObjectBuffer {
 	 * Once the producer has signaled that it is done, further write() invocations
 	 * will cause an IllegalStateException to be thrown. Calling done() multiple times,
 	 * however, has no effect.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void done(){
 		synchronized (this){
@@ -412,6 +463,8 @@ public class CircularObjectBuffer {
 	 *   will have been written since the buffer was set to be non-blocking.
 	 * @throws IllegalStateException if done() has been called.
 	 * @throws InterruptedException if the write is interrupted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void write(Object[] buf) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		write(buf, 0, buf.length);
@@ -431,6 +484,8 @@ public class CircularObjectBuffer {
 	 *   will have been written since the buffer was set to be non-blocking.
 	 * @throws IllegalStateException if done() has been called.
 	 * @throws InterruptedException if the write is interrupted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void write(Object[] buf, int off, int len) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		while (len > 0){
@@ -479,6 +534,8 @@ public class CircularObjectBuffer {
 	 *   will have been written since the buffer was set to be non-blocking.
 	 * @throws IllegalStateException if done() has been called.
 	 * @throws InterruptedException if the write is interrupted.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void write(Object o) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		boolean written = false;

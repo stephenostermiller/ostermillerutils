@@ -36,16 +36,23 @@ import java.io.IOException;
  *
  * @see CircularByteBuffer
  * @see CircularObjectBuffer
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class CircularCharBuffer {
 
 	/**
 	 * The default size for a circular character buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int DEFAULT_SIZE = 1024;
 
 	/**
 	 * A buffer that will grow as things are added.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int INFINITE_SIZE = -1;
 
@@ -68,48 +75,70 @@ public class CircularCharBuffer {
 	 * wrapping around the end of the buffer.  The characters that have
 	 * been saved to support a reset() of the Reader go from markPosition
 	 * to readPosition, wrapping around the end of the buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char[] buffer;
 	/**
 	 * Index of the first character available to be read.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int readPosition = 0;
 	/**
 	 * Index of the first character available to be written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int writePosition = 0;
 	/**
 	 * Index of the first saved character. (To support stream marking.)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int markPosition = 0;
 	/**
 	 * Number of characters that have to be saved
 	 * to support mark() and reset() on the Reader.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile int markSize = 0;
 	/**
 	 * If this buffer is infinite (should resize itself when full)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected volatile boolean infinite = false;
 	/**
 	 * True if a write to a full buffer should block until the buffer
 	 * has room, false if the write method should throw an IOException
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean blockingWrite = true;
 	/**
 	 * The Reader that can empty this buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected Reader reader = new CircularCharBufferReader();
 	/**
 	 * true if the close() method has been called on the Reader
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean readerClosed = false;
 	/**
 	 * The Writer that can fill this buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected Writer writer = new CircularCharBufferWriter();
 	/**
 	 * true if the close() method has been called on the writer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected boolean writerClosed = false;
 
@@ -117,6 +146,8 @@ public class CircularCharBuffer {
 	 * Make this buffer ready for reuse.  The contents of the buffer
 	 * will be cleared and the streams associated with this buffer
 	 * will be reopened if they had been closed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void clear(){
 		synchronized (this){
@@ -140,6 +171,8 @@ public class CircularCharBuffer {
 	 *
 	 *
 	 * @return the producer for this buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Writer getWriter(){
 		return writer;
@@ -153,6 +186,8 @@ public class CircularCharBuffer {
 	 * of the buffer size.
 	 *
 	 * @return the consumer for this buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Reader getReader(){
 		return reader;
@@ -167,6 +202,8 @@ public class CircularCharBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the size in characters of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getAvailable(){
 		synchronized (this){
@@ -184,6 +221,8 @@ public class CircularCharBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the available space in characters of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getSpaceLeft(){
 		synchronized (this){
@@ -200,6 +239,8 @@ public class CircularCharBuffer {
 	 * space for other purposes.
 	 *
 	 * @return the size in characters of this buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getSize(){
 		synchronized (this){
@@ -209,6 +250,8 @@ public class CircularCharBuffer {
 
 	/**
 	 * double the size of the buffer
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void resize(){
 		char[] newBuffer = new char[buffer.length * 2];
@@ -234,6 +277,8 @@ public class CircularCharBuffer {
 
 	/**
 	 * Space available in the buffer which can be written.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int spaceLeft(){
 		if (writePosition < markPosition){
@@ -249,6 +294,8 @@ public class CircularCharBuffer {
 
 	/**
 	 * Characters available for reading.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int available(){
 		if (readPosition <= writePosition){
@@ -264,6 +311,8 @@ public class CircularCharBuffer {
 
 	/**
 	 * Characters saved for supporting marks.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private int marked(){
 		if (markPosition <= readPosition){
@@ -280,6 +329,8 @@ public class CircularCharBuffer {
 	/**
 	 * If we have passed the markSize reset the
 	 * mark so that the space can be used.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void ensureMark(){
 		if (marked() >= markSize){
@@ -292,6 +343,8 @@ public class CircularCharBuffer {
 	 * Create a new buffer with a default capacity.
 	 * Writing to a full buffer will block until space
 	 * is available rather than throw an exception.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularCharBuffer(){
 		this (DEFAULT_SIZE, true);
@@ -311,6 +364,8 @@ public class CircularCharBuffer {
 	 * without bound.
 	 *
 	 * @param size desired capacity of the buffer in characters or CircularCharBuffer.INFINITE_SIZE
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularCharBuffer(int size){
 		this (size, true);
@@ -323,6 +378,8 @@ public class CircularCharBuffer {
 	 * @param blockingWrite true writing to a full buffer should block
 	 *        until space is available, false if an exception should
 	 *        be thrown instead.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularCharBuffer(boolean blockingWrite){
 		this (DEFAULT_SIZE, blockingWrite);
@@ -344,6 +401,8 @@ public class CircularCharBuffer {
 	 * @param blockingWrite true writing to a full buffer should block
 	 *        until space is available, false if an exception should
 	 *        be thrown instead.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CircularCharBuffer(int size, boolean blockingWrite){
 		if (size == INFINITE_SIZE){
@@ -358,6 +417,8 @@ public class CircularCharBuffer {
 
 	/**
 	 * Class for reading from a circular character buffer.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected class CircularCharBufferReader extends Reader {
 
@@ -367,6 +428,8 @@ public class CircularCharBuffer {
 		 * previously-closed stream, however, has no effect.
 		 *
 		 * @throws IOException never.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void close() throws IOException {
 			synchronized (CircularCharBuffer.this){
@@ -385,6 +448,8 @@ public class CircularCharBuffer {
 		 *    reset the stream will fail.
 		 * @throws IOException if the stream is closed, or the buffer size is greater
 		 * than or equal to the readAheadLimit.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void mark(int readAheadLimit) throws IOException {
 			synchronized (CircularCharBuffer.this){
@@ -399,6 +464,8 @@ public class CircularCharBuffer {
 		 * Tell whether this stream supports the mark() operation.
 		 *
 		 * @return true, mark is supported.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public boolean markSupported() {
 			return true;
@@ -412,6 +479,8 @@ public class CircularCharBuffer {
 		 * @return The character read, as an integer in the range 0 to 65535 (0x00-0xffff),
 		 *     or -1 if the end of the stream has been reached
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public int read() throws IOException {
 			while (true){
@@ -447,6 +516,8 @@ public class CircularCharBuffer {
 		 * @return The number of characters read, or -1 if the end of
 		 *   the stream has been reached
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public int read(char[] cbuf) throws IOException {
 			return read(cbuf, 0, cbuf.length);
@@ -463,6 +534,8 @@ public class CircularCharBuffer {
 		 * @return The number of characters read, or -1 if the end of
 		 *   the stream has been reached
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public int read(char[] cbuf, int off, int len) throws IOException {
 			while (true){
@@ -504,6 +577,8 @@ public class CircularCharBuffer {
 		 *    false otherwise. Note that returning false does not guarantee that
 		 *    the next read will block.
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public boolean ready() throws IOException {
 			synchronized (CircularCharBuffer.this){
@@ -519,6 +594,8 @@ public class CircularCharBuffer {
 		 * than the readAheadLimit have been read, this method has no effect.
 		 *
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void reset() throws IOException {
 			synchronized (CircularCharBuffer.this){
@@ -536,6 +613,8 @@ public class CircularCharBuffer {
 		 * @return The number of characters actually skipped
 		 * @throws IllegalArgumentException if n is negative.
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public long skip(long n) throws IOException, IllegalArgumentException {
 			while (true){
@@ -573,6 +652,8 @@ public class CircularCharBuffer {
 	 * If the buffer is full, the writes will either block
 	 * until there is some space available or throw an IOException
 	 * based on the CircularCharBuffer's preference.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected class CircularCharBufferWriter extends Writer {
 
@@ -585,6 +666,8 @@ public class CircularCharBuffer {
 		 * however, has no effect.
 		 *
 		 * @throws IOException never.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void close() throws IOException {
 			synchronized (CircularCharBuffer.this){
@@ -599,6 +682,8 @@ public class CircularCharBuffer {
 		 * Flush the stream.
 		 *
 		 * @throws IOException if the stream is closed.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void flush() throws IOException {
 			if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed Writer.");
@@ -616,6 +701,8 @@ public class CircularCharBuffer {
 		 *   and the buffer is full.  If the exception is thrown, no data
 		 *   will have been written since the buffer was set to be non-blocking.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void write(char[] cbuf) throws IOException {
 			write(cbuf, 0, cbuf.length);
@@ -633,6 +720,8 @@ public class CircularCharBuffer {
 		 *   and the buffer is full.  If the exception is thrown, no data
 		 *   will have been written since the buffer was set to be non-blocking.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void write(char[] cbuf, int off, int len) throws IOException {
 			while (len > 0){
@@ -685,6 +774,8 @@ public class CircularCharBuffer {
 		 * @throws BufferOverflowException if buffer does not allow blocking writes
 		 *   and the buffer is full.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void write(int c) throws IOException {
 			boolean written = false;
@@ -727,6 +818,8 @@ public class CircularCharBuffer {
 		 *   and the buffer is full.  If the exception is thrown, no data
 		 *   will have been written since the buffer was set to be non-blocking.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void write(String str) throws IOException {
 			write(str, 0, str.length());
@@ -744,6 +837,8 @@ public class CircularCharBuffer {
 		 *   and the buffer is full.  If the exception is thrown, no data
 		 *   will have been written since the buffer was set to be non-blocking.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
+		 *
+		 * @since ostermillerutils 1.00.00
 		 */
 		public void write(String str, int off, int len) throws IOException {
 			while (len > 0){

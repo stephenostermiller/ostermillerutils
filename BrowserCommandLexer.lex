@@ -30,6 +30,9 @@ import java.io.*;
 
 /**
  * Tokenize a command line into application and arguments.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 %%
 %class BrowserCommandLexer
@@ -43,6 +46,8 @@ import java.io.*;
      * the name of the file to use as input
      *
      * @param args program arguments, of which the first is a filename
+	 *
+	 * @since ostermillerutils 1.00.00
      */
     private static void main(String[] args) {
         InputStream in;
