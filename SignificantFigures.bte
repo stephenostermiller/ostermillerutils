@@ -21,7 +21,7 @@
 </span><span class=identifier>number </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>SignificantFigures</span><span class=separator>(</span><span class=identifier>result</span><span class=separator>);
 </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>setNumberSignificantFigures</span><span class=separator>(</span><span class=identifier>sigs</span><span class=separator>);
 </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>number</span><span class=separator>);</span></pre>
-Figure significant figures for multilication of numbers.
+Figure significant figures for multiplication of numbers.
 </div>
 
 <p>A Java number class for figuring out how many significant figures each of the
