@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta name="description" content="Open source utilities for common tasks when programming in java.">
-   <meta name="keywords" content="util, util, util, utils, utils, utils, utilities, utilities, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, csv, csv, browser, browser control, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl">
+   <meta name="keywords" content="util, util, util, utils, utils, utils, utilities, utilities, base64, base64, base64, encode, encoding, decode, decoding, password, username, dialog, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, csv, csv, browser, browser control, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl">
    <title>Java Utilities</title>
    <base href="http://www.smo.f2s.com/utils/">
 </head>
@@ -10,17 +10,38 @@
 
 <h1>Java Utilities</h1>
 
-<P><big><a name="download" href="utils.jar">Download</a></big> the latest version of these utilities including source code.  (Jar - 53k)</p>
+<P><big><a name="download" href="utils.jar">Download</a></big> the latest version of these utilities including source code.  (Jar - 61k)</p>
 <p>[<a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">Browse</a> the source code. |
 <a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a> the JavaDoc.]</p>
 
 <ul>
+<li><a href="#base64">Base64</a></li>
 <li><a href="#browser">Browser</a></li>
 <li><a href="#csv_parser">CSV Parser</a></li>
 <li><a href="#password_dialog">Password Dialog</a></li>
 <li><a href="#string_tokenizer">String Tokenizer</a></li>
 <li><a href="#straight_stream_reader">Straight Stream Reader</a></li>
 </ul>
+
+<hr>
+
+<h2><a name="base64">Base64</a></h2>
+
+<p>Bas64 encoding and decoding of data.  Encode and decode methods for Strings, byte arrays, and streams.</p>
+
+<p>Base64 is needed in many places other than its original use as an encoding format for transfering attachements in email.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
+<blockquote><code>
+import com.Ostermiller.util.Base64;<br>
+URL url = new URL("http://....");<br>
+HttpURLConnection connection = (HttpURLConnection)url.openConnection();<br>
+connection.setRequestProperty("Authorization", "Basic " + Base64.encode(username + ":" + password));<br>        
+InputStream in = connection.getInputStream();<br>
+</code></blockquote></p>
+
+<p>[<a href="#download">download</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Base64.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <hr>
 
@@ -38,7 +59,8 @@ JavaWorld has a <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip6
 
 <p>[<a href="#download">download</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">documentation</a>]</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <hr>
 
@@ -57,7 +79,8 @@ it if you want to modify the parser.</P>
 
 <p>[<a href="#download">download</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVLexer.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVLexer.html">documentation</a>]</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVLexer.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <hr>
 
@@ -67,7 +90,8 @@ it if you want to modify the parser.</P>
 
 <p>[<a href="#download">download</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/PasswordDialog.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/PasswordDialog.html">documentation</a>]</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/PasswordDialog.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <br clear="all">
 <hr>
@@ -88,7 +112,8 @@ it if you want to modify the parser.</P>
 
 <p>[<a href="#download">download</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StringTokenizer.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StringTokenizer.html">documentation</a>]</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StringTokenizer.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <hr>
 
@@ -98,11 +123,13 @@ it if you want to modify the parser.</P>
 
 <p>[<a href="#download">download</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StraightStreamReader.java/0">source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StraightStreamReader.html">documentation</a>]</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StraightStreamReader.html">documentation</a> | 
+<a href="#license">License</a>]</p>
 
 <hr>
 
 <ul>
+<li><a href="#base64">Base64</a></li>
 <li><a href="#browser">Browser</a></li>
 <li><a href="#csv_parser">CSV Parser</a></li>
 <li><a href="#password_dialog">Password Dialog</a></li>
@@ -112,7 +139,7 @@ it if you want to modify the parser.</P>
 
 <hr>
 
-<h2>License</h2>
+<h2><a name="license">License</a></h2>
 
 <P>Copyright (c) 2001 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
 (utils@Ostermiller.com)</P>
