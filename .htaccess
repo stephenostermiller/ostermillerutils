@@ -2,6 +2,7 @@ AddType application/octet-stream jar
 AddType text/plain csv
 AddType text/plain;charset=GB2312 gb2312csv
 AddType text/x-java java
+AddType text/x-bash sh
 
 Redirect permanent /utils/csvlexer.html http://ostermiller.org/utils/CSVLexer.html
 Redirect permanent /utils/CSVLexor.html http://ostermiller.org/utils/CSVLexer.html
