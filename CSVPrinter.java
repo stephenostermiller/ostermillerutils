@@ -1,6 +1,6 @@
 /*
  * Write files in comma separated value format.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Print values as a comma separated list.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
@@ -163,7 +163,7 @@ public class CSVPrinter implements CSVPrint {
 
 	/**
 	 * Print the string as the last value on the line.	The value
-	 * will be quoted if needed.
+	 * will be quoted if needed. If value is null, an empty value is printed.
 	 *
 	 * @param value value to be outputted.
 	 *
@@ -177,7 +177,7 @@ public class CSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * Output a blank line.
+	 * Start a new line.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -193,6 +193,7 @@ public class CSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 * @throws NullPointerException if values is null.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -211,6 +212,7 @@ public class CSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 * @throws NullPointerException if values is null.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -230,13 +232,15 @@ public class CSVPrinter implements CSVPrint {
 	 * Comments will always begin on a new line and occupy a
 	 * least one full line. The character specified to star
 	 * comments and a space will be inserted at the beginning of
-	 * each new line in the comment.
+	 * each new line in the comment.  If the comment is null,
+	 * an empty comment is outputted.
 	 *
 	 * @param comment the comment to output.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void printlnComment(String comment){
+		if (comment==null) comment = "";
 		if (!newLine){
 			out.println();
 		}
@@ -267,13 +271,14 @@ public class CSVPrinter implements CSVPrint {
 
 	/**
 	 * Print the string as the next value on the line.	The value
-	 * will be quoted if needed.
+	 * will be quoted if needed. If value is null, an empty value is printed.
 	 *
 	 * @param value value to be outputted.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void print(String value){
+		if (value == null) value = "";
 		boolean quote = false;
 		if (value.length() > 0){
 			char c = value.charAt(0);

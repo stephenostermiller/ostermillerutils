@@ -1,6 +1,6 @@
 /*
  * Write files in Excel comma separated value format.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
@@ -129,7 +129,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
 	 * Print the string as the last value on the line.	The value
-	 * will be quoted if needed.
+	 * will be quoted if needed. If value is null, an empty value is printed.
 	 *
 	 * @param value value to be outputted.
 	 *
@@ -143,7 +143,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	}
 
 	/**
-	 * Output a blank line.
+	 * Start a new line.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -159,6 +159,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 * @throws NullPointerException if values is null.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -177,6 +178,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * newLine characters will be escaped.
 	 *
 	 * @param values values to be outputted.
+	 * @throws NullPointerException if values is null.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -193,7 +195,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
 	 * Since ExcelCSV format does not support comments,
-	 * this method will ignore the comment and star
+	 * this method will ignore the comment and start
 	 * a new row.
 	 *
 	 * @param comment the comment to output (ignored).
@@ -206,13 +208,14 @@ public class ExcelCSVPrinter implements CSVPrint {
 
 	/**
 	 * Print the string as the next value on the line.	The value
-	 * will be quoted if needed.
+	 * will be quoted if needed. If value is null, an empty value is printed.
 	 *
 	 * @param value value to be outputted.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void print(String value){
+		if (value == null) value = "";
 		boolean quote = false;
 		if (value.length() > 0){
 			for (int i=0; i<value.length(); i++){
