@@ -69,7 +69,7 @@ public class Browser {
      */
     public static String[] exec = null;
 
-    /** 
+    /**
      * Determine appropriate commands to start a browser on the current
      * operating system.  On windows: <br>
      * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
@@ -284,23 +284,18 @@ public class Browser {
                             args[2].startsWith("file:/")){
                             if (args[2].charAt(6) != '/'){
             					args[2] = "file://" + args[2].substring(6);
-        					} 
-							if (args[2].indexOf("%") != -1){
-                                if (args[2].charAt(7) != '/'){
-                                    args[2] = "file:///" + args[2].substring(7);
-                                }
-                                File shortcut = new File(System.getProperty("user.home"), "java");
-                                shortcut = new File(shortcut, "Browser");
-                                shortcut.mkdirs();
-                                shortcut = new File(shortcut, "TempShortcut.url");
-                                if (shortcut.exists()) shortcut.delete();
-                                shortcut.createNewFile();
-                                PrintWriter out = new PrintWriter(new FileWriter(shortcut));
-                                out.println("[InternetShortcut]");
-                                out.println("URL=" + args[2]);
-                                out.close();
-                                args[2] = shortcut.getCanonicalPath();
+        					}
+                            if (args[2].charAt(7) != '/'){
+                                args[2] = "file:///" + args[2].substring(7);
                             }
+                            File shortcut = File.createTempFile("OpenInBrowser", ".url");
+                            shortcut = shortcut.getCanonicalFile();
+                            shortcut.deleteOnExit();
+                            PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+                            out.println("[InternetShortcut]");
+                            out.println("URL=" + args[2]);
+                            out.close();
+                            args[2] = shortcut.getCanonicalPath();
 						}
                         // start the browser
                         Process p = Runtime.getRuntime().exec(args);
@@ -308,7 +303,7 @@ public class Browser {
                         // give the browser a bit of time to fail.
                         // I have found that sometimes sleep doesn't work
                         // the first time, so do it twice.  My tests
-                        // seem to show that 1000 milisec is enough 
+                        // seem to show that 1000 millisec is enough
                         // time for the browsers I'm using.
                         for (int j=0; j<2; j++){
                             try{
@@ -317,7 +312,7 @@ public class Browser {
                             }
                         }
                         if (p.exitValue() == 0){
-                            // this is a weird case.  The browser exited after 
+                            // this is a weird case.  The browser exited after
                             // a couple seconds saying that it successfully
                             // displayed the url.  Either the browser is lying
                             // or the user closed it *really* quickly.  Oh well.
@@ -333,13 +328,13 @@ public class Browser {
                     throw new IOException(labels.getString("failed"));
                 }
 
-            } catch (IllegalThreadStateException e){      
+            } catch (IllegalThreadStateException e){
                 // the browser is still running.  This is a good sign.
                 // lets just say that it is displaying the url right now!
             }
         }
     }
-    
+
     /**
      * Display the URLs, each in their own window, in the system browser.
      *
@@ -361,13 +356,9 @@ public class Browser {
             displayURL(urls[0]);
             return;
         }
-        File shortcut = new File(System.getProperty("user.home"), ".java");
-        shortcut = new File(shortcut, "Browser");
-        shortcut.mkdirs();
-        shortcut = new File(shortcut, "DisplayURLs.html");
+        File shortcut = File.createTempFile("DisplayURLs", ".html");
         shortcut = shortcut.getCanonicalFile();
-        if (shortcut.exists()) shortcut.delete();
-        shortcut.createNewFile();
+        shortcut.deleteOnExit();
         PrintWriter out = new PrintWriter(new FileWriter(shortcut));
         out.println("<html>");
         out.println("<head>");
@@ -390,9 +381,7 @@ public class Browser {
         out.println("</body>");
         out.println("</html>");
         out.close();
-        System.out.println(shortcut.toURL().toString());
         displayURL(shortcut.toURL().toString());
-
     }
 
     /**
@@ -436,13 +425,9 @@ public class Browser {
         if (urls == null || urls.length == 0){
             return;
         }
-        File shortcut = new File(System.getProperty("user.home"), ".java");
-        shortcut = new File(shortcut, "Browser");
-        shortcut.mkdirs();
-        shortcut = new File(shortcut, "DisplayURLs.html");
+        File shortcut = File.createTempFile("DisplayURLs", ".html");
+        shortcut.deleteOnExit();
         shortcut = shortcut.getCanonicalFile();
-        if (shortcut.exists()) shortcut.delete();
-        shortcut.createNewFile();
         PrintWriter out = new PrintWriter(new FileWriter(shortcut));
         out.println("<html>");
         out.println("<head>");
@@ -477,9 +462,7 @@ public class Browser {
         out.println("</body>");
         out.println("</html>");
         out.close();
-        System.out.println(shortcut.toURL().toString());
         displayURL(shortcut.toURL().toString());
-
     }
 
     /**
@@ -503,7 +486,11 @@ public class Browser {
                     Browser.displayURLs(args, "_blank");
                 }
             }
-        } catch (IOException e){
+            try {
+            	Thread.sleep(10000);
+            } catch (InterruptedException x){
+            }
+		} catch (IOException e){
             System.out.println(e.getMessage());
         }
         System.exit(0);
