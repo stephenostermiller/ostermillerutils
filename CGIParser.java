@@ -176,8 +176,18 @@ public class CGIParser {
 				name = nameValue.substring(0, equalInd);
 				value = nameValue.substring(equalInd+1, nameValue.length());
 			}
-			name = URLDecoder.decode(name, charset);
-			value = URLDecoder.decode(value, charset);
+			try {
+				name = URLDecoder.decode(name, charset);
+			} catch (IllegalArgumentException iax){
+				// May be thrown for for illegal escape sequences such as %s
+				name = "";
+			}
+			try {
+				value = URLDecoder.decode(value, charset);
+			} catch (IllegalArgumentException iax){
+				// May be thrown for for illegal escape sequences such as %s
+				value = "";
+			}
 
 			// Hash
 			ArrayList values = (ArrayList)nameValuePairHash.get(name);
