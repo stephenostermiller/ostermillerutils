@@ -166,6 +166,12 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	@echo Make: Building  randpass.jar.
 	@mkdir -p com/Ostermiller/util
 	@cp *RandPass*.class *RandPass*.properties *.TXT com/Ostermiller/util/
+	@touch com/Ostermiller/util/RandPass_en.class com/Ostermiller/util/RandPass_en.properties \
+	com/Ostermiller/util/RandPass_en_US.class com/Ostermiller/util/RandPass_en_US.properties \
+	com/Ostermiller/util/RandPass_de_DE.class com/Ostermiller/util/RandPass_de_DE.properties \
+	com/Ostermiller/util/RandPass_de.class com/Ostermiller/util/RandPass_de.properties \
+	com/Ostermiller/util/RandPass_se.class com/Ostermiller/util/RandPass_se.properties \
+	com/Ostermiller/util/RandPass_se_MX.class com/Ostermiller/util/RandPass_se_MX.properties
 	@jar cfv randpass.jar com/ > /dev/null
 	@rm -rf com/
 	
