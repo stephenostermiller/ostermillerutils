@@ -30,16 +30,25 @@ size
 description
 </th></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_04_01.jar">ostermillerutils_1_04_01.jar</a>
+<a name="download" href="ostermillerutils_1_04_02.jar">Ostermiller Utils version 1.04.02</a>
 </td><td>
-423k
+427k
 </td><td>
 The latest version of the com.Ostermiller.util utilities including source code.
 </td></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_04_01_for_java_1_3.jar">ostermillerutils_1_04_01_for_java_1_3.jar</a>
+<a name="download" href="ostermillerutils_1_04_02_for_java_1_4.jar">Ostermiller Utils version 1.04.02 for Java 1.4</a>
 </td><td>
-421k
+426k
+</td><td>
+Version modified for compatibility with the older Java 1.4 release.  Modifications include:
+<ul>
+<li>Does not use 1.5 features such as Generics</li>
+</ul>
+</td></tr><tr><td>
+<a name="download" href="ostermillerutils_1_04_02_for_java_1_3.jar">Ostermiller Utils version 1.04.02 for Java 1.3</a>
+</td><td>
+424k
 </td><td>
 Version modified for compatibility with the older Java 1.3 release.  Modifications include:
 <ul>
@@ -54,7 +63,6 @@ Version modified for compatibility with the older Java 1.3 release.  Modificatio
 
 <div class=history>
 <h2>Version History</h2>
-<p>The current version of utils.jar is <b>1.04.01</b>. 
 The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
 <li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>
