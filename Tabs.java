@@ -457,9 +457,7 @@ public class Tabs {
 		InputStream in = null;
 		OutputStream out = null;
 		boolean modified = false;
-		boolean deleteTemp = true;
 		try {
-			f = f.getCanonicalFile();
 			if (inputTabWidth == TABS){
 				inputTabWidth = guessTabWidth(new FileInputStream(f));
 			}
@@ -473,30 +471,15 @@ public class Tabs {
 			out.close();
 			out = null;
 			if (modified){
-				if (!f.delete() || !temp.renameTo(f)){
-					boolean corrupt = false;
-					try {
-						in = new FileInputStream(temp);
-						out = new FileOutputStream(f);
-						corrupt = true;
-						copy(in, out);
-						temp.deleteOnExit();
-					} catch (IOException x){
-						// the temp file is needed
-						// because the original may
-						// have become corrupted.
-						deleteTemp = false;
-						if (corrupt){
-							throw new IOException(MessageFormat.format(labels.getString("corrupt"), new String[] {f.toString(), temp.toString()}));
-						} else {
-							throw new IOException(MessageFormat.format(labels.getString("unmodifiable"), new String[] {f.toString(), temp.toString()}));
-						}
-					}
-				} else {
-					// we renamed the temp file
-					// deleting it might delete
-					// the wrong thing.
-					deleteTemp = false;
+				FileHelper.move(temp, f, true);				
+			} else {
+				if (!temp.delete()){
+					throw new IOException(
+						MessageFormat.format(
+							labels.getString("tempdeleteerror"),
+							new String[] {temp.toString()}
+						)
+					);
 				}
 			}
 		} finally {
@@ -515,27 +498,10 @@ public class Tabs {
 				}
 				out = null;
 			}
-			if (deleteTemp && temp != null && temp.exists()){
-				temp.deleteOnExit();
-			}
 		}
 		return modified;
 	}
 
-	/**
-	 * Copy the data from the input stream to the output stream.
-	 *
-	 * @param in data source
-	 * @param out data destination
-	 * @throws IOException in an input or output error occurs
-	 */
-	private static void copy(InputStream in, OutputStream out) throws IOException{
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int read;
-		while((read = in.read(buffer)) != -1){
-			out.write(buffer, 0, read);
-		}
-	}
 	/**
 	 * Buffer size when reading from input stream.
 	 */
