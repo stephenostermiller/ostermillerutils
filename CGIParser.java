@@ -19,6 +19,7 @@
 package com.Ostermiller.util;
 import java.util.*;
 import java.io.*;
+import java.net.URLEncoder;
 
 /**
  * Parses query string data from a CGI request into name value pairs.
@@ -112,6 +113,102 @@ public class CGIParser{
 	}
 
 	/**
+	 * Set a name value pair as used in a URL.
+	 * This method will replace any previously defined values with the single
+	 * value specified. If the value is null, the name is removed.
+	 *
+	 * @param name a String specifying the name of the parameter.
+	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 */
+	public void setParameter(String name, String value){
+		if (value == null){
+			cgi.remove(name);
+			return;
+		}
+		Vector values = (Vector)cgi.get(name);
+		if (values == null){
+			values = new Vector();
+		}
+		values.setSize(0);
+		values.add(value);
+		cgi.put(name, values);
+	}
+
+	/**
+	 * Set a name value pair as used in a URL.
+	 * This method will replace any previously defined values with the single
+	 * value specified. If values is null or empty, the name is removed.
+	 *
+	 * @param name a String specifying the name of the parameter.
+	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @throws NullPointerException if any of the values is null.
+	 */
+	public void setParameter(String name, String[] values){
+		if (values == null || values.length == 0){
+			cgi.remove(name);
+			return;
+		}
+		for (int i=0; i<values.length; i++){
+			if (values[i] == null) throw new NullPointerException();
+		}
+		Vector valuesVec = (Vector)cgi.get(name);
+		if (valuesVec == null){
+			valuesVec = new Vector();
+		}
+		valuesVec.setSize(0);
+		for (int i=0; i<values.length; i++){
+			valuesVec.add(values[i]);
+		}
+		cgi.put(name, valuesVec);
+	}
+
+	/**
+	 * Set a name value pair as used in a URL.
+	 * This method will add to any previously defined values the values
+	 * specified. If value is null, this method has no effect.
+	 *
+	 * @param name a String specifying the name of the parameter.
+	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 */
+	public void addParameter(String name, String value){
+		if (value == null){
+			return;
+		}
+		Vector values = (Vector)cgi.get(name);
+		if (values == null){
+			values = new Vector();
+		}
+		values.add(value);
+		cgi.put(name, values);
+	}
+
+	/**
+	 * Set a name value pair as used in a URL.
+	 * This method will add to any previously defined values the values
+	 * specified. If values is null, this method has no effect.
+	 *
+	 * @param name a String specifying the name of the parameter.
+	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @throws NullPointerException if any of the values is null.
+	 */
+	public void addParameter(String name, String[] values){
+		if (values == null || values.length == 0){
+			return;
+		}
+		for (int i=0; i<values.length; i++){
+			if (values[i] == null) throw new NullPointerException();
+		}
+		Vector valuesVec = (Vector)cgi.get(name);
+		if (valuesVec == null){
+			valuesVec = new Vector();
+		}
+		for (int i=0; i<values.length; i++){
+			valuesVec.add(values[i]);
+		}
+		cgi.put(name, valuesVec);
+	}
+
+	/**
 	 * Returns the value of a request parameter as a String, or null if the parameter does
 	 * not exist. Request parameters are extra information sent with the request.
 	 * <p>
@@ -143,5 +240,30 @@ public class CGIParser{
 	 */
 	public Enumeration getParameterNames(){
 		return cgi.keys();
+	}
+
+	/**
+	 * Returns the name value pairs properly escaped and written in URL format.
+	 *
+	 * @param enc Character encoding to use when escaping characters.
+	 * @returns URLEncoded name value pairs.
+	 * @throws  UnsupportedEncodingException If the named encoding is not supported.
+	 */
+	public String toString(String enc) throws UnsupportedEncodingException {
+		StringBuffer sb = new StringBuffer();
+		boolean bFirst = true;
+
+		for (Enumeration e = getParameterNames(); e.hasMoreElements();){
+			String name = (String)e.nextElement();
+			String[] values = getParameterValues(name);
+			for (int i=0; i<values.length; i++){
+				if (!bFirst) sb.append('&');
+				bFirst = false;
+				sb.append(URLEncoder.encode(name, enc));
+				sb.append("=");
+				sb.append(URLEncoder.encode(values[i], enc));
+			}
+		}
+		return sb.toString();
 	}
 }
