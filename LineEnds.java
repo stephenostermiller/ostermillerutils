@@ -19,14 +19,22 @@ package com.Ostermiller.util;
 
 import java.io.*;
 import gnu.getopt.*;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
+import java.util.Locale;
 
 /**
  * Stream editor to alter the line separators on text to match
  * that of a given platform.
  */
 public class LineEnds {
-    public static String version = "1.1";
-
+    public static String version = "1.2";
+    
+    /**
+     * Locale specific strings displayed to the user.
+     */
+ 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.LineEnds",  Locale.getDefault());
+  
     /**
      * Converts the line ending on files, or standard input.
      * Run with --help argument for more information.
@@ -36,74 +44,84 @@ public class LineEnds {
     public static void main(String[] args){    
         // create the command line options that we are looking for
         LongOpt[] longopts = {
-            new LongOpt("help", LongOpt.NO_ARGUMENT, null, 1),
-            new LongOpt("version", LongOpt.NO_ARGUMENT, null, 2),
-            new LongOpt("about", LongOpt.NO_ARGUMENT, null, 3),
-            new LongOpt("windows", LongOpt.NO_ARGUMENT, null, 'd'),
-            new LongOpt("dos", LongOpt.NO_ARGUMENT, null, 'd'),
-            new LongOpt("unix", LongOpt.NO_ARGUMENT, null, 'n'),
-            new LongOpt("java", LongOpt.NO_ARGUMENT, null, 'n'),
-            new LongOpt("mac", LongOpt.NO_ARGUMENT, null, 'r'),             
-            new LongOpt("system", LongOpt.NO_ARGUMENT, null, 's'),            
-            new LongOpt("force", LongOpt.NO_ARGUMENT, null, 'f'),              
-            new LongOpt("quiet", LongOpt.NO_ARGUMENT, null, 'q'),             
-            new LongOpt("reallyquiet", LongOpt.NO_ARGUMENT, null, 'Q'),             
-            new LongOpt("verbose", LongOpt.NO_ARGUMENT, null, 'v'),            
-            new LongOpt("noforce", LongOpt.NO_ARGUMENT, null, 4),
+            new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
+            new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
+            new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
+            new LongOpt(labels.getString("windows.option"), LongOpt.NO_ARGUMENT, null, 'd'),
+            new LongOpt(labels.getString("dos.option"), LongOpt.NO_ARGUMENT, null, 'd'),
+            new LongOpt(labels.getString("unix.option"), LongOpt.NO_ARGUMENT, null, 'n'),
+            new LongOpt(labels.getString("java.option"), LongOpt.NO_ARGUMENT, null, 'n'),
+            new LongOpt(labels.getString("mac.option"), LongOpt.NO_ARGUMENT, null, 'r'),             
+            new LongOpt(labels.getString("system.option"), LongOpt.NO_ARGUMENT, null, 's'),            
+            new LongOpt(labels.getString("force.option"), LongOpt.NO_ARGUMENT, null, 'f'),              
+            new LongOpt(labels.getString("quiet.option"), LongOpt.NO_ARGUMENT, null, 'q'),             
+            new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),             
+            new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),              
+            new LongOpt(labels.getString("reallyverbose.option"), LongOpt.NO_ARGUMENT, null, 'V'),               
+            new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
         };
-        Getopt opts = new Getopt("LineEnds", args, "dnrsfqQv", longopts);
+        String oneLetterOptions = "dnrsfVvqQ";
+        Getopt opts = new Getopt(labels.getString("lineends"), args, oneLetterOptions, longopts);
         int style = STYLE_SYSTEM; 
         boolean force = false;
         boolean printMessages = false;
+        boolean printExtraMessages = false;
         boolean printErrors = true;
         int c;
         while ((c = opts.getopt()) != -1){
             switch(c){
           		case 1:{
                     // print out the help message
+                    String[] helpFlags = new String[]{
+                        "--" + labels.getString("help.option"),
+                        "--" + labels.getString("version.option"),
+                        "--" + labels.getString("about.option"),
+                        "-d --" + labels.getString("windows.option") + " --" + labels.getString("dos.option"),
+                        "-n --" + labels.getString("unix.option") + " --" + labels.getString("java.option"),
+                        "-r --" + labels.getString("mac.option"),
+                        "-s --" + labels.getString("system.option"),
+                        "-f --" + labels.getString("force.option"),
+                        "--" + labels.getString("noforce.option"),
+                        "-V --" + labels.getString("reallyverbose.option"),
+                        "-v --" + labels.getString("verbose.option"),
+                        "-q --" + labels.getString("quiet.option"),
+                        "-Q --" + labels.getString("reallyquiet.option"),
+                    };
+                    int maxLength = 0;
+                    for (int i=0; i<helpFlags.length; i++){
+                        maxLength = Math.max(maxLength, helpFlags[i].length());
+                    }
+                    maxLength += 2;
                 	System.out.println(
-                        "LineEnds [-dnrsfvqQ] <files>\n\n" +
-                        "   Adjusts the line endings in files.\n" +
-                        "   If no files are specified standard in and out will be used.\n\n" +
-                        "   --help                 Print this help message.\n" +
-                        "   --version              Print out the version number.\n" +
-                        "   --about                Print out license and contact info.\n" +
-                        "   -d --windows --dos     Use the Windows/DOS line ending.\n" +
-                        "   -n --unix --java       Use the UNIX/Java line ending.\n" +
-                        "   -r --mac               Use the Macintosh line ending.\n" +
-                        "   -s --system            Use the current system's line ending. (default)\n" +
-                        "   -f --force             Always modify files, even binary files.\n" +
-                        "   --noforce              Don't modify binary files. (default)\n" +
-                        "   -v --verbose           Print a message for each file modified.\n" +
-                        "   -q --quiet             Print error messages. (default)\n" +
-                        "   -Q --reallyquiet       Print nothing.\n"
+                        labels.getString("lineends") + " [-" + oneLetterOptions + "] <" + labels.getString("files") + "\n" +
+                        labels.getString("purpose.message") + "\n" +
+                        "  " + labels.getString("stdin.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("d.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("n.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("r.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("s.message") + " (" + labels.getString("default") + ")\n" +
+                        "  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("f.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
+                        "  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("V.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("v.message") + "\n" +
+                        "  " + StringHelper.postpad(helpFlags[11] ,maxLength, ' ') + labels.getString("q.message") + " (" + labels.getString("default") + ")\n" +
+                        "  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("Q.message") + "\n"
 					);
                     System.exit(0);
                 } break;
                 case 2:{
                     // print out the version message
-                    System.out.println("Version " + version);
+                    System.out.println(MessageFormat.format(labels.getString("version"), new String[] {version}));
                     System.exit(0);
                 } break;
                 case 3:{
                     System.out.println(
-                        "LineEnds -- Adjusts the line endings in files.\n" +
-                        "Copyright (c) 2001 by Stephen Ostermiller (utils@ostermiller.com)\n" +
-                        "\n" +
-                        "This program is free software; you can redistribute it and/or modify\n" +
-                        "it under the terms of the GNU Library General Public License as published\n" +
-                        "by  the Free Software Foundation; either version 2 of the License or\n" +
-                        "(at your option) any later version.\n" +
-                        "\n" +
-                        "This program is distributed in the hope that it will be useful, but\n" +
-                        "WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                        "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                        "GNU General Public License for more details.\n" +
-                        "\n" +
-                        "You should have received a copy of the GNU General Public License\n" +
-                        "along with this program; see the file COPYING.TXT.  If not, write to\n" +
-                        "the Free Software Foundation Inc., 59 Temple Place - Suite 330,\n" +
-                        "Boston, MA  02111-1307 USA, or visit http://www.gnu.org/"
+                        labels.getString("lineends") + " -- " + labels.getString("purpose.message") + "\n" +
+                        MessageFormat.format(labels.getString("copyright"), new String[] {"2001", "Stephen Ostermiller (utils@ostermiller.com)"}) + "\n\n" +
+                        labels.getString("license")
                     );
                     System.exit(0);
                 } break;
@@ -124,16 +142,24 @@ public class LineEnds {
                 } break;
                 case 4:{
                     force = false;
+                } break;                
+                case 'V':{
+                    printExtraMessages = true;
+                    printMessages = true;
+                    printErrors = true;
                 } break;
                 case 'v':{
+                    printExtraMessages = false;
                     printMessages = true;
                     printErrors = true;
                 } break;
                 case 'q':{
+                    printExtraMessages = false;
                     printMessages = false;
                     printErrors = true;
                 } break;
                 case 'Q':{
+                    printExtraMessages = false;
                     printMessages = false;
                     printErrors = false;
                 } break;
@@ -145,67 +171,43 @@ public class LineEnds {
         
         int exitCond = 0;
         boolean done = false;
-        for (int i=opts.getOptind(); i<args.length; i++){
-            done = true;
-            File temp = null;
-            File source = null;
-            InputStream in = null;
-            OutputStream out = null;
-            boolean modified = false;
-            try {
-                source = new File(args[i]); 
-                source = source.getCanonicalFile();
-                in = new FileInputStream(source);  
-                temp = File.createTempFile("LineEnds", null, null);
-                out = new FileOutputStream(temp);
-                modified = convert (in, out, style, !force);
-                in.close();
-                in = null;
-                out.flush();
-                out.close();
-                out = null;
-                if (modified){
-                    if (!source.delete() || !temp.renameTo(source)){                        
-                        String message = "Could not be modified";
-                        try {
-                            in = new FileInputStream(temp);  
-                            out = new FileOutputStream(source);
-                            message += " and is likely corrupted";
-                            copy(in, out);
-                            temp.deleteOnExit();
-                        } catch (IOException x1){
-                            throw new IOException(message + ". Modifications can be found in " + temp);
-                        }                        
-                    } // else temp renamed so don't delete 
-                    if (printMessages){
-                        System.out.println("Modified line breaks in: " + args[i]);
-                    }  
-                } else {
-                    temp.deleteOnExit(); 
-                }
-                temp = null;                 
-            } catch (Exception x){                
-                if (in != null){
-                    try { 
-                        in.close(); 
-                    } catch (IOException ignore){
-                    }
-                }                  
-                if (out != null){
-                    try { 
-                        out.flush(); 
-                        out.close(); 
-                    } catch (IOException ignore){
-                    }
-                }  
-                if (!modified && temp != null && temp.exists()){
-                    temp.deleteOnExit();                    
-                } 
+        for (int i=opts.getOptind(); i<args.length; i++){            
+            boolean modified = false;            
+            done = true;            
+            File source = new File(args[i]); 
+            if (!source.exists()){
                 if(printErrors){                              
-                    System.err.println(args[i] + ": " + x.getMessage());
+                    System.err.println(MessageFormat.format(labels.getString("doesnotexist"), new String[] {args[i]}));
                 }
-                exitCond = 1; 
-            }                        
+                exitCond = 1;
+            } else if (!source.canRead()){
+                if(printErrors){                              
+                    System.err.println(MessageFormat.format(labels.getString("cantread"), new String[] {args[i]}));
+                }
+                exitCond = 1;
+            } else if (!source.canWrite()){
+                if(printErrors){                              
+                    System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {args[i]}));
+                }
+                exitCond = 1;
+            } else {
+                try {
+                    if(convert (source, style, !force)){                
+                        if (printMessages){
+                            System.out.println(MessageFormat.format(labels.getString("modified"), new String[] {args[i]}));
+                        } 
+                    } else {
+                        if (printExtraMessages){
+                            System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), new String[] {args[i]}));
+                        } 
+                    } 
+                } catch (IOException x){                
+                    if(printErrors){                              
+                        System.err.println(args[i] + ": " + x.getMessage());
+                    }
+                    exitCond = 1;
+                }             
+            }
         }
         if (!done){
             try {
@@ -393,6 +395,127 @@ public class LineEnds {
         } else {
             return true;
         }
+    }
+    
+    /**
+     * Change the line endings on given file.     
+     * 
+     * The current system's line separator is used.
+     *
+     * @param f File to be converted.
+     * @return true if the file was modified, false if it was already in the correct format
+     * @throws BinaryDataException if non-text data is encountered.
+     * @throws IOException if an input or output error occurs.
+     */
+    public static boolean convert(File f) throws IOException {        
+        return convert(f, STYLE_SYSTEM, true);
+    }
+    
+    /**
+     * Change the line endings on given file.     
+     *
+     * @param f File to be converted.
+     * @param style line separator style.
+     * @return true if the file was modified, false if it was already in the correct format
+     * @throws BinaryDataException if non-text data is encountered.
+     * @throws IOException if an input or output error occurs.
+     * @throws IllegalArgumentException if an unknown style is requested.
+     */
+    public static boolean convert(File f, int style) throws IOException {       
+        return convert(f, style, true);
+    }
+    
+    /**
+     * Change the line endings on given file.      
+     * 
+     * The current system's line separator is used.      
+     *
+     * @param f File to be converted.
+     * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
+     * @return true if the file was modified, false if it was already in the correct format
+     * @throws BinaryDataException if non-text data is encountered.
+     * @throws IOException if an input or output error occurs.
+     */
+    public static boolean convert(File f, boolean binaryException) throws IOException {       
+        return convert(f, STYLE_SYSTEM, binaryException);
+    }
+    
+    /**
+     * Change the line endings on given file.  
+     *
+     * @param f File to be converted.
+     * @param style line separator style.
+     * @param binaryException throw an exception and abort the operation if binary data is encountered and binaryExcepion is false.
+     * @return true if the file was modified, false if it was already in the correct format
+     * @throws BinaryDataException if non-text data is encountered.
+     * @throws IOException if an input or output error occurs.
+     * @throws IllegalArgumentException if an unknown style is requested.
+     */
+    public static boolean convert(File f, int style, boolean binaryException) throws IOException {
+        File temp = null;
+        InputStream in = null;
+        OutputStream out = null;
+        boolean modified = false;
+        boolean deleteTemp = true;
+        try {
+            f = f.getCanonicalFile();
+            in = new FileInputStream(f);  
+            temp = File.createTempFile("LineEnds", null, null);
+            out = new FileOutputStream(temp);
+            modified = convert (in, out, style, binaryException);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+            if (modified){
+                if (!f.delete() || !temp.renameTo(f)){
+                    boolean corrupt = false;   
+                    try {
+                        in = new FileInputStream(temp);  
+                        out = new FileOutputStream(f);
+                        corrupt = true;
+                        copy(in, out);
+                        temp.deleteOnExit();
+                    } catch (IOException x){
+                        // the temp file is needed 
+                        // because the original may
+                        // have become corrupted.
+                        deleteTemp = false;
+                        if (corrupt){
+                            throw new IOException(MessageFormat.format(labels.getString("corrupt"), new String[] {f.toString(), temp.toString()}));
+                        } else {
+                            throw new IOException(MessageFormat.format(labels.getString("unmodifiable"), new String[] {f.toString(), temp.toString()}));
+                        }
+                    }                        
+                } else {
+                    // we renamed the temp file
+                    // deleting it might delete
+                    // the wrong thing.
+                    deleteTemp = false;
+                }
+            }               
+        } finally {                
+            if (in != null){
+                try { 
+                    in.close(); 
+                } catch (IOException ignore){
+                }
+                in = null;
+            }                  
+            if (out != null){
+                try { 
+                    out.flush(); 
+                    out.close(); 
+                } catch (IOException ignore){
+                }
+                out = null;
+            }  
+            if (deleteTemp && temp != null && temp.exists()){
+                temp.deleteOnExit();                    
+            } 
+        } 
+        return modified;    
     }
     
     /**
