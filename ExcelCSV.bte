@@ -1,5 +1,5 @@
 <%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Excel Comma Separated Values (CSV) in Java<%/bte.tpl%>
+<%bte.tpl name=pageTitle%>Excel Comma Separated Values (CSV)<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to read and write files in Excel Comma Separated Value (CSV) format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>csv, csv, csv, excel, excel, microsoft excel, excel spreadsheet, spreadsheet, spread sheet, microsoft, comma, separated, value, values, comma, separated, value, values comma separated value, values<%/bte.tpl%>
 <%bte.tpl name=content%>
