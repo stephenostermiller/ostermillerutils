@@ -988,6 +988,36 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
     public String restOfText(){
         return nextToken(null, null);
     }
+    
+    /**
+     * Returns the same value as nextToken() but does not alter
+     * the internal state of the Tokenizer.  Subsequent calls 
+     * to peek() or a call to nextToken() will return the same
+     * token again.
+     *     
+     * @return the next token from this string tokenizer.
+     * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
+     */
+    public String peek(){
+        // copy over state variables from the class to local
+        // variables so that the state of this object can be
+        // restored to the state that it was in before this
+        // method was called.
+        int savedPosition = position;
+        boolean savedEmptyReturned = emptyReturned;
+        int savedtokenCount = tokenCount;
+        
+        // get the next token
+        String retval = nextToken();
+        
+        // restore the state
+        position = savedPosition;
+        emptyReturned = savedEmptyReturned;
+        tokenCount = savedtokenCount;
+        
+        // return the nextToken;
+        return(retval);        
+    }
 }
 
 
