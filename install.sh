@@ -43,7 +43,7 @@ fi
 if [ ! -e $directory/$RandPass ] || [ ! -z $1 ]
 then
     echo "#!/bin/bash" > $directory/$RandPass
-    echo "java -classpath $workingdir/$utils com.Ostermiller.util.RandPass \$@" >> $directory/$RandPass
+    echo "java -classpath $workingdir/$utils com.Ostermiller.util.RandPass \"\$@\"" >> $directory/$RandPass
     chmod 755 $directory/$RandPass
     echo "$RandPass installed."
 else
@@ -53,7 +53,7 @@ fi
 if [ ! -e $directory/$LineEnds ] || [ ! -z $1 ]
 then
     echo "#!/bin/bash" > $directory/$LineEnds
-    echo "java -classpath $workingdir/$utils com.Ostermiller.util.LineEnds \$@" >> $directory/$LineEnds
+    echo "java -classpath $workingdir/$utils com.Ostermiller.util.LineEnds \"\$@\"" >> $directory/$LineEnds
     chmod 755 $directory/$LineEnds
     echo "$LineEnds installed."
 else
@@ -63,7 +63,7 @@ fi
 if [ ! -e $directory/$MD5 ] || [ ! -z $1 ]
 then
     echo "#!/bin/bash" > $directory/$MD5
-    echo "java -classpath $workingdir/$utils com.Ostermiller.util.MD5 \$@" >> $directory/$MD5
+    echo "java -classpath $workingdir/$utils com.Ostermiller.util.MD5 \"\$@\"" >> $directory/$MD5
     chmod 755 $directory/$MD5
     echo "$MD5 installed."
 else
@@ -73,7 +73,7 @@ fi
 if [ ! -e $directory/$Tabs ] || [ ! -z $1 ]
 then
     echo "#!/bin/bash" > $directory/$Tabs
-    echo "java -classpath $workingdir/$utils com.Ostermiller.util.Tabs \$@" >> $directory/$Tabs
+    echo "java -classpath $workingdir/$utils com.Ostermiller.util.Tabs \"\$@\"" >> $directory/$Tabs
     chmod 755 $directory/$Tabs
     echo "$Tabs installed."
 else
@@ -83,7 +83,7 @@ fi
 if [ ! -e $directory/$Base64 ] || [ ! -z $1 ]
 then
     echo "#!/bin/bash" > $directory/$Base64
-    echo "java -classpath $workingdir/$utils com.Ostermiller.util.Base64 \$@" >> $directory/$Base64
+    echo "java -classpath $workingdir/$utils com.Ostermiller.util.Base64 \"\$@\"" >> $directory/$Base64
     chmod 755 $directory/$Base64
     echo "$Base64 installed."
 else
