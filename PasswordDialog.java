@@ -20,6 +20,8 @@ package com.Ostermiller.util;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ResourceBundle;
+import java.util.Locale;
 
 /**
  * A modal dialog that asks the user for a username and password.
@@ -39,6 +41,11 @@ import java.awt.event.*;
  * </code>
  */
 public class PasswordDialog extends JDialog {
+
+    /**
+     * Locale specific strings displayed to the user.
+     */
+ 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  Locale.getDefault());
 
     /**
      * Where the name is typed.
@@ -89,42 +96,46 @@ public class PasswordDialog extends JDialog {
 
     /**
      * Set the label on the ok button.
-     * "OK" is the default.
+     * The default is a localized string.
      *
      * @param ok label for the ok button.
      */
     public void setOKText(String ok){
         this.okButton.setText(ok);
+        pack();
     }
 
     /**
      * Set the label on the cancel button.
-     * "Cancel" is the default.
+     * The default is a localized string.
      *
      * @param cancel label for the cancel button.
      */
     public void setCancelText(String cancel){
         this.cancelButton.setText(cancel);
+        pack();
     }
 
     /**
      * Set the label for the field in which the name is entered.
-     * "Name: " is the default.
+     * The default is a localized string.
      *
      * @param name label for the name field.
      */
     public void setNameLabel(String name){
         this.nameLabel.setText(name);
+        pack();
     }
 
     /**
      * Set the label for the field in which the password is entered.
-     * "Password: " is the default.
+     * The default is a localized string.
      *
      * @param pass label for the password field.
      */
     public void setPassLabel(String pass){
         this.passLabel.setText(pass);
+        pack();
     }
 
     /**
@@ -173,8 +184,29 @@ public class PasswordDialog extends JDialog {
      */
 	public PasswordDialog(Frame parent, String title) {
         super(parent, title, true);
-        setLocationRelativeTo(parent);
+        if (title==null){
+            setTitle(labels.getString("dialog.title"));
+        }
+        if (parent != null){
+        	setLocationRelativeTo(parent);
+        }
         // super calls dialogInit, so we don't need to do it again.
+    }
+
+    /**
+     * Create this dialog with the given parent and the default title.
+     *
+     * @param parent window from which this dialog is launched
+     */
+	public PasswordDialog(Frame parent) {
+        this(parent, null);
+    }
+
+    /**
+     * Create this dialog with the default title.
+     */
+	public PasswordDialog() {
+        this(null, null);
     }
 
     /**
@@ -184,10 +216,10 @@ public class PasswordDialog extends JDialog {
 
         name = new JTextField("", 20);
         pass = new JPasswordField("", 20);
-        okButton = new JButton("OK");
-		cancelButton = new JButton("Cancel");
-        nameLabel = new JLabel("Name: ");
-        passLabel = new JLabel("Password: ");
+        okButton = new JButton(labels.getString("dialog.ok"));
+		cancelButton = new JButton(labels.getString("dialog.cancel"));
+        nameLabel = new JLabel(labels.getString("dialog.name"));
+        passLabel = new JLabel(labels.getString("dialog.pass"));
 
 		super.dialogInit();
 
@@ -263,7 +295,7 @@ public class PasswordDialog extends JDialog {
      * @param args command line arguments: name and password (optional)
      */
     private static void main(String[] args){
-        PasswordDialog p = new PasswordDialog(null, "Test");
+        PasswordDialog p = new PasswordDialog();
         if(args.length > 0){
             p.setName(args[0]);
         }
