@@ -20,7 +20,7 @@ package com.Ostermiller.util;
 import java.io.*;
 
 /**
- * Print values as a comma separated list
+ * Print values as a comma separated lis
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
@@ -28,30 +28,30 @@ import java.io.*;
  */
 public interface CSVPrint {
 
-    /**
+	/**
 	 * Print the string as the last value on the line.	The value
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
 	 */
 	public void println(String value);
-    
-    /**
+
+	/**
 	 * Output a blank line
 	 */
 	public void println();
-    
-    /**
+
+	/**
 	 * Print a single line of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
 	 * and other characters that need it will be escaped.
 	 *
 	 * @param values values to be outputted.
 	 */
-	public void println(String[] values);    
-    
-    
-    /**
+	public void println(String[] values);
+
+
+	/**
 	 * Print several lines of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
 	 * newLine characters will be escaped.
@@ -59,21 +59,21 @@ public interface CSVPrint {
 	 * @param values values to be outputted.
 	 */
 	public void println(String[][] values);
-    
-    /**
-	 * If the CSV format supports comments, write the comment
-     * to the file on its own line, otherwise, start a new line.
+
+	/**
+	 * If the CSV format supports comments, write the commen
+	 * to the file on its own line, otherwise, start a new line.
 	 *
-	 * @param comment the comment to output
+	 * @param comment the comment to outpu
 	 */
 	public void printlnComment(String comment);
-    
-    /**
+
+	/**
 	 * Print the string as the next value on the line.	The value
 	 * will be quoted if needed.
 	 *
 	 * @param value value to be outputted.
 	 */
 	public void print(String value);
-    
+
 }

@@ -101,7 +101,7 @@ public class CSVPrinter implements CSVPrint {
 	public void println(String value){
 		print(value);
 		out.println();
-        out.flush();
+		out.flush();
 		newLine = true;
 	}
 
@@ -109,8 +109,8 @@ public class CSVPrinter implements CSVPrint {
 	 * Output a blank line
 	 */
 	public void println(){
-		out.println();        
-        out.flush();
+		out.println();
+		out.flush();
 		newLine = true;
 	}
 
@@ -126,11 +126,11 @@ public class CSVPrinter implements CSVPrint {
 			print(values[i]);
 		}
 		out.println();
-        out.flush();
+		out.flush();
 		newLine = true;
 	}
-    
-    /**
+
+	/**
 	 * Print several lines of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
 	 * newLine characters will be escaped.
@@ -139,23 +139,23 @@ public class CSVPrinter implements CSVPrint {
 	 */
 	public void println(String[][] values){
 		for (int i=0; i<values.length; i++){
-            println(values[i]);
+			println(values[i]);
 		}
-        if (values.length == 0){
-		    out.println();
-        }
-        out.flush();
+		if (values.length == 0){
+			out.println();
+		}
+		out.flush();
 		newLine = true;
 	}
 
 	/**
 	 * Put a comment amoung the comma separated values.
-	 * Comments will always begin on a new line and occupy at
-	 * least one full line. The character specified to start
+	 * Comments will always begin on a new line and occupy a
+	 * least one full line. The character specified to star
 	 * comments and a space will be inserted at the beginning of
 	 * each new line in the comment.
 	 *
-	 * @param comment the comment to output
+	 * @param comment the comment to outpu
 	 */
 	public void printlnComment(String comment){
 		if (!newLine){
@@ -169,7 +169,7 @@ public class CSVPrinter implements CSVPrint {
 				case '\r': {
 					if (i+1 < comment.length() && comment.charAt(i+1) == '\n'){
 						i++;
-					} 
+					}
 				} //break intentionally excluded.
 				case '\n': {
 					out.println();
@@ -212,12 +212,12 @@ public class CSVPrinter implements CSVPrint {
 				quote = true;
 			}
 		} else if (newLine) {
-            // always quote an empty token that is the first
-            // on the line, as it may be the only thing on the 
-            // line.  If it were not quoted in that case,
-            // an empty line has no tokens.
-            quote = true;
-        }
+			// always quote an empty token that is the firs
+			// on the line, as it may be the only thing on the
+			// line.  If it were not quoted in that case,
+			// an empty line has no tokens.
+			quote = true;
+		}
 		if (newLine){
 			newLine = false;
 		} else {
@@ -239,35 +239,35 @@ public class CSVPrinter implements CSVPrint {
 	 * @return the value, escaped and quoted.
 	 */
 	private static String escapeAndQuote(String value){
-        int count = 2;
-        for (int i=0; i<value.length(); i++){
-            switch(value.charAt(i)){
-                case '\"': case '\n': case '\r': case '\\': {
-                    count ++;
-                } break; 
-            }
+		int count = 2;
+		for (int i=0; i<value.length(); i++){
+			switch(value.charAt(i)){
+				case '\"': case '\n': case '\r': case '\\': {
+					count ++;
+				} break;
+			}
 		}
 		StringBuffer sb = new StringBuffer(value.length() + count);
 		sb.append('"');
 		for (int i=0; i<value.length(); i++){
-            char c = value.charAt(i);
-            switch(c){
-                case '\"': {
-				    sb.append("\\\"");
-                } break; 
-                case '\n': {
-				    sb.append("\\n");
-                } break; 
-                case '\r': {
-				    sb.append("\\r");
-                } break; 
-                case '\\': {
-				    sb.append("\\\\");
-                } break; 
-                default: {
-                    sb.append(c);
-                }
-            }
+			char c = value.charAt(i);
+			switch(c){
+				case '\"': {
+					sb.append("\\\"");
+				} break;
+				case '\n': {
+					sb.append("\\n");
+				} break;
+				case '\r': {
+					sb.append("\\r");
+				} break;
+				case '\\': {
+					sb.append("\\\\");
+				} break;
+				default: {
+					sb.append(c);
+				}
+			}
 		}
 		sb.append('"');
 		return (sb.toString());
@@ -284,7 +284,7 @@ public class CSVPrinter implements CSVPrint {
 			if (args.length > 0){
 				File f = new File(args[0]);
 				if (!f.exists()){
-                    f.createNewFile();
+						f.createNewFile();
 					if (f.canWrite()){
 						out = new FileOutputStream(f);
 					} else {
@@ -298,7 +298,7 @@ public class CSVPrinter implements CSVPrint {
 			}
 			CSVPrinter p  = new CSVPrinter(out);
 			p.print("unquoted");
-            p.print("un\\quoted");
+			p.print("un\\quoted");
 			p.print("escaped\"quote");
 			p.print("escaped\"quote\\");
 			p.println("comma,comma");

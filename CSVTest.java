@@ -24,39 +24,39 @@ import java.io.*;
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  */
 class CSVTest {
-    public static void main (String[] args) throws IOException{
-        File f = new File("CSVTest.txt");
-        FileOutputStream out = new FileOutputStream(f);
-        CSVPrinter csvOut = new CSVPrinter(out, '#');
+	public static void main (String[] args) throws IOException{
+		File f = new File("CSVTest.txt");
+		FileOutputStream out = new FileOutputStream(f);
+		CSVPrinter csvOut = new CSVPrinter(out, '#');
 
-        csvOut.printlnComment("Comma Separated Value Test");
-        csvOut.println();
-        csvOut.printlnComment("Five Cities");
-        csvOut.println(new String[] {
-            "Boston",
-            "San Francisco",
-            "New York",
-            "Chicago",
-            "Houston",
+		csvOut.printlnComment("Comma Separated Value Test");
+		csvOut.println();
+		csvOut.printlnComment("Five Cities");
+		csvOut.println(new String[] {
+			"Boston",
+			"San Francisco",
+			"New York",
+			"Chicago",
+			"Houston",
 		});
-        csvOut.println();
-        csvOut.println(""); // an empty value on a line by itself.
-        csvOut.println(new String[] {
-            "Two\nTokens",
-            "On the\nSame Line"
+		csvOut.println();
+		csvOut.println(""); // an empty value on a line by itself.
+		csvOut.println(new String[] {
+			"Two\nTokens",
+			"On the\nSame Line"
 		});
-        csvOut.printlnComment("A two line comment\njust to see that it works");
+		csvOut.printlnComment("A two line comment\njust to see that it works");
 
-        CSVParser shredder = new CSVParser(new StraightStreamReader(new FileInputStream(f)));
-        shredder.setCommentStart("#;!");
-        shredder.setEscapes("nrtf", "\n\r\t\f");
-        String t;
-        while ((t = shredder.nextValue()) != null) {
-            if (t.length() == 1){
-            	System.out.println("" + shredder.lastLineNumber() + " " + (int)(t.charAt(0)));
-            } else {
-            	System.out.println("" + shredder.lastLineNumber() + " " + t);
-            }
+		CSVParser shredder = new CSVParser(new StraightStreamReader(new FileInputStream(f)));
+		shredder.setCommentStart("#;!");
+		shredder.setEscapes("nrtf", "\n\r\t\f");
+		String t;
+		while ((t = shredder.nextValue()) != null) {
+			if (t.length() == 1){
+				System.out.println("" + shredder.lastLineNumber() + " " + (int)(t.charAt(0)));
+			} else {
+				System.out.println("" + shredder.lastLineNumber() + " " + t);
+			}
 		}
-    }
+	}
 }

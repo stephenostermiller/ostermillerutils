@@ -20,7 +20,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Read files in comma separated value format as outputted by the Microsoft
+ * Read files in comma separated value format as outputted by the Microsof
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
@@ -49,8 +49,8 @@ import java.util.*;
  * }
  * </pre>
  * <P>
- * The CSV that Excel outputs differs from the 
- * <a href="http://ostermiller.org/utils/CSVLexer.html">ISO CSV</a> standard 
+ * The CSV that Excel outputs differs from the
+ * <a href="http://ostermiller.org/utils/CSVLexer.html">standard</a>
  * in several respects:
  * <ul><li>Leading and trailing whitespace is significant.</li>
  * <li>A backslash is not a special character and is not used to escape anything.</li>
@@ -63,7 +63,7 @@ import java.util.*;
  * This parser does not attempt to fix these excel conversions, but users should be aware
  * of them.</li></ul>
  *
- * @see com.Ostermiller.util.CSVParser 
+ * @see com.Ostermiller.util.CSVParser
  */
 public class ExcelCSVParser implements CSVParse {
 
@@ -118,7 +118,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * get the next value.
 	 *
 	 * @return the next value or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
 	public String nextValue() throws IOException {
 		if (tokenCache == null){
@@ -133,9 +133,9 @@ public class ExcelCSVParser implements CSVParse {
 
 	/**
 	 * Get the line number that the last token came from.
-     * <p>
-     * New line breaks that occur in the middle of a token are not
-     * counted in the line number count. 
+	 * <p>
+	 * New line breaks that occur in the middle of a token are no
+	 * counted in the line number count.
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
 	 */
@@ -145,12 +145,12 @@ public class ExcelCSVParser implements CSVParse {
 
 	/**
 	 * Get all the values from a line.
-     * <p>
-     * If the line has already been partially read, only the
-     * values that have not already been read will be included.
+	 * <p>
+	 * If the line has already been partially read, only the
+	 * values that have not already been read will be included.
 	 *
 	 * @return all the values from the line or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
@@ -160,7 +160,7 @@ public class ExcelCSVParser implements CSVParse {
 			lineNumber = lineCache;
 		}
 		while ((tokenCache = lexer.getNextToken()) != null
-			&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)) {
+				&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)) {
 			v.add(tokenCache);
 			lineNumber = lexer.getLineNumber();
 		}
@@ -172,40 +172,40 @@ public class ExcelCSVParser implements CSVParse {
 		String[] result = new String[v.size()];
 		return ((String[])v.toArray(result));
 	}
-    
-    /**
+
+	/**
 	 * Get all the values from the file.
-     * <p>
-     * If the file has already been partially read, only the
-     * values that have not already been read will be included.
-     * <p>
-     * Each line of the file that has at least one value will be
-     * represented.  Comments and empty lines are ignored.
-     * <p>
-     * The resulting double array may be jagged.
+	 * <p>
+	 * If the file has already been partially read, only the
+	 * values that have not already been read will be included.
+	 * <p>
+	 * Each line of the file that has at least one value will be
+	 * represented.  Comments and empty lines are ignored.
+	 * <p>
+	 * The resulting double array may be jagged.
 	 *
 	 * @return all the values from the file or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
-    public String[][] getAllValues() throws IOException {        
+	public String[][] getAllValues() throws IOException {
 		Vector v = new Vector();
-        String[] line;
-        while((line = getLine()) != null){
-            v.add(line);
-        }
+		String[] line;
+		while((line = getLine()) != null){
+			v.add(line);
+		}
 		if (v.size() == 0){
 			return null;
 		}
-        String[][] result = new String[v.size()][];
+		String[][] result = new String[v.size()][];
 		return ((String[][])v.toArray(result));
-    }
+	}
 
 	/**
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
 	 * would be comments:<br>
-	 * <pre> # Comment
-	 * ; Another Comment
+	 * <pre> # Commen
+	 * ; Another Commen
 	 * ! Yet another comment</pre>
 	 * By default there are no comments in CVS files.  Commas and quotes may not be
 	 * used to indicate comment lines.
@@ -263,17 +263,17 @@ public class ExcelCSVParser implements CSVParse {
 			System.out.println(e.getMessage());
 		}
 	}
-    
-    /**
+
+	/**
 	 * Parse the comma delimited data from a string.
 	 *
 	 * @param s string with comma delimited data to parse.
 	 */
 	public static String[][] parse(String s){
-        try {
-		    return (new ExcelCSVParser(new StringReader(s))).getAllValues();
-        } catch (IOException x){
-            return null;
-        }
-    }
+		try {
+			return (new ExcelCSVParser(new StringReader(s))).getAllValues();
+		} catch (IOException x){
+			return null;
+		}
+	}
 }
