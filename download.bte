@@ -41,7 +41,7 @@ The latest version of the com.Ostermiller.util utilities including source code.
 </td><td>
 400k
 </td><td>
-Version modified for compatibility <a href="kaffe.org">Kaffe</a> (version 1.1.4).  This version is completely free software.  It can be run on Linux with Kaffe, which has no dependencies on non-free software. Modifications include:
+Version modified for compatibility <a href="http://kaffe.org/">Kaffe</a> (version 1.1.4).  This version is completely free software.  It can be run on Linux with Kaffe, which has no dependencies on non-free software. Modifications include:
 <ul>
 <li>Does not use 1.5 features such as Generics</li>
 <li>Classes that use Swing components have been removed: PasswordDialog, RandPassApplet, Browser</li>
@@ -79,7 +79,7 @@ Version modified for compatibility with the older Java 1.3 release.  Modificatio
 The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
 <li>Version 1.04.02 - LabeledCSVParser does not parse labels until they are needed rather than in the constructor.</li>
-<li>Version 1.04.01 - ConcatStreams can dynamically accept more input sources, ExcelCSVParser saves input streams so it can later close them..</li>
+<li>Version 1.04.01 - ConcatStreams can dynamically accept more input sources, ExcelCSVParser saves input streams so it can later close them.</li>
 <li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>
 <li><a href="history.html">Older Changes...</a></li>
 </ul>
