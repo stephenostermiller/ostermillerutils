@@ -389,6 +389,7 @@ public class StringHelper {
 	public static String escapeHTML(String s){
 		int length = s.length();
 		int newLength = length;
+		  boolean someCharacterEscaped = false;
 		// first check for characters that might
 		// be dangerous and calculate a length
 		// of the string that has escapes.
@@ -404,25 +405,29 @@ public class StringHelper {
 					} break;
 					default: {
 						newLength -= 1;
+						someCharacterEscaped = true;
 					}
 				}
 			} else {
 				switch(c){
 					case '\"':{
 						newLength += 5;
+						someCharacterEscaped = true;
 					} break;
 					case '&':
 					case '\'':{
 						newLength += 4;
+						someCharacterEscaped = true;
 					} break;
 					case '<':
 					case '>':{
 						newLength += 3;
+						someCharacterEscaped = true;
 					} break;
 				}
 			}
 		}
-		if (length == newLength){
+		if (!someCharacterEscaped){
 			// nothing to escape in the string
 			return s;
 		}
