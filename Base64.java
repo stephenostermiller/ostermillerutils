@@ -141,22 +141,22 @@ public class Base64{
     }
 
     /**
-	 * Table of the sixty-four characters that are used as
-	 * the Base64 alphabet: [A-Za-z0-9+/]
+     * Table of the sixty-four characters that are used as
+     * the Base64 alphabet: [A-Za-z0-9+/]
      */
     protected static final byte[] base64Chars = {
-		'A','B','C','D','E','F','G','H',
-		'I','J','K','L','M','N','O','P',
-		'Q','R','S','T','U','V','W','X',
-		'Y','Z','a','b','c','d','e','f',
-		'g','h','i','j','k','l','m','n',
-		'o','p','q','r','s','t','u','v',
-		'w','x','y','z','0','1','2','3',
-		'4','5','6','7','8','9','+','/',
-	};
+        'A','B','C','D','E','F','G','H',
+        'I','J','K','L','M','N','O','P',
+        'Q','R','S','T','U','V','W','X',
+        'Y','Z','a','b','c','d','e','f',
+        'g','h','i','j','k','l','m','n',
+        'o','p','q','r','s','t','u','v',
+        'w','x','y','z','0','1','2','3',
+        '4','5','6','7','8','9','+','/',
+    };
 
     /**
-	 * Reverse lookup table for the Base64 alphabet.
+     * Reverse lookup table for the Base64 alphabet.
      * reversebase64Chars[byte] gives n for the nth Base64
      * character or -1 if a character is not a Base64 character.
      */
@@ -164,12 +164,12 @@ public class Base64{
     static {
         // Fill in -1 for all characters to start with
         for (int i=0; i<reverseBase64Chars.length; i++){
-			reverseBase64Chars[i] = -1;
+            reverseBase64Chars[i] = -1;
         }
         // For characters that are base64Chars, adjust
         // the reverse lookup table.
         for (byte i=0; i < base64Chars.length; i++){
-			reverseBase64Chars[base64Chars[i]] = i;
+            reverseBase64Chars[base64Chars[i]] = i;
         }
     }
 
@@ -193,7 +193,7 @@ public class Base64{
 
     /**
      * Encode a String in Base64.
-	 * The String is converted to and from bytes according to the platform's
+     * The String is converted to and from bytes according to the platform's
      * default character encoding.
      * No line breaks or other white space are inserted into the encoded data.
      *
@@ -239,7 +239,7 @@ public class Base64{
         length = length * 4 / 3;
         ByteArrayOutputStream out = new ByteArrayOutputStream(length);
         try {
-        	encode(in, out, false);
+            encode(in, out, false);
         } catch (IOException x){
             // This can't happen.
             // The input and output streams were constructed
@@ -259,10 +259,10 @@ public class Base64{
     public static void encode(InputStream in, OutputStream out, boolean lineBreaks) throws IOException {
         // Base64 encoding converts three bytes of input to
         // four bytes of output
-		int[] inBuffer = new int[3];
+        int[] inBuffer = new int[3];
         int lineCount = 0;
 
-		boolean done = false;
+        boolean done = false;
         while (!done && (inBuffer[0] = in.read()) != -1){
             // Fill the buffer
             inBuffer[1] = in.read();
@@ -291,7 +291,7 @@ public class Base64{
                     out.write(base64Chars [inBuffer[2] & 0x3F]);
                 } else {
                     // C's: last four bits of second byte
-					out.write(base64Chars [((inBuffer[1] << 2) & 0x3c)]);
+                    out.write(base64Chars [((inBuffer[1] << 2) & 0x3c)]);
                     // an equals sign for a character that is not a Base64 character
                     out.write('=');
                     done = true;
@@ -316,7 +316,7 @@ public class Base64{
      * Decode a Base64 encoded String.
      * Characters that are not part of the Base64 alphabet are ignored
      * in the input.
-	 * The String is converted to and from bytes according to the platform's
+     * The String is converted to and from bytes according to the platform's
      * default character encoding.
      *
      * @param string The data to decode.
@@ -363,7 +363,7 @@ public class Base64{
         length = length * 3 / 4;
         ByteArrayOutputStream out = new ByteArrayOutputStream(length);
         try {
-        	decode(in, out, false);
+            decode(in, out, false);
         } catch (IOException x){
             // This can't happen.
             // The input and output streams were constructed
@@ -390,9 +390,9 @@ public class Base64{
             read = in.read();
             if (read == -1) return -1;
             if (throwExceptions && reverseBase64Chars[(byte)read] == -1 && 
-				read != ' ' && read != '\n'  && read != '\r' && read != '\t' && read != '\f' && read != '='){
+                read != ' ' && read != '\n'  && read != '\r' && read != '\t' && read != '\f' && read != '='){
                 throw new IOException ("Unexpected Base64 character: " + read);
-			}
+            }
             read = reverseBase64Chars[(byte)read];
         } while (read == -1);
         return read;
@@ -401,7 +401,7 @@ public class Base64{
     /**
      * Decode Base64 encoded data from the InputStream to the OutputStream.
      * Characters in the Base64 alphabet, white space and equals sign are 
-	 * expected to be in urlencoded data.  The presence of other characters
+     * expected to be in urlencoded data.  The presence of other characters
      * could be a sign that the data is corrupted.
      *
      * @param in Stream from which to read data that needs to be decoded.
@@ -411,13 +411,13 @@ public class Base64{
      */
     public static void decode(InputStream in, OutputStream out, boolean throwExceptions) throws IOException {
         // Base64 decoding converts four bytes of input to three bytes of output
-		int[] inBuffer = new int[4];
+        int[] inBuffer = new int[4];
 
         // read bytes unmapping them from their ASCII encoding in the process
         // we must read at least two bytes to be able to output anything
         boolean done = false;
         while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != -1
-			&& (inBuffer[1] = readBase64(in, throwExceptions)) != -1){
+            && (inBuffer[1] = readBase64(in, throwExceptions)) != -1){
             // Fill the buffer
             inBuffer[2] = readBase64(in, throwExceptions);
             inBuffer[3] = readBase64(in, throwExceptions);

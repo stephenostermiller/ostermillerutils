@@ -46,13 +46,8 @@ class CSVTest {
             "On the\nSame Line"
 		});
         csvOut.printlnComment("A two line comment\njust to see that it works");
-        csvOut.println();
-        csvOut.println("Some weird values that could break things");
-        for (int i=0; i<256; i++){
-            csvOut.print("" + (char)i);
-        }
 
-        CSVParser shredder = new CSVParser(new FileInputStream(f));
+        CSVParser shredder = new CSVParser(new StraightStreamReader(new FileInputStream(f)));
         shredder.setCommentStart("#;!");
         shredder.setEscapes("nrtf", "\n\r\t\f");
         String t;

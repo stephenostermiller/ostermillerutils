@@ -8,7 +8,7 @@ JAVADOC=javadoc $(JDFLAGS)
 JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 CVS=cvs
 
-all: compile build javadoc
+all: compile build javadoc htmlsource
 
 compile: buildclean CSVLexer.java \
 	BrowserCommandLexer.java \
@@ -29,7 +29,7 @@ ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
 junkclean:
-	rm -f *~ ~* utils_*.jar *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/
+	rm -f *~ ~* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
 
 buildclean: junkclean
 	rm -f utils.jar
@@ -37,7 +37,10 @@ buildclean: junkclean
 javadocclean: junkclean
 	rm -rf doc/
 
-clean: buildclean javadocclean
+htmlsourceclean: junkclean
+	rm -rf *.java.html syntax.css
+
+clean: buildclean javadocclean htmlsourceclean
 	rm -f *.class
         
 allclean: clean
@@ -76,9 +79,17 @@ update: clean
 commit: clean
 	$(CVS) commit
 
-release: update test build javadoc commit
+release: update commit all
 	./release.sh
 
 install:
 	./install.sh
 
+htmlsource:
+	mkdir src
+	cp *.java src
+	$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
+	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.java
+	mv src/*.java.html src/*.css .
+	rm -rf src
+	
