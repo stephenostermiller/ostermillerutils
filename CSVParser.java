@@ -1,6 +1,6 @@
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -130,6 +130,9 @@ public class CSVParser implements CSVParse {
 
 	/**
 	 * Get the line number that the last token came from.
+     * <p>
+     * New line breaks that occur in the middle of a token are not
+     * counted in the line number count. 
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
 	 */
@@ -139,6 +142,9 @@ public class CSVParser implements CSVParse {
 
 	/**
 	 * Get all the values from a line.
+     * <p>
+     * If the line has already been partially read, only the
+     * values that have not already been read will be included.
 	 *
 	 * @return all the values from the line or null if there are no more values.
      * @throws IOException if an error occurs while reading
@@ -163,6 +169,33 @@ public class CSVParser implements CSVParse {
 		String[] result = new String[v.size()];
 		return ((String[])v.toArray(result));
 	}
+    
+    /**
+	 * Get all the values from the file.
+     * <p>
+     * If the file has already been partially read, only the
+     * values that have not already been read will be included.
+     * <p>
+     * Each line of the file that has at least one value will be
+     * represented.  Comments and empty lines are ignored.
+     * <p>
+     * The resulting double array may be jagged.
+	 *
+	 * @return all the values from the file or null if there are no more values.
+     * @throws IOException if an error occurs while reading
+	 */
+    public String[][] getAllValues() throws IOException {        
+		Vector v = new Vector();
+        String[] line;
+        while((line = getLine()) != null){
+            v.add(line);
+        }
+		if (v.size() == 0){
+			return null;
+		}
+        String[][] result = new String[v.size()][];
+		return ((String[][])v.toArray(result));
+    }
 
 	/**
 	 * Specify escape sequences and their replacements.
