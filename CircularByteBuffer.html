@@ -10,15 +10,14 @@
 
 <h1><a name="circularbytebuffer">Circular Byte Buffer</a></h1>
 
-<p>Implements the circular buffer producer/consumer model for bytes.</p>
-
-<p>Filling and emptying the buffer is done with standard Java InputStreams and OutputStreams.</p>
+<p>Implements the circular buffer producer/consumer model for bytes.
+Filling and emptying the buffer is done with standard Java InputStreams and OutputStreams.</p>
 
 <p>Using this class is a simpler alternative to using a PipedInputStream
- and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
- mark operation, don't allow you to control buffer sizes that they use,
- and have a more complicated API that requires a instantiating two
- classes and connecting them.</p>
+and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
+mark operation, don't allow you to control buffer sizes that they use,
+and have a more complicated API that requires a instantiating two
+classes and connecting them.</p>
  
 <p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
 implements the circular buffer producer/consumer model for characters.</p>
