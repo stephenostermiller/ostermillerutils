@@ -45,7 +45,7 @@ public class PasswordDialog extends JDialog {
     /**
      * Locale specific strings displayed to the user.
      */
- 	protected ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  Locale.getDefault());
+ 	protected ResourceBundle labels;
 
     /**
      * Set the locale used for getting localized 
@@ -193,7 +193,13 @@ public class PasswordDialog extends JDialog {
      * @param title the title for the dialog box window
      */
 	public PasswordDialog(Frame parent, String title) {
-        super(parent, title, true);
+
+		super(parent, title, true);
+
+        if (labels == null){
+        	setLocale(Locale.getDefault());
+        }
+
         if (title==null){
             setTitle(labels.getString("dialog.title"));
         }
@@ -223,6 +229,10 @@ public class PasswordDialog extends JDialog {
      * Called by constructors to initialize the dialog.
      */
 	protected void dialogInit(){
+
+        if (labels == null){
+        	setLocale(Locale.getDefault());
+        }
 
         name = new JTextField("", 20);
         pass = new JPasswordField("", 20);
