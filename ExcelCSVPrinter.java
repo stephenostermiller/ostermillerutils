@@ -22,7 +22,7 @@ import java.io.*;
  * Print values as a comma separated list that can be read by the
  * Excel spreadsheet.
  * More information about this class is available from <a href=
- * "http://ostermiller.org/utils/ExcelCSVLexer.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
  */
 public class ExcelCSVPrinter implements CSVPrint {
 
