@@ -17,6 +17,20 @@
     <jflex file="ExcelCSVLexer.lex" destdir="${top}" />
   </target>
 
+  <!-- http://ostermiller.org/syntax/ant.html -->
+  <taskdef name="syntax" classname="com.Ostermiller.Syntax.ToHTMLAntTask"/>
+  <target name="syntax">
+	<mkdir dir="src" />
+    <syntax srcdir="." 
+	  destdir="src"
+	  includes="*.lex *.java *.properties" 
+	  excludes="*Lexer.java"
+	  template="src.bte">
+	  <parameter type="ignore" name="whitespace" />
+	</syntax>
+	<copy file="syntax.css" todir="src" />
+  </target>
+
   <target name="compile" depends="javafiles,init" description="Compile the source." >
     <javac 
 	  srcdir="${top}" 
