@@ -123,14 +123,18 @@ import java.io.*;
 	 */
 	public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		if (newDelim == delimiter) return; // no need to do anything.
+		if (yycmap == yycmap_instance){
+			yycmap_instance = new char[yycmap.length];
+			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
+		}
 		// 'a' and 'b' should always be safe delimiters unless already the delimiter.
-		if (yycmap[newDelim] != yycmap[(delimiter == 'a')?'b':'a']){
+		if (yycmap_instance[newDelim] != yycmap_instance[(delimiter == 'a')?'b':'a']){
 			throw new BadDelimeterException(newDelim + " is not a safe delimiter.");
 		}
-		char temp = yycmap[newDelim];
-		yycmap[newDelim] = yycmap[delimiter];
-		yycmap[delimiter] = temp;
-		delimiter = newDelim;
+		char temp = yycmap_instance[newDelim];
+		yycmap_instance[newDelim] = yycmap_instance[delimiter];
+		yycmap_instance[delimiter] = temp;
+		newDelim = newDelim;
 	}
 
 	private String escapes = "";
