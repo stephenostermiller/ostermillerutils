@@ -25,6 +25,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Properties;
 import java.util.Vector;
+import java.util.ResourceBundle;
+import java.util.Locale;
 import java.io.StringReader;
 import java.lang.reflect.*;
 
@@ -39,6 +41,11 @@ public class Browser {
      * The dialog that allows user configuration of the options for this class.
      */
     protected static BrowserDialog dialog;
+
+    /**
+     * Locale specific strings displayed to the user.
+     */
+ 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  Locale.getDefault());
     
     /**
      * A list of commands to try in order to display the url.
@@ -56,7 +63,7 @@ public class Browser {
      * Determine appropriate commands to start a browser on the current
      * operating system.  On windows: <br>
      * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
-     * On other operating systems, the "which" command is used to 
+     * On other operating systems, the "which" command is used to
      * test if mozilla, netscape, and lynx(xterm) are available (in that
      * order).
      */
@@ -116,6 +123,65 @@ public class Browser {
     }
 
     /**
+     * Save the options used to the given properties file.
+     * Property names used will all start with com.Ostermiller.util.Browser
+     * Properties are saved in such a way that a call to load(props); will
+     * restore the state of this class.
+     * If the default commands to open a browser are being used then
+     * they are not saved in the properties file, assuming that the user
+     * will want to use the defaults next time even if the defaults change.
+     *
+     * @param props properties file to which configuration is saved.
+     */
+    public static void save(Properties props){
+        boolean saveBrowser = false;
+        if (Browser.exec != null && Browser.exec.length > 0){
+            String[] exec = Browser.defaultCommands();
+            if (exec != null && exec.length == Browser.exec.length){
+                for (int i=0; i<exec.length; i++){
+                    if (!exec[i].equals(Browser.exec[i])){
+                        saveBrowser = true;
+					}
+				}
+            } else {
+                saveBrowser = true;
+            }
+        }
+        if (saveBrowser){
+            StringBuffer sb = new StringBuffer();
+            for (int i=0; Browser.exec != null && i < Browser.exec.length; i++){
+                sb.append(Browser.exec[i]).append('\n');
+            }
+            props.put("com.Ostermiller.util.Browser.open", sb.toString());
+        } else {
+            props.remove("com.Ostermiller.util.Browser.open");
+        }
+    }
+
+    /**
+     * Load the options for this class from the given properties file.
+     * This method is designed to work with the save(props) method.  All
+     * properties used will start with com.Ostermiller.util.Browser.  If
+     * no configuration is found, the default configuration will be used.
+     * If this method is used, a call to Browser.init(); is not needed.
+     *
+     * @param props properties file from which configuration is loaded.
+     */
+    public static void load(Properties props){
+        if (props.containsKey("com.Ostermiller.util.Browser.open")){
+            StringTokenizer tok = new StringTokenizer(props.getProperty("com.Ostermiller.util.Browser.open"), "\r\n", false);
+            int count = tok.countTokens();
+            String[] exec = new String[count];
+            for (int i=0; i < count; i++){
+                exec[i] = tok.nextToken();
+            }
+            Browser.exec = exec;
+        } else {
+        	Browser.init();
+        }
+	}
+
+    /**
      * Display a URL in the system browser.
      *
      * Browser.init() should be called before calling this function or
@@ -133,15 +199,15 @@ public class Browser {
         	if (System.getProperty("os.name").startsWith("Mac")){
         		try {
         			Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
-        			Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")}); 
+        			Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
         			openURL.invoke(null, new Object[] {url});
         			//com.apple.mrj.MRJFileUtils.openURL(url);
         		} catch (Exception x){
         			System.err.println(x.getMessage());
-        			throw new IOException("Browser launch failed");
-        		}        		
+        			throw new IOException(labels.getString("failed"));
+        		}
         	} else {
-            	throw new IOException("Browser execute command not defined");
+            	throw new IOException(labels.getString("nocommand"));
             }
         } else {
             // for security, see if the url is valid.
@@ -249,12 +315,12 @@ public class Browser {
                         }
                     } catch (IOException x){
                         // the command was not a valid command.
-                        System.err.println("Warning: " + x.getMessage());
+                        System.err.println(labels.getString("warning") + " " + x.getMessage());
                     }
                 }
                 if (!found){
                     // we never found a command that didn't terminate with an error.
-                    throw new IOException("Browser launch failed.");
+                    throw new IOException(labels.getString("failed"));
                 }
 
             } catch (IllegalThreadStateException e){      
@@ -270,7 +336,7 @@ public class Browser {
      * Browser.init() should be called before calling this function or
      * Browser.exec should be set explicitly.
      *
-     * If more than one URL is given an html page containing javascript will 
+     * If more than one URL is given an html page containing javascript will
      * be written to the local drive, that page will be opened, and it will
      * open the rest of the urls.
      *
@@ -280,7 +346,7 @@ public class Browser {
     public static void displayURLs(String[] urls) throws IOException {
         if (urls == null || urls.length == 0){
             return;
-        } 
+        }
         if (urls.length == 1){
             displayURL(urls[0]);
             return;
@@ -295,9 +361,9 @@ public class Browser {
         PrintWriter out = new PrintWriter(new FileWriter(shortcut));
         out.println("<html>");
         out.println("<head>");
-        out.println("<title>Open URLs</title>");
+        out.println("<title>" + labels.getString("html.openurls") + "</title>");
         out.println("<script language=\"javascript\" type=\"text/javascript\">");
-        out.println("function displayURLs(){");    
+        out.println("function displayURLs(){");
         for (int i=1; i<urls.length; i++){
             out.println("window.open(\"" + urls[i] + "\", \"_blank\", \"toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes\");");
         }
@@ -305,7 +371,7 @@ public class Browser {
         out.println("}");
         out.println("</script>");
         out.println("</head>");
-        out.println("<body onload=\"javascript:displayURLs()\">");     
+        out.println("<body onload=\"javascript:displayURLs()\">");
         out.println("<noscript>");
         for (int i=0; i<urls.length; i++){
             out.println("<a target=\"_blank\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
@@ -316,7 +382,94 @@ public class Browser {
         out.close();
         System.out.println(shortcut.toURL().toString());
         displayURL(shortcut.toURL().toString());
-    
+
+    }
+
+    /**
+     * Display the URL in a new window.
+     *
+     * Uses javascript to check history.length to determine if the browser opened a
+     * new window already.  If it did, the url is shown in that window, if not, it is
+     * shown in new window.
+     *
+     * Calling this method a second time before the browser has shown the url will
+     * probably not show each url.  To open multiple urls, please use the displayURLs methods.
+     *
+     * Some browsers do not allow the length of history to be viewed by a web page.  In that
+     * case, the url will be displayed in the current window.
+     *
+     * @param urls the list of urls to display
+     * @param throws IOException if the url is not valid or the browser fails to start
+     */
+    public static void displayURLinNew(String url) throws IOException {
+        displayURLs (new String[] {url}, "_blank");
+	}
+
+    /**
+     * Display the URLs, each in their own window, in the system browser and the first in
+     * the named window.
+     *
+     * The first URL will only be opened in the named window if the browser did not
+     * open it in a new window to begin with.
+     *
+     * Browser.init() should be called before calling this function or
+     * Browser.exec should be set explicitly.
+     *
+     * An html page containing javascript will
+     * be written to the local drive, that page will be opened, and it will
+     * open all the urls.
+     *
+     * @param urls the list of urls to display
+     * @param throws IOException if the url is not valid or the browser fails to start
+     */
+    public static void displayURLs(String[] urls, String namedWindow) throws IOException {
+        if (urls == null || urls.length == 0){
+            return;
+        }
+        File shortcut = new File(System.getProperty("user.home"), ".java");
+        shortcut = new File(shortcut, "Browser");
+        shortcut.mkdirs();
+        shortcut = new File(shortcut, "DisplayURLs.html");
+        shortcut = shortcut.getCanonicalFile();
+        if (shortcut.exists()) shortcut.delete();
+        shortcut.createNewFile();
+        PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>" + labels.getString("html.openurls") + "</title>");
+        out.println("<script language=\"javascript\" type=\"text/javascript\">");
+        out.println("function displayURLs(){");
+        out.println("var hlength = 0;");
+        out.println("try {");
+        out.println("hlength = history.length;");
+        out.println("} catch (e) {}");
+        out.println("if (hlength>0) {");
+        out.println("hlength = history.length;");
+        out.println("window.open(\"" + urls[0] + "\", \"" + namedWindow + "\", \"toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes\");");
+        out.println("}");
+        for (int i=1; i<urls.length; i++){
+            out.println("window.open(\"" + urls[i] + "\", \"_blank\", \"toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes\");");
+        }
+        out.println("if (hlength==0) {");
+        out.println("location.href=\"" + urls[0] + "\";");
+        out.println("} else {");
+        out.println("history.back()");
+        out.println("}");
+        out.println("}");
+        out.println("</script>");
+        out.println("</head>");
+        out.println("<body onload=\"javascript:displayURLs()\">");
+        out.println("<noscript>");
+        for (int i=0; i<urls.length; i++){
+            out.println("<a target=\"_blank\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
+        }
+        out.println("</noscript>");
+        out.println("</body>");
+        out.println("</html>");
+        out.close();
+        System.out.println(shortcut.toURL().toString());
+        displayURL(shortcut.toURL().toString());
+
     }
 
     /**
@@ -327,15 +480,18 @@ public class Browser {
     public static void main(String[] args){
         try {
             Browser.init();
-            Browser.dialogConfiguration(null);
-            if (args.length == 0){
-        	    Browser.displayURLs(new String[]{
-                    "http://www.google.com/",
-                    "http://dmoz.org/",
-                    "http://ostermiller.org",
-                });
-            } else {
-                Browser.displayURLs(args);
+            if (Browser.dialogConfiguration(null)){
+                if (args.length == 0){
+                    Browser.displayURLs(new String[]{
+                        "http://www.google.com/",
+                        "http://dmoz.org/",
+                        "http://ostermiller.org",
+                    }, "_blank");
+                } else if (args.length == 1){
+                    Browser.displayURLinNew(args[0]);
+                } else {
+                    Browser.displayURLs(args, "_blank");
+                }
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
@@ -349,30 +505,32 @@ public class Browser {
      *
      * @param owner The frame that owns the dialog.
      */
-    public static void dialogConfiguration(Frame owner){
+    public static boolean dialogConfiguration(Frame owner){
         dialogConfiguration(owner, null);
+        return Browser.dialog.changed();
     }
 
     /**
      * Show a dialog that allows the user to configure the
      * command lines used for starting a browser on their system.
      * String used in the dialog are taken from the given
-     * properties.  This dialog can be customized or displayed in 
+     * properties.  This dialog can be customized or displayed in
 	 * multipl languages.
      * <P>
      * Properties that are used:
-     * com.Ostermiller.util.BrowserDialog.title
-     * com.Ostermiller.util.BrowserDialog.description
-     * com.Ostermiller.util.BrowserDialog.label
-     * com.Ostermiller.util.BrowserDialog.defaults
-     * com.Ostermiller.util.BrowserDialog.browse
-     * com.Ostermiller.util.BrowserDialog.ok
-     * com.Ostermiller.util.BrowserDialog.cancel
+     * com.Ostermiller.util.BrowserDialog.title<br>
+     * com.Ostermiller.util.BrowserDialog.description<br>
+     * com.Ostermiller.util.BrowserDialog.label<br>
+     * com.Ostermiller.util.BrowserDialog.defaults<br>
+     * com.Ostermiller.util.BrowserDialog.browse<br>
+     * com.Ostermiller.util.BrowserDialog.ok<br>
+     * com.Ostermiller.util.BrowserDialog.cancel<br>
      *
      * @param owner The frame that owns this dialog.
      * @param props contains the strings used in the dialog.
+     * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
      */
-    public static void dialogConfiguration(Frame owner, Properties props){
+    public static boolean dialogConfiguration(Frame owner, Properties props){
         if (Browser.dialog == null){
 			Browser.dialog = new BrowserDialog(owner);
 		}
@@ -380,6 +538,7 @@ public class Browser {
             Browser.dialog.setProps(props);
         }
         Browser.dialog.show();
+        return Browser.dialog.changed();
     }
 
     /**
@@ -389,13 +548,15 @@ public class Browser {
 
         /**
          * Properties that are used:
-         * com.Ostermiller.util.BrowserDialog.title
-         * com.Ostermiller.util.BrowserDialog.description
-         * com.Ostermiller.util.BrowserDialog.label
-         * com.Ostermiller.util.BrowserDialog.defaults
-         * com.Ostermiller.util.BrowserDialog.browse
-         * com.Ostermiller.util.BrowserDialog.ok
-         * com.Ostermiller.util.BrowserDialog.cancel
+         * com.Ostermiller.util.BrowserDialog.title<br>
+         * com.Ostermiller.util.BrowserDialog.description<br>
+         * com.Ostermiller.util.BrowserDialog.label<br>
+         * com.Ostermiller.util.BrowserDialog.defaults<br>
+         * com.Ostermiller.util.BrowserDialog.browse<br>
+         * com.Ostermiller.util.BrowserDialog.ok<br>
+         * com.Ostermiller.util.BrowserDialog.cancel<br>
+         *
+         * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
          */
         private void setProps(Properties props){
             if (props.containsKey("com.Ostermiller.util.BrowserDialog.title")){
@@ -420,6 +581,19 @@ public class Browser {
                 cancelButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.cancel"));
             }
 			pack();
+		}
+
+        /**
+         * Whether the user pressed the applied changes.
+         * true if ok was pressed or the user otherwise applied new changes,
+		 * false if cancel was pressed or dialog was closed with no changes.
+         * If called before the dialog is displayed and closed, the results
+         * are not defined.
+         *
+         * @returns if the user made changes to the browser configuration.
+         */
+        public boolean changed() {
+            return pressed_OK;
 		}
 
         /**
@@ -474,7 +648,7 @@ public class Browser {
          * @param title the title for the dialog box window
          */
         public BrowserDialog(Frame parent) {
-            super(parent, "Browser Configuration", true);
+            super(parent, labels.getString("dialog.title"), true);
             setLocationRelativeTo(parent);
             // super calls dialogInit, so we don't need to do it again.
         }
@@ -486,14 +660,12 @@ public class Browser {
 
             commandLinesArea = new JTextArea("", 8, 40);
             JScrollPane scrollpane = new JScrollPane(commandLinesArea);
-            okButton = new JButton("OK");
-            cancelButton = new JButton("Cancel");
-            resetButton = new JButton("Defaults");
-            browseButton = new JButton("Browse");
-            commandLinesLabel = new JLabel("Command lines: ");
-            description = new JTextArea("When a web browser needs to be opened, these command lines will be\n" +
-                "executed in the order they appear here until one of them works.\n" +
-                "{0} is replaced by the URL to be opened.");
+            okButton = new JButton(labels.getString("dialog.ok"));
+            cancelButton = new JButton(labels.getString("dialog.cancel"));
+            resetButton = new JButton(labels.getString("dialog.reset"));
+            browseButton = new JButton(labels.getString("dialog.browse"));
+            commandLinesLabel = new JLabel(labels.getString("dialog.commandLines"));
+            description = new JTextArea(labels.getString("dialog.description"));
             description.setEditable(false);
             description.setOpaque( false );
 
@@ -528,7 +700,7 @@ public class Browser {
                             if (commands.length() != 0 && !commands.endsWith("\n") && !commands.endsWith("\r")){
                                 commands += "\n";
                             }
-                            commandLinesArea.setText(commands + app + " {0}");                            
+                            commandLinesArea.setText(commands + app + " {0}");
                         }
                     } else {
                         pressed_OK = (source == okButton);
