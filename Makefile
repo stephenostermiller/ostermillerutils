@@ -24,7 +24,7 @@ all:
 	@$(MAKE) -s --no-print-directory htmlsource
 	@$(MAKE) -s --no-print-directory release
 
-spell: *.bte *.java
+spell: *.html *.java
 	@echo Make: Running spell check.
 	@./spell.sh $?
 	@touch spell

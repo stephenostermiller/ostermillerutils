@@ -5,7 +5,7 @@ files=$@
 for file in $files
 do
 	ext="${file/*./}"
-	if [ "$ext" == "bte" ] 
+	if [ "$ext" == "bte" ] || [ "$ext" == "html" ] 
 	then
 		mode="sgml"
 	else
@@ -20,5 +20,11 @@ do
 			mv temp "$file"
 		fi
 	fi
-	rm -f temp temp.bak
 done
+head -1 "util.dict" > temp
+tail +2 "util.dict" | sort "util.dict" >> temp
+if [ "`diff "temp" "util.dict"`" ] 
+then
+	mv temp "util.dict"
+fi
+rm -f temp temp.bak
