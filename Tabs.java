@@ -610,6 +610,6 @@ public class Tabs {
             }     
             if (found) return tabWidth;
         }
-        return 1;
-    }    
+        return 2;
+    }
 }
