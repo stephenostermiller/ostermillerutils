@@ -1,6 +1,6 @@
 /*
  * Static String formatting and query routines.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001,2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,10 @@ public class StringHelper {
     /**
 	 * Pad the beginning of the given String with spaces until
      * the String is of the given length.
+	 * <p>
+	 * If a String is longer than the desired length,
+	 * it will not be trunkated, however no padding
+	 * will be added.
 	 *
 	 * @param s String to be padded.
 	 * @param length desired length of result.
@@ -67,6 +71,10 @@ public class StringHelper {
     /**
 	 * Pad the end of the given String with spaces until
      * the String is of the given length.
+	 * <p>
+	 * If a String is longer than the desired length,
+	 * it will not be trunkated, however no padding
+	 * will be added.
 	 *
 	 * @param s String to be padded.
 	 * @param length desired length of result.
@@ -99,6 +107,65 @@ public class StringHelper {
 		StringBuffer sb = new StringBuffer(length);
 		sb.append(s);
 		for (int i=0; i<needed; i++){
+			sb.append(c);
+		}
+		return (sb.toString());
+	}
+
+    /**
+	 * Pad the beginning and end of the given String with spaces until
+     * the String is of the given length.  The result is that the original
+     * String is centered in the middle of the new string.
+     * <p>
+     * If the number of characters to pad is even, then the padding
+     * will be split evenly between the beginning and end, otherwise,
+     * the extra character will be added to the end.
+	 * <p>
+	 * If a String is longer than the desired length,
+	 * it will not be trunkated, however no padding
+	 * will be added.
+	 *
+	 * @param s String to be padded.
+	 * @param length desired length of result.
+	 * @return padded String.
+	 * @throws NullPointerException if s is null.
+	 */
+	public static String midpad(String s, int length){
+		return midpad(s, length, ' ');
+	}
+    
+	/**
+	 * Pad the beginning and end of the given String with the given character 
+     * until the result is  the desired length.  The result is that the original
+     * String is centered in the middle of the new string.
+     * <p>
+     * If the number of characters to pad is even, then the padding
+     * will be split evenly between the beginning and end, otherwise,
+     * the extra character will be added to the end.
+	 * <p>
+	 * If a String is longer than the desired length,
+	 * it will not be trunkated, however no padding
+	 * will be added.
+	 *
+	 * @param s String to be padded.
+	 * @param length desired length of result.
+	 * @param c padding character.
+	 * @return padded String.
+	 * @throws NullPointerException if s is null.
+	 */
+	public static String midpad(String s, int length, char c){
+		int needed = length - s.length();
+		if (needed <= 0){
+			return s;
+		}
+        int beginning = needed / 2;
+        int end = beginning + needed % 2;
+		StringBuffer sb = new StringBuffer(length);
+		for (int i=0; i<beginning; i++){
+			sb.append(c);
+		}
+		sb.append(s);
+		for (int i=0; i<end; i++){
 			sb.append(c);
 		}
 		return (sb.toString());
@@ -499,5 +566,54 @@ public class StringHelper {
             }
         }
         return sb.toString();
+    }
+    
+    /**
+	 * Trim any of the chracters contained in the second
+     * string from the beginning and end of the first.
+	 *
+	 * @param s String to be trimmed.
+	 * @param c list of characters to trim from s.
+	 * @return trimmed String.
+	 * @throws NullPointerException if s is null.
+	 */
+	public static String trim(String s, String c){
+        int length = s.length();
+        if (c == null){ 
+            return s;
+        }
+        int cLength = c.length();
+        if (c.length() == 0){
+            return s;
+        }
+        int start = 0;
+        int end = length;
+        boolean found; // trimmable character found.
+        int i;
+        // Start from the beginning and find the
+        // first non-trimmable character.
+        found = false;
+        for (i=0; !found && i<length; i++){
+            char ch = s.charAt(i);
+            found = true;
+            for (int j=0; found && j<cLength; j++){
+                if (c.charAt(j) == ch) found = false;
+            }
+        }
+        // if all characters are trimmable.
+        if (!found) return "";
+        start = i-1;
+        // Start from the end and find the
+        // last non-trimmable character.
+        found = false;
+        for (i=length-1; !found && i>=0; i--){
+            char ch = s.charAt(i);
+            found = true;
+            for (int j=0; found && j<cLength; j++){
+                if (c.charAt(j) == ch) found = false;
+            }
+        }
+        end = i+2;
+        return s.substring(start, end);
     }
 }
