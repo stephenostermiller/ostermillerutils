@@ -197,18 +197,23 @@ htmlsource: *.java *.properties *.lex
 	@echo Make: Generating colored html source: $?
 	@rm -rf srcbuild/
 	@mkdir srcbuild
-	@cp $? source.sh cleansource.sh src.bte srcbuild
+	@cp $? src.bte srcbuild
 	@rm -f `find srcbuild -name "*.lex" | sed s/.lex/.java/`
 	@touch srcbuild/tempdummy.java srcbuild/tempdummy.lex srcbuild/tempdummy.properties
 	@echo "cd srcbuild" > srcbuild/temp.sh
 	@echo "$(JAVA)/.. com.Ostermiller.util.Tabs -s 4 *.java" >> srcbuild/temp.sh
 	@echo "$(JAVA)/.. com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace *.lex *.java *.properties" >> srcbuild/temp.sh
-	@echo "rm -rf tempdummy*" >> srcbuild/temp.sh
-	@echo "./cleansource.sh" >> srcbuild/temp.sh
-	@echo "./source.sh" >> srcbuild/temp.sh
+	@echo "rm -rf tempdummy*" >> srcbuild/temp.sh	
 	@chmod +x srcbuild/temp.sh
 	@srcbuild/temp.sh
 	@mkdir -p src/
-	@mv srcbuild/*.*.html srcbuild/*.css srcbuild/source.html src/
+	@mv srcbuild/*.*.html srcbuild/*.css src/
 	@rm -rf srcbuild
+	@cp source.sh cleansource.sh src/
+	@echo "cd src" > src/temp.sh
+	@echo "./cleansource.sh" >> src/temp.sh
+	@echo "./source.sh" >> src/temp.sh
+	@chmod +x src/temp.sh
+	@src/temp.sh
+	@rm -f src/*.sh bte
 	@touch htmlsource
