@@ -11,6 +11,7 @@
 <li><a name="browser" href="Browser.html">Browser</a> - Open a browser from an application on Windows, Unix, or Macintosh.</li>
 <li><a name="cgi_parser" href="CGIParser.html">CGI Query String Parser</a> - Libraries to to parse the query data supplied by HTTP GET or POST requests.</li>
 <li><a name="circularbuffer" href="CircularBuffer.html">Circular Buffers</a> - Implements the circular buffer producer/consumer model for bytes.</li>
+<li><a name="concat" href="Concat.html">Concatenation Streams</a> - Combine multiple streams of incoming data to create a single stream.</li>
 <li><a name="csv_parser" href="CSV.html">Comma Separated Values (CSV)</a> - Libraries to read and write files in Comma Separated Value (CSV) format. (<a name="excel_csv_parser" href="ExcelCSV.html">Excel CSV Format</a> also available)</li>
 <li><a name="file_helper" href="FileHelper.html">File Helper</a> - Methods for manipulating files.</li>
 <li><a name="iterator_enumeration" href="Iterator_Enumeration.html">Iterators and Enumerations</a> - Convert between Iterators and Enumerations or convert arrays to Iterators or Enumerations.</li>
@@ -20,6 +21,7 @@
 <li><a name="password_dialog" href="PasswordDialog.html">Password Dialog</a> - A password dialog box written for Swing.</li>
 <li><a name="randpass" href="RandPass.html">Random Password Generator</a> - Generate a random String using a cryptographically secure random number generator.</li>
 <li><a name="significant_figures" href="SignificantFigures.html">Significant Figures</a> - Handles parsing, rounding, and displaying numbers for scientific applications.</li>
+<li><a name="size_limit_input_stream" href="SizeLimitInputStream.html">Size Limit Input Stream</a> - Create a sub-stream of a specified length from an existing input stream.</li>
 <li><a name="string_helper" href="StringHelper.html">String Helper</a> - Methods for formatting, manipulating, and querying Strings.</li>
 <li><a name="string_tokenizer" href="StringTokenizer.html">String Tokenizer</a> - A StringTokenizer replacement with enhancements.</li>
 <li><a name="straight_stream_reader" href="StraightStreamReader.html">Straight Stream Reader</a> - An input stream reader that does no character class translation.</li>
