@@ -2,8 +2,8 @@
 <html>
 <head>
    <meta name="description" content="Implements the circular buffer producer/consumer model for characters.">
-   <meta name="keywords" content="buffer, buffer, circular, cirular, char, character, chars, characters, buffers, producer, producers, consumer, consumers, thread, threads, overflow, overflows, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc">
-   <title>Base64</title>
+   <meta name="keywords" content="buffer, buffer, circular, cirular, char, character, chars, characters, buffers, reader, writer, readers, writers, pipedreader, pipedwriter,producer, producers, consumer, consumers, thread, threads, overflow, overflows, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc">
+   <title>Circular Character Buffer</title>
    <base href="http://ostermiller.org/utils/">
 </head>
 <body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
@@ -11,6 +11,16 @@
 <h1><a name="circularcharbuffer">Circular Character Buffer</a></h1>
 
 <p>Implements the circular buffer producer/consumer model for characters.</p>
+
+<p>Using this class is a simpler alternative to using a PipedReader
+and a PipedWriter. PipedReaders and PipedWriters don't support the
+mark operation, don't allow you to control buffer sizes that they use,
+and have a more complicated API that requires a instantiating two
+classes and connecting them.</p>
+ 
+<p>This class is similar to the <a href="CircularByteBuffer.html">CircularByteBuffer</a> which 
+implements the circular buffer producer/consumer model for bytes.</p>
+
 
 <p>Filling and emptying the buffer is done with standard Java Readers and Writers.</p>
 

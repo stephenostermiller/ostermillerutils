@@ -1,0 +1,289 @@
+package com.Ostermiller.util;
+
+import java.io.*;
+import java.util.*;
+
+class CircularBufferTests {
+
+    private byte[] pi = {
+        3,
+        1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0,5,8,2,0,9,7,4,9,4,4,
+        5,9,2,3,0,7,8,1,6,4,0,6,2,8,6,2,0,8,9,9,8,6,2,8,0,3,4,8,2,5,3,4,2,1,1,7,0,6,7,9,8,2,1,4,8,0,8,6,5,1,3,2,8,2,3,0,6,6,4,7,
+        0,9,3,8,4,4,6,0,9,5,5,0,5,8,2,2,3,1,7,2,5,3,5,9,4,0,8,1,2,8,4,8,1,1,1,7,4,5,0,2,8,4,1,0,2,7,0,1,9,3,8,5,2,1,1,0,5,5,5,9,
+        6,4,4,6,2,2,9,4,8,9,5,4,9,3,0,3,8,1,9,6,4,4,2,8,8,1,0,9,7,5,6,6,5,9,3,3,4,4,6,1,2,8,4,7,5,6,4,8,2,3,3,7,8,6,7,8,3,1,6,5,
+        2,7,1,2,0,1,9,0,9,1,4,5,6,4,8,5,6,6,9,2,3,4,6,0,3,4,8,6,1,0,4,5,4,3,2,6,6,4,8,2,1,3,3,9,3,6,0,7,2,6,0,2,4,9,1,4,1,2,7,3,
+        7,2,4,5,8,7,0,0,6,6,0,6,3,1,5,5,8,8,1,7,4,8,8,1,5,2,0,9,2,0,9,6,2,8,2,9,2,5,4,0,9,1,7,1,5,3,6,4,3,6,7,8,9,2,5,9,0,3,6,0,
+        0,1,1,3,3,0,5,3,0,5,4,8,8,2,0,4,6,6,5,2,1,3,8,4,1,4,6,9,5,1,9,4,1,5,1,1,6,0,9,4,3,3,0,5,7,2,7,0,3,6,5,7,5,9,5,9,1,9,5,3,
+        0,9,2,1,8,6,1,1,7,3,8,1,9,3,2,6,1,1,7,9,3,1,0,5,1,1,8,5,4,8,0,7,4,4,6,2,3,7,9,9,6,2,7,4,9,5,6,7,3,5,1,8,8,5,7,5,2,7,2,4,
+        8,9,1,2,2,7,9,3,8,1,8,3,0,1,1,9,4,9,1,2,9,8,3,3,6,7,3,3,6,2,4,4,0,6,5,6,6,4,3,0,8,6,0,2,1,3,9,4,9,4,6,3,9,5,2,2,4,7,3,7,
+        1,9,0,7,0,2,1,7,9,8,6,0,9,4,3,7,0,2,7,7,0,5,3,9,2,1,7,1,7,6,2,9,3,1,7,6,7,5,2,3,8,4,6,7,4,8,1,8,4,6,7,6,6,9,4,0,5,1,3,2,
+        0,0,0,5,6,8,1,2,7,1,4,5,2,6,3,5,6,0,8,2,7,7,8,5,7,7,1,3,4,2,7,5,7,7,8,9,6,0,9,1,7,3,6,3,7,1,7,8,7,2,1,4,6,8,4,4,0,9,0,1,
+        2,2,4,9,5,3,4,3,0,1,4,6,5,4,9,5,8,5,3,7,1,0,5,0,7,9,2,2,7,9,6,8,9,2,5,8,9,2,3,5,4,2,0,1,9,9,5,6,1,1,2,1,2,9,0,2,1,9,6,0,
+        8,6,4,0,3,4,4,1,8,1,5,9,8,1,3,6,2,9,7,7,4,7,7,1,3,0,9,9,6,0,5,1,8,7,0,7,2,1,1,3,4,9,9,9,9,9,9,8,3,7,2,9,7,8,0,4,9,9,5,1,
+    };
+
+    private String theGettysburgAddress = "Four score and seven years ago our fathers brought forth, " +
+            "upon this continent, a new nation, conceived in Liberty, and dedicated " +
+            "to the proposition that all men are created equal.\n" + 
+            "Now we are engaged in a great civil war, testing whether that nation, " +
+            "or any nation so conceived, and so dedicated, can long endure. We are " + 
+            "met here on a great battlefield of that war. We have come to dedicate " + 
+            "a portion of it as a final resting place for those who here gave their " +
+            "lives that that nation might live. It is altogether fitting and proper " +
+            "that we should do this.\n" +
+            "But in a larger sense we can not dedicate -- we can not consecrate -- " +
+            "we can not hallow this ground. The brave men, living and dead, who " +
+            "struggled, here, have consecrated it far above our poor power to add " +
+            "or detract. The world will little note, nor long remember, what we say here, " +
+            "but can never forget what they did here. It is for us, the living, rather " +
+            "to be dedicated here to the unfinished work which they have, thus far, so " +
+            "nobly carried on. It is rather for us to be here dedicated to the great task " +
+            "remaining before us -- that from these honored dead we take increased devotion " +
+            "to that cause for which they here gave the last full measure of devotion -- " +
+            "that we here highly resolve that these dead shall not have died in vain; that " +
+            "this nation shall have a new birth of freedom; and that this government of the " +
+            "people, by the people, for the people, shall not perish from the earth.";
+
+    private Random rand = new Random();
+
+    private CircularCharBuffer ccb = new CircularCharBuffer(20);
+    private Reader ccbin;
+    private Writer ccbout;
+    
+    private CircularByteBuffer cbb = new CircularByteBuffer(20);
+    private InputStream cbbin;
+    private OutputStream cbbout;
+    
+    public static void main(String args[]) throws Exception {
+        new CircularBufferTests();        
+    }
+    
+    private CircularBufferTests() throws Exception{
+        ccbin = ccb.getReader();
+        ccbout = ccb.getWriter();
+        CCBProducer ccbp = new CCBProducer();
+        CCBConsumer ccbc = new CCBConsumer();
+        ccbc.start();
+        ccbp.start();
+        while (ccbc.isAlive() || ccbp.isAlive()){
+            if(System.in.available() > 0){
+                ccbc.interrupt();
+                ccbp.interrupt();
+                return; 
+            }
+        } 
+        System.out.println();  
+        cbbin = cbb.getInputStream();
+        cbbout = cbb.getOutputStream();
+        CBBProducer cbbp = new CBBProducer();
+        CBBConsumer cbbc = new CBBConsumer();
+        cbbc.start();
+        cbbp.start();
+        while (cbbc.isAlive() || cbbp.isAlive()){
+            if(System.in.available() > 0){
+                cbbc.interrupt();
+                cbbp.interrupt();
+                return; 
+            }
+        } 
+        System.out.println();     
+    }
+    
+    private class CCBProducer extends Thread {
+        public void run() {
+            try {
+                for(int position = 0; !isInterrupted() && position < theGettysburgAddress.length(); position++){
+                    int len = rand.nextInt(30);
+                    len = Math.min(len, theGettysburgAddress.length() - position);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(4)){
+                        case 0: {                        
+                            char[] writeBuf = new char[len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i] = theGettysburgAddress.charAt(position + i);
+                            }
+                            ccbout.write(writeBuf);
+                        } break;
+                        case 1: {
+                            char[] writeBuf = new char[off + len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i+off] = theGettysburgAddress.charAt(position + i);
+                            }
+                            ccbout.write(writeBuf, off, len);
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && i<len; i++){
+                                ccbout.write(theGettysburgAddress.charAt(position + i));
+                            }                        
+                        } break;
+                        case 3: {
+                            ccbout.write(theGettysburgAddress.substring(position, position+len)); 
+                        } break;
+                        case 4: {
+                            ccbout.write(theGettysburgAddress, position, len); 
+                        } break;
+                    } 
+                    position += (len - 1);                    
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Producer thread interrupted.");
+                    }               
+                }
+                ccbout.close();
+            } catch (IOException x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+    
+    private class CCBConsumer extends Thread {
+        public void run() {  
+            try {  
+                boolean done = false;     
+                while(!isInterrupted() && !done){
+                    int len = rand.nextInt(30);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(2)){
+                        case 0: {                        
+                            char[] readBuf = new char[len];
+                            int read = ccbin.read(readBuf);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i]);
+                                }                            
+                            }
+                        } break;
+                        case 1: {
+                            char[] readBuf = new char[off + len];
+                            int read = ccbin.read(readBuf, off, len);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i+off]);
+                                }                            
+                            }
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && !done && i<len; i++){
+                                int read;
+                                read = ccbin.read();
+                                if (read == -1){
+                                    done = true;
+                                } else {
+                                    System.out.print((char)read);
+                                }
+                            }                        
+                        } break;
+                    }
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Consumer thread interrupted.");
+                    }                      
+                }
+            } catch (IOException x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+    
+    private class CBBProducer extends Thread {
+        public void run() {
+            try {
+                for(int position = 0; !isInterrupted() && position < pi.length; position++){
+                    int len = rand.nextInt(30);
+                    len = Math.min(len, pi.length - position);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(2)){
+                        case 0: {                        
+                            byte[] writeBuf = new byte[len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i] = pi[position + i];
+                            }
+                            cbbout.write(writeBuf);
+                        } break;
+                        case 1: {
+                            byte[] writeBuf = new byte[off + len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i+off] = pi[position + i];
+                            }
+                            cbbout.write(writeBuf, off, len);
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && i<len; i++){
+                                cbbout.write(pi[position + i]);
+                            }                        
+                        } break;
+                    } 
+                    position += (len - 1);                    
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Producer thread interrupted.");
+                    }               
+                }
+                cbbout.close();
+            } catch (IOException x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+    
+    private class CBBConsumer extends Thread {
+        public void run() {  
+            try {  
+                boolean done = false;     
+                while(!isInterrupted() && !done){
+                    int len = rand.nextInt(30);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(2)){
+                        case 0: {                        
+                            byte[] readBuf = new byte[len];
+                            int read = cbbin.read(readBuf);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i]);
+                                }                            
+                            }
+                        } break;
+                        case 1: {
+                            byte[] readBuf = new byte[off + len];
+                            int read = cbbin.read(readBuf, off, len);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i+off]);
+                                }                            
+                            }
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && !done && i<len; i++){
+                                int read;
+                                read = cbbin.read();
+                                if (read == -1){
+                                    done = true;
+                                } else {
+                                    System.out.print((byte)read);
+                                }
+                            }                        
+                        } break;
+                    }
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Consumer thread interrupted.");
+                    }                      
+                }
+            } catch (IOException x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+}
