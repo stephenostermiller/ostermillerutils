@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1277
+personal_ws-1.1 en 1301
 aa
 aA
 aaa
@@ -13,6 +13,8 @@ actionListener
 actionPerformed
 addActionListener
 addHeader
+addInputStream
+addInputStreams
 addKeyListener
 addOne
 addParameter
@@ -20,9 +22,13 @@ addProperties
 addProperty
 addPropertyNames
 addr
+addReader
+addReaders
 addRequirement
 addVerifier
 advancePosition
+advanceToNextInputStream
+advanceToNextReader
 aelig
 AElig
 af
@@ -239,6 +245,8 @@ CTLs
 curren
 currentHeader
 currentHeaderName
+currentInputStream
+currentReader
 CVS
 CVSLexer
 Cygwin
@@ -289,6 +297,8 @@ dnrsfVvqQ
 doctype
 doesnotexist
 doGet
+doneAddingInputStreams
+doneAddingReaders
 doPost
 doPostGet
 dosomething
@@ -373,6 +383,7 @@ firebird
 firstAlphabet
 firstInSig
 firstLen
+fiv
 fivesi
 floatValue
 FlowLayout
@@ -417,7 +428,9 @@ getContainsAnyIgnoreCasePattern
 getContainsAnyPattern
 getContentPane
 getContents
+getCurrentInputStream
 getCurrentPosition
+getCurrentReader
 getDate
 getDefault
 getDialogPanel
@@ -552,8 +565,11 @@ inputDone
 inputstream
 inputStream
 inputStreamClosed
+inputStreamQueue
+inputStreamQueueIndex
 InputStreamReader
-InputStreams
+inputstreams
+inputStreams
 inputTabWidth
 inReader
 instanceof
@@ -621,8 +637,10 @@ lArr
 lastAlphabet
 lastDate
 lastEnd
+lastInputStreamAdded
 lastLine
 lastLineNumber
+lastReaderAdded
 lastRemoved
 lastSeparator
 lceil
@@ -744,6 +762,7 @@ ne
 Nederlands
 neededPadding
 netscape
+netwo
 newBuffer
 newDelim
 newDelimiter
@@ -757,7 +776,9 @@ newTokHasMoreTokens
 nextAmp
 nextDelimiter
 nextElement
+nextInputStream
 nextInt
+nextReader
 nextSemi
 nextToken
 nextValue
@@ -935,6 +956,8 @@ readASCIILine
 readBase
 readBuf
 readerClosed
+readerQueue
+readerQueueIndex
 readFully
 readlimit
 readLine
@@ -1101,6 +1124,7 @@ StringWriter
 strLength
 stValue
 sube
+subinputstream
 supe
 sw
 swappedInput
