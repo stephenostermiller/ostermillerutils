@@ -246,7 +246,7 @@ public class CGIParser{
 	 * Returns the name value pairs properly escaped and written in URL format.
 	 *
 	 * @param enc Character encoding to use when escaping characters.
-	 * @returns URLEncoded name value pairs.
+	 * @return URLEncoded name value pairs.
 	 * @throws  UnsupportedEncodingException If the named encoding is not supported.
 	 */
 	public String toString(String enc) throws UnsupportedEncodingException {
