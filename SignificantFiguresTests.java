@@ -39,20 +39,26 @@ class SignificantFiguresTests {
 	}
 	private static final TestCase[] testCases = new TestCase[]{
 		new TestCase("1234", 3, "1230"),
-		new TestCase("200", 2, "2.0E2"),
-		new TestCase("6.15", 2, "6.2"),
-		new TestCase("6.25", 2, "6.2"),
 		new TestCase("60.91", 3, "60.9"),
-		new TestCase("5097.808073851760832954355668151943215272", 3, "5.10E3"),
 		new TestCase("3343", 1, "3000"),
-		new TestCase("200.123", 3, "200."),
-		new TestCase("234.123", 3, "234"),
-		new TestCase("199.87", 3, "200."),
-		new TestCase("6.153", 2, "6.2"),
-		new TestCase("6.253", 2, "6.3"),
-		new TestCase(".0033234324", 2, "0.0033"),
-		new TestCase("0.0033234324", 2, "0.0033"),
-		new TestCase(".00033234324", 2, "3.3E-4"),
+		new TestCase("200", 2, "2.0E2"), // not representable without scientific notation
+		new TestCase("5097.808073851760832954355668151943215272", 3, "5.10E3"), // not representable without scientific notation
+		new TestCase("6.15", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.25", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.150", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.250", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.1500", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.2500", 2, "6.2"), // rounding on a five - special even odd rule
+		new TestCase("6.153", 2, "6.2"), // when more digits special even odd rule does not apply when rounding on a five
+		new TestCase("6.253", 2, "6.3"), // when more digits special even odd rule does not apply when rounding on a five
+		new TestCase("200.123", 3, "200."), // decimal point at end
+		new TestCase("234.123", 3, "234"), // no decimal point at end
+		new TestCase("199.87", 3, "200."), // decimal point at end
+		new TestCase(".0033234324", 2, "0.0033"), // gets leading zero
+		new TestCase("0.0033234324", 2, "0.0033"), // keeps leading zero, can be represented without scientific notation
+		new TestCase(".00033234324", 2, "3.3E-4"), // too small without scientific notation
+		new TestCase("1234567", 3, "1230000"), // can be represented without scientific notation
+		new TestCase("12345678", 3, "1.23E7"), // too large without scientific notation
 	};
 
 	public static void main(String[] args){
