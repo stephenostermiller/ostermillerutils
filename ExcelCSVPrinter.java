@@ -1,5 +1,5 @@
 /*
- * Write files in comma separated value format.
+ * Write files in Excel comma separated value format.
  * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,11 +19,12 @@ package com.Ostermiller.util;
 import java.io.*;
 
 /**
- * Print values as a comma separated list.
+ * Print values as a comma separated list that can be read by the
+ * Excel spreadsheet.
  * More information about this class is available from <a href=
- * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/ExcelCSVLexer.html">ostermiller.org</a>.
  */
-public class CSVPrinter {
+public class ExcelCSVPrinter {
 
 	/**
 	 * The place that the values get written.
@@ -36,11 +37,6 @@ public class CSVPrinter {
 	protected boolean newLine = true;
 
 	/**
-	 * Character used to start comments. (Default is '#')
-	 */
-	protected char commentStart = '#';
-
-	/**
 	 * Create a printer that will print values to the given
 	 * stream.	 Character to byte conversion is done using
 	 * the default character encoding.	Comments will be
@@ -48,7 +44,7 @@ public class CSVPrinter {
 	 *
 	 * @param out stream to which to print.
 	 */
-	public CSVPrinter (OutputStream out){
+	public ExcelCSVPrinter (OutputStream out){
 		this.out = new PrintWriter(out);
 	}
 
@@ -60,38 +56,12 @@ public class CSVPrinter {
 	 *
 	 * @param out stream to which to print.
 	 */
-	public CSVPrinter (Writer out){
+	public ExcelCSVPrinter (Writer out){
 		if (out instanceof PrintWriter){
 			this.out = (PrintWriter)out;
 		} else {
 			this.out = new PrintWriter(out);
 		}
-	}
-
-	/**
-	 * Create a printer that will print values to the given
-	 * stream.	 Character to byte conversion is done using
-	 * the default character encoding.
-	 *
-	 * @param out stream to which to print.
-	 * @param commentStart Character used to start comments.
-	 */
-	public CSVPrinter (OutputStream out, char commentStart){
-		this(out);
-		this.commentStart = commentStart;
-	}
-
-	/**
-	 * Create a printer that will print values to the given
-	 * stream.	 Character to byte conversion is done using
-	 * the default character encoding.
-	 *
-	 * @param out stream to which to print.
-	 * @param commentStart Character used to start comments.
-	 */
-	public CSVPrinter (Writer out, char commentStart){
-		this(out);
-		this.commentStart = commentStart;
 	}
 
 	/**
@@ -111,7 +81,7 @@ public class CSVPrinter {
 	 * Output a blank line
 	 */
 	public void println(){
-		out.println();        
+		out.println();
         out.flush();
 		newLine = true;
 	}
@@ -131,45 +101,7 @@ public class CSVPrinter {
         out.flush();
 		newLine = true;
 	}
-
-	/**
-	 * Put a comment amoung the comma separated values.
-	 * Comments will always begin on a new line and occupy at
-	 * least one full line. The character specified to start
-	 * comments and a space will be inserted at the beginning of
-	 * each new line in the comment.
-	 *
-	 * @param comment the comment to output
-	 */
-	public void printlnComment(String comment){
-		if (!newLine){
-			out.println();
-		}
-		out.print(commentStart);
-		out.print(' ');
-		for (int i=0; i<comment.length(); i++){
-			char c = comment.charAt(i);
-			switch (c){
-				case '\r': {
-					if (i+1 < comment.length() && comment.charAt(i+1) == '\n'){
-						i++;
-					} 
-				} //break intentionally excluded.
-				case '\n': {
-					out.println();
-					out.print(commentStart);
-					out.print(' ');
-				} break;
-				default: {
-					out.print(c);
-				} break;
-			}
-		}
-		out.println();
-		out.flush();
-		newLine = true;
-	}
-
+    
 	/**
 	 * Print the string as the next value on the line.	The value
 	 * will be quoted if needed.
@@ -179,21 +111,11 @@ public class CSVPrinter {
 	public void print(String value){
 		boolean quote = false;
 		if (value.length() > 0){
-			char c = value.charAt(0);
-			if (newLine && (c<'0' || (c>'9' && c<'A') || (c>'Z' && c<'a') || (c>'z'))){
-				quote = true;
-			}
-			if (c==' ' || c=='\f' || c=='\t'){
-				quote = true;
-			}
 			for (int i=0; i<value.length(); i++){
-				c = value.charAt(i);
+				char c = value.charAt(i);
 				if (c=='"' || c==',' || c=='\n' || c=='\r'){
 					quote = true;
 				}
-			}
-			if (c==' ' || c=='\f' || c=='\t'){
-				quote = true;
 			}
 		}
 		if (newLine){
@@ -217,38 +139,8 @@ public class CSVPrinter {
 	 * @return the value, escaped and quoted.
 	 */
 	private static String escapeAndQuote(String value){
-        int count = 2;
-        for (int i=0; i<value.length(); i++){
-            switch(value.charAt(i)){
-                case '\"': case '\n': case '\r': case '\\': {
-                    count ++;
-                } break; 
-            }
-		}
-		StringBuffer sb = new StringBuffer(value.length() + count);
-		sb.append('"');
-		for (int i=0; i<value.length(); i++){
-            char c = value.charAt(i);
-            switch(c){
-                case '\"': {
-				    sb.append("\\\"");
-                } break; 
-                case '\n': {
-				    sb.append("\\n");
-                } break; 
-                case '\r': {
-				    sb.append("\\r");
-                } break; 
-                case '\\': {
-				    sb.append("\\\\");
-                } break; 
-                default: {
-                    sb.append(c);
-                }
-            }
-		}
-		sb.append('"');
-		return (sb.toString());
+        String s = StringHelper.replace(value, "\"", "\"\"");
+        return (new StringBuffer(2 + s.length())).append("\"").append(s).append("\"").toString();
 	}
 
 	/**
@@ -274,25 +166,20 @@ public class CSVPrinter {
 			} else {
 				out = System.out;
 			}
-			CSVPrinter p  = new CSVPrinter(out);
+			ExcelCSVPrinter p  = new ExcelCSVPrinter(out);
 			p.print("unquoted");
-            p.print("un\\quoted");
 			p.print("escaped\"quote");
-			p.print("escaped\"quote\\");
 			p.println("comma,comma");
 			p.print("!quoted");
 			p.print("!unquoted");
 			p.print(" quoted");
-			p.print("quoted ");
-			p.printlnComment("A comment.");
+			p.println("quoted ");
 			p.print("one");
 			p.print("");
 			p.print("");
 			p.print("");
-			p.print("");
-			p.printlnComment("Multi\nLine\rComment\r\nto test line breaks\r");
+			p.println("");
 			p.println("two");
-			p.printlnComment("Comment after explicit new line.");
 			p.print("\nthree\nline\n");
 			p.println("\ttab");
 		} catch (IOException e){
