@@ -72,7 +72,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	public void println(String value){
 		print(value);
 		out.println();
-        out.flush();
+		out.flush();
 		newLine = true;
 	}
 
@@ -81,7 +81,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 */
 	public void println(){
 		out.println();
-        out.flush();
+		out.flush();
 		newLine = true;
 	}
 
@@ -97,11 +97,11 @@ public class ExcelCSVPrinter implements CSVPrint {
 			print(values[i]);
 		}
 		out.println();
-        out.flush();
+		out.flush();
 		newLine = true;
-	}    
-    
-    /**
+	}
+
+	/**
 	 * Print several lines of comma separated values.
 	 * The values will be quoted if needed.  Quotes and
 	 * newLine characters will be escaped.
@@ -110,26 +110,26 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 */
 	public void println(String[][] values){
 		for (int i=0; i<values.length; i++){
-            println(values[i]);
+			println(values[i]);
 		}
-        if (values.length == 0){
-		    out.println();
-        }
-        out.flush();
+		if (values.length == 0){
+			out.println();
+		}
+		out.flush();
 		newLine = true;
 	}
-    
-    /**
+
+	/**
 	 * Since ExcelCSV format does not support comments,
-     * this method will ignore the comment and start
-     * a new row.
+	 * this method will ignore the comment and star
+	 * a new row.
 	 *
 	 * @param comment the comment to output (ignored)
 	 */
 	public void printlnComment(String comment){
-        println();
-    }
-    
+		println();
+	}
+
 	/**
 	 * Print the string as the next value on the line.	The value
 	 * will be quoted if needed.
@@ -146,12 +146,12 @@ public class ExcelCSVPrinter implements CSVPrint {
 				}
 			}
 		} else if (newLine) {
-            // always quote an empty token that is the first
-            // on the line, as it may be the only thing on the 
-            // line.  If it were not quoted in that case,
-            // an empty line has no tokens.
-            quote = true;
-        }
+			// always quote an empty token that is the firs
+			// on the line, as it may be the only thing on the
+			// line.  If it were not quoted in that case,
+			// an empty line has no tokens.
+			quote = true;
+		}
 		if (newLine){
 			newLine = false;
 		} else {
@@ -173,8 +173,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * @return the value, escaped and quoted.
 	 */
 	private static String escapeAndQuote(String value){
-        String s = StringHelper.replace(value, "\"", "\"\"");
-        return (new StringBuffer(2 + s.length())).append("\"").append(s).append("\"").toString();
+		String s = StringHelper.replace(value, "\"", "\"\"");
+		return (new StringBuffer(2 + s.length())).append("\"").append(s).append("\"").toString();
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 			if (args.length > 0){
 				File f = new File(args[0]);
 				if (!f.exists()){
-                    f.createNewFile();
+					f.createNewFile();
 					if (f.canWrite()){
 						out = new FileOutputStream(f);
 					} else {
