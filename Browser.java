@@ -1,6 +1,6 @@
 /*
  * Control a web browser from your java application.
- * Copyright (C) 2001 Stephen Ostermiller
+ * Copyright (C) 2001-2002 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
