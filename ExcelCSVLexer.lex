@@ -2,14 +2,16 @@
  * edit ExcelCSVLexer.lex to make changes.	Use JFlex to generate it.
  * JFlex may be obtained from
  * <a href="http://jflex.de">the JFlex website</a>.
- * Once JFlex is in your classpath run<br>
- * java --skel csv.jflex.skel JFlex.Main ExcelCSVLexer.lex<br>
+ * This file was tested to work with jflex 1.4 (and may not 
+ * work with more recent version because it needs a skeleton file)
+ * Run: <br>
+ * jflex --skel csv.jflex.skel ExcelCSVLexer.lex<br>
  * You will then have a file called ExcelCSVLexer.java
  */
 
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001-2003 Stephen Ostermiller
+ * Copyright (C) 2001-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -119,16 +121,16 @@ import java.io.*;
 	private char delimiter = ',';
 	private char quote = '\"';
 
-	/** Checks that yycmap_instance is an instance variable (not just
+	/** Checks that zzcmap_instance is an instance variable (not just
 	 * a pointer to a static variable).  If it is a pointer to a static
 	 * variable, it will be cloned.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	private void ensureCharacterMapIsInstance(){
-		if (yycmap == yycmap_instance){
-			yycmap_instance = new char[yycmap.length];
-			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
+		if (ZZ_CMAP == zzcmap_instance){
+			zzcmap_instance = new char[ZZ_CMAP.length];
+			System.arraycopy(ZZ_CMAP, 0, zzcmap_instance, 0, ZZ_CMAP.length);
 		}
 	}
 
@@ -144,7 +146,7 @@ import java.io.*;
 		// There are two character classes that one could use as a delimiter.
 		// The first would be the class that most characters are in.  These
 		// are normally data.  The second is the class that the tab is usually in.
-		return (yycmap_instance[c] == yycmap['a'] || yycmap_instance[c] == yycmap['\t']);
+		return (zzcmap_instance[c] == ZZ_CMAP['a'] || zzcmap_instance[c] == ZZ_CMAP['\t']);
 	}
 
 	/**
@@ -161,19 +163,19 @@ import java.io.*;
 		// before modifying the character map, make sure it isn't static.
 		ensureCharacterMapIsInstance();
 		// make the newChar behave like the oldChar
-		yycmap_instance[newChar] = yycmap_instance[oldChar];
+		zzcmap_instance[newChar] = zzcmap_instance[oldChar];
 		// make the oldChar behave like it isn't special.
 		switch (oldChar){
 			case ',':
 			case '"': {
 				// These should act as normal character,
 				// not delimiters or quotes right now.
-				yycmap_instance[oldChar] = yycmap['a'];
+				zzcmap_instance[oldChar] = ZZ_CMAP['a'];
 			} break;
 			default: {
 				// Set the it back to the way it would act
 				// if not used as a delimiter or quote.
-				yycmap_instance[oldChar] = yycmap[oldChar];
+				zzcmap_instance[oldChar] = ZZ_CMAP[oldChar];
 			} break;
 		}
 	}
