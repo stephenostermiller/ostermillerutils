@@ -1,6 +1,6 @@
 <%bte.doc super="item.bte" %>
 <%bte.tpl name=pageTitle%>Base64<%/bte.tpl%>
-<%bte.tpl name=description%>ncode and decode base 64 in Java.<%/bte.tpl%>
+<%bte.tpl name=description%>Encode and decode base 64 in Java.<%/bte.tpl%>
 <%bte.tpl name=keywords%>base, 64, base64, base, 64, base64, base, 64, base64, encode, decode, encode, decode<%/bte.tpl%>
 <%bte.tpl name=content%>
 <table align=right border=1 width=150 hspace=10 vspace=10 cellpadding=10><tr><td>
