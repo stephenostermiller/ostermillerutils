@@ -18,7 +18,7 @@
  *
  * See COPYING.TXT for details.
  */
- 
+
 package com.Ostermiller.util;
 
 import java.io.*;
@@ -135,13 +135,13 @@ class LabeledCSVParserTests {
 
 		String value = parse.nextValue();
 		if (!"10.5".equals(value)){
-			throw new Exception("Expected nextValue to return 10.5.");            
+			throw new Exception("Expected nextValue to return 10.5.");
 		}
 		try {
 			parse.getValueByLabel("FIELD01");
 			throw new Exception("IllegalStateException expected");
 		} catch (IllegalStateException iex){
-		}        
+		}
 		if (parse.getLastLineNumber() != 2){
 			throw new Exception("Expected 2 from getLastLineNumber()");
 		}
