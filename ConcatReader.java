@@ -30,7 +30,7 @@ import java.util.*;
 public class ConcatReader extends Reader {
 
 	/**
-	 * Current index to the Reader[] in
+	 * Current index to readerQueue
 	 *
 	 * @since ostermillerutils 1.04.01
 	 */
@@ -149,7 +149,7 @@ public class ConcatReader extends Reader {
 	 * When all sources have been added the lastReaderAdded() should
 	 * be called so that read methods can return -1 (end of stream).
 	 * <p>
-	 * Adding new sources can by interleaved with read calls.
+	 * Adding new sources may by interleaved with read calls.
 	 *
 	 * @since ostermillerutils 1.04.01
 	 */
