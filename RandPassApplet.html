@@ -1,17 +1,37 @@
 <html>
+<head>
 <title>Random Password Generator</title>
+<meta name="description" content="Java applet to generate a random String using a cryptographically secure random number generator.">
+<meta name="keywords" content="random, rand, pass, password, passwords, generate, generator, generater, secure, securely, securly, string, strings, alphabet, alphabets, java, java, applet, applet, source, code, open source, gpl, javadoc">
+<style>
+div.applet {
+border:4px gray outset;
+float:left;
+margin-right:1cm;
+padding:0;
+}
+div.noapplet {
+width:2in;
+padding:1cm;
+}
+</style>
+</head>
 <body>
 <h1>Random Password Generator</h1>
-<applet code="com/Ostermiller/util/RandPassApplet.class"
+<div class=applet>
+<object codetype="application/java"
+classid="java:com/Ostermiller/util/RandPassApplet.class"
 archive="randpass.jar"
 width=200 
-height=400
-align=left
-hspace=30>
-The Random Password Generator could not be run in your browser.  To run the applet in your browser, you must have a <a href="http://java.sun.com/j2se/downloads.html"recent version of Java installed</a>.
-</applet>
+height=340>
+<div class=noapplet>
+The Random Password Generator could not be run in your browser.  
+To run the applet, you must have a <a href="http://java.sun.com/j2se/downloads.html">
+recent version of Java</a> installed, configured, and enabled.
+</div></object>
+</div>
 <ul>
-<li>You must have Java 1.3 installed and configured to use the password generator in your web browser.</li>
+<li>You must have <a href="http://java.sun.com/j2se/downloads.html">Java 1.3 or later</a> installed, configured, and enabled to use the password generator in your web browser.</li>
 <li>The password length, and characters that can appear in the password can be set in the preferences.</li>
 <li>Preferences are not remembered between visits and page reloads.</li>
 <li>This applet is part of the <a href="http://ostermiller.org/utils/">com.Ostermiller.util Java Utilities</a></li>
