@@ -231,3 +231,6 @@ htmlsource: *.java *.properties *.lex
 	@src/temp.sh
 	@rm -f src/*.sh
 	@touch htmlsource
+
+package.html:
+	@cvs update package.html

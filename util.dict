@@ -1,4 +1,4 @@
-personal_ws-1.1 english 981
+personal_ws-1.1 english 989
 aa
 aaa
 AAAAAABB
@@ -191,6 +191,9 @@ decodeall
 decodeBuffer
 decodeEndLine
 decodegood
+decodeToBytes
+decodeToStream
+decodeToString
 DecodingException
 defaultCommands
 defaultValue
@@ -233,6 +236,8 @@ eldagxfqQvV
 elementAt
 emptyReturned
 emsp
+encIn
+encOut
 endian
 endsWith
 ensp
@@ -271,6 +276,7 @@ fIn
 finalState
 findLength
 findRep
+firebird
 firstAlphabet
 firstInSig
 firstLen
@@ -292,6 +298,7 @@ Français
 frasl
 fufilledInd
 fVvqQ
+galeon
 gb
 ge
 generateButton
@@ -458,6 +465,7 @@ KeyEvent
 keyListener
 keyPressed
 keySet
+konqueror
 labelPanel
 lang
 laquo
