@@ -14,6 +14,7 @@ compile: buildclean CSVLexer.java \
 	BrowserCommandLexer.java \
 	CGILexer.java \
 	ExcelCSVLexer.java
+	./neaten.sh
 	$(JAVAC) *.java
 
 CSVLexer.java: CSVLexer.lex
@@ -29,7 +30,7 @@ ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
 junkclean:
-	rm -rf *~ ~* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
+	rm -rf *~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
 
 buildclean: junkclean
 	rm -f utils.jar
