@@ -630,8 +630,6 @@ public class Base64 {
 	 * Line breaks will be inserted every 76 characters.
 	 *
 	 * @param fIn File to be encoded (will be overwritten).
-	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
-	 * @throws IOException if an input or output error occurs.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -643,7 +641,6 @@ public class Base64 {
 	 * Encode this file in Base64.
 	 *
 	 * @param fIn File to be encoded (will be overwritten).
-	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
 	 *
@@ -659,7 +656,6 @@ public class Base64 {
 	 *
 	 * @param fIn File to be encoded.
 	 * @param fOut File to which the results should be written (may be the same as fIn).
-	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -1348,7 +1344,7 @@ public class Base64 {
 	 * Additionally, extra data such as headers or footers may throw
 	 * this method off the scent and cause it to return false.
 	 *
-	 * @param b data that could be in base64 format.
+	 * @param bytes data that could be in base64 format.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -1383,7 +1379,7 @@ public class Base64 {
 	 * Additionally, extra data such as headers or footers may throw
 	 * this method off the scent and cause it to return false.
 	 *
-	 * @param s String that may be in base64 format.
+	 * @param string String that may be in base64 format.
 	 * @return Best guess as to whether the data is in base64 format.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -1410,7 +1406,7 @@ public class Base64 {
 	 * Additionally, extra data such as headers or footers may throw
 	 * this method off the scent and cause it to return false.
 	 *
-	 * @param s String that may be in base64 format.
+	 * @param string String that may be in base64 format.
 	 * @param enc Character encoding to use when converting to bytes.
 	 * @return Best guess as to whether the data is in base64 format.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
@@ -1438,7 +1434,6 @@ public class Base64 {
 	 * this method off the scent and cause it to return false.
 	 *
 	 * @param fIn File that may be in base64 format.
-	 * @param enc Character encoding to use when converting to bytes.
 	 * @return Best guess as to whether the data is in base64 format.
 	 * @throws IOException if an IO error occurs.
 	 *
