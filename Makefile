@@ -5,11 +5,15 @@ JAVADOC=javadoc
 JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 
 all: CSVLexer.java \
-	BrowserCommandLexer.java
+	BrowserCommandLexer.java \
+        CGILexer.java
 	$(JAVAC) $(JFLAGS) *.java
 
 CSVLexer.java: CSVLexer.lex
 	$(JLEX) CSVLexer.lex
+
+CGILexer.java: CGILexer.lex
+	$(JLEX) CGILexer.lex
 
 BrowserCommandLexer.java: BrowserCommandLexer.lex
 	$(JLEX) BrowserCommandLexer.lex
