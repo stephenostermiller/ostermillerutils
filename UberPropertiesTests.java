@@ -61,6 +61,16 @@ class UberPropertiesTests {
 				System.err.println(results);
 				System.exit(1);
 			}
+            CircularByteBuffer cbb = new CircularByteBuffer(CircularByteBuffer.INFINITE_SIZE);
+            up.save(cbb.getOutputStream());
+            cbb.getOutputStream().close();
+            UberProperties up2 = new UberProperties();
+            up2.load(cbb.getInputStream());
+            results = compare(up, up2);
+			if (results != null){
+				System.err.println(results);
+				System.exit(1);
+			}     
 		}
 	}
 
@@ -83,6 +93,25 @@ class UberPropertiesTests {
 			}
 			if (!upValue.equals(pValue)){
 				return ("Values for '" + pNames[i] + "' do not match:\n  '" + pValue + "'\n  '" + upValue + "'");
+			}
+		}
+		return null;
+	}
+    
+    private static String compare(UberProperties up1, UberProperties up2){
+		String[] up1Names = up1.propertyNames();
+        String[] up2Names = up2.propertyNames();
+		if (up1Names.length != up2Names.length){
+			return ("Number of properties do not match: Uber: " + up1Names.length +  " Normal:" + up2Names.length);
+		}
+		for (int i=0; i<up1Names.length; i++){
+			String up1Value = up1.getProperty(up1Names[i]);
+			String up2Value = up2.getProperty(up1Names[i]);
+			if (up2Value == null) {
+				return "Second does not contain property: '" + up1Names[i] + "'";
+			}
+			if (!up1Value.equals(up2Value)){
+				return ("Values for '" + up1Names[i] + "' do not match:\n  '" + up1Value + "'\n  '" + up2Value + "'");
 			}
 		}
 		return null;
