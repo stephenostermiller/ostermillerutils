@@ -4,6 +4,7 @@ directory=/usr/local/bin
 RandPass=RandPass
 LineEnds=LineEnds
 MD5=MD5Sum
+Tabs=Tabs
 
 if [ ! -z $1 ]
     then 
@@ -65,6 +66,16 @@ then
     echo "$MD5 installed."
 else
     echo "$directory/$MD5 already exists.  Use -f to overwrite."
+fi
+
+if [ ! -e $directory/$Tabs ] || [ ! -z $1 ]
+then
+    echo "#!/bin/bash" > $directory/$Tabs
+    echo "java -classpath $workingdir/utils.jar com.Ostermiller.util.Tabs \$@" >> $directory/$Tabs
+    chmod 755 $directory/$Tabs
+    echo "$Tabs installed."
+else
+    echo "$directory/$Tabs already exists.  Use -f to overwrite."
 fi
 
 
