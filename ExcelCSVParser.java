@@ -214,6 +214,18 @@ public class ExcelCSVParser implements CSVParse {
 		lexer.changeDelimiter(newDelim);
 	}
 
+	/**
+	 * Change this parser so that it uses a new character for quoting.
+	 * <p>
+	 * The initial character is a double quote ("), the delimiter cannot be changed
+	 * to a comma or other character that has special meaning in CSV.
+	 *
+	 * @param newQuote character to use for quoting.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 */
+	public void changeQuote(char newQuote) throws BadQuoteException {
+		lexer.changeQuote(newQuote);
+	}
 
 	/**
 	 * Set the characters that indicate a comment at the beginning of the line.

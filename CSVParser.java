@@ -264,8 +264,21 @@ public class CSVParser implements CSVParse {
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
 	 */
-		public void changeDelimiter(char newDelim) throws BadDelimeterException {
+	public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		lexer.changeDelimiter(newDelim);
+	}
+
+	/**
+	 * Change this parser so that it uses a new character for quoting.
+	 * <p>
+	 * The initial character is a double quote ("), the delimiter cannot be changed
+	 * to a comma or other character that has special meaning in CSV.
+	 *
+	 * @param newQuote character to use for quoting.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 */
+	public void changeQuote(char newQuote) throws BadQuoteException {
+		lexer.changeQuote(newQuote);
 	}
 
 	/**

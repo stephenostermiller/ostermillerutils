@@ -1,15 +1,15 @@
 /* CSVLexer.java is a generated file.  You probably want to
  * edit CSVLexer.lex to make changes.  Use JFlex to generate it.
- * JFlex may be obtained from 
+ * JFlex may be obtained from
  * <a href="http://jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
  * java --skel csv.jflex.skel JFlex.Main CSVLexer.lex<br>
  * You will then have a file called CSVLexer.java
  */
- 
+
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001-2003 Stephen Ostermiller 
+ * Copyright (C) 2001-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -112,29 +112,97 @@ import java.io.*;
 	}
 	
 	private char delimiter = ',';
+	private char quote = '\"';
+	
+	/** Checks that yycmap_instance is an instance variable (not just
+	 * a pointer to a static variable).  If it is a pointer to a static
+	 * variable, it will be cloned.
+	 */
+	private void ensureCharacterMapIsInstance(){
+		if (yycmap == yycmap_instance){
+			yycmap_instance = new char[yycmap.length];
+			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
+		}
+	}
+	
+	/**
+	 * Ensures that the given character is not used for some special purpose
+	 * in parsing.  This method should be called before setting some character
+	 * to be a delimiter so that the parsing doesn't break.  Examples of bad
+	 * characters are quotes, commas, and whitespace.
+	 */
+	private boolean charIsSafe(char c){
+		// There are two character classes that one could use as a delimiter.
+		// The first would be the class that most characters are in.  These
+		// are normally data.  The second is the class that the tab is usually in.
+		return (yycmap_instance[c] == yycmap['a'] || yycmap_instance[c] == yycmap['\t']);
+	}
+	
+	/**
+	 * Change the character classes of the two given characters.  This
+	 * will make the state machine behave as if the characters were switched
+	 * when they are encountered in the input.
+	 *
+	 * @param old the old character, its value will be returned to initial
+	 * @param two second character
+	 */
+	private void updateCharacterClasses(char oldChar, char newChar){
+		// before modifying the character map, make sure it isn't static.
+		ensureCharacterMapIsInstance();
+		// make the newChar behave like the oldChar
+		yycmap_instance[newChar] = yycmap_instance[oldChar];
+		// make the oldChar behave like it isn't special.
+		switch (oldChar){
+			case ',':
+			case '"': {
+				// These should act as normal character,
+				// not delimiters or quotes right now.
+				yycmap_instance[oldChar] = yycmap['a'];
+			} break;
+			default: {
+				// Set the it back to the way it would act
+				// if not used as a delimiter or quote.
+				yycmap_instance[oldChar] = yycmap[oldChar];
+			} break;
+		}
+	}
+	
 	/**
 	 * Change this Lexer so that it uses a new delimiter.
 	 * <p>
-	 * The inital character is a comma, the delimiter cannot be changed
+	 * The initial character is a comma, the delimiter cannot be changed
 	 * to a quote or other character that has special meaning in CSV.
-	 * 
+	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
 	 */
 	public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		if (newDelim == delimiter) return; // no need to do anything.
-		if (yycmap == yycmap_instance){
-			yycmap_instance = new char[yycmap.length];
-			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
-		}
-		// 'a' and 'b' should always be safe delimiters unless already the delimiter.
-		if (yycmap_instance[newDelim] != yycmap_instance[(delimiter == 'a')?'b':'a']){
+		if (!charIsSafe(newDelim)){
 			throw new BadDelimeterException(newDelim + " is not a safe delimiter.");
 		}
-		char temp = yycmap_instance[newDelim];
-		yycmap_instance[newDelim] = yycmap_instance[delimiter];
-		yycmap_instance[delimiter] = temp;
+		updateCharacterClasses(delimiter, newDelim);
+		// keep a record of the current delimiter.
 		delimiter = newDelim;
+	}
+	
+	/**
+	 * Change this Lexer so that it uses a new character for quoting.
+	 * <p>
+	 * The initial character is a double quote ("), the delimiter cannot be changed
+	 * to a comma or other character that has special meaning in CSV.
+	 *
+	 * @param newQuote character to use for quoting.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 */
+	public void changeQuote(char newQuote) throws BadQuoteException {
+		if (newQuote == quote) return; // no need to do anything.
+		if (!charIsSafe(newQuote)){
+			throw new BadQuoteException(newQuote + " is not a safe quote.");
+		}
+		updateCharacterClasses(quote, newQuote);
+		// keep a record of the current quote.
+		quote = newQuote;
 	}
 
 	private String escapes = "";
@@ -182,15 +250,15 @@ import java.io.*;
 					sb.append(replacements.charAt(index));
 				} else {
 					sb.append(c1);
-				}				 
+				}				
 			} else {
 				sb.append(c);
 			}
 		}
 		return sb.toString();
-	} 
+	}
 		
-	private String commentDelims = ""; 
+	private String commentDelims = "";
 	
 	/**
 	 * Set the characters that indicate a comment at the beginning of the line.
@@ -209,15 +277,15 @@ import java.io.*;
 	}
 	
 	private boolean addLine = true;
-    private int lines = 0;
-    
+	private int lines = 0;
+	
 	/**
 	 * Get the line number that the last token came from.
-     * <p>
-     * New line breaks that occur in the middle of a token are not
-     * counted in the line number count.
-     * <p> 
-     * If no tokens have been returned, the line number is undefined. 
+	 * <p>
+	 * New line breaks that occur in the middle of a token are not
+	 * counted in the line number count.
+	 * <p>
+	 * If no tokens have been returned, the line number is undefined.
 	 *
 	 * @return line number of the last token.
 	 */
@@ -253,18 +321,18 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 %%
 
 <YYINITIAL> ({NonBreakingWS}) {
-    if (addLine) {
-        lines++;
-        addLine = false;
-    }
+	if (addLine) {
+		lines++;
+		addLine = false;
+	}
 	yybegin(BEFORE);
 }
 <YYINITIAL> {Value} {
-    if (addLine) {
-        lines++;
-        addLine = false;
-    }
-	String text = yytext();    
+	if (addLine) {
+		lines++;
+		addLine = false;
+	}
+	String text = yytext();	
 	if (commentDelims.indexOf(text.charAt(0)) == -1){
 		yybegin(AFTER);
 		return(text);
@@ -273,62 +341,62 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	}
 }
 <YYINITIAL> {Separator} {
-    if (addLine) {
-        lines++;
-        addLine = false;
-    }
-	yybegin(BEFORE);   
+	if (addLine) {
+		lines++;
+		addLine = false;
+	}
+	yybegin(BEFORE);
 	return("");
 }
 <YYINITIAL> {StringLiteral} {
-    if (addLine) {
-        lines++;
-        addLine = false;
-    }
-	yybegin(AFTER);  
-	return(unescape(yytext()));    
+	if (addLine) {
+		lines++;
+		addLine = false;
+	}
+	yybegin(AFTER);
+	return(unescape(yytext()));	
 }
 <YYINITIAL> {FalseLiteral} {
-    if (addLine) {
-        lines++;
-        addLine = false;
-    }
-	yybegin(YYINITIAL);  
-	return(yytext());    
+	if (addLine) {
+		lines++;
+		addLine = false;
+	}
+	yybegin(YYINITIAL);
+	return(yytext());	
 }
 <BEFORE> {Separator} {
-	yybegin(BEFORE);   
+	yybegin(BEFORE);
 	return("");
 }
 <BEFORE> {StringLiteral} {
-	yybegin(AFTER);  
-	return(unescape(yytext()));    
+	yybegin(AFTER);
+	return(unescape(yytext()));	
 }
 <BEFORE> {FalseLiteral} {
-	yybegin(YYINITIAL);  
-	return(yytext());    
+	yybegin(YYINITIAL);
+	return(yytext());	
 }
 <BEFORE> {Value} {
-	yybegin(AFTER);  
+	yybegin(AFTER);
 	return(yytext());
 }
 <BEFORE> ({NonBreakingWS}*) {
 }
 <BEFORE> ({EOL}) {
-    addLine = true; 
+	addLine = true;
 	yybegin(YYINITIAL);
 	return("");
 }
 <BEFORE> <<EOF>> {
 	yybegin(YYINITIAL);
-    addLine = true;
+	addLine = true;
 	return("");
 }
 <AFTER> {Separator} {
 	yybegin(BEFORE);
 }
 <AFTER, COMMENT, YYINITIAL> ({NonBreakingWS}*{EOL}) {
-    addLine = true;
+	addLine = true;
 	yybegin(YYINITIAL);
 }
 <AFTER> {IgnoreAfter} {

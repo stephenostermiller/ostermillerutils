@@ -59,5 +59,53 @@ class CSVTest {
 				System.out.println("" + shredder.lastLineNumber() + " " + t);
 			}
 		}
+
+		try {
+			String normalInput = ",\"a\",\",\t'\\\"\"";
+			String[][] normalOutput = new String[][]{{"", "a", ",\t'\""}};
+			shredder = new CSVParser(new StringReader(normalInput));
+			compare("normal", normalOutput, shredder.getAllValues());
+
+			String tabInput = "\t\"a\"\t\",\t'\\\"\"";
+			shredder = new CSVParser(new StringReader(tabInput));
+			shredder.changeDelimiter('\t');
+			compare("tabs", normalOutput, shredder.getAllValues());
+
+			String aposInput = ",'a',',\t\\'\"'";
+			shredder = new CSVParser(new StringReader(aposInput));
+			shredder.changeQuote('\'');
+			compare("apostrophes", normalOutput, shredder.getAllValues());
+
+			String swappedInput = "\",a,\",\\,\t'\\\",";
+			shredder = new CSVParser(new StringReader(swappedInput));
+			shredder.changeDelimiter('\t');
+			shredder.changeQuote(',');
+			shredder.changeDelimiter('"');
+			compare("commas and quotes swapped", normalOutput, shredder.getAllValues());
+		} catch (Exception x){
+			System.err.println(x.getMessage());
+			System.exit(1);
+		}
+
+	}
+
+	private static void compare(String testName, String[][] a, String[][] b){
+		if (a.length != b.length) {
+			System.err.println(testName + ": unexpected number of lines");
+			System.exit(1);
+		}
+		for(int i=0; i<a.length; i++){
+			if (a[i].length != b[i].length) {
+				System.err.println(testName + ": unexpected number of values in line: " + b[i].length);
+				System.exit(1);
+			}
+			for (int j=0; j<a[i].length; j++){
+				if (!a[i][j].equals(b[i][j])) {
+					System.err.println(testName + ": values do not match.");
+					System.exit(1);
+				}
+			}
+		}
+
 	}
 }
