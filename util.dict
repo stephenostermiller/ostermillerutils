@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1190
+personal_ws-1.1 en 1192
 aa
 aA
 aaa
@@ -558,6 +558,7 @@ JPasswordField
 JScrollPane
 JTextArea
 JTextField
+Kaffe
 KeyAdapter
 KeyEvent
 keyListener
@@ -1141,6 +1142,7 @@ valuesVec
 ver
 versioned
 VK
+vm
 waitFor
 weierp
 wgtsfVvqQ

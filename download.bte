@@ -37,6 +37,18 @@ description
 The latest version of the com.Ostermiller.util utilities including source code.
 </td></tr>
 <tr><td>
+<a name="download" href="ostermillerutils_1_04_02_for_kaffe.jar">Ostermiller Utils version 1.04.02 for Kaffe</a>
+</td><td>
+426k
+</td><td>
+Version modified for compatibility <a href="kaffe.org">Kaffe</a> (version 1.1.4).  This version is completely free software.  It can be run on Linux with Kaffe, which has no dependencies on non-free software. Modifications include:
+<ul>
+<li>Does not use 1.5 features such as Generics</li>
+<li>Classes that use Swing components have been removed: PasswordDialog, RandPassApplet, Browser</li>
+<li>Unit test for the Circular Buffers does *NOT* pass, although the classes have been included.  (Seems to be threading issues in the Kaffe vm.)</li>
+</ul>
+</td></tr>
+<tr><td>
 <a name="download" href="ostermillerutils_1_04_02_for_java_1_4.jar">Ostermiller Utils version 1.04.02 for Java 1.4</a>
 </td><td>
 426k
@@ -45,7 +57,8 @@ Version modified for compatibility with the older Java 1.4 release.  Modificatio
 <ul>
 <li>Does not use 1.5 features such as Generics</li>
 </ul>
-</td></tr><tr><td>
+</td></tr>
+<tr><td>
 <a name="download" href="ostermillerutils_1_04_02_for_java_1_3.jar">Ostermiller Utils version 1.04.02 for Java 1.3</a>
 </td><td>
 424k
