@@ -1,4 +1,4 @@
-personal_ws-1.1 en 964
+personal_ws-1.1 english 981
 aa
 aaa
 AAAAAABB
@@ -12,6 +12,7 @@ actionPerformed
 addActionListener
 addKeyListener
 addOne
+addParameter
 addProperties
 addProperty
 addPropertyNames
@@ -39,10 +40,12 @@ anFLrlRv
 ang
 API
 APIs
+aposInput
 appletviewer
 applyRequirements
 args
 argsVector
+argumentType
 aring
 arrayContains
 arraycopy
@@ -59,6 +62,7 @@ availableInd
 avoidRepetition
 badcfe
 BadDelimeterException
+BadQuoteException
 bb
 BBBBCCCC
 bdceee
@@ -66,6 +70,7 @@ bde
 bdecfa
 bdquo
 beea
+bFirst
 bgcolor
 BigDecimal
 BigInteger
@@ -122,6 +127,7 @@ cgi
 CGILexer
 CGIParser
 changeDelimiter
+changeQuote
 charAt
 charset
 cint
@@ -183,6 +189,7 @@ darr
 dArr
 decodeall
 decodeBuffer
+decodeEndLine
 decodegood
 DecodingException
 defaultCommands
@@ -279,6 +286,7 @@ fout
 fOut
 fOUt
 fqQvV
+fqQvVn
 frac
 Français
 frasl
@@ -545,6 +553,7 @@ newDelim
 newLength
 newLine
 newNumTokens
+newQuote
 newTok
 newTokHasMoreTokens
 nextAmp
@@ -572,6 +581,8 @@ nolines
 NONCONFUSING
 nontoken
 nontokenDelims
+normalInput
+normalOutput
 noscript
 NoSuchElementException
 notin
@@ -727,6 +738,7 @@ RSA
 rsaquo
 rsquo
 rundll
+RuntimeException
 Santeri
 Santeri's
 saveBrowser
@@ -774,6 +786,7 @@ setNameLabel
 setNumberSignificantFigures
 setOKText
 setOpaque
+setParameter
 setPass
 setPassLabel
 setPreferredSize
@@ -800,6 +813,7 @@ sim
 skipDelimiters
 solaris
 somebodyelse
+someCharacterEscaped
 someURL
 spaceData
 spaceInd
@@ -823,9 +837,11 @@ StringTokenizer
 strLength
 sube
 supe
+swappedInput
 systemResource
 szlig
 tabInd
+tabInput
 tabStops
 tabWidth
 td
@@ -915,6 +931,7 @@ uuencode
 uuml
 uxxxx
 valArray
+valuesVec
 ver
 versioned
 VK
