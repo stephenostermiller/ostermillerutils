@@ -29,6 +29,9 @@ import java.io.*;
  * characters.  If you are planning on displaying the text, you should always do this and should
  * use an InputStreamReader for the purpose.  Sometimes it is useful to treat characters as bytes
  * with some extra bits.  In these cases you would want to use a StraightStreamReader.
+ * <P>
+ * For top efficiency, consider wrapping an StraightStreamReader within a BufferedReader. For example:<br>
+ * <code>BufferedReader in = new BufferedReader(new StraightStreamReader(System.in));</code>
  */
 public class StraightStreamReader extends Reader{
 
@@ -113,10 +116,10 @@ public class StraightStreamReader extends Reader{
 	 * @throws IOException If an I/O error occurs
      */
   	public int read(char[] cbuf, int off, int len) throws IOException {
-		byte[] buffer = new byte[cbuf.length];
-        int length = in.read(buffer, off, len);
+		byte[] buffer = new byte[len];
+        int length = in.read(buffer, 0, len);
         for (int i=0; i<length; i++){
-            cbuf[off+i] = (char)(0xFF & buffer[off+i]);
+            cbuf[off+i] = (char)(0xFF & buffer[i]);
 		}
 		return length;
    	}
@@ -176,8 +179,9 @@ public class StraightStreamReader extends Reader{
                 throw new IOException(f + " already exists.  I don't want to overwrite it.");
             }
             StraightStreamReader in;
-            char[] cbuf = new char[0x100];
+            char[] cbuf = new char[0x1000];
             int read;
+            int totRead;
 
             // write a file with all possible values of bytes
 			FileOutputStream out = new FileOutputStream(f);
@@ -196,10 +200,23 @@ public class StraightStreamReader extends Reader{
             }
             in.close();
 
+            // read as much of it back as possible with one simple buffer read.
+            in = new StraightStreamReader(new FileInputStream(f));
+            totRead = in.read(cbuf);
+            if (totRead != 0x100){
+                System.err.println("Simple buffered read did not read the full amount: 0x" + Integer.toHexString(totRead));
+            }
+            for (int i=0x00; i<totRead; i++){
+               if (cbuf[i] != i){
+                	System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i]);
+                }
+            }
+            in.close();
+
             // read it back using buffer read method.
             in = new StraightStreamReader(new FileInputStream(f));
-            int totRead = 0;
-            while ((read = in.read(cbuf, totRead, cbuf.length-totRead)) > 0 && read <= cbuf.length){
+            totRead = 0;
+            while (totRead <= 0x100 && (read = in.read(cbuf, totRead, 0x100 - totRead)) > 0){
                 totRead += read;
 			}
             if (totRead != 0x100){
@@ -207,10 +224,43 @@ public class StraightStreamReader extends Reader{
             }
             for (int i=0x00; i<totRead; i++){
                if (cbuf[i] != i){
-                	System.err.println("Error: " + i + " read as " + cbuf[i]);
+                	System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i]);
                 }
             }
             in.close();
+
+            // read it back using an offset buffer read method.
+            in = new StraightStreamReader(new FileInputStream(f));
+            totRead = 0;
+            while (totRead <= 0x100 && (read = in.read(cbuf, totRead+0x123, 0x100 - totRead)) > 0){
+                totRead += read;
+			}
+            if (totRead != 0x100){
+                System.err.println("Not enough read. Bytes read: " + Integer.toHexString(totRead));
+            }
+            for (int i=0x00; i<totRead; i++){
+               if (cbuf[i+0x123] != i){
+                	System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i+0x123]);
+                }
+            }
+            in.close();
+
+            // read it back using a partial offset buffer read method.
+            in = new StraightStreamReader(new FileInputStream(f));
+            totRead = 0;
+            while (totRead <= 0x100 && (read = in.read(cbuf, totRead+0x123, 7)) > 0){
+                totRead += read;
+			}
+            if (totRead != 0x100){
+                System.err.println("Not enough read. Bytes read: " + Integer.toHexString(totRead));
+            }
+            for (int i=0x00; i<totRead; i++){
+               if (cbuf[i+0x123] != i){
+                	System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i+0x123]);
+                }
+            }
+            in.close();
+
             f.delete();
         } catch (IOException x){
             System.err.println(x.getMessage());
