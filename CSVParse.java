@@ -80,13 +80,13 @@ public interface CSVParse {
 	 * @throws IOException if an error occurs while reading
 	 */
 	public String[][] getAllValues() throws IOException;
-	
-		
+
+
 	/**
 	 * Change this parser so that it uses a new delimeter.
-	 * 
+	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
 	 */
-    public void changeDelimiter(char newDelim) throws BadDelimeterException;
+		public void changeDelimiter(char newDelim) throws BadDelimeterException;
 }

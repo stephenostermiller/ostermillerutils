@@ -200,14 +200,14 @@ public class ExcelCSVParser implements CSVParse {
 		String[][] result = new String[v.size()][];
 		return ((String[][])v.toArray(result));
 	}
-	
+
 	/**
 	 * Change this parser so that it uses a new delimeter.
-	 * 
+	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
 	 */
-    public void changeDelimiter(char newDelim) throws BadDelimeterException {
+		public void changeDelimiter(char newDelim) throws BadDelimeterException {
 		lexer.changeDelimiter(newDelim);
 	}
 
@@ -227,7 +227,7 @@ public class ExcelCSVParser implements CSVParse {
 	public void setCommentStart(String commentDelims){
 		lexer.setCommentStart(commentDelims);
 	}
-	
+
 	/**
 	 * Get the number of the line from which the last value was retrieved.
 	 *
