@@ -14,7 +14,7 @@
  *
  * See COPYING.TXT for details.
  */
- package com.Ostermiller.util;
+package com.Ostermiller.util;
 
 import java.io.*;
 
