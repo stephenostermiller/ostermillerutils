@@ -207,7 +207,7 @@ public class Base64 {
 	/**
 	 * Version number of this program
 	 */
-	public static final String version = "1.1";
+	public static final String version = "1.2";
 
 	/**
 	 * Locale specific strings displayed to the user.
@@ -217,6 +217,10 @@ public class Base64 {
 	private static final int ACTION_GUESS = 0;
 	private static final int ACTION_ENCODE = 1;
 	private static final int ACTION_DECODE = 2;
+
+	private static final int ARGUMENT_GUESS = 0;
+	private static final int ARGUMENT_STRING = 1;
+	private static final int ARGUMENT_FILE = 2;
 
 	/**
 	 * Converts the line ending on files, or standard input.
@@ -243,8 +247,12 @@ public class Base64 {
 			new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),
 			new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),
 			new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
+			new LongOpt(labels.getString("file.option"), LongOpt.NO_ARGUMENT, null, 7),
+			new LongOpt(labels.getString("string.option"), LongOpt.NO_ARGUMENT, null, 8),
+			new LongOpt(labels.getString("newline.option"), LongOpt.NO_ARGUMENT, null, 'n'),
+			new LongOpt(labels.getString("nonewline.option"), LongOpt.NO_ARGUMENT, null, 9),
 		};
-		String oneLetterOptions = "eldagx::fqQvV";
+		String oneLetterOptions = "eldagx::fqQvVn";
 		Getopt opts = new Getopt(labels.getString("base64"), args, oneLetterOptions, longopts);
 		int action = ACTION_GUESS;
 		String extension = "base64";
@@ -253,6 +261,8 @@ public class Base64 {
 		boolean printErrors = true;
 		boolean forceDecode = false;
 		boolean lineBreaks = true;
+		int argumentType = ARGUMENT_GUESS;
+		boolean decodeEndLine = false;
 		int c;
 		while ((c = opts.getopt()) != -1){
 			switch(c){
@@ -275,6 +285,10 @@ public class Base64 {
 						"-v --" + labels.getString("verbose.option"),
 						"-q --" + labels.getString("quiet.option"),
 						"-Q --" + labels.getString("reallyquiet.option"),
+						"--" + labels.getString("file.option"),
+						"--" + labels.getString("string.option"),
+						"-n --" + labels.getString("newline.option"),
+						"--" + labels.getString("nonewline.option"),
 					};
 					int maxLength = 0;
 					for (int i=0; i<helpFlags.length; i++){
@@ -300,7 +314,11 @@ public class Base64 {
 						"  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
 						"  " + StringHelper.postpad(helpFlags[13] ,maxLength, ' ') + labels.getString("v.message") + " (" + labels.getString("default") + ")\n" +
 						"  " + StringHelper.postpad(helpFlags[14] ,maxLength, ' ') + labels.getString("q.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[15] ,maxLength, ' ') + labels.getString("Q.message") + "\n"
+						"  " + StringHelper.postpad(helpFlags[15] ,maxLength, ' ') + labels.getString("Q.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[16] ,maxLength, ' ') + labels.getString("file.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[17] ,maxLength, ' ') + labels.getString("string.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[18] ,maxLength, ' ') + labels.getString("newline.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[19] ,maxLength, ' ') + labels.getString("nonewline.message") + "\n"
 					);
 					System.exit(0);
 				} break;
@@ -360,7 +378,20 @@ public class Base64 {
 					printMessages = false;
 					printErrors = false;
 				} break;
+				case 7: {
+					argumentType = ARGUMENT_FILE;
+				} break;
+				case 8: {
+					argumentType = ARGUMENT_STRING;
+				} break;
+				case 'n': {
+					decodeEndLine = true;
+				} break;
+				case 9: {
+					decodeEndLine = false;
+				} break;
 				default:{
+					System.err.println(labels.getString("unknownarg"));
 					System.exit(1);
 				}
 			}
@@ -371,7 +402,40 @@ public class Base64 {
 		for (int i=opts.getOptind(); i<args.length; i++){
 			done = true;
 			File source = new File(args[i]);
-			if (!source.exists()){
+			if (argumentType == ARGUMENT_STRING || (argumentType == ARGUMENT_GUESS && !source.exists())){
+				try {
+					int fileAction = action;
+					if (fileAction == ACTION_GUESS){
+						if (isBase64(args[i])){
+							fileAction = ACTION_DECODE;
+						} else {
+							fileAction = ACTION_ENCODE;
+						}
+					}
+					if (fileAction == ACTION_ENCODE){
+						if (printMessages){
+							System.out.println(labels.getString("encodingarg"));
+						}
+						encode(new ByteArrayInputStream(args[i].getBytes()), System.out, lineBreaks);
+					} else {
+						if (printMessages){
+							System.out.println(labels.getString("decodingarg"));
+						}
+						decode(new ByteArrayInputStream(args[i].getBytes()), System.out, !forceDecode);
+						if (decodeEndLine) System.out.println();
+					}
+				} catch (Base64DecodingException x){
+					if(printErrors){
+						System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+					}
+					exitCond = 1;
+				} catch (IOException x){
+					if(printErrors){
+						System.err.println(args[i] + ": " + x.getMessage());
+					}
+					exitCond = 1;
+				}
+			} else 	if (!source.exists()){
 				if(printErrors){
 					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), new String[] {args[i]}));
 				}
@@ -416,13 +480,13 @@ public class Base64 {
 						if (fileAction == ACTION_ENCODE){
 							if (printMessages){
 								System.out.println(MessageFormat.format(labels.getString("encoding"), new String[] {args[i], outName}));
-								encode(source, outFile, lineBreaks);
 							}
+							encode(source, outFile, lineBreaks);
 						} else {
 							if (printMessages){
 								System.out.println(MessageFormat.format(labels.getString("decoding"), new String[] {args[i], outName}));
-								decode(source, outFile, !forceDecode);
 							}
+							decode(source, outFile, !forceDecode);
 						}
 					}
 				} catch (Base64DecodingException x){
@@ -441,7 +505,9 @@ public class Base64 {
 		if (!done){
 			try {
 				if (action == ACTION_GUESS){
-					System.out.println(labels.getString("cantguess"));
+					if(printErrors){
+						System.err.println(labels.getString("cantguess"));
+					}
 					exitCond = 1;
 				} else if (action == ACTION_ENCODE){
 					encode(
@@ -455,6 +521,7 @@ public class Base64 {
 						new BufferedOutputStream(System.out),
 						!forceDecode
 					);
+					if (decodeEndLine) System.out.println();
 				}
 			} catch (Base64DecodingException x){
 				if(printErrors){
