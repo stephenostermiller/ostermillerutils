@@ -22,6 +22,9 @@ import java.security.SecureRandom;
 /** 
  * Generates a random String using a cryptographically 
  * secure random number generator.
+ * 
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
  */
 public class RandPass {
 
