@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta name="description" content="Open source utilities for common tasks when programming in java.">
-   <meta name="keywords" content="util, util, util, utils, utils, utils, utilities, utilities, programming, text, csv, csv, comma, separated, value, values, java, java, open source, gpl">
+   <meta name="keywords" content="util, util, util, utils, utils, utils, utilities, utilities, programming, text, csv, csv, browser, browser control, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl">
    <title>Java Utilities</title>
    <base href="http://www.smo.f2s.com/utils/">
 </head>
@@ -10,9 +10,9 @@
 
 <h1>Java Utilities</h1>
 
-<P><a href="utils.jar">Download</a> the latest version of these utilities including source code.(Jar - 36k)<br>
+<P><a href="utils.jar">Download</a> the latest version of these utilities including source code.(Jar - 26k)<br>
 <a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">Browse</a> the source code.<br>
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a>the JavaDoc.</p>
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a> the JavaDoc.</p>
 
 <hr>
 
@@ -28,6 +28,20 @@ support line numbering, escape characters, and comments.</P>
 
 <P>This parser was created using <a href="http://www.jflex.de/">JFlex</a> and you will need to have 
 it if you want to modify the parser.</P>
+
+<hr>
+
+<h2>Browser</h2>
+
+<P>Allows URLs to be opened in the system browser on Windows and Unix.
+JavaWorld has a <a href="">Java Tip</a> which shows how to open a URL in the system browser.  That  implementation has some serious problems:
+<ol>
+    <li><b>Security</b> - You must rely on the Runtime.exec() method to open another program in java.  You must stick the URL into the command line that you use to open the browser.  If you do not check for it, somebody could craft a URL that messes up the command line.  This is possible either by adding whitespace to the url (so it is interpretted as more than one argument) or by prepending the url with a '-' so that it is interpretted not as a url but as an option by the browser.  This would be an issue if you were writing an instant messanger and were opening URLs sent to in a special URL field.  A malicous hacker could exploit this by sending you a URL allowing them to access or crash your computer.</li>
+    <li><b>Out of date</b> - There are a variety of browsers available on Linux.  It would be nice to check for something better than Netscape.  (I prefer Mozilla)</li>
+    <li><b>Blocking</b> - If you are using Netscape under Linux, a Java program using this library will wait for netscape to close before continuing.</li>
+</ol></p>
+
+<p>All of these problems are solved in the com.Ostermiller.util.Browser implementation.</p>
 
 <hr>
 
