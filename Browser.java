@@ -821,9 +821,9 @@ public class Browser {
 			gridbag.setConstraints(commandLinesLabel, c);
 			pane.add(commandLinesLabel);
 			JPanel buttonPanel = new JPanel();
-			c.anchor = GridBagConstraints.EAST;			
+			c.anchor = GridBagConstraints.EAST;
 			browseButton.addActionListener(actionListener);
-			buttonPanel.add(browseButton);			
+			buttonPanel.add(browseButton);
 			resetButton.addActionListener(actionListener);
 			buttonPanel.add(resetButton);
 			gridbag.setConstraints(buttonPanel, c);

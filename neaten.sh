@@ -16,11 +16,11 @@ do
     elif [ -e ${file%.java}.lex ]
     then
         generated='1'
-    elif [ `egrep -l "[ \t]+$" $file` ]
+    elif [ `egrep -l "[ 	]+$" $file` ]
     then
         echo "Removing trailing white space from $file."
         mv "$file" temp
-        sed 's/[ \t]*$//' temp > "$file"
+        sed 's/[ 	]*$//' temp > "$file"
     fi
     if [ $generated -eq '0' ]
     then

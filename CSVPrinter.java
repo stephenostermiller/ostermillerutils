@@ -82,7 +82,7 @@ public class CSVPrinter implements CSVPrint {
 
 	/**
 	 * Create a printer that will print values to the given
-	 * stream.	
+	 * stream.
 	 *
 	 * @param out stream to which to print.
 	 * @param commentStart Character used to start comments.

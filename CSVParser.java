@@ -123,7 +123,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param in stream that contains comma separated values.
 	 * @param escapes a list of characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param replacements the list of repacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
@@ -138,7 +138,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param in reader that contains comma separated values.
 	 * @param escapes a list of characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param replacements the list of repacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
@@ -342,7 +342,7 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @param s string with comma delimited data to parse.
 	 * @param escapes a list of additional characters that will represent escape sequences.
-	 * @param replacements the list of repacement characters for those escape sequences.	
+	 * @param replacements the list of repacement characters for those escape sequences.
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public static String[][] parse(String s, String escapes, String replacements, String commentDelims){

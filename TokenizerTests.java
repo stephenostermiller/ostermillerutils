@@ -192,9 +192,9 @@ class TokenizerTests {
 		compareAndPrint("peek", newTok.peek());
 		compareAndPrint("peek", newTok.nextToken());
 		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.peek());		
+		compareAndPrint("method", newTok.peek());
 		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.nextToken());		
+		compareAndPrint("method", newTok.nextToken());
 		compareAndPrint("false", "" + newTok.hasMoreTokens());
 		System.out.println("  ===============================================");
 	}

@@ -473,7 +473,7 @@ public class LineEnds {
 			out.close();
 			out = null;
 			if (modified){
-				FileHelper.move(temp, f, true);				
+				FileHelper.move(temp, f, true);
 			} else {
 				if (!temp.delete()){
 					throw new IOException(
