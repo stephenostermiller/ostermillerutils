@@ -42,7 +42,7 @@ public class StraightStreamReader extends Reader{
      *
      * @param in InputStream to wrap a Reader around.
 	 */
-	StraightStreamReader(InputStream in) {
+	public StraightStreamReader(InputStream in) {
 		this.in = in;
 	}
 
