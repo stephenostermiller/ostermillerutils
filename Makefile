@@ -209,6 +209,6 @@ htmlsource: *.java *.properties *.lex
 	@chmod +x srcbuild/temp.sh
 	@srcbuild/temp.sh
 	@mkdir -p src/
-	@mv srcbuild/*.*.html srcbuild/*.css src/
+	@mv srcbuild/*.*.html srcbuild/*.css srcbuild/source.html src/
 	@rm -rf srcbuild
 	@touch htmlsource
