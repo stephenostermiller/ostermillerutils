@@ -132,7 +132,17 @@ import java.io.*;
  * because no hyphen characters are used in the base64 encoding.</p>
  * </blockquote>
  */
-public class Base64{
+public class Base64 {
+
+	/**
+	 * Symbol that represents the end of an input stream
+	 */
+	private static final int END_OF_INPUT = -1;
+
+	/**
+	 * A character that is not a valid base 64 character.
+	 */
+	private static final int NON_BASE_64 = -1;
 
 	/**
 	 * This class need not be instantiated, all methods are static.
@@ -158,13 +168,13 @@ public class Base64{
 	/**
 	 * Reverse lookup table for the Base64 alphabet.
 	 * reversebase64Chars[byte] gives n for the nth Base64
-	 * character or -1 if a character is not a Base64 character.
+	 * character or NON_BASE_64 if a character is not a Base64 character.
 	 */
 	protected static final byte[] reverseBase64Chars = new byte[0x100];
 	static {
-		// Fill in -1 for all characters to start with
+		// Fill in NON_BASE_64 for all characters to start with
 		for (int i=0; i<reverseBase64Chars.length; i++){
-			reverseBase64Chars[i] = -1;
+			reverseBase64Chars[i] = NON_BASE_64;
 		}
 		// For characters that are base64Chars, adjust
 		// the reverse lookup table.
@@ -263,7 +273,7 @@ public class Base64{
 		int lineCount = 0;
 
 		boolean done = false;
-		while (!done && (inBuffer[0] = in.read()) != -1){
+		while (!done && (inBuffer[0] = in.read()) != END_OF_INPUT){
 			// Fill the buffer
 			inBuffer[1] = in.read();
 			inBuffer[2] = in.read();
@@ -271,7 +281,7 @@ public class Base64{
 			// Calculate the out Buffer
 			// The first byte of our in buffer will always be valid
 			// but we must check to make sure the other two bytes
-			// are not -1 before using them.
+			// are not END_OF_INPUT before using them.
 			// The basic idea is that the three bytes get split into
 			// four bytes along these lines:
 			//      [AAAAAABB] [BBBBCCCC] [CCDDDDDD]
@@ -281,10 +291,10 @@ public class Base64{
 
 			// A's: first six bits of first byte
 			out.write(base64Chars[ inBuffer[0] >> 2 ]);
-			if (inBuffer[1] != -1){
+			if (inBuffer[1] != END_OF_INPUT){
 				// B's: last two bits of first byte, first four bits of second byte
 				out.write(base64Chars [(( inBuffer[0] << 4 ) & 0x30) | (inBuffer[1] >> 4) ]);
-				if (inBuffer[2] != -1){
+				if (inBuffer[2] != END_OF_INPUT){
 					// C's: last four bits of second byte, first two bits of third byte
 					out.write(base64Chars [((inBuffer[1] << 2) & 0x3c) | (inBuffer[2] >> 6) ]);
 					// D's: last six bits of third byte
@@ -388,13 +398,13 @@ public class Base64{
 		int read;
 		do {
 			read = in.read();
-			if (read == -1) return -1;
-			if (throwExceptions && reverseBase64Chars[(byte)read] == -1 &&
+			if (read == END_OF_INPUT) return END_OF_INPUT;
+			if (throwExceptions && reverseBase64Chars[(byte)read] == NON_BASE_64 &&
 				read != ' ' && read != '\n'  && read != '\r' && read != '\t' && read != '\f' && read != '='){
 				throw new IOException ("Unexpected Base64 character: " + read);
 			}
 			read = reverseBase64Chars[(byte)read];
-		} while (read == -1);
+		} while (read == NON_BASE_64);
 		return read;
 	}
 
@@ -416,8 +426,8 @@ public class Base64{
 		// read bytes unmapping them from their ASCII encoding in the process
 		// we must read at least two bytes to be able to output anything
 		boolean done = false;
-		while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != -1
-			&& (inBuffer[1] = readBase64(in, throwExceptions)) != -1){
+		while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != END_OF_INPUT
+			&& (inBuffer[1] = readBase64(in, throwExceptions)) != END_OF_INPUT){
 			// Fill the buffer
 			inBuffer[2] = readBase64(in, throwExceptions);
 			inBuffer[3] = readBase64(in, throwExceptions);
@@ -425,7 +435,7 @@ public class Base64{
 			// Calculate the output
 			// The first two bytes of our in buffer will always be valid
 			// but we must check to make sure the other two bytes
-			// are not -1 before using them.
+			// are not END_OF_INPUT before using them.
 			// The basic idea is that the four bytes will get reconstituted
 			// into three bytes along these lines:
 			// [xxAAAAAA] [xxBBBBBB] [xxCCCCCC] [xxDDDDDD]
@@ -434,10 +444,10 @@ public class Base64{
 
 			// six A and two B
 			out.write(inBuffer[0] << 2 | inBuffer[1] >> 4);
-			if (inBuffer[2] != -1){
+			if (inBuffer[2] != END_OF_INPUT){
 				// four B and four C
 				out.write(inBuffer[1] << 4 | inBuffer[2] >> 2);
-				if (inBuffer[3] != -1){
+				if (inBuffer[3] != END_OF_INPUT){
 					// two C and six D
 					out.write(inBuffer[2] << 6 | inBuffer[3]);
 				} else {
