@@ -22,7 +22,7 @@ do
 	fi
 done
 head -1 "util.dict" > temp
-tail +2 "util.dict" | sort "util.dict" >> temp
+tail +2 "util.dict" | sort | uniq >> temp
 if [ "`diff "temp" "util.dict"`" ] 
 then
 	mv temp "util.dict"

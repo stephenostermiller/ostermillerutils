@@ -1,4 +1,4 @@
-personal_ws-1.1 english 681
+personal_ws-1.1 english 683
 aa
 aaa
 AAAAAABB
@@ -175,6 +175,7 @@ escapeAndQuote
 escapeHTML
 escapeJavaLiteral
 escapeSQL
+Español
 ExcelCSV
 ExcelCSVLexer
 ExcelCSVParser
@@ -310,6 +311,7 @@ IOException
 isAlive
 isInterrupted
 isZero
+Italiano
 javadoc
 JavaDoc
 javascript
@@ -455,7 +457,6 @@ passSize
 PasswordDialog
 PasswordVerifier
 PEM
-personal_ws-1.1 english 681
 PipedInputStream
 PipedInputStreams
 PipedOutputStream
