@@ -95,6 +95,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * Change this printer so that it uses a new delimiter.
 	 *
 	 * @param newDelimiter The new delimiter character to use.
+	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
 	 *
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
@@ -110,7 +111,8 @@ public class ExcelCSVPrinter implements CSVPrint {
 	/**
 	 * Change this printer so that it uses a new character for quoting.
 	 *
-	 * @param newDelimiter The new character to use for quoting.
+	 * @param newQuote The new character to use for quoting.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
 	 *
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
