@@ -10,19 +10,45 @@
 
 <h1><a name="line">Line Ending Conversion</a></h1>
 
-<p>Easily converts text files so that they can be read by editors on various systems.  Text editors often do not deal with line endings properly for files created on other systems.  Squares that appear in Notepad where it should wrap to a new line are often a result of this.  This utility does not care what format the file is in, it can read it.  It has options to re-write the file in various formats.  By default, it will not touch files that it finds to be in binary format, preventing data corruption.  The default option is to convert the text file to your system's format.</p>
+<p>Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.</p>
 
-<p>Text formats supported:<br>
+<h3>Features</h3>
+<ul>
+<li>Text formats supported
 <ul>
 <li>DOS</li>
 <li>Windows</li>
 <li>UNIX</li>
 <li>Java</li>
 <li>Mac</li>
-</ul></p>
+</ul></li>
+<li>Reads files in any of the supported formats, or files that are in mixed formats.</li>
+<li>Can re-write in any format, but defaults to the correct format for the current system.</li>
+<li>Only re-writes files which are not already in the correct format.</li>
+<li>Detects binary files and does not modify those files unless forced.</li>
+</ul>
 
 <p>To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;--help</b></p>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;&lt;file&gt;</b></p>
+
+<pre>LineEnds [-dnrsfvqQ] &lt;files&gt;
+
+   Adjusts the line endings in files.
+   If no files are specified standard in and out will be used.
+
+   --help                 Print this help message.
+   --version              Print out the version number.
+   --about                Print out license and contact info.
+   -d --windows --dos     Use the Windows/DOS line ending.
+   -n --unix --java       Use the UNIX/Java line ending.
+   -r --mac               Use the Macintosh line ending.
+   -s --system            Use the current system's line ending. (default)
+   -f --force             Always modify files, even binary files.
+   --noforce              Don't modify binary files. (default)
+   -v --verbose           Print a message for each file modified.
+   -q --quiet             Print error messages. (default)
+   -Q --reallyquiet       Print nothing.
+</pre>
 
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/LineEnds.java/0">Version History</a> |
