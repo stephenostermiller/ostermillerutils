@@ -149,6 +149,16 @@ public class Base64 {
 	private static final int NON_BASE_64 = -1;
 
 	/**
+	 * A character that is not a valid base 64 character.
+	 */
+	private static final int NON_BASE_64_WHITESPACE = -2;
+
+	/**
+	 * A character that is not a valid base 64 character.
+	 */
+	private static final int NON_BASE_64_PADDING = -3;
+
+	/**
 	 * This class need not be instantiated, all methods are static.
 	 */
 	private Base64(){
@@ -172,7 +182,7 @@ public class Base64 {
 	/**
 	 * Reverse lookup table for the Base64 alphabet.
 	 * reversebase64Chars[byte] gives n for the nth Base64
-	 * character or NON_BASE_64 if a character is not a Base64 character.
+	 * character or negative if a character is not a Base64 character.
 	 */
 	protected static final byte[] reverseBase64Chars = new byte[0x100];
 	static {
@@ -185,12 +195,18 @@ public class Base64 {
 		for (byte i=0; i < base64Chars.length; i++){
 			reverseBase64Chars[base64Chars[i]] = i;
 		}
+		reverseBase64Chars[' '] = NON_BASE_64_WHITESPACE;
+		reverseBase64Chars['\n'] = NON_BASE_64_WHITESPACE;
+		reverseBase64Chars['\r'] = NON_BASE_64_WHITESPACE;
+		reverseBase64Chars['\t'] = NON_BASE_64_WHITESPACE;
+		reverseBase64Chars['\f'] = NON_BASE_64_WHITESPACE;
+		reverseBase64Chars['='] = NON_BASE_64_PADDING;
 	}
 
 	/**
 	 * Version number of this program
 	 */
-	public static final String version = "1.0";
+	public static final String version = "1.1";
 
 	/**
 	 * Locale specific strings displayed to the user.
@@ -365,22 +381,15 @@ public class Base64 {
 				}
 				exitCond = 1;
 			} else {
-				int fileAction = action;
-				if (fileAction == ACTION_GUESS){
-					if (extension.length() > 0){
-						if (args[i].endsWith(extension)){
+				try {
+					int fileAction = action;
+					if (fileAction == ACTION_GUESS){
+						if (isBase64(source)){
 							fileAction = ACTION_DECODE;
 						} else {
 							fileAction = ACTION_ENCODE;
 						}
 					}
-				}
-				if (fileAction == ACTION_GUESS){
-					if(printErrors){
-						System.err.println(labels.getString("cantguess"));
-					}
-					exitCond = 1;
-				} else {
 					String outName = args[i];
 					if (extension.length() > 0){
 						if (fileAction == ACTION_ENCODE){
@@ -391,42 +400,40 @@ public class Base64 {
 							}
 						}
 					}
-					try {
-						File outFile = new File(outName);
-						if (!force && outFile.exists()){
-							if(printErrors){
-								System.err.println(MessageFormat.format(labels.getString("overwrite"), new String[] {outName}));
+					File outFile = new File(outName);
+					if (!force && outFile.exists()){
+						if(printErrors){
+							System.err.println(MessageFormat.format(labels.getString("overwrite"), new String[] {outName}));
+						}
+						exitCond = 1;
+					} else if (!(outFile.exists() || outFile.createNewFile()) || !outFile.canWrite()){
+						if(printErrors){
+							System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {outName}));
+						}
+						exitCond = 1;
+					} else {
+						if (fileAction == ACTION_ENCODE){
+							if (printMessages){
+								System.out.println(MessageFormat.format(labels.getString("encoding"), new String[] {args[i], outName}));
+								encode(source, outFile, lineBreaks);
 							}
-							exitCond = 1;
-						} else if (!(outFile.exists() || outFile.createNewFile()) || !outFile.canWrite()){
-							if(printErrors){
-								System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {outName}));
-							}
-							exitCond = 1;
 						} else {
-							if (fileAction == ACTION_ENCODE){
-								if (printMessages){
-									System.out.println(MessageFormat.format(labels.getString("encoding"), new String[] {args[i], outName}));
-									encode(source, outFile, lineBreaks);
-								}
-							} else {
-								if (printMessages){
-									System.out.println(MessageFormat.format(labels.getString("decoding"), new String[] {args[i], outName}));
-									decode(source, outFile, !forceDecode);
-								}
+							if (printMessages){
+								System.out.println(MessageFormat.format(labels.getString("decoding"), new String[] {args[i], outName}));
+								decode(source, outFile, !forceDecode);
 							}
 						}
-					} catch (Base64DecodingException x){
-						if(printErrors){
-							System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
-						}
-						exitCond = 1;
-					} catch (IOException x){
-						if(printErrors){
-							System.err.println(args[i] + ": " + x.getMessage());
-						}
-						exitCond = 1;
 					}
+				} catch (Base64DecodingException x){
+					if(printErrors){
+						System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+					}
+					exitCond = 1;
+				} catch (IOException x){
+					if(printErrors){
+						System.err.println(args[i] + ": " + x.getMessage());
+					}
+					exitCond = 1;
 				}
 			}
 		}
@@ -740,14 +747,15 @@ public class Base64 {
 		return out.toByteArray();
 	}
 
-		/**
+	/**
 	 * Decode Base64 encoded data from one file to the other.
 	 * Characters in the Base64 alphabet, white space and equals sign are
 	 * expected to be in urlencoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param fIn File to be decoded (will be overwritten).
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered.
 	 */
 	public static void decode(File fIn) throws IOException {
 		decode(fIn, fIn, true);
@@ -761,7 +769,8 @@ public class Base64 {
 	 *
 	 * @param fIn File to be decoded (will be overwritten).
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
 	 */
 	public static void decode(File fIn, boolean throwExceptions) throws IOException {
 		decode(fIn, fIn, throwExceptions);
@@ -775,7 +784,8 @@ public class Base64 {
 	 *
 	 * @param fIn File to be decoded.
 	 * @param fOut File to which the results should be written (may be the same as fIn).
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered.
 	 */
 	public static void decode(File fIn, File fOut) throws IOException {
 		decode(fIn, fOut, true);
@@ -790,7 +800,8 @@ public class Base64 {
 	 * @param fIn File to be decoded.
 	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
 	 */
 	public static void decode(File fIn, File fOut, boolean throwExceptions) throws IOException {
 		File temp = null;
@@ -831,20 +842,19 @@ public class Base64 {
 	 * Non Base64 characters are skipped.
 	 *
 	 * @param in Stream from which bytes are read.
-	 * @param throwExceptions Throw an exception if an unexpected character
-	 *    is encountered.
-	 * @return the next Base64 character from the stream or -1 if
-	 *    there are no more Base64 characters on the stream.
-	 * @throws IOException if an IO Error occurs or if an unexpected character
-	 *    is encountered.
+	 * @param throwExceptions Throw an exception if an unexpected character is encountered.
+	 * @return the next Base64 character from the stream or -1 if there are no more Base64 characters on the stream.
+	 * @throws IOException if an IO Error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
 	 */
 	private static final int readBase64(InputStream in, boolean throwExceptions) throws IOException {
 		int read;
+		int numPadding = 0;
 		do {
 			read = in.read();
 			if (read == END_OF_INPUT) return END_OF_INPUT;
-			if (throwExceptions && reverseBase64Chars[(byte)read] == NON_BASE_64 &&
-				read != ' ' && read != '\n'  && read != '\r' && read != '\t' && read != '\f' && read != '='){
+			read = reverseBase64Chars[(byte)read];
+			if (throwExceptions && (read == NON_BASE_64 || (numPadding > 0 && read > NON_BASE_64))){
 				throw new Base64DecodingException (
 					MessageFormat.format(
 						labels.getString("unexpectedchar"),
@@ -855,8 +865,10 @@ public class Base64 {
 					(char)read
 				);
 			}
-			read = reverseBase64Chars[(byte)read];
-		} while (read == NON_BASE_64);
+			if (read == NON_BASE_64_PADDING){
+				numPadding++;
+			}
+		} while (read <= NON_BASE_64);
 		return read;
 	}
 
@@ -868,7 +880,8 @@ public class Base64 {
 	 *
 	 * @param in Stream from which to read data that needs to be decoded.
 	 * @param out Stream to which to write decoded data.
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered.
 	 */
 	public static void decode(InputStream in, OutputStream out) throws IOException {
 		decode(in, out, true);
@@ -883,7 +896,8 @@ public class Base64 {
 	 * @param in Stream from which to read data that needs to be decoded.
 	 * @param out Stream to which to write decoded data.
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
-	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 * @throws IOException if an IO error occurs.
+	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
 	 */
 	public static void decode(InputStream in, OutputStream out, boolean throwExceptions) throws IOException {
 		// Base64 decoding converts four bytes of input to three bytes of output
@@ -924,5 +938,165 @@ public class Base64 {
 			}
 		}
 		out.flush();
+	}
+
+		/**
+	 * Determines if the byte array is in base64 format.
+	 * <p>
+	 * Data will be considered to be in base64 format if it contains
+	 * only base64 characters and whitespace with equals sign padding
+	 * on the end so that the number of base64 characters is divisible
+	 * by four.
+	 * <p>
+	 * It is possible for data to be in base64 format but for it to not
+	 * meet these stringent requirements.  It is also possible for data
+	 * to meet these requirements even though decoding it would not make
+	 * any sense.  This method should be used as a guide but it is not
+	 * authoritative because of the possibility of these false positives
+	 * and false negatives.
+	 * <p>
+	 * Additionally, extra data such as headers or footers may throw
+	 * this method off the scent and cause it to return false.
+	 *
+	 * @param b data that could be in base64 format.
+	 */
+	public static boolean isBase64(byte[] bytes){
+		try {
+			return isBase64(new ByteArrayInputStream(bytes));
+		} catch (IOException x){
+			// This can't happen.
+			// The input and output streams were constructed
+			// on memory structures that don't actually use IO.
+			return false;
+		}
+	}
+
+		/**
+	 * Determines if the String is in base64 format.
+	 * The String is converted to and from bytes according to the platform's
+	 * default character encoding.
+	 * <p>
+	 * Data will be considered to be in base64 format if it contains
+	 * only base64 characters and whitespace with equals sign padding
+	 * on the end so that the number of base64 characters is divisible
+	 * by four.
+	 * <p>
+	 * It is possible for data to be in base64 format but for it to not
+	 * meet these stringent requirements.  It is also possible for data
+	 * to meet these requirements even though decoding it would not make
+	 * any sense.  This method should be used as a guide but it is not
+	 * authoritative because of the possibility of these false positives
+	 * and false negatives.
+	 * <p>
+	 * Additionally, extra data such as headers or footers may throw
+	 * this method off the scent and cause it to return false.
+	 *
+	 * @param s String that may be in base64 format.
+	 * @return Best guess as to whether the data is in base64 format.
+	 */
+	public static boolean isBase64(String string){
+		return isBase64(string.getBytes());
+	}
+
+	/**
+	 * Determines if the String is in base64 format.
+	 * <p>
+	 * Data will be considered to be in base64 format if it contains
+	 * only base64 characters and whitespace with equals sign padding
+	 * on the end so that the number of base64 characters is divisible
+	 * by four.
+	 * <p>
+	 * It is possible for data to be in base64 format but for it to not
+	 * meet these stringent requirements.  It is also possible for data
+	 * to meet these requirements even though decoding it would not make
+	 * any sense.  This method should be used as a guide but it is not
+	 * authoritative because of the possibility of these false positives
+	 * and false negatives.
+	 * <p>
+	 * Additionally, extra data such as headers or footers may throw
+	 * this method off the scent and cause it to return false.
+	 *
+	 * @param s String that may be in base64 format.
+	 * @param enc Character encoding to use when converting to bytes.
+	 * @return Best guess as to whether the data is in base64 format.
+	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
+	 */
+	public static boolean isBase64(String string, String enc) throws UnsupportedEncodingException {
+		return isBase64(string.getBytes(enc));
+	}
+
+
+	/**
+	 * Determines if the File is in base64 format.
+	 * <p>
+	 * Data will be considered to be in base64 format if it contains
+	 * only base64 characters and whitespace with equals sign padding
+	 * on the end so that the number of base64 characters is divisible
+	 * by four.
+	 * <p>
+	 * It is possible for data to be in base64 format but for it to not
+	 * meet these stringent requirements.  It is also possible for data
+	 * to meet these requirements even though decoding it would not make
+	 * any sense.  This method should be used as a guide but it is not
+	 * authoritative because of the possibility of these false positives
+	 * and false negatives.
+	 * <p>
+	 * Additionally, extra data such as headers or footers may throw
+	 * this method off the scent and cause it to return false.
+	 *
+	 * @param fIn File that may be in base64 format.
+	 * @param enc Character encoding to use when converting to bytes.
+	 * @return Best guess as to whether the data is in base64 format.
+	 * @throws IOException if an IO error occurs.
+	 */
+	public static boolean isBase64(File fIn) throws IOException {
+		return isBase64(new BufferedInputStream(new FileInputStream(fIn)));
+	}
+
+	/**
+	 * Reads data from the stream and determines if it is
+	 * in base64 format.
+	 * <p>
+	 * Data will be considered to be in base64 format if it contains
+	 * only base64 characters and whitespace with equals sign padding
+	 * on the end so that the number of base64 characters is divisible
+	 * by four.
+	 * <p>
+	 * It is possible for data to be in base64 format but for it to not
+	 * meet these stringent requirements.  It is also possible for data
+	 * to meet these requirements even though decoding it would not make
+	 * any sense.  This method should be used as a guide but it is not
+	 * authoritative because of the possibility of these false positives
+	 * and false negatives.
+	 * <p>
+	 * Additionally, extra data such as headers or footers may throw
+	 * this method off the scent and cause it to return false.
+	 *
+	 * @param in Stream from which to read data to be tested.
+	 * @return Best guess as to whether the data is in base64 format.
+	 * @throws IOException if an IO error occurs.
+	 */
+	public static boolean isBase64(InputStream in) throws IOException {
+		long numBase64Chars = 0;
+		int numPadding = 0;
+		int read;
+
+		while ((read = in.read()) != -1){
+			read = reverseBase64Chars[read];
+			if (read == NON_BASE_64){
+				return false;
+			} else if (read == NON_BASE_64_WHITESPACE){
+			} else if (read == NON_BASE_64_PADDING){
+				numPadding++;
+				numBase64Chars++;
+			} else if (numPadding > 0){
+				return false;
+			} else {
+				numBase64Chars++;
+			}
+		}
+		if (numBase64Chars == 0) return false;
+		if (numBase64Chars % 4 != 0) return false;
+		return true;
 	}
 }

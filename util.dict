@@ -1,4 +1,4 @@
-personal_ws-1.1 english 703
+personal_ws-1.1 english 706
 aa
 aaa
 AAAAAABB
@@ -324,6 +324,7 @@ intVal
 intValue
 IOException
 isAlive
+isBase
 isInterrupted
 isZero
 Italiano
@@ -436,9 +437,11 @@ nto
 nTokens
 NullPointerException
 num
+numBase
 NumberFormatException
 numGood
 numLines
+numPadding
 ok
 okButton
 okPressed
