@@ -6,7 +6,7 @@ echo "<meta name='keywords' content='java, java, java, util, utils, utilities, s
 echo "<title>Java Utilities Source Code</title>" >> source.html
 echo "<base href='http://ostermiller.org/utils/'>" >> source.html
 echo "<body text='#000000' bgcolor='#FFFFFF' link='#0000FF' vlink='#800080' alink='#FF0000'>" >> source.html
-echo "<h1>Java Utilities Source Code</h1>" >> source.html
+echo "<h1><a href="http://ostermiller.org/utils/">Java Utilities</a> Source Code</h1>" >> source.html
 echo "<ul>" >> source.html
 for file in *.*.html
 do
@@ -18,7 +18,7 @@ echo "<h2><a href='./'>Download and Information</a></h2>" >> source.html
 echo "" >> source.html
 echo "<h2><a name='license'>License</a></h2>" >> source.html
 echo "" >> source.html
-echo "<P>Copyright (c) 2001, 2002 by <a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'>Stephen Ostermiller</a></P>" >> source.html
+echo "<P>Copyright (c) 2001-2003 by <a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'>Stephen Ostermiller</a></P>" >> source.html
 echo "" >> source.html
 echo "<p>This library is free software; you can redistribute it and/or modify" >> source.html
 echo "it under the terms of the GNU General Public License as published" >> source.html

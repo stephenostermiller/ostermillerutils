@@ -32,15 +32,15 @@ import java.util.*;
  * <P>
  * If field includes a comma or a new line, the whole field must be surrounded with double quotes.
  * When the field is in quotes, any quote literals must be escaped by \" Backslash
- * literals must be escaped by \\.	Otherwise a backslash an the character following i
- * will be treated as the following character, IE."\n" is equivalent to "n".  Other escape
+ * literals must be escaped by \\.	Otherwise a backslash and the character following
+ * will be treated as the following character, IE. "\n" is equivalent to "n".  Other escape
  * sequences may be set using the setEscapes() method.	Text that comes after quotes that have
  * been closed but come before the next comma will be ignored.
  * <P>
  * Empty fields are returned as as String of length zero: "".  The following line has three empty
  * fields and three non-empty fields in it.  There is an empty field on each end, and one in the
  * middle.  One token is returned as a space.<br>
- * <pre>,second,, ,fifth,</pre>
+ * <pre>,second,," ",fifth,</pre>
  * <P>
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
  * comment character as set by the setCommentStart() method.

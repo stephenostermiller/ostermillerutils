@@ -8,6 +8,8 @@ do
 	then
       mv  "$file" temp
       sed "s/<a.*$baseFile.*\($baseFile\.[a-z]*\).*a>/\1/g" temp > $file
+	  mv  "$file" temp      
+	  sed "s/<small.*Download.*small>//g" temp > $file
 	fi
   fi
   prob=`egrep -l "<small.*JavaDoc.*small>" $file`

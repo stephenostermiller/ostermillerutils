@@ -9,10 +9,14 @@
 </head>
 <body>
 <div style="border: thin black ridge;padding:1cm;">
+<h1>
+<a href="http://ostermiller.org/utils/">com.Ostermiller.util Java Utilities</a>
+</h1>
 <h2>
 Source code for <a href="http://ostermiller.org/utils/<%bte.inc name="fileName"%>.html"><%bte.inc name="fileName"%>.<%bte.inc name="fileExtension"%></a>
 </h2> 
 <small>(<a href="http://ostermiller.org/utils/doc/com/Ostermiller/util/<%bte.inc name="fileName"%>.html">JavaDoc</a>)</small>
+<small>(<a href="http://ostermiller.org/utils/<%bte.inc name="fileName"%>.html">Information and Download</a>)</small>
 <p align=right><a href="source.html">Browse all com.Ostermiller.util source code</a></p></div>
 <%bte.inc name="highlightedDocument"%>
 <div style="border: thin black ridge;padding:1cm;">
