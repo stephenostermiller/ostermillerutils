@@ -419,7 +419,7 @@ public class StringHelper {
             char c = s.charAt(i);
             switch(c){                
                 case '\\':{
-                    sb.append("\\\"");
+                    sb.append("\\\\");
                 } break;
                 case '\"':{
                     sb.append("\\\"");
