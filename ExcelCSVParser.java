@@ -132,7 +132,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.02.24
 	 */
 	public ExcelCSVParser(InputStream in, char delimiter) throws BadDelimiterException {
-        inStream = in;
+		inStream = in;
 		lexer = new ExcelCSVLexer(in);
 		changeDelimiter(delimiter);
 	}
@@ -146,7 +146,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public ExcelCSVParser(InputStream in){
-        inStream = in;
+		inStream = in;
 		lexer = new ExcelCSVLexer(in);
 	}
 
@@ -162,7 +162,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.02.24
 	 */
 	public ExcelCSVParser(Reader in, char delimiter) throws BadDelimiterException {
-        inReader = in;
+		inReader = in;
 		lexer = new ExcelCSVLexer(in);
 		changeDelimiter(delimiter);
 	}
@@ -176,7 +176,7 @@ public class ExcelCSVParser implements CSVParse {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public ExcelCSVParser(Reader in){
-        inReader = in;
+		inReader = in;
 		lexer = new ExcelCSVLexer(in);
 	}
 
