@@ -239,7 +239,5 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     }
     System.err.println("State: " + state);
     System.err.println("Text: " + text);
-    System.err.println("Line: " + (yyline+1));
-    System.err.println("Column: " + (yycolumn+1));
 	yy_ScanError(YY_NO_MATCH);
 }
