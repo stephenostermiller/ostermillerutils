@@ -171,6 +171,7 @@ public class PasswordDialog extends JDialog {
      */
 	public PasswordDialog(Frame parent, String title) {
         super(parent, title, true);
+        setLocationRelativeTo(parent);
         // super calls dialogInit, so we don't need to do it again.
     }
 
