@@ -41,15 +41,39 @@ class ConcatTests {
 					new StringReader("seven"),
 				}
 			);
+			if (!cr.ready()) throw new Exception ("Not Ready");
 			read(cr, '1');
 			read(cr, 't');
 			read(cr, 'w');
 			read(cr, 'o');
+			if (!cr.ready()) throw new Exception ("Not Ready");
 			read(cr, '4');
-			read(cr, "fivesi");
+			read(cr, "fiv");
+			skip(cr, 2);
+			read(cr, "i");
 			read(cr, "xseven");
 			if (cr.read() != -1) throw new Exception ("Read did not terminate");
+			if (cr.read() != -1) throw new Exception ("Didn't stay closed");
+			cr.close();
 
+			final ConcatReader cr1 = new ConcatReader();
+			if (cr1.ready()) throw new Exception ("Ready");
+			cr1.addReader(new StringReader("one"));
+			read(cr1, 'o');
+			cr1.addReader(new StringReader("two"));
+			read(cr1, "netwo");
+			new Thread(){
+				public void run(){
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException ix){
+					}
+					cr1.addReader(new StringReader("three"));
+				}
+			}.start();
+			read(cr1, "three");
+			cr1.lastReaderAdded();
+			if (cr1.read() != -1) throw new Exception ("Read did not terminate");
 
 			ConcatInputStream cis = new ConcatInputStream(
 				new InputStream[]{
@@ -69,7 +93,7 @@ class ConcatTests {
 			read(cis, '4');
 			read(cis, "fivesi");
 			read(cis, "xseven");
-			if (cr.read() != -1) throw new Exception ("Read did not terminate");
+			if (cis.read() != -1) throw new Exception ("Read did not terminate");
 
 		} catch (Exception x){
 			System.err.println(x.getMessage());
@@ -78,6 +102,14 @@ class ConcatTests {
 		}
 		System.exit(0);
 	}
+
+	private static void skip(Reader in, int n) throws Exception {
+		int s = 0;
+		while (s<n){
+			s+=in.skip(n-s);
+		}
+	}
+
 
 	private static void read(Reader in, char expected) throws Exception {
 		int c = in.read();

@@ -17,6 +17,7 @@
 package com.Ostermiller.util;
 
 import java.io.*;
+import java.util.*;
 
 /**
  * A reader which reads sequentially from multiple sources.
@@ -29,18 +30,110 @@ import java.io.*;
 public class ConcatReader extends Reader {
 
 	/**
-	 * List of sources.
-	 *
-	 * @since ostermillerutils 1.04.00
-	 */
-	private Reader[] in;
-
-	/**
 	 * Current index to the Reader[] in
 	 *
-	 * @since ostermillerutils 1.04.00
+	 * @since ostermillerutils 1.04.01
 	 */
-	private int inIndex = 0;
+	private int readerQueueIndex = 0;
+
+	/**
+	 * Queue of readers that have yet to be read from.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private ArrayList readerQueue = new ArrayList();
+
+	/**
+	 * A cache of the current reader from the readerQueue
+	 * to avoid unneeded access to the queue which must
+	 * be synchronized.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private Reader currentReader = null;
+
+	/**
+	 * true iff the client may add more readers.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private boolean doneAddingReaders = false;
+
+	/**
+	 * Causes the addReader method to throw IllegalStateException
+	 * and read() methods to return -1 (end of stream)
+	 * when there is no more available data.
+	 * <p>
+	 * Calling this method when this class is no longer accepting
+	 * more readers has no effect.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void lastReaderAdded(){
+		doneAddingReaders = true;
+	}
+
+	/**
+	 * Add the given reader to the queue of readers from which to
+	 * concatenate data.
+	 *
+	 * @param in Reader to add to the concatenation.
+	 * @throws IllegalStateException if more readers can't be added because lastReaderAdded() has been called, close() has been called, or a constructor with reader parameters was used.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void addReader(Reader in){
+		synchronized(readerQueue){
+			if (in == null) throw new NullPointerException();
+			if (closed) throw new IllegalStateException("ConcatReader has been closed");
+			if (doneAddingReaders) throw new IllegalStateException("Cannot add more readers - the last reader has already been added.");
+			readerQueue.add(in);
+		}
+	}
+
+	/**
+	 * Add the given reader to the queue of readers from which to
+	 * concatenate data.
+	 *
+	 * @param in Reader to add to the concatenation.
+	 * @throws IllegalStateException if more readers can't be added because lastReaderAdded() has been called, close() has been called, or a constructor with reader parameters was used.
+	 * @throws NullPointerException the array of readers, or any of the contents is null.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public void addReaders(Reader[] in){
+		for (int i=0; i<in.length; i++){
+			addReader(in[i]);
+		}
+	}
+
+	/**
+	 * Gets the current reader, looking at the next
+	 * one in the list if the current one is null.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private Reader getCurrentReader(){
+		if (currentReader == null && readerQueueIndex < readerQueue.size()){
+			synchronized(readerQueue){
+				// reader queue index is advanced only by the nextReader()
+				// method.  Don't do it here.
+				currentReader = (Reader)readerQueue.get(readerQueueIndex);
+			}
+		}
+		return currentReader;
+	}
+
+	/**
+	 * Indicate that we are done with the current reader and we should
+	 * advance to the next reader.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	private void advanceToNextReader(){
+		currentReader = null;
+		readerQueueIndex++;
+	}
 
 	/**
 	 * True iff this the close() method has been called on this stream.
@@ -50,7 +143,25 @@ public class ConcatReader extends Reader {
 	private boolean closed = false;
 
 	/**
+	 * Create a new reader that can dynamically accept new sources.
+	 * <p>
+	 * New sources should be added using the addReader() method.
+	 * When all sources have been added the lastReaderAdded() should
+	 * be called so that read methods can return -1 (end of stream).
+	 * <p>
+	 * Adding new sources can by interleaved with read calls.
+	 *
+	 * @since ostermillerutils 1.04.01
+	 */
+	public ConcatReader(){
+	}
+
+	/**
 	 * Create a new reader with one source.
+	 * <p>
+	 * When using this constructor, more readers cannot
+	 * be added later, and calling addReader() will
+	 * throw an illegal state Exception.
 	 *
 	 * @param in reader to use as a source.
 	 *
@@ -59,11 +170,16 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatReader(Reader in){
-		this(new Reader[]{in});
+		addReader(in);
+		lastReaderAdded();
 	}
 
 	/**
 	 * Create a new reader with two sources.
+	 * <p>
+	 * When using this constructor, more readers cannot
+	 * be added later, and calling addReader() will
+	 * throw an illegal state Exception.
 	 *
 	 * @param in1 first reader to use as a source.
 	 * @param in2 second reader to use as a source.
@@ -73,11 +189,17 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatReader(Reader in1, Reader in2){
-		this(new Reader[]{in1, in2});
+		addReader(in1);
+		addReader(in2);
+		lastReaderAdded();
 	}
 
 	/**
 	 * Create a new reader with an arbitrary number of sources.
+	 * <p>
+	 * When using this constructor, more readers cannot
+	 * be added later, and calling addReader() will
+	 * throw an illegal state Exception.
 	 *
 	 * @param in readers to use as a sources.
 	 *
@@ -86,17 +208,18 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public ConcatReader(Reader[] in){
-		if (in == null) throw new NullPointerException();
-		for (int i=0; i<in.length; i++){
-			if (in[i] == null) throw new NullPointerException();
-		}
-		this.in = in;
+		addReaders(in);
+		lastReaderAdded();
 	}
 
 	/**
 	 * Read a single character. This method will block until a
 	 * character is available, an I/O error occurs, or the end of all underlying
 	 * streams are reached.
+	 * <p>
+	 * If this class in not done accepting readers and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds a reader or interrupts.
 	 *
 	 * @return The character read, as an integer in the range 0 to 65535 (0x00-0xffff),
 	 *    or -1 if the end of the stream has been reached
@@ -108,9 +231,19 @@ public class ConcatReader extends Reader {
 	public int read() throws IOException {
 		if (closed) throw new IOException("Reader closed");
 		int r = -1;
-		while (r == -1 && inIndex < in.length){
-			r = in[inIndex].read();
-			if (r == -1) inIndex++;
+		while (r == -1){
+			Reader in = getCurrentReader();
+			if (in == null){
+				if (doneAddingReaders) return -1;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				r = in.read();
+				if (r == -1) advanceToNextReader();
+			}
 		}
 		return r;
 	}
@@ -119,6 +252,10 @@ public class ConcatReader extends Reader {
 	 * Read characters into an array. This method will block until some input is available, an
 	 * I/O error occurs, or the end of all underlying
 	 * streams are reached.
+	 * <p>
+	 * If this class in not done accepting readers and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds a reader or interrupts.
 	 *
 	 * @param cbuf - Destination buffer
 	 * @return The number of characters read, or -1 if the end of the stream has been reached
@@ -136,6 +273,10 @@ public class ConcatReader extends Reader {
 	 * Read characters into a portion of an array. This method will block until
 	 * some input is available, an I/O error occurs, or the end of all underlying
 	 * streams are reached.
+	 * <p>
+	 * If this class in not done accepting readers and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds a reader or interrupts.
 	 *
 	 * @param cbuf Destination buffer
 	 * @param off Offset at which to start storing characters
@@ -152,9 +293,19 @@ public class ConcatReader extends Reader {
 		if (off < 0 || len < 0 || off + len > cbuf.length) throw new IndexOutOfBoundsException();
 		if (closed) throw new IOException("Reader closed");
 		int r = -1;
-		while (r == -1 && inIndex < in.length){
-			r = in[inIndex].read(cbuf, off, len);
-			if (r == -1) inIndex++;
+		while (r == -1){
+			Reader in = getCurrentReader();
+			if (in == null){
+				if (doneAddingReaders) return -1;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				r = in.read(cbuf, off, len);
+				if (r == -1) advanceToNextReader();
+			}
 		}
 		return r;
 	}
@@ -162,8 +313,12 @@ public class ConcatReader extends Reader {
 	/**
 	 * Skip characters. This method will block until some characters are
 	 * available, an I/O error occurs, or the end of the stream is reached.
+	 * <p>
+	 * If this class in not done accepting readers and the end of the last known
+	 * stream is reached, this method will block forever unless another thread
+	 * adds a reader or interrupts.
 	 *
-	 * @param n he number of characters to skip
+	 * @param n the number of characters to skip
 	 * @return The number of characters actually skipped
 	 *
 	 * @throws IllegalArgumentException If n is negative.
@@ -175,23 +330,33 @@ public class ConcatReader extends Reader {
 		if (closed) throw new IOException("Reader closed");
 		if (n <= 0) return 0;
 		long s = -1;
-		while (s <= 0 && inIndex < in.length){
-			s = in[inIndex].skip(n);
-			// When nothing was skipped it is a bit of a puzzle.
-			// The most common cause is that the end of the underlying
-			// stream was reached.  In which case calling skip on it
-			// will always return zero.  If somebody were calling skip
-			// until it skipped everything they needed, there would
-			// be an infinite loop if we were to return zero here.
-			// If we get zero, let us try to read one character so
-			// we can see if we are at the end of the stream.  If so,
-			// we will move to the next.
-			if (s == 0) {
-				// read() will adjust inIndex for us, so don't do it again
-				s = ((read()==-1)?-1:1);
+		while (s <= 0){
+			Reader in = getCurrentReader();
+			if (in == null){
+				if (doneAddingReaders) return 0;
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException iox){
+					throw new IOException("Interrupted");
+				}
+			} else {
+				s = in.skip(n);
+				// When nothing was skipped it is a bit of a puzzle.
+				// The most common cause is that the end of the underlying
+				// stream was reached.  In which case calling skip on it
+				// will always return zero.  If somebody were calling skip
+				// until it skipped everything they needed, there would
+				// be an infinite loop if we were to return zero here.
+				// If we get zero, let us try to read one character so
+				// we can see if we are at the end of the stream.  If so,
+				// we will move to the next.
+				if (s <= 0) {
+					// read() will advance to the next stream for us, so don't do it again
+					s = ((read()==-1)?-1:1);
+				}
 			}
+
 		}
-		if (s == -1) s = 0;
 		return s;
 	}
 
@@ -208,7 +373,9 @@ public class ConcatReader extends Reader {
 	 */
 	public boolean ready() throws IOException {
 		if (closed) throw new IOException("Reader closed");
-		return in[inIndex].ready();
+		Reader in = getCurrentReader();
+		if (in == null) return false;
+		return in.ready();
 	}
 
 	/**
@@ -222,11 +389,11 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public void close() throws IOException {
-		for (int i=0; i<in.length; i++){
-			in[i].close();
+		if (closed) return;
+		for (Iterator i=readerQueue.iterator(); i.hasNext();){
+			((Reader)i.next()).close();
 		}
 		closed = true;
-		inIndex = in.length;
 	}
 
 	/**
