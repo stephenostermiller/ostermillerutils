@@ -55,16 +55,16 @@ class CSVTest {
 			shredder.setCommentStart("#;!");
 			shredder.setEscapes("nrtf", "\n\r\t\f");
 			String t;
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "Boston", 4);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "San Francisco", 4);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "New York", 4);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "Chicago", 4);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "Houston", 4);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "", 6);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "Two\nTokens", 7);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), "On the\nSame Line", 7);
-            compare(shredder.nextValue(), shredder.lastLineNumber(), null, 9);
-            
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "Boston", 4);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "San Francisco", 4);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "New York", 4);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "Chicago", 4);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "Houston", 4);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "", 6);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "Two\nTokens", 7);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), "On the\nSame Line", 7);
+			compare(shredder.nextValue(), shredder.lastLineNumber(), null, 9);
+
 			String normalInput = ",\"a\",\",\t'\\\"\"";
 			String[][] normalOutput = new String[][]{{"", "a", ",\t'\""}};
 			shredder = new CSVParser(new StringReader(normalInput));
@@ -100,14 +100,14 @@ class CSVTest {
 
 	private static void compare(String value, int line, String expectedValue, int expectedLine) throws Exception {
 		if (line != expectedLine) {
-            throw new Exception("Line numbers do not match");
-        }
-        if (expectedValue == null && value == null){
-            return;
-        }
-        if (!value.equals(expectedValue)){
-            throw new Exception("Value and expected value do not match");
-        }
+			throw new Exception("Line numbers do not match");
+		}
+		if (expectedValue == null && value == null){
+			return;
+		}
+		if (!value.equals(expectedValue)){
+			throw new Exception("Value and expected value do not match");
+		}
 	}
 
 	private static void compare(String testName, String[][] a, String[][] b) throws Exception {
