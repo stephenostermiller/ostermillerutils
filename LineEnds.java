@@ -30,7 +30,11 @@ import java.util.Locale;
  * "http://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
  */
 public class LineEnds {
-    public static String version = "1.2";
+    
+    /** 
+     * Version number of this program
+     */
+    public static final String version = "1.2";
     
     /**
      * Locale specific strings displayed to the user.
