@@ -43,7 +43,7 @@ If using this class in servlets, you would request the parameters from the param
 
 <p>The servlet implementation that I am using does not parse the CGI name value pairs correctly for either POST or GET requests when there is a large amount of query data.  Luckily, you can parse the query data yourself.  I have written a class to do so.  Its methods for retrieving the name value pairs are identical to the three methods in the http request of the servlet.  The class can be created from the string of the GET request or the stream of the POST request.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CGIParser.java/0">Version History</a> |
 <a href="CGIParser.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/CGIParser.html">Documentation</a>]</p>

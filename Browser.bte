@@ -56,7 +56,7 @@ cases in which all in the same window is not desirable.</p>
 
 <p>Locale specific string for this class are in the <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Browser.properties/HEAD">com.Ostermiller.util.Browser resource bundle</a>. Translations are welcome and appreciated.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">Version History</a> |
 <a href="Browser.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/Browser.html">Documentation</a>]</p>

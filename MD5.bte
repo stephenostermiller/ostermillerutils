@@ -31,7 +31,7 @@ a private (secret) key under a public-key cryptosystem such as RSA.</p>
 and <a href="http://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.  This implementation is several times
 faster and much more memory efficient than Santeri's implementation.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5.java/0">Version History</a> |
 <a href="MD5.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/MD5.html">Documentation</a>]</p>
@@ -51,7 +51,7 @@ faster and much more memory efficient than Santeri's implementation.</p>
 
 <p>A filtered input stream that computes an MD5 sum for anything read.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5InputStream.java/0">Version History</a> |
 <a href="MD5InputStream.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/MD5InputStream.html">Documentation</a>]</p>
@@ -70,7 +70,7 @@ faster and much more memory efficient than Santeri's implementation.</p>
 
 <p>A filtered output stream that computes an MD5 sum for anything written.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/MD5OutputStream.java/0">Version History</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/MD5OutputStream.java/HEAD">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/MD5OutputStream.html">Documentation</a>]</p>

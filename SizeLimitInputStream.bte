@@ -19,7 +19,7 @@ subsequent requests.  An implementation of an HTTP 1.1  client might read the he
 the size, and then pass off the actual document handling to another class via a 
 SizeLimitInputStream.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="SizeLimitInputStream.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/SizeLimitInputStream.html">Documentation</a>]</p>
 

@@ -27,7 +27,7 @@ Figure significant figures for multiplication of numbers.
 <p>A Java number class for figuring out how many significant figures each of the
 numbers in a calculation has and displaying the result appropriately.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/SignificantFigures.java/0">Version History</a> | 
 <a href="SignificantFigures.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/SignificantFigures.html">Documentation</a>]</p>

@@ -25,7 +25,7 @@ escape special characters.  Comments can easily be written and correct line begi
 <a href="CSV.html">standard CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ExcelCSVPrinter.java/0">Version History</a> |
 <a href="ExcelCSVPrinter.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ExcelCSVPrinter.html">Documentation</a>]</p>
@@ -65,7 +65,7 @@ implement the CSVParse interface.</p>
 
 <p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ExcelCSVParser.java/0">Version History</a> |
 <a href="ExcelCSVParser.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ExcelCSVParser.html">Documentation</a>]</p>

@@ -36,7 +36,7 @@
 write properties files that are in the same format but it can handle multiple 
 properties with the same name and makes comments from the files available.</p>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/UberProperties.java/0">Version History</a> | 
 <a href="UberProperties.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/UberProperties.html">Documentation</a>]</p>

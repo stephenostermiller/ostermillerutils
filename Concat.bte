@@ -20,7 +20,7 @@
 </div>
 
 <p>Combines multiple byte stream sources into a single byte stream.<p>
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="ConcatInputStream.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ConcatInputStream.html">Documentation</a>]</p>
 
@@ -42,7 +42,7 @@
 </div>
 
 <p>Combines multiple character stream sources into a single character stream.<p>
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="ConcatReader.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ConcatReader.html">Documentation</a>]</p>
 

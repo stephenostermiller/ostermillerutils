@@ -39,7 +39,7 @@ recent version of Java</a> installed, configured, and enabled.
 <li>Preferences are not remembered between visits and page reloads.</li>
 <li>This applet is part of the <a href="http://ostermiller.org/utils/">com.Ostermiller.util Java Utilities</a></li>
 <li><a href="http://ostermiller.org/utils/RandPass.html">A command line and a Java library</a> version of this program is also available.</li>
-<li>The <a href="http://ostermiller.org/utils/#download">source code for this applet</a> is available.</li>
+<li>The <a href="http://ostermiller.org/utildownload.html">source code for this applet</a> is available.</li>
 </ul>
 <br clear=all>
 <%/bte.tpl%>

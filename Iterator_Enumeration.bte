@@ -12,7 +12,7 @@
 
 <h2>Convert an Iterator to an Enumeration: IteratorEnumeration</h2>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/IteratorEnumeration.java/0">Version History</a> |
 <a href="IteratorEnumeration.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/IteratorEnumeration.html">Documentation</a>]</p>
@@ -27,7 +27,7 @@
 
 <h2>Convert an Enumeration to an Iterator: EnumerationIterator</h2>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/EnumerationIterator.java/0">Version History</a> |
 <a href="EnumerationIterator.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/EnumerationIterator.html">Documentation</a>]</p>
@@ -42,7 +42,7 @@
 
 <h2>Convert an array to an Enumeration: ArrayEnumeration</h2>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ArrayEnumeration.java/0">Version History</a> |
 <a href="ArrayEnumeration.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ArrayEnumeration.html">Documentation</a>]</p>
@@ -57,7 +57,7 @@
 
 <h2>Convert an array to an Iterator: ArrayIterator</h2>
 
-<p>[<a href="./#download">Download /w Source</a> |
+<p>[<a href="download.html">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ArrayIterator.java/0">Version History</a> |
 <a href="ArrayIterator.java.html">Browse Source</a> |
 <a href="doc/com/Ostermiller/util/ArrayIterator.html">Documentation</a>]</p>
