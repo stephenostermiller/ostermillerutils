@@ -39,7 +39,7 @@ import java.util.Vector;
  * of a certain type of character, or not allowing repetition,
  * may decrease security.
  * <p>
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller

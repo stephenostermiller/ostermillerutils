@@ -20,7 +20,7 @@
 
 /**
  * A regression test for com.Ostermiller.util.StringTokenizer.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
  */
 class TokenizerTests {

@@ -23,7 +23,7 @@ package com.Ostermiller.util;
  * This class handles parsing numbers, determining the number
  * of significant figures, adjusting the number of significant
  * figures (including scientific rounding), and displaying the number.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/SignificantFigures.html">ostermiller.org</a>.
  * <p>
  * When parsing a number to determine the number of significant figures,

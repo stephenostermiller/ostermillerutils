@@ -27,7 +27,7 @@ import java.util.Locale;
 /**
  * Stream editor to alter the line separators on text to match
  * that of a given platform.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
  */
 public class LineEnds {

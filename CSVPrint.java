@@ -21,8 +21,8 @@ package com.Ostermiller.util;
 import java.io.*;
 
 /**
- * Print values as a comma separated list
- * More information about this class is available from <a href=
+ * Print values as a comma separated list.
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
  * CSV printers should implement.

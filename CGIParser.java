@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Parses query string data from a CGI request into name value pairs.
  * <p>
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CGIParser.html">ostermiller.org</a>.
  */
 public class CGIParser{

@@ -19,7 +19,7 @@ package com.Ostermiller.util;
 
 /**
  * Implements the Circular Buffer producer/consumer model for Objects.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CircularObjectBuffer.html">ostermiller.org</a>.
  * <p>
  * This class is thread safe.

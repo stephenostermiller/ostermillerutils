@@ -27,6 +27,8 @@ import java.io.*;
 
 /**
  * Implements MD5 functionality on a stream.
+ * More information about this class is available from <a target="_top" href=
+ * "http://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
  * <p>
  * This class produces a 128-bit "fingerprint" or "message digest" for
  * all data read from this stream.

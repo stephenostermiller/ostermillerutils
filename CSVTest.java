@@ -21,7 +21,7 @@ import java.io.*;
 
 /**
  * Regression test for CSV.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
  */
 class CSVTest {

@@ -24,7 +24,7 @@ import java.util.*;
  * Regression test for circular buffers.  When run, this program
  * should output the Gettysburg Address and quite a few digits of
  * pi.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CircularCharBuffer.html">ostermiller.org</a>.
  */
 class CircularBufferTests {

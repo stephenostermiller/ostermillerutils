@@ -26,7 +26,7 @@ import java.util.Locale;
 
 /**
  * A modal dialog that asks the user for a user name and password.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/PasswordDialog.html">ostermiller.org</a>.
  *
  * <code>

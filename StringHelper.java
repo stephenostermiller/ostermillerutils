@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 /**
  * Utilities for String formatting, manipulation, and queries.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/StringHelper.html">ostermiller.org</a>.
  */
 public class StringHelper {

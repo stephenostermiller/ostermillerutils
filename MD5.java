@@ -29,6 +29,8 @@ import java.io.*;
 
 /**
  * MD5 hash generator.
+ * More information about this class is available from <a target="_top" href=
+ * "http://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
  * <p>
  * This class takes as input a message of arbitrary length and produces
  * as output a 128-bit "fingerprint" or "message digest" of the input.

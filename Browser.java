@@ -34,7 +34,7 @@ import java.lang.reflect.*;
 
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/Browser.html">ostermiller.org</a>.
  */
 public class Browser {

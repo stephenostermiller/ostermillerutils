@@ -23,7 +23,7 @@ import java.util.*;
 /**
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
- * More information about this class is available from <a href=
+ * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
  * <P>
  * Excel CSV is a file format used as a portable representation of a database.
