@@ -1,6 +1,7 @@
 /*
  * Regression tests for Circular Buffers.
- * Copyright (C) 2002 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2002 Stephen Ostermiller
+ * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -1,4 +1,4 @@
-personal_ws-1.1 english 859
+personal_ws-1.1 english 872
 aa
 aaa
 AAAAAABB
@@ -46,6 +46,7 @@ AstringB
 asymp
 atilde
 atStart
+Attesoro
 auml
 availableInd
 avoidRepetition
@@ -68,6 +69,7 @@ binhex
 bitCount
 blockingWrite
 blockquote
+BorderLayout
 br
 browseButton
 BrowserCommandLexer
@@ -140,6 +142,7 @@ commentStart
 commentText
 compareAndPrint
 compareState
+configPanel
 cong
 containsKey
 countTokens
@@ -269,6 +272,7 @@ getCanonicalFile
 getCanonicalPath
 getChar
 getComment
+getConfigPanel
 getContentPane
 getContents
 getCurrentPosition
@@ -316,6 +320,7 @@ getWriter
 GG
 gjtcat
 gjtcompile
+gjtdep
 gjthome
 gjtjvm
 gjtlicense
@@ -362,6 +367,7 @@ indexOf
 indexOfNextDelimiter
 infin
 init
+initConfigPanel
 inLength
 inputDone
 inputstream
@@ -371,6 +377,7 @@ InputStreamReader
 InputStreams
 inputTabWidth
 instanceof
+instructionPanel
 inte
 InternetShortcut
 InterruptedException
@@ -396,6 +403,7 @@ JDialog
 JFileChooser
 JFlex
 JLabel
+Jpanel
 JPanel
 JPasswordField
 JScrollPane
@@ -406,6 +414,7 @@ KeyEvent
 keyListener
 keyPressed
 keySet
+labelPanel
 lang
 laquo
 larr
@@ -445,6 +454,7 @@ lsd
 lsquo
 lt
 macr
+mainPanel
 MalformedURLException
 MANTISSADIGIT
 mantissaStart
@@ -631,6 +641,7 @@ reqNum
 reqs
 reqUsedInd
 resetButton
+resetConfigPanel
 resizable
 ResourceBundle
 restOfText
@@ -640,6 +651,7 @@ reversebase
 reverseBase
 rfloor
 rlm
+Roedy
 rotateLeft
 RSA
 rsaquo
@@ -675,6 +687,7 @@ setEditable
 setEscapes
 setFirstAlphabet
 setLastAlphabet
+setLayout
 setLength
 setLMSD
 setLocale

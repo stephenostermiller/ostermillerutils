@@ -18,8 +18,7 @@ echo "<h2><a href='./'>Download and Information</a></h2>" >> source.html
 echo "" >> source.html
 echo "<h2><a name='license'>License</a></h2>" >> source.html
 echo "" >> source.html
-echo "<P>Copyright (c) 2001, 2002 by <a href='mailto:utils@Ostermiller.com'>Stephen Ostermiller</a>" >> source.html
-echo "(utils@Ostermiller.com)</P>" >> source.html
+echo "<P>Copyright (c) 2001, 2002 by <a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'>Stephen Ostermiller</a></P>" >> source.html
 echo "" >> source.html
 echo "<p>This library is free software; you can redistribute it and/or modify" >> source.html
 echo "it under the terms of the GNU General Public License as published" >> source.html

@@ -9,7 +9,8 @@
 
 /*
  * Tokenize a command line into application and arguments.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001 Stephen Ostermiller 
+ * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

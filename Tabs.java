@@ -1,6 +1,7 @@
 /*
  * Adjusts tabs and spaces.
- * Copyright (C) 2002 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2002 Stephen Ostermiller
+ * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -131,7 +132,7 @@ public class Tabs {
 				case 3:{
 					System.out.println(
 						labels.getString("tabs") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), new String[] {"2002", "Stephen Ostermiller (utils@ostermiller.com)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), new String[] {"2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
