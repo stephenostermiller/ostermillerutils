@@ -192,20 +192,20 @@ public class Browser {
 		}
 	}
 
-	 /**
-		* Display a URL in the system browser.
-		*
-		* Browser.init() should be called before calling this function or
-		* Browser.exec should be set explicitly.
-		*
-		* For security reasons, the URL will may not be passed directly to the
-		* browser as it is passed to this method.  The URL may be made safe for
-		* the exec command by URLEncoding the URL before passing it.
-		*
-		* @param url the url to display
-		* @throws IOException if the url is not valid or the browser fails to star
-		*/
-	 public static void displayURL(String url) throws IOException {
+	/**
+	 * Display a URL in the system browser.
+	 *
+	 * Browser.init() should be called before calling this function or
+	 * Browser.exec should be set explicitly.
+	 *
+	 * For security reasons, the URL will may not be passed directly to the
+	 * browser as it is passed to this method.  The URL may be made safe for
+	 * the exec command by URLEncoding the URL before passing it.
+	 *
+	 * @param url the url to display
+	 * @throws IOException if the url is not valid or the browser fails to star
+	 */
+	public static void displayURL(String url) throws IOException {
 		if (exec == null || exec.length == 0){
 			if (System.getProperty("os.name").startsWith("Mac")){
 				boolean success = false;
