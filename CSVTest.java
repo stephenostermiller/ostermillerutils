@@ -40,6 +40,11 @@ class CSVTest {
             "Houston",
 		});
         csvOut.println();
+        csvOut.println(""); // an empty value on a line by itself.
+        csvOut.println(new String[] {
+            "Two\nTokens",
+            "On the\nSame Line"
+		});
         csvOut.printlnComment("A two line comment\njust to see that it works");
         csvOut.println();
         csvOut.println("Some weird values that could break things");

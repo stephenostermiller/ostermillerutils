@@ -1,8 +1,8 @@
 1  field1
 1 field2 
-1 	field3
-1 field4	
-1   field5	
+1     field3
+1 field4   
+1   field5   
 1 field6
 2 
 2 field2
@@ -20,7 +20,7 @@
 4  field"2
 4  field 3
 4  field\4
-4  field	5
+4  field    5
 4  field'6
 5 
 5 1
@@ -31,30 +31,30 @@
 5 sixsix
 6  "field1"
 6 field2
-6 	"field3"
+6     "field3"
 6 field4
 6   "field5"   
 6 field6
 7  field1
 7 field2 
-7 	 field3
+7     field3
 7 field4   
-7 	field5	 
+7   field5   
 7 field6 
 8 field,1
 8 field2
 stillField2
-10 field"1
-10 field\\2
-10 field3\nstillField3
-10 field\t4
-10 field\u5
-10 field\a6
-11 end at the dot.
-11 end at the dot.
-12 
-12 field2
-12 
-12  
-12 field5
-12 
+9 field\
+9  "field\\2"
+9  "field3\nstillField3"
+9  "field\t4"
+9  "field\u5"
+9  "field\a6"
+10 end at the dot.
+10 end at the dot.
+11 
+11 field2
+11 
+11  
+11 field5
+11 
