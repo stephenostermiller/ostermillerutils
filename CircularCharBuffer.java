@@ -22,18 +22,32 @@ import java.io.IOException;
 
 /**
  * Implements the Circular Buffer producer/consumer model for characters.
- * <p> 
+ * <p>
+ * Using this class is a simpler alternative to using a PipedReader
+ * and a PipedWriter. PipedReaders and PipedWriters don't support the
+ * mark operation, don't allow you to control buffer sizes that they use,
+ * and have a more complicated API that requires a instantiating two
+ * classes and connecting them. 
+ * <p>
  * This class is thread safe.
- */ 
+ *
+ * @see CircularByteBuffer
+ */
 public class CircularCharBuffer {
+    
+    /** 
+     * The default size for a circular character buffer.
+     */
+    private final static int DEFAULT_SIZE = 1024;
+
     /**
      * The circular buffer.
      * <p>
      * The actual capacity of the buffer is one less than the actual length
-     * of the buffer so that an empty and a full buffer can be 
+     * of the buffer so that an empty and a full buffer can be
      * distinguished.  An empty buffer will have the markPostion and the
      * writePosition equal to each other.  A full buffer will have
-     * the writePosition one less than the markPostion. 
+     * the writePosition one less than the markPostion.
      * <p>
      * There are three important indexes into the buffer:
      * The readPosition, the writePosition, and the markPosition.
@@ -41,7 +55,7 @@ public class CircularCharBuffer {
      * the markPosition should always be the same.  The characters
      * available to be read go from the readPosition to the writePosition,
      * wrapping around the end of the buffer.  The space available for writing
-     * goes from the write position to one less than the markPosition, 
+     * goes from the write position to one less than the markPosition,
      * wrapping around the end of the buffer.  The characters that have
      * been saved to support a reset() of the Reader go from markPosition
      * to readPosition, wrapping around the end of the buffer.
@@ -50,39 +64,44 @@ public class CircularCharBuffer {
     /**
      * Index of the first character available to be read.
      */
-    protected int readPosition = 0;
+    protected volatile int readPosition = 0;
     /**
      * Index of the first character available to be written.
      */
-    protected int writePosition = 0;
+    protected volatile int writePosition = 0;
     /**
      * Index of the first saved character. (To support stream marking.)
      */
-    protected int markPosition = 0;
+    protected volatile int markPosition = 0;
     /**
-     * Number of characters that have to be saved 
+     * Number of characters that have to be saved
      * to support mark() and reset() on the Reader.
      */
-    protected int markSize = 0;
-    /** 
-     * The reader that can empty this buffer.
+    protected volatile int markSize = 0;
+    /**
+     * True if a write to a full buffer should block until the buffer
+     * has room, false if the write method should throw an IOException
+     */
+    protected boolean blockingWrite = true;
+    /**
+     * The Reader that can empty this buffer.
      */
     protected Reader reader = new CircularCharBufferReader();
     /**
-     * true if the close() method has been called on the reader
+     * true if the close() method has been called on the Reader
      */
     protected boolean readerClosed = false;
     /**
-     * The writer that can fill this buffer.
+     * The Writer that can fill this buffer.
      */
     protected Writer writer = new CircularCharBufferWriter();
     /**
      * true if the close() method has been called on the writer
      */
     protected boolean writerClosed = false;
-    
+
     /**
-     * Retrieve a writer that can be used to fill
+     * Retrieve a Writer that can be used to fill
      * this buffer.
      * <p>
      * Write methods may throw a BufferOverflowException if
@@ -90,27 +109,27 @@ public class CircularCharBuffer {
      * size must be chosen so that this does not happen or
      * the caller must be prepared to catch the exception and
      * try again once part of the buffer has been consumed.
-     * 
-     * 
+     *
+     *
      * @return the producer for this buffer.
      */
     public Writer getWriter(){
         return writer;
     }
-    
+
     /**
-     * Retrieve a reader that can be used to empty
+     * Retrieve a Reader that can be used to empty
      * this buffer.
      * <p>
-     * This reader supports marks at the expense 
-     * of the buffer size.  
-     * 
+     * This Reader supports marks at the expense
+     * of the buffer size.
+     *
      * @return the consumer for this buffer.
      */
     public Reader getReader(){
         return reader;
     }
-    
+
     /**
      * Get number of characters that are available to be read.
      * <p>
@@ -118,7 +137,7 @@ public class CircularCharBuffer {
      * the number of characters free may not add up to the
      * capacity of this buffer, as the buffer may reserve some
      * space for other purposes.
-     * 
+     *
      * @return the size in characters of this buffer
      */
     public int getAvailable(){
@@ -126,16 +145,16 @@ public class CircularCharBuffer {
             return available();
         }
     }
-    
+
     /**
-     * Get the number of characters this buffer has free for 
+     * Get the number of characters this buffer has free for
      * writing.
      * <p>
      * Note that the number of characters available plus
      * the number of characters free may not add up to the
      * capacity of this buffer, as the buffer may reserve some
      * space for other purposes.
-     * 
+     *
      * @return the available space in characters of this buffer
      */
     public int getSpaceLeft(){
@@ -143,7 +162,7 @@ public class CircularCharBuffer {
             return spaceLeft();
         }
     }
-    
+
     /**
      * Get the capacity of this buffer.
      * <p>
@@ -151,14 +170,14 @@ public class CircularCharBuffer {
      * the number of characters free may not add up to the
      * capacity of this buffer, as the buffer may reserve some
      * space for other purposes.
-     *  
+     *
      * @return the size in characters of this buffer
      */
     public int getSize(){
         return buffer.length;
     }
-    
-    private String toDebugString(){
+ 
+    String toDebugString(){
         StringBuffer sb = new StringBuffer(buffer.length);
         for (int i=0; i<buffer.length; i++){
             if (i==writePosition){
@@ -166,16 +185,16 @@ public class CircularCharBuffer {
             }
             if (i==readPosition){
                 sb.append('#');
-            }            
+            }
             if (i==markPosition){
                 sb.append('!');
-            } 
+            }
             if (buffer[i] >= '%' && buffer[i] <= '~'){
                 sb.append(buffer[i]);
             } else {
                 sb.append(' ');
-            }                
-        }        
+            }
+        }
         sb.append('"');
         return sb.toString();
     }
@@ -185,46 +204,46 @@ public class CircularCharBuffer {
      */
     private int spaceLeft(){
         if (writePosition < markPosition){
-            // any space between the first write and 
-            // the mark except one character is available.  
+            // any space between the first write and
+            // the mark except one character is available.
             // In this case it is all in one piece.
             return (markPosition - writePosition - 1);
         } else {
             // space at the beginning and end.
             return ((buffer.length - 1) - (writePosition - markPosition));
-        } 
+        }
     }
-    
+
     /**
      * Characters available for reading.
      */
     private int available(){
         if (readPosition <= writePosition){
-            // any space between the first read and 
+            // any space between the first read and
             // the first write is available.  In this case it
             // is all in one piece.
             return (writePosition - readPosition);
         } else {
             // space at the beginning and end.
             return (buffer.length - (readPosition - writePosition));
-        } 
+        }
     }
-    
+
     /**
      * Characters saved for supporting marks.
      */
     private int marked(){
         if (markPosition <= readPosition){
-            // any space between the markPosition and 
+            // any space between the markPosition and
             // the first write is marked.  In this case it
             // is all in one piece.
             return (readPosition - markPosition);
-        } else { 
+        } else {
             // space at the beginning and end.
             return (buffer.length - (markPosition - readPosition));
-        } 
+        }
     }
-    
+
     /**
      * If we have passed the markSize reset the
      * mark so that the space can be used.
@@ -232,34 +251,74 @@ public class CircularCharBuffer {
     private void ensureMark(){
         if (marked() >= markSize){
             markPosition = readPosition;
-            markSize = 0;   
+            markSize = 0;
         }
     }
     
     /**
+     * Create a new buffer with a default capacity.
+     * Writing to a full buffer will block until space
+     * is available rather than throw an exception.
+     */
+    public CircularCharBuffer(){
+        this (DEFAULT_SIZE, true);
+    }
+
+    /**
      * Create a new buffer with given capacity.
+     * Writing to a full buffer will block until space
+     * is available rather than throw an exception.
      * <p>
-     * Note that the buffer may reserve some characters for 
+     * Note that the buffer may reserve some characters for
      * special purposes and capacity number of characters may
-     * not be able to be written to the buffer. 
-     * 
+     * not be able to be written to the buffer.
+     *
      * @param size desired capacity of the buffer in characters.
      */
     public CircularCharBuffer(int size){
-        buffer = new char[size];
+        this (size, true);
     }
     
+    /**
+     * Create a new buffer with a default capacity and
+     * given blocking behavior.
+     * 
+     * @param blockingWrite true writing to a full buffer should block
+     *        until space is available, false if an exception should
+     *        be thrown instead.
+     */
+    public CircularCharBuffer(boolean blockingWrite){
+        this (DEFAULT_SIZE, blockingWrite);
+    }
     
+    /**
+     * Create a new buffer with the given capacity and
+     * blocking behavior.
+     * <p>
+     * Note that the buffer may reserve some characters for
+     * special purposes and capacity number of characters may
+     * not be able to be written to the buffer.
+     *
+     * @param size desired capacity of the buffer in characters.
+     * @param blockingWrite true writing to a full buffer should block
+     *        until space is available, false if an exception should
+     *        be thrown instead.
+     */
+    public CircularCharBuffer(int size, boolean blockingWrite){
+        buffer = new char[size];
+        this.blockingWrite = blockingWrite;
+    }
+
     /**
      * Class for reading from a circular character buffer.
      */
     protected class CircularCharBufferReader extends Reader {
-        
+
         /**
-         * Close the stream. Once a stream has been closed, further read(), ready(), 
-         * mark(), or reset() invocations will throw an IOException. Closing a 
+         * Close the stream. Once a stream has been closed, further read(), ready(),
+         * mark(), or reset() invocations will throw an IOException. Closing a
          * previously-closed stream, however, has no effect.
-         * 
+         *
          * @throws IOException never.
          */
         public void close() throws IOException {
@@ -267,28 +326,28 @@ public class CircularCharBuffer {
                 readerClosed = true;
             }
         }
-        
+
         /**
-         * Mark the present position in the stream. Subsequent calls to reset() will 
+         * Mark the present position in the stream. Subsequent calls to reset() will
          * attempt to reposition the stream to this point.
          * <p>
          * The readAheadLimit must be less than the size of circular buffer.
          *
-         * @param readAheadLimit Limit on the number of characters that may be read while 
-         *    still preserving the mark. After reading this many characters, attempting to 
+         * @param readAheadLimit Limit on the number of characters that may be read while
+         *    still preserving the mark. After reading this many characters, attempting to
          *    reset the stream will fail.
-         * @throws IOException if the stream is closed, or the buffer size is greater 
-         * than or equal to the readAheadLimit. 
+         * @throws IOException if the stream is closed, or the buffer size is greater
+         * than or equal to the readAheadLimit.
          */
         public void mark(int readAheadLimit) throws IOException {
             synchronized (CircularCharBuffer.this){
-                if (readerClosed) throw new IOException("Reader has been closed; cannot mark a closed reader.");
+                if (readerClosed) throw new IOException("Reader has been closed; cannot mark a closed Reader.");
                 if (buffer.length - 1 <= readAheadLimit) throw new IOException("Cannot mark stream, readAheadLimit bigger than buffer size.");
                 markSize = readAheadLimit;
                 markPosition = readPosition;
             }
         }
-        
+
         /**
          * Tell whether this stream supports the mark() operation.
          *
@@ -297,20 +356,20 @@ public class CircularCharBuffer {
         public boolean markSupported() {
             return true;
         }
-        
+
         /**
-         * Read a single character. 
-         * This method will block until a character is available, an I/O error occurs, 
+         * Read a single character.
+         * This method will block until a character is available, an I/O error occurs,
          * or the end of the stream is reached.
          *
-         * @return The character read, as an integer in the range 0 to 65535 (0x00-0xffff), 
+         * @return The character read, as an integer in the range 0 to 65535 (0x00-0xffff),
          *     or -1 if the end of the stream has been reached
          * @throws IOException if the stream is closed.
          */
         public int read() throws IOException {
             while (true){
                 synchronized (CircularCharBuffer.this){
-                    if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed reader.");
+                    if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed Reader.");
                     int available = available();
                     if (available > 0){
                         int result = buffer[readPosition] & 0xffff;
@@ -329,39 +388,39 @@ public class CircularCharBuffer {
                 } catch(Exception x){
                     throw new IOException("Blocking read operation interrupted.");
                 }
-            }                
+            }
         }
-        
+
         /**
          * Read characters into an array.
-         * This method will block until some input is available, 
-         * an I/O error occurs, or the end of the stream is reached. 
+         * This method will block until some input is available,
+         * an I/O error occurs, or the end of the stream is reached.
          *
          * @param cbuf Destination buffer.
-         * @return The number of characters read, or -1 if the end of 
+         * @return The number of characters read, or -1 if the end of
          *   the stream has been reached
          * @throws IOException if the stream is closed.
          */
         public int read(char[] cbuf) throws IOException {
             return read(cbuf, 0, cbuf.length);
         }
-        
+
         /**
          * Read characters into a portion of an array.
-         * This method will block until some input is available, 
-         * an I/O error occurs, or the end of the stream is reached. 
+         * This method will block until some input is available,
+         * an I/O error occurs, or the end of the stream is reached.
          *
          * @param cbuf Destination buffer.
          * @param off Offset at which to start storing characters.
          * @param len Maximum number of characters to read.
-         * @return The number of characters read, or -1 if the end of 
+         * @return The number of characters read, or -1 if the end of
          *   the stream has been reached
          * @throws IOException if the stream is closed.
          */
         public int read(char[] cbuf, int off, int len) throws IOException {
             while (true){
                 synchronized (CircularCharBuffer.this){
-                    if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed reader.");
+                    if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed Reader.");
                     int available = available();
                     if (available > 0){
                         int length = Math.min(len, available);
@@ -377,12 +436,13 @@ public class CircularCharBuffer {
                         if (readPosition == buffer.length) {
                             readPosition = 0;
                         }
+                        ensureMark();
                         return length;
                     } else if (writerClosed){
                         return -1;
                     }
                 }
-                try {
+                try { 
                     Thread.sleep(100);
                 } catch(Exception x){
                     throw new IOException("Blocking read operation interrupted.");
@@ -401,13 +461,13 @@ public class CircularCharBuffer {
         public boolean ready() throws IOException {
             synchronized (CircularCharBuffer.this){
                 if (readerClosed) throw new IOException("Reader has been closed, it is not ready.");
-                return (writerClosed || available() > 0);
+                return (available() > 0);
             }
         }
-                  
+
         /**
-         * Reset the stream. 
-         * If the stream has been marked, then attempt to reposition it 
+         * Reset the stream.
+         * If the stream has been marked, then attempt to reposition it
          * at the mark. If the stream has not been marked, or more characters
          * than the readAheadLimit have been read, this method has no effect.
          *
@@ -415,25 +475,25 @@ public class CircularCharBuffer {
          */
         public void reset() throws IOException {
             synchronized (CircularCharBuffer.this){
-                if (readerClosed) throw new IOException("Reader has been closed; cannot reset a closed reader.");
+                if (readerClosed) throw new IOException("Reader has been closed; cannot reset a closed Reader.");
                 readPosition = markPosition;
             }
-        }           
-        
+        }
+
         /**
          * Skip characters.
-         * This method will block until some characters are available, 
+         * This method will block until some characters are available,
          * an I/O error occurs, or the end of the stream is reached.
          *
          * @param n The number of characters to skip
          * @return The number of characters actually skipped
          * @throws IllegalArgumentException if n is negative.
-         * @throws IOException if the stream is closed. 
+         * @throws IOException if the stream is closed.
          */
-        public long skip(long n) throws IOException, IllegalArgumentException {            
+        public long skip(long n) throws IOException, IllegalArgumentException {
             while (true){
                 synchronized (CircularCharBuffer.this){
-                    if (readerClosed) throw new IOException("Reader has been closed; cannot skip characters on a closed reader.");
+                    if (readerClosed) throw new IOException("Reader has been closed; cannot skip characters on a closed Reader.");
                     int available = available();
                     if (available > 0){
                         int length = Math.min((int)n, available);
@@ -460,21 +520,24 @@ public class CircularCharBuffer {
             }
         }
     }
-    
+
     /**
      * Class for writing to a circular character buffer.
+     * If the buffer is full, the writes will either block
+     * until there is some space available or throw an IOException
+     * based on the CircularCharBuffer's preference.
      */
-    protected class CircularCharBufferWriter extends Writer {        
-        
+    protected class CircularCharBufferWriter extends Writer {
+
         /**
          * Close the stream, flushing it first.
-         * This will cause the reader associated with this circular buffer 
+         * This will cause the reader associated with this circular buffer
          * to read its last characters once it empties the buffer.
-         * Once a stream has been closed, further write() or flush() invocations 
-         * will cause an IOException to be thrown. Closing a previously-closed stream, 
+         * Once a stream has been closed, further write() or flush() invocations
+         * will cause an IOException to be thrown. Closing a previously-closed stream,
          * however, has no effect.
          *
-         * @throws IOException never. 
+         * @throws IOException never.
          */
         public void close() throws IOException {
             synchronized (CircularCharBuffer.this){
@@ -484,106 +547,160 @@ public class CircularCharBuffer {
                 writerClosed = true;
             }
         }
-        
+
         /**
          * Flush the stream.
          *
          * @throws IOException if the stream is closed.
          */
         public void flush() throws IOException {
-            if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed writer.");
-            if (readerClosed) throw new IOException("Buffer closed by reader; cannot flush.");
+            if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed Writer.");
+            if (readerClosed) throw new IOException("Buffer closed by Reader; cannot flush.");
             // this method needs to do nothing
         }
-        
+
         /**
          * Write an array of characters.
-         * 
+         * If the buffer allows blocking writes, this method will block until
+         * all the data has been written rather than throw an IOException.
+         *
          * @param cbuf Array of characters to be written
-         * @throws IOException if the buffer is full or the stream is closed.
+         * @throws BufferOverflowException if buffer does not allow blocking writes
+         *   and the buffer is full.  If the exception is thrown, no data
+         *   will have been written since the buffer was set to be non-blocking.
+         * @throws IOException if the stream is closed, or the write is interrupted.
          */
         public void write(char[] cbuf) throws IOException {
             write(cbuf, 0, cbuf.length);
         }
-        
+
         /**
          * Write a portion of an array of characters.
+         * If the buffer allows blocking writes, this method will block until
+         * all the data has been written rather than throw an IOException.
          *
          * @param cbuf Array of characters
          * @param off Offset from which to start writing characters
          * @param len - Number of characters to write
-         * @throws IOException if the buffer is full or the stream is closed.
-         */        
+         * @throws BufferOverflowException if buffer does not allow blocking writes
+         *   and the buffer is full.  If the exception is thrown, no data
+         *   will have been written since the buffer was set to be non-blocking.
+         * @throws IOException if the stream is closed, or the write is interrupted.
+         */
         public void write(char[] cbuf, int off, int len) throws IOException {
-            synchronized (CircularCharBuffer.this){
-                if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed writer.");
-                if (readerClosed) throw new IOException("Buffer closed by reader; cannot write to a closed buffer.");
-                if (len > 0){                
-                    if (spaceLeft() < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
-                    int firstLen = Math.min(len, buffer.length - writePosition);
-                    int secondLen = len - firstLen;
-                    System.arraycopy(cbuf, off, buffer, writePosition, firstLen);
+            while (len > 0){
+                synchronized (CircularCharBuffer.this){
+                    if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
+                    if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
+                    int spaceLeft = spaceLeft();
+                    if (!blockingWrite && spaceLeft < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
+                    int realLen = Math.min(len, spaceLeft);
+                    int firstLen = Math.min(realLen, buffer.length - writePosition);
+                    int secondLen = Math.min(realLen - firstLen, buffer.length - markPosition - 1);
+                    int written = firstLen + secondLen;
+                    if (firstLen > 0){
+                        System.arraycopy(cbuf, off, buffer, writePosition, firstLen);
+                    }
                     if (secondLen > 0){
                         System.arraycopy(cbuf, off+firstLen, buffer, 0, secondLen);
                         writePosition = secondLen;
                     } else {
-                        writePosition += len;
+                        writePosition += written;
                     }
                     if (writePosition == buffer.length) {
                         writePosition = 0;
                     }
+                    off += written;
+                    len -= written;
+                }
+                if (len > 0){
+                    try {   
+                        Thread.sleep(100);
+                    } catch(Exception x){
+                        throw new IOException("Waiting for available space in buffer interrupted.");
+                    }
                 }
             }
         }
-        
+
         /**
-         * Write a single character.  
-         * The character to be written is contained in the 16 low-order bits of the 
+         * Write a single character.
+         * The character to be written is contained in the 16 low-order bits of the
          * given integer value; the 16 high-order bits are ignored.
+         * If the buffer allows blocking writes, this method will block until
+         * all the data has been written rather than throw an IOException.
          *
          * @param c int specifying a character to be written.
-         * @throws IOException if the buffer is full or the stream is closed.
-         */        
-        public void write(int c) throws IOException {            
-            synchronized (CircularCharBuffer.this){
-                if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed writer.");
-                if (readerClosed) throw new IOException("Buffer closed by reader; cannot write to a closed buffer.");
-                int len = 1;
-                if (spaceLeft() < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
-                buffer[writePosition] = (char)(c & 0xffff);
-                writePosition++;
-                if (writePosition == buffer.length) {
-                    writePosition = 0;
+         * @throws BufferOverflowException if buffer does not allow blocking writes
+         *   and the buffer is full.
+         * @throws IOException if the stream is closed, or the write is interrupted.
+         */
+        public void write(int c) throws IOException {
+            boolean written = false;
+            while (!written){
+                synchronized (CircularCharBuffer.this){
+                    if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
+                    if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
+                    int spaceLeft = spaceLeft();
+                    if (!blockingWrite && spaceLeft < 1) throw new BufferOverflowException("CircularCharBuffer is full; cannot write 1 character");
+                    if (spaceLeft > 0){
+                        buffer[writePosition] = (char)(c & 0xffff);
+                        writePosition++;
+                        if (writePosition == buffer.length) {
+                            writePosition = 0;
+                        }
+                        written = true;
+                    }
+                }
+                if (!written){ 
+                    try { 
+                        Thread.sleep(100);
+                    } catch(Exception x){
+                        throw new IOException("Waiting for available space in buffer interrupted.");
+                    }
                 }
             }
         }
-        
+
         /**
-         * Write a string. 
-         * 
+         * Write a string.
+         * If the buffer allows blocking writes, this method will block until
+         * all the data has been written rather than throw an IOException.
+         *
          * @param str String to be written
-         * @throws IOException if the buffer is full or the stream is closed.  
-         */        
+         * @throws BufferOverflowException if buffer does not allow blocking writes
+         *   and the buffer is full.  If the exception is thrown, no data
+         *   will have been written since the buffer was set to be non-blocking.
+         * @throws IOException if the stream is closed, or the write is interrupted.
+         */
         public void write(String str) throws IOException {
             write(str, 0, str.length());
         }
-        
+
         /**
          * Write a portion of a string.
+         * If the buffer allows blocking writes, this method will block until
+         * all the data has been written rather than throw an IOException.
+         *
          * @param str A String
          * @param off Offset from which to start writing characters
          * @param len Number of characters to write
-         *
-         * @throws IOException if the buffer is full or the stream is closed.  
-         */        
-        public void write(String str, int off, int len) throws IOException {
-            synchronized (CircularCharBuffer.this){
-                if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed writer.");
-                if (readerClosed) throw new IOException("Buffer closed by reader; cannot write to a closed buffer.");
-                if (len > 0){
-                    if (spaceLeft() < len) throw new IOException("CircularCharBuffer is full; cannot write " + len + " characters");
-                    int firstLen = Math.min(len, buffer.length - writePosition);
-                    int secondLen = len - firstLen;
+         * @throws BufferOverflowException if buffer does not allow blocking writes
+         *   and the buffer is full.  If the exception is thrown, no data
+         *   will have been written since the buffer was set to be non-blocking.
+         * @throws IOException if the stream is closed, or the write is interrupted.
+         */    
+        public void write(String str, int off, int len) throws IOException {        
+            while (len > 0){
+                synchronized (CircularCharBuffer.this){
+                    if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
+                    if (readerClosed) throw new IOException("Buffer closed by Reader; cannot write to a closed buffer.");
+                    int spaceLeft = spaceLeft();
+                    if (!blockingWrite && spaceLeft < len) throw new BufferOverflowException("CircularCharBuffer is full; cannot write " + len + " characters");
+                    int realLen = Math.min(len, spaceLeft);
+                    int firstLen = Math.min(realLen, buffer.length - writePosition);
+                    int secondLen = Math.min(realLen - firstLen, buffer.length - markPosition - 1);
+                    int written = firstLen + secondLen;
                     for (int i=0; i<firstLen; i++){
                         buffer[writePosition + i] = str.charAt(off+i);
                     }
@@ -593,10 +710,19 @@ public class CircularCharBuffer {
                         }
                         writePosition = secondLen;
                     } else {
-                        writePosition += len;
+                        writePosition += written;
                     }
                     if (writePosition == buffer.length) {
                         writePosition = 0;
+                    }
+                    off += written;
+                    len -= written;
+                }
+                if (len > 0){
+                    try { 
+                        Thread.sleep(100);
+                    } catch(Exception x){
+                        throw new IOException("Waiting for available space in buffer interrupted.");
                     }
                 }
             }
