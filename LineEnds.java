@@ -132,7 +132,7 @@ public class LineEnds {
                 source = new File(args[i]); 
                 source = source.getCanonicalFile();
                 in = new FileInputStream(source);  
-                temp = File.createTempFile("LineEnds", null, source.getParentFile());
+                temp = File.createTempFile("LineEnds", null, null);
                 out = new FileOutputStream(temp);
                 convert (in, out, style, !force);
                 in.close();
@@ -285,13 +285,13 @@ public class LineEnds {
         byte[] lineEnding;
         switch (style) {
             case STYLE_SYSTEM: {
-               lineEnding = System.getProperty("line.separator").getBytes(); 
+               lineEnding = System.getProperty("line.separator").getBytes();
             } break;
             case STYLE_RN: {
-               lineEnding = new byte[]{'\r','\n'}; 
+               lineEnding = new byte[]{'\r','\n'};
             } break;
             case STYLE_R: {
-               lineEnding = new byte[]{'\r'}; 
+               lineEnding = new byte[]{'\r'};
             } break;
             case STYLE_N: {
                lineEnding = new byte[]{'\n'};
@@ -309,15 +309,15 @@ public class LineEnds {
                 if (state==STATE_R){
                     if(b!='\n'){
                         out.write(lineEnding);
-                    }                    
+                    }
                 }
                 if (b=='\r'){
                     state = STATE_R;
-                } else {                    
+                } else {
                     state = STATE_INIT;
                     if (b=='\n'){
                         out.write(lineEnding);
-                    } else if(binaryException && b!='\t' && b!='\f' && b<32){
+                    } else if(binaryException && b!='\t' && b!='\f' && (b & 0xff)<32){
                         throw new BinaryDataException("Binary data encountered, line break replacement aborted.");
                     } else {
                         out.write(b);
@@ -327,6 +327,6 @@ public class LineEnds {
         }
         if (state==STATE_R){
             out.write(lineEnding);
-        }   
+        }
     }
 }
