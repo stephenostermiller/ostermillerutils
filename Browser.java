@@ -19,6 +19,10 @@ package com.Ostermiller.util;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.net.URL;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Properties;
 
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
@@ -28,6 +32,11 @@ import java.net.URL;
  * is written more cleanly and takes a bit of security into account. 
  */
 public class Browser {
+
+    /**
+     * The dialog that allows user configuration of the options for this class.
+     */
+    protected static BrowserDialog dialog;
     
     /**
      * A list of commands to try in order to display the url.
@@ -50,6 +59,14 @@ public class Browser {
      * order).
      */
     public static void init(){
+        exec = defaultCommands();
+    }
+
+    /**
+     * Retrieve the default commands to open a browser for this system.
+     */
+    public static String[] defaultCommands(){
+        String[] exec = null;
         if ( System.getProperty("os.name").startsWith("Windows")){
             exec = new String[1];
             exec[0] = "rundll32 url.dll,FileProtocolHandler {0}";
@@ -93,22 +110,23 @@ public class Browser {
                     }
                 } catch (IOException e){
                 } catch (InterruptedException e){
-                }               
+                }
             }
             if (!found){
                 exec = null;
             }
         }
+        return exec;
     }
-    
+
     /**
-     * Display a URL in the system browser.  
-     * 
+     * Display a URL in the system browser.
+     *
      * Browser.init() should be called before calling this function or
      * Browser.exec should be set explicitly.
-     * 
+     *
      * For security reasons, the URL will may not be passed directly to the
-     * browser as it is passed to this method.  The URL may be made safe for 
+     * browser as it is passed to this method.  The URL may be made safe for
      * the exec command by URLEncoding the URL before passing it.
      *
      * @param url the url to display
@@ -118,9 +136,9 @@ public class Browser {
         if (exec == null || exec.length == 0){
             throw new IOException("Browser execute command not defined");
         } else {
-            // for security, see if the url is valid.  
-            // this is primarily to catch an attack in which the url 
-            // starts with a - to fool the command line flags, but 
+            // for security, see if the url is valid.
+            // this is primarily to catch an attack in which the url
+            // starts with a - to fool the command line flags, but
             // it could catch other stuff as well, and will throw a
             // MalformedURLException which will give the caller of this
             // function useful information.
@@ -133,23 +151,23 @@ public class Browser {
             for (int i=0; i<url.length(); i++){
                 char c = url.charAt(i);
                 if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
-                    || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?' 
+                    || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
                     || c == '%' || c =='+' || c == '='){
                     //characters that are nessesary for urls and should be safe
                     //to pass to exec.  Exec uses a default string tokenizer with
                     //the default arguments (whitespace) to separate command line
-                    //arguments, so there should be no problem with anything but 
+                    //arguments, so there should be no problem with anything but
                     //whitespace.
                     sb.append(c);
                 } else{
                     c = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)
-                    if (c < 0x10) {                    
+                    if (c < 0x10) {
                         sb.append("%0" + Integer.toHexString(c));
                     } else {
                         sb.append("%" + Integer.toHexString(c));
                     }
 
-                }                 
+                }
             }
             String[] messageArray = new String[1];
         	messageArray[0] = sb.toString();
@@ -163,8 +181,8 @@ public class Browser {
                     // start the browser
                     Process p = Runtime.getRuntime().exec(command);
                     // give the browser a bit of time to fail.
-                    // I have found that sometimes sleep doesn't work 
-                    // the first time, so do it twice.  My tests 
+                    // I have found that sometimes sleep doesn't work
+                    // the first time, so do it twice.  My tests
                     // seem to show that 1000 milisec is enough 
                     // time for the browsers I'm using.
                     for (int j=0; j<2; j++){
@@ -198,9 +216,10 @@ public class Browser {
      *
      * @param args Command line arguments (URLs)
      */
-    public static void main(String[] args){       
+    public static void main(String[] args){
         try {
             Browser.init();
+            Browser.dialogConfiguration(null);
             if (args.length == 0){
         	    Browser.displayURL("http://www.javaworld.com/");
             } else {
@@ -210,6 +229,230 @@ public class Browser {
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
+        }
+        System.exit(0);
+    }
+
+    /**
+     * Show a dialog that allows the user to configure the
+     * command lines used for starting a browser on their system.
+     *
+     * @param owner The frame that owns the dialog.
+     */
+    public static void dialogConfiguration(Frame owner){
+        dialogConfiguration(owner, null);
+    }
+
+    /**
+     * Show a dialog that allows the user to configure the
+     * command lines used for starting a browser on their system.
+     * String used in the dialog are taken from the given
+     * properties.  This dialog can be customized or displayed in 
+	 * multipl languages.
+     * <P>
+     * Properties that are used:
+     * com.Ostermiller.util.BrowserDialog.title
+     * com.Ostermiller.util.BrowserDialog.description
+     * com.Ostermiller.util.BrowserDialog.label
+     * com.Ostermiller.util.BrowserDialog.defaults
+     * com.Ostermiller.util.BrowserDialog.ok
+     * com.Ostermiller.util.BrowserDialog.cancel
+     *
+     * @param owner The frame that owns this dialog.
+     * @param props contains the strings used in the dialog.
+     */
+    public static void dialogConfiguration(Frame owner, Properties props){
+        if (Browser.dialog == null){
+			Browser.dialog = new BrowserDialog(owner);
+		}
+        if (props != null){
+            Browser.dialog.setProps(props);
+        }
+        Browser.dialog.show();
+    }
+
+    /**
+     * A modal dialog that presents configuration option for this class.
+     */
+    private static class BrowserDialog extends JDialog {
+
+        /**
+         * Properties that are used:
+         * com.Ostermiller.util.BrowserDialog.title
+         * com.Ostermiller.util.BrowserDialog.description
+         * com.Ostermiller.util.BrowserDialog.label
+         * com.Ostermiller.util.BrowserDialog.defaults
+         * com.Ostermiller.util.BrowserDialog.ok
+         * com.Ostermiller.util.BrowserDialog.cancel
+         */
+        private void setProps(Properties props){
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.title")){
+				setTitle(props.getProperty("com.Ostermiller.util.BrowserDialog.title"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.description")){
+				description.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.description"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.label")){
+                commandLinesLabel.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.label"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.defaults")){
+                resetButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.defaults"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.ok")){
+                okButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.ok"));
+            }
+            if (props.containsKey("com.Ostermiller.util.BrowserDialog.cancel")){
+                cancelButton.setText(props.getProperty("com.Ostermiller.util.BrowserDialog.cancel"));
+            }
+			pack();
+		}
+
+        /**
+         * Where the command lines are typed.
+         */
+        private JTextArea description;
+
+        /**
+         * Where the command lines are typed.
+         */
+        private JTextArea commandLinesArea;
+
+        /**
+         * The reset button.
+         */
+        private JButton resetButton;
+
+        /**
+         * The OK button.
+         */
+        private JButton okButton;
+
+        /**
+         * The cancel button.
+         */
+        private JButton cancelButton;
+
+        /**
+         * The label for the field in which the name is typed.
+         */
+        private JLabel commandLinesLabel;
+
+        /**
+         * update this variable when the user makes an action
+         */
+        private boolean pressed_OK = false;
+
+        /**
+         * Create this dialog with the given parent and title.
+         *
+         * @param parent window from which this dialog is launched
+         * @param title the title for the dialog box window
+         */
+        public BrowserDialog(Frame parent) {
+            super(parent, "Browser Configuration", true);
+            setLocationRelativeTo(parent);
+            // super calls dialogInit, so we don't need to do it again.
+        }
+
+        /**
+         * Called by constructors to initialize the dialog.
+         */
+        protected void dialogInit(){
+
+            commandLinesArea = new JTextArea("", 8, 40);
+            JScrollPane scrollpane = new JScrollPane(commandLinesArea);
+            okButton = new JButton("OK");
+            cancelButton = new JButton("Cancel");
+            resetButton = new JButton("Defaults");
+            commandLinesLabel = new JLabel("Command lines: ");
+            description = new JTextArea("When a web browser needs to be opened, these command lines will be\n" +
+                "executed in the order they appear here until one of them works.\n" +
+                "{0} is replaced by the URL to be opened.");
+            description.setEditable(false);
+            description.setOpaque( false );
+
+
+            super.dialogInit();
+
+            ActionListener actionListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e){
+                    Object source = e.getSource();
+                    if (source == resetButton){
+                        setCommands(Browser.defaultCommands());
+                    } else {
+                        pressed_OK = (source == okButton);
+                        BrowserDialog.this.hide();
+                    }
+                }
+            };
+
+            GridBagLayout gridbag = new GridBagLayout();
+            GridBagConstraints c = new GridBagConstraints();
+            c.insets.top = 5;
+            c.insets.bottom = 5;
+            JPanel pane = new JPanel(gridbag);
+            pane.setBorder(BorderFactory.createEmptyBorder(10, 20, 5, 20));
+            JLabel label;
+
+
+            c.gridwidth = GridBagConstraints.REMAINDER;
+            c.anchor = GridBagConstraints.WEST;
+            gridbag.setConstraints(description, c);
+            pane.add(description);
+
+            c.gridy = 1;
+            c.gridwidth = GridBagConstraints.RELATIVE;
+            gridbag.setConstraints(commandLinesLabel, c);
+            pane.add(commandLinesLabel);
+            c.anchor = GridBagConstraints.EAST;
+            gridbag.setConstraints(resetButton, c);
+            resetButton.addActionListener(actionListener);
+            pane.add(resetButton);
+
+            c.gridy = 2;
+            c.gridwidth = GridBagConstraints.REMAINDER;
+            c.anchor = GridBagConstraints.WEST;
+            gridbag.setConstraints(scrollpane, c);
+            pane.add(scrollpane);
+
+            c.gridy = 3;
+            c.anchor = GridBagConstraints.CENTER;
+            JPanel panel = new JPanel();
+            okButton.addActionListener(actionListener);
+            panel.add(okButton);
+            cancelButton.addActionListener(actionListener);
+            panel.add(cancelButton);
+            gridbag.setConstraints(panel, c);
+            pane.add(panel);
+
+            getContentPane().add(pane);
+
+            pack();
+        }
+
+        /**
+         * Shows the dialog.
+         */
+        public void show(){
+            setCommands(Browser.exec);
+            super.show();
+            if (pressed_OK){
+                java.util.StringTokenizer tok = new java.util.StringTokenizer(commandLinesArea.getText(), "\r\n", false);
+                int count = tok.countTokens();
+                String[] exec = new String[count];
+                for (int i=0; i < count; i++){
+                    exec[i] = tok.nextToken();
+                }
+                Browser.exec = exec;
+            }
+        }
+
+        private void setCommands(String[] exec){
+            StringBuffer sb = new StringBuffer();
+            for (int i=0; exec != null && i < exec.length; i++){
+                sb.append(exec[i]).append('\n');
+            }
+            commandLinesArea.setText(sb.toString());
         }
     }
 }
