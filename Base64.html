@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta name="description" content="Encode and decode base 64 in Java.">
-   <meta name="keywords" content="base, 64, base64, base, 64, base64,base, 64, base64, encode, decode, encode, decode, java, util, utility, class, library, libraries, source, code, open source, gpl">
+   <meta name="keywords" content="base, 64, base64, base, 64, base64, base, 64, base64, encode, decode, encode, decode, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc, encoding, decoding, encoder, decoder, stream, streams, inputstream, outputstream, array, arrays, string, strings">
    <title>Base64</title>
    <base href="http://ostermiller.org/utils/">
 </head>
@@ -15,13 +15,14 @@
 <p>Base64 is needed in many places other than its original use as an encoding format for transfering attachements in email.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
 <blockquote><code>
 import com.Ostermiller.util.Base64;<br>
+...<br>
 URL url = new URL("http://....");<br>
 HttpURLConnection connection = (HttpURLConnection)url.openConnection();<br>
 connection.setRequestProperty("Authorization", "Basic " + Base64.encode(username + ":" + password));<br>        
 InputStream in = connection.getInputStream();<br>
 </code></blockquote></p>
 
-<p>[<a href="./#download">Download /w Source Code</a> |
+<p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">Version History</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Base64.java/HEAD">Browse Source</a> |
 <a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Base64.html">Documentation</a>]</p>
