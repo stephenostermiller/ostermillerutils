@@ -57,5 +57,7 @@ test:
 	diff out.txt CSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.ExcelCSVLexer ExcelCSVRegressionTest.csv > out.txt
 	diff out.txt ExcelCSVRegressionTestResults.txt
+	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
+	diff out.txt CSVTestResults.txt
 	rm out.txt
 
