@@ -32,6 +32,7 @@
 <li>Detects binary files and does not modify those files unless forced.</li>
 </ul>
 
+<div class=programinstructions>
 <p>To run the program use the following command line:<br>
 <b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;&lt;files&gt;</b></p>
 
@@ -51,8 +52,8 @@
    --noforce              Don't modify binary files. (default)
    -v --verbose           Print a message for each file modified.
    -q --quiet             Print error messages. (default)
-   -Q --reallyquiet       Print nothing.
-</pre>
+   -Q --reallyquiet       Print nothing.</pre>
+</div>
 
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/LineEnds.java/0">Version History</a> |
