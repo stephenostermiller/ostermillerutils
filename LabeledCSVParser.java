@@ -142,7 +142,11 @@ public class LabeledCSVParser implements CSVParse {
 	 */
 	public String[][] getAllValues() throws IOException {
 		String[][] allValues = parse.getAllValues();
-		lastLine = allValues[allValues.length-1];
+        if (allValues == null){
+            lastLine = null;
+        } else {
+		    lastLine = allValues[allValues.length-1];
+        }
 		return allValues;
 	}
 
