@@ -171,17 +171,10 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	@cp *RandPass*.class *RandPass*.properties *.TXT com/Ostermiller/util/
 	@jar cfv randpass.jar com/ > /dev/null
 	@rm -rf com/
-
+	
 utils.jar: *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
-	@mkdir -p com/Ostermiller/util
-	@cp *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml com/Ostermiller/util/
-	@rm -f com/Ostermiller/util/*Test*.class
-	@rm -f com/Ostermiller/util/*Lexer.java
-	@mkdir -p gnu/getopt		
-	@cp ../../../gnu/getopt/*.* gnu/getopt
-	@jar cfv utils.jar com/ gnu/ > /dev/null
-	@rm -rf com/ gnu/
+	@ant dist > /dev/null
 
 .PHONY: test
 test: 
