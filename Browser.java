@@ -277,9 +277,9 @@ public class Browser {
 			boolean found = false;
 			// try each of the exec commands until something works
 			try {
-					for (int i=0; i<exec.length && !found; i++){
-						try {
-							// stick the url into the command
+				for (int i=0; i<exec.length && !found; i++){
+					try {
+						// stick the url into the command
 						command = MessageFormat.format(exec[i], messageArray);
 						// parse the command line.
 						Vector argsVector = new Vector();
