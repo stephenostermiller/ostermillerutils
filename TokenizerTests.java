@@ -22,6 +22,9 @@
  * A regression test for com.Ostermiller.util.StringTokenizer.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 class TokenizerTests {
 

@@ -23,6 +23,9 @@ package com.Ostermiller.util;
  * The type of token, the text of the token, the line number on which it
  * occurred, the number of characters into the input at which it started, and
  * similarly, the number of characters into the input at which it ended. <br>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 class PropertiesToken {
 
@@ -43,6 +46,8 @@ class PropertiesToken {
 	 *
 	 * @param ID the id number of the token
 	 * @param contents A string representing the text of the token
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public PropertiesToken(int ID, String contents){
 		this.ID = ID;
@@ -53,6 +58,8 @@ class PropertiesToken {
 	 * get the ID number of this token
 	 *
 	 * @return the id number of the token
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int getID(){
 		return ID;
@@ -62,6 +69,8 @@ class PropertiesToken {
 	 * get the contents of this token
 	 *
 	 * @return A string representing the text of the token
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getContents(){
 		return (contents);

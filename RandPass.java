@@ -42,29 +42,38 @@ import java.util.Vector;
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class RandPass {
 
 	/**
 	 * Version number of this program
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final String version = "1.1";
 
 	/**
 	 * Locale specific strings displayed to the user.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.RandPass",  Locale.getDefault());
 
 
 	/**
 	 * Default length for passwords
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int DEFAULT_PASSWORD_LENGTH = 8;
 
 	/**
 	 * Alphabet consisting of upper and lowercase letters A-Z and
 	 * the digits 0-9.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] NUMBERS_AND_LETTERS_ALPHABET = {
 		'A','B','C','D','E','F','G','H',
@@ -79,6 +88,8 @@ public class RandPass {
 
 	/**
 	 * Alphabet consisting of all the printable ASCII symbols.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] SYMBOLS_ALPHABET = {
 		'!','\"','#','$','%','&','\'','(',
@@ -89,6 +100,8 @@ public class RandPass {
 
 	/**
 	 * Alphabet consisting of all the printable ASCII characters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] PRINTABLE_ALPHABET = {
 		'!','\"','#','$','%','&','\'','(',
@@ -107,6 +120,8 @@ public class RandPass {
 
 	/**
 	 * Alphabet consisting of the lowercase letters A-Z.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] LOWERCASE_LETTERS_ALPHABET = {
 		'a','b','c','d','e','f','g','h',
@@ -118,6 +133,8 @@ public class RandPass {
 	/**
 	 * Alphabet consisting of the lowercase letters A-Z and
 	 * the digits 0-9.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] LOWERCASE_LETTERS_AND_NUMBERS_ALPHABET = {
 		'a','b','c','d','e','f','g','h',
@@ -129,6 +146,8 @@ public class RandPass {
 
 	/**
 	 * Alphabet consisting of upper and lowercase letters A-Z.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] LETTERS_ALPHABET = {
 		'A','B','C','D','E','F','G','H',
@@ -142,6 +161,8 @@ public class RandPass {
 
 	/**
 	 * Alphabet consisting of the upper letters A-Z.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] UPPERCASE_LETTERS_ALPHABET = {
 		'A','B','C','D','E','F','G','H',
@@ -154,6 +175,8 @@ public class RandPass {
 	 * Alphabet consisting of upper and lowercase letters A-Z and
 	 * the digits 0-9 but with characters that are often mistaken
 	 * for each other when typed removed. (I,L,O,U,V,i,l,o,u,v,0,1)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final char[] NONCONFUSING_ALPHABET = {
 		'A','B','C','D','E','F','G','H',
@@ -167,6 +190,8 @@ public class RandPass {
 
 	/**
 	 * Random number generator used.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected SecureRandom rand;
 
@@ -174,6 +199,8 @@ public class RandPass {
 	 * One less than the maximum number of repeated characters
 	 * that are allowed in a password.
 	 * Set to -1 to disable this feature.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected int repetition = -1;
 
@@ -183,6 +210,8 @@ public class RandPass {
 	 * <p>
 	 * This value may not be null or have
 	 * no elements.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char[] alphabet;
 
@@ -193,6 +222,8 @@ public class RandPass {
 	 * <p>
 	 * This value may be null but it mus
 	 * have at least one element otherwise.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char[] firstAlphabet;
 
@@ -203,6 +234,8 @@ public class RandPass {
 	 * <p>
 	 * This value may be null but it mus
 	 * have at least one element otherwise.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected char[] lastAlphabet;
 
@@ -210,6 +243,8 @@ public class RandPass {
 	 * Create a new random password generator
 	 * with the default secure random number generator
 	 * and default NONCONFUSING alphabet for all characters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public RandPass(){
 		this(new SecureRandom(), NONCONFUSING_ALPHABET);
@@ -221,6 +256,8 @@ public class RandPass {
 	 * and default NONCONFUSING alphabet for all characters.
 	 *
 	 * @param rand Secure random number generator to use when generating passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public RandPass(SecureRandom rand){
 		this(rand, NONCONFUSING_ALPHABET);
@@ -232,6 +269,8 @@ public class RandPass {
 	 * and given alphabet for all characters.
 	 *
 	 * @param alphabet Characters allowed in generated passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public RandPass(char[] alphabet){
 		this(new SecureRandom(), alphabet);
@@ -244,6 +283,8 @@ public class RandPass {
 	 *
 	 * @param rand Secure random number generator to use when generating passwords.
 	 * @param alphabet Characters allowed in generated passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public RandPass(SecureRandom rand, char[] alphabet){
 		this.rand = rand;
@@ -264,6 +305,8 @@ public class RandPass {
 	 * Run with --help argument for more information.
 	 *
 	 * @param args Command line arguments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args) throws Exception {
 		// create the command line options that we are looking for
@@ -433,6 +476,8 @@ public class RandPass {
 	 *
 	 * @param alphabet set of letters that must be present
 	 * @param num number of letters from the alphabet that must be present.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addRequirement(char[] alphabet, int num){
 		if (requirements == null) requirements = new Vector();
@@ -446,6 +491,8 @@ public class RandPass {
 	 * @param alphabet Characters allowed in generated passwords.
 	 * @throws NullPointerException if the alphabet is null.
 	 * @throws ArrayIndexOutOfBoundsException if the alphabet has no elements.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setAlphabet(char[] alphabet){
 		if (alphabet == null) throw new NullPointerException("Null alphabet");
@@ -457,6 +504,8 @@ public class RandPass {
 	 * Set the random number generator used by this random password generator.
 	 *
 	 * @param rand Secure random number generator to use when generating passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setRandomGenerator(SecureRandom rand){
 		this.rand = rand;
@@ -470,6 +519,8 @@ public class RandPass {
 	 * be used for the first character.
 	 *
 	 * @param alphabet Characters allowed for the first character of the passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setFirstAlphabet(char[] alphabet){
 		if (alphabet == null || alphabet.length == 0){
@@ -487,6 +538,8 @@ public class RandPass {
 	 * be used for the last character.
 	 *
 	 * @param alphabet Characters allowed for the last character of the passwords.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setLastAlphabet(char[] alphabet){
 		if (alphabet == null || alphabet.length == 0){
@@ -511,6 +564,8 @@ public class RandPass {
 	 * is the permutation of the alphabet rather than the combination.
 	 *
 	 * @param rep Maximum character repetition.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setMaxRepetition(int rep){
 		this.repetition = rep - 1;
@@ -529,6 +584,8 @@ public class RandPass {
 	 *
 	 * @param pass buffer that will hold the password.
 	 * @return the buffer, filled with random characters.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public char[] getPassChars(char[] pass){
 		boolean verified = false;
@@ -560,6 +617,8 @@ public class RandPass {
 	 * will be returned unless all verifiers approve of it.
 	 *
 	 * @param verifier class that performs verification of password.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void addVerifier(PasswordVerifier verifier){
 		if (verifiers == null) verifiers = new Vector();
@@ -636,6 +695,8 @@ public class RandPass {
 	/**
 	 * Avoid repetition (if possible) by moving all characters that would cause repetition to
 	 * the end of the alphabet and returning the size of the alphabet that may be used.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static int avoidRepetition(char[] alph, char[] pass, int passSize, int repetition, int alphSize){
 		if (repetition > -1){
@@ -657,6 +718,8 @@ public class RandPass {
 	/**
 	 * Find a repetition of the desired length.  The characters to search
 	 * for are located at pass[end-length] to pass[end]
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static int findRep(char[] pass, int start, int end, int length){
 		for (int i=start; i<end-length; i++){
@@ -672,6 +735,8 @@ public class RandPass {
 	/**
 	 * move all of the given character to the end of the array
 	 * and return the number of characters moved.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static int moveto(char[] alph, int numGood, char c){
 		int count = 0;
@@ -696,6 +761,8 @@ public class RandPass {
 	 *
 	 * @param length The desired length of the generated password.
 	 * @return a random password
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public char[] getPassChars(int length){
 		return(getPassChars(new char[length]));
@@ -710,6 +777,8 @@ public class RandPass {
 	 *
 	 * @param length The desired length of the generated password.
 	 * @return a random password
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public char[] getPassChars(){
 		return(getPassChars(DEFAULT_PASSWORD_LENGTH));
@@ -725,7 +794,9 @@ public class RandPass {
 	 *
 	 * @param length The desired length of the generated password.
 	 * @return a random password
+	 *
 	 * @see #getPassChars(int)
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getPass(int length){
 		return(new String(getPassChars(new char[length])));
@@ -740,7 +811,9 @@ public class RandPass {
 	 * when no longer in use.
 	 *
 	 * @return a random password
+	 *
 	 * @see #getPassChars()
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getPass(){
 		return(getPass(DEFAULT_PASSWORD_LENGTH));
