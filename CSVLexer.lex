@@ -3,7 +3,7 @@
  * JFlex may be obtained from 
  * <a href="http://jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
- * java JFlex.Main CSVLexer.lex<br>
+ * java --skel csv.jflex.skel JFlex.Main CSVLexer.lex<br>
  * You will then have a file called CSVLexer.java
  */
  
@@ -113,7 +113,7 @@ import java.io.*;
 	
 	private char delimiter = ',';
 	/**
-	 * Change this Lexer so that it uses a new delimeter.
+	 * Change this Lexer so that it uses a new delimiter.
 	 * <p>
 	 * The inital character is a comma, the delimiter cannot be changed
 	 * to a quote or other character that has special meaning in CSV.
@@ -134,7 +134,7 @@ import java.io.*;
 		char temp = yycmap_instance[newDelim];
 		yycmap_instance[newDelim] = yycmap_instance[delimiter];
 		yycmap_instance[delimiter] = temp;
-		newDelim = newDelim;
+		delimiter = newDelim;
 	}
 
 	private String escapes = "";

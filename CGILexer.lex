@@ -3,7 +3,7 @@
  * JFlex may be obtained from 
  * <a href="http://jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
- * java JFlex.Main CGILexer.lex<br>
+ * java --skel cgi.jflex.skel JFlex.Main CGILexer.lex<br>
  * You will then have a file called CGILexer.java
  */
  

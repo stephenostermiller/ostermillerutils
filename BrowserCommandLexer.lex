@@ -3,7 +3,7 @@
  * JFlex may be obtained from
  * <a href="http://www.jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
- * java JFlex.Main BrowserCommandLexer<br>
+ * java --skel browser.jflex.skel JFlex.Main BrowserCommandLexer<br>
  * You will then have a file called BrowserCommandLexer.java
  */
 

@@ -3,7 +3,7 @@
  * To generate PropertiesLexer.java
  * Install <a href="http://jflex.de/">JFlex</a> v1.3.2 or later.
  * Once JFlex is in your classpath run<br>
- * <code>java JFlex.Main PropertiesLexer.lex</code><br>
+ * <code>java --skel properties.jflex.skel JFlex.Main PropertiesLexer.lex</code><br>
  * You will then have a file called PropertiesLexer.java
  */
 
