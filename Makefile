@@ -183,7 +183,7 @@ test:
 	@diff out.txt CSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.ExcelCSVLexer ExcelCSVRegressionTest.csv > out.txt
 	@diff out.txt ExcelCSVRegressionTestResults.txt
-	$(JAVA) com.Ostermiller.util.CSVTest
+	$(JAVA) com.Ostermiller.util.CSVTests
 	$(JAVA) com.Ostermiller.util.CircularBufferTests
 	$(JAVA) com.Ostermiller.util.UberPropertiesTests
 	$(JAVA) com.Ostermiller.util.LabeledCSVParserTests
