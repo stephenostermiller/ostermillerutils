@@ -1,4 +1,4 @@
-personal_ws-1.1 english 875
+personal_ws-1.1 english 884
 aa
 aaa
 AAAAAABB
@@ -517,6 +517,12 @@ ni
 njust
 nline
 nLine
+NoClose
+NoCloseInputStream
+NoCloseOutputStream
+NoCloseReader
+NoCloseStream
+NoCloseWriter
 nocommand
 noforce
 nolines
@@ -562,7 +568,7 @@ oplus
 ordf
 ordm
 oslash
-Ostermiller
+ostermiller
 otilde
 otimes
 ouml
@@ -630,9 +636,11 @@ readAheadLimit
 readBase
 readBuf
 readerClosed
+readlimit
 readPosition
 readPostion
 realLen
+reallyClose
 reallyquiet
 reallyverbose
 renameTo
@@ -828,6 +836,7 @@ uuml
 uxxxx
 valArray
 ver
+versioned
 VK
 vlink
 waitFor
