@@ -6,11 +6,11 @@ JAVAC=javac $(JFLAGS)
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
 JLEX=$(JAVA) $(JFLAGS) JFlex.Main
-CVS=cvs
+CVS=cvs -q
 
 all: compile build javadoc htmlsource
 
-compile: buildclean CSVLexer.java \
+compile: clean buildclean CSVLexer.java \
 	BrowserCommandLexer.java \
 	CGILexer.java \
 	ExcelCSVLexer.java
@@ -53,7 +53,7 @@ allclean: clean
 javadoc: javadocclean
 	mv -f package.html temp
 	mkdir doc
-	$(JAVADOC) -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
+	$(JAVADOC) -quiet -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
 	mv -f temp package.html
 
 build: clean compile testclean
@@ -61,7 +61,7 @@ build: clean compile testclean
 	cp *.* Makefile com/Ostermiller/util/
 	mkdir -p gnu/getopt		
 	cp ../../../gnu/getopt/*.* gnu/getopt
-	jar cfv utils.jar com/ gnu/
+	jar cfv utils.jar com/ gnu/ > /dev/null
 	rm -rf com/ gnu/
 
 test: compile
@@ -78,7 +78,7 @@ test: compile
 	rm out.txt CSVTest.txt CircularBufferTestResults.txt
         
 update: clean
-	$(CVS) update
+	$(CVS) update -RPd .
         
 commit: clean
 	$(CVS) commit
