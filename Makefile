@@ -7,7 +7,7 @@ OPTIMIZE=-g:none
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
 JLEXFLAGS=-q -skel csv.jflex.skel
-JLEX=$(JAVA) JFlex.Main  $(JLEXFLAGS)
+JLEX=jflex $(JLEXFLAGS)
 CVS=cvs -q
 BTE=bte
 
