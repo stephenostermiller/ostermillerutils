@@ -1,30 +1,49 @@
 <!doctype html public "-//w3c//dtd html 4.0 transitional//en">
 <html>
 <head>
-   <meta name="description" content="Java library to read values from a file that is in Comma Separated Value (CSV) format.">
-   <meta name="keywords" content="csv, csv, csv, comma, separated, value, values, comma, separated, value, values comma separated value, values, java, util, utility, class, library, libraries, source, code, open source, gpl">
-   <title>CSV Parser</title>
+   <meta name="description" content="Java libraries to read and write files in Comma Separated Value (CSV) format.">
+   <meta name="keywords" content="csv, csv, csv, comma, separated, value, values, comma, separated, value, values comma separated value, values, java, util, utility, utilities, class, classes, library, libraries, source, code, open source, gpl, write, print, output, input, read, array, string, reading, writing, parsing, lexing, printing, seperated, file, files, format, data, file format, data format">
+   <title>Comma Separated Values (CSV) in Java</title>
    <base href="http://ostermiller.org/utils/">
 </head>
 <body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
 
-<h1><a name="csv_parser">CSV Parser</a></h1>
+<h1>Comma Separated Values (CSV) in Java</h1>
 
-<P>Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
+<hr>
+
+<h2>Writing CSV files: CSVPrinter</h2>
+<p>This class makes it easy to output CSV.  Given values, it will automatically determine if they need to be quoted and
+escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
+
+<p>[<a href="./#download">Download /w Source Code</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVPrinter.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CSVPrinter.java/HEAD">Browse Source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVPrinter.html">Documentation</a>]</p>
+
+<hr>
+
+<h2><a name="csv_parser">Reading CSV files: CSVParser</a></h2>
+
+<p>Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
 First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get
 Strings in quotes that have commas inside them.  This CSV parser takes care of those issues and
-support line numbering, escape characters, and comments.</P>
+support line numbering, escape characters, and comments.  Each line of values can be returned as an array, or 
+the values can be returned individually with the number of the line from which they came.</p>
 
-<P>There is also a <a href="CSVRegressionTest.csv">regression test</a> and the expected
-<a href="CSVRegressionTestResults.txt">results</a> of that test available.</P>
+<p>[<a href="./#download">Download /w Source Code</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVParser.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CSVParser.java/HEAD">Browse Source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVParser.html">Documentation</a>]</p>
 
-<P>This parser was created using <a href="http://www.jflex.de/">JFlex</a> and you will need to have
-it if you want to modify the parser.</P>
+<h3>CSVLexer</h3>
 
-<p>[<a href="./#download">Download</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVLexer.java/0">Version History</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CSVLexer.java/HEAD">Browse Source</a> |
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVLexer.html">Documentation</a>]</p>
+<p>The lexer (CSVLexer) created using <a href="http://www.jflex.de/">JFlex</a> is still available in the download and is
+still supported.  In fact,  CSVParser uses it behind the scenes.  However, CSVParser has a much cleaner, full-featured API
+and its use is recommended.</p>
+
+<p>A CSVLexer <a href="CSVRegressionTest.csv">regression test</a> and the expected
+<a href="CSVRegressionTestResults.txt">results</a> of that test available.</p>
 
 <hr>
 
