@@ -69,6 +69,20 @@ import java.util.*;
 public class CSVParser implements CSVParse {
 
 	/**
+	 * InputStream on which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 */
+	private InputStream inStream;
+
+	/**
+	 * Reader on which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 */
+	private Reader inReader;
+
+	/**
 	 * Does all the dirty work.
 	 * Calls for new tokens are routed through
 	 * this object.
@@ -114,7 +128,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CSVParser(java.io.InputStream in){
+	public CSVParser(InputStream in){
+		inStream = in;
 		lexer = new CSVLexer(in);
 	}
 
@@ -126,7 +141,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CSVParser(java.io.Reader in){
+	public CSVParser(Reader in){
+		inReader = in;
 		lexer = new CSVLexer(in);
 	}
 
@@ -144,7 +160,8 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
+	public CSVParser(InputStream in, String escapes, String replacements, String commentDelims){
+		inStream = in;
 		lexer = new CSVLexer(in);
 		setEscapes(escapes, replacements);
 		setCommentStart(commentDelims);
@@ -161,10 +178,22 @@ public class CSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
+	public CSVParser(Reader in, String escapes, String replacements, String commentDelims){
+		inReader = in;
 		lexer = new CSVLexer(in);
 		setEscapes(escapes, replacements);
 		setCommentStart(commentDelims);
+	}
+
+	/**
+	 * Close any stream upon which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 * @throws IOException if an error occurs while closing the stream.
+	 */
+	public void close() throws IOException {
+		if (inStream != null) inStream.close();
+		if (inReader != null) inReader.close();
 	}
 
 	/**

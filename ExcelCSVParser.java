@@ -72,6 +72,20 @@ import java.util.*;
 public class ExcelCSVParser implements CSVParse {
 
 	/**
+	 * InputStream on which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 */
+	private InputStream inStream;
+
+	/**
+	 * Reader on which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 */
+	private Reader inReader;
+
+	/**
 	 * Does all the dirty work.
 	 * Calls for new tokens are routed through
 	 * this object.
@@ -114,7 +128,7 @@ public class ExcelCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public ExcelCSVParser(java.io.InputStream in) {
+	public ExcelCSVParser(InputStream in) {
 		lexer = new ExcelCSVLexer(in);
 	}
 
@@ -126,8 +140,19 @@ public class ExcelCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public ExcelCSVParser(java.io.Reader in) {
+	public ExcelCSVParser(Reader in) {
 		lexer = new ExcelCSVLexer(in);
+	}
+
+	/**
+	 * Close any stream upon which this parser is based.
+	 *
+	 * @since ostermillerutils 1.02.22
+	 * @throws IOException if an error occurs while closing the stream.
+	 */
+	public void close() throws IOException {
+		if (inStream != null) inStream.close();
+		if (inReader != null) inReader.close();
 	}
 
 	/**
