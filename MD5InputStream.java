@@ -68,7 +68,7 @@ public class MD5InputStream extends FilterInputStream {
      * <p>
      * This method simply performs in.read() and returns the result. 
      * 
-     * @returns the next byte of data, or -1 if the end of the stream is reached.
+     * @return the next byte of data, or -1 if the end of the stream is reached.
      * @throws IOException if an I/O error occurs.
      */
     public int read() throws IOException {
