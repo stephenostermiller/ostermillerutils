@@ -82,7 +82,7 @@ import java.io.*;
      * Return the next token from the browser command.
      *
      * @return the next token
-     * @throws IOException if a error occurs while reading the command.
+     * @throws IOException if an error occurs while reading the command.
      */
     public String getNextToken() throws IOException {
         return getToken();
