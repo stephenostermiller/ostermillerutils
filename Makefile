@@ -1,10 +1,16 @@
-JFLAGS=
+CLASSPATH=../../..
+SOURCPATH=../../..
+JFLAGS=-classpath $(CLASSPATH)
+JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
 JAVAC=javac
 JAVA=java
-JAVADOC=javadoc
+JAVADOC=javadoc $(JDFLAGS)
 JLEX=$(JAVA) $(JFLAGS) JFlex.Main
+CVS=cvs
 
-all: CSVLexer.java \
+all: compile build javadoc
+
+compile: CSVLexer.java \
 	BrowserCommandLexer.java \
 	CGILexer.java \
 	ExcelCSVLexer.java
@@ -22,30 +28,32 @@ BrowserCommandLexer.java: BrowserCommandLexer.lex
 ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
-clean:
-	rm -rf docs/ gnu/ com/
-	rm -f *.class
-	rm -f *~
-	rm -f ~*
-	rm -f *.jar
-	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
-	rm -f CSVTest.txt
+junkclean:
+	rm -f *~ ~* utils_*.jar
+	rm -rf com/ gnu/
 
-docs:
-	rm -rf doc/ docs/
+buildclean: junkclean
+	rm -f utils.jar
+        
+javadocclean: junkclean
+	rm -rf doc/
+
+clean: buildclean javadocclean
+	rm -f *.class
+        
+allclean: clean
+	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
+
+javadoc: javadocclean
+	mv -f package.html temp
 	mkdir doc
 	$(JAVADOC) -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
+	mv -f temp package.html
 
-build:
-	rm -f utils.jar
-	rm -f *~
-	rm -f ~*
-	mkdir com
-	mkdir com/Ostermiller
-	mkdir com/Ostermiller/util
+build: junkclean
+	mkdir -p com/Ostermiller/util
 	cp *.* Makefile com/Ostermiller/util/
-	mkdir gnu
-	mkdir gnu/getopt		
+	mkdir -p gnu/getopt		
 	cp ../../../gnu/getopt/*.* gnu/getopt
 	jar cfv utils.jar com/ gnu/
 	rm -rf com/ gnu/
@@ -60,4 +68,18 @@ test:
 	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
 	diff out.txt CSVTestResults.txt
 	rm out.txt
+        
+update: clean
+	$(CVS) update
+        
+commit: clean
+	$(CVS) commit
+
+release: compile build javadoc test
+	mv -f package.html temp
+	scp -r *.html utils.jar doc/ deadsea@ostermiller.org:www/utils
+	mv -f temp package.html
+
+install:
+	./install.sh
 
