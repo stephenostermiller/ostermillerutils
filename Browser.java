@@ -285,7 +285,7 @@ public class Browser {
             displayURL(urls[0]);
             return;
         }
-        File shortcut = new File(System.getProperty("user.home"), "java");
+        File shortcut = new File(System.getProperty("user.home"), ".java");
         shortcut = new File(shortcut, "Browser");
         shortcut.mkdirs();
         shortcut = new File(shortcut, "DisplayURLs.html");
@@ -298,10 +298,10 @@ public class Browser {
         out.println("<title>Open URLs</title>");
         out.println("<script language=\"javascript\" type=\"text/javascript\">");
         out.println("function displayURLs(){");    
-        for (int i=0; i<urls.length-1; i++){
+        for (int i=1; i<urls.length; i++){
             out.println("window.open(\"" + urls[i] + "\", \"_blank\", \"toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes\");");
         }
-        out.println("location.href=\"" + urls[urls.length-1] + "\";");
+        out.println("location.href=\"" + urls[0] + "\";");
         out.println("}");
         out.println("</script>");
         out.println("</head>");
@@ -314,6 +314,7 @@ public class Browser {
         out.println("</body>");
         out.println("</html>");
         out.close();
+        System.out.println(shortcut.toURL().toString());
         displayURL(shortcut.toURL().toString());
     
     }
@@ -334,9 +335,10 @@ public class Browser {
                     "http://www.gjt.org",
                 });
             } else {
-                for (int i=0; i<args.length; i++){
+                Browser.displayURLs(args);
+                /*for (int i=0; i<args.length; i++){
                     Browser.displayURL(args[i]);
-                }
+                }*/
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
