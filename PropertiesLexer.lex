@@ -40,7 +40,10 @@ import java.io.*;
  *  }
  *  </PRE>
  *  </CODE>
+ *
  * @see PropertiesToken
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */ 
 
 %%
@@ -60,6 +63,8 @@ import java.io.*;
      * the name of the file to use as input
      *
      * @param args program arguments, of which the first is a filename
+	 *
+	 * @since ostermillerutils 1.00.00
      */
     public static void main(String[] args) {
         InputStream in;

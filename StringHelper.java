@@ -24,6 +24,9 @@ import java.util.HashMap;
  * Utilities for String formatting, manipulation, and queries.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/StringHelper.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class StringHelper {
 
@@ -39,6 +42,8 @@ public class StringHelper {
 	 * @param length desired length of result.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String prepad(String s, int length){
 		return prepad(s, length, ' ');
@@ -57,6 +62,8 @@ public class StringHelper {
 	 * @param c padding character.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String prepad(String s, int length, char c){
 		int needed = length - s.length();
@@ -83,6 +90,8 @@ public class StringHelper {
 	 * @param length desired length of result.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String postpad(String s, int length){
 		return postpad(s, length, ' ');
@@ -101,6 +110,8 @@ public class StringHelper {
 	 * @param c padding character.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String postpad(String s, int length, char c){
 		int needed = length - s.length();
@@ -132,6 +143,8 @@ public class StringHelper {
 	 * @param length desired length of result.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String midpad(String s, int length){
 		return midpad(s, length, ' ');
@@ -155,6 +168,8 @@ public class StringHelper {
 	 * @param c padding character.
 	 * @return padded String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String midpad(String s, int length, char c){
 		int needed = length - s.length();
@@ -205,6 +220,8 @@ public class StringHelper {
 	 * @param delimiter String literal on which to split.
 	 * @return an array of tokens.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String[] split(String s, String delimiter){
 		int delimiterLength;
@@ -277,6 +294,8 @@ public class StringHelper {
 	 * @param replace String to replace.
 	 * @return a string with all the occurrences of the string to find replaced.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String replace(String s, String find, String replace){
 		int findLength;
@@ -385,6 +404,8 @@ public class StringHelper {
 	 * @param s String to be escaped
 	 * @return escaped String
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String escapeHTML(String s){
 		int length = s.length();
@@ -496,6 +517,8 @@ public class StringHelper {
 	 * @param s String to be escaped
 	 * @return escaped String
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String escapeSQL(String s){
 		int length = s.length();
@@ -551,6 +574,8 @@ public class StringHelper {
 	 * @param s String to be escaped
 	 * @return escaped String
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String escapeJavaLiteral(String s){
 		int length = s.length();
@@ -613,6 +638,8 @@ public class StringHelper {
 	 * @param c list of characters to trim from s.
 	 * @return trimmed String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String trim(String s, String c){
 		int length = s.length();
@@ -917,6 +944,8 @@ public class StringHelper {
 	 * @param s String to be unescaped.
 	 * @return unescaped String.
 	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String unescapeHTML(String s){
 		StringBuffer result = new StringBuffer(s.length());

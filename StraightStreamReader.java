@@ -35,11 +35,16 @@ import java.io.*;
  * <P>
  * For top efficiency, consider wrapping an StraightStreamReader within a BufferedReader. For example:<br>
  * <code>BufferedReader in = new BufferedReader(new StraightStreamReader(System.in));</code>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class StraightStreamReader extends Reader{
 
 	/**
 	 * The input stream from which all methods in this class read.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private InputStream in;
 
@@ -49,6 +54,8 @@ public class StraightStreamReader extends Reader{
 	 * deletion each time a read is called.  This buffer may be
 	 * null and may not be large enough.  Make sure to check i
 	 * before using it.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private byte[] buffer;
 
@@ -56,6 +63,8 @@ public class StraightStreamReader extends Reader{
 	 * Create a StraightStreamReader from an InputStream
 	 *
 	 * @param in InputStream to wrap a Reader around.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public StraightStreamReader(InputStream in) {
 		this.in = in;
@@ -65,6 +74,8 @@ public class StraightStreamReader extends Reader{
 	 * Close the stream.
 	 *
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void close() throws IOException {
 		in.close();
@@ -79,6 +90,8 @@ public class StraightStreamReader extends Reader{
 	 *    while still preserving the mark. After reading this many characters,
 	 *    attempting to reset the stream may fail.
 	 * @throws IOException If the stream does not support mark(), or if some other I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void mark(int readAheadLimit) throws IOException {
 		in.mark(readAheadLimit);
@@ -88,6 +101,8 @@ public class StraightStreamReader extends Reader{
 	 * Tell whether this stream supports the mark() operation.
 	 *
 	 * @return true if and only if this stream supports the mark operation.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean markSupported(){
 		return in.markSupported();
@@ -100,6 +115,8 @@ public class StraightStreamReader extends Reader{
 	 * @return The character read, as an integer in the range 0 to 256 (0x00-0xff), or -1 if
 	 *    the end of the stream has been reached
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read() throws IOException {
 		return in.read();
@@ -112,6 +129,8 @@ public class StraightStreamReader extends Reader{
 	 * @param cbuf Destination buffer
 	 * @return The number of bytes read, or -1 if the end of the stream has been reached
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read(char[] cbuf) throws IOException {
 		return read(cbuf, 0, cbuf.length);
@@ -126,6 +145,8 @@ public class StraightStreamReader extends Reader{
 	 * @param len Maximum number of characters to read
 	 * @return The number of bytes read, or -1 if the end of the stream has been reached
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public int read(char[] cbuf, int off, int len) throws IOException {
 		// ensure the capacity of the buffer that we will be using
@@ -147,6 +168,8 @@ public class StraightStreamReader extends Reader{
 	 * @return True if the next read() is guaranteed not to block for input, false otherwise.
 	 *    Note that returning false does not guarantee that the next read will block.
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean ready() throws IOException {
 		return (in.available() > 0);
@@ -161,6 +184,8 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @throws IOException If the stream has not been marked, or if the mark has been invalidated,
 	 *    or if the stream does not support reset(), or if some other I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void reset() throws IOException {
 		in.reset();
@@ -174,6 +199,8 @@ public class StraightStreamReader extends Reader{
 	 * @return The number of characters actually skipped
 	 * @throws IllegalArgumentException If n is negative
 	 * @throws IOException If an I/O error occurs
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public long skip(long n) throws IOException {
 		return in.skip(n);
@@ -188,6 +215,8 @@ public class StraightStreamReader extends Reader{
 	 * read, write, and delete access to this file.
 	 *
 	 * @param args command line arguments (ignored)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static void main(String[] args){
 		try {
