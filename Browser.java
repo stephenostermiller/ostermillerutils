@@ -134,7 +134,7 @@ public class Browser {
                 char c = url.charAt(i);
                 if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
                     || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?' 
-                    || c == '%' || c =='+'){
+                    || c == '%' || c =='+' || c == '='){
                     //characters that are nessesary for urls and should be safe
                     //to pass to exec.  Exec uses a default string tokenizer with
                     //the default arguments (whitespace) to separate command line
@@ -148,6 +148,7 @@ public class Browser {
                     } else {
                         sb.append("%" + Integer.toHexString(c));
                     }
+
                 }                 
             }
             String[] messageArray = new String[1];
