@@ -99,7 +99,7 @@ public class LineEnds {
 					}
 					maxLength += 2;
 					System.out.println(
-						labels.getString("lineends") + " [-" + oneLetterOptions + "] <" + labels.getString("files") + "\n" +
+						labels.getString("lineends") + " [-" + oneLetterOptions + "] <" + labels.getString("files") + ">\n" +
 						labels.getString("purpose.message") + "\n" +
 						"  " + labels.getString("stdin.message") + "\n" +
 						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
