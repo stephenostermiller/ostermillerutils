@@ -326,7 +326,7 @@ public class CSVParser implements CSVParse {
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
-		Vector<String> v = new Vector<String>();
+		Vector v = new Vector();
 		if (tokenCache != null){
 			v.add(tokenCache);
 			lineNumber = lineCache;
@@ -362,7 +362,7 @@ public class CSVParser implements CSVParse {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[][] getAllValues() throws IOException {
-		Vector<String[]> v = new Vector<String[]>();
+		Vector v = new Vector();
 		String[] line;
 		while((line = getLine()) != null){
 			v.add(line);

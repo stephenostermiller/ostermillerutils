@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1210
+personal_ws-1.1 en 1216
 aa
 aA
 aaa
@@ -241,6 +241,7 @@ da
 Dansk
 darr
 dArr
+de
 decodeall
 decodeBuffer
 decodeEndLine
@@ -556,6 +557,7 @@ javascript
 JavaScript
 JavaWorld
 JButton
+JDBC
 JDialog
 JDK
 JFileChooser
@@ -717,6 +719,7 @@ nextValue
 nextValueLine
 nfe
 ni
+Nilo
 njust
 nline
 nLine
@@ -913,8 +916,10 @@ retval
 reversebase
 reverseBase
 rfloor
+Ricebridge
 rlm
 Roedy
+Roock
 rotateLeft
 RSA
 rsaquo
@@ -1007,6 +1012,7 @@ SizeLimitInputStreams
 SizeLimitInputStreamTests
 skipDelimiters
 slis
+Soard
 solaris
 somebodyelse
 someCharacterEscaped

@@ -1,7 +1,8 @@
 /*
  * Control a web browser from your java application.
- * Copyright (C) 2001-2002 Stephen Ostermiller
+ * Copyright (C) 2001-2005 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * Copyright (C) 2005 Johann N. Loefflmann <jonelo@jonelo.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -108,7 +109,7 @@ public class Browser {
 				"rundll32 url.dll,FileProtocolHandler {0}",
 			};
 		} else if (System.getProperty("os.name").startsWith("Mac")){
-			Vector<String> browsers = new Vector<String>();
+			Vector browsers = new Vector();
 			try {
 				Process p = Runtime.getRuntime().exec("which open");
 				if (p.waitFor() == 0){
@@ -122,8 +123,10 @@ public class Browser {
 			} else {
 				exec = (String[])browsers.toArray(new String[0]);
 			}
+		} else if (System.getProperty("os.name").startsWith("SunOS")) {
+			exec = new String[]{"/usr/dt/bin/sdtwebclient {0}"};
 		} else {
-			Vector<String> browsers = new Vector<String>();
+			Vector browsers = new Vector();
 			try {
 				Process p = Runtime.getRuntime().exec("which firebird");
 				if (p.waitFor() == 0){
@@ -350,7 +353,7 @@ public class Browser {
 						// stick the url into the command
 						command = MessageFormat.format(exec[i], (Object[])messageArray);
 						// parse the command line.
-						Vector<String> argsVector = new Vector<String>();
+						Vector argsVector = new Vector();
 						BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
 						String t;
 						while ((t = lex.getNextToken()) != null) {

@@ -682,7 +682,7 @@ public class StringHelper {
 		return s.substring(start, end);
 	}
 
-	private static HashMap<String, Integer> htmlEntities = new HashMap<String, Integer>();
+	private static HashMap htmlEntities = new HashMap();
 	static {
 		htmlEntities.put("nbsp", new Integer(160));
 		htmlEntities.put("iexcl", new Integer(161));

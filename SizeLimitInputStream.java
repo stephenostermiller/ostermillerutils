@@ -58,6 +58,22 @@ public class SizeLimitInputStream extends InputStream {
 	protected long bytesRead = 0;
 
 	/**
+	 * The number of bytes that have been read
+	 * from this stream since mark() was called.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	protected long bytesReadSinceMark = 0;
+
+	/**
+	 * The number of bytes the user has request
+	 * to have been marked for reset.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	protected long markReadLimitBytes = -1;
+
+	/**
 	 * Get the number of bytes actually read
 	 * from this stream.
 	 *
@@ -127,6 +143,7 @@ public class SizeLimitInputStream extends InputStream {
 		int b = in.read();
 		if(b != -1){
 			bytesRead++;
+			bytesReadSinceMark++;
 		}
 		return b;
 	}
@@ -151,6 +168,7 @@ public class SizeLimitInputStream extends InputStream {
 		}
 		int bytesJustRead = in.read(b, off, len);
 		bytesRead += bytesJustRead;
+		bytesReadSinceMark += bytesJustRead;
 		return bytesJustRead;
 	}
 
@@ -198,15 +216,23 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void mark(int readlimit) {
-		in.mark(readlimit);
+	public void mark(int readlimit){
+		if (in.markSupported()){
+			markReadLimitBytes = readlimit;
+			bytesReadSinceMark = 0;
+			in.mark(readlimit);
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public void reset() throws IOException {
-		in.reset();
+		if (in.markSupported() && bytesReadSinceMark <= markReadLimitBytes){
+			bytesRead -= bytesReadSinceMark;
+			in.reset();
+			bytesReadSinceMark = 0;
+		}
 	}
 
 	/**
