@@ -12,7 +12,7 @@
 
 <p>Bas64 encoding and decoding of data.  Encode and decode methods for Strings, byte arrays, and streams.</p>
 
-<p>Base64 is needed in many places other than its original use as an encoding format for transfering attachements in email.
+<p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
 It can be used anytime binary or arbitrary data needs to be represented in
 common printable characters.  For example to connect to a web page that requires a username and password (basic authentication) you need to Base64 encode the username and password.  Here is a snippet to do so:<br>
 <blockquote><code>
@@ -27,7 +27,7 @@ InputStream in = connection.getInputStream();<br>
 <p>Be aware that Base64 encoding in <i>not</i> encryption.  Base64 scrambles the
 output and it may appear to be unreadable, but it is easily readable by
 anybody with a little experience or time.  Base64 encoded strings will often end
-in one or two equal signs, and they will have only letters, numbers, plusses, and slashes.
+in one or two equal signs, and they will have only letters, numbers, pluses, and slashes.
 Once somebody figures out that it is in Base64, it is just a matter of running
 the decode method on it.  Furthermore, real encryption algorithms will change
 the entire output if one bit in the input changes.  If you change a letter in a
