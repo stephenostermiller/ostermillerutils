@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -e Tabs.class ]
+then
+    javac Tabs.java
+fi
+
 tablist=""
 
 for file in *.java
@@ -22,5 +27,5 @@ do
         tablist="$tablist $file"  
     fi    
 done
-java com.Ostermiller.util.Tabs -gtv $tablist
+java -classpath ../../.. com.Ostermiller.util.Tabs -gtv $tablist
 
