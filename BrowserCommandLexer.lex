@@ -82,7 +82,7 @@ import java.io.*;
     }
 %}
 
-%full
+%unicode
 
 AnyChar=([A]|[^A])
 Escape=([\\]{AnyChar})

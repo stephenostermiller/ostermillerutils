@@ -77,7 +77,7 @@ import java.io.*;
     private StringBuffer token = new StringBuffer();
 %}
 
-%full
+%unicode
 
 %state VALUE
 
