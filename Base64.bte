@@ -137,9 +137,16 @@ unknown
 Annotated code and nifty graphic that shows how
 Base64 encoding works. Supports byte array to byte array operations.
 </td></tr>
+
+<tr><td>
+Sinotar<br>
+<a href="http://www.sinotar.com/download/base64/README.html">com.sinotar.algorithm.Base64</a>
+</td><td>
+Open source, free only for personal use.
+</td><td>
+Encodes from byte arrays to strings, decodes from strings to byte arrays.
+</td></tr>
+
 </table>
-
-
-
 <%/bte.tpl%>
 <%/bte.doc%>
