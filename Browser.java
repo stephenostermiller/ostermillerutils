@@ -336,9 +336,6 @@ public class Browser {
                 });
             } else {
                 Browser.displayURLs(args);
-                /*for (int i=0; i<args.length; i++){
-                    Browser.displayURL(args[i]);
-                }*/
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
