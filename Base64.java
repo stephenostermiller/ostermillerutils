@@ -273,7 +273,7 @@ public class Base64{
             // are not -1 before using them.
             // The basic idea is that the three bytes get split into
             // four bytes along these lines:
-            // [AAAAAABB] [BBBBCCCCC] [CCDDDDDD]
+            //      [AAAAAABB] [BBBBCCCC] [CCDDDDDD]
             // [xxAAAAAA] [xxBBBBBB] [xxCCCCCC] [xxDDDDDD]
             // bytes are considered to be zero when absent.
             // the four bytes are then mapped to common ASCII symbols
@@ -428,7 +428,7 @@ public class Base64{
             // The basic idea is that the four bytes will get reconstituted
             // into three bytes along these lines:
             // [xxAAAAAA] [xxBBBBBB] [xxCCCCCC] [xxDDDDDD]
-            // [AAAAAABB] [BBBBCCCCC] [CCDDDDDD]
+            //      [AAAAAABB] [BBBBCCCC] [CCDDDDDD]
             // bytes are considered to be zero when absent.
 
             // six A and two B
