@@ -92,7 +92,7 @@ public class MD5 {
             // add the padding
             update(finalState, padding, 0, padlen);
             // add the length (computed before padding was added)
-            update(finalState, bitCount);	
+            update(finalState, bitCount);   
             finalState.valid = true;
         }
         // make a copy of the hash before returning it.
@@ -263,7 +263,7 @@ public class MD5 {
         return getHashString();
     }
 
-    /**	
+    /** 
      * Update this hash with the given data.
      * <p>
      * A state may be passed into this method so that we can add padding
@@ -273,7 +273,7 @@ public class MD5 {
      * If length bytes are not available to be hashed, as many bytes as
      * possible will be hashed.
      *
-     * @param state	Which state is updated.
+     * @param state Which state is updated.
      * @param buffer Array of bytes to be hashed.
      * @param offset Offset to buffer array.
      * @param length number of bytes to hash.
@@ -298,28 +298,23 @@ public class MD5 {
         int partlen = 64 - index;        
         int i = 0;
         if (length >= partlen) {
-            for (i = 0; i < partlen; i++){
-	            state.buffer[i + index] = buffer[i + offset];
-            }
-            
+            System.arraycopy(buffer, offset, state.buffer, index, partlen);
             transform(state, decode(state.buffer, 64, offset));
-
             for (i = partlen; (i + 63) < length; i+= 64){
-	            transform(state, decode(buffer, 64, i));
+                transform(state, decode(buffer, 64, i));
             }
-
             index = 0;
-        } 
+        }
 
-        // buffer remaining input 
-        if (i < length) {            
+        // buffer remaining input
+        if (i < length) {
             for (int start = i; i < length; i++) {
-	            state.buffer[index + i - start] = buffer[i + offset];
+                state.buffer[index + i - start] = buffer[i + offset];
             }
         }
     }
 
-    /**	
+    /**
      * Update this hash with the given data.
      * <p>
      * If length bytes are not available to be hashed, as many bytes as
@@ -333,7 +328,7 @@ public class MD5 {
         update(workingState, buffer, offset, length);
     }
 
-    /**	
+    /**
      * Update this hash with the given data.
      * <p>
      * If length bytes are not available to be hashed, as many bytes as
@@ -346,7 +341,7 @@ public class MD5 {
         update(buffer, 0, length);
     }
 
-    /**	
+    /** 
      * Update this hash with the given data.
      *
      * @param buffer Array of bytes to be hashed.
@@ -358,7 +353,7 @@ public class MD5 {
     /**
      * Updates this hash with a single byte.
      *
-     * @param b	byte to be hashed.
+     * @param b byte to be hashed.
      */
     public void update (byte b) {
         byte buffer[] = new byte[1];
@@ -369,9 +364,9 @@ public class MD5 {
     /**
      * Update this hash with a long.
      * This hash will be updated in a little endian order with the
-     * the least significant byte going first. 
+     * the least significant byte going first.
      *
-     * @param l	long to be hashed.
+     * @param l long to be hashed.
      */
     private void update (MD5State state, long l) {
         update(
@@ -441,7 +436,7 @@ public class MD5 {
                 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 
-                0, 0, 0, 0, 0, 0, 0, 0, 
+                0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0,
     };
@@ -451,7 +446,7 @@ public class MD5 {
      * Passes MD5 test suite as defined in RFC1321.
      */
     private class MD5State {
-        
+
         /**
          * True if this state is valid.
          */
@@ -487,7 +482,7 @@ public class MD5 {
         public MD5State() { 
             reset();
         }
-        
+
         /** 
          * Set this state to be exacly the same as some other.
          *
@@ -507,7 +502,7 @@ public class MD5 {
      * a two digit unsigned hex number.
      * 
      * @param hash Array of bytes to convert to hex-string
-     * @return	Generated hex string
+     * @return  Generated hex string
      */
     private static String toHex(byte hash[]){
         StringBuffer buf = new StringBuffer(hash.length * 2);
@@ -516,7 +511,7 @@ public class MD5 {
             if (intVal < 0x10){
                 // append a zero before a one digit hex 
                 // number to make it two digits.
-	            buf.append("0");
+                buf.append("0");
             }
             buf.append(Integer.toHexString(intVal));
         }
@@ -559,9 +554,9 @@ public class MD5 {
         return a + b;
     }
     
-    private static byte[] encode(int input[], int len){    
+    private static byte[] encode(int input[], int len){
         byte[] out = new byte[len];
-        int	i, j;
+        int i, j;
         for (i = j = 0; j  < len; i++, j += 4) {
             out[j] = (byte) (input[i] & 0xff);
             out[j + 1] = (byte) ((input[i] >>> 8) & 0xff);
@@ -576,15 +571,15 @@ public class MD5 {
         for (i = j = 0; j < len; i++, j += 4) {
               decodeBuffer[i] = (
                   (int) (buffer[j + offset] & 0xff)) | 
-	              (((int) (buffer[j + 1 + offset] & 0xff)) << 8) |
-	              (((int) (buffer[j + 2 + offset] & 0xff)) << 16) | 
-	              (((int) (buffer[j + 3 + offset] & 0xff)) << 24
+                  (((int) (buffer[j + 1 + offset] & 0xff)) << 8) |
+                  (((int) (buffer[j + 2 + offset] & 0xff)) << 16) | 
+                  (((int) (buffer[j + 3 + offset] & 0xff)) << 24
               );
         }
         return decodeBuffer;
     }
 
-    private static void transform(MD5State state, int[] x){      	
+    private static void transform(MD5State state, int[] x){         
         int a = state.state[0];
         int b = state.state[1];
         int c = state.state[2];
