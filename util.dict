@@ -1,4 +1,4 @@
-personal_ws-1.1 english 954
+personal_ws-1.1 en 955
 aa
 aaa
 AAAAAABB
@@ -226,6 +226,7 @@ endian
 endsWith
 ensp
 ensureMark
+EOF
 escapeAndQuote
 escapeHTML
 escapeJavaLiteral
