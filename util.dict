@@ -1,4 +1,4 @@
-personal_ws-1.1 english 720
+personal_ws-1.1 english 740
 aa
 aaa
 AAAAAABB
@@ -35,12 +35,14 @@ ArrayList
 ascii
 AstringB
 atStart
+Attesoro
 availableInd
 avoidRepetition
 badcfe
 bb
 BBBBCCCC
 bdceee
+bde
 bdecfa
 beea
 bgcolor
@@ -178,6 +180,10 @@ eldagx
 eldagxfqQvV
 elementAt
 emptyReturned
+encodeToBytes
+encodeToFile
+encodeToStream
+encodeToString
 endian
 endsWith
 ensureMark
@@ -200,6 +206,7 @@ fileAction
 fileChooser
 FileHelper
 FileInputStream
+FileNotFoundException
 FileOutputStream
 FileProtocolHandler
 FileWriter
@@ -264,12 +271,14 @@ getPassword
 getPosition
 getProperties
 getProperty
+getPropertyNameCount
 getQueryString
 getReader
 getSize
 getSource
 getSpaceLeft
 getString
+getSystemResourceAsStream
 getText
 getValue
 getValues
@@ -314,6 +323,7 @@ inBuffer
 indexOf
 indexOfNextDelimiter
 init
+inLength
 inputDone
 inputstream
 inputStream
@@ -386,6 +396,7 @@ markPostion
 markSize
 markSupported
 maxDelimChar
+maxEncodeOutLength
 maxLength
 maxreps
 md
@@ -394,6 +405,7 @@ messageArray
 MessageFormat
 midpad
 MIDZEROS
+mkdirs
 mostCombined
 mostPlace
 mostSpaces
@@ -411,6 +423,7 @@ nameLabel
 NaN
 nbsp
 Nederlands
+neededPadding
 netscape
 newBuffer
 newLength
@@ -534,6 +547,7 @@ returnEmptyTokens
 retval
 reversebase
 reverseBase
+Roedy
 rotateLeft
 RSA
 rundll
@@ -589,6 +603,7 @@ setText
 sharedWorkspace
 shortValue
 showDialog
+sifqQvV
 sigfigs
 significantFigures
 sigs
@@ -604,12 +619,14 @@ stName
 str
 StraightStreamReader
 StreamTokenizer
+stringAction
 StringBuffer
 StringHelper
 stringLength
 StringReader
 StringTokenizer
 strLength
+systemResource
 tabInd
 tabStops
 tabWidth
@@ -619,6 +636,7 @@ testName
 theGettysburgAddress
 Throwable
 throwExceptions
+tld
 toArray
 toByteArray
 toCharArray
@@ -669,6 +687,8 @@ urlencodes
 URLEncoding
 urls
 useAlph
+userFile
+userhome
 username
 util
 Utilites
