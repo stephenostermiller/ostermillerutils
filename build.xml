@@ -10,66 +10,91 @@
   <!-- http://jflex.de/jflex_anttask.html -->
   <taskdef classname="JFlex.anttask.JFlexTask" name="jflex" />
   <target name="javafiles" depends="init" description="Create lexical source files." >
-    <jflex file="BrowserCommandLexer.lex" destdir="${top}" />
+    <jflex file="BrowserCommandLexer.lex" skeleton="browser.jflex.skel" destdir="${top}" />
     <jflex file="CSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
-    <jflex file="PropertiesLexer.lex" destdir="${top}" />
-    <jflex file="CGILexer.lex" destdir="${top}" />
+    <jflex file="PropertiesLexer.lex" skeleton="properties.jflex.skel" destdir="${top}" />
+    <jflex file="CGILexer.lex" skeleton="cgi.jflex.skel" destdir="${top}" />
     <jflex file="ExcelCSVLexer.lex" skeleton="csv.jflex.skel" destdir="${top}" />
   </target>
 
   <!-- http://ostermiller.org/syntax/ant.html -->
   <taskdef name="syntax" classname="com.Ostermiller.Syntax.ToHTMLAntTask"/>
   <target name="syntax">
-	<mkdir dir="src" />
+    <mkdir dir="src" />
     <syntax srcdir="." 
-	  destdir="src"
-	  includes="*.lex *.java *.properties" 
-	  excludes="*Lexer.java"
-	  template="src.bte">
-	  <parameter type="ignore" name="whitespace" />
-	</syntax>
-	<copy file="syntax.css" todir="src" />
+      destdir="src"
+      includes="*.lex *.java *.properties" 
+      excludes="*Lexer.java"
+      template="src.bte">
+      <parameter type="ignore" name="whitespace" />
+    </syntax>
+    <copy file="syntax.css" todir="src" />
   </target>
 
   <target name="compile" depends="javafiles,init" description="Compile the source." >
     <javac 
-	  srcdir="${top}" 
-	  destdir="${top}" 
-	  classpath="${top}" 
-	  includes="${proj}/*.java"
-	  failonerror="true" 
-	  debug="false"
-	/>
+      srcdir="${top}" 
+      destdir="${top}" 
+      classpath="${top}" 
+      includes="${proj}/*.java"
+      failonerror="true" 
+      debug="false"
+    />
+  </target>
+  
+  <target name="compiledebug" depends="javafiles,init" description="Compile the source." >
+    <javac 
+      srcdir="${top}" 
+      destdir="${top}" 
+      classpath="${top}" 
+      includes="${proj}/*.java"
+      failonerror="true" 
+      debug="true"
+    />
   </target>
   
   <target name="dist" depends="compile,init" description="Create distributable archive." >
     <jar 
-	  destfile="utils.jar" basedir="${top}"
-	  includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
-	  excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
-	  defaultexcludes="no" duplicate="fail" index="true" compress="true"
-	/>
-	<jar 
-	  destfile="randpass.jar" basedir="${top}"
-	  includes="${proj}/*RandPass*.class ${proj}/*RandPass*.properties ${proj}/*.TXT"
-	  defaultexcludes="no" duplicate="fail" index="true" compress="true"
-	/>
+      destfile="utils.jar" basedir="${top}"
+      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
+      excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
+      defaultexcludes="no" duplicate="fail" index="true" compress="true"
+    />
+    <jar 
+      destfile="randpass.jar" basedir="${top}"
+      includes="${proj}/*RandPass*.class ${proj}/*RandPass*.properties ${proj}/*.TXT"
+      defaultexcludes="no" duplicate="fail" index="true" compress="true"
+    />
+  </target>
+  
+  <target name="distdebug" depends="compiledebug,init" description="Create distributable archive." >
+    <jar 
+      destfile="utils.jar" basedir="${top}"
+      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
+      excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
+      defaultexcludes="no" duplicate="fail" index="true" compress="true"
+    />
+    <jar 
+      destfile="randpass.jar" basedir="${top}"
+      includes="${proj}/*RandPass*.class ${proj}/*RandPass*.properties ${proj}/*.TXT"
+      defaultexcludes="no" duplicate="fail" index="true" compress="true"
+    />
   </target>
   
   <target name="doc" depends="javafiles,init" description="Create Java documentation." >
     <delete dir="doc" quiet="true" />
-	<move file="package.html" tofile="temp" />
-	<javadoc 
-	  sourcepath="${top}" 
-	  classpath="${top}" 
-	  destdir="doc" 
-	  packagenames="com.Ostermiller.util" 
-	  bottom="&lt;p&gt;Copyright (c) 2001-2003 by &lt;a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'&gt;Stephen Ostermiller&lt;/a&gt;&lt;/p&gt;"
-	  header="&lt;h1&gt;&lt;a target=\'_top\' href='http://ostermiller.org/utils/'&gt;com.Ostermiller.util&lt;/a&gt; Java Utilities&lt;/h1&gt;"
-	  link="http://java.sun.com/j2se/1.4.1/docs/api/"
-	  failonerror="true"
-	/>
-	<move file="temp" tofile="package.html" />
+    <move file="package.html" tofile="temp" />
+    <javadoc 
+      sourcepath="${top}" 
+      classpath="${top}" 
+      destdir="doc" 
+      packagenames="com.Ostermiller.util" 
+      bottom="&lt;p&gt;Copyright (c) 2001-2003 by &lt;a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'&gt;Stephen Ostermiller&lt;/a&gt;&lt;/p&gt;"
+      header="&lt;h1&gt;&lt;a target=\'_top\' href='http://ostermiller.org/utils/'&gt;com.Ostermiller.util&lt;/a&gt; Java Utilities&lt;/h1&gt;"
+      link="http://java.sun.com/j2se/1.4.1/docs/api/"
+      failonerror="true"
+    />
+    <move file="temp" tofile="package.html" />
   </target>
   
   <target name="update" depends="init" description="Update from CVS." >
@@ -80,10 +105,10 @@
     <delete quiet="true">
       <fileset dir="." includes="*~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt" />
     </delete>
-	<delete dir="com" quiet="true" />
-	<delete dir="gnu" quiet="true" />
-	<delete dir="srcbuild" quiet="true" />
-	<delete dir="META-INF" quiet="true" />	
+    <delete dir="com" quiet="true" />
+    <delete dir="gnu" quiet="true" />
+    <delete dir="srcbuild" quiet="true" />
+    <delete dir="META-INF" quiet="true" />    
   </target>
   
    <target name="javafilesclean" depends="junkclean" description="Delete generated Java files." >
@@ -118,7 +143,13 @@
     <delete quiet="true">
       <fileset dir="." includes="neaten spell release javadoc htmlsource "/>
     </delete>
-	<delete dir="src" quiet="true" />	
+    <delete dir="src" quiet="true" />    
   </target>  
   <target name="cleanall" depends="allclean" description="Deleting files not in CVS." /> 
+
+  <target name="test" depends="compile" description="Running unit tests." >
+    <junit>
+      <test name="my.test.TestCase"/>
+    </junit>
+  </target>
 </project>
