@@ -190,7 +190,8 @@ test:
 	$(JAVA) com.Ostermiller.util.Base64Tests
 	$(JAVA) com.Ostermiller.util.MD5Tests
 	$(JAVA) com.Ostermiller.util.SizeLimitInputStreamTests
-        
+	$(JAVA) com.Ostermiller.util.SignificantFiguresTests
+
 .PHONY: update
 update: 
 	@$(CVS) update -RPd .
