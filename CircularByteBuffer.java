@@ -202,29 +202,9 @@ public class CircularByteBuffer {
 	 * @return the size in bytes of this buffer
 	 */
 	public int getSize(){
-		return buffer.length;
-	}
-
-	String toDebugString(){
-		StringBuffer sb = new StringBuffer(buffer.length);
-		for (int i=0; i<buffer.length; i++){
-			if (i==writePosition){
-				sb.append('$');
-			}
-			if (i==readPosition){
-				sb.append('#');
-			}
-			if (i==markPosition){
-				sb.append('!');
-			}
-			if (buffer[i] >= 0 && buffer[i] <= 9){
-				sb.append(buffer[i]);
-			} else {
-				sb.append(' ');
-			}
+		synchronized (this){
+			return buffer.length;
 		}
-		sb.append('"');
-		return sb.toString();
 	}
 
 	/**

@@ -138,28 +138,9 @@ public class CircularObjectBuffer {
 	 * @return the size in Objects of this buffer
 	 */
 	public int getSize(){
-		return buffer.length;
-	}
-
-	String toDebugString(){
-		StringBuffer sb = new StringBuffer(buffer.length);
-		for (int i=0; i<buffer.length; i++){
-			if (i==writePosition){
-				sb.append('$');
-			}
-			if (i==readPosition){
-				sb.append('#');
-			}
-			if (buffer[i] instanceof String &&
-					(String)buffer[i] != null &&
-					((String)buffer[i]).length() > 0){
-				sb.append(((String)buffer[i]).charAt(0));
-			} else {
-				sb.append(' ');
-			}
+		synchronized (this){
+			return buffer.length;
 		}
-		sb.append('"');
-		return sb.toString();
 	}
 
 	/**
