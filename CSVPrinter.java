@@ -76,6 +76,7 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.02.18
 	 */
 	public void changeDelimiter(char newDelimiter) throws BadDelimeterException {
+		if (delimiterChar == newDelimiter) return; // no need to do anything.
 		if (newDelimiter == '\n' || newDelimiter == '\r' ||
 				newDelimiter == delimiterChar || newDelimiter == quoteChar){
 			throw new BadDelimeterException();

@@ -1,4 +1,4 @@
-personal_ws-1.1 english 991
+personal_ws-1.1 english 998
 aa
 aaa
 AAAAAABB
@@ -202,6 +202,7 @@ deleteerror
 deleteOnExit
 deleteoriginalerror
 delim
+delimiterChar
 delimiterLength
 delims
 delimsAreTokens
@@ -214,6 +215,8 @@ displayURL
 displayURLinNew
 displayURLs
 displayURLsinNew
+dittgen
+Dittgen
 dll
 dnrsfvqQ
 dnrsfVvqQ
@@ -559,6 +562,7 @@ neededPadding
 netscape
 newBuffer
 newDelim
+newDelimiter
 newLength
 newLine
 newNumTokens
@@ -633,6 +637,7 @@ ordf
 ordm
 oslash
 ostermiller
+ostermillerutils
 otilde
 otimes
 ouml
@@ -667,6 +672,7 @@ PasswordVerifier
 PEM
 permil
 perp
+pierre
 pipedinputstream
 PipedInputStream
 PipedInputStreams
@@ -700,6 +706,7 @@ PropertiesToken
 propertyNames
 protocal
 px
+quoteChar
 radic
 randpass
 randPass
