@@ -197,9 +197,7 @@ public class PasswordDialog extends JDialog {
 
 		super(parent, title, true);
 
-		if (labels == null){
-			setLocale(Locale.getDefault());
-		}
+		setLocale(Locale.getDefault());
 
 		if (title==null){
 			setTitle(labels.getString("dialog.title"));
