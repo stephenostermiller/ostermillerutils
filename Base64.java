@@ -1,6 +1,6 @@
 /*
  * Base64 encoding and decoding.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001-2002 Stephen Ostermiller <utils@Ostermiller.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -160,7 +160,7 @@ public class Base64{
 	 * reversebase64Chars[byte] gives n for the nth Base64
 	 * character or -1 if a character is not a Base64 character.
 	 */
-	protected static final byte[] reverseBase64Chars = new byte[0xff];
+	protected static final byte[] reverseBase64Chars = new byte[0x100];
 	static {
 		// Fill in -1 for all characters to start with
 		for (int i=0; i<reverseBase64Chars.length; i++){
