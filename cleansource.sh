@@ -1,7 +1,7 @@
 for file in *.*.html
 do
   prob=`egrep -l "<a.*${file%.*.html}.*\(${file%.*.html}\.[a-z]*\).*a>" $file`
-  if [ ! -e "${file%.*.html}.html" ]
+  if [ ! -e "../${file%.*.html}.html" ]
   then
 	if [ "a$prob" != "a" ]
 	then
@@ -10,7 +10,7 @@ do
 	fi
   fi
   prob=`egrep -l "<small.*JavaDoc.*small>" $file`
-  if [ ! -e "doc/com/Ostermiller/util/${file%.*.html}.html" ]
+  if [ ! -e "../doc/com/Ostermiller/util/${file%.*.html}.html" ]
   then
 	if [ "a$prob" != "a" ]
 	then

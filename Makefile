@@ -206,7 +206,7 @@ htmlsource: *.java *.properties *.lex
 	@chmod +x srcbuild/temp.sh
 	@srcbuild/temp.sh
 	@mkdir -p src/
-	@mv srcbuild/*.*.html srcbuild/*.css src/
+	@mv srcbuild/*.*.html srcbuild/*.css src
 	@rm -rf srcbuild
 	@cp source.sh cleansource.sh src/
 	@echo "cd src" > src/temp.sh
@@ -214,5 +214,5 @@ htmlsource: *.java *.properties *.lex
 	@echo "./source.sh" >> src/temp.sh
 	@chmod +x src/temp.sh
 	@src/temp.sh
-	@rm -f src/*.sh bte
+	@rm -f src/*.sh
 	@touch htmlsource
