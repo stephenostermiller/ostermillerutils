@@ -111,9 +111,15 @@
     <delete dir="META-INF" quiet="true" />    
   </target>
   
-   <target name="javafilesclean" depends="junkclean" description="Delete generated Java files." >
+  <target name="javafilesclean" depends="junkclean" description="Delete generated Java files." >
     <delete quiet="true">
       <fileset dir="." includes="*Lexer.java" />
+    </delete>
+  </target>
+  
+  <target name="htmlclean" depends="junkclean" description="Delete generated HTML files." >
+    <delete quiet="true">
+      <fileset dir="." includes="*html" excludes="package.html"/>
     </delete>
   </target>
   
@@ -133,7 +139,7 @@
     <delete dir="doc" quiet="true" />
   </target>
   
-  <target name="clean" depends="buildclean,javadocclean" description="Delete generated class files." >
+  <target name="clean" depends="buildclean,javadocclean,htmlclean" description="Delete generated class files." >
     <delete quiet="true">
       <fileset dir="." includes="*.class"/>
     </delete>
