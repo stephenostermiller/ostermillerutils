@@ -151,14 +151,12 @@ cleanall: allclean
 javadoc: *.java
 	@echo Make: Generating javadoc
 	@rm -rf doc
-	@mv -f package.html temp
 	@mkdir doc
 	@$(JAVADOC) \
 		-bottom '<p>Copyright (c) 2001-2004 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
 		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>" \
 		-link http://java.sun.com/j2se/1.4.2/docs/api/ -d doc/ \
 		com.Ostermiller.util > /dev/null
-	@mv -f temp package.html
 	@touch javadoc
 
 .PHONY: build
@@ -171,7 +169,7 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	@jar cfv randpass.jar com/ > /dev/null
 	@rm -rf com/
 	
-utils.jar: *.java package.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
+utils.jar: *.java *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
 	@$(ANT) dist > /dev/null
 
@@ -232,6 +230,3 @@ htmlsource: *.java *.properties *.lex
 	@src/temp.sh
 	@rm -f src/*.sh
 	@touch htmlsource
-
-package.html:
-	@cvs update package.html

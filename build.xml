@@ -56,7 +56,7 @@
   <target name="dist" depends="compile,init" description="Create distributable archive." >
     <jar 
       destfile="utils.jar" basedir="${top}"
-      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
+      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
       excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
       defaultexcludes="no" duplicate="fail" index="true" compress="true"
     />
@@ -70,7 +70,7 @@
   <target name="distdebug" depends="compiledebug,init" description="Create distributable archive." >
     <jar 
       destfile="utils.jar" basedir="${top}"
-      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/package.html ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
+      includes="gnu/getopt/*.* ${proj}/*.java ${proj}/*.class ${proj}/*.sh ${proj}/*.lex ${proj}/*.properties ${proj}/*.txt ${proj}/*.TXT ${proj}/*.csv ${proj}/*.bte ${proj}/*.dict ${proj}/Makefile ${proj}/*.xml ${proj}/*.bte ${proj}/*.skel"
       excludes="${proj}/*Lexer.java ${proj}/*Test*.class"
       defaultexcludes="no" duplicate="fail" index="true" compress="true"
     />
@@ -83,7 +83,6 @@
   
   <target name="doc" depends="javafiles,init" description="Create Java documentation." >
     <delete dir="doc" quiet="true" />
-    <move file="package.html" tofile="temp" />
     <javadoc 
       sourcepath="${top}" 
       classpath="${top}" 
@@ -94,7 +93,6 @@
       link="http://java.sun.com/j2se/1.4.1/docs/api/"
       failonerror="true"
     />
-    <move file="temp" tofile="package.html" />
   </target>
   
   <target name="update" depends="init" description="Update from CVS." >
@@ -119,7 +117,7 @@
   
   <target name="htmlclean" depends="junkclean" description="Delete generated HTML files." >
     <delete quiet="true">
-      <fileset dir="." includes="*html" excludes="package.html"/>
+      <fileset dir="." includes="*html"/>
     </delete>
   </target>
   

@@ -30,9 +30,9 @@ size
 description
 </th></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_03_00.jar">utils.jar</a>
+<a name="download" href="ostermillerutils_1_04_00.jar">utils.jar</a>
 </td><td>
-403k
+421k
 </td><td>
 The latest version of the com.Ostermiller.util utilities including source code.
 </td></tr></table>
@@ -41,12 +41,12 @@ The latest version of the com.Ostermiller.util utilities including source code.
 
 <div class=history>
 <h2>Version History</h2>
-<p>The current version of utils.jar is <b>1.03.00</b>. 
+<p>The current version of utils.jar is <b>1.04.00</b>. 
 The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
+<li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>
 <li>Version 1.03.00 - Labeled CSV class; new Iterator and Enumeration classes; NameValuePair class for CGI; CGI parameter order preserved; CGI character set bug fixed.</li>
 <li>Version 1.02.27 - Fixed a possible ArrayOutOfBoundsException in the MD5 libraries.</li>
-<li>Version 1.02.26 - CSVPrint updated with new methods for proper stream handling: flush, close, write methods that throw exceptions, auto flush control, and quoting behavior control..  CSVParse updated with a close method.</li>
 <li><a href="history.html">Older Changes...</a></li>
 </ul>
 </div>

@@ -7,6 +7,7 @@
 <div class=history>
 <h2>Version History</h2>
 <ul>
+<li>Version 1.02.26 - CSVPrint updated with new methods for proper stream handling: flush, close, write methods that throw exceptions, auto flush control, and quoting behavior control..  CSVParse updated with a close method.</li>
 <li>Version 1.02.25 - Additional StringHelper methods for escaping regular expressions and comparing a string to multiple others.</li>
 <li>Version 1.02.24 - MD5 sums were not correctly computed for certain odd byte lengths.  Convenience methods/constructors to CSV to change delimiters.</li>
 <li>Version 1.02.23 - Fixed numerous inconsistencies between UberProperties and java.util.Properties, added unit test.</li>
