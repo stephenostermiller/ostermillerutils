@@ -22,7 +22,6 @@ all:
 	@$(MAKE) -s --no-print-directory build
 	@$(MAKE) -s --no-print-directory javadoc
 	@$(MAKE) -s --no-print-directory htmlsource
-	@$(MAKE) -s --no-print-directory release
 
 spell: *.html *.java
 	@echo Make: Running spell check.
