@@ -1,4 +1,4 @@
-personal_ws-1.1 english 950
+personal_ws-1.1 english 954
 aa
 aaa
 AAAAAABB
@@ -58,6 +58,7 @@ auml
 availableInd
 avoidRepetition
 badcfe
+BadDelimeterException
 bb
 BBBBCCCC
 bdceee
@@ -120,6 +121,7 @@ cedil
 cgi
 CGILexer
 CGIParser
+changeDelimiter
 charAt
 charset
 circ
@@ -532,6 +534,7 @@ Nederlands
 neededPadding
 netscape
 newBuffer
+newDelim
 newLength
 newLine
 newNumTokens
@@ -649,6 +652,7 @@ PipedWriter
 PipedWriters
 piv
 plusmn
+Polska
 postpad
 PostScript
 pre
