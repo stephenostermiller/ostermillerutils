@@ -6,7 +6,7 @@ JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 
 all: CSVLexer.java \
 	BrowserCommandLexer.java \
-        CGILexer.java
+		CGILexer.java
 	$(JAVAC) $(JFLAGS) *.java
 
 CSVLexer.java: CSVLexer.lex
@@ -19,11 +19,12 @@ BrowserCommandLexer.java: BrowserCommandLexer.lex
 	$(JLEX) BrowserCommandLexer.lex
 
 clean:
-	rm -rf docs/
+	rm -rf docs/ gnu/ com/
 	rm -f *.class
 	rm -f *~
 	rm -f ~*
 	rm -f *.jar
+	rm -f CSVLexer.java BrowserCommandLexer.java CGILexer.java
 
 docs:
 	rm -rf docs/
@@ -38,8 +39,11 @@ build:
 	mkdir com/Ostermiller
 	mkdir com/Ostermiller/util
 	cp *.* Makefile com/Ostermiller/util/
-	jar cfv utils.jar com/
-	rm -rf com/
+	mkdir gnu
+	mkdir gnu/getopt		
+	cp ../../../gnu/getopt/*.* gnu/getopt
+	jar cfv utils.jar com/ gnu/
+	rm -rf com/ gnu/
 
 test:
 	$(JAVA) com.Ostermiller.util.TokenizerTests > out.txt
@@ -47,3 +51,4 @@ test:
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
 	diff out.txt CSVRegressionTestResults.txt
 	rm out.txt
+
