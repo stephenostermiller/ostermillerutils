@@ -258,7 +258,7 @@ public class SignificantFigures extends Number {
 	}
 
 	/**
-	 * Adjust the number of significant figures such that the leas
+	 * Adjust the number of significant figures such that the least
 	 * significant digit is at the given place.  This method may add
 	 * significant zeros to the end of this number, or remove significant
 	 * digits from this number.
@@ -274,10 +274,11 @@ public class SignificantFigures extends Number {
 	 * This method has no effect if this number is not a number or infinity.
 	 *
 	 * @param place the desired place of the least significant digit.
-	 * @return the decimal place of the least significant digit, or Integer.MIN_VALUE to ignore.
+	 * @return this number.
 	 */
-	public void setLSD(int place){
+	public SignificantFigures setLSD(int place){
 		setLMSD(place, Integer.MIN_VALUE);
+		return this;
 	}
 
 	/**
@@ -294,9 +295,9 @@ public class SignificantFigures extends Number {
 	 *
 	 * @param leastPlace the desired place of the least significant digit or Integer.MIN_VALUE to ignore.
 	 * @param mostPlace the desired place of the most significant digit or Integer.MIN_VALUE to ignore.
-	 * @return the decimal place of the least significant digit
+	 * @return this number
 	 */
-	public void setLMSD(int leastPlace, int mostPlace){
+	public SignificantFigures setLMSD(int leastPlace, int mostPlace){
 		if (digits != null && leastPlace != Integer.MIN_VALUE){
 			int significantFigures = digits.length();
 			int current = mantissa - significantFigures + 1;
@@ -322,6 +323,7 @@ public class SignificantFigures extends Number {
 				}
 			}
 		}
+		return this;
 	}
 
 	/**
@@ -711,8 +713,9 @@ public class SignificantFigures extends Number {
 	 * This method has no effect if this number is not a number or infinity.
 	 *
 	 * @param significantFigures desired number of significant figures.
+	 * @return This number.
 	 */
-	public void setNumberSignificantFigures(int significantFigures){
+	public SignificantFigures setNumberSignificantFigures(int significantFigures){
 		if (significantFigures <= 0) throw new IllegalArgumentException("Desired number of significant figures must be positive.");
 		if (digits != null) {
 			int length =  digits.length();
@@ -767,6 +770,7 @@ public class SignificantFigures extends Number {
 				digits.setLength(significantFigures);
 			}
 		}
+		return this;
 	}
 
 	/**
