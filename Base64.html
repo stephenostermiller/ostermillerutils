@@ -10,6 +10,15 @@
 
 <h1><a name="base64">Base64</a></h1>
 
+<table align=right border=1 width=150 hspace=10 vspace=10 cellpadding=10><tr><td>
+    Internationalization - included languages:
+    <ul>	
+    <li>English</li> 
+    </ul>
+    Translations gladly accepted.  Please translate
+    <a href="Base64.properties.html">Base64.properties</a>.
+</td></tr></table>
+
 <p>Bas64 encoding and decoding of data.  Encode and decode methods for Strings, byte arrays, and streams.</p>
 
 <p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
@@ -36,6 +45,30 @@ change.  Base64 is not a substitute for encryption.  Base64 used this way is
 obfuscation, and rather poor obfuscation at that.  It may be a disservice to your
 users to use Base64 as obfuscation because it may give them the impression that
 their data is encrypted when it really isn't.</p>
+
+<p>To run Base64 as a stand alone program use the following command line:<br>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Base64&nbsp;&lt;files&gt;</b></p>
+
+<pre>Base64 [-eldagxfqQvV] &lt;files&gt;
+Encode or decode using the base64 format.
+  If no files are specified standard input and output will be used.
+  --help            Print this help message.
+  --version         Print out the version number.
+  --about           Print out license and contact info.
+  -g --guess        Guess from file name whether to decode or encode. (default)
+  -e --encode       Apply base64 encoding.
+  -l --lines        Insert line breaks when encoding. (default)
+  --nolines         Insert no line breaks when encoding.
+  -d --decode       Remove base64 encoding.
+  -a --decodeall    When decoding, attempt badly formatted files.
+  --decodegood      Don't decode badly formatted files.  (default)
+  -x --ext &lt;ext&gt;    File extension to use. (default: base64)
+  -f --force        Overwrite files without prompting
+  --noforce         Don't overwrite files.  (default)
+  -v --verbose      Print a message for each file encoded or decoded. (default)
+  -q --quiet        Print error messages.
+  -Q --reallyquiet  Print nothing.
+</pre>
 
 <p>[<a href="./#download">Download /w Source</a> |
 <a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">Version History</a> |

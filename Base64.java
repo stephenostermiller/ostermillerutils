@@ -17,6 +17,10 @@
 package com.Ostermiller.util;
 
 import java.io.*;
+import gnu.getopt.*;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
+import java.util.Locale;
 
 /**
  * Implements Base64 encoding and decoding as defined by RFC 2045: "Multipurpose Internet
@@ -184,21 +188,279 @@ public class Base64 {
 	}
 
 	/**
-	 * Encodes and decodes each of the arguments.
-	 * Also check so see if encoding then decoding each
-	 * of the arguments returns the original argument.
-	 *
-	 * @param args Command line arguments to encode/decode
+	 * Version number of this program
 	 */
-	private static void main(String[] args){
-		for (int i=0; i<args.length; i++){
-			String encoded = encode(args[i]);
-			String decoded = decode(encoded);
-			System.out.println(args[i] + ": " + encoded + " " + decode(args[i]));
-			if (!decoded.equals(args[i])){
-				System.err.println("Encoding then decoding " + args[i] + " does not work. Decoded: '" + decoded + "'");
+	public static final String version = "1.0";
+
+	/**
+	 * Locale specific strings displayed to the user.
+	 */
+	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Base64",  Locale.getDefault());
+
+	private static final int ACTION_GUESS = 0;
+	private static final int ACTION_ENCODE = 1;
+	private static final int ACTION_DECODE = 2;
+
+	/**
+	 * Converts the line ending on files, or standard input.
+	 * Run with --help argument for more information.
+	 *
+	 * @param args Command line arguments.
+	 */
+	public static void main(String[] args){
+		// create the command line options that we are looking for
+		LongOpt[] longopts = {
+			new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
+			new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
+			new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
+			new LongOpt(labels.getString("encode.option"), LongOpt.NO_ARGUMENT, null, 'e'),
+			new LongOpt(labels.getString("lines.option"), LongOpt.NO_ARGUMENT, null, 'l'),
+			new LongOpt(labels.getString("nolines.option"), LongOpt.NO_ARGUMENT, null, 6),
+			new LongOpt(labels.getString("decode.option"), LongOpt.NO_ARGUMENT, null, 'd'),
+			new LongOpt(labels.getString("decodeall.option"), LongOpt.NO_ARGUMENT, null, 'a'),
+			new LongOpt(labels.getString("decodegood.option"), LongOpt.NO_ARGUMENT, null, 5),
+			new LongOpt(labels.getString("guess.option"), LongOpt.NO_ARGUMENT, null, 'g'),
+			new LongOpt(labels.getString("ext.option"), LongOpt.OPTIONAL_ARGUMENT, null, 'x'),
+			new LongOpt(labels.getString("force.option"), LongOpt.NO_ARGUMENT, null, 'f'),
+			new LongOpt(labels.getString("quiet.option"), LongOpt.NO_ARGUMENT, null, 'q'),
+			new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),
+			new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),
+			new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
+		};
+		String oneLetterOptions = "eldagx::fqQvV";
+		Getopt opts = new Getopt(labels.getString("base64"), args, oneLetterOptions, longopts);
+		int action = ACTION_GUESS;
+		String extension = "base64";
+		boolean force = false;
+		boolean printMessages = true;
+		boolean printErrors = true;
+		boolean forceDecode = false;
+		boolean lineBreaks = true;
+		int c;
+		while ((c = opts.getopt()) != -1){
+			switch(c){
+					case 1:{
+					// print out the help message
+					String[] helpFlags = new String[]{
+						"--" + labels.getString("help.option"),
+						"--" + labels.getString("version.option"),
+						"--" + labels.getString("about.option"),
+						"-g --" + labels.getString("guess.option"),
+						"-e --" + labels.getString("encode.option"),
+						"-l --" + labels.getString("lines.option"),
+						"--" + labels.getString("nolines.option"),
+						"-d --" + labels.getString("decode.option"),
+						"-a --" + labels.getString("decodeall.option"),
+						"--" + labels.getString("decodegood.option"),
+						"-x --" + labels.getString("ext.option") + " <" + labels.getString("ext.option") + ">",
+						"-f --" + labels.getString("force.option"),
+						"--" + labels.getString("noforce.option"),
+						"-v --" + labels.getString("verbose.option"),
+						"-q --" + labels.getString("quiet.option"),
+						"-Q --" + labels.getString("reallyquiet.option"),
+					};
+					int maxLength = 0;
+					for (int i=0; i<helpFlags.length; i++){
+						maxLength = Math.max(maxLength, helpFlags[i].length());
+					}
+					maxLength += 2;
+					System.out.println(
+						labels.getString("base64") + " [-" + StringHelper.replace(oneLetterOptions, ":", "") + "] <" + labels.getString("files") + ">\n" +
+						labels.getString("purpose.message") + "\n" +
+						"  " + labels.getString("stdin.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("g.message") + " (" + labels.getString("default") + ")\n" +
+						"  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("e.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("l.message") + " (" + labels.getString("default") + ")\n" +
+						"  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("nolines.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("d.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("a.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("decodegood.message") + " (" + labels.getString("default") + ")\n" +
+						"  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("x.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[11] ,maxLength, ' ') + labels.getString("f.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
+						"  " + StringHelper.postpad(helpFlags[13] ,maxLength, ' ') + labels.getString("v.message") + " (" + labels.getString("default") + ")\n" +
+						"  " + StringHelper.postpad(helpFlags[14] ,maxLength, ' ') + labels.getString("q.message") + "\n" +
+						"  " + StringHelper.postpad(helpFlags[15] ,maxLength, ' ') + labels.getString("Q.message") + "\n"
+					);
+					System.exit(0);
+				} break;
+				case 2:{
+					// print out the version message
+					System.out.println(MessageFormat.format(labels.getString("version"), new String[] {version}));
+					System.exit(0);
+				} break;
+				case 3:{
+					System.out.println(
+						labels.getString("base64") + " -- " + labels.getString("purpose.message") + "\n" +
+						MessageFormat.format(labels.getString("copyright"), new String[] {"2001-2002", "Stephen Ostermiller (utils@ostermiller.com)"}) + "\n\n" +
+						labels.getString("license")
+					);
+					System.exit(0);
+				} break;
+				case 'd':{
+					action = ACTION_DECODE;
+				} break;
+				case 'a':{
+					forceDecode = true;
+				} break;
+				case 5:{
+					forceDecode = false;
+				} break;
+				case 'e':{
+					action = ACTION_ENCODE;
+				} break;
+				case 'l':{
+					lineBreaks = true;
+				} break;
+				case 6:{
+					lineBreaks = false;
+				} break;
+				case 'g':{
+					action = ACTION_GUESS;
+				} break;
+				case 'x':{
+					extension = opts.getOptarg();
+					if (extension == null) extension = "";
+				} break;
+				case 'f':{
+					force = true;
+				} break;
+				case 4:{
+					force = false;
+				} break;
+				case 'v':{
+					printMessages = true;
+					printErrors = true;
+				} break;
+				case 'q':{
+					printMessages = false;
+					printErrors = true;
+				} break;
+				case 'Q':{
+					printMessages = false;
+					printErrors = false;
+				} break;
+				default:{
+					System.exit(1);
+				}
 			}
 		}
+
+		int exitCond = 0;
+		boolean done = false;
+		for (int i=opts.getOptind(); i<args.length; i++){
+			done = true;
+			File source = new File(args[i]);
+			if (!source.exists()){
+				if(printErrors){
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), new String[] {args[i]}));
+				}
+				exitCond = 1;
+			} else if (!source.canRead()){
+				if(printErrors){
+					System.err.println(MessageFormat.format(labels.getString("cantread"), new String[] {args[i]}));
+				}
+				exitCond = 1;
+			} else {
+				int fileAction = action;
+				if (fileAction == ACTION_GUESS){
+					if (extension.length() > 0){
+						if (args[i].endsWith(extension)){
+							fileAction = ACTION_DECODE;
+						} else {
+							fileAction = ACTION_ENCODE;
+						}
+					}
+				}
+				if (fileAction == ACTION_GUESS){
+					if(printErrors){
+						System.err.println(labels.getString("cantguess"));
+					}
+					exitCond = 1;
+				} else {
+					String outName = args[i];
+					if (extension.length() > 0){
+						if (fileAction == ACTION_ENCODE){
+							outName = args[i] + "." + extension;
+						} else {
+							if (args[i].endsWith("." + extension)){
+								outName = args[i].substring(0, args[i].length() - (extension.length() + 1));
+							}
+						}
+					}
+					try {
+						File outFile = new File(outName);
+						if (!force && outFile.exists()){
+							if(printErrors){
+								System.err.println(MessageFormat.format(labels.getString("overwrite"), new String[] {outName}));
+							}
+							exitCond = 1;
+						} else if (!(outFile.exists() || outFile.createNewFile()) || !outFile.canWrite()){
+							if(printErrors){
+								System.err.println(MessageFormat.format(labels.getString("cantwrite"), new String[] {outName}));
+							}
+							exitCond = 1;
+						} else {
+							if (fileAction == ACTION_ENCODE){
+								if (printMessages){
+									System.out.println(MessageFormat.format(labels.getString("encoding"), new String[] {args[i], outName}));
+									encode(source, outFile, lineBreaks);
+								}
+							} else {
+								if (printMessages){
+									System.out.println(MessageFormat.format(labels.getString("decoding"), new String[] {args[i], outName}));
+									decode(source, outFile, !forceDecode);
+								}
+							}
+						}
+					} catch (Base64DecodingException x){
+						if(printErrors){
+							System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+						}
+						exitCond = 1;
+					} catch (IOException x){
+						if(printErrors){
+							System.err.println(args[i] + ": " + x.getMessage());
+						}
+						exitCond = 1;
+					}
+				}
+			}
+		}
+		if (!done){
+			try {
+				if (action == ACTION_GUESS){
+					System.out.println(labels.getString("cantguess"));
+					exitCond = 1;
+				} else if (action == ACTION_ENCODE){
+					encode(
+						new BufferedInputStream(System.in),
+						new BufferedOutputStream(System.out),
+						lineBreaks
+					);
+				} else {
+					decode(
+						new BufferedInputStream(System.in),
+						new BufferedOutputStream(System.out),
+						!forceDecode
+					);
+				}
+			} catch (Base64DecodingException x){
+				if(printErrors){
+					System.err.println(x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+				}
+				exitCond = 1;
+			} catch (IOException x){
+				if(printErrors){
+					System.err.println(x.getMessage());
+				}
+				exitCond = 1;
+			}
+		}
+		System.exit(exitCond);
 	}
 
 	/**
@@ -256,6 +518,97 @@ public class Base64 {
 			// on memory structures that don't actually use IO.
 		}
 		return out.toByteArray();
+	}
+
+	/**
+	 * Encode this file in Base64.
+	 * Line breaks will be inserted every 76 characters.
+	 *
+	 * @param fIn File to be encoded (will be overwritten).
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @throws IOException if an input or output error occurs.
+	 */
+	public static void encode(File fIn) throws IOException {
+		encode(fIn, fIn, true);
+	}
+
+	/**
+	 * Encode this file in Base64.
+	 *
+	 * @param fIn File to be encoded (will be overwritten).
+	 * @param fOut File to which the results should be written (may be the same as fIn).
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @throws IOException if an input or output error occurs.
+	 */
+	public static void encode(File fIn, boolean lineBreaks) throws IOException {
+		encode(fIn, fIn, lineBreaks);
+	}
+
+	/**
+	 * Encode this file in Base64.
+	 * Line breaks will be inserted every 76 characters.
+	 *
+	 * @param fIn File to be encoded.
+	 * @param fOut File to which the results should be written (may be the same as fIn).
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @throws IOException if an input or output error occurs.
+	 */
+	public static void encode(File fIn, File fOut) throws IOException {
+		encode(fIn, fOut, true);
+	}
+
+	/**
+	 * Encode this file in Base64.
+	 *
+	 * @param fIn File to be encoded.
+	 * @param fOut File to which the results should be written (may be the same as fIn).
+	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
+	 * @throws IOException if an input or output error occurs.
+	 */
+	public static void encode(File fIn, File fOut, boolean lineBreaks) throws IOException {
+		File temp = null;
+		InputStream in = null;
+		OutputStream out = null;
+		try {
+			in = new BufferedInputStream(new FileInputStream(fIn));
+			temp = File.createTempFile("Base64", null, null);
+			out = new BufferedOutputStream(new FileOutputStream(temp));
+			encode(in, out, lineBreaks);
+			in.close();
+			in = null;
+			out.flush();
+			out.close();
+			out = null;
+			FileHelper.move(temp, fOut, true);
+		} finally {
+			if (in != null){
+				try {
+					in.close();
+				} catch (IOException ignore){
+				}
+				in = null;
+			}
+			if (out != null){
+				try {
+					out.flush();
+					out.close();
+				} catch (IOException ignore){
+				}
+				out = null;
+			}
+		}
+	}
+
+	/**
+	 * Encode data from the InputStream to the OutputStream in Base64.
+	 * Line breaks are inserted every 76 characters in the output.
+	 *
+	 * @param in Stream from which to read data that needs to be encoded.
+	 * @param out Stream to which to write encoded data.
+	 * @throws IOException if there is a problem reading or writing.
+	 */
+	public static void encode(InputStream in, OutputStream out) throws IOException {
+		encode(in, out, true);
 	}
 
 	/**
@@ -320,6 +673,11 @@ public class Base64 {
 				lineCount = 0;
 			}
 		}
+		if (lineBreaks && lineCount >= 1){
+			out.write('\n');
+			lineCount = 0;
+		}
+		out.flush();
 	}
 
 	/**
@@ -382,6 +740,92 @@ public class Base64 {
 		return out.toByteArray();
 	}
 
+		/**
+	 * Decode Base64 encoded data from one file to the other.
+	 * Characters in the Base64 alphabet, white space and equals sign are
+	 * expected to be in urlencoded data.  The presence of other characters
+	 * could be a sign that the data is corrupted.
+	 *
+	 * @param fIn File to be decoded (will be overwritten).
+	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 */
+	public static void decode(File fIn) throws IOException {
+		decode(fIn, fIn, true);
+	}
+
+	/**
+	 * Decode Base64 encoded data from one file to the other.
+	 * Characters in the Base64 alphabet, white space and equals sign are
+	 * expected to be in urlencoded data.  The presence of other characters
+	 * could be a sign that the data is corrupted.
+	 *
+	 * @param fIn File to be decoded (will be overwritten).
+	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
+	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 */
+	public static void decode(File fIn, boolean throwExceptions) throws IOException {
+		decode(fIn, fIn, throwExceptions);
+	}
+
+	/**
+	 * Decode Base64 encoded data from one file to the other.
+	 * Characters in the Base64 alphabet, white space and equals sign are
+	 * expected to be in urlencoded data.  The presence of other characters
+	 * could be a sign that the data is corrupted.
+	 *
+	 * @param fIn File to be decoded.
+	 * @param fOut File to which the results should be written (may be the same as fIn).
+	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 */
+	public static void decode(File fIn, File fOut) throws IOException {
+		decode(fIn, fOut, true);
+	}
+
+	/**
+	 * Decode Base64 encoded data from one file to the other.
+	 * Characters in the Base64 alphabet, white space and equals sign are
+	 * expected to be in urlencoded data.  The presence of other characters
+	 * could be a sign that the data is corrupted.
+	 *
+	 * @param fIn File to be decoded.
+	 * @param fOut File to which the results should be written (may be the same as fIn).
+	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
+	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 */
+	public static void decode(File fIn, File fOut, boolean throwExceptions) throws IOException {
+		File temp = null;
+		InputStream in = null;
+		OutputStream out = null;
+		try {
+			in = new BufferedInputStream(new FileInputStream(fIn));
+			temp = File.createTempFile("Base64", null, null);
+			out = new BufferedOutputStream(new FileOutputStream(temp));
+			decode(in, out, throwExceptions);
+			in.close();
+			in = null;
+			out.flush();
+			out.close();
+			out = null;
+			FileHelper.move(temp, fOut, true);
+		} finally {
+			if (in != null){
+				try {
+					in.close();
+				} catch (IOException ignore){
+				}
+				in = null;
+			}
+			if (out != null){
+				try {
+					out.flush();
+					out.close();
+				} catch (IOException ignore){
+				}
+				out = null;
+			}
+		}
+	}
+
 	/**
 	 * Reads the next (decoded) Base64 character from the input stream.
 	 * Non Base64 characters are skipped.
@@ -401,11 +845,33 @@ public class Base64 {
 			if (read == END_OF_INPUT) return END_OF_INPUT;
 			if (throwExceptions && reverseBase64Chars[(byte)read] == NON_BASE_64 &&
 				read != ' ' && read != '\n'  && read != '\r' && read != '\t' && read != '\f' && read != '='){
-				throw new IOException ("Unexpected Base64 character: " + read);
+				throw new Base64DecodingException (
+					MessageFormat.format(
+						labels.getString("unexpectedchar"),
+						new String[] {
+							"'" + (char)read + "' (0x" + Integer.toHexString(read) + ")"
+						}
+					),
+					(char)read
+				);
 			}
 			read = reverseBase64Chars[(byte)read];
 		} while (read == NON_BASE_64);
 		return read;
+	}
+
+	/**
+	 * Decode Base64 encoded data from the InputStream to the OutputStream.
+	 * Characters in the Base64 alphabet, white space and equals sign are
+	 * expected to be in urlencoded data.  The presence of other characters
+	 * could be a sign that the data is corrupted.
+	 *
+	 * @param in Stream from which to read data that needs to be decoded.
+	 * @param out Stream to which to write decoded data.
+	 * @throws IOException if an IO occurs or unexpected data is encountered.
+	 */
+	public static void decode(InputStream in, OutputStream out) throws IOException {
+		decode(in, out, true);
 	}
 
 	/**
@@ -457,5 +923,6 @@ public class Base64 {
 				done = true;
 			}
 		}
+		out.flush();
 	}
 }
