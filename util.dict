@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1192
+personal_ws-1.1 en 1193
 aa
 aA
 aaa
@@ -198,6 +198,7 @@ concatinputstream
 ConcatInputStream
 concatreader
 ConcatReader
+ConcatStreams
 ConcatTests
 cong
 containsAny
