@@ -532,7 +532,7 @@ public class StringHelper {
 				case '\\':
 				case '\"':
 				case '\'':
-				case '0':{
+				case '\0':{
 					newLength += 1;
 				} break;
 			}
@@ -554,7 +554,7 @@ public class StringHelper {
 				case '\'':{
 					sb.append("\\\'");
 				} break;
-				case '0':{
+				case '\0':{
 					sb.append("\\0");
 				} break;
 				default: {
