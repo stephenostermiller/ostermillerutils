@@ -136,31 +136,44 @@ import java.util.Locale;
  * delimiters within base64-encoded bodies within multipart entities
  * because no hyphen characters are used in the base64 encoding.</p>
  * </blockquote>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class Base64 {
 
 	/**
 	 * Symbol that represents the end of an input stream
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int END_OF_INPUT = -1;
 
 	/**
 	 * A character that is not a valid base 64 character.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int NON_BASE_64 = -1;
 
 	/**
 	 * A character that is not a valid base 64 character.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int NON_BASE_64_WHITESPACE = -2;
 
 	/**
 	 * A character that is not a valid base 64 character.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int NON_BASE_64_PADDING = -3;
 
 	/**
 	 * This class need not be instantiated, all methods are static.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private Base64(){
 	}
@@ -168,6 +181,8 @@ public class Base64 {
 	/**
 	 * Table of the sixty-four characters that are used as
 	 * the Base64 alphabet: [A-Za-z0-9+/]
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected static final byte[] base64Chars = {
 		'A','B','C','D','E','F','G','H',
@@ -184,6 +199,8 @@ public class Base64 {
 	 * Reverse lookup table for the Base64 alphabet.
 	 * reversebase64Chars[byte] gives n for the nth Base64
 	 * character or negative if a character is not a Base64 character.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected static final byte[] reverseBase64Chars = new byte[0x100];
 	static {
@@ -206,11 +223,15 @@ public class Base64 {
 
 	/**
 	 * Version number of this program
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final String version = "1.2";
 
 	/**
 	 * Locale specific strings displayed to the user.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Base64",  Locale.getDefault());
 
@@ -227,6 +248,8 @@ public class Base64 {
 	 * Run with --help argument for more information.
 	 *
 	 * @param args Command line arguments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
 		// create the command line options that we are looking for
@@ -546,6 +569,8 @@ public class Base64 {
 	 *
 	 * @param string The data to encode.
 	 * @return An encoded String.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String encode(String string){
 		return new String(encode(string.getBytes()));
@@ -559,6 +584,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting to and from bytes.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return An encoded String.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String encode(String string, String enc) throws UnsupportedEncodingException {
 		return new String(encode(string.getBytes(enc)), enc);
@@ -570,6 +597,8 @@ public class Base64 {
 	 *
 	 * @param bytes The data to encode.
 	 * @return Encoded bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static byte[] encode(byte[] bytes){
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
@@ -603,6 +632,8 @@ public class Base64 {
 	 * @param fIn File to be encoded (will be overwritten).
 	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(File fIn) throws IOException {
 		encode(fIn, fIn, true);
@@ -615,6 +646,8 @@ public class Base64 {
 	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(File fIn, boolean lineBreaks) throws IOException {
 		encode(fIn, fIn, lineBreaks);
@@ -628,6 +661,8 @@ public class Base64 {
 	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(File fIn, File fOut) throws IOException {
 		encode(fIn, fOut, true);
@@ -640,6 +675,8 @@ public class Base64 {
 	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @param lineBreaks  Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(File fIn, File fOut, boolean lineBreaks) throws IOException {
 		File temp = null;
@@ -676,6 +713,8 @@ public class Base64 {
 	 * @param in Stream from which to read data that needs to be encoded.
 	 * @param out Stream to which to write encoded data.
 	 * @throws IOException if there is a problem reading or writing.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(InputStream in, OutputStream out) throws IOException {
 		encode(in, out, true);
@@ -688,6 +727,8 @@ public class Base64 {
 	 * @param out Stream to which to write encoded data.
 	 * @param lineBreaks Whether to insert line breaks every 76 characters in the output.
 	 * @throws IOException if there is a problem reading or writing.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void encode(InputStream in, OutputStream out, boolean lineBreaks) throws IOException {
 		// Base64 encoding converts three bytes of input to
@@ -759,6 +800,8 @@ public class Base64 {
 	 *
 	 * @param string The data to decode.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String decode(String string){
 		return new String(decode(string.getBytes()));
@@ -773,6 +816,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting to and from bytes.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String decode(String string, String enc) throws UnsupportedEncodingException {
 		return new String(decode(string.getBytes(enc)), enc);
@@ -788,6 +833,8 @@ public class Base64 {
 	 * @param encOut Character encoding to use when converting decoded bytes to output.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static String decode(String string, String encIn, String encOut) throws UnsupportedEncodingException {
 		return new String(decode(string.getBytes(encIn)), encOut);
@@ -802,6 +849,8 @@ public class Base64 {
 	 *
 	 * @param string The data to decode.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(String string){
 		return new String(decode(string.getBytes()));
@@ -816,6 +865,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting to and from bytes.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(String string, String enc) throws UnsupportedEncodingException {
 		return new String(decode(string.getBytes(enc)), enc);
@@ -831,6 +882,8 @@ public class Base64 {
 	 * @param encOut Character encoding to use when converting decoded bytes to output.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(String string, String encIn, String encOut) throws UnsupportedEncodingException {
 		return new String(decode(string.getBytes(encIn)), encOut);
@@ -846,6 +899,8 @@ public class Base64 {
 	 * @param string The data to decode.
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static void decodeToStream(String string, OutputStream out) throws IOException {
 		decode(new ByteArrayInputStream(string.getBytes()), out);
@@ -861,6 +916,8 @@ public class Base64 {
 	 * @param out Stream to which to write decoded data.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static void decodeToStream(String string, String enc, OutputStream out) throws UnsupportedEncodingException, IOException {
 		decode(new ByteArrayInputStream(string.getBytes(enc)), out);
@@ -875,6 +932,8 @@ public class Base64 {
 	 *
 	 * @param string The data to decode.
 	 * @return decoded data.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static byte[] decodeToBytes(String string){
 		return decode(string.getBytes());
@@ -889,6 +948,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting from bytes.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return decoded data.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static byte[] decodeToBytes(String string, String enc) throws UnsupportedEncodingException {
 		return decode(string.getBytes(enc));
@@ -903,6 +964,8 @@ public class Base64 {
 	 *
 	 * @param bytes The data to decode.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(byte[] bytes){
 		return new String(decode(bytes));
@@ -917,6 +980,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting to and from bytes.
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
 	 * @return A decoded String.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(byte[] bytes, String enc) throws UnsupportedEncodingException {
 		return new String(decode(bytes), enc);
@@ -929,6 +994,8 @@ public class Base64 {
 	 *
 	 * @param bytes The data to decode.
 	 * @return Decoded bytes.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static byte[] decodeToBytes(byte[] bytes){
 		return decode(bytes);
@@ -941,6 +1008,8 @@ public class Base64 {
 	 *
 	 * @param bytes The data to decode.
 	 * @return Decoded bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static byte[] decode(byte[] bytes){
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
@@ -976,6 +1045,8 @@ public class Base64 {
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
 	 * @return Decoded bytes.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(byte[] bytes, OutputStream out) throws IOException {
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
@@ -991,6 +1062,8 @@ public class Base64 {
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
 	 * @return Decoded bytes.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static void decodeToStream(byte[] bytes, OutputStream out) throws IOException {
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
@@ -1006,6 +1079,8 @@ public class Base64 {
 	 * @param fIn File to be decoded (will be overwritten).
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(File fIn) throws IOException {
 		decode(fIn, fIn, true);
@@ -1021,6 +1096,8 @@ public class Base64 {
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(File fIn, boolean throwExceptions) throws IOException {
 		decode(fIn, fIn, throwExceptions);
@@ -1036,6 +1113,8 @@ public class Base64 {
 	 * @param fOut File to which the results should be written (may be the same as fIn).
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(File fIn, File fOut) throws IOException {
 		decode(fIn, fOut, true);
@@ -1052,6 +1131,8 @@ public class Base64 {
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(File fIn, File fOut, boolean throwExceptions) throws IOException {
 		File temp = null;
@@ -1098,6 +1179,8 @@ public class Base64 {
 	 * @return the next Base64 character from the stream or -1 if there are no more Base64 characters on the stream.
 	 * @throws IOException if an IO Error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static final int readBase64(InputStream in, boolean throwExceptions) throws IOException {
 		int read;
@@ -1132,6 +1215,8 @@ public class Base64 {
 	 * @param in Stream from which to read data that needs to be decoded.
 	 * @return decoded data.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static byte[] decodeToBytes(InputStream in) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -1149,6 +1234,8 @@ public class Base64 {
 	 * @param in Stream from which to read data that needs to be decoded.
 	 * @return decoded data.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(InputStream in) throws IOException {
 		return new String(decodeToBytes(in));
@@ -1164,6 +1251,8 @@ public class Base64 {
 	 * @return decoded data.
 	 * @throws IOException if an IO error occurs.Throws:
 	 * @throws UnsupportedEncodingException if the character encoding specified is not supported.
+	 *
+	 * @since ostermillerutils 1.02.16
 	 */
 	public static String decodeToString(InputStream in, String enc) throws IOException {
 		return new String(decodeToBytes(in), enc);
@@ -1179,6 +1268,8 @@ public class Base64 {
 	 * @param out Stream to which to write decoded data.
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(InputStream in, OutputStream out) throws IOException {
 		decode(in, out, true);
@@ -1195,6 +1286,8 @@ public class Base64 {
 	 * @param throwExceptions Whether to throw exceptions when unexpected data is encountered.
 	 * @throws IOException if an IO error occurs.
 	 * @throws Base64DecodingException if unexpected data is encountered when throwExceptions is specified.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void decode(InputStream in, OutputStream out, boolean throwExceptions) throws IOException {
 		// Base64 decoding converts four bytes of input to three bytes of output
@@ -1256,6 +1349,8 @@ public class Base64 {
 	 * this method off the scent and cause it to return false.
 	 *
 	 * @param b data that could be in base64 format.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean isBase64(byte[] bytes){
 		try {
@@ -1290,6 +1385,8 @@ public class Base64 {
 	 *
 	 * @param s String that may be in base64 format.
 	 * @return Best guess as to whether the data is in base64 format.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean isBase64(String string){
 		return isBase64(string.getBytes());
@@ -1322,7 +1419,6 @@ public class Base64 {
 		return isBase64(string.getBytes(enc));
 	}
 
-
 	/**
 	 * Determines if the File is in base64 format.
 	 * <p>
@@ -1345,6 +1441,8 @@ public class Base64 {
 	 * @param enc Character encoding to use when converting to bytes.
 	 * @return Best guess as to whether the data is in base64 format.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean isBase64(File fIn) throws IOException {
 		return isBase64(new BufferedInputStream(new FileInputStream(fIn)));
@@ -1372,6 +1470,8 @@ public class Base64 {
 	 * @param in Stream from which to read data to be tested.
 	 * @return Best guess as to whether the data is in base64 format.
 	 * @throws IOException if an IO error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean isBase64(InputStream in) throws IOException {
 		long numBase64Chars = 0;
