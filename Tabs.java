@@ -492,18 +492,12 @@ public class Tabs {
 			}
 		} finally {
 			if (in != null){
-				try {
-					in.close();
-				} catch (IOException ignore){
-				}
+				in.close();
 				in = null;
 			}
 			if (out != null){
-				try {
-					out.flush();
-					out.close();
-				} catch (IOException ignore){
-				}
+				out.flush();
+				out.close();
 				out = null;
 			}
 		}

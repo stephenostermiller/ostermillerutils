@@ -70,6 +70,7 @@ public class CGIParser{
 			parse(lex);
 		} catch (IOException x){
 			// This shouldn't be able to happen from a string.
+			throw new RuntimeException(x);
 		}
 	}
 

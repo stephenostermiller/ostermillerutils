@@ -524,6 +524,7 @@ public class Base64 {
 			// This can't happen.
 			// The input and output streams were constructed
 			// on memory structures that don't actually use IO.
+			throw new RuntimeException(x);
 		}
 		return out.toByteArray();
 	}
