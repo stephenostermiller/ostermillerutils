@@ -95,7 +95,7 @@ htmlsource:
 	cp *.java *.properties *.lex src
 	rm -f `find src -name "*.lex" | sed s/.lex/.java/`
 	$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
-	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.java src/*.properties
+	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.lex src/*.java src/*.properties
 	mv src/*.*.html src/*.css .
 	rm -rf src
 	./source.sh
