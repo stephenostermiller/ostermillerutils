@@ -149,7 +149,7 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.00
 	 */
 	public int read(char[] cbuf, int off, int len) throws IOException {
-		if (off < 0 || len < 0 || off + len >= cbuf.length) throw new IndexOutOfBoundsException();
+		if (off < 0 || len < 0 || off + len > cbuf.length) throw new IndexOutOfBoundsException();
 		if (closed) throw new IOException("Reader closed");
 		int r = -1;
 		while (r == -1 && inIndex < in.length){

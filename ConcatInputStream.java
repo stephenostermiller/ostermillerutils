@@ -160,7 +160,7 @@ public class ConcatInputStream extends InputStream {
 	 * @throws IndexOutOfBoundsException - if len or offset are not possible.
 	 */
 	public int read(byte[] b, int off, int len) throws IOException {
-		if (off < 0 || len < 0 || off + len >= b.length) throw new IllegalArgumentException();
+		if (off < 0 || len < 0 || off + len > b.length) throw new IllegalArgumentException();
 		if (closed) throw new IOException("InputStream closed");
 		int r = -1;
 		while (r == -1 && inIndex < in.length){

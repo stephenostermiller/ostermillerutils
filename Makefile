@@ -190,6 +190,7 @@ test:
 	$(JAVA) com.Ostermiller.util.MD5Tests
 	$(JAVA) com.Ostermiller.util.SizeLimitInputStreamTests
 	$(JAVA) com.Ostermiller.util.SignificantFiguresTests
+	$(JAVA) com.Ostermiller.util.ConcatTests
 
 .PHONY: update
 update: 
