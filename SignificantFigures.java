@@ -173,7 +173,7 @@ public class SignificantFigures extends Number {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public SignificantFigures(int number){
-		original = Integer.toString(number);
+		original = String.valueOf(number);
 		try {
 			parse(original);
 		} catch (NumberFormatException nfe){
