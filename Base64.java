@@ -273,7 +273,7 @@ public class Base64{
             // are not -1 before using them.
             // The basic idea is that the three bytes get split into
             // four bytes along these lines:
-            // [AAAAAABB] [BBBBCCCCC] [CCDDDD]
+            // [AAAAAABB] [BBBBCCCCC] [CCDDDDDD]
             // [xxAAAAAA] [xxBBBBBB] [xxCCCCCC] [xxDDDDDD]
             // bytes are considered to be zero when absent.
             // the four bytes are then mapped to common ASCII symbols
@@ -415,7 +415,7 @@ public class Base64{
         // read bytes unmapping them from their ASCII encoding in the process
         // we must read at least two bytes to be able to output anything
         boolean done = false;
-        while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != -1 
+        while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != -1
 			&& (inBuffer[1] = readBase64(in, throwExceptions)) != -1){
             // Fill the buffer
             inBuffer[2] = readBase64(in, throwExceptions);
@@ -428,7 +428,7 @@ public class Base64{
             // The basic idea is that the four bytes will get reconstituted
             // into three bytes along these lines:
             // [xxAAAAAA] [xxBBBBBB] [xxCCCCCC] [xxDDDDDD]
-            // [AAAAAABB] [BBBBCCCCC] [CCDDDD]
+            // [AAAAAABB] [BBBBCCCCC] [CCDDDDDD]
             // bytes are considered to be zero when absent.
 
             // six A and two B
