@@ -131,7 +131,7 @@ public class CGIParser{
 	 * value specified. If the value is null, the name is removed.
 	 *
 	 * @param name a String specifying the name of the parameter.
-	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @param value a String specifying the value of the single parameter, or null to remove.
 	 *
 	 * @since ostermillerutils 1.02.15
 	 */
@@ -155,7 +155,7 @@ public class CGIParser{
 	 * value specified. If values is null or empty, the name is removed.
 	 *
 	 * @param name a String specifying the name of the parameter.
-	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @param values a String array specifying the values for the parameter, or null to remove.
 	 * @throws NullPointerException if any of the values is null.
 	 *
 	 * @since ostermillerutils 1.02.15
@@ -185,7 +185,7 @@ public class CGIParser{
 	 * specified. If value is null, this method has no effect.
 	 *
 	 * @param name a String specifying the name of the parameter.
-	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @param value a String specifying the value of the single parameter, or null to remove.
 	 *
 	 * @since ostermillerutils 1.02.15
 	 */
@@ -207,7 +207,7 @@ public class CGIParser{
 	 * specified. If values is null, this method has no effect.
 	 *
 	 * @param name a String specifying the name of the parameter.
-	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 * @param values a String array specifying the values of the parameter, or null to remove.
 	 * @throws NullPointerException if any of the values is null.
 	 *
 	 * @since ostermillerutils 1.02.15
