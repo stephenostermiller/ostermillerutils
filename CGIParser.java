@@ -26,6 +26,9 @@ import java.net.URLEncoder;
  * <p>
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/CGIParser.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class CGIParser{
 	protected Hashtable cgi = new Hashtable();
@@ -40,6 +43,8 @@ public class CGIParser{
 	 * default character encoding.
 	 *
 	 * @param in Stream containing CGI Encoded name value pairs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CGIParser (InputStream in) throws IOException {
 		CGILexer lex = new CGILexer(in);
@@ -53,6 +58,8 @@ public class CGIParser{
 	 * The reader is read until the stream contains no more characters.
 	 *
 	 * @param in Reader containing CGI Encoded name value pairs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CGIParser (Reader in) throws IOException {
 		CGILexer lex = new CGILexer(in);
@@ -64,6 +71,8 @@ public class CGIParser{
 	 * make them available for retrieval.
 	 *
 	 * @param s CGI Encoded name value pairs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public CGIParser (String s) {
 		try {
@@ -80,6 +89,8 @@ public class CGIParser{
 	 * them in the cgi hashtable.
 	 *
 	 * @param lex Lexer that will return the tokens.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private void parse(CGILexer lex) throws IOException {
 		String name, value;
@@ -102,6 +113,8 @@ public class CGIParser{
 	 * If the parameter has a single value, the array has a length of 1.
 	 * @param name a String containing the name of the parameter whose value is requested
 	 * @return an array of String objects containing the parameter's values
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getParameterValues(String name){
 		Vector values = (Vector)cgi.get(name);
@@ -119,6 +132,8 @@ public class CGIParser{
 	 *
 	 * @param name a String specifying the name of the parameter.
 	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 *
+	 * @since ostermillerutils 1.02.15
 	 */
 	public void setParameter(String name, String value){
 		if (value == null){
@@ -142,6 +157,8 @@ public class CGIParser{
 	 * @param name a String specifying the name of the parameter.
 	 * @param value a String specifying the name of the single parameter, or null to remove.
 	 * @throws NullPointerException if any of the values is null.
+	 *
+	 * @since ostermillerutils 1.02.15
 	 */
 	public void setParameter(String name, String[] values){
 		if (values == null || values.length == 0){
@@ -169,6 +186,8 @@ public class CGIParser{
 	 *
 	 * @param name a String specifying the name of the parameter.
 	 * @param value a String specifying the name of the single parameter, or null to remove.
+	 *
+	 * @since ostermillerutils 1.02.15
 	 */
 	public void addParameter(String name, String value){
 		if (value == null){
@@ -190,6 +209,8 @@ public class CGIParser{
 	 * @param name a String specifying the name of the parameter.
 	 * @param value a String specifying the name of the single parameter, or null to remove.
 	 * @throws NullPointerException if any of the values is null.
+	 *
+	 * @since ostermillerutils 1.02.15
 	 */
 	public void addParameter(String name, String[] values){
 		if (values == null || values.length == 0){
@@ -220,6 +241,8 @@ public class CGIParser{
 	 *
 	 * @param name a String specifying the name of the parameter
 	 * @return a String representing the single value of the parameter
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getParameter(String name){
 		Vector values = (Vector)cgi.get(name);
@@ -237,6 +260,8 @@ public class CGIParser{
 	 * @return an Enumeration of String objects, each String containing the name
 	 *     of a request parameter; or an empty Enumeration if the request has
 	 *     no parameters
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public Enumeration getParameterNames(){
 		return cgi.keys();
@@ -248,6 +273,8 @@ public class CGIParser{
 	 * @param enc Character encoding to use when escaping characters.
 	 * @return URLEncoded name value pairs.
 	 * @throws  UnsupportedEncodingException If the named encoding is not supported.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String toString(String enc) throws UnsupportedEncodingException {
 		StringBuffer sb = new StringBuffer();
