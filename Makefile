@@ -2,7 +2,7 @@ CLASSPATH=../../..
 SOURCPATH=../../..
 JFLAGS=-classpath $(CLASSPATH)
 JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
-JAVAC=javac $(JFLAGS)
+JAVAC=javac $(JFLAGS) -g:none
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
 JLEXFLAGS=-q
@@ -161,10 +161,10 @@ randpass.jar: *RandPass*.class *RandPass*.properties *.TXT
 	@jar cfv randpass.jar com/ > /dev/null
 	@rm -rf com/
 
-utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile ../../../gnu/getopt/*.*
+utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
 	@mkdir -p com/Ostermiller/util
-	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile com/Ostermiller/util/
+	@cp *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile *.xml com/Ostermiller/util/
 	@rm -f com/Ostermiller/util/*Test*.class
 	@rm -f com/Ostermiller/util/*Lexer.java
 	@mkdir -p gnu/getopt		

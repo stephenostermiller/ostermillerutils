@@ -24,6 +24,7 @@
 	  classpath="${top}" 
 	  includes="${proj}/*.java"
 	  failonerror="true" 
+	  debug="false"
 	/>
   </target>
   
