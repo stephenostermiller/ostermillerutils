@@ -22,8 +22,9 @@ import java.net.URL;
 
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
- * This code is based on the methods in <a href="">JavaWorld Java Tip 66: 
- * Control browsers from your Java application</a> but has more options, 
+ * This code is based on the methods in 
+ * <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip66.html">JavaWorld 
+ * Java Tip 66: Control browsers from your Java application</a> but has more options, 
  * is written more cleanly and takes a bit of security into account. 
  */
 public class Browser {
