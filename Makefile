@@ -1,7 +1,7 @@
 CLASSPATH=../../..
-SOURCPATH=../../..
+SOURCEPATH=../../..
 JFLAGS=-classpath $(CLASSPATH)
-JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
+JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCEPATH)
 JAVAC=javac $(JFLAGS) 
 OPTIMIZE=-g:none
 JAVA=java $(JFLAGS)
@@ -189,6 +189,7 @@ test:
 	$(JAVA) com.Ostermiller.util.LabeledCSVParserTests
 	$(JAVA) com.Ostermiller.util.Base64Tests
 	$(JAVA) com.Ostermiller.util.MD5Tests
+	$(JAVA) com.Ostermiller.util.SizeLimitInputStreamTests
         
 .PHONY: update
 update: 
