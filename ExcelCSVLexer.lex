@@ -176,7 +176,8 @@ EOL=({CR}|{LF}|{CR}{LF})
 
 NotCommaEOLQuote=([^\r\n\,\"])
 NotCommaEOL=([^\,\r\n])
-StringLiteral=(([\"]([^\"]|[\"][\"])*[\"]))
+FalseLiteral=([\"]([^\"]|[\"][\"])*)
+StringLiteral=({FalseLiteral}[\"])
 Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 
 %%
@@ -210,6 +211,14 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
 }
+<YYINITIAL> {FalseLiteral} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
+	yybegin(YYINITIAL);  
+	return(yytext());    
+}
 <BEFORE> ([\,]) {
 	yybegin(BEFORE);   
 	return("");
@@ -217,6 +226,10 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 <BEFORE> {StringLiteral} {
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
+}
+<BEFORE> {FalseLiteral} {
+	yybegin(YYINITIAL);  
+	return(yytext());    
 }
 <BEFORE> {Value} {
 	yybegin(AFTER);  

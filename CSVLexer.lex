@@ -216,7 +216,8 @@ NonBreakingWS=({Blank}|{Tab}|{FF})
 NotCommaSpaceQuote=([^\t\f\r\n\,\" ])
 NotCommaSpace=([^\t\f\r\n\, ])
 NotCommaEOL=([^\,\r\n])
-StringLiteral=(([\"]([^\"]|[\\][\"])*[\"]))
+FalseLiteral=([\"]([^\"]|[\\][\"])*)
+StringLiteral=({FalseLiteral}[\"])
 Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 
 %%
@@ -257,6 +258,14 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
 }
+<YYINITIAL> {FalseLiteral} {
+    if (addLine) {
+        lines++;
+        addLine = false;
+    }
+	yybegin(YYINITIAL);  
+	return(yytext());    
+}
 <BEFORE> ([\,]) {
 	yybegin(BEFORE);   
 	return("");
@@ -264,6 +273,10 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 <BEFORE> {StringLiteral} {
 	yybegin(AFTER);  
 	return(unescape(yytext()));    
+}
+<BEFORE> {FalseLiteral} {
+	yybegin(YYINITIAL);  
+	return(yytext());    
 }
 <BEFORE> {Value} {
 	yybegin(AFTER);  
