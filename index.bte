@@ -9,8 +9,8 @@
 add utils.jar to your classpath:
 <ul>
 <li>Put utils.jar in the Java extensions directory.</li>
-<li>Set your CLASSPATH environment variable to include utils.jar. (May cause compile problems in JDK 1.4)</li>
-<li>Specify utils.jar in the command line classpath when you compile and run your programs. (May cause compile problems in JDK 1.4)</li>
+<li>Set your CLASSPATH environment variable to include utils.jar.</li>
+<li>Specify utils.jar in the command line classpath when you compile and run your programs.</li>
 <li>Extract utils.jar to a folder already in your classpath.</li>
 <li>Include the contents of utils.jar in your program's jar file.</li>
 <li>Reference utils.jar from the manifest file in your program's jar file.</li>
