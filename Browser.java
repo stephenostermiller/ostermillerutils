@@ -46,10 +46,10 @@ public class Browser {
 	/**
 	 * Locale specific strings displayed to the user.
 	 */
- 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  Locale.getDefault());
-    
+	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  Locale.getDefault());
+
 	/**
-	 * Set the locale used for getting localized 
+	 * Set the locale used for getting localized
 	 * strings.
 	 *
 	 * @param locale Locale used to for i18n.
@@ -57,7 +57,7 @@ public class Browser {
 	public static void setLocale(Locale locale){
 		labels = ResourceBundle.getBundle("com.Ostermiller.util.Browser",  locale);
 	}
-    
+
 	/**
 	 * A list of commands to try in order to display the url.
 	 * The url is put into the command using MessageFormat, so
@@ -71,11 +71,11 @@ public class Browser {
 	public static String[] exec = null;
 
 	/**
-	 * Determine appropriate commands to start a browser on the current
+	 * Determine appropriate commands to start a browser on the curren
 	 * operating system.  On windows: <br>
 	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
 	 * On other operating systems, the "which" command is used to
-	 * test if mozilla, netscape, and lynx(xterm) are available (in that
+	 * test if mozilla, netscape, and lynx(xterm) are available (in tha
 	 * order).
 	 */
 	public static void init(){
@@ -91,7 +91,7 @@ public class Browser {
 			exec = new String[1];
 			exec[0] = "rundll32 url.dll,FileProtocolHandler {0}";
 		} else if (System.getProperty("os.name").startsWith("Mac")){
-			 exec = null; 
+			 exec = null;
 		} else {
 			Vector browsers = new Vector();
 			try {
@@ -192,164 +192,162 @@ public class Browser {
 		}
 	}
 
-    /**
-     * Display a URL in the system browser.
-     *
-     * Browser.init() should be called before calling this function or
-     * Browser.exec should be set explicitly.
-     *
-     * For security reasons, the URL will may not be passed directly to the
-     * browser as it is passed to this method.  The URL may be made safe for
-     * the exec command by URLEncoding the URL before passing it.
-     *
-     * @param url the url to display
-     * @throws IOException if the url is not valid or the browser fails to start
-     */
-    public static void displayURL(String url) throws IOException {
-        if (exec == null || exec.length == 0){
-        	if (System.getProperty("os.name").startsWith("Mac")){
-        		boolean success = false;                
-				try {
-                    Class nSWorkspace;
-                    if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
-                        // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
-                        ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
-                        nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
-        			} else {
-                        nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
-        			}
-                    Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
-        			Object workspace = sharedWorkspace.invoke(null, new Object[] {});
-        			Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
-        			success = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();		
-					//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
-				} catch (Exception x) {}
-				if (!success){
-        			try {
-        				Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
-        				Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
-        				openURL.invoke(null, new Object[] {url});
-        				//com.apple.mrj.MRJFileUtils.openURL(url);
-        			} catch (Exception x){
-        				System.err.println(x.getMessage());
-        				throw new IOException(labels.getString("failed"));
-        			}
-        		}
-        	} else {
-            	throw new IOException(labels.getString("nocommand"));
-            }
-        } else {
-            // for security, see if the url is valid.
-            // this is primarily to catch an attack in which the url
-            // starts with a - to fool the command line flags, but
-            // it could catch other stuff as well, and will throw a
-            // MalformedURLException which will give the caller of this
-            // function useful information.
-            new URL(url);
-            // escape any weird characters in the url.  This is primarily
-            // to prevent an attacker from putting in spaces
-            // that might fool exec into allowing
-            // the attacker to execute arbitrary code.
-            StringBuffer sb = new StringBuffer(url.length());
-            for (int i=0; i<url.length(); i++){
-                char c = url.charAt(i);
-                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
-                    || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
-                    || c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
-                    //characters that are nessesary for urls and should be safe
-                    //to pass to exec.  Exec uses a default string tokenizer with
-                    //the default arguments (whitespace) to separate command line
-                    //arguments, so there should be no problem with anything but
-                    //whitespace.
-                    sb.append(c);
-                } else{
-                    c = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)
-                    if (c < 0x10) {
-                        sb.append("%0" + Integer.toHexString(c));
-                    } else {
-                        sb.append("%" + Integer.toHexString(c));
-                    }
-
-                }
-            }
-            String[] messageArray = new String[1];
-        	messageArray[0] = sb.toString();
-            String command = null;
-            boolean found = false;
-            // try each of the exec commands until something works
-            try {
-                for (int i=0; i<exec.length && !found; i++){
-                    try {
-                        // stick the url into the command
-                        command = MessageFormat.format(exec[i], messageArray);
-                        // parse the command line.
-                        Vector argsVector = new Vector();
-                        BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
-                        String t;
-                        while ((t = lex.getNextToken()) != null) {
-                            argsVector.add(t);
-                        }
-                        String[] args = new String[argsVector.size()];
-                        args = (String[])argsVector.toArray(args);
-                        // the windows urlprotocol handler doesn't work well with file urls.
-                        // Correct those problems here before continuing
-                        // Java File.toURL() gives only one / following file: but
-                        // we need two.
-                        // If there are escaped characters in the url, we will have
-                        // to create an internet shortcut and open that, as the command
-                        // line version of the rundll doesn't like them.
-                        if (args[0].equals("rundll32") &&
-							args[1].equals("url.dll,FileProtocolHandler") &&
-							args[2].startsWith("file:/")){
-							if (args[2].charAt(6) != '/'){
-								args[2] = "file://" + args[2].substring(6);
-							}
-							if (args[2].charAt(7) != '/'){
-								args[2] = "file:///" + args[2].substring(7);
-							}
-							File shortcut = File.createTempFile("OpenInBrowser", ".url");
-							shortcut = shortcut.getCanonicalFile();
-							shortcut.deleteOnExit();
-							PrintWriter out = new PrintWriter(new FileWriter(shortcut));
-							out.println("[InternetShortcut]");
-							out.println("URL=" + args[2]);
-							out.close();
-							args[2] = shortcut.getCanonicalPath();
-						}
-						// start the browser
-						Process p = Runtime.getRuntime().exec(args);
-
-						// give the browser a bit of time to fail.
-						// I have found that sometimes sleep doesn't work
-						// the first time, so do it twice.  My tests
-						// seem to show that 1000 millisec is enough
-						// time for the browsers I'm using.
-						for (int j=0; j<2; j++){
-							try{
-								Thread.currentThread().sleep(1000);
-							} catch (InterruptedException inte){
-							}
-						}
-						if (p.exitValue() == 0){
-							// this is a weird case.  The browser exited after
-							// a couple seconds saying that it successfully
-							// displayed the url.  Either the browser is lying
-							// or the user closed it *really* quickly.  Oh well.
-							found = true;
-						}
-					} catch (IOException x){
-						// the command was not a valid command.
-						System.err.println(labels.getString("warning") + " " + x.getMessage());
+	 /**
+		* Display a URL in the system browser.
+		*
+		* Browser.init() should be called before calling this function or
+		* Browser.exec should be set explicitly.
+		*
+		* For security reasons, the URL will may not be passed directly to the
+		* browser as it is passed to this method.  The URL may be made safe for
+		* the exec command by URLEncoding the URL before passing it.
+		*
+		* @param url the url to display
+		* @throws IOException if the url is not valid or the browser fails to star
+		*/
+	 public static void displayURL(String url) throws IOException {
+		if (exec == nu ll || exec.length == 0){
+			if (System .getProperty("os.name").startsWith("Mac")){
+				boolea n success = false;
+			try {
+				Class  nSWorkspace;
+					if  (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
+						 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
+						 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
+						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
+					}  else {
+						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
+					}
+					Me thod sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
+					Ob ject workspace = sharedWorkspace.invoke(null, new Object[] {});
+					Me thod openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
+					su ccess = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();
+				//succ ess = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
+			} catch (E xception x) {}
+				if (!s uccess){
+					tr y {
+						 Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
+						 Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
+						 openURL.invoke(null, new Object[] {url});
+						 //com.apple.mrj.MRJFileUtils.openURL(url);
+					}  catch (Exception x){
+						 System.err.println(x.getMessage());
+						 throw new IOException(labels.getString("failed"));
 					}
 				}
-				if (!found){
-					// we never found a command that didn't terminate with an error.
-					throw new IOException(labels.getString("failed"));
+			} else {
+				throw  new IOException(labels.getString("nocommand"));
+			}
+		} else {
+			// for sec urity, see if the url is valid.
+			// this is  primarily to catch an attack in which the url
+			// starts  with a - to fool the command line flags, bu
+			// it coul d catch other stuff as well, and will throw a
+			// Malform edURLException which will give the caller of this
+			// functio n useful information.
+			new URL(ur l);
+			// escape  any weird characters in the url.  This is primarily
+			// to prev ent an attacker from putting in spaces
+			// that mi ght fool exec into allowing
+			// the att acker to execute arbitrary code.
+			StringBuff er sb = new StringBuffer(url.length());
+			for (int i =0; i<url.length(); i++){
+				char c  = url.charAt(i);
+				if ((c  >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+						 || c == '.' || c == ':' || c == '&' || c == '@' || c == '/' || c == '?'
+						 || c == '%' || c =='+' || c == '=' || c == '#' || c == '-'){
+					// characters that are nessesary for urls and should be safe
+					// to pass to exec.  Exec uses a default string tokenizer with
+					// the default arguments (whitespace) to separate command line
+					// arguments, so there should be no problem with anything bu
+					// whitespace.
+					sb .append(c);
+				} else  {
+					c  = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)
+					if  (c < 0x10){
+						 sb.append("%0" + Integer.toHexString(c));
+					}  else {
+						 sb.append("%" + Integer.toHexString(c));
+					}
 				}
+			}
+			String[] m essageArray = new String[1];
+			messageArr ay[0] = sb.toString();
+			String com mand = null;
+			boolean fo und = false;
+			// try eac h of the exec commands until something works
+			try {
+				for (i nt i=0; i<exec.length && !found; i++){
+					tr y {
+						 // stick the url into the command
+						 command = MessageFormat.format(exec[i], messageArray);
+						 // parse the command line.
+						 Vector argsVector = new Vector();
+						 BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
+						 String t;
+						 while ((t = lex.getNextToken()) != null) {
+							 argsVector.add(t);
+						 }
+						 String[] args = new String[argsVector.size()];
+						 args = (String[])argsVector.toArray(args);
+						 // the windows urlprotocol handler doesn't work well with file urls.
+						 // Correct those problems here before continuing
+						 // Java File.toURL() gives only one / following file: bu
+						 // we need two.
+						 // If there are escaped characters in the url, we will have
+						 // to create an internet shortcut and open that, as the command
+						 // line version of the rundll doesn't like them.
+						 if (args[0].equals("rundll32") &&
+								 args[1].equals("url.dll,FileProtocolHandler") &&
+								 args[2].startsWith("file:/")){
+							 if (args[2].charAt(6) != '/'){
+								 args[2] = "file://" + args[2].substring(6);
+							 }
+							 if (args[2].charAt(7) != '/'){
+								 args[2] = "file:///" + args[2].substring(7);
+							 }
+							 File shortcut = File.createTempFile("OpenInBrowser", ".url");
+							 shortcut = shortcut.getCanonicalFile();
+							 shortcut.deleteOnExit();
+							 PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+							 out.println("[InternetShortcut]");
+							 out.println("URL=" + args[2]);
+							 out.close();
+							 args[2] = shortcut.getCanonicalPath();
+						 }
+						 // start the browser
+						 Process p = Runtime.getRuntime().exec(args);
 
-			} catch (IllegalThreadStateException e){
-				// the browser is still running.  This is a good sign.
-				// lets just say that it is displaying the url right now!
+						 // give the browser a bit of time to fail.
+						 // I have found that sometimes sleep doesn't work
+						 // the first time, so do it twice.  My tests
+						 // seem to show that 1000 millisec is enough
+						 // time for the browsers I'm using.
+						 for (int j=0; j<2; j++){
+							 try{
+								 Thread.currentThread().sleep(1000);
+							 } catch (InterruptedException inte){
+							 }
+						 }
+						 if (p.exitValue() == 0){
+							 // this is a weird case.  The browser exited after
+							 // a couple seconds saying that it successfully
+							 // displayed the url.  Either the browser is lying
+							 // or the user closed it *really* quickly.  Oh well.
+							 found = true;
+						 }
+					}  catch (IOException x){
+						 // the command was not a valid command.
+						 System.err.println(labels.getString("warning") + " " + x.getMessage());
+					}
+				}
+				if (!f ound){
+					//  we never found a command that didn't terminate with an error.
+					th row new IOException(labels.getString("failed"));
+				}
+			} catch (I llegalThreadStateException e){
+				// the  browser is still running.  This is a good sign.
+				// let s just say that it is displaying the url right now!
 			}
 		}
 	}
@@ -365,7 +363,7 @@ public class Browser {
 	 * open the rest of the urls.
 	 *
 	 * @param urls the list of urls to display
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURLs(String[] urls) throws IOException {
 		if (urls == null || urls.length == 0){
@@ -410,14 +408,14 @@ public class Browser {
 	 * new window already.  If it did, the url is shown in that window, if not, it is
 	 * shown in new window.
 	 *
-	 * Some browsers do not allow the length of history to be viewed by a web page.  In that
+	 * Some browsers do not allow the length of history to be viewed by a web page.  In tha
 	 * case, the url will be displayed in the current window.
 	 *
 	 * Browser.init() should be called before calling this function or
 	 * Browser.exec should be set explicitly.
 	 *
 	 * @param url the url to display in a new window.
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURLinNew(String url) throws IOException {
 		displayURLsinNew (new String[] {url});
@@ -427,7 +425,7 @@ public class Browser {
 	 * Display the URLs, each in their own window, in the system browser and the first in
 	 * the named window.
 	 *
-	 * The first URL will only be opened in the named window if the browser did not
+	 * The first URL will only be opened in the named window if the browser did no
 	 * open it in a new window to begin with.
 	 *
 	 * Browser.init() should be called before calling this function or
@@ -438,7 +436,7 @@ public class Browser {
 	 * open all the urls.
 	 *
 	 * @param urls the list of urls to display
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURLsinNew(String[] urls) throws IOException {
 		if (urls == null || urls.length == 0){
@@ -494,7 +492,7 @@ public class Browser {
 	 *
 	 * @param url the url to display
 	 * @param namedWindow the name of the desired window.
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURL(String url, String namedWindow) throws IOException {
 		displayURLs (new String[] {url}, new String[] {namedWindow});
@@ -514,7 +512,7 @@ public class Browser {
 	 *
 	 * @param urls the list of urls to display
 	 * @param namedWindows the list of names for the windows.
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURLs(String[] urls, String[] namedWindows) throws IOException {
 		if (urls == null || urls.length == 0){
@@ -547,7 +545,7 @@ public class Browser {
 		displayURL(shortcut.toURL().toString());
 	}
 
-    /**
+	/**
 	 * Display the URLs the first in the given named window.
 	 *
 	 * If the browser opens a new window by default, this will likely cause a duplicate window
@@ -558,10 +556,10 @@ public class Browser {
 	 *
 	 * @param urls the list of urls to display
 	 * @param namedWindow the name of the first window to use.
-	 * @throws IOException if the url is not valid or the browser fails to start
+	 * @throws IOException if the url is not valid or the browser fails to star
 	 */
 	public static void displayURLs(String[] urls, String namedWindow) throws IOException {
-        displayURLs(urls, new String[] {namedWindow});
+		displayURLs(urls, new String[] {namedWindow});
 	}
 
 	/**
@@ -706,7 +704,7 @@ public class Browser {
 		 * The reset button.
 		 */
 		private JButton resetButton;
-		
+
 		/**
 		 * The browse button.
 		 */
@@ -731,7 +729,7 @@ public class Browser {
 		 * update this variable when the user makes an action
 		 */
 		private boolean pressed_OK = false;
-		
+
 		/**
 		 * File dialog for choosing a browser
 		 */
@@ -753,7 +751,6 @@ public class Browser {
 		 * Called by constructors to initialize the dialog.
 		 */
 		protected void dialogInit(){
-
 			commandLinesArea = new JTextArea("", 8, 40);
 			JScrollPane scrollpane = new JScrollPane(commandLinesArea);
 			okButton = new JButton(labels.getString("dialog.ok"));
@@ -824,9 +821,9 @@ public class Browser {
 			gridbag.setConstraints(commandLinesLabel, c);
 			pane.add(commandLinesLabel);
 			JPanel buttonPanel = new JPanel();
-			c.anchor = GridBagConstraints.EAST;			  
+			c.anchor = GridBagConstraints.EAST;			
 			browseButton.addActionListener(actionListener);
-			buttonPanel.add(browseButton);			  
+			buttonPanel.add(browseButton);			
 			resetButton.addActionListener(actionListener);
 			buttonPanel.add(resetButton);
 			gridbag.setConstraints(buttonPanel, c);
@@ -879,5 +876,3 @@ public class Browser {
 		}
 	}
 }
-
-

@@ -19,23 +19,23 @@ package com.Ostermiller.util;
 import java.io.IOException;
 
 /**
- * An indication that there was a buffer overflow.  
+ * An indication that there was a buffer overflow.
  */
 public class BufferOverflowException extends IOException {
 
-    /**
-     * Create a new Exception
-     */
-    public BufferOverflowException(){
-        super();
-    }
-    
-    /**
-     * Create a new Exception with the given message.
-     * 
-     * @param msg Error message.
-     */
-    public BufferOverflowException(String msg){
-        super(msg);
-    }
+	/**
+	 * Create a new Exception
+	 */
+	public BufferOverflowException(){
+		super();
+	}
+
+	/**
+	 * Create a new Exception with the given message.
+	 *
+	 * @param msg Error message.
+	 */
+	public BufferOverflowException(String msg){
+		super(msg);
+	}
 }
