@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1189
+personal_ws-1.1 en 1190
 aa
 aA
 aaa
@@ -969,6 +969,7 @@ setReturnEmptyTokens
 setSize
 setText
 setTitle
+setVisible
 sharedWorkspace
 shortValue
 showConfirmDialog

@@ -316,13 +316,13 @@ public class LabeledCSVParser implements CSVParse {
 	public String getValueByLabel(String label) throws IllegalStateException {
 		if (nextValueLine == getLastLineNumber()) throw new IllegalStateException("nextValue() was used to get values from this line.");
 		if (lastLine == null) return null;
-        int fieldIndex;
-        try {
-		    fieldIndex = getLabelIdx(label);
-        } catch (IOException iox){
-            // Can't happen here because the labels have been read before the first line.
-            throw new RuntimeException(iox);
-        }
+		int fieldIndex;
+		try {
+			fieldIndex = getLabelIdx(label);
+		} catch (IOException iox){
+			// Can't happen here because the labels have been read before the first line.
+			throw new RuntimeException(iox);
+		}
 		if (fieldIndex == -1) return null;
 		if (fieldIndex >= lastLine.length) return null;
 		return lastLine[fieldIndex];

@@ -1015,25 +1015,25 @@ public class Browser {
 		 * Shows the dialog.
 		 *
 		 * @since ostermillerutils 1.00.00
-         * @deprecated use setVisible(true);
+		 * @deprecated use setVisible(true);
 		 */
 		public void show(){
-            setVisible(true);
+			setVisible(true);
 		}
-        
-        public void setVisible(boolean visible){
-            if (visible){                
-			    initPanel();
-			    super.setVisible(true);
-			    if (pressed_OK){
-				    userOKedPanelChanges();
-			    }
-            } else {
-                super.setVisible(false);
-            }
-        }
-        
-        
+
+		public void setVisible(boolean visible){
+			if (visible){
+				initPanel();
+				super.setVisible(true);
+				if (pressed_OK){
+					userOKedPanelChanges();
+				}
+			} else {
+				super.setVisible(false);
+			}
+		}
+
+
 	}
 
 	private static void setCommands(String[] newExec){

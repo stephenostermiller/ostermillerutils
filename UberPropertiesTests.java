@@ -59,7 +59,7 @@ class UberPropertiesTests {
 			String results = compare(up, p);
 			if (results != null){
 				System.err.println(results);
-                System.err.println(TESTS[i]);
+				System.err.println(TESTS[i]);
 				System.exit(1);
 			}
 			CircularByteBuffer cbb = new CircularByteBuffer(CircularByteBuffer.INFINITE_SIZE);
@@ -70,7 +70,7 @@ class UberPropertiesTests {
 			results = compare(up, up2);
 			if (results != null){
 				System.err.println(results);
-                System.err.println(TESTS[i]);
+				System.err.println(TESTS[i]);
 				System.exit(1);
 			}
 		}
