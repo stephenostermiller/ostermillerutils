@@ -2,19 +2,19 @@ CLASSPATH=../../..
 SOURCPATH=../../..
 JFLAGS=-classpath $(CLASSPATH)
 JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
-JAVAC=javac
-JAVA=java
+JAVAC=javac $(JFLAGS)
+JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
 JLEX=$(JAVA) $(JFLAGS) JFlex.Main
 CVS=cvs
 
 all: compile build javadoc
 
-compile: CSVLexer.java \
+compile: buildclean CSVLexer.java \
 	BrowserCommandLexer.java \
 	CGILexer.java \
 	ExcelCSVLexer.java
-	$(JAVAC) $(JFLAGS) *.java
+	$(JAVAC) *.java
 
 CSVLexer.java: CSVLexer.lex
 	$(JLEX) CSVLexer.lex
@@ -29,8 +29,7 @@ ExcelCSVLexer.java: ExcelCSVLexer.lex
 	$(JLEX) ExcelCSVLexer.lex
 
 junkclean:
-	rm -f *~ ~* utils_*.jar
-	rm -rf com/ gnu/
+	rm -f *~ ~* utils_*.jar *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/
 
 buildclean: junkclean
 	rm -f utils.jar
@@ -67,7 +66,9 @@ test: compile
 	diff out.txt ExcelCSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
 	diff out.txt CSVTestResults.txt
-	rm out.txt CSVTest.txt
+	$(JAVA) com.Ostermiller.util.CircularBufferTests > out.txt
+	diff out.txt CircularBufferTestResults.txt
+	rm out.txt CSVTest.txt CircularBufferTestResults.txt
         
 update: clean
 	$(CVS) update
@@ -76,9 +77,7 @@ commit: clean
 	$(CVS) commit
 
 release: update test build javadoc commit
-	mv -f package.html temp
 	./release.sh
-	mv -f temp package.html
 
 install:
 	./install.sh

@@ -34,6 +34,7 @@ import java.io.IOException;
  * This class is thread safe.
  *
  * @see CircularByteBuffer
+ * @see CircularObjectBuffer
  */
 public class CircularCharBuffer {
     

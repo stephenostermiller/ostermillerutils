@@ -76,12 +76,27 @@ class CircularBufferTests {
     private CircularByteBuffer cbb = new CircularByteBuffer(20);
     private InputStream cbbin;
     private OutputStream cbbout;
+
+    private CircularObjectBuffer cob = new CircularObjectBuffer(20);
     
     public static void main(String args[]) throws Exception {
         new CircularBufferTests();        
     }
     
     private CircularBufferTests() throws Exception{
+        // write expected results
+        Writer fout = new BufferedWriter(new FileWriter("CircularBufferTestResults.txt"));
+        fout.write(theGettysburgAddress);
+        fout.write(System.getProperty("line.separator"));
+        for (int i=0; i<pi.length; i++){
+            fout.write(Byte.toString(pi[i]));
+        }
+        fout.write(System.getProperty("line.separator"));
+        fout.write(theGettysburgAddress);
+        fout.write(System.getProperty("line.separator"));
+        fout.flush();
+        fout.close();        
+        
         ccbin = ccb.getReader();
         ccbout = ccb.getWriter();
         CCBProducer ccbp = new CCBProducer();
@@ -109,7 +124,19 @@ class CircularBufferTests {
                 return; 
             }
         } 
-        System.out.println();     
+        System.out.println();  
+        COBProducer cobp = new COBProducer();
+        COBConsumer cobc = new COBConsumer();
+        cobc.start();
+        cobp.start();
+        while (cobc.isAlive() || cobp.isAlive()){
+            if(System.in.available() > 0){
+                cobc.interrupt();
+                cobp.interrupt();
+                return; 
+            }
+        } 
+        System.out.println();       
     }
     
     private class CCBProducer extends Thread {
@@ -305,6 +332,102 @@ class CircularBufferTests {
                     }                      
                 }
             } catch (IOException x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+    
+    private class COBProducer extends Thread {
+        public void run() {
+            try {
+                for(int position = 0; !isInterrupted() && position < theGettysburgAddress.length(); position++){
+                    int len = rand.nextInt(30);
+                    len = Math.min(len, theGettysburgAddress.length() - position);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(2)){
+                        case 0: {                        
+                            String[] writeBuf = new String[len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i] = Character.toString(theGettysburgAddress.charAt(position + i));
+                            }
+                            cob.write(writeBuf);
+                        } break;
+                        case 1: {
+                            String[] writeBuf = new String[off + len];
+                            for (int i=0; i<len; i++){
+                                writeBuf[i+off] = Character.toString(theGettysburgAddress.charAt(position + i));
+                            }
+                            cob.write(writeBuf, off, len);
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && i<len; i++){
+                                cob.write(Character.toString(theGettysburgAddress.charAt(position + i)));
+                            }                        
+                        } break;
+                    } 
+                    position += (len - 1);                    
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Producer thread interrupted.");
+                    }               
+                }
+                cob.done();
+            } catch (Exception x){
+                System.err.println(x.getMessage());
+            }
+        }    
+    }
+    
+    private class COBConsumer extends Thread {
+        public void run() {  
+            try {  
+                boolean done = false;     
+                while(!isInterrupted() && !done){
+                    int len = rand.nextInt(30);
+                    int off = rand.nextInt(10);
+                    switch (rand.nextInt(2)){
+                        case 0: {                        
+                            Object[] readBuf = new Object[len];
+                            int read = cob.read(readBuf);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i]);
+                                }                            
+                            }
+                        } break;
+                        case 1: {
+                            Object[] readBuf = new Object[off + len];
+                            int read = cob.read(readBuf, off, len);
+                            if (read == -1){
+                                done = true;
+                            } else {
+                                for (int i=0; i<read; i++){
+                                    System.out.print(readBuf[i+off]);
+                                }                            
+                            }
+                        } break;
+                        case 2: {
+                            for (int i=0; !isInterrupted() && !done && i<len; i++){
+                                Object read;
+                                read = cob.read();
+                                if (read == null){
+                                    done = true;
+                                } else {
+                                    System.out.print(read);
+                                }
+                            }                        
+                        } break;
+                    }
+                    try {
+                        Thread.sleep(50 + rand.nextInt(100));
+                    } catch(Exception x){
+                        throw new IOException("Consumer thread interrupted.");
+                    }                      
+                }
+            } catch (Exception x){
                 System.err.println(x.getMessage());
             }
         }    
