@@ -330,9 +330,9 @@ public class Browser {
             Browser.dialogConfiguration(null);
             if (args.length == 0){
         	    Browser.displayURLs(new String[]{
-                    "http://www.javaworld.com/",
-                    "http://www.cnn.com/",
-                    "http://www.gjt.org",
+                    "http://www.google.com/",
+                    "http://dmoz.org/",
+                    "http://ostermiller.org",
                 });
             } else {
                 Browser.displayURLs(args);
