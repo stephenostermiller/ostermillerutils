@@ -374,7 +374,7 @@ public class LineEnds {
                         }
                         out.write(lineEnding);
                     } else if(binaryException && b!='\t' && b!='\f' && (b & 0xff)<32){
-                        throw new BinaryDataException("Binary data encountered, line break replacement aborted.");
+                        throw new BinaryDataException(labels.getString("binaryexcepion"));
                     } else {
                         out.write(b);
                     }                    
