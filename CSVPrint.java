@@ -42,7 +42,7 @@ public interface CSVPrint {
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
-	public void changeDelimiter(char newDelimiter);
+	public void changeDelimiter(char newDelimiter) throws BadDelimeterException;
 
 	/**
 	 * Change this printer so that it uses a new character for quoting.
@@ -52,7 +52,7 @@ public interface CSVPrint {
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
-	public void changeQuote(char newQuote);
+	public void changeQuote(char newQuote) throws BadQuoteException;
 
 	/**
 	 * Print the string as the last value on the line.	The value

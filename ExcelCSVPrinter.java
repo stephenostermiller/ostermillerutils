@@ -99,7 +99,11 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
-	public void changeDelimiter(char newDelimiter){
+	public void changeDelimiter(char newDelimiter) throws BadDelimeterException {
+		if (newDelimiter == '\n' || newDelimiter == '\r' ||
+				newDelimiter == delimiterChar || newDelimiter == quoteChar){
+			throw new BadDelimeterException();
+		}
 		delimiterChar = newDelimiter;
 	}
 
@@ -111,7 +115,11 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
-	public void changeQuote(char newQuote){
+	public void changeQuote(char newQuote) throws BadQuoteException {
+		if (newQuote == '\n' || newQuote == '\r' ||
+				newQuote == delimiterChar || newQuote == quoteChar){
+			throw new BadQuoteException();
+		}
 		quoteChar = newQuote;
 	}
 
