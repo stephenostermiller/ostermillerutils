@@ -14,7 +14,7 @@
  *
  * See COPYING.TXT for details.
  */
- 
+
  package com.Ostermiller.util;
 
 /**
@@ -23,7 +23,7 @@
  * "http://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
  */
 class TokenizerTests {
-	
+
 	public static void main(String args[]){
 		java.util.StringTokenizer oldTok;
 		com.Ostermiller.util.StringTokenizer newTok;
@@ -192,22 +192,20 @@ class TokenizerTests {
 		compareAndPrint("peek", newTok.peek());
 		compareAndPrint("peek", newTok.nextToken());
 		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.peek());		 
+		compareAndPrint("method", newTok.peek());		
 		compareAndPrint("true", "" + newTok.hasMoreTokens());
-		compareAndPrint("method", newTok.nextToken());		  
+		compareAndPrint("method", newTok.nextToken());		
 		compareAndPrint("false", "" + newTok.hasMoreTokens());
 		System.out.println("  ===============================================");
-
-
 	}
 
 	private static void compareAndPrint(String one, String two){
-	   System.out.print((one.equals(two) ? "  " : "* "));
-	   System.out.print(one);
-	   for (int i=0; i < 20 - one.length(); i++){
-		   System.out.print(" ");
-	   }
-	   System.out.println("| " + two);
+		 System.out.print((one.equals(two) ? "  " : "* "));
+		 System.out.print(one);
+		 for (int i=0; i < 20 - one.length(); i++){
+			 System.out.print(" ");
+		 }
+		 System.out.println("| " + two);
 	}
 
 	private static boolean compareState(String testName, java.util.StringTokenizer oldTok, com.Ostermiller.util.StringTokenizer newTok){
