@@ -1,0 +1,26 @@
+<%bte.doc super="page.bte" %>
+<%bte.tpl name=pageTitle%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
+<%bte.tpl name=firstLine%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
+<%bte.tpl name=description%>Download open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
+<%bte.tpl name=keywords%>history, jar, util, util, util, utils, utils, utils, utilities, utilities, base64, base64, base64, md5, md5, md5, significant, figures, encode, encoding, decode, decoding, password, username, dialog, string, string tokenizer, tokenizer, stringtokenizer, stringtokenizer,  programming, text, cgi, csv, csv, browser, random, password, generate, generator, pass, launcher, browser control, launch, web browser, open url, url, comma, separated, value, values, java, java, open source, gpl, javadoc<%/bte.tpl%>
+<%bte.tpl name=content%>
+<div class=history>
+<h2>Version History</h2>
+<ul>
+<li>Version 1.02.08 - Ability to change delimiters in CSV parsers.</li>
+<li>Version 1.02.07 - Added convenience methods to sigfigs, browser doesn't escape forward slash.</li>
+<li>Version 1.02.06 - Updated French translations.</li>
+<li>Version 1.02.05 - Two Polish translations.</li>
+<li>Version 1.02.04 - Created build file for Ant.</li>
+<li>Version 1.02.03 - Convenience methods in CSV parsers.</li>
+<li>Version 1.02.02 - Unclosed quoted value in CSV bug.</li>
+<li>Version 1.02.01 - Documentation improvement.</li>
+<li>Version 1.02.00 - Applet added for Random Passwords.</li>
+<li>Version 1.01.00 - NoClose Streams</li>
+<li>Version 1.00.00 - First versioned release.</li>
+</ul>
+<p>No version number was available before January 2003, old versions are not available for download.  <a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">CVS from gjt.org</a> can be used to answer specific questions about revisions to a particular file.</div>
+</div>
+<br clear=all>
+<%/bte.tpl%>
+<%/bte.doc%>

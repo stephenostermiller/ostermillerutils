@@ -24,7 +24,18 @@ if (!styleok){
 //--></script>
 <%bte.grp onNoResolve=ok %><%bte.inc name=extraheader %><%/bte.grp %></head>
 <body>
+<div class=titleandlinks>
+<div class=titlebox>
 <h1><%bte.inc name=firstLine %></h1>
+</div>
+<div class=linksbox>
+<%bte.grp ondefault=ok%><%bte.inc name=linkutilies%><%/bte.grp%><br>
+<%bte.grp ondefault=ok%><%bte.inc name=linkdownload%><%/bte.grp%><br>
+<%bte.grp ondefault=ok%><%bte.inc name=linksource%><%/bte.grp%><br>
+<%bte.grp ondefault=ok%><%bte.inc name=linkdoc%><%/bte.grp%>
+
+</div>
+</div>
 <%bte.inc name=content %>
 <hr>
 
@@ -43,4 +54,8 @@ or FITNESS FOR A PARTICULAR PURPOSE. See the
 <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
 </body>
 </html><%/bte.tpl%>
+<%bte.tpl name=linkutilies%><a href="./">Utilities</a><%/bte.tpl%>
+<%bte.tpl name=linkdownload%><a href="download.html">Download</a><%/bte.tpl%>
+<%bte.tpl name=linksource%><a href="source.html">Browse Source</a><%/bte.tpl%>
+<%bte.tpl name=linkdoc%><a href="doc/">JavaDoc</a><%/bte.tpl%>
 <%/bte.doc%>
