@@ -23,18 +23,15 @@ common printable characters.  For example to connect to a web page that requires
 <br clear=all>
 
 <div class=examplecode><h3>Example</h3>
-<pre><span class=reservedWord>import</span><span class=whitespace> </span><span class=identifier>com</span><span class=separator>.</span><span class=identifier>Ostermiller</span><span class=separator>.</span><span class=identifier>util</span><span class=separator>.</span><span class=identifier>Base64</span><span class=separator>;</span><span class=whitespace>
-</span><span class=separator>...</span><span class=whitespace>
-</span><span class=identifier>URL</span><span class=whitespace> </span><span class=identifier>url</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>URL</span><span class=separator>(</span><span class=literal>&quot;http://....&quot;</span><span class=separator>);</span><span class=whitespace>
-</span><span class=identifier>HttpURLConnection</span><span class=whitespace> </span><span class=identifier>connection</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>HttpURLConnection</span><span class=separator>)</span><span class=identifier>url</span><span class=separator>.</span><span class=identifier>openConnection</span><span class=separator>();</span><span class=whitespace>
-</span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>setRequestProperty</span><span class=separator>(</span><span class=whitespace>
-    </span><span class=literal>&quot;Authorization&quot;</span><span class=separator>,</span><span class=whitespace> 
-    </span><span class=literal>&quot;Basic &quot;</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=identifier>Base64</span><span class=separator>.</span><span class=identifier>encode</span><span class=separator>(</span><span class=whitespace>
-        </span><span class=identifier>username</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=literal>&quot;:&quot;</span><span class=whitespace> </span><span class=operator>+</span><span class=whitespace> </span><span class=identifier>password</span><span class=whitespace>
-    </span><span class=separator>)</span><span class=whitespace>
-</span><span class=separator>);</span><span class=whitespace>      
-</span><span class=identifier>InputStream</span><span class=whitespace> </span><span class=identifier>in</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>getInputStream</span><span class=separator>();</span><span class=whitespace>
-</span></pre>
+<pre><span class=identifier>URL url </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>URL</span><span class=separator>(</span><span class=literal>&quot;http://....&quot;</span><span class=separator>);
+</span><span class=identifier>HttpURLConnection connection </span><span class=operator>= </span><span class=separator>(</span><span class=identifier>HttpURLConnection</span><span class=separator>)</span><span class=identifier>url</span><span class=separator>.</span><span class=identifier>openConnection</span><span class=separator>();
+</span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>setRequestProperty</span><span class=separator>(
+    </span><span class=literal>&quot;Authorization&quot;</span><span class=separator>, 
+    </span><span class=literal>&quot;Basic &quot; </span><span class=operator>+ </span><span class=identifier>Base64</span><span class=separator>.</span><span class=identifier>encode</span><span class=separator>(
+        </span><span class=identifier>username </span><span class=operator>+ </span><span class=literal>&quot;:&quot; </span><span class=operator>+ </span><span class=identifier>password
+    </span><span class=separator>)
+);      
+</span><span class=identifier>InputStream in </span><span class=operator>= </span><span class=identifier>connection</span><span class=separator>.</span><span class=identifier>getInputStream</span><span class=separator>();</span></pre>
 Use base64 to add a basic authentication to an HTTP request.
 </div>
 
