@@ -29,16 +29,23 @@ import java.util.Locale;
  * that of a given platform.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class LineEnds {
 
 	/**
 	 * Version number of this program
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static final String version = "1.2";
 
 	/**
 	 * Locale specific strings displayed to the user.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.LineEnds",  Locale.getDefault());
 
@@ -47,6 +54,8 @@ public class LineEnds {
 	 * Run with --help argument for more information.
 	 *
 	 * @param args Command line arguments.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
 		// create the command line options that we are looking for
@@ -230,43 +239,63 @@ public class LineEnds {
 	/**
 	 * The system line ending as determined
 	 * by System.getProperty("line.separator")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_SYSTEM = 0;
 	/**
 	 * The Windows and DOS line ending ("\r\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_WINDOWS = 1;
 	/**
 	 * The Windows and DOS line ending ("\r\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_DOS = 1;
 	/**
 	 * The Windows and DOS line ending ("\r\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_RN = 1;
 	/**
 	 * The UNIX and Java line ending ("\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_UNIX = 2;
 	/**
 	 * The UNIX and Java line ending ("\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_N = 2;
 	/**
 	 * The UNIX and Java line ending ("\n")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_JAVA = 2;
 	/**
 	 * The Macintosh line ending ("\r")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_MAC = 3;
 	/**
 	 * The Macintosh line ending ("\r")
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_R = 3;
 
 	/**
 	 * Buffer size when reading from input stream.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private final static int BUFFER_SIZE = 1024;
 	private final static int STATE_INIT = 0;
@@ -287,6 +316,8 @@ public class LineEnds {
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out) throws IOException {
 		return convert(in, out, STYLE_SYSTEM, true);
@@ -303,6 +334,8 @@ public class LineEnds {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, int style) throws IOException {
 		return convert(in, out, style, true);
@@ -320,6 +353,8 @@ public class LineEnds {
 	 * @return true if the output was modified from the input, false if it is exactly the same
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, boolean binaryException) throws IOException {
 		return convert(in, out, STYLE_SYSTEM, binaryException);
@@ -337,6 +372,8 @@ public class LineEnds {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(InputStream in, OutputStream out, int style, boolean binaryException) throws IOException {
 		byte[] lineEnding;
@@ -413,6 +450,8 @@ public class LineEnds {
 	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f) throws IOException {
 		return convert(f, STYLE_SYSTEM, true);
@@ -427,6 +466,8 @@ public class LineEnds {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, int style) throws IOException {
 		return convert(f, style, true);
@@ -442,6 +483,8 @@ public class LineEnds {
 	 * @return true if the file was modified, false if it was already in the correct format
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, boolean binaryException) throws IOException {
 		return convert(f, STYLE_SYSTEM, binaryException);
@@ -457,6 +500,8 @@ public class LineEnds {
 	 * @throws BinaryDataException if non-text data is encountered.
 	 * @throws IOException if an input or output error occurs.
 	 * @throws IllegalArgumentException if an unknown style is requested.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public static boolean convert(File f, int style, boolean binaryException) throws IOException {
 		File temp = null;
