@@ -1,6 +1,6 @@
 /*
  * Read files in Excel comma separated value format.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -276,5 +276,15 @@ public class ExcelCSVParser implements CSVParse {
 		} catch (IOException x){
 			return null;
 		}
+	}
+
+	/**
+	 * Parse the comma delimited data from a stream.
+	 *
+	 * @param in Reader with comma delimited data to parse.
+	 * @throws IOException if an error occurs while reading
+	 */
+	public static String[][] parse(Reader in) throws IOException {
+		return (new ExcelCSVParser(in)).getAllValues();
 	}
 }

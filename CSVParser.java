@@ -1,6 +1,6 @@
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -352,5 +352,31 @@ public class CSVParser implements CSVParse {
 		} catch (IOException x){
 			return null;
 		}
+	}
+
+	/**
+	 * Parse the comma delimited data from a stream.
+	 * <p>
+	 * Only escaped backslashes and quotes will be recognized as escape sequences.
+	 * The data will be treated as having no comments.
+	 *
+	 * @param in Reader with comma delimited data to parse.
+	 * @throws IOException if an error occurs while reading
+	 */
+	public static String[][] parse(Reader in) throws IOException {
+		return (new CSVParser(in)).getAllValues();
+	}
+
+	/**
+	 * Parse the comma delimited data from a stream.
+	 * Escaped backslashes and quotes will always recognized as escape sequences.
+	 *
+	 * @param in Reader with comma delimited data to parse.
+	 * @param escapes a list of additional characters that will represent escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
+	 * @param commentDelims list of characters a comment line may start with.
+	 */
+	public static String[][] parse(Reader in, String escapes, String replacements, String commentDelims) throws IOException {
+		return (new CSVParser(in, escapes, replacements, commentDelims)).getAllValues();
 	}
 }
