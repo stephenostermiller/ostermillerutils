@@ -46,7 +46,7 @@ class PropertiesToken {
 	 */
 	public PropertiesToken(int ID, String contents){
 		this.ID = ID;
-		this.contents = new String(contents);
+		this.contents = contents;
 	}
 
 	/**
@@ -64,21 +64,21 @@ class PropertiesToken {
 	 * @return A string representing the text of the token
 	 */
 	public String getContents(){
-		return (new String(contents));
+		return (contents);
 	}
 
 	public String toString(){
 			String idString = "";
-				switch (ID){
-					case COMMENT: idString = "COMMENT"; break;
-			case END_LINE_WHITE_SPACE: idString = "END_LINE_WHITE_SPACE"; break;
-			case WHITE_SPACE: idString = "WHITE_SPACE"; break;
-			case SEPARATOR: idString = "SEPARATOR"; break;
-			case CONTINUE_LINE: idString = "CONTINUE_LINE"; break;
-			case NAME: idString = "NAME"; break;
-			case VALUE: idString = "VALUE"; break;
-				}
-				idString = StringHelper.postpad(idString, 21);
+			switch (ID){
+				case COMMENT: idString = "COMMENT"; break;
+				case END_LINE_WHITE_SPACE: idString = "END_LINE_WHITE_SPACE"; break;
+				case WHITE_SPACE: idString = "WHITE_SPACE"; break;
+				case SEPARATOR: idString = "SEPARATOR"; break;
+				case CONTINUE_LINE: idString = "CONTINUE_LINE"; break;
+				case NAME: idString = "NAME"; break;
+				case VALUE: idString = "VALUE"; break;
+			}
+			idString = StringHelper.postpad(idString, 21);
 		return idString + contents;
 	}
 }
