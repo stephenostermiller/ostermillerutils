@@ -89,17 +89,64 @@ public class Browser {
 	public static String[] defaultCommands(){
 		String[] exec = null;
 		if ( System.getProperty("os.name").startsWith("Windows")){
-			exec = new String[1];
-			exec[0] = "rundll32 url.dll,FileProtocolHandler {0}";
+			exec = new String[]{
+				"rundll32 url.dll,FileProtocolHandler {0}",
+			};
 		} else if (System.getProperty("os.name").startsWith("Mac")){
-			 exec = null;
+			Vector browsers = new Vector();
+			try {
+				Process p = Runtime.getRuntime().exec("which open");
+				if (p.waitFor() == 0){
+					browsers.add("open {0}");
+				}
+			} catch (IOException e){
+			} catch (InterruptedException e){
+			}
+			if (browsers.size() == 0){
+				exec = null;
+			} else {
+				exec = (String[])browsers.toArray(new String[0]);
+			}
 		} else {
 			Vector browsers = new Vector();
 			try {
+				Process p = Runtime.getRuntime().exec("which firebird");
+				if (p.waitFor() == 0){
+					browsers.add("firebird -remote openURL({0})");
+					browsers.add("firebird {0}");
+				}
+			} catch (IOException e){
+			} catch (InterruptedException e){
+			}try {
 				Process p = Runtime.getRuntime().exec("which mozilla");
 				if (p.waitFor() == 0){
 					browsers.add("mozilla -remote openURL({0})");
 					browsers.add("mozilla {0}");
+				}
+			} catch (IOException e){
+			} catch (InterruptedException e){
+			}
+			try {
+				Process p = Runtime.getRuntime().exec("which opera");
+				if (p.waitFor() == 0){
+					browsers.add("opera -remote openURL({0})");
+					browsers.add("opera {0}");
+				}
+			} catch (IOException e){
+			} catch (InterruptedException e){
+			}
+			try {
+				Process p = Runtime.getRuntime().exec("which galeon");
+				if (p.waitFor() == 0){
+					browsers.add("galeon {0}");
+				}
+			} catch (IOException e){
+			} catch (InterruptedException e){
+			}
+			try {
+				Process p = Runtime.getRuntime().exec("which konqueror");
+				if (p.waitFor() == 0){
+					browsers.add("konqueror {0}");
 				}
 			} catch (IOException e){
 			} catch (InterruptedException e){
@@ -127,8 +174,7 @@ public class Browser {
 			if (browsers.size() == 0){
 				exec = null;
 			} else {
-				exec = new String[browsers.size()];
-				exec = (String[])browsers.toArray(exec);
+				exec = (String[])browsers.toArray(new String[0]);
 			}
 		}
 		return exec;
