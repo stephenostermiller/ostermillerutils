@@ -113,6 +113,7 @@ junkclean:
 buildclean: junkclean
 	@echo Make: Removing generated jar files.
 	@rm -f utils.jar
+	@rm -f randpass.jar
         
 .PHONY: javadocclean	        
 javadocclean: junkclean
@@ -154,7 +155,14 @@ javadoc: *.java
 	@touch javadoc
 
 .PHONY: build
-build: utils.jar
+build: utils.jar randpass.jar
+
+randpass.jar: *RandPass*.class *RandPass*.properties *.TXT 
+	@echo Make: Building  randpass.jar.
+	@mkdir -p com/Ostermiller/util
+	@cp *RandPass*.class *RandPass*.properties *.TXT com/Ostermiller/util/
+	@jar cfv randpass.jar com/ > /dev/null
+	@rm -rf com/
 
 utils.jar: *.java *.html *.class *.sh *.lex *.properties *.txt *.TXT *.csv *.bte *.dict Makefile ../../../gnu/getopt/*.*
 	@echo Make: Building jar file.
@@ -189,7 +197,7 @@ update:
 commit: 
 	@$(CVS) commit
 
-release: *.html src/* utils.jar .htaccess install.sh doc/
+release: *.html src/* utils.jar randpass.jar .htaccess install.sh doc/
 	@./release.sh $?
 	@touch release
 

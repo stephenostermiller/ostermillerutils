@@ -1,4 +1,4 @@
-personal_ws-1.1 english 884
+personal_ws-1.1 english 924
 aa
 aaa
 AAAAAABB
@@ -26,6 +26,12 @@ agrave
 alefsym
 alink
 alph
+alphabetField
+alphabetFirstField
+alphabetFirstString
+alphabetLastField
+alphabetLastString
+alphabetString
 alphSize
 alreadyexistserror
 ampInd
@@ -33,6 +39,7 @@ anFLrlRv
 ang
 API
 APIs
+appletviewer
 applyRequirements
 args
 argsVector
@@ -129,6 +136,7 @@ CircularCharBufferWriter
 CircularObjectBuffer
 classLoader
 classpath
+clearButton
 cLength
 cobc
 COBConsumer
@@ -202,6 +210,7 @@ eacute
 ec
 ecirc
 edgx
+editMenu
 ef
 egrave
 eldagx
@@ -248,6 +257,7 @@ firstAlphabet
 firstInSig
 firstLen
 floatValue
+FlowLayout
 fnof
 forall
 forceDecode
@@ -265,12 +275,15 @@ fufilledInd
 fVvqQ
 gb
 ge
+generateButton
 getAllValues
+getAppletInfo
 getAvailable
 getBytes
 getCanonicalFile
 getCanonicalPath
 getChar
+getChars
 getComment
 getConfigPanel
 getContentPane
@@ -279,6 +292,7 @@ getCurrentPosition
 getDefault
 getHash
 getHashString
+getHeight
 getID
 getInputStream
 getKeyCode
@@ -303,6 +317,7 @@ getPass
 getPassChars
 getPassword
 getPosition
+getPreferredSize
 getProperties
 getProperty
 getPropertyNameCount
@@ -329,6 +344,7 @@ gpl
 gridbag
 GridBagConstraints
 GridBagLayout
+GridLayout
 gridwidth
 gridy
 gts
@@ -394,6 +410,7 @@ isInterrupted
 isZero
 Italiano
 iuml
+JApplet
 javadoc
 JavaDoc
 javascript
@@ -405,6 +422,10 @@ JDK
 JFileChooser
 JFlex
 JLabel
+JMenu
+JMenuBar
+JMenuItem
+JOptionPane
 Jpanel
 JPanel
 JPasswordField
@@ -471,12 +492,14 @@ maxreps
 md
 mdash
 menubar
+menuBar
 messageArray
 MessageFormat
 middot
 midpad
 MIDZEROS
 mkdirs
+Monospaced
 mostCombined
 mostPlace
 mostSpaces
@@ -593,7 +616,12 @@ partlen
 passChar
 passLabel
 passSize
+passwordAlphabet
 PasswordDialog
+passwordFirstAlphabet
+passwordLastAlphabet
+passwordLength
+passwordLengthField
 PasswordVerifier
 PEM
 permil
@@ -611,6 +639,10 @@ plusmn
 postpad
 PostScript
 pre
+preferencesPanel
+preferencesPanelLayout
+preferencesResult
+prefsMenuItem
 prepad
 PreparedStatement
 printErrors
@@ -626,6 +658,7 @@ px
 radic
 randpass
 randPass
+RandPassApplet
 raquo
 rarr
 rArr
@@ -643,6 +676,7 @@ realLen
 reallyClose
 reallyquiet
 reallyverbose
+removeAll
 renameTo
 replaceLength
 repPos
@@ -696,6 +730,9 @@ setDelims
 setEditable
 setEscapes
 setFirstAlphabet
+setFont
+setHgap
+setJMenuBar
 setLastAlphabet
 setLayout
 setLength
@@ -711,6 +748,7 @@ setOKText
 setOpaque
 setPass
 setPassLabel
+setPreferredSize
 setProperties
 setProperty
 setPropertyComment
@@ -719,9 +757,11 @@ setRandomGenerator
 setRepetition
 setRequestProperty
 setReturnEmptyTokens
+setSize
 setText
 sharedWorkspace
 shortValue
+showConfirmDialog
 showDialog
 sifqQvV
 sigfigs
