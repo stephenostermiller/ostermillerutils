@@ -34,7 +34,7 @@ import java.io.*;
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
  * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
- * <P>-
+ * <P>
  * Excel CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.
  * <P>

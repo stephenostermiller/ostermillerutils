@@ -20,7 +20,7 @@
 /**
  * The string tokenizer class allows an application to break a string into
  * tokens.  More information about this class is available from <a href=
- * "http://ostermiller.org/utils/Browser.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
  * <p>
   * The tokenization method is much simpler than the one used by the
  * <code>StreamTokenizer</code> class. The <code>StringTokenizer</code> methods

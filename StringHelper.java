@@ -19,6 +19,8 @@ package com.Ostermiller.util;
 
 /** 
  * Utilities for String formatting, manipulation, and queries.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/StringHelper.html">ostermiller.org</a>.
  */
 public class StringHelper {
 

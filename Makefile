@@ -34,7 +34,7 @@ clean:
 docs:
 	rm -rf doc/ docs/
 	mkdir doc
-	$(JAVADOC) -d doc/ com.Ostermiller.util
+	$(JAVADOC) -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
 
 build:
 	rm -f utils.jar

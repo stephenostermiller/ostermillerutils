@@ -22,6 +22,8 @@ import java.io.IOException;
 
 /**
  * Implements the Circular Buffer producer/consumer model for characters.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/CircularCharBuffer.html">ostermiller.org</a>.
  * <p>
  * Using this class is a simpler alternative to using a PipedReader
  * and a PipedWriter. PipedReaders and PipedWriters don't support the
