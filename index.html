@@ -10,13 +10,21 @@
 
 <h1>Java Utilities</h1>
 
-<P><a href="utils.jar">Download</a> the latest version of these utilities including source code.(Jar - 46k)<br>
-<a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">Browse</a> the source code.<br>
-<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a> the JavaDoc.</p>
+<P><big><a href="utils.jar">Download</a></big> the latest version of these utilities including source code.  (Jar - 56k)</p>
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">Browse</a> the source code. |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/package-summary.html">View</a> the JavaDoc.]</p>
+
+<ul>
+<li><a href="#browser">Browser</a></li>
+<li><a href="#csv_parser">CSV Parser</a></li>
+<li><a href="#password_dialog">Password Dialog</a></li>
+<li><a href="#string_tokenizer">String Tokenizer</a></li>
+<li><a href="#straight_stream_reader">Straight Stream Reader</a></li>
+</ul>
 
 <hr>
 
-<h2>Browser</h2>
+<h2><a name="browser">Browser</a></h2>
 
 <P>Allows URLs to be opened in the system browser on Windows and Unix.
 JavaWorld has a <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip66.html">Java Tip</a> which shows how to open a URL in the system browser.  That  implementation has some serious problems:
@@ -28,24 +36,40 @@ JavaWorld has a <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip6
 
 <p>All of these problems are solved in the com.Ostermiller.util.Browser implementation.</p>
 
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Browser.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/Browser.html">documentation</a>]</p>
+
 <hr>
 
-<h2>CSV Parser</h2>
+<h2><a name="csv_parser">CSV Parser</a></h2>
 
 <P>Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
-First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get 
+First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get
 Strings in quotes that have commas inside them.  This CSV parser takes care of those issues and
 support line numbering, escape characters, and comments.</P>
 
-<P>There is also a <a href="CSVRegressionTest.csv">regression test</a> and the expected 
+<P>There is also a <a href="CSVRegressionTest.csv">regression test</a> and the expected
 <a href="CSVRegressionTestResults.txt">results</a> of that test available.</P>
 
-<P>This parser was created using <a href="http://www.jflex.de/">JFlex</a> and you will need to have 
+<P>This parser was created using <a href="http://www.jflex.de/">JFlex</a> and you will need to have
 it if you want to modify the parser.</P>
+
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVLexer.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVLexer.html">documentation</a>]</p>
 
 <hr>
 
-<h2>String Tokenizer</h2>
+<h2><a name="password_dialog">Password Dialog</a></h2>
+
+<P><img align=left src="dialog.png" hspace="10">The Java APIs didn't have an easy to use password dialog box that I could find.  This one is written for swing, it extends JDialog.</p>
+
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/PasswordDialog.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/PasswordDialog.html">documentation</a>]</p>
+
+<br clear="all">
+<hr>
+
+<h2><a name="string_tokenizer">String Tokenizer</a></h2>
 
 <P>A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.  This implementation of StringTokenizer tries to fix the following bugs:<ul>
     <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4086845.html">Bug 4086845</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4140850.html">Bug 4140850</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4233089.html">Bug 4233089</a>, <a href="http://developer.java.sun.com/developer/bugParade/bugs/4287338.html">Bug 4287338</a> Report empty/null tokens</b> - It would be nice to have the string "one,two,,four" have four tokens.  This implementations has the option to return empty tokens as an empty string ("").</li>
@@ -59,14 +83,27 @@ it if you want to modify the parser.</P>
     <li><b><a href="http://developer.java.sun.com/developer/bugParade/bugs/4215241.html">Bug 4215241</a> restOfText() method</b> - It is there.</li>
 </ul></p>
 
-<hr>
-
-<h2>Straight Stream Reader</h2>
-
-<P>An input stream reader that does not character class translation.  You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some <a href="http://www.jflex.de/manual.html#SECTION00063000000000000000">discussion</a> in its manual about how a class like this might come in handy.</P>
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StringTokenizer.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StringTokenizer.html">documentation</a>]</p>
 
 <hr>
 
+<h2><a name="straight_stream_reader">Straight Stream Reader</a></h2>
+
+<P>An input stream reader that does not character class translation.  You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some <a href="http://www.jflex.de/manual.html#SECTION00063000000000000000">discussion</a> in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
+
+<p>[<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/StraightStreamReader.java/0">source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/StraightStreamReader.html">documentation</a>]</p>
+
+<hr>
+
+<ul>
+<li><a href="#browser">Browser</a></li>
+<li><a href="#csv_parser">CSV Parser</a></li>
+<li><a href="#password_dialog">Password Dialog</a></li>
+<li><a href="#string_tokenizer">String Tokenizer</a></li>
+<li><a href="#straight_stream_reader">Straight Stream Reader</a></li>
+</ul>
 
 <h2>License</h2>
 
