@@ -55,6 +55,8 @@ or FITNESS FOR A PARTICULAR PURPOSE. See the
 
 <p><a href="licenseFAQ.html">License FAQs</a> - Why GPL? How about the LGPL or something else?</p>
 
+<div class=sitenav><a href="http://ostermiller.org/">ostermiller.org</a> (<a href="http://ostermiller.org/siteindex.html">site index</a>)</div>
+
 </body>
 </html><%/bte.tpl%>
 <%bte.tpl name=linkutilies%><a href="./">Utilities</a><%/bte.tpl%>

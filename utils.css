@@ -192,3 +192,7 @@ body {
 .unknown{
 	color:orange;
 }
+div.sitenav {
+    text-align:right;
+    font-size:smaller;
+}
