@@ -828,4 +828,109 @@ public class SignificantFigures extends Number {
 	public short shortValue() throws NumberFormatException {
 		return Short.parseShort(original);
 	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(byte number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(double number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(float number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(int number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(long number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(Number number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 */
+	public static String format(short number, int significantFigures){
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
+
+	/**
+	 * Convenience method to display a number with the correct
+	 * significant digits.
+	 *
+	 * @param num the number to display
+	 * @param significantFigures the number of significant figures to display.
+	 * @param throws NumberFormatException if the String is not a valid number.
+	 */
+	public static String format(String number, int significantFigures) throws NumberFormatException {
+		SignificantFigures sf = new SignificantFigures(number);
+		sf.setNumberSignificantFigures(significantFigures);
+		return sf.toString();
+	}
 }
