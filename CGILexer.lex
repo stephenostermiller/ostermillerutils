@@ -1,15 +1,15 @@
 /* CGILexer.java is a generated file.  You probably want to
  * edit CGILexer.lex to make changes.  Use JFlex to generate it.
- * JFlex may be obtained from 
+ * JFlex may be obtained from
  * <a href="http://jflex.de">the JFlex website</a>.
  * Once JFlex is in your classpath run<br>
  * java --skel cgi.jflex.skel JFlex.Main CGILexer.lex<br>
  * You will then have a file called CGILexer.java
  */
- 
+
 /*
  * Parse CGI query data.
- * Copyright (C) 2001 Stephen Ostermiller 
+ * Copyright (C) 2001 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -43,44 +43,44 @@ import java.io.*;
 %function nextToken
 %type String
 %{
-    /**
-     * Prints out tokens and line numbers from a file or System.in.
-     * If no arguments are given, System.in will be used for input.
-     * If more arguments are given, the first argument will be used as
-     * the name of the file to use as input
-     *
-     * @param args program arguments, of which the first is a filename
+	/**
+	 * Prints out tokens and line numbers from a file or System.in.
+	 * If no arguments are given, System.in will be used for input.
+	 * If more arguments are given, the first argument will be used as
+	 * the name of the file to use as input
+	 *
+	 * @param args program arguments, of which the first is a filename
 	 *
 	 * @since ostermillerutils 1.00.00
-     */
-    public static void main(String[] args) {
-        InputStream in;
-        try {
-            if (args.length > 0){
-                File f = new File(args[0]);
-                if (f.exists()){
-                    if (f.canRead()){
-                        in = new FileInputStream(f);
-                    } else {
-                        throw new IOException("Could not open " + args[0]);
-                    }
-                } else {
-                    throw new IOException("Could not find " + args[0]);
-                }
-            } else {
-                in = System.in;
-            }
-            CGILexer shredder = new CGILexer(in);
-            String t;
-            while ((t = shredder.nextToken()) != null) {
-                System.out.println(t);
-            }
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    private StringBuffer token = new StringBuffer();
+	 */
+	public static void main(String[] args) {
+		InputStream in;
+		try {
+			if (args.length > 0){
+				File f = new File(args[0]);
+				if (f.exists()){
+					if (f.canRead()){
+						in = new FileInputStream(f);
+					} else {
+						throw new IOException("Could not open " + args[0]);
+					}
+				} else {
+					throw new IOException("Could not find " + args[0]);
+				}
+			} else {
+				in = System.in;
+			}
+			CGILexer shredder = new CGILexer(in);
+			String t;
+			while ((t = shredder.nextToken()) != null) {
+				System.out.println(t);
+			}
+		} catch (IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private StringBuffer token = new StringBuffer();
 %}
 
 %unicode
@@ -90,7 +90,7 @@ NameValue=([^\&\=]*(\=[^&]*)?)
 %%
 
 <YYINITIAL> {NameValue} {
-    return yytext();
+	return yytext();
 }
 
 <YYINITIAL> (\&) {

@@ -134,6 +134,25 @@ public class CSVParser implements CSVParse {
 	}
 
 	/**
+	 * Create a parser to parse comma separated values from
+	 * a Reader.
+	 * <p>
+	 * Byte to character conversion is done using the platform
+	 * default locale.
+	 *
+	 * @param in stream that contains comma separated values.
+	 * @param returnEmptyAsNull whether to return empty (unquoted) tokens as null rather than zero length strings.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public CSVParser(InputStream in, boolean returnEmptyAsNull){
+		inStream = in;
+		lexer = new CSVLexer(in);
+		setReturnEmptyAsNull(returnEmptyAsNull);
+	}
+
+
+	/**
 	 * Create a parser to parse delimited values from
 	 * an InputStream.
 	 * <p>
@@ -164,6 +183,21 @@ public class CSVParser implements CSVParse {
 	public CSVParser(Reader in){
 		inReader = in;
 		lexer = new CSVLexer(in);
+	}
+
+	/**
+	 * Create a parser to parse comma separated values from
+	 * a Reader.
+	 *
+	 * @param in reader that contains comma separated values.
+	 * @param returnEmptyAsNull whether to return empty (unquoted) tokens as null rather than zero length strings.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public CSVParser(Reader in, boolean returnEmptyAsNull){
+		inReader = in;
+		lexer = new CSVLexer(in);
+		setReturnEmptyAsNull(returnEmptyAsNull);
 	}
 
 	/**
@@ -230,6 +264,30 @@ public class CSVParser implements CSVParse {
 	}
 
 	/**
+	 * Create a parser to parse comma separated values from
+	 * an InputStream.
+	 * <p>
+	 * Byte to character conversion is done using the platform
+	 * default locale.
+	 *
+	 * @param in stream that contains comma separated values.
+	 * @param escapes a list of characters that will represent escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
+	 * @param commentDelims list of characters a comment line may start with.
+	 * @param returnEmptyAsNull whether to return empty (unquoted) tokens as null rather than zero length strings.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public CSVParser(InputStream in, String escapes, String replacements, String commentDelims, boolean returnEmptyAsNull){
+		inStream = in;
+		lexer = new CSVLexer(in);
+		setEscapes(escapes, replacements);
+		setCommentStart(commentDelims);
+		setReturnEmptyAsNull(returnEmptyAsNull);
+	}
+
+
+	/**
 	 * Create a parser to parse delimited values from
 	 * a Reader.
 	 *
@@ -267,6 +325,26 @@ public class CSVParser implements CSVParse {
 		lexer = new CSVLexer(in);
 		setEscapes(escapes, replacements);
 		setCommentStart(commentDelims);
+	}
+
+	/**
+	 * Create a parser to parse comma separated values from
+	 * a Reader.
+	 *
+	 * @param in reader that contains comma separated values.
+	 * @param escapes a list of characters that will represent escape sequences.
+	 * @param replacements the list of replacement characters for those escape sequences.
+	 * @param commentDelims list of characters a comment line may start with.
+	 * @param returnEmptyAsNull whether to return empty (unquoted) tokens as null rather than zero length strings.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public CSVParser(Reader in, String escapes, String replacements, String commentDelims, boolean returnEmptyAsNull){
+		inReader = in;
+		lexer = new CSVLexer(in);
+		setEscapes(escapes, replacements);
+		setCommentStart(commentDelims);
+		setReturnEmptyAsNull(returnEmptyAsNull);
 	}
 
 	/**
@@ -454,6 +532,18 @@ public class CSVParser implements CSVParse {
 	 */
 	public int getLastLineNumber(){
 		return lastLine;
+	}
+
+	/**
+	 * If return empty as null is set, unquoted, zero length tokens will
+	 * be returned as null rather than the empty string.
+	 *
+	 * @param returnEmptyAsNull whether to return empty (unquoted) tokens as null rather than zero length strings.
+	 *
+	 * @since ostermillerutils 1.04.00
+	 */
+	public void setReturnEmptyAsNull(boolean returnEmptyAsNull){
+		lexer.setReturnEmptyAsNull(returnEmptyAsNull);
 	}
 
 	/**

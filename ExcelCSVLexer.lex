@@ -115,10 +115,10 @@ import java.io.*;
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private char delimiter = ',';
 	private char quote = '\"';
-	
+
 	/** Checks that yycmap_instance is an instance variable (not just
 	 * a pointer to a static variable).  If it is a pointer to a static
 	 * variable, it will be cloned.
@@ -131,7 +131,7 @@ import java.io.*;
 			System.arraycopy(yycmap, 0, yycmap_instance, 0, yycmap.length);
 		}
 	}
-	
+
 	/**
 	 * Ensures that the given character is not used for some special purpose
 	 * in parsing.  This method should be called before setting some character
@@ -146,7 +146,7 @@ import java.io.*;
 		// are normally data.  The second is the class that the tab is usually in.
 		return (yycmap_instance[c] == yycmap['a'] || yycmap_instance[c] == yycmap['\t']);
 	}
-	
+
 	/**
 	 * Change the character classes of the two given characters.  This
 	 * will make the state machine behave as if the characters were switched
@@ -177,7 +177,7 @@ import java.io.*;
 			} break;
 		}
 	}
-	
+
 	/**
 	 * Change this Lexer so that it uses a new delimiter.
 	 * <p>
@@ -198,7 +198,7 @@ import java.io.*;
 		// keep a record of the current delimiter.
 		delimiter = newDelim;
 	}
-	
+
 	/**
 	 * Change this Lexer so that it uses a new character for quoting.
 	 * <p>
@@ -220,7 +220,7 @@ import java.io.*;
 		quote = newQuote;
 	}
 
-	private String unescape(String s){	
+	private String unescape(String s){
 		if (s.indexOf('\"', 1) == s.length()-1){
 			return s.substring(1, s.length()-1);
 		}
@@ -237,9 +237,9 @@ import java.io.*;
 		}
 		return sb.toString();
 	}
-		
+
 	private String commentDelims = "";
-	
+
 	/**
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
@@ -257,10 +257,10 @@ import java.io.*;
 	public void setCommentStart(String commentDelims){
 		this.commentDelims = commentDelims;
 	}
-	
+
 	private int addLine = 1;
 	private int lines = 0;
-	
+
 	/**
 	 * Get the line number that the last token came from.
 	 * <p>
@@ -320,13 +320,13 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 	lines+=addLine;
 	addLine = 0;
 	yybegin(AFTER);
-	return(unescape(yytext()));	
+	return(unescape(yytext()));
 }
 <YYINITIAL> {FalseLiteral} {
 	lines+=addLine;
 	addLine = 0;
 	yybegin(YYINITIAL);
-	return(yytext());	
+	return(yytext());
 }
 <BEFORE> {Separator} {
 	yybegin(BEFORE);
@@ -334,11 +334,11 @@ Value=({NotCommaEOLQuote}(({NotCommaEOL}*))?)
 }
 <BEFORE> {StringLiteral} {
 	yybegin(AFTER);
-	return(unescape(yytext()));	
+	return(unescape(yytext()));
 }
 <BEFORE> {FalseLiteral} {
 	yybegin(YYINITIAL);
-	return(yytext());	
+	return(yytext());
 }
 <BEFORE> {Value} {
 	yybegin(AFTER);

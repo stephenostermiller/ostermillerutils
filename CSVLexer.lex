@@ -220,21 +220,8 @@ import java.io.*;
 		quote = newQuote;
 	}
 
-	/**
-	 * If return empty as null is set, unquoted, zero length tokens will
-	 * be returned as null rather than the empty string.
-	 *
-	 * @param returnEmptyAsNull whether or not to return empty tokens as null.
-	 *
-	 * @since ostermillerutils 1.04.00
-	 */
-	public void setReturnEmptyAsNull(boolean returnEmptyAsNull){
-		this.returnEmptyAsNull = returnEmptyAsNull;
-	}
-
 	private String escapes = "";
 	private String replacements = "";
-	private boolean returnEmptyAsNull = false;
 
 	/**
 	 * Specify escape sequences and their replacements.
@@ -374,7 +361,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 	lines+=addLine;
 	addLine = 0;
 	yybegin(BEFORE);
-	return(returnEmptyAsNull?null:"");
+	return("");
 }
 <YYINITIAL> {StringLiteral} {
 	lines+=addLine;
@@ -390,7 +377,7 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 }
 <BEFORE> {Separator} {
 	yybegin(BEFORE);
-	return(returnEmptyAsNull?null:"");
+	return("");
 }
 <BEFORE> {StringLiteral} {
 	yybegin(AFTER);
@@ -409,12 +396,12 @@ Value=({NotCommaSpaceQuote}(({NotCommaEOL}*){NotCommaSpace})?)
 <BEFORE> ({EOL}) {
 	addLine++;
 	yybegin(YYINITIAL);
-	return(returnEmptyAsNull?null:"");
+	return("");
 }
 <BEFORE> <<EOF>> {
 	yybegin(YYINITIAL);
 	addLine++;
-	return(returnEmptyAsNull?null:"");
+	return("");
 }
 <AFTER> {Separator} {
 	yybegin(BEFORE);

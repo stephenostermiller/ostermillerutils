@@ -36,7 +36,7 @@ import java.io.*;
  *  PropertiesLexer shredder = new PropertiesLexer(System.in);
  *  PropertiesToken t;
  *  while ((t = shredder.getNextToken()) != null){
- *      System.out.println(t);
+ *	  System.out.println(t);
  *  }
  *  </PRE>
  *  </CODE>
@@ -54,47 +54,47 @@ import java.io.*;
 %unicode
 
 %{
-    private int lastToken;
-    private int nextState=YYINITIAL;
-        
-    /**
-     * Prints out tokens from a file or System.in.
-     * If no arguments are given, System.in will be used for input.
-     * If more arguments are given, the first argument will be used as
-     * the name of the file to use as input
-     *
-     * @param args program arguments, of which the first is a filename
+	private int lastToken;
+	private int nextState=YYINITIAL;
+		
+	/**
+	 * Prints out tokens from a file or System.in.
+	 * If no arguments are given, System.in will be used for input.
+	 * If more arguments are given, the first argument will be used as
+	 * the name of the file to use as input
+	 *
+	 * @param args program arguments, of which the first is a filename
 	 *
 	 * @since ostermillerutils 1.00.00
-     */
-    public static void main(String[] args) {
-        InputStream in;
-        try {
-            if (args.length > 0){
-                File f = new File(args[0]);
-                if (f.exists()){
-                    if (f.canRead()){
-                        in = new FileInputStream(f);
-                    } else {
-                        throw new IOException("Could not open " + args[0]);
-                    }
-                } else {
-                    throw new IOException("Could not find " + args[0]);
-                }
-            } else {
-                in = System.in;
-            }
-            PropertiesLexer shredder = new PropertiesLexer(in);
-            PropertiesToken t;
-            while ((t = shredder.getNextToken()) != null) {
-                if (true || t.getID() != PropertiesToken.WHITE_SPACE){
-                    System.out.println(t);
-                }
-            }
-        } catch (IOException e){
-            System.err.println(e.getMessage());
-        }
-    }  
+	 */
+	public static void main(String[] args) {
+		InputStream in;
+		try {
+			if (args.length > 0){
+				File f = new File(args[0]);
+				if (f.exists()){
+					if (f.canRead()){
+						in = new FileInputStream(f);
+					} else {
+						throw new IOException("Could not open " + args[0]);
+					}
+				} else {
+					throw new IOException("Could not find " + args[0]);
+				}
+			} else {
+				in = System.in;
+			}
+			PropertiesLexer shredder = new PropertiesLexer(in);
+			PropertiesToken t;
+			while ((t = shredder.getNextToken()) != null) {
+				if (true || t.getID() != PropertiesToken.WHITE_SPACE){
+					System.out.println(t);
+				}
+			}
+		} catch (IOException e){
+			System.err.println(e.getMessage());
+		}
+	}  
 %}
 
 %full
@@ -136,133 +136,133 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
 %%
 
 <YYINITIAL> {Comment} { 
-    nextState = LINE_END;
-    lastToken = PropertiesToken.COMMENT;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = LINE_END;
+	lastToken = PropertiesToken.COMMENT;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <YYINITIAL> {WhiteSpace}+ {
-    nextState = WHITE_SPACE;    
-    lastToken = PropertiesToken.WHITE_SPACE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = WHITE_SPACE;	
+	lastToken = PropertiesToken.WHITE_SPACE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <NAME, NAME_SPACE> {WhiteSpace}+ {
-    nextState = NAME_SPACE;
-    lastToken = PropertiesToken.WHITE_SPACE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = NAME_SPACE;
+	lastToken = PropertiesToken.WHITE_SPACE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <SEPARATOR, VALUE, MID_VALUE> {WhiteSpace}+ {
-    lastToken = PropertiesToken.WHITE_SPACE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    return (t);
+	lastToken = PropertiesToken.WHITE_SPACE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	return (t);
 }
 <YYINITIAL,WHITE_SPACE,LINE_END, NAME, NAME_SPACE, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> {LineEndingWhiteSpace} {
-    nextState = YYINITIAL;
-    lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = YYINITIAL;
+	lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <YYINITIAL,WHITE_SPACE,LINE_END, NAME, NAME_SPACE, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> <<EOF>> {
-    nextState = DONE;
-    lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
-    PropertiesToken t = new PropertiesToken(lastToken,"");
-    yybegin(nextState);
-    return (t);
+	nextState = DONE;
+	lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
+	PropertiesToken t = new PropertiesToken(lastToken,"");
+	yybegin(nextState);
+	return (t);
 }
 <DONE> ([^]*) {
 	return null;
 }
 <YYINITIAL, WHITE_SPACE, MID_NAME, MID_NAME_NEW_LINE> {Name} {
-    nextState = NAME;
-    lastToken = PropertiesToken.NAME;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = NAME;
+	lastToken = PropertiesToken.NAME;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <YYINITIAL, WHITE_SPACE, NAME, NAME_SPACE, MID_NAME, MID_NAME_NEW_LINE> ":"|"=" {
-    nextState = SEPARATOR;
-    lastToken = PropertiesToken.SEPARATOR;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = SEPARATOR;
+	lastToken = PropertiesToken.SEPARATOR;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <NAME, NAME_SPACE> {Value} {
-    nextState = VALUE;
-    lastToken = PropertiesToken.VALUE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = VALUE;
+	lastToken = PropertiesToken.VALUE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <NAME_SPACE> ({LineEscape}) {
-    lastToken = PropertiesToken.CONTINUE_LINE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    return (t);
+	lastToken = PropertiesToken.CONTINUE_LINE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	return (t);
 }
 <NAME, MID_NAME, MID_NAME_NEW_LINE> ({LineEscape}) {
-    nextState = MID_NAME_NEW_LINE;
-    lastToken = PropertiesToken.CONTINUE_LINE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = MID_NAME_NEW_LINE;
+	lastToken = PropertiesToken.CONTINUE_LINE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <MID_NAME_NEW_LINE> ({WhiteSpace}+) {
-    nextState = MID_NAME;
-    lastToken = PropertiesToken.WHITE_SPACE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = MID_NAME;
+	lastToken = PropertiesToken.WHITE_SPACE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <SEPARATOR, MID_VALUE> {FullValue} {
-    nextState = VALUE;
-    lastToken = PropertiesToken.VALUE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = VALUE;
+	lastToken = PropertiesToken.VALUE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <SEPARATOR, VALUE, MID_VALUE> ({LineEscape}) {
-    nextState = MID_VALUE;
-    lastToken = PropertiesToken.CONTINUE_LINE;
-    String text = yytext();
-    PropertiesToken t = new PropertiesToken(lastToken,text);
-    yybegin(nextState);
-    return (t);
+	nextState = MID_VALUE;
+	lastToken = PropertiesToken.CONTINUE_LINE;
+	String text = yytext();
+	PropertiesToken t = new PropertiesToken(lastToken,text);
+	yybegin(nextState);
+	return (t);
 }
 <YYINITIAL,LINE_END,WHITE_SPACE,NAME,NAME_SPACE,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> {EscChar} {
-    // Ignore escape characters at the end of the file.
+	// Ignore escape characters at the end of the file.
 }
 <YYINITIAL,LINE_END,WHITE_SPACE,NAME,NAME_SPACE,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> [^] {
-    System.err.println("Unmatched input.");
-    String state = "";    
+	System.err.println("Unmatched input.");
+	String state = "";	
 	String text = yytext();
-    switch (nextState){
-        case YYINITIAL: state = "YYINITIAL"; break;
-        case LINE_END: state = "LINE_END"; break;
-        case WHITE_SPACE: state = "WHITE_SPACE"; break;
-        case NAME: state = "NAME"; break;
-        case SEPARATOR: state = "SEPARATOR"; break;
-        case VALUE: state = "VALUE"; break;
-        case MID_NAME: state = "MID_NAME"; break;
-        case NAME_SPACE: state = "NAME_SPACE"; break;
-    }
-    System.err.println("State: '" + state + "'");
-    System.err.println("Text: '" + text + "'");
+	switch (nextState){
+		case YYINITIAL: state = "YYINITIAL"; break;
+		case LINE_END: state = "LINE_END"; break;
+		case WHITE_SPACE: state = "WHITE_SPACE"; break;
+		case NAME: state = "NAME"; break;
+		case SEPARATOR: state = "SEPARATOR"; break;
+		case VALUE: state = "VALUE"; break;
+		case MID_NAME: state = "MID_NAME"; break;
+		case NAME_SPACE: state = "NAME_SPACE"; break;
+	}
+	System.err.println("State: '" + state + "'");
+	System.err.println("Text: '" + text + "'");
 	yy_ScanError(YY_NO_MATCH);
 }
