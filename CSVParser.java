@@ -31,7 +31,7 @@ import java.util.*;
  * <P>
  * If field includes a comma or a new line, the whole field must be surrounded with double quotes.
  * When the field is in quotes, any quote literals must be escaped by \" Backslash
- * literals must be escaped by \\.	Otherwise a backslash an the character following it
+ * literals must be escaped by \\.	Otherwise a backslash an the character following i
  * will be treated as the following character, ie."\n" is equivelent to "n".  Other escape
  * sequences may be set using the setEscapes() method.	Text that comes after quotes that have
  * been closed but come before the next comma will be ignored.
@@ -56,11 +56,11 @@ import java.util.*;
  * </pre>
  * <P>
  * Some applications do not output CSV according to the generally accepted standards and this parse may
- * not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A 
- * separate class must be use to read 
- * <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>. 
+ * not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A
+ * separate class must be use to read
+ * <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.
  *
- * @see com.Ostermiller.util.ExcelCSVParser 
+ * @see com.Ostermiller.util.ExcelCSVParser
  */
 public class CSVParser implements CSVParse {
 
@@ -94,9 +94,9 @@ public class CSVParser implements CSVParse {
 	/**
 	 * Create a parser to parse comma separated values from
 	 * an InputStream.
-     * <p>
-     * Byte to character conversion is done using the platform
-     * default locale.
+	 * <p>
+	 * Byte to character conversion is done using the platform
+	 * default locale.
 	 *
 	 * @param in stream that contains comma separated values.
 	 */
@@ -113,23 +113,23 @@ public class CSVParser implements CSVParse {
 	public CSVParser(java.io.Reader in){
 		lexer = new CSVLexer(in);
 	}
-    
-    /**
+
+	/**
 	 * Create a parser to parse comma separated values from
 	 * an InputStream.
-     * <p>
-     * Byte to character conversion is done using the platform
-     * default locale.
+	 * <p>
+	 * Byte to character conversion is done using the platform
+	 * default locale.
 	 *
 	 * @param in stream that contains comma separated values.
-     * @param escapes a list of characters that will represent escape sequences.
+	 * @param escapes a list of characters that will represent escape sequences.
 	 * @param replacements the list of repacement characters for those escape sequences.	
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.InputStream in, String escapes, String replacements, String commentDelims){
 		lexer = new CSVLexer(in);
-        setEscapes(escapes, replacements);
-        setCommentStart(commentDelims);
+		setEscapes(escapes, replacements);
+		setCommentStart(commentDelims);
 	}
 
 	/**
@@ -137,21 +137,21 @@ public class CSVParser implements CSVParse {
 	 * a Reader.
 	 *
 	 * @param in reader that contains comma separated values.
-     * @param escapes a list of characters that will represent escape sequences.
+	 * @param escapes a list of characters that will represent escape sequences.
 	 * @param replacements the list of repacement characters for those escape sequences.	
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public CSVParser(java.io.Reader in, String escapes, String replacements, String commentDelims){
 		lexer = new CSVLexer(in);
-        setEscapes(escapes, replacements);
-        setCommentStart(commentDelims);
+		setEscapes(escapes, replacements);
+		setCommentStart(commentDelims);
 	}
 
 	/**
 	 * get the next value.
 	 *
 	 * @return the next value or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
 	public String nextValue() throws IOException {
 		if (tokenCache == null){
@@ -166,9 +166,9 @@ public class CSVParser implements CSVParse {
 
 	/**
 	 * Get the line number that the last token came from.
-     * <p>
-     * New line breaks that occur in the middle of a token are not
-     * counted in the line number count. 
+	 * <p>
+	 * New line breaks that occur in the middle of a token are no
+	 * counted in the line number count.
 	 *
 	 * @return line number or -1 if no tokens have been returned yet.
 	 */
@@ -178,12 +178,12 @@ public class CSVParser implements CSVParse {
 
 	/**
 	 * Get all the values from a line.
-     * <p>
-     * If the line has already been partially read, only the
-     * values that have not already been read will be included.
+	 * <p>
+	 * If the line has already been partially read, only the
+	 * values that have not already been read will be included.
 	 *
 	 * @return all the values from the line or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
@@ -193,7 +193,7 @@ public class CSVParser implements CSVParse {
 			lineNumber = lineCache;
 		}
 		while ((tokenCache = lexer.getNextToken()) != null
-			&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)) {
+				&& (lineNumber == -1 || lexer.getLineNumber() == lineNumber)) {
 			v.add(tokenCache);
 			lineNumber = lexer.getLineNumber();
 		}
@@ -205,33 +205,33 @@ public class CSVParser implements CSVParse {
 		String[] result = new String[v.size()];
 		return ((String[])v.toArray(result));
 	}
-    
-    /**
+
+	/**
 	 * Get all the values from the file.
-     * <p>
-     * If the file has already been partially read, only the
-     * values that have not already been read will be included.
-     * <p>
-     * Each line of the file that has at least one value will be
-     * represented.  Comments and empty lines are ignored.
-     * <p>
-     * The resulting double array may be jagged.
+	 * <p>
+	 * If the file has already been partially read, only the
+	 * values that have not already been read will be included.
+	 * <p>
+	 * Each line of the file that has at least one value will be
+	 * represented.  Comments and empty lines are ignored.
+	 * <p>
+	 * The resulting double array may be jagged.
 	 *
 	 * @return all the values from the file or null if there are no more values.
-     * @throws IOException if an error occurs while reading
+	 * @throws IOException if an error occurs while reading
 	 */
-    public String[][] getAllValues() throws IOException {        
+	public String[][] getAllValues() throws IOException {
 		Vector v = new Vector();
-        String[] line;
-        while((line = getLine()) != null){
-            v.add(line);
-        }
+		String[] line;
+		while((line = getLine()) != null){
+			v.add(line);
+		}
 		if (v.size() == 0){
 			return null;
 		}
-        String[][] result = new String[v.size()][];
+		String[][] result = new String[v.size()][];
 		return ((String[][])v.toArray(result));
-    }
+	}
 
 	/**
 	 * Specify escape sequences and their replacements.
@@ -258,8 +258,8 @@ public class CSVParser implements CSVParse {
 	 * Set the characters that indicate a comment at the beginning of the line.
 	 * For example if the string "#;!" were passed in, all of the following lines
 	 * would be comments:<br>
-	 * <pre> # Comment
-	 * ; Another Comment
+	 * <pre> # Commen
+	 * ; Another Commen
 	 * ! Yet another comment</pre>
 	 * By default there are no comments in CVS files.  Commas and quotes may not be
 	 * used to indicate comment lines.
@@ -319,37 +319,37 @@ public class CSVParser implements CSVParse {
 			System.out.println(e.getMessage());
 		}
 	}
-    
-    /**
+
+	/**
 	 * Parse the comma delimited data from a string.
-     * <p>
-     * Only escaped backslashes and quotes will be recognized as escape sequences.
-     * The data will be treated as having no comments.
+	 * <p>
+	 * Only escaped backslashes and quotes will be recognized as escape sequences.
+	 * The data will be treated as having no comments.
 	 *
 	 * @param s string with comma delimited data to parse.
 	 */
 	public static String[][] parse(String s){
-        try {
-		    return (new CSVParser(new StringReader(s))).getAllValues();
-        } catch (IOException x){
-            return null;
-        }
-    }
-    
-    /**
+		try {
+			return (new CSVParser(new StringReader(s))).getAllValues();
+		} catch (IOException x){
+			return null;
+		}
+	}
+
+	/**
 	 * Parse the comma delimited data from a string.
-     * Escaped backslashes and quotes will always recognized as escape sequences.
+	 * Escaped backslashes and quotes will always recognized as escape sequences.
 	 *
 	 * @param s string with comma delimited data to parse.
-     * @param escapes a list of additional characters that will represent escape sequences.
+	 * @param escapes a list of additional characters that will represent escape sequences.
 	 * @param replacements the list of repacement characters for those escape sequences.	
 	 * @param commentDelims list of characters a comment line may start with.
 	 */
 	public static String[][] parse(String s, String escapes, String replacements, String commentDelims){
 		try {
-            return (new CSVParser(new StringReader(s), escapes, replacements, commentDelims)).getAllValues();
-        } catch (IOException x){
-            return null;
-        }
-    }
+			return (new CSVParser(new StringReader(s), escapes, replacements, commentDelims)).getAllValues();
+		} catch (IOException x){
+			return null;
+		}
+	}
 }
