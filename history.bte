@@ -7,6 +7,7 @@
 <div class=history>
 <h2>Version History</h2>
 <ul>
+<li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>
 <li>Version 1.03.00 - Labeled CSV class; new Iterator and Enumeration classes; NameValuePair class for CGI; CGI parameter order preserved; CGI character set bug fixed.</li>
 <li>Version 1.02.27 - Fixed a possible ArrayOutOfBoundsException in the MD5 libraries.</li>
 <li>Version 1.02.26 - CSVPrint updated with new methods for proper stream handling: flush, close, write methods that throw exceptions, auto flush control, and quoting behavior control..  CSVParse updated with a close method.</li>

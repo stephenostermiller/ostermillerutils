@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1211
+personal_ws-1.1 en 1209
 aa
 aA
 aaa
@@ -235,7 +235,6 @@ curren
 currentInputStream
 currentReader
 cvs
-CVS
 CVSLexer
 Cygwin
 da
@@ -571,7 +570,6 @@ JScrollPane
 JTextArea
 JTextField
 kaffe
-Kaffe
 KeyAdapter
 KeyEvent
 keyListener
