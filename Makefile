@@ -155,7 +155,7 @@ javadoc: *.java
 	@$(JAVADOC) \
 		-bottom '<p>Copyright (c) 2001-2004 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
 		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>" \
-		-link http://java.sun.com/j2se/1.4.2/docs/api/ -d doc/ \
+		-link http://java.sun.com/j2se/1.5.0/docs/api/ -d doc/ \
 		com.Ostermiller.util > /dev/null
 	@touch javadoc
 
