@@ -9,7 +9,7 @@
  
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2001,2002 Stephen Ostermiller 
+ * Copyright (C) 2001-2003 Stephen Ostermiller 
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -114,6 +114,9 @@ import java.io.*;
 	private char delimiter = ',';
 	/**
 	 * Change this Lexer so that it uses a new delimeter.
+	 * <p>
+	 * The inital character is a comma, the delimiter cannot be changed
+	 * to a quote or other character that has special meaning in CSV.
 	 * 
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
@@ -127,6 +130,7 @@ import java.io.*;
 		char temp = yycmap[newDelim];
 		yycmap[newDelim] = yycmap[delimiter];
 		yycmap[delimiter] = temp;
+		delimiter = newDelim;
 	}
 
 	private String escapes = "";

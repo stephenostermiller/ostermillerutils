@@ -1,6 +1,6 @@
 /*
  * Read files in comma separated value format.
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2003 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -83,7 +83,10 @@ public interface CSVParse {
 
 
 	/**
-	 * Change this parser so that it uses a new delimeter.
+	 * Change this parser so that it uses a new delimiter.
+	 * <p>
+	 * The initial character is a comma, the delimiter cannot be changed
+	 * to a quote or other character that has special meaning in CSV.
 	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.

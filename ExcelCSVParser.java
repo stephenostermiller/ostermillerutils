@@ -202,7 +202,10 @@ public class ExcelCSVParser implements CSVParse {
 	}
 
 	/**
-	 * Change this parser so that it uses a new delimeter.
+	 * Change this parser so that it uses a new delimiter.
+	 * <p>
+	 * The initial character is a comma, the delimiter cannot be changed
+	 * to a quote or other character that has special meaning in CSV.
 	 *
 	 * @param newDelim delimiter to which to switch.
 	 * @throws BadDelimeterException if the character cannot be used as a delimiter.
