@@ -29,12 +29,12 @@ import java.util.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
-public class ArrayEnumeration  implements Enumeration {
+public class ArrayEnumeration <ElementType> implements Enumeration {
 
 	/**
 	 * Array being converted to enumeration.
 	 */
-	private Object[] array;
+	private ElementType[] array;
 
 	/**
 	 * Current index into the array.
@@ -48,7 +48,7 @@ public class ArrayEnumeration  implements Enumeration {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public ArrayEnumeration(Object[] array){
+	public ArrayEnumeration(ElementType[] array){
 		this.array = array;
 	}
 
@@ -73,9 +73,9 @@ public class ArrayEnumeration  implements Enumeration {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public Object nextElement() throws NoSuchElementException {
+	public ElementType nextElement() throws NoSuchElementException {
 		if (index >= array.length) throw new NoSuchElementException("Array index: " + index);
-		Object object = array[index];
+		ElementType object = array[index];
 		index++;
 		return object;
 	}

@@ -29,12 +29,12 @@ import java.util.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
-public class ArrayIterator  implements Iterator {
+public class ArrayIterator <ElementType> implements Iterator {
 
 	/**
 	 * Array being converted to iterator.
 	 */
-	private Object[] array;
+	private ElementType[] array;
 
 	/**
 	 * Current index into the array.
@@ -53,7 +53,7 @@ public class ArrayIterator  implements Iterator {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public ArrayIterator(Object[] array){
+	public ArrayIterator(ElementType[] array){
 		this.array = array;
 	}
 
@@ -78,9 +78,9 @@ public class ArrayIterator  implements Iterator {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public Object next() throws NoSuchElementException {
+	public ElementType next() throws NoSuchElementException {
 		if (index >= array.length) throw new NoSuchElementException("Array index: " + index);
-		Object object = array[index];
+		ElementType object = array[index];
 		index++;
 		lastRemoved = false;
 		return object;

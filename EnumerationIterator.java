@@ -29,12 +29,12 @@ import java.util.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
-public class EnumerationIterator  implements Iterator {
+public class EnumerationIterator <ElementType> implements Iterator {
 
 	/**
 	 * Enumeration being converted to iterator.
 	 */
-	private Enumeration enumeration;
+	private Enumeration<ElementType> enumeration;
 
 	/**
 	 * Create an Iterator from an Enumeration.
@@ -43,7 +43,7 @@ public class EnumerationIterator  implements Iterator {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public EnumerationIterator(Enumeration enumeration){
+	public EnumerationIterator(Enumeration<ElementType> enumeration){
 		this.enumeration = enumeration;
 	}
 
@@ -68,7 +68,7 @@ public class EnumerationIterator  implements Iterator {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public Object next() throws NoSuchElementException {
+	public ElementType next() throws NoSuchElementException {
 		return enumeration.nextElement();
 	}
 

@@ -379,8 +379,8 @@ public class CGIParser {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public Enumeration getParameterNames(){
-		return new IteratorEnumeration(nameValuePairHash.keySet().iterator());
+	public Enumeration<String> getParameterNames(){
+		return (Enumeration<String>)new IteratorEnumeration<String>(nameValuePairHash.keySet().iterator());
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*
  * Circular Object Buffer
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@ package com.Ostermiller.util;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
-public class CircularObjectBuffer {
+public class CircularObjectBuffer <ElementType> {
 
 	/**
 	 * The default size for a circular object buffer.
@@ -64,7 +64,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	protected Object[] buffer;
+	protected ElementType[] buffer;
 	/**
 	 * Index of the first Object available to be read.
 	 *
@@ -170,13 +170,20 @@ public class CircularObjectBuffer {
 		}
 	}
 
+	private ElementType[] createArray(int size){
+		// The Java 1.5 compiler complains that this is unsafe
+		// casting - it really isn't and there is no way to
+		// make the compiler think otherwise.
+		return (ElementType[]) new Object[size];
+	}
+
 	/**
 	 * double the size of the buffer
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	private void resize(){
-		Object[] newBuffer = new Object[buffer.length * 2];
+		ElementType[] newBuffer = createArray(buffer.length * 2);
 		int available = available();
 		if (readPosition <= writePosition){
 			// any space between the read and
@@ -296,10 +303,10 @@ public class CircularObjectBuffer {
 	 */
 	public CircularObjectBuffer(int size, boolean blockingWrite){
 		if (size == INFINITE_SIZE){
-			buffer = new Object[DEFAULT_SIZE];
+			buffer = createArray(DEFAULT_SIZE);
 			infinite = true;
 		} else {
-			buffer = new Object[size];
+			buffer = createArray(size);
 			infinite = false;
 		}
 		this.blockingWrite = blockingWrite;
@@ -317,12 +324,12 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public Object read() throws InterruptedException {
+	public ElementType read() throws InterruptedException {
 		while (true){
 			synchronized (this){
 				int available = available();
 				if (available > 0){
-					Object result = buffer[readPosition];
+					ElementType result = buffer[readPosition];
 					readPosition++;
 					if (readPosition == buffer.length){
 						readPosition = 0;
@@ -349,7 +356,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(Object[] buf) throws InterruptedException {
+	public int read(ElementType[] buf) throws InterruptedException {
 		return read(buf, 0, buf.length);
 	}
 
@@ -368,7 +375,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(Object[] buf, int off, int len) throws InterruptedException {
+	public int read(ElementType[] buf, int off, int len) throws InterruptedException {
 		while (true){
 			synchronized (this){
 				int available = available();
@@ -466,7 +473,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void write(Object[] buf) throws BufferOverflowException, IllegalStateException, InterruptedException {
+	public void write(ElementType[] buf) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		write(buf, 0, buf.length);
 	}
 
@@ -487,7 +494,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void write(Object[] buf, int off, int len) throws BufferOverflowException, IllegalStateException, InterruptedException {
+	public void write(ElementType[] buf, int off, int len) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		while (len > 0){
 			synchronized (CircularObjectBuffer.this){
 				if (inputDone) throw new IllegalStateException("CircularObjectBuffer.done() has been called, CircularObjectBuffer.write() failed.");
@@ -537,7 +544,7 @@ public class CircularObjectBuffer {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void write(Object o) throws BufferOverflowException, IllegalStateException, InterruptedException {
+	public void write(ElementType o) throws BufferOverflowException, IllegalStateException, InterruptedException {
 		boolean written = false;
 		while (!written){
 			synchronized (CircularObjectBuffer.this){

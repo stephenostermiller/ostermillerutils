@@ -86,7 +86,7 @@ class CircularBufferTests {
 	private InputStream cbbin;
 	private OutputStream cbbout;
 
-	private CircularObjectBuffer cob = new CircularObjectBuffer(20);
+	private CircularObjectBuffer<String> cob = new CircularObjectBuffer<String>(20);
 
 	public static void main(String args[]){
 		try {
@@ -408,7 +408,7 @@ class CircularBufferTests {
 					int off = rand.nextInt(10);
 					switch (rand.nextInt(2)){
 						case 0: {
-							Object[] readBuf = new Object[len];
+							String[] readBuf = new String[len];
 							int read = cob.read(readBuf);
 							if (read == -1){
 								done = true;
@@ -419,7 +419,7 @@ class CircularBufferTests {
 							}
 						} break;
 						case 1: {
-							Object[] readBuf = new Object[off + len];
+							String[] readBuf = new String[off + len];
 							int read = cob.read(readBuf, off, len);
 							if (read == -1){
 								done = true;
@@ -431,7 +431,7 @@ class CircularBufferTests {
 						} break;
 						case 2: {
 							for (int i=0; !isInterrupted() && !done && i<len; i++){
-								Object read;
+								String read;
 								read = cob.read();
 								if (read == null){
 									done = true;
