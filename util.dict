@@ -1,4 +1,4 @@
-personal_ws-1.1 english 989
+personal_ws-1.1 english 991
 aa
 aaa
 AAAAAABB
@@ -476,6 +476,7 @@ lastDate
 lastEnd
 lastLine
 lastLineNumber
+lastSeparator
 lceil
 ldquo
 le
@@ -843,6 +844,7 @@ StringReader
 stringtokenizer
 StringTokenizer
 strLength
+stValue
 sube
 supe
 swappedInput

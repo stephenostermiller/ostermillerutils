@@ -598,7 +598,8 @@ public class UberProperties {
 	 * @param add whether parameters should add to parameters with the same name or replace them.
 	 * @throws IOException if an error occurs when reading.
 	 */
-	public void load(InputStream in, boolean add) throws IOException {PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
+	public void load(InputStream in, boolean add) throws IOException {
+		PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
 		PropertiesToken t;
 		HashSet names = new HashSet();
 		StringBuffer comment = new StringBuffer();
@@ -607,6 +608,7 @@ public class UberProperties {
 		StringBuffer value = new StringBuffer();
 		int last = TYPE_COMMENT;
 		boolean atStart = true;
+		String lastSeparator = null;
 		while ((t = lex.getNextToken()) != null){
 			if (t.getID() == PropertiesToken.COMMENT){
 				int start = 1;
@@ -630,6 +632,8 @@ public class UberProperties {
 					atStart = false;
 				}
 				value.append(t.getContents());
+			} else if (t.getID() == PropertiesToken.SEPARATOR){
+				lastSeparator = t.getContents();
 			} else if (t.getID() == PropertiesToken.END_LINE_WHITE_SPACE){
 				if (atStart==true){
 					setComment(comment.toString());
@@ -637,17 +641,21 @@ public class UberProperties {
 					atStart = false;
 				}
 				String stName = unescape(name.toString());
-				if (add | names.contains(stName)){
-					addProperty(stName, unescape(value.toString()));
-				} else {
-					setProperty(stName, unescape(value.toString()));
-					names.add(stName);
+				String stValue = unescape(value.toString());
+				if (stName.length() != 0 || stValue.length() != 0 || lastSeparator != null){
+					if (add | names.contains(stName)){
+						addProperty(stName, stValue);
+					} else {
+						setProperty(stName, stValue);
+						names.add(stName);
+					}
 				}
 				if (foundComment) setComment(stName, unescape(comment.toString()));
 				comment.setLength(0);
 				name.setLength(0);
 				value.setLength(0);
 				foundComment = false;
+				lastSeparator = null;
 			}
 		}
 	}
@@ -712,9 +720,7 @@ public class UberProperties {
 			writeComment(out, getComment(names[i]));
 			String[] values = getProperties(names[i]);
 			for (int j=0; j<values.length; j++){
-				if (names[i].length() > 0 || values[j].length() > 0){
-					writeProperty(out, names[i], values[j]);
-				}
+				writeProperty(out, names[i], values[j]);
 			}
 		}
 		out.flush();
