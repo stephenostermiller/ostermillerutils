@@ -590,18 +590,12 @@ public class Base64 {
 			FileHelper.move(temp, fOut, true);
 		} finally {
 			if (in != null){
-				try {
-					in.close();
-				} catch (IOException ignore){
-				}
+				in.close();
 				in = null;
 			}
 			if (out != null){
-				try {
-					out.flush();
-					out.close();
-				} catch (IOException ignore){
-				}
+				out.flush();
+				out.close();
 				out = null;
 			}
 		}
@@ -744,6 +738,7 @@ public class Base64 {
 			// This can't happen.
 			// The input and output streams were constructed
 			// on memory structures that don't actually use IO.
+			 throw new RuntimeException(x);
 		}
 		return out.toByteArray();
 	}
@@ -824,6 +819,7 @@ public class Base64 {
 				try {
 					in.close();
 				} catch (IOException ignore){
+					 if (throwExceptions) throw ignore;
 				}
 				in = null;
 			}
@@ -832,6 +828,7 @@ public class Base64 {
 					out.flush();
 					out.close();
 				} catch (IOException ignore){
+					 if (throwExceptions) throw ignore;
 				}
 				out = null;
 			}
