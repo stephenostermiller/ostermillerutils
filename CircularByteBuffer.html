@@ -1,0 +1,49 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="description" content="Implements the circular buffer producer/consumer model for bytes.">
+   <meta name="keywords" content="buffer, buffer, circular, cirular, byte, bytes, buffers, inputstream, outputstream, pipedinputstream, pipedoutputstream, producer, producers, consumer, consumers, thread, threads, overflow, overflows, java, util, utility, class, library, libraries, source, code, open source, gpl, javadoc">
+   <title>Circular Byte Buffer</title>
+   <base href="http://ostermiller.org/utils/">
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<h1><a name="circularbytebuffer">Circular Byte Buffer</a></h1>
+
+<p>Implements the circular buffer producer/consumer model for bytes.</p>
+
+<p>Filling and emptying the buffer is done with standard Java InputStreams and OutputStreams.</p>
+
+<p>Using this class is a simpler alternative to using a PipedInputStream
+ and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
+ mark operation, don't allow you to control buffer sizes that they use,
+ and have a more complicated API that requires a instantiating two
+ classes and connecting them.</p>
+ 
+<p>This class is similar to the <a href="CircularCharBuffer.html">CircularCharBuffer</a> which 
+implements the circular buffer producer/consumer model for characters.</p>
+
+<p>[<a href="./#download">Download /w Source</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularByteBuffer.java/0">Version History</a> |
+<a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CircularByteBuffer.java/HEAD">Browse Source</a> |
+<a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CircularByteBuffer.html">Documentation</a>]</p>
+
+<hr>
+
+<h2><a name="license">License</a></h2>
+
+<P>Copyright (c) 2002 by <a href="mailto:utils@Ostermiller.com">Stephen Ostermiller</a>
+(utils@Ostermiller.com)</P>
+
+<p>This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation; either version 2 of the License or (at
+your option) any later version.</P>
+
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+</body>
+</html>
