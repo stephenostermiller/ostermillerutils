@@ -50,7 +50,8 @@ import java.io.*;
 
 %class PropertiesLexer
 %function getNextToken
-%type PropertiesToken 
+%type PropertiesToken
+%unicode
 
 %{
     private int lastToken;
@@ -86,7 +87,7 @@ import java.io.*;
             PropertiesLexer shredder = new PropertiesLexer(in);
             PropertiesToken t;
             while ((t = shredder.getNextToken()) != null) {
-                if (t.getID() != PropertiesToken.WHITE_SPACE){
+                if (true || t.getID() != PropertiesToken.WHITE_SPACE){
                     System.out.println(t);
                 }
             }
@@ -101,6 +102,7 @@ import java.io.*;
 %state LINE_END
 %state WHITE_SPACE
 %state NAME
+%state NAME_SPACE
 %state MID_NAME
 %state MID_NAME_NEW_LINE
 %state SEPARATOR
@@ -117,7 +119,7 @@ CR=([\r])
 LF=([\n])
 EOL=({CR}|{LF}|{CR}{LF})
 WhiteSpace=({BLANK}|{TAB}|{FF})
-LineEndingWhiteSpace=({WhiteSpace}*{EOL})
+LineEndingWhiteSpace=({EOL})
 fourHex=({HexDigit}{4})
 UnicodeEscape=({EscChar}[u]({fourHex}*))
 Escape=(({EscChar}[^\r\n])|{UnicodeEscape})
@@ -125,8 +127,8 @@ LineEscape=({EscChar}{EOL})
 
 NameText=([^\=\:\t\f\r\n\\ ]|{Escape})
 NameTextWSeparators=([^\t\f\r\n\\ ]|{Escape})
-ValueText=([^\t\f\r\n\\ ]|([\t\f ]+([^\t\f\r\n\\ ]|{Escape}))|{Escape})
-Comment=([\!\#][^\r\n]*)
+ValueText=([^\r\n\\]|{Escape})
+Comment=({WhiteSpace}*[\!\#][^\r\n]*)
 Name=({NameText}*)
 Value=((({NameText}+){ValueText}*)?)
 FullValue=((({NameTextWSeparators}+){ValueText}*)?)
@@ -149,13 +151,21 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     yybegin(nextState);
     return (t);
 }
-<NAME, SEPARATOR, VALUE, MID_VALUE> {WhiteSpace}+ {
+<NAME, NAME_SPACE> {WhiteSpace}+ {
+    nextState = NAME_SPACE;
+    lastToken = PropertiesToken.WHITE_SPACE;
+    String text = yytext();
+    PropertiesToken t = new PropertiesToken(lastToken,text);
+    yybegin(nextState);
+    return (t);
+}
+<SEPARATOR, VALUE, MID_VALUE> {WhiteSpace}+ {
     lastToken = PropertiesToken.WHITE_SPACE;
     String text = yytext();
     PropertiesToken t = new PropertiesToken(lastToken,text);
     return (t);
 }
-<YYINITIAL, LINE_END, NAME, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> {LineEndingWhiteSpace} {
+<YYINITIAL,WHITE_SPACE,LINE_END, NAME, NAME_SPACE, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> {LineEndingWhiteSpace} {
     nextState = YYINITIAL;
     lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
     String text = yytext();
@@ -163,7 +173,7 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     yybegin(nextState);
     return (t);
 }
-<YYINITIAL, LINE_END, NAME, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> <<EOF>> {
+<YYINITIAL,WHITE_SPACE,LINE_END, NAME, NAME_SPACE, SEPARATOR, VALUE, NAME, MID_NAME, MID_NAME_NEW_LINE, MID_VALUE> <<EOF>> {
     nextState = DONE;
     lastToken = PropertiesToken.END_LINE_WHITE_SPACE;
     PropertiesToken t = new PropertiesToken(lastToken,"");
@@ -181,7 +191,7 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     yybegin(nextState);
     return (t);
 }
-<YYINITIAL, WHITE_SPACE, NAME, MID_NAME, MID_NAME_NEW_LINE> ":"|"=" {
+<YYINITIAL, WHITE_SPACE, NAME, NAME_SPACE, MID_NAME, MID_NAME_NEW_LINE> ":"|"=" {
     nextState = SEPARATOR;
     lastToken = PropertiesToken.SEPARATOR;
     String text = yytext();
@@ -189,12 +199,18 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     yybegin(nextState);
     return (t);
 }
-<NAME> {Value} {
+<NAME, NAME_SPACE> {Value} {
     nextState = VALUE;
     lastToken = PropertiesToken.VALUE;
     String text = yytext();
     PropertiesToken t = new PropertiesToken(lastToken,text);
     yybegin(nextState);
+    return (t);
+}
+<NAME_SPACE> ({LineEscape}) {
+    lastToken = PropertiesToken.CONTINUE_LINE;
+    String text = yytext();
+    PropertiesToken t = new PropertiesToken(lastToken,text);
     return (t);
 }
 <NAME, MID_NAME, MID_NAME_NEW_LINE> ({LineEscape}) {
@@ -229,7 +245,10 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
     yybegin(nextState);
     return (t);
 }
-<YYINITIAL,LINE_END,WHITE_SPACE,NAME,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> [^] {
+<YYINITIAL,LINE_END,WHITE_SPACE,NAME,NAME_SPACE,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> {EscChar} {
+    // Ignore escape characters at the end of the file.
+}
+<YYINITIAL,LINE_END,WHITE_SPACE,NAME,NAME_SPACE,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> [^] {
     System.err.println("Unmatched input.");
     String state = "";    
 	String text = yytext();
@@ -241,8 +260,9 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
         case SEPARATOR: state = "SEPARATOR"; break;
         case VALUE: state = "VALUE"; break;
         case MID_NAME: state = "MID_NAME"; break;
+        case NAME_SPACE: state = "NAME_SPACE"; break;
     }
-    System.err.println("State: " + state);
-    System.err.println("Text: " + text);
+    System.err.println("State: '" + state + "'");
+    System.err.println("Text: '" + text + "'");
 	yy_ScanError(YY_NO_MATCH);
 }

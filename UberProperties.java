@@ -686,14 +686,14 @@ public class UberProperties {
 				lex.getNextToken();
 				foundComment = true;
 			} else if (t.getID() == PropertiesToken.NAME){
-				if (atStart==true){
+				if (atStart){
 					setComment(comment.toString());
 					comment.setLength(0);
 					atStart = false;
 				}
 				name.append(t.getContents());
 			} else if (t.getID() == PropertiesToken.VALUE){
-				if (atStart==true){
+				if (atStart){
 					setComment(comment.toString());
 					comment.setLength(0);
 					atStart = false;
@@ -702,21 +702,19 @@ public class UberProperties {
 			} else if (t.getID() == PropertiesToken.SEPARATOR){
 				lastSeparator = t.getContents();
 			} else if (t.getID() == PropertiesToken.END_LINE_WHITE_SPACE){
-				if (atStart==true){
+				if (atStart){
 					setComment(comment.toString());
 					comment.setLength(0);
 					atStart = false;
 				}
 				String stName = unescape(name.toString());
 				String stValue = unescape(value.toString());
-				if (stName.length() != 0){
-					if (stValue.length() != 0 || lastSeparator != null){
-						if (add | names.contains(stName)){
-							addProperty(stName, stValue);
-						} else {
-							setProperty(stName, stValue);
-							names.add(stName);
-						}
+				if (lastSeparator != null || stName.length() > 0 || stValue.length() > 0 ){
+					if (add || names.contains(stName)){
+						addProperty(stName, stValue);
+					} else {
+						setProperty(stName, stValue);
+						names.add(stName);
 					}
 					if (foundComment) setComment(stName, unescape(comment.toString()));
 				}
