@@ -40,11 +40,16 @@ import java.util.Locale;
  * }
  * </pre>
  * </code>
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public class PasswordDialog extends JDialog {
 
 	/**
 	 * Locale specific strings displayed to the user.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected ResourceBundle labels;
 
@@ -53,6 +58,8 @@ public class PasswordDialog extends JDialog {
 	 * strings.
 	 *
 	 * @param locale Locale used to for i18n.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setLocale(Locale locale){
 		labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  locale);
@@ -60,26 +67,38 @@ public class PasswordDialog extends JDialog {
 
 	/**
 	 * Where the name is typed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JTextField name;
 	/**
 	 * Where the password is typed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JPasswordField pass;
 	/**
 	 * The OK button.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JButton okButton;
 	/**
 	 * The cancel button.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JButton cancelButton;
 	/**
 	 * The label for the field in which the name is typed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JLabel nameLabel;
 	/**
 	 * The label for the field in which the password is typed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected JLabel passLabel;
 
@@ -89,6 +108,8 @@ public class PasswordDialog extends JDialog {
 	 * before the dialog is displayed.
 	 *
 	 * @param name default name to be displayed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setName(String name){
 		this.name.setText(name);
@@ -100,6 +121,8 @@ public class PasswordDialog extends JDialog {
 	 * before the dialog is displayed.
 	 *
 	 * @param pass default password to be displayed.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setPass(String pass){
 		this.pass.setText(pass);
@@ -110,6 +133,8 @@ public class PasswordDialog extends JDialog {
 	 * The default is a localized string.
 	 *
 	 * @param ok label for the ok button.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setOKText(String ok){
 		this.okButton.setText(ok);
@@ -121,6 +146,8 @@ public class PasswordDialog extends JDialog {
 	 * The default is a localized string.
 	 *
 	 * @param cancel label for the cancel button.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setCancelText(String cancel){
 		this.cancelButton.setText(cancel);
@@ -132,6 +159,8 @@ public class PasswordDialog extends JDialog {
 	 * The default is a localized string.
 	 *
 	 * @param name label for the name field.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setNameLabel(String name){
 		this.nameLabel.setText(name);
@@ -143,6 +172,8 @@ public class PasswordDialog extends JDialog {
 	 * The default is a localized string.
 	 *
 	 * @param pass label for the password field.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public void setPassLabel(String pass){
 		this.passLabel.setText(pass);
@@ -154,6 +185,8 @@ public class PasswordDialog extends JDialog {
 	 * the dialog was closed.
 	 *
 	 * @return the name from the name field.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getName(){
 		return name.getText();
@@ -164,6 +197,8 @@ public class PasswordDialog extends JDialog {
 	 * the dialog was closed.
 	 *
 	 * @return the password from the password field.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public String getPass(){
 		return new String(pass.getPassword());
@@ -177,6 +212,8 @@ public class PasswordDialog extends JDialog {
 	 * are not.
 	 *
 	 * @return true if the the user hit OK, false if the user canceled.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean okPressed(){
 		return pressed_OK;
@@ -184,6 +221,8 @@ public class PasswordDialog extends JDialog {
 
 	/**
 	 * update this variable when the user makes an action
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private boolean pressed_OK = false;
 
@@ -192,6 +231,8 @@ public class PasswordDialog extends JDialog {
 	 *
 	 * @param parent window from which this dialog is launched
 	 * @param title the title for the dialog box window
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public PasswordDialog(Frame parent, String title) {
 
@@ -212,6 +253,8 @@ public class PasswordDialog extends JDialog {
 	 * Create this dialog with the given parent and the default title.
 	 *
 	 * @param parent window from which this dialog is launched
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public PasswordDialog(Frame parent) {
 		this(parent, null);
@@ -219,6 +262,8 @@ public class PasswordDialog extends JDialog {
 
 	/**
 	 * Create this dialog with the default title.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public PasswordDialog() {
 		this(null, null);
@@ -226,6 +271,8 @@ public class PasswordDialog extends JDialog {
 
 	/**
 	 * Called by constructors to initialize the dialog.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	protected void dialogInit(){
 
@@ -321,6 +368,8 @@ public class PasswordDialog extends JDialog {
 	 * Shows the dialog and returns true if the user pressed ok.
 	 *
 	 * @return true if the the user hit OK, false if the user canceled.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean showDialog(){
 		show();
@@ -333,6 +382,8 @@ public class PasswordDialog extends JDialog {
 	 * is treated as the default name, the second as the default password
 	 *
 	 * @param args command line arguments: name and password (optional)
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	private static void main(String[] args){
 		PasswordDialog p = new PasswordDialog();

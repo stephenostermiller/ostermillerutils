@@ -20,6 +20,9 @@ package com.Ostermiller.util;
 
 /**
  * Interface to verify passwords.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.00.00
  */
 public interface PasswordVerifier {
 	/**
@@ -30,6 +33,8 @@ public interface PasswordVerifier {
 	 *
 	 * @param password an array of characters representing a password.
 	 * @return true iff this password is ok.
+	 *
+	 * @since ostermillerutils 1.00.00
 	 */
 	public boolean verify(char[] password);
 
