@@ -7,7 +7,9 @@ fi
 
 tablist=""
 
-for file in *.java
+files=$@
+
+for file in $files
 do
     generated='0'
     if [ ! -e $file ]
@@ -27,5 +29,8 @@ do
         tablist="$tablist $file"  
     fi    
 done
-java -classpath ../../.. com.Ostermiller.util.Tabs -gtv $tablist
+if [ "$tablist" != "" ]
+then
+	java -classpath ../../.. com.Ostermiller.util.Tabs -gtv $tablist
+fi
 
