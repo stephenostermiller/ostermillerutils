@@ -5,98 +5,191 @@ JDFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCPATH)
 JAVAC=javac $(JFLAGS)
 JAVA=java $(JFLAGS)
 JAVADOC=javadoc $(JDFLAGS)
-JLEX=$(JAVA) $(JFLAGS) JFlex.Main
+JLEXFLAGS=-q
+JLEX=$(JAVA) JFlex.Main  $(JLEXFLAGS)
 CVS=cvs -q
 
-all: compile build javadoc htmlsource
+.SUFFIXES:
+.SUFFIXES: .lex .java
+.SUFFIXES: .java .class
+.SUFFIXES: .bte .html
 
-compile: clean buildclean CSVLexer.java \
-	BrowserCommandLexer.java \
-	CGILexer.java \
-	ExcelCSVLexer.java
-	./neaten.sh
-	$(JAVAC) *.java
+all: junkclean neaten compile build javadoc htmlsource
 
-CSVLexer.java: CSVLexer.lex
-	$(JLEX) CSVLexer.lex
+.PHONY : compile
+compile: javafiles classes
 
-CGILexer.java: CGILexer.lex
-	$(JLEX) CGILexer.lex
+neaten: *.java
+	@./neaten.sh $?
+	@touch neaten
+	
+LEXFILES=$(wildcard *.lex)
+.PHONY: javafiles
+javafiles: $(LEXFILES:.lex=.java)
+	@# Write a bash script that will compile the files in the todo list
+	@echo "#!/bin/bash" > tempCommand	
+	@# If the todo list doesn't exist, don't compile anything
+	@echo "if [ -e tempChangedLexFileList ]" >> tempCommand
+	@echo "then" >> tempCommand
+	@# Make sure each file is only on the todo list once.
+	@echo "sort tempChangedLexFileList | uniq  > tempChangedLexFileListUniq" >> tempCommand
+	@echo "FILES=\`cat tempChangedLexFileListUniq\`" >> tempCommand
+	@# Compile the files.
+	@echo "echo Make: Compiling: $$ FILES" >> tempCommand
+	@echo "$(JLEX) $$ FILES" >> tempCommand
+	@echo "for file in $$ FILES" >> tempCommand
+	@echo "do" >> tempCommand
+	@# Each generated java file needs to be compiled by the java compiler.
+	@echo "echo \"$$ {file%.lex}.java\" >> tempChangedJavaFileList" >> tempCommand
+	@echo "done" >> tempCommand
+	@echo "fi" >> tempCommand
+	@# Remove extra spaces in the script that follow the dollar signs.
+	@sed "s/\$$ /\$$/" tempCommand > tempCommand.sh
+	@# Make the script executable.
+	@chmod +x tempCommand.sh
+	@# Call the script
+	@./tempCommand.sh
+	@rm -f tempCommand tempCommand.sh tempChangedLexFileList tempChangedLexFileListUniq *~
 
-BrowserCommandLexer.java: BrowserCommandLexer.lex
-	$(JLEX) BrowserCommandLexer.lex
-		
-ExcelCSVLexer.java: ExcelCSVLexer.lex
-	$(JLEX) ExcelCSVLexer.lex
+.lex.java:
+	@#for each changed lex file, add it to the todo list.
+	@echo "$<" >> tempChangedLexFileList
 
+.PHONY: javafilesclean
+javafilesclean: 
+	@echo Make: Removing generated Lexer java files.
+	@rm -f `find . -name "*.lex" | sed s/.lex/.java/`
+
+JAVAFILES=$(wildcard *.java)
+.PHONY: classes
+classes: javafiles $(JAVAFILES:.java=.class)
+	@# Write a bash script that will compile the files in the todo list
+	@echo "#!/bin/bash" > tempCommand	
+	@# If the todo list doesn't exist, don't compile anything
+	@echo "if [ -e tempChangedJavaFileList ]" >> tempCommand
+	@echo "then" >> tempCommand
+	@# Make sure each file is only on the todo list once.
+	@echo "sort tempChangedJavaFileList | uniq  > tempChangedJavaFileListUniq" >> tempCommand
+	@echo "FILES=\`cat tempChangedJavaFileListUniq\`" >> tempCommand
+	@# Compile the files.
+	@echo "echo Make: Compiling: $$ FILES" >> tempCommand
+	@echo "$(JAVAC) $$ FILES" >> tempCommand
+	@echo "fi" >> tempCommand
+	@# Remove extra spaces in the script that follow the dollar signs.
+	@sed "s/\$$ /\$$/" tempCommand > tempCommand.sh
+	@# Make the script executable.
+	@chmod +x tempCommand.sh
+	@# Call the script
+	@./tempCommand.sh
+	@rm -f tempCommand tempCommand.sh tempChangedJavaFileList tempChangedJavaFileListUniq
+
+.java.class:
+	@#for each changed java file, add it to the todo list.
+	@echo "$<" >> tempChangedJavaFileList
+
+.PHONY: classesclean
+classesclean: junkclean
+	@echo Make: Removing Lexer class files
+	@rm -f *.class
+
+.PHONY: junkclean	        
 junkclean:
-	rm -rf *~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
+	@echo Make: Removing utilites detritus.
+	@rm -rf *~ ~* temp* utils_*.jar out.txt *.bak CSVTest.txt CircularBufferTestResults.txt com/ gnu/ src/
 
+.PHONY: buildclean	        
 buildclean: junkclean
-	rm -f utils.jar
+	@echo Make: Removing generated jar files.
+	@rm -f utils.jar
         
+.PHONY: javadocclean	        
 javadocclean: junkclean
-	rm -rf doc/
+	@echo Make: Removing generated documentation.
+	@rm -rf doc/
 
+.PHONY: htmlsourceclean	        
 htmlsourceclean: junkclean
-	rm -f *.*.html syntax.css source.html
+	@echo Make: Removing generated html source.
+	@rm -f *.*.html syntax.css source.html
         
+.PHONY: testclean	        
 testclean: junkclean
-	rm -f CircularBufferTests*.class CSVTest.class TokenizerTests.class
+	@echo Make: Removing compiled tests.
+	@rm -f CircularBufferTests*.class CSVTest.class TokenizerTests.class
 
+.PHONY: clean	        
 clean: buildclean javadocclean htmlsourceclean
-	rm -f *.class
-        
+	@echo Make: Removing generated class files.
+	@rm -f *.class
+
+.PHONY: allclean        
 allclean: clean
-	rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java
+	@echo Make: Removing all files not in CVS.
+	@rm -rf CSVLexer.java BrowserCommandLexer.java CGILexer.java ExcelCSVLexer.java javadoc htmlsource neaten
 
-javadoc: javadocclean
-	mv -f package.html temp
-	mkdir doc
-	$(JAVADOC) -quiet -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util
-	mv -f temp package.html
+javadoc: *.java
+	@echo Make: Generating javadoc
+	@rm -rf doc
+	@mv -f package.html temp
+	@mkdir doc
+	@$(JAVADOC) -quiet -link http://java.sun.com/j2se/1.3/docs/api/ -d doc/ com.Ostermiller.util > /dev/null
+	@mv -f temp package.html
+	@touch javadoc
 
-build: clean compile testclean
-	mkdir -p com/Ostermiller/util
-	cp *.* Makefile com/Ostermiller/util/
-	mkdir -p gnu/getopt		
-	cp ../../../gnu/getopt/*.* gnu/getopt
-	jar cfv utils.jar com/ gnu/ > /dev/null
-	rm -rf com/ gnu/
+.PHONY: build
+build: utils.jar
 
-test: compile
+utils.jar: *.java *.class *.html *.sh *.lex *.properties *.txt *.TXT *.csv *.bte Makefile ../../../gnu/getopt/*.*
+	@echo Make: Building jar file.
+	@mkdir -p com/Ostermiller/util
+	@cp *.java *.class *.html *.sh *.lex *.properties *.txt *.TXT *.csv *.bte Makefile Makefile com/Ostermiller/util/
+	@rm -f `find com/Ostermiller/util -name "*.lex" | sed s/.lex/.java/`
+	@rm -f com/Ostermiller/util/CircularBufferTests*.class com/Ostermiller/util/CSVTest.class com/Ostermiller/util/TokenizerTests.class
+	@mkdir -p gnu/getopt		
+	@cp ../../../gnu/getopt/*.* gnu/getopt
+	@jar cfv utils.jar com/ gnu/ > /dev/null
+	@rm -rf com/ gnu/
+
+.PHONY: test
+test: 
 	$(JAVA) com.Ostermiller.util.TokenizerTests > out.txt
-	diff out.txt TokenizerTestResults.txt
+	@diff out.txt TokenizerTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVLexer CSVRegressionTest.csv > out.txt
-	diff out.txt CSVRegressionTestResults.txt
+	@diff out.txt CSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.ExcelCSVLexer ExcelCSVRegressionTest.csv > out.txt
-	diff out.txt ExcelCSVRegressionTestResults.txt
+	@diff out.txt ExcelCSVRegressionTestResults.txt
 	$(JAVA) com.Ostermiller.util.CSVTest > out.txt
-	diff out.txt CSVTestResults.txt
+	@diff out.txt CSVTestResults.txt
 	$(JAVA) com.Ostermiller.util.CircularBufferTests > out.txt
-	diff out.txt CircularBufferTestResults.txt
-	rm out.txt CSVTest.txt CircularBufferTestResults.txt
+	@diff out.txt CircularBufferTestResults.txt
+	@rm out.txt CSVTest.txt CircularBufferTestResults.txt
         
-update: clean
-	$(CVS) update -RPd .
+.PHONY: update
+update: 
+	@$(CVS) update -RPd .
         
-commit: clean
-	$(CVS) commit
+.PHONY: commit
+commit: 
+	@$(CVS) commit
 
-release: update commit all
-	./release.sh
+.PHONY: release
+release: 
+	@./release.sh
 
+.PHONY: install
 install:
-	./install.sh
+	@./install.sh
 
-htmlsource:
-	rm -rf src/
-	mkdir src
-	cp *.java *.properties *.lex src
-	rm -f `find src -name "*.lex" | sed s/.lex/.java/`
-	$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
-	$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.lex src/*.java src/*.properties
-	mv src/*.*.html src/*.css .
-	rm -rf src
-	./source.sh
-	./cleansource.sh
+htmlsource: *.java *.lex
+	@echo Make: Generating colored html source.
+	@rm -rf src/
+	@mkdir src
+	@cp *.java *.properties *.lex src
+	@rm -f `find src -name "*.lex" | sed s/.lex/.java/`
+	@$(JAVA) com.Ostermiller.util.Tabs -s 4 src/*.java
+	@$(JAVA) com.Ostermiller.Syntax.ToHTML -t src.bte -i whitespace src/*.lex src/*.java src/*.properties
+	@mv src/*.*.html src/*.css .
+	@rm -rf src
+	@./source.sh
+	@./cleansource.sh
+	@touch htmlsource
