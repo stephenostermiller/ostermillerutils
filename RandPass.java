@@ -426,6 +426,13 @@ public class RandPass {
     
     private Vector requirements = null;
     
+    /**
+     * Require that a certain number of characters from an 
+     * alphabet be present in generated passwords.
+     * 
+     * @param alphabet set of letters that must be present
+     * @param num number of letters from the alphabet that must be present.
+     */    
     public void addRequirement(char[] alphabet, int num){
         if (requirements == null) requirements = new Vector();
         requirements.add(new Requirement(alphabet, num));

@@ -28,7 +28,7 @@ package com.Ostermiller.util;
      * loop.
      * 
      * @param password an array of characters representing a password.
-     * @returns true iff this password is ok.
+     * @return true iff this password is ok.
      */
     public boolean verify(char[] password);
  
