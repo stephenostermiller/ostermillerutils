@@ -1,6 +1,6 @@
 /*
  * Control a web browser from your java application.
- * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>
+ * Copyright (C) 2001 Stephen Ostermiller <utils@Ostermiller.com>     
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -179,7 +179,7 @@ public class Browser {
      */
     public static void load(Properties props){
         if (props.containsKey("com.Ostermiller.util.Browser.open")){
-            StringTokenizer tok = new StringTokenizer(props.getProperty("com.Ostermiller.util.Browser.open"), "\r\n", false);
+            java.util.StringTokenizer tok = new java.util.StringTokenizer(props.getProperty("com.Ostermiller.util.Browser.open"), "\r\n", false);
             int count = tok.countTokens();
             String[] exec = new String[count];
             for (int i=0; i < count; i++){
@@ -737,7 +737,7 @@ public class Browser {
             c.gridwidth = GridBagConstraints.RELATIVE;
             gridbag.setConstraints(commandLinesLabel, c);
             pane.add(commandLinesLabel);
-            JPanel buttonPanel = new JPanel(); 
+            JPanel buttonPanel = new JPanel();
             c.anchor = GridBagConstraints.EAST;           
             browseButton.addActionListener(actionListener);
             buttonPanel.add(browseButton);            
