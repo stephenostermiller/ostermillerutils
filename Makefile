@@ -32,9 +32,9 @@ clean:
 	rm -f CSVTest.txt
 
 docs:
-	rm -rf docs/
-	mkdir docs
-	$(JAVADOC) -d docs/ com.Ostermiller.util
+	rm -rf doc/ docs/
+	mkdir doc
+	$(JAVADOC) -d doc/ com.Ostermiller.util
 
 build:
 	rm -f utils.jar
