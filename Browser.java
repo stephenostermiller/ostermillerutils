@@ -286,7 +286,7 @@ public class Browser {
 						BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
 						String t;
 						while ((t = lex.getNextToken()) != null) {
-								argsVector.add(t);
+							argsVector.add(t);
 						}
 						String[] args = new String[argsVector.size()];
 						args = (String[])argsVector.toArray(args);
@@ -301,10 +301,10 @@ public class Browser {
 								args[1].equals("url.dll,FileProtocolHandler") &&
 								args[2].startsWith("file:/")){
 							if (args[2].charAt(6) != '/'){
-									args[2] = "file://" + args[2].substring(6);
+								args[2] = "file://" + args[2].substring(6);
 							}
 							if (args[2].charAt(7) != '/'){
-									args[2] = "file:///" + args[2].substring(7);
+								args[2] = "file:///" + args[2].substring(7);
 							}
 							File shortcut = File.createTempFile("OpenInBrowser", ".url");
 							shortcut = shortcut.getCanonicalFile();
