@@ -45,6 +45,15 @@ separate class must be use to read
 <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/CSVParser.java/HEAD">Browse Source</a> |
 <a href="http://www.gjt.org/javadoc/com/Ostermiller/util/CSVParser.html">Documentation</a>]</p>
 
+<h3>CSV Character Sets</h3>
+<p>Several people have asked how to read CSV files that are in other character sets such as
+Chinese or Japanese.  To parse such files, simple use the CSVParser constructor that takes a reader.
+Make sure the reader has been initialized to read the correct character set.  An example that reads
+Simplified Chinese (charset GB2312) CSV values from <a href="CSVCharsetTest.gb2312csv">CSVCharsetTest.gb2312csv</a>
+can be found in <a href="CSVCharsetTest.java">CSVCharsetTest.java</a>.  If you have a Chinese font 
+installed and Java is set up to use it, the example will show a dialog with each of the Chinese 
+words on it.</p>
+
 <h3>CSVLexer</h3>
 
 <p>The lexer (CSVLexer) created using <a href="http://www.jflex.de/">JFlex</a> is still available in the download and is
