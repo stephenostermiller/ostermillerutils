@@ -93,7 +93,7 @@ and its use is recommended.</p>
 <p>A CSVLexer <a href="CSVRegressionTest.csv">regression test</a> and the expected
 <a href="CSVRegressionTestResults.txt">results</a> of that test are available.</p>
 
-<h2><name="links">Links</a></h2>
+<h2><a name="links"></a>Links</h2>
 <table border=2 cellpadding=5>
 <tr><th>Author</th><th>License</th><th>Features</th></tr>
 
