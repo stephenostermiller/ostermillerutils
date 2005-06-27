@@ -127,7 +127,7 @@ Parses CSV files into Java objects contained entirely in memory.
 
 <tr><td>
 Nilo de Roock<br>
-<a href="http://nilostep.com/">xlSQL </a>
+<a href="http://xlsql.sourceforge.net/">xlSQL </a>
 </td><td>
 Open source, GPL
 </td><td>
