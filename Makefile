@@ -195,6 +195,7 @@ test:
 	$(JAVA) com.Ostermiller.util.SizeLimitInputStreamTests
 	$(JAVA) com.Ostermiller.util.SignificantFiguresTests
 	$(JAVA) com.Ostermiller.util.ConcatTests
+	$(JAVA) com.Ostermiller.util.ParallelizerTests
 
 .PHONY: update
 update: 
