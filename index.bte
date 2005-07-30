@@ -18,6 +18,7 @@
 <li><a name="line_ends" href="LineEnds.html">Line Ends</a> - Converts text files between various system formats.</li>
 <li><a name="md5" href="MD5.html">MD5 Sums</a> - Classes for generating MD5 checksums on String, Byte arrays, Streams, or Files.</li>
 <li><a name="no_close_stream" href="NoCloseStream.html">NoClose Streams</a> - Create streams that cannot be closed with the regular close() mechanism.</li>
+<li><a name="parallelizer" href="Parallelizer.html">Parallelizer</a> - Runs multiple jobs in parallel, n threads at a time, and waits until all threads are complete before continuing.</li>
 <li><a name="password_dialog" href="PasswordDialog.html">Password Dialog</a> - A password dialog box written for Swing.</li>
 <li><a name="randpass" href="RandPass.html">Random Password Generator</a> - Generate a random String using a cryptographically secure random number generator.</li>
 <li><a name="significant_figures" href="SignificantFigures.html">Significant Figures</a> - Handles parsing, rounding, and displaying numbers for scientific applications.</li>
