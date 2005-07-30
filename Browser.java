@@ -456,6 +456,7 @@ public class Browser {
 		shortcut = shortcut.getCanonicalFile();
 		shortcut.deleteOnExit();
 		PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+		out.println("<!-- saved from url=(0014)about:internet -->");
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>" + labels.getString("html.openurls") + "</title>");
@@ -529,6 +530,7 @@ public class Browser {
 		shortcut.deleteOnExit();
 		shortcut = shortcut.getCanonicalFile();
 		PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+		out.println("<!-- saved from url=(0014)about:internet -->");
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>" + labels.getString("html.openurls") + "</title>");
@@ -609,6 +611,7 @@ public class Browser {
 		shortcut.deleteOnExit();
 		shortcut = shortcut.getCanonicalFile();
 		PrintWriter out = new PrintWriter(new FileWriter(shortcut));
+		out.println("<!-- saved from url=(0014)about:internet -->");
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>" + labels.getString("html.openurls") + "</title>");
