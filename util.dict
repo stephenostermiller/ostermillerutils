@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1216
+personal_ws-1.1 en 1250
 aa
 aA
 aaa
@@ -104,6 +104,7 @@ binaryException
 binhex
 bitCount
 blockingWrite
+blockOrDie
 blockquote
 BorderLayout
 br
@@ -206,6 +207,7 @@ concatreader
 ConcatReader
 ConcatStreams
 ConcatTests
+concurrentThreadLimit
 cong
 containsAny
 containsAnyIgnoreCase
@@ -289,6 +291,8 @@ doPostGet
 dosomething
 doubleValue
 Drzymala
+dt
+dumpStack
 eacute
 ec
 ecf
@@ -320,6 +324,7 @@ EOF
 equalInd
 equalsAny
 equalsAnyIgnoreCase
+errorList
 escapeAndQuote
 escapeHTML
 escapeJavaLiteral
@@ -334,6 +339,7 @@ ExcelCSV
 ExcelCSVLexer
 ExcelCSVParser
 ExcelCSVPrinter
+exceptionList
 exitCond
 exitValue
 expectedLine
@@ -412,6 +418,8 @@ getEndsWithAnyIgnoreCasePattern
 getEndsWithAnyPattern
 getEqualsAnyIgnoreCasePattern
 getEqualsAnyPattern
+getExceptionCount
+getExceptions
 getHash
 getHashString
 getHeight
@@ -430,6 +438,7 @@ getMessage
 getMethod
 getMSD
 getName
+getNextThreadName
 getNextToken
 getNumberSignificantFigures
 getopt
@@ -451,6 +460,7 @@ getProperty
 getPropertyNameCount
 getQueryString
 getReader
+getRunningThreads
 getSize
 getSource
 getSpaceLeft
@@ -476,6 +486,7 @@ gts
 guessTabWidth
 harr
 hArr
+hashKey
 HashMap
 HashSet
 hashString
@@ -566,6 +577,8 @@ JLabel
 JMenu
 JMenuBar
 JMenuItem
+jobWrapper
+joinOrDie
 JOptionPane
 JPanel
 JPasswordField
@@ -622,6 +635,7 @@ lineNumber
 LinkedList
 linux
 listIterator
+Loefflmann
 LongOpt
 longopts
 longValue
@@ -743,6 +757,7 @@ normalInput
 normalOutput
 noscript
 NoSuchElementException
+notifyAll
 notin
 nree
 nrtf
@@ -806,6 +821,7 @@ OutputStreamWriter
 outputTabWidth
 Paavolainen
 padlen
+ParallelizerTests
 param
 params
 parseByte
@@ -843,6 +859,7 @@ pipedwriter
 PipedWriter
 PipedWriters
 piv
+pll
 plusmn
 pNames
 pNamesEnum
@@ -899,6 +916,7 @@ reallyverbose
 ree
 reencode
 removeAll
+removeFirst
 renameTo
 replaceLength
 repPos
@@ -911,6 +929,7 @@ resetButton
 resizable
 ResourceBundle
 restOfText
+rethrow
 returnEmptyTokens
 retval
 reversebase
@@ -924,8 +943,11 @@ rotateLeft
 RSA
 rsaquo
 rsquo
+rtx
 rundll
-RuntimeException
+runningThreads
+runtimeException
+rx
 San
 Santeri
 Santeri's
@@ -939,6 +961,7 @@ scaron
 scrollpane
 SDK
 sdot
+sdtwebclient
 secondLen
 SecureRandom
 securly
@@ -1023,7 +1046,9 @@ spaceLeft
 spaceUsed
 SQL
 ss
+stackSize
 staightstreamreader
+startAJobIfNeeded
 startsWith
 startsWithAny
 startsWithAnyIgnoreCase
@@ -1046,6 +1071,7 @@ strLength
 stValue
 sube
 subinputstream
+SunOS
 supe
 sw
 swappedInput
@@ -1065,8 +1091,13 @@ tgbaWriter
 theGettysburgAddress
 thetasym
 thinsp
-Throwable
+threadGroup
+threadName
+threadNameCount
+throwable
 throwExceptions
+throwFirstError
+throwFirstException
 tld
 toArray
 toByteArray
@@ -1089,6 +1120,7 @@ TokenizerTests
 tokenizes
 tokenizing
 toolbar
+toRunQueue
 toScientificNotation
 toString
 totalRead
@@ -1152,6 +1184,7 @@ userhome
 username
 userOKedPanelChanges
 useShortCut
+usr
 UTF
 util
 Utilites
@@ -1203,6 +1236,7 @@ xFF
 xffeff
 xfffa
 xffff
+xlSQL
 xseven
 xxAAAAAA
 xxBBBBBB
