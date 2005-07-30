@@ -24,7 +24,7 @@
 <p>To use the Parallelizer, a developer would typically:</p>
 <ol>
 <li>Create a new Parallelizer before the loop.</li>
-<li>Put the contents of the loop inside an inline Runnable instance.</li>
+<li>Put the contents of the loop inside an in-line Runnable instance.</li>
 <li>Copy all loop variables used inside the Runnable instance into finals</li>
 <li>Call join() after the loop to wait until the threads are done and it is safe to proceed</li> 
 </ol>

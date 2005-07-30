@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1250
+personal_ws-1.1 en 1254
 aa
 aA
 aaa
@@ -126,6 +126,7 @@ byteArraysEqual
 bytesJustRead
 bytesLeft
 bytesRead
+bytesReadSinceMark
 bytesToString
 byteValue
 cancelButton
@@ -655,6 +656,7 @@ mantissaStart
 Marcin
 markPosition
 markPostion
+markReadLimitBytes
 markSize
 markSupported
 maxBytesToRead
@@ -672,6 +674,7 @@ microsoft
 middot
 midpad
 MIDZEROS
+Miniwark
 mkdirs
 Monospaced
 mostCombined
@@ -698,6 +701,7 @@ nameValuePairHash
 nameValuePairList
 NaN
 nAthree
+Natschlaeger
 nAtwo
 nbefore
 nBfour
