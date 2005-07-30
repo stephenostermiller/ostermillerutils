@@ -30,53 +30,53 @@ import java.util.*;
 class ParallelizerTests {
 	public static void main (String[] args){
 		try {
-            final HashMap<String,Date> results = new HashMap<String,Date>();
-            final Random random = new Random();
-            Parallelizer pll = new Parallelizer(8);
-            for(int i=0; i<100; i++){
-                final String hashKey = Integer.toString(i);
-                pll.run(
-                    new Runnable(){
-                        public void run(){
-                            try {
-                                Thread.sleep(random.nextInt(5000));
-                                results.put(hashKey,new Date());
-                            } catch (RuntimeException rx){
-                                throw rx;
-                            } catch (Exception x){
-                                throw new RuntimeException(x);
-                            }
-                        }
-                    }
-                );
-            }
-            if (results.size() == 100) throw new Exception("Expected results to not yet have 100 items in it.");
-            pll.join();
-            if (results.size() != 100) throw new Exception("Expected results to have 100 items, not " + results.size());
-            for(int i=0; i<100; i++){
-                String hashKey = Integer.toString(i);
-                Date result = (Date)results.get(hashKey);
-                if (result == null) throw new Exception(hashKey + " not in map");
-            }
+			final HashMap<String,Date> results = new HashMap<String,Date>();
+			final Random random = new Random();
+			Parallelizer pll = new Parallelizer(8);
+			for(int i=0; i<100; i++){
+				final String hashKey = Integer.toString(i);
+				pll.run(
+					new Runnable(){
+						public void run(){
+							try {
+								Thread.sleep(random.nextInt(5000));
+								results.put(hashKey,new Date());
+							} catch (RuntimeException rx){
+								throw rx;
+							} catch (Exception x){
+								throw new RuntimeException(x);
+							}
+						}
+					}
+				);
+			}
+			if (results.size() == 100) throw new Exception("Expected results to not yet have 100 items in it.");
+			pll.join();
+			if (results.size() != 100) throw new Exception("Expected results to have 100 items, not " + results.size());
+			for(int i=0; i<100; i++){
+				String hashKey = Integer.toString(i);
+				Date result = (Date)results.get(hashKey);
+				if (result == null) throw new Exception(hashKey + " not in map");
+			}
 			System.exit(0);
-            
-            pll = new Parallelizer();
-            pll.run(
-                new Runnable(){
-                    public void run(){
-                        throw new RuntimeException("Testing Parallelizer");
-                    }
-                }
-            );
 
-            try {
-                pll.join();
-                throw new Exception("Parallelizer appears not to have thrown expected exception");
-            } catch (RuntimeException rtx){
-                if (!"Testing Parallelizer".equals(rtx.getMessage())){
-                    throw new Exception("Expected Testing Parallelizer as message to exception");
-                }
-            }
+			pll = new Parallelizer();
+			pll.run(
+				new Runnable(){
+					public void run(){
+						throw new RuntimeException("Testing Parallelizer");
+					}
+				}
+			);
+
+			try {
+				pll.join();
+				throw new Exception("Parallelizer appears not to have thrown expected exception");
+			} catch (RuntimeException rtx){
+				if (!"Testing Parallelizer".equals(rtx.getMessage())){
+					throw new Exception("Expected Testing Parallelizer as message to exception");
+				}
+			}
 
 		} catch (Throwable x){
 			x.printStackTrace(System.err);
