@@ -39,7 +39,7 @@ The latest version of the com.Ostermiller.util utilities including source code.
 <tr><td>
 <a name="download" href="ostermillerutils_1_05_00_for_kaffe.jar">Ostermiller Utils version 1.05.00 for Kaffe</a>
 </td><td>
-399k
+421k
 </td><td>
 Version modified for compatibility <a href="http://kaffe.org/">Kaffe</a> (version 1.1.4).  This version is completely free software.  It can be run on Linux with Kaffe, which has no dependencies on non-free software. Modifications include:
 <ul>
@@ -51,7 +51,7 @@ Version modified for compatibility <a href="http://kaffe.org/">Kaffe</a> (versio
 <tr><td>
 <a name="download" href="ostermillerutils_1_05_00_for_java_1_4.jar">Ostermiller Utils version 1.05.00 for Java 1.4</a>
 </td><td>
-421k
+434k
 </td><td>
 Version modified for compatibility with the older Java 1.4 release.  Modifications include:
 <ul>
@@ -61,7 +61,7 @@ Version modified for compatibility with the older Java 1.4 release.  Modificatio
 <tr><td>
 <a name="download" href="ostermillerutils_1_05_00_for_java_1_3.jar">Ostermiller Utils version 1.05.00 for Java 1.3</a>
 </td><td>
-424k
+430k
 </td><td>
 Version modified for compatibility with the older Java 1.3 release.  Modifications include:
 <ul>
