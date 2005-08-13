@@ -1,7 +1,8 @@
-personal_ws-1.1 en 1255
+personal_ws-1.1 en 1270
 aa
 aA
 aaa
+aaaaa
 AAAAAABB
 aacute
 aaf
@@ -323,6 +324,7 @@ enumerationiterator
 EnumerationIterator
 EOF
 equalInd
+equalOrDie
 equalsAny
 equalsAnyIgnoreCase
 errorList
@@ -736,6 +738,7 @@ nextToken
 nextValue
 nextValueLine
 nfe
+nhello
 ni
 Nilo
 njust
@@ -793,10 +796,18 @@ ol
 oldTok
 oline
 oneLetterOptions
+onetwo
+onetwothre
+onetwothree
 onetwothreefourfivesixseven
+onetwthre
 onload
 onToken
 onTrack
+ontwothre
+ontwothree
+ontwthre
+ontwthree
 openConnection
 OpenInBrowser
 openurl
@@ -1048,6 +1059,7 @@ spaceData
 spaceInd
 spaceLeft
 spaceUsed
+splitIncludeDelimiters
 SQL
 ss
 stackSize
@@ -1066,6 +1078,7 @@ StreamTokenizer
 StringBuffer
 stringhelper
 StringHelper
+StringHelperTests
 stringLength
 StringReader
 stringtokenizer
@@ -1093,6 +1106,7 @@ testCases
 testName
 tgbaWriter
 theGettysburgAddress
+thello
 thetasym
 thinsp
 threadGroup
@@ -1133,6 +1147,7 @@ totRead
 toURL
 transferFocus
 tre
+trueOrDie
 tt
 ttab
 tw

@@ -1,6 +1,6 @@
 /*
  * Static String formatting and query routines.
- * Copyright (C) 2001,2002 Stephen Ostermiller
+ * Copyright (C) 2001-2005 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -209,13 +209,13 @@ public class StringHelper {
 	 * null, the only element in the result is the original String.
 	 * <P>
 	 * StringHelper.split("1-2-3", "-");<br>
-	 * result: {"1", "2", "3"}<br>
+	 * result: {"1","2","3"}<br>
 	 * StringHelper.split("-1--2-", "-");<br>
-	 * result: {"", "1", ,"", "2", ""}<br>
+	 * result: {"","1","","2",""}<br>
 	 * StringHelper.split("123", "");<br>
 	 * result: {"123"}<br>
 	 * StringHelper.split("1-2---3----4", "--");<br>
-	 * result: {"1-2", "-3", "", "4"}<br>
+	 * result: {"1-2","-3","","4"}<br>
 	 *
 	 * @param s String to be split.
 	 * @param delimiter String literal on which to split.
@@ -252,7 +252,7 @@ public class StringHelper {
 		// Scan s and count the tokens.
 		count = 0;
 		start = 0;
-		while((end = s.indexOf(delimiter, start)) != -1) {
+		while((end = s.indexOf(delimiter, start)) != -1){
 			count++;
 			start = end + delimiterLength;
 		}
@@ -265,7 +265,7 @@ public class StringHelper {
 		// Scan s again, but this time pick out the tokens
 		count = 0;
 		start = 0;
-		while((end = s.indexOf(delimiter, start)) != -1) {
+		while((end = s.indexOf(delimiter, start)) != -1){
 			result[count] = (s.substring(start, end));
 			count++;
 			start = end + delimiterLength;
@@ -274,6 +274,164 @@ public class StringHelper {
 		result[count] = s.substring(start, end);
 
 		return (result);
+	}
+
+	/**
+	 * Split the given String into tokens.  Delimiters will
+	 * be returned as tokens.
+	 * <P>
+	 * This method is meant to be similar to the split
+	 * function in other programming languages but it does
+	 * not use regular expressions.  Rather the String is
+	 * split on a single String literal.
+	 * <P>
+	 * Unlike java.util.StringTokenizer which accepts
+	 * multiple character tokens as delimiters, the delimiter
+	 * here is a single String literal.
+	 * <P>
+	 * Each null token is returned as an empty String.
+	 * Delimiters are never returned as tokens.
+	 * <P>
+	 * If there is no delimiter because it is either empty or
+	 * null, the only element in the result is the original String.
+	 * <P>
+	 * StringHelper.split("1-2-3", "-");<br>
+	 * result: {"1","-","2","-","3"}<br>
+	 * StringHelper.split("-1--2-", "-");<br>
+	 * result: {"","-","1","-","","-","2","-",""}<br>
+	 * StringHelper.split("123", "");<br>
+	 * result: {"123"}<br>
+	 * StringHelper.split("1-2--3---4----5", "--");<br>
+	 * result: {"1-2","--","3","--","-4","--","","--","5"}<br>
+	 *
+	 * @param s String to be split.
+	 * @param delimiter String literal on which to split.
+	 * @return an array of tokens.
+	 * @throws NullPointerException if s is null.
+	 *
+	 * @since ostermillerutils 1.05.00
+	 */
+	public static String[] splitIncludeDelimiters(String s, String delimiter){
+		int delimiterLength;
+		// the next statement has the side effect of throwing a null pointer
+		// exception if s is null.
+		int stringLength = s.length();
+		if (delimiter == null || (delimiterLength = delimiter.length()) == 0){
+			// it is not inherently clear what to do if there is no delimiter
+			// On one hand it would make sense to return each character because
+			// the null String can be found between each pair of characters in
+			// a String.  However, it can be found many times there and we don'
+			// want to be returning multiple null tokens.
+			// returning the whole String will be defined as the correct behavior
+			// in this instance.
+			return new String[] {s};
+		}
+
+		// a two pass solution is used because a one pass solution would
+		// require the possible resizing and copying of memory structures
+		// In the worst case it would have to be resized n times with each
+		// resize having a O(n) copy leading to an O(n^2) algorithm.
+
+		int count;
+		int start;
+		int end;
+
+		// Scan s and count the tokens.
+		count = 0;
+		start = 0;
+		while((end = s.indexOf(delimiter, start)) != -1){
+			count+=2;
+			start = end + delimiterLength;
+		}
+		count++;
+
+		// allocate an array to return the tokens,
+		// we now know how big it should be
+		String[] result = new String[count];
+
+		// Scan s again, but this time pick out the tokens
+		count = 0;
+		start = 0;
+		while((end = s.indexOf(delimiter, start)) != -1){
+			result[count] = (s.substring(start, end));
+			count++;
+			result[count] = delimiter;
+			count++;
+			start = end + delimiterLength;
+		}
+		end = stringLength;
+		result[count] = s.substring(start, end);
+
+		return (result);
+	}
+
+	/**
+	 * Join all the elements of a string array into a single
+	 * String.
+	 * <p>
+	 * If the given array empty an empty string
+	 * will be returned.  Null elements of the array are allowed
+	 * and will be treated like empty Strings.
+	 *
+	 * @param array Array to be joined into a string.
+	 * @return Concatenation of all the elements of the given array.
+	 * @throws NullPointerException if array is null.
+	 *
+	 * @since ostermillerutils 1.05.00
+	 */
+	public static String join(String[] array){
+		return join(array, "");
+	}
+
+	/**
+	 * Join all the elements of a string array into a single
+	 * String.
+	 * <p>
+	 * If the given array empty an empty string
+	 * will be returned.  Null elements of the array are allowed
+	 * and will be treated like empty Strings.
+	 *
+	 * @param array Array to be joined into a string.
+	 * @param delimiter String to place between array elements.
+	 * @return Concatenation of all the elements of the given array with the the delimiter in between.
+	 * @throws NullPointerException if array or delimiter is null.
+	 *
+	 * @since ostermillerutils 1.05.00
+	 */
+	public static String join(String[] array, String delimiter){
+		// Cache the length of the delimiter
+		// has the side effect of throwing a NullPointerException if
+		// the delimiter is null.
+		int delimiterLength = delimiter.length();
+
+		// Nothing in the array return empty string
+		// has the side effect of throwing a NullPointerException if
+		// the array is null.
+		if (array.length == 0) return "";
+
+		// Only one thing in the array, return it.
+		if (array.length == 1){
+			if (array[0] == null) return "";
+			return array[0];
+		}
+
+		// Make a pass through and determine the size
+		// of the resulting string.
+		int length = 0;
+		for (int i=0; i<array.length; i++){
+			if (array[i] != null) length+=array[i].length();
+			if (i<array.length-1) length+=delimiterLength;
+		}
+
+		// Make a second pass through and concatenate everything
+		// into a string buffer.
+		StringBuffer result = new StringBuffer(length);
+		for (int i=0; i<array.length; i++){
+			if (array[i] != null) result.append(array[i]);
+			if (i<array.length-1) result.append(delimiter);
+		}
+
+		return result.toString();
 	}
 
 	/**
@@ -332,7 +490,7 @@ public class StringHelper {
 			// Scan s and count the number of times we find our target.
 			count = 0;
 			start = 0;
-			while((end = s.indexOf(find, start)) != -1) {
+			while((end = s.indexOf(find, start)) != -1){
 				count++;
 				start = end + findLength;
 			}
@@ -358,7 +516,7 @@ public class StringHelper {
 		StringBuffer sb = new StringBuffer(length);
 
 		// Scan s and do the replacements
-		while (end != -1) {
+		while (end != -1){
 			sb.append(s.substring(start, end));
 			sb.append(replace);
 			start = end + findLength;
@@ -682,7 +840,7 @@ public class StringHelper {
 		return s.substring(start, end);
 	}
 
-	private static HashMap htmlEntities = new HashMap();
+	private static HashMap<String,Integer> htmlEntities = new HashMap<String,Integer>();
 	static {
 		htmlEntities.put("nbsp", new Integer(160));
 		htmlEntities.put("iexcl", new Integer(161));
