@@ -134,6 +134,15 @@ Open source, GPL
 Provides a JDBC interface for accessing CSV files.
 </td></tr>
 
+<tr><td>
+Bruce Dunwiddie<br>
+<a href="http://www.csvreader.com/">CsvReader </a>
+</td><td>
+Commercial, with various license price points.
+</td><td>
+Reads CSV files one line at a time and values may be obtained by name (similar to LabeledCSVParser) or by index. Single CSV parsing class can be configured to parse standard CSV, Excel CSV, or other user specified variants. A .Net version of the parser is also available.
+</td></tr>
+
 </table>
 
 <%/bte.tpl%>
