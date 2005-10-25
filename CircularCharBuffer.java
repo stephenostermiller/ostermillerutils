@@ -29,7 +29,7 @@ import java.io.IOException;
  * Using this class is a simpler alternative to using a PipedReader
  * and a PipedWriter. PipedReaders and PipedWriters don't support the
  * mark operation, don't allow you to control buffer sizes that they use,
- * and have a more complicated API that requires a instantiating two
+ * and have a more complicated API that requires instantiating two
  * classes and connecting them.
  * <p>
  * This class is thread safe.
