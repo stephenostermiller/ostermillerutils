@@ -633,6 +633,7 @@ public class CircularCharBuffer {
 						if (readPosition == buffer.length) {
 							readPosition = 0;
 						}
+						ensureMark();
 						return length;
 					} else if (writerClosed){
 						return 0;

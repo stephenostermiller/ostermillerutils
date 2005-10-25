@@ -633,6 +633,7 @@ public class CircularByteBuffer {
 						if (readPosition == buffer.length) {
 							readPosition = 0;
 						}
+						ensureMark();
 						return length;
 					} else if (outputStreamClosed){
 						return 0;
