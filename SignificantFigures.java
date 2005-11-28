@@ -316,7 +316,7 @@ public class SignificantFigures extends Number {
 	}
 
 	/**
-	 * Adjust the number of significant figures such that the leas
+	 * Adjust the number of significant figures such that the least
 	 * significant digit is at the given place.  This method may add
 	 * significant zeros to the end of this number, or remove significant
 	 * digits from this number.
