@@ -1,0 +1,28 @@
+<%bte.doc super="item.bte" %>
+<%bte.tpl name=pageTitle%>Helper Methods for Arrays<%/bte.tpl%>
+<%bte.tpl name=description%>Java libraries for working with arrays.<%/bte.tpl%>
+<%bte.tpl name=keywords%>java arrays, concatenate arrays, compare arrays, print array<%/bte.tpl%>
+<%bte.tpl name=content%>
+<div class=examplecode><h3>Example</h3>
+<pre></span><span class=identifier>ArrayHelper</span><span class=separator>.</span><span class=identifier>print</span><span class=separator>(
+    </span><span class=identifier>ArrayHelper</span><span class=separator>.</span><span class=identifier>cat</span><span class=separator>(
+        </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
+            </span><span class=literal>&quot;one&quot;</span><span class=separator>,
+            </span><span class=literal>&quot;two&quot;
+        </span><span class=separator>},        
+        </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
+            </span><span class=literal>&quot;three&quot;</span><span class=separator>,
+            </span><span class=literal>&quot;four&quot;
+        </span><span class=separator>}
+    )
+);</span></pre>
+</div>
+
+<p>Methods that are useful when working with arrays.  Contains utilities to concatenate arrays, print arrays, and compare arrays.</p>
+
+<p>[<a href="download.html">Download /w Source</a> |
+<a href="ArrayHelper.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/ArrayHelper.html">Documentation</a>]</p>
+
+<%/bte.tpl%>
+<%/bte.doc%>

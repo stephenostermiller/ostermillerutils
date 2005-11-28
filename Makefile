@@ -197,6 +197,8 @@ test:
 	$(JAVA) com.Ostermiller.util.ConcatTests
 	$(JAVA) com.Ostermiller.util.ParallelizerTests
 	$(JAVA) com.Ostermiller.util.StringHelperTests
+	$(JAVA) com.Ostermiller.util.ExecHelperTests
+	$(JAVA) com.Ostermiller.util.ArrayHelperTests
 
 .PHONY: update
 update: 

@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1271
+personal_ws-1.1 en 1305
 aa
 aA
 aaa
@@ -8,6 +8,7 @@ aacute
 aaf
 ababab
 abcabc
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
 acirc
 ActionEvent
 actionListener
@@ -66,6 +67,8 @@ arrayContains
 arraycopy
 arrayenumeration
 ArrayEnumeration
+ArrayHelper
+ArrayHelperTests
 ArrayIndexOutOfBoundsException
 arrayiterator
 ArrayIterator
@@ -169,8 +172,10 @@ changeQuote
 charAt
 charset
 checkError
+checkExec
 cint
 circ
+CircularBuffers
 CircularBufferTests
 circularbytebuffer
 CircularByteBuffer
@@ -190,6 +195,8 @@ classLoader
 classpath
 clearButton
 cLength
+cmd
+cmdarray
 cobc
 COBConsumer
 cobp
@@ -201,6 +208,7 @@ commandLinesLabel
 commentDelims
 commentStart
 commentText
+commonSuperClass
 compareState
 concat
 concatinputstream
@@ -218,6 +226,7 @@ countTokens
 cr
 crarr
 createArray
+createLargeString
 createNewFile
 createTempFile
 CRLF
@@ -233,6 +242,7 @@ CSVParsers
 CSVPrint
 CSVPrinter
 CSVPrinters
+CsvReader
 CSVTest
 CSVTests
 curren
@@ -276,6 +286,7 @@ dialogPanel
 dialogParent
 diams
 DIGITSDOT
+dir
 displayURL
 displayURLinNew
 displayURLs
@@ -295,6 +306,7 @@ doubleValue
 Drzymala
 dt
 dumpStack
+Dunwiddie
 eacute
 ec
 ecf
@@ -322,8 +334,10 @@ ensp
 ensureMark
 enumerationiterator
 EnumerationIterator
+envp
 EOF
 equalInd
+equalObjects
 equalOrDie
 equalsAny
 equalsAnyIgnoreCase
@@ -343,6 +357,10 @@ ExcelCSVLexer
 ExcelCSVParser
 ExcelCSVPrinter
 exceptionList
+exe
+ExecHelper
+ExecHelperTests
+execUsingShell
 exitCond
 exitValue
 expectedLine
@@ -382,6 +400,7 @@ forall
 forceDecode
 forName
 foundComment
+foundcommonSuperClass
 foundMantissaDigit
 foundUnicode
 fOut
@@ -421,6 +440,8 @@ getEndsWithAnyIgnoreCasePattern
 getEndsWithAnyPattern
 getEqualsAnyIgnoreCasePattern
 getEqualsAnyPattern
+getError
+getErrorStream
 getExceptionCount
 getExceptions
 getHash
@@ -447,6 +468,7 @@ getNumberSignificantFigures
 getopt
 getOptarg
 getOptind
+getOutput
 getOutputStream
 getParameter
 getParameterNameList
@@ -469,7 +491,9 @@ getSource
 getSpaceLeft
 getStartsWithAnyIgnoreCasePattern
 getStartsWithAnyPattern
+getStatus
 getString
+getSuperclass
 getSystemResourceAsStream
 getText
 getValue
@@ -562,6 +586,7 @@ isZero
 Italiano
 iteratorenumeration
 IteratorEnumeration
+itx
 iuml
 JApplet
 java
@@ -692,6 +717,7 @@ msd
 msg
 multipart
 mydialog
+myfile
 nabla
 nafter
 namedWindow
@@ -721,6 +747,7 @@ newBuffer
 newDelim
 newDelimiter
 newExec
+newInstance
 newLength
 newLine
 newNumTokens
@@ -924,6 +951,7 @@ readFully
 readlimit
 readPosition
 readPostion
+readSomething
 realLen
 reallyClose
 reallyquiet
@@ -979,6 +1007,7 @@ sdot
 sdtwebclient
 secondLen
 SecureRandom
+SecurityException
 securly
 seperated
 servlet
@@ -1068,8 +1097,12 @@ startAJobIfNeeded
 startsWith
 startsWithAny
 startsWithAnyIgnoreCase
+stderr
+stderrclosed
 stdin
 stdinguess
+stdout
+stdoutclosed
 stillname
 stName
 str
@@ -1117,6 +1150,7 @@ throwExceptions
 throwFirstError
 throwFirstException
 tld
+tmp
 toArray
 toByteArray
 toCharArray

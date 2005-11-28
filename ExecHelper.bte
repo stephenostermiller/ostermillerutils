@@ -1,0 +1,28 @@
+<%bte.doc super="item.bte" %>
+<%bte.tpl name=pageTitle%>Helper Methods for Runtime.exec<%/bte.tpl%>
+<%bte.tpl name=description%>Java libraries to make executing external applications easier.<%/bte.tpl%>
+<%bte.tpl name=keywords%>exec, exec helper, runtime.exec<%/bte.tpl%>
+<%bte.tpl name=content%>
+<div class=examplecode><h3>Example</h3>
+<pre><span class=comment>// Read a file using cat
+</span><span class=identifier>String file </span><span class=operator>= </span><span class=identifier>ExecHelper</span><span class=separator>.</span><span class=identifier>exec</span><span class=separator>(
+    </span><span class=literal>&quot;cat&quot;</span><span class=separator>,
+    </span><span class=literal>&quot;myfile.txt&quot;
+</span><span class=separator>).</span><span class=identifier>getOutput</span><span class=separator>();
+
+</span><span class=comment>// Similar to Perl or bash back ticks
+</span><span class=identifier>String hello </span><span class=operator>= </span><span class=identifier>ExecHelper</span><span class=separator>.</span><span class=identifier>execUsingShell</span><span class=separator>(
+    </span><span class=literal>&quot;echo 'Hello World'&quot;
+</span><span class=separator>).</span><span class=identifier>getOutput</span><span class=separator>();</span></pre>
+</div>
+
+<p>The Runtime.exec method is particularly difficult to use to call external applications to do data processing compared to such functionality in other languages.  For example in Perl and bash, the target can be placed in back ticks and the standard output is placed directly into a variable. To achieve this functionality in Java, one would need to use Runtime.exec, get the process, read from both the output and the error streams, and buffer the data into a String yourself.  Or this library can be used.</p>
+
+<p>This class contains convenience methods to call Runtime.exec with a given command.  The methods block until the process exits and all the data returned by the command is buffered and returned to the application in a ExecHelper object.  The object has three fields: standard output, standard input, and the exit status.</p>
+
+<p>[<a href="download.html">Download /w Source</a> |
+<a href="ExecHelper.java.html">Browse Source</a> |
+<a href="doc/com/Ostermiller/util/ExecHelper.html">Documentation</a>]</p>
+
+<%/bte.tpl%>
+<%/bte.doc%>
