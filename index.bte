@@ -1,7 +1,7 @@
 <%bte.doc super="page.bte" %>
 <%bte.tpl name=pageTitle%>com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=firstLine%>com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=description%>Open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
+<%bte.tpl name=firstLine%>Java Utilities - OstermillerUtils<%/bte.tpl%>
+<%bte.tpl name=description%>Open source (GPL) Java utilities (ostermillerutils) for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
 <%bte.tpl name=keywords%>ostermillerutils, ostermillerutil, ostermiller utils, ostermiller utilities, java utils, java utilities<%/bte.tpl%>
 <%bte.tpl name=content%>
 

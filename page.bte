@@ -45,7 +45,7 @@ google_color_text = "6F6F6F";
 
 <p>Copyright (c) 2001-2005 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a> and <a href="contributors.html">other contributors</a></p>
 
-<p>This library is free software; you can redistribute it and/or modify
+<p>The OstermillerUtils library is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published
 by the Free Software Foundation; either version 2 of the License or (at
 your option) any later version.</p>
