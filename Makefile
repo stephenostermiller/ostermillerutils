@@ -154,7 +154,7 @@ javadoc: *.java
 	@mkdir doc
 	@$(JAVADOC) \
 		-bottom '<p>Copyright (c) 2001-2004 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
-		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>" \
+		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1><script type=\"text/javascript\"><!--google_ad_client = \"pub-2385172974335864\";google_ad_width = 728;google_ad_height = 90;google_ad_format = \"728x90_as\";google_ad_type = \"text\";google_ad_channel =\"\";google_color_border = \"A8DDA0\";google_color_bg = \"EBFFED\";google_color_link = \"0000CC\";google_color_url = \"008000\";google_color_text = \"6F6F6F\";//--></script><script type=\"text/javascript\" src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\"></script>" \
 		-link http://java.sun.com/j2se/1.5.0/docs/api/ -d doc/ \
 		com.Ostermiller.util > /dev/null
 	@touch javadoc

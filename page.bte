@@ -17,8 +17,27 @@
 <%bte.grp ondefault=ok%><%bte.inc name=linksource%><%/bte.grp%><br>
 <%bte.grp ondefault=ok%><%bte.inc name=linkdoc%><%/bte.grp%>
 </div>
-<div style="border:1px solid green;background-color:#ccffcc;width:3in;padding:1cm;font-size:smaller;">My employer (a top 300 website) has job openings in the Boston area for experienced Java programmers.  <a href="http://ostermiller.org/contact.pl?regarding=Java+Job">Please send me a note</a> if you are interested in applying.  Be sure to note any specific experience you have with XSLT, Linux, and SQL as they will earn your brownie points.<br> -- Stephen</div>
 </div>
+
+<div style="width:336px;padding:1cm;float:left;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2385172974335864";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "A8DDA0";
+google_color_bg = "EBFFED";
+google_color_link = "0000CC";
+google_color_url = "008000";
+google_color_text = "6F6F6F";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
 <%bte.inc name=content %>
 <hr>
 
