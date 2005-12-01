@@ -7,6 +7,7 @@ echo "<title>Java Utilities Source Code</title>" >> source.html
 echo "<base href='http://ostermiller.org/utils/'>" >> source.html
 echo "<body text='#000000' bgcolor='#FFFFFF' link='#0000FF' vlink='#800080' alink='#FF0000'>" >> source.html
 echo "<h1><a href="http://ostermiller.org/utils/">Java Utilities</a> Source Code</h1>" >> source.html
+echo -e '<script type="text/javascript"><!--\nvar google_ad_client = "pub-2385172974335864";\nvar google_ad_width = 728;\nvar google_ad_height = 90;\nvar google_ad_format = "728x90_as";\nvar google_ad_type = "text";\nvar google_ad_channel ="";\nvar google_color_border = "A8DDA0";\nvar google_color_bg = "EBFFED";\nvar google_color_link = "0000CC";\nvar google_color_url = "008000";\nvar google_color_text = "6F6F6F";\n//--></script>\n<script type="text/javascript"\n  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">\n</script>' >> source.html
 echo "<ul>" >> source.html
 for file in *.*.html
 do
