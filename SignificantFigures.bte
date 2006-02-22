@@ -55,7 +55,7 @@ numbers in a calculation has and displaying the result appropriately.</p>
 Figure significant figures for addition of numbers.
 </div>
 
-<p>See also: <a href="/calc/sigfig.html">JavaScript routines and an HTML interface for significant figures calculations</a>.</p>
+<p>See also: <a href="/calc/significant_figures.html">JavaScript routines and an HTML interface for significant figures calculations</a>.</p>
 
 <br clear=all>
 <%/bte.tpl%>
