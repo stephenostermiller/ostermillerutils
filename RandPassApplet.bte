@@ -21,11 +21,11 @@ classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
 width=200
 height=340
 codebase="http://java.sun.com/products/plugin/autodl/jinstall-1_4_0-win.cab">
-<param name="code" value="com/Ostermiller/util/RandPassApplet.class">
+<param name="code" value="com/Ostermiller/utils/RandPassApplet.class">
 <param name="archive" value="randpass.jar">
 <param name="type" value="application/x-java-applet;jpi-version=1.4.0"><comment><object 
 codetype="application/x-java-applet"
-classid="java:com/Ostermiller/util/RandPassApplet.class"
+classid="java:com/Ostermiller/utils/RandPassApplet.class"
 archive="randpass.jar"
 width=200 
 height=340><div class=noapplet>
@@ -39,7 +39,7 @@ recent version of Java</a> installed, configured, and enabled.
 <li>Preferences are not remembered between visits and page reloads.</li>
 <li>This applet is part of the <a href="http://ostermiller.org/utils/">com.Ostermiller.util Java Utilities</a></li>
 <li><a href="http://ostermiller.org/utils/RandPass.html">A command line and a Java library</a> version of this program is also available.</li>
-<li>The <a href="http://ostermiller.org/util/download.html">source code for this applet</a> is available.</li>
+<li>The <a href="http://ostermiller.org/utils/download.html">source code for this applet</a> is available.</li>
 </ul>
 <br clear=all>
 <%/bte.tpl%>
