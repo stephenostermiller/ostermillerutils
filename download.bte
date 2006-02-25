@@ -6,22 +6,29 @@
 <%bte.tpl name=content%>
 <div class="install"><h3>Installation</h3>
 <p>The utilities are pre-compiled and ready to use. Simply use one of the following to
-add utils.jar to your classpath:
+add the jar file to your classpath:
 <ul>
-<li>Put utils.jar in the Java extensions directory.</li>
-<li>Set your CLASSPATH environment variable to include utils.jar.</li>
-<li>Specify utils.jar in the command line classpath when you compile and run your programs.</li>
-<li>Extract utils.jar to a folder already in your classpath.</li>
-<li>Include the contents of utils.jar in your program's jar file.</li>
-<li>Reference utils.jar from the manifest file in your program's jar file.</li>
+<li>Put the jar file in the Java extensions directory.</li>
+<li>Set your CLASSPATH environment variable to include the jar file.</li>
+<li>Specify the jar file in the command line classpath when you compile and run your programs.</li>
+<li>Extract the jar file to a folder already in your classpath.</li>
+<li>Include the contents of the jar file in your program's jar file.</li>
+<li>Reference the jar file from the manifest file in your program's jar file.</li>
 </ul>
-You can extract the contents of utils.jar either with the jar tool that comes with Java or by 
-renaming utils.jar to utils.zip and using any zip file extractor.</p>
+You can extract the contents of the jar file either with the jar tool that comes with Java or by 
+renaming the jar file to have a .zip extension and using any zip file extractor.</p>
 <p>If you have a Unix compatible system and you want to have easy access to the Base64, LineEnds, MD5Sum, RandPass, and Tabs
 command line programs that come in these utilities, run this <a href="install.sh">install shell script.</a></p>
 </div>
 <br clear=left>
 <div class=download>
+<div id='instructions'>
+<h3>Download Instructions</h3>
+<ul>
+<li>All downloads are in .jar format.  Some browsers think that jar is the same as zip.  If your browser renames the jar to have a .zip extension, please rename it back to .jar.</li>
+<li>Be sure to download the version of the utilities that matches the version of Java that you are using. Otherwise you may get an UnsupportedClassVersionError exception.</li>
+</ul>
+</div>
 <table><tr><th>
 file
 </th><th>
@@ -30,11 +37,11 @@ size
 description
 </th></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_06_00.jar">Ostermiller Utils version 1.06.00</a>
+<a name="download" href="ostermillerutils_1_06_00.jar">Ostermiller Utils version 1.06.00 for Java 1.5</a>
 </td><td>
 450k
 </td><td>
-The latest version of the com.Ostermiller.util utilities including source code.
+The latest version of the com.Ostermiller.util utilities including source code.  Compiled for the latest version of Sun's Java (Java 1.5)
 </td></tr>
 <tr><td>
 <a name="download" href="ostermillerutils_1_04_03_for_kaffe.jar">Ostermiller Utils version 1.04.03 for Kaffe</a>

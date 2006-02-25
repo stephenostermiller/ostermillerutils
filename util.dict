@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1306
+personal_ws-1.1 en 1308
 aa
 aA
 aaa
@@ -1214,6 +1214,7 @@ unicodeValue
 unix
 unknownarg
 unmapping
+UnsupportedClassVersionError
 UnsupportedEncodingException
 UnsupportedOperationException
 upNames
@@ -1298,6 +1299,7 @@ xxAAAAAA
 xxBBBBBB
 xxCCCCCC
 xxDDDDDD
+XXXXX
 yacute
 yuml
 zA
