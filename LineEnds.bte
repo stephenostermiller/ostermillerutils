@@ -11,7 +11,7 @@
     Translations gladly accepted.  Please translate
     <a href="LineEnds.properties.html">LineEnds.properties</a>.<br>
 	You may want to use: 
-	<a href="http://ostermiller.org/attesoro/">Attesoro - A Java Translation Editor</a>
+	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
 </div>
 
 <p>Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.</p>

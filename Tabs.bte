@@ -12,7 +12,7 @@
     Translations gladly accepted.  Please translate
     <a href="Tabs.properties.html">Tabs.properties</a>.<br>
 	You may want to use: 
-	<a href="http://ostermiller.org/attesoro/">Attesoro - A Java Translation Editor</a>.
+	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>.
 </div>
 
 <p>Converts tabs to spaces or spaces to tabs at the beginning of each line of files.</p>
