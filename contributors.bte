@@ -17,6 +17,7 @@
 <li>Carlo Magnaghi - Fixes to the UberProperties</li>
 <li>Pierre Dittgen - Added changeQuote and changeDelimiter methods to CSVPrint and implementations.</li>
 <li>Allen T. Campbell - Wrote the labeled CSV parser.</li>
+<li>Jonathan Faivre-Vuillin - Bug fix to IteratorEnumeration.</li>
 </ul>
 </div>
 <br clear=all>

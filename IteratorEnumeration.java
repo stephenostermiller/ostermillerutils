@@ -29,7 +29,7 @@ import java.util.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
-public class IteratorEnumeration <ElementType> implements Enumeration {
+public class IteratorEnumeration<ElementType> implements Enumeration<ElementType> {
 
 	/**
 	 * Iterator being converted to enumeration.
