@@ -21,8 +21,8 @@ do
 		fi
 	fi
 done
-head -1 "util.dict" > temp
-tail +2 "util.dict" | sort | uniq >> temp
+head -n 1 "util.dict" > temp
+tail -n +2 "util.dict" | sort | uniq >> temp
 if [ "`diff "temp" "util.dict"`" ] 
 then
 	mv temp "util.dict"
