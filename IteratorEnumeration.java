@@ -2,7 +2,7 @@
  * Converts an iterator to an enumerator.
  * Copyright (C) 2004-2006 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * Copyright (C) 2006 Jonathan Faivre-Vuillin 
+ * Copyright (C) 2006 Jonathan Faivre-Vuillin
  * public dot lp at free dot fr
  *
  * This program is free software; you can redistribute it and/or modify
