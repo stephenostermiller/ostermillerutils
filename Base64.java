@@ -129,7 +129,7 @@ import java.util.Locale;
  * converted to canonical form.  In particular, text line breaks must be
  * converted into CRLF sequences prior to base64 encoding.  The
  * important thing to note is that this may be done directly by the
- * encoder rather than in a prior canonicalization step in some
+ * encoder rather than in a prior canonization step in some
  * implementations.</p>
  *
  * <p>NOTE: There is no need to worry about quoting potential boundary
