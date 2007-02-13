@@ -14,7 +14,7 @@
 	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
 </div>
 
-<p>Bas64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
+<p>Base64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
 
 <p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
 It can be used anytime binary or arbitrary data needs to be represented in
