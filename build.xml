@@ -150,10 +150,4 @@
     <delete dir="src" quiet="true" />    
   </target>  
   <target name="cleanall" depends="allclean" description="Deleting files not in CVS." /> 
-
-  <target name="test" depends="compile" description="Running unit tests." >
-    <junit>
-      <test name="my.test.TestCase"/>
-    </junit>
-  </target>
 </project>
