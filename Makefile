@@ -87,6 +87,7 @@ test:
 	$(JAVA) com.Ostermiller.util.StringHelperTests
 	$(JAVA) com.Ostermiller.util.ExecHelperTests
 	$(JAVA) com.Ostermiller.util.ArrayHelperTests
+	@rm -f out.txt
 
 .PHONY: update
 update: 
