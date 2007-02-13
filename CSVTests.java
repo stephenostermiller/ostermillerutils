@@ -32,6 +32,7 @@ class CSVTests {
 		try {
 			StringWriter sw = new StringWriter();
 			CSVPrinter csvOut = new CSVPrinter(sw, '#');
+			csvOut.setLineEnding("\r");
 
 			csvOut.printlnComment("Comma Separated Value Test");
 			csvOut.println();
