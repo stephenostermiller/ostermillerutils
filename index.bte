@@ -43,7 +43,6 @@ to modify and recompile these utilities:
 <li><a href="http://ostermiller.org/bte/">Better Template Engine</a> - To compile the website documentation.</li>
 <li><a href="http://ostermiller.org/syntax/">com.Ostermiller.Syntax package</a> - To color the HTML source code.</li>
 <li>Make - (optional in addition to ant) to automate the build.  Consider "make", "make install", "make clean", "make build", and "make javadoc".</li>
-<li>CVS - to check out the latest version of these utilities from the <a href="http://gjt.org/">Giant Java Tree</a>.</li>
 <li><a href="http://cygwin.com/">Cygwin</a> - to get Unix utilities (including make and CVS) for Windows.</li>
 </ul>
 </div>
