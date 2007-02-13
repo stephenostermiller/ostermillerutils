@@ -23,7 +23,7 @@ size=`humanreadable $size`
 if [ -z "`grep -i $size download.html`" ]
 then
     echo "utils.jar size is $size but download.html does not show that."
-    #exit 1
+    exit 1
 fi
 
 latestversion=`grep -oE 'ostermillerutils_[0-9]_[0-9]{2}_[0-9]{2}\.jar' download.bte | sort | tail -1`
@@ -32,9 +32,9 @@ cp utils.jar "$latestversion"
 FILES="$@ $latestversion"
 if [ "$FILES" ]
 then
-	echo Make: Uploading to web site: $FILES
+	echo Make: copying to web site: $FILES
     chmod -x install.sh
-	cp -r $FILES ~/ostermiller.org/www/utils
+	cp -r $FILES ~/sites/ostermiller.org/www/utils
     chmod +x install.sh
 fi
 
