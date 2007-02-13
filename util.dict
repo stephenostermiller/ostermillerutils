@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1311
+personal_ws-1.1 en 1329 
 aa
 aA
 aaa
@@ -110,6 +110,7 @@ bitCount
 blockingWrite
 blockOrDie
 blockquote
+boolean
 BorderLayout
 br
 browseButton
@@ -308,6 +309,7 @@ dt
 dumpStack
 Dunwiddie
 eacute
+EBCDIC
 ec
 ecf
 ecirc
@@ -325,6 +327,7 @@ emsp
 encIn
 encodeToString
 encodingarg
+encodings
 encOut
 endian
 endsWith
@@ -377,6 +380,7 @@ fileChooser
 filehelper
 FileHelper
 FileInputStream
+filename
 FileNotFoundException
 FileOutputStream
 FileProtocolHandler
@@ -648,6 +652,7 @@ LEADZEROSDOT
 leastPlace
 leftOver
 len
+lex
 lexing
 LF
 lfloor
@@ -668,6 +673,7 @@ Loefflmann
 LongOpt
 longopts
 longValue
+lookup
 lowast
 loz
 lp
@@ -717,6 +723,7 @@ mrjfileutils
 mrjFileUtils
 msd
 msg
+multi
 multipart
 mydialog
 myfile
@@ -866,6 +873,7 @@ OutputStreamWriter
 outputTabWidth
 Paavolainen
 padlen
+parallelizer
 ParallelizerTests
 param
 params
@@ -973,6 +981,8 @@ reqUsedInd
 resave
 resetButton
 resizable
+resize
+resized
 ResourceBundle
 restOfText
 rethrow
@@ -992,6 +1002,7 @@ rsquo
 rtx
 rundll
 runningThreads
+runtime
 runtimeException
 rx
 San
@@ -1004,6 +1015,7 @@ savedtokenCount
 sb
 sbquo
 scaron
+scrollbars
 scrollpane
 SDK
 sdot
@@ -1082,6 +1094,7 @@ SizeLimitInputStreams
 SizeLimitInputStreamTests
 skipDelimiters
 slis
+SMTP
 Soard
 solaris
 somebodyelse
@@ -1124,6 +1137,9 @@ strLength
 stValue
 sube
 subinputstream
+subprocess
+substring
+substrings
 SunOS
 supe
 sw
@@ -1141,6 +1157,7 @@ TestCase
 testCases
 testName
 tgbaWriter
+th
 theGettysburgAddress
 thello
 thetasym
@@ -1261,6 +1278,7 @@ Vuillin
 waitFor
 weierp
 wgtsfVvqQ
+whitespace
 widtherror
 workingEmptyReturned
 workingPosition
