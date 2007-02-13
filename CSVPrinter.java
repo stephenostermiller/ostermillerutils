@@ -1,6 +1,6 @@
 /*
  * Write files in comma separated value format.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
@@ -32,18 +32,28 @@ import java.io.*;
 public class CSVPrinter implements CSVPrint {
 
 	/**
-	 * If auto flushing is enabled.
-	 *
-	 * @since ostermillerutils 1.02.26
+	 * Default state of auto flush
 	 */
-	protected boolean autoFlush = true;
+	private static final boolean AUTO_FLUSH_DEFAULT = true;
 
 	/**
 	 * If auto flushing is enabled.
 	 *
 	 * @since ostermillerutils 1.02.26
 	 */
-	protected boolean alwaysQuote = false;
+	protected boolean autoFlush = AUTO_FLUSH_DEFAULT;
+
+	/**
+	 * Default state of always quote
+	 */
+	private static final boolean ALWAYS_QUOTE_DEFAULT = false;
+
+	/**
+	 * If auto flushing is enabled.
+	 *
+	 * @since ostermillerutils 1.02.26
+	 */
+	protected boolean alwaysQuote = ALWAYS_QUOTE_DEFAULT;
 
 	/**
 	 * true iff an error has occurred.
@@ -53,18 +63,28 @@ public class CSVPrinter implements CSVPrint {
 	protected boolean error = false;
 
 	/**
-	 * Delimiter character written.
-	 *
-	 * @since ostermillerutils 1.02.18
+	 * Default delimiter character
 	 */
-	protected char delimiterChar = ',';
+	private static final char DELIMITER_DEFAULT = ',';
 
 	/**
-	 * Quoting character written.
+	 * Character written as field delimiter.
 	 *
 	 * @since ostermillerutils 1.02.18
 	 */
-	protected char quoteChar = '"';
+	protected char delimiterChar = DELIMITER_DEFAULT;
+
+	/**
+	 * Default quoting character
+	 */
+	private static final char QUOTE_DEFAULT = '"';
+
+	/**
+	 * Quoting character.
+	 *
+	 * @since ostermillerutils 1.02.18
+	 */
+	protected char quoteChar = QUOTE_DEFAULT;
 
 	/**
 	 * The place that the values get written.
@@ -81,11 +101,33 @@ public class CSVPrinter implements CSVPrint {
 	protected boolean newLine = true;
 
 	/**
+	 * Default start of comments
+	 */
+	private static final char COMMENT_START_DEFAULT = '#';
+
+	/**
 	 * Character used to start comments. (Default is '#')
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	protected char commentStart = '#';
+	protected char commentStart = COMMENT_START_DEFAULT;
+
+	/**
+	 * Line ending default
+	 */
+	private static final String LINE_ENDING_DEFAULT = "\n";
+
+	/**
+	 * Line ending indicating the system line ending should be chosen
+	 */
+	private static final String LINE_ENDING_SYSTEM = null;
+
+	/**
+	 * The line ending, must be one of "\n", "\r", or "\r\n"
+	 *
+	 * @since ostermillerutils 1.06.01
+	 */
+	protected String lineEnding = LINE_ENDING_DEFAULT;
 
 	/**
 	 * Change this printer so that it uses a new delimiter.
@@ -115,6 +157,7 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.02.18
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException {
+		if (quoteChar == newQuote) return; // no need to do anything.
 		if (newQuote == '\n' || newQuote == '\r' ||
 				newQuote == delimiterChar || newQuote == quoteChar){
 			throw new BadQuoteException();
@@ -123,11 +166,41 @@ public class CSVPrinter implements CSVPrint {
 	}
 
 	/**
+	 * Change this printer so that it uses a new line ending.
+	 * <p>
+	 * A line ending must be one of "\n", "\r", or "\r\n".
+	 * <p>
+	 * The default line ending is the system line separator as specified by
+	 * <code>System.getProperty("line.separator")</code>, or "\n" if the system
+	 * line separator is not a legal line ending.
+	 *
+	 * @param lineEnding The new line ending, or null to use the default line ending.
+	 * @throws BadLineEndingException if the line ending is not one of the three legal line endings.
+	 *
+	 * @since ostermillerutils 1.06.01
+	 */
+	public void setLineEnding(String lineEnding) throws BadLineEndingException {
+		boolean setDefault = lineEnding == null;
+		if (setDefault){
+			lineEnding = System.getProperty("line.separator");
+		}
+		if (!"\n".equals(lineEnding) && !"\r".equals(lineEnding) && !"\r\n".equals(lineEnding)){
+			if (setDefault){
+				lineEnding = LINE_ENDING_DEFAULT;
+			} else {
+				throw new BadLineEndingException();
+			}
+		}
+		this.lineEnding = lineEnding;
+	}
+
+	/**
 	 * Create a printer that will print values to the given
 	 * stream.	 Character to byte conversion is done using
 	 * the default character encoding.	Comments will be
 	 * written using the default comment character '#', the delimiter will
-	 * be the comma, the quote character will be double quotes,
+	 * be the comma, the line ending will be the default system line ending,
+	 * the quote character will be double quotes,
 	 * quotes will be used when needed, and auto flushing
 	 * will be enabled.
 	 *
@@ -136,14 +209,17 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter(OutputStream out){
-		this.out = new OutputStreamWriter(out);
+		this(
+			new OutputStreamWriter(out)
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.	Comments will be
 	 * written using the default comment character '#', the delimiter will
-	 * be the comma, the quote character will be double quotes,
+	 * be the comma, the line ending will be the default
+	 * system line ending, the quote character will be double quotes,
 	 * quotes will be used when needed, and auto flushing
 	 * will be enabled.
 	 *
@@ -152,14 +228,18 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter(Writer out){
-		this.out = out;
+		this(
+			out,
+			COMMENT_START_DEFAULT
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.	 Character to byte conversion is done using
 	 * the default character encoding.  The delimiter will
-	 * be the comma, the quote character will be double quotes,
+	 * be the comma, the line ending will be the default system
+	 * line ending, the quote character will be double quotes,
 	 * quotes will be used when needed, and auto flushing
 	 * will be enabled.
 	 *
@@ -169,14 +249,17 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter(OutputStream out, char commentStart){
-		this(out);
-		this.commentStart = commentStart;
+		this(
+			new OutputStreamWriter(out),
+			commentStart
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.  The delimiter will
-	 * be the comma, the quote character will be double quotes,
+	 * be the comma, the line ending will be the default
+	 * system line ending, the quote character will be double quotes,
 	 * quotes will be used when needed, and auto flushing
 	 * will be enabled.
 	 *
@@ -186,14 +269,19 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public CSVPrinter(Writer out, char commentStart){
-		this(out);
-		this.commentStart = commentStart;
+		this(
+			out,
+			commentStart,
+			QUOTE_DEFAULT,
+			DELIMITER_DEFAULT
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
 	 * stream.	The comment character will be the number sign, the delimiter will
-	 * be the comma, and the quote character will be double quotes.
+	 * be the comma, the line ending will be the default
+	 * system line ending, and the quote character will be double quotes.
 	 *
 	 * @param out stream to which to print.
 	 * @param alwaysQuote true if quotes should be used even when not strictly needed.
@@ -202,14 +290,20 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.02.26
 	 */
 	public CSVPrinter(Writer out, boolean alwaysQuote, boolean autoFlush){
-		this.out = out;
-		setAlwaysQuote(alwaysQuote);
-		setAutoFlush(autoFlush);
+		this(
+			out,
+			COMMENT_START_DEFAULT,
+			QUOTE_DEFAULT,
+			DELIMITER_DEFAULT,
+			alwaysQuote,
+			autoFlush
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
-	 * stream.	Quotes will be used when needed, and auto flushing
+	 * stream.	 The line ending will be the default system line
+	 * ending, quotes will be used when needed, and auto flushing
 	 * will be enabled.
 	 *
 	 * @param out stream to which to print.
@@ -222,15 +316,46 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.02.26
 	 */
 	public CSVPrinter(Writer out, char commentStart, char quote, char delimiter) throws BadDelimiterException, BadQuoteException {
-		this.out = out;
-		this.commentStart = commentStart;
-		changeQuote(quote);
-		changeDelimiter(delimiter);
+		this(
+			out,
+			commentStart,
+			quote,
+			delimiter,
+			LINE_ENDING_SYSTEM
+		);
 	}
 
 	/**
 	 * Create a printer that will print values to the given
-	 * stream.
+	 * stream.	Quotes will be used when needed, and auto flushing
+	 * will be enabled.
+	 *
+	 * @param out stream to which to print.
+	 * @param commentStart Character used to start comments.
+	 * @param delimiter The new delimiter character to use.
+	 * @param quote The new character to use for quoting.
+	 * @param lineEnding The new line ending, or null to use the default line ending.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
+	 * @throws BadLineEndingException if the line ending is not one of the three legal line endings.
+	 *
+	 * @since ostermillerutils 1.06.01
+	 */
+	public CSVPrinter(Writer out, char commentStart, char quote, char delimiter, String lineEnding) throws BadDelimiterException, BadQuoteException, BadLineEndingException {
+		this(
+			out,
+			commentStart,
+			quote,
+			delimiter,
+			lineEnding,
+			ALWAYS_QUOTE_DEFAULT,
+			AUTO_FLUSH_DEFAULT
+		);
+	}
+
+	/**
+	 * Create a printer that will print values to the given
+	 * stream.  The line ending will be the default system line ending,
 	 *
 	 * @param out stream to which to print.
 	 * @param commentStart Character used to start comments.
@@ -244,10 +369,40 @@ public class CSVPrinter implements CSVPrint {
 	 * @since ostermillerutils 1.02.26
 	 */
 	public CSVPrinter(Writer out, char commentStart, char quote, char delimiter, boolean alwaysQuote, boolean autoFlush) throws BadDelimiterException, BadQuoteException {
+		this (
+			out,
+			commentStart,
+			quote,
+			delimiter,
+			LINE_ENDING_SYSTEM,
+			alwaysQuote,
+			autoFlush
+		);
+	}
+
+	/**
+	 * Create a printer that will print values to the given
+	 * stream.
+	 *
+	 * @param out stream to which to print.
+	 * @param commentStart Character used to start comments.
+	 * @param delimiter The new delimiter character to use.
+	 * @param lineEnding The new line ending, or null to use the default line ending.
+	 * @param quote The new character to use for quoting.
+	 * @param alwaysQuote true if quotes should be used even when not strictly needed.
+	 * @param autoFlush should auto flushing be enabled.
+	 * @throws BadQuoteException if the character cannot be used as a quote.
+	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
+	 * @throws BadLineEndingException if the line ending is not one of the three legal line endings.
+	 *
+	 * @since ostermillerutils 1.06.01
+	 */
+	public CSVPrinter(Writer out, char commentStart, char quote, char delimiter, String lineEnding, boolean alwaysQuote, boolean autoFlush) throws BadDelimiterException, BadQuoteException, BadLineEndingException {
 		this.out = out;
 		this.commentStart = commentStart;
 		changeQuote(quote);
 		changeDelimiter(delimiter);
+		setLineEnding(lineEnding);
 		setAlwaysQuote(alwaysQuote);
 		setAutoFlush(autoFlush);
 	}
@@ -317,7 +472,7 @@ public class CSVPrinter implements CSVPrint {
 	 */
 	public void writeln() throws IOException {
 		try {
-			out.write("\n");
+			out.write(lineEnding);
 			if (autoFlush) flush();
 			newLine = true;
 		} catch (IOException iox){
