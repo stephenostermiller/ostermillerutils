@@ -37,7 +37,7 @@
 Several tools are useful if you want
 to modify and recompile these utilities:
 <ul>
-<li><a href="http://java.sun.com/j2se/1.4.1/download.html">Java SDK</a> - Includes the Java compiler.</li>
+<li><a href="http://java.sun.com/javase/downloads/index.jsp">Java SDK</a> - Includes the Java compiler.</li>
 <li><a href="http://ant.apache.org/">Apache Ant</a> - for building distribution files.</li>
 <li><a href="http://jflex.de/">JFlex</a> - to generate lexers used by several utilities.</li>
 <li><a href="http://ostermiller.org/bte/">Better Template Engine</a> - To compile the website documentation.</li>
