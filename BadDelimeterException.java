@@ -1,6 +1,5 @@
 /*
- * Binary data exception.
- * Copyright (C) 2003-2004 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,9 +18,8 @@
 package com.Ostermiller.util;
 
 /**
- * Signals that binary data was encountered and continuing
- * with a text operation would likely corrupt the data.
- *
+ * An Illegal delimiter was specified.
+ * <p>
  * This class has been replaced by BadDelimiterException.  It is not deprecated,
  * and it may be used, however the name of this class contains a spelling error.
  *
@@ -29,10 +27,10 @@ package com.Ostermiller.util;
  * @since ostermillerutils 1.02.08
  * @see BadDelimiterException
  */
-public class BadDelimeterException extends RuntimeException {
+public class BadDelimeterException extends IllegalArgumentException {
 
 	/**
-	 * Constructs an IOException with null as its error detail message.
+	 * Constructs an exception with null as its error detail message.
 	 *
 	 * @since ostermillerutils 1.02.08
 	 */

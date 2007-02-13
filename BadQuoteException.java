@@ -1,6 +1,6 @@
 /*
  * Binary data exception.
- * Copyright (C) 2003-2004 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,16 +19,15 @@
 package com.Ostermiller.util;
 
 /**
- * Signals that binary data was encountered and continuing
- * with a text operation would likely corrupt the data.
+ * An illegal quote was specified.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.02.16
  */
-public class BadQuoteException extends RuntimeException {
+public class BadQuoteException extends IllegalArgumentException {
 
 	/**
-	 * Constructs an IOException with null as its error detail message.
+	 * Constructs an exception with null as its error detail message.
 	 *
 	 * @since ostermillerutils 1.02.16
 	 */
