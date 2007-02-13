@@ -71,12 +71,12 @@ public class StringHelper {
 		if (needed <= 0){
 			return s;
 		}
+		char padding[] = new char[needed];
+		java.util.Arrays.fill(padding, c);
 		StringBuffer sb = new StringBuffer(length);
-		for (int i=0; i<needed; i++){
-			sb.append(c);
-		}
+		sb.append(padding);
 		sb.append(s);
-		return (sb.toString());
+		return sb.toString();
 	}
 
 	/**
@@ -119,12 +119,12 @@ public class StringHelper {
 		if (needed <= 0){
 			return s;
 		}
+		char padding[] = new char[needed];
+		java.util.Arrays.fill(padding, c);
 		StringBuffer sb = new StringBuffer(length);
 		sb.append(s);
-		for (int i=0; i<needed; i++){
-			sb.append(c);
-		}
-		return (sb.toString());
+		sb.append(padding);
+		return sb.toString();
 	}
 
 	/**
@@ -179,15 +179,15 @@ public class StringHelper {
 		}
 		int beginning = needed / 2;
 		int end = beginning + needed % 2;
+		char prepadding[] = new char[beginning];
+		java.util.Arrays.fill(prepadding, c);
+		char postpadding[] = new char[end];
+		java.util.Arrays.fill(postpadding, c);
 		StringBuffer sb = new StringBuffer(length);
-		for (int i=0; i<beginning; i++){
-			sb.append(c);
-		}
+		sb.append(prepadding);
 		sb.append(s);
-		for (int i=0; i<end; i++){
-			sb.append(c);
-		}
-		return (sb.toString());
+		sb.append(postpadding);
+		return sb.toString();
 	}
 
 	/**
