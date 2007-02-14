@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1329 
+personal_ws-1.1 en 1336 
 aa
 aA
 aaa
@@ -89,6 +89,7 @@ bac
 badcfe
 BadDelimeterException
 BadDelimiterException
+BadLineEndingException
 BadQuoteException
 BAZ
 bb
@@ -174,6 +175,7 @@ charAt
 charset
 checkError
 checkExec
+checksums
 cint
 circ
 CircularBuffers
@@ -919,6 +921,7 @@ pNamesEnum
 pNamesList
 Polska
 postpad
+postpadding
 PostScript
 pre
 preferencesPanel
@@ -926,6 +929,7 @@ preferencesPanelLayout
 preferencesResult
 prefsMenuItem
 prepad
+prepadding
 PreparedStatement
 printErrors
 printExtraMessages
@@ -1038,6 +1042,7 @@ setComment
 setCommentStart
 setConstraints
 setContentType
+setDefault
 setDelimiters
 setDelims
 setEditable
@@ -1050,6 +1055,7 @@ setLabels
 setLastAlphabet
 setLayout
 setLength
+setLineEnding
 setLMSD
 setLocale
 setLocationRelativeTo
@@ -1271,6 +1277,7 @@ valArray
 valueOf
 valuesVec
 ver
+versa
 versioned
 VK
 vm
