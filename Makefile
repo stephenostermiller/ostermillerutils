@@ -46,11 +46,11 @@ htmlfiles: *.bte
 	@echo Make: Compiling web pages.
 	@bte .
 
-.PHONY: junkclean	        
+.PHONY: junkclean		
 junkclean:
 	ant junkclean
 
-.PHONY: clean	        
+.PHONY: clean		
 clean:
 	ant clean
 
@@ -92,7 +92,7 @@ test:
 .PHONY: update
 update: 
 	ant update
-        
+	
 release: *.html src/* utils.jar randpass.jar .htaccess install.sh doc/
 	@./release.sh $?
 	@touch release
@@ -103,3 +103,20 @@ install:
 
 htmlsource: *.java *.properties *.lex
 	ant syntax
+	
+htaccess: *.java *.properties *.lex
+	@for file in *.java *.properties *.lex; \
+	do \
+	  base=`echo $$file | sed -r 's/\.[^\.]+$$//g'` ;\
+	  if [ ! -e $$base.html ]; \
+	  then \
+	    if [ `grep -c "Redirect.*/utils/$$base.html " .htaccess` == 0 ]; \
+	    then \
+	      echo Redirect permanent /utils/$$base.html http://ostermiller.org/utils/ >> .htaccess ;\
+	    fi \
+	  fi \
+	done
+
+	
+	
+	
