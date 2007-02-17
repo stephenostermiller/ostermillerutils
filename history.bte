@@ -7,6 +7,8 @@
 <div class=history>
 <h2>Version History</h2>
 <ul>
+<li>Version 1.04.03 - Generics support for CircularObjectBuffer, ArrayIterator, ArrayEnumeration, IteratorEnumeration, and EnumerationIterator.</li>
+<li>Version 1.04.02 - LabeledCSVParser does not parse labels until they are needed rather than in the constructor.</li>
 <li>Version 1.04.02 - Enumerations and Iterators have better support for generics.</li>
 <li>Version 1.04.01 - ConcatStreams can dynamically accept more input sources, ExcelCSVParser saves input streams so it can later close them.</li>
 <li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>

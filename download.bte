@@ -37,9 +37,9 @@ size
 description
 </th></tr>
 <tr><td>
-<a name="download" href="ostermillerutils_1_06_00.jar">Ostermiller Utils version 1.06.00 for Java 1.5</a>
+<a name="download" href="ostermillerutils_1_06_01.jar">Ostermiller Utils version 1.06.01 for Java 1.5</a>
 </td><td>
-450k
+425k
 </td><td>
 The latest version of the com.Ostermiller.util utilities including source code.  Compiled for the latest version of Sun's Java (Java 1.5)
 </td></tr>
@@ -85,11 +85,10 @@ Version modified for compatibility with the older Java 1.3 release.  Modificatio
 <h2>Version History</h2>
 The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
+<li>Version 1.06.01 - <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=5">CSV changeQuote doesn't check if same character is used again</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=6">String Helper padding methods could be more efficient</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=7">CSV line ending character(s) should be settable, not unix \n by default</a></li>
 <li>Version 1.06.00 - ArrayHelper; ExecHelper; CircularBuffers no longer eat space when skip() is called.</li>
 <li>Version 1.05.00 - New Parallelizer thread utility;  Added "mark of the web" to html files produced by the Browser opener to work better with Internet Explorer Windows XP service pack 2; Added splitIncludeDelimiters and join methods to StringHelper.</li>
-<li>Version 1.04.03 - Generics support for CircularObjectBuffer, ArrayIterator, ArrayEnumeration, IteratorEnumeration, and EnumerationIterator.</li>
-<li>Version 1.04.02 - LabeledCSVParser does not parse labels until they are needed rather than in the constructor.</li>
-<li><a href="history.html">Older Changes...</a></li>
+    <li><a href="history.html">Older Changes...</a></li>
 </ul>
 </div>
 <br clear=all>
