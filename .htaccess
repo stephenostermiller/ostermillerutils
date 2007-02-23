@@ -70,6 +70,15 @@ Redirect permanent /utils/CSVCharsetTest.csv http://ostermiller.org/utils/CSVCha
 Redirect permanent /utils/CircularCharBuffer.html http://ostermiller.org/utils/CircularBuffer.html
 Redirect permanent /utils/CircularByteBuffer.html http://ostermiller.org/utils/CircularBuffer.html
 Redirect permanent /utils/CircularObjectBuffer.html http://ostermiller.org/utils/CircularBuffer.html
+
+Redirect permanent /utils/StringHelper.html: http://ostermiller.org/utils/StringHelper.html
+Redirect permanent /utils/StringHelper.java: http://ostermiller.org/utils/StringHelper.html
+Redirect permanent /utils/StringHelper.java http://ostermiller.org/utils/StringHelper.html
+
+Redirect permanent /utils/doc/com/index.html http://ostermiller.org/utils/doc/
+Redirect permanent /utils/doc/com/Ostermiller/index.html http://ostermiller.org/utils/doc/
+Redirect permanent /utils/doc/com/Ostermiller/util/index.html http://ostermiller.org/utils/doc/
+Redirect permanent /utils/doc/resources/index.html http://ostermiller.org/utils/doc/
 Redirect permanent /utils/ArrayEnumeration.html http://ostermiller.org/utils/
 Redirect permanent /utils/ArrayHelperTests.html http://ostermiller.org/utils/
 Redirect permanent /utils/ArrayIterator.html http://ostermiller.org/utils/
