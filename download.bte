@@ -3,6 +3,7 @@
 <%bte.tpl name=firstLine%>Download com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=description%>Download open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
 <%bte.tpl name=keywords%>download java utilities, download ostermiller utilities, ostermillerutils download, java utilities download, jar file for utilities, utilities for kaffe, kaffe utilities<%/bte.tpl%>
+<%bte.tpl name=topcontent%>The Ostermiller Java Utilities can be downloaded for various versions of Java and Kaffe below.<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class="install"><h3>Installation</h3>
 <p>The utilities are pre-compiled and ready to use. Simply use one of the following to

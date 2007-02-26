@@ -3,8 +3,11 @@
 <%bte.tpl name=firstLine%>Java Utilities - OstermillerUtils<%/bte.tpl%>
 <%bte.tpl name=description%>Open source (GPL) Java utilities (ostermillerutils) for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
 <%bte.tpl name=keywords%>ostermillerutils, ostermillerutil, ostermiller utils, ostermiller utilities, java utils, java utilities<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+Open source (GPL) Java utilities maintained by Stephen Ostermiller with help from <a href="contributors.html">many contributors</a>.   The utilities can be obtained in .jar format from the <a href="download.html">download page</a>.
+<%/bte.tpl%>
 <%bte.tpl name=content%>
-
+<h2>Components</h2>
 <div class=utillist>
 <ul>
 <li><a name="array_helper" href="ArrayHelper.html">ArrayHelper</a> - Helpful utilities for working with arrays.</li>

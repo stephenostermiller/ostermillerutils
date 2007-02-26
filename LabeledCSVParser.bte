@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Labeled Comma Separated Values (CSV)<%/bte.tpl%>
 <%bte.tpl name=description%>Read a CSV file and treat the first line as column titles.<%/bte.tpl%>
 <%bte.tpl name=keywords%>labeled csv parser, labeledcsvparser, java labeled csv, comma separated values with labels, java csv labeled, column headings on csv<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+Decorates either a href="CSV.html">CSV</a> or the <a href="ExcelCSV.html">Excel CSV</a> parsers such that the first row read is a row of labels.
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>
@@ -29,11 +32,13 @@
 
 <p>The labeled CSV parser allows you to use either the <a href="CSV.html">CSV</a> or the <a href="ExcelCSV.html">Excel CSV</a> parsers, treating them as if the first line were the column headings.</p>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/LabeledCSVParser.java/0">Version History</a> |
-<a href="LabeledCSVParser.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/LabeledCSVParser.html">Documentation</a>]</p>
-
-<br clear=all>
 <%/bte.tpl%>
+<%bte.tpl name=linkLabeledCSVParser%><b>Labeled CSV Parser</b>
+<ul>
+<li><a href="LabeledCSVParser.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/LabeledCSVParser.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

@@ -88,7 +88,7 @@
       classpath="${top}" 
       destdir="doc" 
       packagenames="com.Ostermiller.util" 
-      bottom="&lt;p&gt;Copyright (c) 2001-2004 by &lt;a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'&gt;Stephen Ostermiller&lt;/a&gt;&lt;/p&gt;"
+      bottom="&lt;p&gt;Copyright (c) 2001-2007 by &lt;a href='http://ostermiller.org/contact.pl?regarding=Java+Utilities'&gt;Stephen Ostermiller&lt;/a&gt;&lt;/p&gt;"
       header="&lt;h1&gt;&lt;a target=\'_top\' href='http://ostermiller.org/utils/'&gt;com.Ostermiller.util&lt;/a&gt; Java Utilities&lt;/h1&gt;"
       link="http://java.sun.com/j2se/1.5.0/docs/api/"
       failonerror="true"

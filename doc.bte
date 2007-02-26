@@ -1,0 +1,15 @@
+<%bte.doc super="page.bte" %>
+<%bte.tpl name=pageTitle%>Documentation for com.Ostermiller.util Java Utilities<%/bte.tpl%>
+<%bte.tpl name=firstLine%>Documentation for com.Ostermiller.util Java Utilities<%/bte.tpl%>
+<%bte.tpl name=description%>JavaDoc documentation for Stephen Ostermiller's Java Utilities.<%/bte.tpl%>
+<%bte.tpl name=keywords%>javadoc, doc<%/bte.tpl%>
+<%bte.tpl name=topcontent%>API Documentation for the Java utilities is available in javadoc form<%/bte.tpl%>
+<%bte.tpl name=content%>
+
+<h3>Javadoc</h3>
+
+<a href="doc/">Browse the JavaDoc</a>
+
+<%/bte.tpl%>
+<%bte.tpl name=linkdoc%><b>JavaDoc</b><%/bte.tpl%>
+<%/bte.doc%>

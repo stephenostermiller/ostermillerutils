@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Significant Figures<%/bte.tpl%>
 <%bte.tpl name=description%>Handles parsing, rounding, and displaying numbers for scientific applications.<%/bte.tpl%>
 <%bte.tpl name=keywords%>significant figures java library, significant digits java library, scientific rounding java library, java significant figures<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>A Java number class for figuring out how many significant figures each of the
+numbers in a calculation has and displaying the result appropriately.</p><%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>
@@ -23,14 +26,6 @@
 </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>number</span><span class=separator>);</span></pre>
 Figure significant figures for multiplication of numbers.
 </div>
-
-<p>A Java number class for figuring out how many significant figures each of the
-numbers in a calculation has and displaying the result appropriately.</p>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/SignificantFigures.java/0">Version History</a> | 
-<a href="SignificantFigures.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/SignificantFigures.html">Documentation</a>]</p>
 
 <br clear=all>
 <div class=examplecode><h3>Example</h3>
@@ -59,4 +54,13 @@ Figure significant figures for addition of numbers.
 
 <br clear=all>
 <%/bte.tpl%>
+
+<%bte.tpl name=linkSignificantFigures%><b>Significant Figures</b>
+<ul>
+<li><a href="SignificantFigures.java.html">SignificantFigures Source</a></li>
+<li><a href="doc/com/Ostermiller/util/SignificantFigures.html">SignificantFigures Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

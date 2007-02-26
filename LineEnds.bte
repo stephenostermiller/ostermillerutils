@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Line Ending Conversion<%/bte.tpl%>
 <%bte.tpl name=description%>Line separator adjuster that can convert text files to DOS, Windows, Unix, Java, or Macintosh format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>modify line endings, line ends library, end of line modifications, java library for line ends<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.</p>
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=i18n>
     Internationalization - included languages:
@@ -13,8 +16,6 @@
 	You may want to use: 
 	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
 </div>
-
-<p>Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.</p>
 
 <h3>Features</h3>
 <ul>
@@ -55,9 +56,14 @@
    -Q --reallyquiet       Print nothing.</pre>
 </div>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/LineEnds.java/0">Version History</a> |
-<a href="LineEnds.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/LineEnds.html">Documentation</a>]</p>
 <%/bte.tpl%>
+
+<%bte.tpl name=linkLineEnds%><b>Line Ends</b>
+<ul>
+<li><a href="LineEnds.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/LineEnds.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Line+Ends&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

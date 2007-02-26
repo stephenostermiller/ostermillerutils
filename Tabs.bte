@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Tabs<%/bte.tpl%>
 <%bte.tpl name=description%>Tab adjuster that can convert tabs to spaces and vice versa.<%/bte.tpl%>
 <%bte.tpl name=keywords%>adjust tabs, modify tabs, tabs to spaces, spaces to tabs, java tabs library, library for tabs, tabs utility<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>Converts tabs to spaces or spaces to tabs at the beginning of each line of files.</p>
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=i18n>
@@ -14,8 +17,6 @@
 	You may want to use: 
 	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>.
 </div>
-
-<p>Converts tabs to spaces or spaces to tabs at the beginning of each line of files.</p>
 
 <h3>Features</h3>
 <ul>
@@ -44,10 +45,14 @@ Adjusts the tabs and spaces at the beginning of each line in files.
   -Q --reallyquiet    Print nothing.
 </pre>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Tabs.java/0">Version History</a> |
-<a href="Tabs.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/Tabs.html">Documentation</a>]</p>
-
 <%/bte.tpl%>
+
+<%bte.tpl name=linkTabs%><b>Tabs</b>
+<ul>
+<li><a href="Tabs.java.html">Tabs Source</a></li>
+<li><a href="doc/com/Ostermiller/util/Tabs.html">Tabs Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Tabs&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

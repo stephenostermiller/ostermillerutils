@@ -2,15 +2,16 @@
 <%bte.tpl name=pageTitle%>Circular Buffers<%/bte.tpl%>
 <%bte.tpl name=description%>Implements the circular buffer producer/consumer model for streams or Objects.<%/bte.tpl%>
 <%bte.tpl name=keywords%>java circular buffers, circular buffer,circular object buffer, circularobjectbuffer, circular char buffer, circularcharbuffer, circular byte buffer, circularbytebuffer, pipedinputstream replacement, pipedoutputstream replacement, pipedwriter replacement, pipedreader replacement<%/bte.tpl%>
-<%bte.tpl name=content%>
-
-<p><a href="#circularobjectbuffer">CircularObjectBuffer</a> | <a href="#circularcharbuffer">CircularCharBuffer</a> | <a href="#circularbytebuffer">CircularByteBuffer</a></p>
-
+<%bte.tpl name=topcontent%>
 <p>The com.Ostermiller.util package contains three flavors of circular buffer.  Each type 
 is presented here along with a simple example.  For a more complex example that uses 
 threads and blocks input, please see the 
 <a href="http://ostermiller.org/utils/CircularBufferTests.java.html">unit test</a>
 for these classes.</p>
+<%/bte.tpl%>
+<%bte.tpl name=content%>
+
+<p><a href="#circularobjectbuffer">CircularObjectBuffer</a> | <a href="#circularcharbuffer">CircularCharBuffer</a> | <a href="#circularbytebuffer">CircularByteBuffer</a></p>
 
 <hr>
 
@@ -32,11 +33,6 @@ get around this by making the buffer infinite size or emptying the buffer in ano
 <h2><a name="circularobjectbuffer">Circular Object Buffer</a></h2>
 
 <p>Implements the circular buffer producer/consumer model for Objects.
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularObjectBuffer.java/0">Version History</a> |
-<a href="CircularObjectBuffer.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CircularObjectBuffer.html">Documentation</a>]</p>
 
 <br clear=all>
 <hr>
@@ -71,11 +67,6 @@ mark operation, don't allow you to control buffer sizes that they use,
 and have a more complicated API that requires a instantiating two
 classes and connecting them.</p>
  
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularCharBuffer.java/0">Version History</a> |
-<a href="CircularCharBuffer.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CircularCharBuffer.html">Documentation</a>]</p>
-
 <br clear=all>
 <hr>
 
@@ -113,12 +104,20 @@ and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support 
 mark operation, don't allow you to control buffer sizes that they use,
 and have a more complicated API that requires a instantiating two
 classes and connecting them.</p>
- 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CircularByteBuffer.java/0">Version History</a> |
-<a href="CircularByteBuffer.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CircularByteBuffer.html">Documentation</a>]</p>
 
 <br clear=all>
 <%/bte.tpl%>
+
+<%bte.tpl name=linkCircularBuffer%><b>Circular Buffers</b>
+<ul>
+<li><a href="CircularByteBuffer.java.html">CircularByteBuffer Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CircularByteBuffer.html">CircularByteBuffer Documentation</a></li>
+<li><a href="CircularCharBuffer.java.html">CircularCharBuffer Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CircularCharBuffer.html">CircularCharBuffer Documentation</a></li>
+<li><a href="CircularObjectBuffer.java.html">CircularObjectBuffer Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CircularObjectBuffer.html">CircularObjectBuffer Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Circular+Buffers&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

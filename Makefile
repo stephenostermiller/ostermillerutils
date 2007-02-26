@@ -21,7 +21,6 @@ all:
 	@$(MAKE) -s --no-print-directory neaten
 	@$(MAKE) -s --no-print-directory build
 	@$(MAKE) -s --no-print-directory javadoc
-	@$(MAKE) -s --no-print-directory htmlfiles
 	@$(MAKE) -s --no-print-directory htmlsource
 
 spell: *.bte *.java
@@ -41,11 +40,6 @@ neaten: *.java
 	@./neaten.sh $?
 	@touch neaten
 	
-.PHONY: htmlfiles
-htmlfiles: *.bte
-	@echo Make: Compiling web pages.
-	@bte .
-
 .PHONY: junkclean		
 junkclean:
 	ant junkclean
@@ -58,12 +52,12 @@ doc: javadoc
 
 javadoc: *.java
 	@echo Make: Generating javadoc
-	@rm -rf doc
-	@mkdir doc
+	@rm -rf src/doc
+	@mkdir -p src/doc
 	@$(JAVADOC) \
-		-bottom '<p>Copyright (c) 2001-2004 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
+		-bottom '<p>Copyright (c) 2001-2007 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>' \
 		-header "<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1><script type=\"text/javascript\">var google_ad_client = \"pub-2385172974335864\";var google_ad_width = 728;var google_ad_height = 90;var google_ad_format = \"728x90_as\";var google_ad_type = \"text\";var google_ad_channel =\"\";var google_color_border = \"A8DDA0\";var google_color_bg = \"EBFFED\";var google_color_link = \"0000CC\";var google_color_url = \"008000\";var google_color_text = \"6F6F6F\";var google_page_url = document.location;</script><script type=\"text/javascript\" src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\"></script>" \
-		-link http://java.sun.com/j2se/1.5.0/docs/api/ -d doc/ \
+		-link http://java.sun.com/j2se/1.5.0/docs/api/ -d src/doc/ \
 		com.Ostermiller.util > /dev/null
 	@touch javadoc
 	
@@ -93,7 +87,7 @@ test:
 update: 
 	ant update
 	
-release: *.html src/* utils.jar randpass.jar .htaccess install.sh doc/
+release: src/* utils.jar randpass.jar .htaccess install.sh
 	@./release.sh $?
 	@touch release
 
@@ -101,8 +95,11 @@ release: *.html src/* utils.jar randpass.jar .htaccess install.sh doc/
 install:
 	@./install.sh
 
-htmlsource: *.java *.properties *.lex
+htmlsource: *.java *.properties *.lex source.sh *.bte
 	ant syntax
+	cd src && ../source.sh
+	cp *.bte *.css install.sh *.jar src/
+	bte src/
 	
 htaccess: *.java *.properties *.lex
 	@for file in *.java *.properties *.lex; \

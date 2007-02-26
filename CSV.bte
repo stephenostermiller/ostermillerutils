@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Comma Separated Values (CSV)<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to read and write files in Comma Separated Value (CSV) format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>csv, comma separated values, java csv library, library for csv, utilities csv java, csv file format java<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+Utilities for reading and writing CSV (comma separated value) text files.  CSV as supported by these classes uses backslashes to escape quotes and new lines.  For CSV that is compatible with Microsoft Excel, <a href="ExcelCSV.html">separate Excel CSV libraries</a> are available.
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the printer
@@ -25,11 +28,6 @@ escape special characters.  Comments can easily be written and correct line begi
 spreadsheet.  A separate class must be use to write 
 <a href="ExcelCSV.html">Excel CSV</a>.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVPrinter.java/0">Version History</a> |
-<a href="CSVPrinter.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CSVPrinter.html">Documentation</a>]</p>
 
 <br clear=all>
 <hr>
@@ -67,11 +65,6 @@ separate class must be use to read
 implement the CSVParse interface.</p>
 
 <p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CSVParser.java/0">Version History</a> |
-<a href="CSVParser.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CSVParser.html">Documentation</a>]</p>
 
 <h3>CSV Character Sets</h3>
 <p>Several people have asked how to read CSV files that are in other character sets such as
@@ -143,7 +136,27 @@ Commercial, with various license price points.
 Reads CSV files one line at a time and values may be obtained by name (similar to LabeledCSVParser) or by index. Single CSV parsing class can be configured to parse standard CSV, Excel CSV, or other user specified variants. A .Net version of the parser is also available.
 </td></tr>
 
+<tr><td>
+Roedy Green<br>
+<a href="http://mindprod.com/jgloss/csv.html">Mindprod CSV</a>
+</td><td>
+Open source, freeware (except military)
+</td><td>
+CSV definition and libraries.
+</td></tr>
+
 </table>
 
 <%/bte.tpl%>
+
+<%bte.tpl name=linkCSV%><b>Comma Separated Values (CSV)</b>
+<ul>
+<li><a href="CSVPrinter.java.html">CSVPrinter Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CSVPrinter.html">CSVPrinter Documentation</a></li>
+<li><a href="CSVParser.java.html">CSVParser Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CSVParser.html">CSVParser Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

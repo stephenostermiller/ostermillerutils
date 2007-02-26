@@ -2,6 +2,7 @@
 <%bte.tpl name=pageTitle%>CGI Query String Parser<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to to parse the query data supplied by HTTP GET or POST requests.<%/bte.tpl%>
 <%bte.tpl name=keywords%>cgi parser, parse cgi, java cgi parser, common gateway interface parser<%/bte.tpl%>
+<%bte.tpl name=topcontent%>Parses ampersand and equal sign delimited data from the query string of URLs.<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 
@@ -41,13 +42,14 @@
 If using this class in servlets, you would request the parameters from the params object rather than from the request.
 </div>
 
-<p>The servlet implementation that I am using does not parse the CGI name value pairs correctly for either POST or GET requests when there is a large amount of query data.  Luckily, you can parse the query data yourself.  I have written a class to do so.  Its methods for retrieving the name value pairs are identical to the three methods in the http request of the servlet.  The class can be created from the string of the GET request or the stream of the POST request.</p>
+<p>Some servlet implementations do not parse the CGI name value pairs correctly for either POST or GET requests when there is a large amount of query data.  Luckily, you can parse the query data yourself.  I have written a class to do so.  Its methods for retrieving the name value pairs are identical to the three methods in the http request of the servlet.  The class can be created from the string of the GET request or the stream of the POST request.</p>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/CGIParser.java/0">Version History</a> |
-<a href="CGIParser.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/CGIParser.html">Documentation</a>]</p>
-
-<br clear=all>
+<%/bte.tpl%>
+<%bte.tpl name=linkCGIParser%><b>CGI Query String Parser</b>
+<ul>
+<li><a href="CGIParser.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/CGIParser.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CGI+Query+String+Parser&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
 <%/bte.tpl%>
 <%/bte.doc%>

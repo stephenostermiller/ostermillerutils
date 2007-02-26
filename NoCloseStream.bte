@@ -4,19 +4,15 @@
 <%bte.tpl name=keywords%>no close stream, noclosestream, unclosable stream library, java stream that can't be closed<%/bte.tpl%>
 <%bte.tpl name=content%>
 <p>Create streams that cannot be closed with the normal close() mechanism.  Instead, a reallyClose() method is provided while the close() method does nothing.</p>
-
+<%/bte.tpl%>
+<%bte.tpl name=content%>
 <p>This is useful when you have a stream to pass to methods that either read or write using the stream.  If any of the methods call the stream's close method before you are done with the stream, this class is useful.  Simply wrap your stream in one of the NoClose Streams, and pass that around.  When the other method calls the close method it will have no effect.  You can later close your stream by calling the reallyClose() method.</p>
 
 <h2>NoCloseStream</h2>
 
 Interface for all four of the following classes.
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/NoCloseStream.java/0">Version History</a> |
-<a href="NoCloseStream.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/NoCloseStream.html">Documentation</a>]</p>
-
-<br clear=all>
+<h2>NoCloseInputStream</h2>
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// prevent system.in from being closed
@@ -26,14 +22,9 @@ Interface for all four of the following classes.
 </span><span class=identifier>in</span><span class=separator>.</span><span class=identifier>reallyClose</span><span class=separator>();</span></pre>
 </div>
 
-<h2>NoCloseInputStream</h2>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/NoCloseInputStream.java/0">Version History</a> |
-<a href="NoCloseInputStream.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/NoCloseInputStream.html">Documentation</a>]</p>
-
 <br clear=all>
+
+<h2>NoCloseOutputStream</h2>
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// prevent system.out from being closed
@@ -43,14 +34,9 @@ Interface for all four of the following classes.
 </span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>reallyClose</span><span class=separator>();</span></pre>
 </div>
 
-<h2>NoCloseOutputStream</h2>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/NoCloseOutputStream.java/0">Version History</a> |
-<a href="NoCloseOutputStream.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/NoCloseOutputStream.html">Documentation</a>]</p>
-
 <br clear=all>
+
+<h2>NoCloseReader</h2>
 
 <div class=examplecode><h3>Example</h3>
 <pre></span><span class=comment>// prevent a file reader from being closed
@@ -60,14 +46,9 @@ Interface for all four of the following classes.
 </span><span class=identifier>in</span><span class=separator>.</span><span class=identifier>reallyClose</span><span class=separator>();</span></pre>
 </div>
 
-<h2>NoCloseReader</h2>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/NoCloseReader.java/0">Version History</a> |
-<a href="NoCloseReader.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/NoCloseReader.html">Documentation</a>]</p>
-
 <br clear=all>
+
+<h2>NoCloseWriter</h2>
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// prevent a file writer from being closed
@@ -77,13 +58,20 @@ Interface for all four of the following classes.
 </span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>reallyClose</span><span class=separator>();</span></pre>
 </div>
 
-<h2>NoCloseWriter</h2>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/NoCloseWriter.java/0">Version History</a> |
-<a href="NoCloseWriter.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/NoCloseWriter.html">Documentation</a>]</p>
-
-<br clear=all>
+<%/bte.tpl%>
+<%bte.tpl name=linkNoCloseStream%><b>NoClose Streams</b>
+<ul>
+<li><a href="NoCloseStream.java.html">NoCloseStream Source</a></li>
+<li><a href="doc/com/Ostermiller/util/NoCloseStream.html">NoCloseStream Documentation</a></li>
+<li><a href="NoCloseInputStream.java.html">NoCloseInputStream Source</a></li>
+<li><a href="doc/com/Ostermiller/util/NoCloseInputStream.html">NoCloseInputStream Documentation</a></li>
+<li><a href="NoCloseOutputStream.java.html">NoCloseOutputStream Source</a></li>
+<li><a href="doc/com/Ostermiller/util/NoCloseOutputStream.html">NoCloseOutputStream Documentation</a></li>
+<li><a href="NoCloseReader.java.html">NoCloseReader Source</a></li>
+<li><a href="doc/com/Ostermiller/util/NoCloseReader.html">NoCloseReader Documentation</a></li>
+<li><a href="NoCloseWriter.java.html">NoCloseWriter Source</a></li>
+<li><a href="doc/com/Ostermiller/util/NoCloseWriter.html">NoCloseWriter Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=NoClose+Streams5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
 <%/bte.tpl%>
 <%/bte.doc%>

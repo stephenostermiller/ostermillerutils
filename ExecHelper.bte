@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Helper Methods for Runtime.exec<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to make executing external applications easier.<%/bte.tpl%>
 <%bte.tpl name=keywords%>exec, exec helper, runtime.exec<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+Utilities to make executing other programs from Java easier.
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Read a file using cat
@@ -20,9 +23,14 @@
 
 <p>This class contains convenience methods to call Runtime.exec with a given command.  The methods block until the process exits and all the data returned by the command is buffered and returned to the application in a ExecHelper object.  The object has three fields: standard output, standard input, and the exit status.</p>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="ExecHelper.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ExecHelper.html">Documentation</a>]</p>
-
 <%/bte.tpl%>
+
+<%bte.tpl name=linkExecHelper%><b>Exec Helper</b>
+<ul>
+<li><a href="ExecHelper.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ExecHelper.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Exec+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

@@ -37,29 +37,26 @@ padding-top:.2cm;
 padding-bottom:.2cm;
 margin:0;
 }
-
+br {
+display:block;
+margin-bottom:0.5cm;
+}
 ul ul {
 list-style-position:inside;
 list-style-type:square;
-padding-left:1cm;
+padding-left:0.3cm;
 padding-right:0;
 padding-top:0;
 padding-bottom:0;
 margin:0;
 }
-
-div.titleandlinks {
-display:table;
-width:100%;
+.nav{
+font-size:smaller;
+background-color:#EBFFED;
 }
-div.titlebox, div.linksbox {
-display:table-cell;
-padding:.3cm;
+.main{
+padding-left:0.5cm;
 }
-div.linksbox {
-width:200px;
-}
-
 div.install {
 position:relative;
 float:right;
@@ -71,23 +68,13 @@ margin-bottom:1cm;
 padding-left:15px;
 padding-bottom:15px;
 }
-
-div.utillist, div.download, div.license div.modifications {
-margin-right:1cm;
-margin-bottom:0.2cm;
-padding-right:15px;
-padding-bottom:15px;
-}
-
 .download table {
 border:thin black solid;
 }
-
 .download table tr td, .download table tr th {
 border:thin black solid;
 padding:.2cm;
 }
-
 div.examplecode {
 float:right;
 border:thin black ridge;

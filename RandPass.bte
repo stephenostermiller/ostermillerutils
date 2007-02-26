@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Random Password Generator<%/bte.tpl%>
 <%bte.tpl name=description%>Java library to generate a random String using a cryptographically secure random number generator.<%/bte.tpl%>
 <%bte.tpl name=keywords%>random password java library, java library for passwords, password library for java, secure password library<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>Generate random passwords of arbitrary length and arbitrary alphabet.</p> 
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>
@@ -11,8 +14,6 @@
 	</span><span class=reservedWord>new </span><span class=identifier>RandPass</span><span class=separator>(</span><span class=reservedWord>new char</span><span class=separator>[]{</span><span class=literal>'A'</span><span class=separator>,</span><span class=literal>'B'</span><span class=separator>,</span><span class=literal>'C'</span><span class=separator>}).</span><span class=identifier>getPass</span><span class=separator>(</span><span class=literal>8</span><span class=separator>)
 );</span></pre>
 </div>
-
-<p>Generate random passwords of arbitrary length and arbitrary alphabet.</p> 
 
 <p>You could use the command line:<br>
 <b>java com.ostermiller.util.RandPass</b><br>
@@ -42,10 +43,12 @@ Generate secure random passwords.
   -v --verify class    Java subclass of PasswordVerifier to use.</pre>
 </div>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/RandPass.java/0">Version History</a> |
-<a href="RandPass.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/RandPass.html">Documentation</a>]</p>
-
+<%/bte.tpl%>
+<%bte.tpl name=linkRandPass%><b>Random Password Generator</b>
+<ul>
+<li><a href="RandPass.java.html">RandPass Source</a></li>
+<li><a href="doc/com/Ostermiller/util/RandPass.html">RandPass Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
 <%/bte.tpl%>
 <%/bte.doc%>

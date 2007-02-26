@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Base64<%/bte.tpl%>
 <%bte.tpl name=description%>Encode and decode base 64 in Java.<%/bte.tpl%>
 <%bte.tpl name=keywords%>base 64, base64, encode base64, decode base64, java base64<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>Base64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=i18n>
     Internationalization - included languages:
@@ -13,8 +16,6 @@
 	You may want to use: 
 	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
 </div>
-
-<p>Base64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
 
 <p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
 It can be used anytime binary or arbitrary data needs to be represented in
@@ -74,11 +75,6 @@ Encode or decode using the base64 format.
   -Q --reallyquiet  Print nothing.</pre>
 </div>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/Base64.java/0">Version History</a> |
-<a href="Base64.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/Base64.html">Documentation</a>]</p>
-
 <h2><name="links">Links</a></h2>
 <table border=2 cellpadding=5>
 <tr><th>Author</th><th>License</th><th>Features</th></tr>
@@ -103,30 +99,13 @@ encode and decode streams if you instantiate a Base64.InputStream or a Base64.Ou
 
 <tr><td>
 Roedy Green<br>
-<a href="http://mindprod.com/jglossbase64.html">Java Glossary</a>
-<a href="http://mindprod.com/products.html#BASE64">com.mindprod.base64.base64</a>
+<a href="http://mindprod.com/jgloss/base64.html">Java Glossary</a>
+<a href="http://mindprod.com/products1.html#BASE64">com.mindprod.base64.base64</a>
 </td><td>
 Open source, freeware (except military)
 </td><td>
 Encodes from byte arrays to strings, decodes from strings to byte arrays.
 </td></tr>
-
-<tr><td>
-Kevin Kelley<br>
-<a href="http://kevinkelley.mystarband.net/java/goodies.html">Base64</a>
-</td><td>
-Open source, GPL
-</td><td>
-Encodes and decodes from byte arrays to byte arrays.
-</td></tr>
-
-<tr><td>
-Bob Withers<br>
-<a href="http://www.ruffboy.com/download.htm">Base64</a>
-</td><td>
-Open source, freeware (any purpose with attribution)
-</td><td>
-Encodes and decodes from byte arrays to byte arrays and comes with C++ code too.</td></tr>
 
 <tr><td>
 Tom Daley<br>
@@ -149,4 +128,13 @@ Encodes from byte arrays to strings, decodes from strings to byte arrays.
 
 </table>
 <%/bte.tpl%>
+
+<%bte.tpl name=linkBase64%><b>Base64</b>
+<ul>
+<li><a href="Base64.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/Base64.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Base64&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

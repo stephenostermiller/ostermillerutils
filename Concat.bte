@@ -2,8 +2,10 @@
 <%bte.tpl name=pageTitle%>Concatenation Streams<%/bte.tpl%>
 <%bte.tpl name=description%>Combine multiple streams of incoming data to create a single stream<%/bte.tpl%>
 <%bte.tpl name=keywords%>concat stream, concatenation stream, concatinputstream, concatreader<%/bte.tpl%>
-<%bte.tpl name=content%>
+<%bte.tpl name=topcontent%>
 <p>Concatenation Streams allow multiple input sources to be combined into a singe source stream.</p>
+<%/bte.tpl%>
+<%bte.tpl name=content%>
 
 <h2>ConcatInputStream</h2>
 <div class=examplecode><h3>Example</h3>
@@ -19,10 +21,6 @@
 </span><span class=separator>);</span></pre>
 </div>
 
-<p>Combines multiple byte stream sources into a single byte stream.<p>
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="ConcatInputStream.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ConcatInputStream.html">Documentation</a>]</p>
 
 <br clear=all>
 <hr>
@@ -42,11 +40,19 @@
 </div>
 
 <p>Combines multiple character stream sources into a single character stream.<p>
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="ConcatReader.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ConcatReader.html">Documentation</a>]</p>
-
 <br clear=all>
 
 <%/bte.tpl%>
+
+<%bte.tpl name=linkConcat%><b>Concatenation Streams</b>
+<ul>
+<li><a href="ConcatInputStream.java.html">ConcatInputStream Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ConcatInputStream.html">ConcatInputStream Documentation</a></li>
+<li><a href="ConcatReader.java.html">ConcatReader Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ConcatReader.html">ConcatReader Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Concatenation+Streams&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
+
 <%/bte.doc%>

@@ -3,6 +3,7 @@
 <%bte.tpl name=firstLine%>Contributors to  com.Ostermiller.util Java Utilities<%/bte.tpl%>
 <%bte.tpl name=description%>List of people who have made contribution to the open source(GPL) com.Ostermiller.util Java utilities.<%/bte.tpl%>
 <%bte.tpl name=keywords%>ostermillerutils contributors, contributors java utilities, java utilities contributors<%/bte.tpl%>
+<%bte.tpl name=topcontent%>These Java Utilities were mainly written by Stephen Ostermiller, but many others listed below have given much needed help.<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=contributors>
 <ul>
@@ -22,4 +23,5 @@
 </div>
 <br clear=all>
 <%/bte.tpl%>
+<%bte.tpl name=linkcontrib%><b>Contributors</b><%/bte.tpl%>
 <%/bte.doc%>

@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Helper Methods for Arrays<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries for working with arrays.<%/bte.tpl%>
 <%bte.tpl name=keywords%>java arrays, concatenate arrays, compare arrays, print array<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+Methods that are useful when working with arrays.  Contains utilities to concatenate arrays, print arrays, and compare arrays.
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=examplecode><h3>Example</h3>
 <pre></span><span class=identifier>ArrayHelper</span><span class=separator>.</span><span class=identifier>print</span><span class=separator>(
@@ -18,11 +21,15 @@
 );</span></pre>
 </div>
 
-<p>Methods that are useful when working with arrays.  Contains utilities to concatenate arrays, print arrays, and compare arrays.</p>
-
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="ArrayHelper.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ArrayHelper.html">Documentation</a>]</p>
 
 <%/bte.tpl%>
+
+<%bte.tpl name=linkArrayHelper%><b>ArrayHelper</b>
+<ul>
+<li><a href="ArrayHelper.java.html">Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ArrayHelper.html">Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=ArrayHelper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>

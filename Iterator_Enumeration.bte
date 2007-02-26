@@ -2,6 +2,9 @@
 <%bte.tpl name=pageTitle%>Basic Iterators and Enumerations<%/bte.tpl%>
 <%bte.tpl name=description%>Java libraries to provide basic iterator and enumerations: convert between iterators and enumerations and convert an array to an iterator or enumeration..<%/bte.tpl%>
 <%bte.tpl name=keywords%>enumerationiterator, enumeration iterator, arrayiterator, array iterator, arrayenumeration, array enumeration, iterator enumeration, iteratorenumeration, convert iterator to enumeration, java iterator to enumeration, convert enumeration to iterator, java enumeration to iterator, convert array to iterator, java array to iterator, convert array to enumeration java array to iterator<%/bte.tpl%>
+<%bte.tpl name=topcontent%>
+<p>Classes to convert between enumerations and iterators.  Also classes to convert arrays to enumerations or iterators.</p>
+<%/bte.tpl%>
 <%bte.tpl name=content%>
 
 <div class=examplecode><h3>Example</h3>
@@ -12,10 +15,6 @@
 
 <h2>Convert an Iterator to an Enumeration: IteratorEnumeration</h2>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/IteratorEnumeration.java/0">Version History</a> |
-<a href="IteratorEnumeration.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/IteratorEnumeration.html">Documentation</a>]</p>
 <br clear=all>
 <hr>
 
@@ -27,10 +26,6 @@
 
 <h2>Convert an Enumeration to an Iterator: EnumerationIterator</h2>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/EnumerationIterator.java/0">Version History</a> |
-<a href="EnumerationIterator.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/EnumerationIterator.html">Documentation</a>]</p>
 <br clear=all>
 <hr>
 
@@ -42,10 +37,7 @@
 
 <h2>Convert an array to an Enumeration: ArrayEnumeration</h2>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ArrayEnumeration.java/0">Version History</a> |
-<a href="ArrayEnumeration.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ArrayEnumeration.html">Documentation</a>]</p>
+
 <br clear=all>
 <hr>
 
@@ -57,10 +49,21 @@
 
 <h2>Convert an array to an Iterator: ArrayIterator</h2>
 
-<p>[<a href="download.html">Download /w Source</a> |
-<a href="http://www.gjt.org/servlets/JCVSlet/log/gjt/com/Ostermiller/util/ArrayIterator.java/0">Version History</a> |
-<a href="ArrayIterator.java.html">Browse Source</a> |
-<a href="doc/com/Ostermiller/util/ArrayIterator.html">Documentation</a>]</p>
 <br clear=all>
 <%/bte.tpl%>
+
+<%bte.tpl name=linkIteratorEnumeration%><b>Iterators and Enumerations</b>
+<ul>
+<li><a href="IteratorEnumeration.java.html">IteratorEnumeration Source</a></li>
+<li><a href="doc/com/Ostermiller/util/IteratorEnumeration.html">IteratorEnumeration Documentation</a></li>
+<li><a href="EnumerationIterator.java.html">EnumerationIterator Source</a></li>
+<li><a href="doc/com/Ostermiller/util/EnumerationIterator.html">EnumerationIterator Documentation</a></li>
+<li><a href="ArrayEnumeration.java.html">ArrayEnumeration Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ArrayEnumeration.html">ArrayEnumeration Documentation</a></li>
+<li><a href="ArrayIterator.java.html">ArrayIterator Source</a></li>
+<li><a href="doc/com/Ostermiller/util/ArrayIterator.html">ArrayIterator Documentation</a></li>
+<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Iterators+and+Enumerations&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
+</ul>
+<%/bte.tpl%>
+
 <%/bte.doc%>
