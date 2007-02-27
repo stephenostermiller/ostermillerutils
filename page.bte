@@ -9,7 +9,7 @@
 <body>
 
 <div class=titlebox>
-<h1><%bte.inc name=firstLine %></h1>
+<h1><a href="http://ostermiller.org/utils/"><img border="0" align="absmiddle" alt="Ostermillerutil Java Utilities"src="http://ostermiller.org/javacup.png"></a> <%bte.inc name=firstLine %></h1>
 </div>
 <table><tr>
 <td valign="top" width="200" class=nav>
@@ -92,7 +92,7 @@ google_color_text = "6F6F6F";
 
 <h2><a name="license">License</a></h2>
 
-<p>Copyright (c) 2001-2007 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a> and <a href="contributors.html">other contributors</a></p>
+<p>OstermillerUtil Java Utilities Copyright (c) 2001-2007 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a> and <a href="contributors.html">other contributors</a></p>
 
 <p>The OstermillerUtils library is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published
