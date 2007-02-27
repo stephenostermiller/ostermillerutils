@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1341 
+personal_ws-1.1 en 1344 
 aa
 aA
 aaa
@@ -124,6 +124,7 @@ BufferedInputStream
 BufferedOutputStream
 BufferedReader
 BufferOverflowException
+bugzilla
 buildFindAnyPattern
 buttonPanel
 ByteArrayInputStream
@@ -863,7 +864,9 @@ org
 os
 oslash
 ostermiller
+Ostermiller's
 ostermillerutil
+OstermillerUtil
 ostermillerutils
 OstermillerUtils
 otilde
