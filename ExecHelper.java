@@ -93,7 +93,7 @@ public final class ExecHelper {
 	 * @since ostermillerutils 1.06.00
 	 */
 	public static ExecHelper exec(String[] cmdarray, String[] envp, File dir) throws IOException {
-		return new ExecHelper(Runtime.getRuntime().exec(cmdarray, envp), null);
+		return new ExecHelper(Runtime.getRuntime().exec(cmdarray, envp, dir), null);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public final class ExecHelper {
 	 * @since ostermillerutils 1.06.00
 	 */
 	public static ExecHelper exec(String[] cmdarray, String[] envp, File dir, String charset) throws IOException {
-		return new ExecHelper(Runtime.getRuntime().exec(cmdarray, envp), charset);
+		return new ExecHelper(Runtime.getRuntime().exec(cmdarray, envp, dir), charset);
 	}
 
 	/**
