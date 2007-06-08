@@ -2,8 +2,9 @@
  * MD5 implementation
  * written Santeri Paavolainen, Helsinki Finland 1996
  * (c) Santeri Paavolainen, Helsinki Finland 1996
- * modifications Copyright (C) 2002-2004 Stephen Ostermiller
+ * modifications Copyright (C) 2002-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -197,7 +198,7 @@ public class MD5 {
 	 */
 	public static byte[] getHash(File f) throws IOException {
 		InputStream is = new FileInputStream(f);
-		byte[] hash = getHash(new FileInputStream(f));
+		byte[] hash = getHash(is);
 		is.close();
 		return hash;
 	}
