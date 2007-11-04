@@ -3,7 +3,7 @@
 <%bte.tpl name=description%>Java libraries to read and write files in Excel Comma Separated Value (CSV) format.<%/bte.tpl%>
 <%bte.tpl name=keywords%>excel csv java, java excel csv, comma separated values excel java, cvs excel java, microsoft excel csv format java<%/bte.tpl%>
 <%bte.tpl name=topcontent%>
-Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote.  <a href="CSV.html">Libraries for other CSV formats</a> are available.
+Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by <a href="http://rfc.net/rfc4180.html">RFC4180</a>.  <a href="CSV.html">Libraries for other CSV formats</a> are available.
 <%/bte.tpl%>
 <%bte.tpl name=content%>
 <div class=examplecode><h3>Example</h3>
@@ -24,7 +24,7 @@ Utilities for reading and writing CSV (comma separated value) text files in the 
 <p>This class makes it easy to output Excel CSV.  Given values, it will automatically determine if they need to be quoted and
 escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
 
-<p>To write standard CSV files that most applications other than Excel can understand use the 
+<p>To write standard CSV files that some applications other than Excel can understand use the 
 <a href="CSV.html">standard CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
@@ -55,10 +55,10 @@ implement the CSVPrint interface.</p>
 However it fails to use the <a href="CSV.html">standard CSV file format</a>.  Excel does
 not use the backslash as an escape character, but instead escapes quote literals with two quotes.
 It also does not quote values that have leading or trailing whitespace.  This special CSV parser
-can read Excel format CSV files.</p>
+can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by <a href="http://rfc.net/rfc4180.html">RFC4180</a>.</p>
 
-<p>To read standard CSV files that most applications other than Excel can understand use the 
-<a href="CSV.html">standard CSV</a> format.    Both CSVParser and ExcelCSVParser
+<p>To read standard CSV files that some applications other than Excel can understand use the 
+<a href="CSV.html">standard CSV</a> format.  Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.</p>
 
 <p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
