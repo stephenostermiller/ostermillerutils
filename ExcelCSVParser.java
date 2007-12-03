@@ -18,7 +18,7 @@
 
 package com.Ostermiller.util;
 import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
 /**
  * Read files in comma separated value format as outputted by the Microsoft
@@ -253,7 +253,7 @@ public class ExcelCSVParser implements CSVParse {
 		lastLine = lineNumber;
 		lineCache = lexer.getLineNumber();
 		String[] result = new String[v.size()];
-		return ((String[])v.toArray(result));
+		return (v.toArray(result));
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class ExcelCSVParser implements CSVParse {
 			return null;
 		}
 		String[][] result = new String[v.size()][];
-		return ((String[][])v.toArray(result));
+		return (v.toArray(result));
 	}
 
 	/**
@@ -342,47 +342,6 @@ public class ExcelCSVParser implements CSVParse {
 	 */
 	public int getLastLineNumber(){
 		return lastLine;
-	}
-
-	/**
-	 * Parse the given file for comma separated values and print the results
-	 * to System.out.
-	 *
-	 * @param args First argument is the file name. System.in used if no filename given.
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args){
-		InputStream in;
-		try {
-			if (args.length > 0){
-				File f = new File(args[0]);
-				if (f.exists()){
-					if (f.canRead()){
-						in = new FileInputStream(f);
-					} else {
-						throw new IOException("Could not open " + args[0]);
-					}
-				} else {
-					throw new IOException("Could not find " + args[0]);
-				}
-			} else {
-				in = System.in;
-			}
-			ExcelCSVParser p = new ExcelCSVParser(in);
-			String[] t;
-			while ((t = p.getLine()) != null){
-				for (int i=0; i<t.length; i++){
-					System.out.print('"' + t[i] + '"');
-					if (i<t.length-1){
-						System.out.print(", ");
-					}
-				}
-				System.out.println();
-			}
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
 	}
 
 	/**

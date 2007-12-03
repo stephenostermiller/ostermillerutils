@@ -1,7 +1,5 @@
 /*
- * A souped up version of the Java Properties format which can
- * handle multiple properties with the same name.
- * Copyright (C) 2002-2003 Stephen Ostermiller
+ * Copyright (C) 2002-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * Copyright (C) 2003 Carlo Magnaghi <software at tecnosoft dot net>
@@ -20,21 +18,8 @@
  */
 package com.Ostermiller.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Arrays;
-import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.*;
 
 /**
  * The Properties class represents a persistent set of properties. The
@@ -253,8 +238,8 @@ public class UberProperties {
 		 */
 		public void add(String[] values){
 			list.ensureCapacity(list.size() + values.length);
-			for (int i=0; i<values.length; i++){
-				add(values[i]);
+			for (String element: values) {
+				add(element);
 			}
 		}
 
@@ -266,7 +251,7 @@ public class UberProperties {
 		 * @since ostermillerutils 1.00.00
 		 */
 		public String getValue(){
-			return (String)list.get(list.size() - 1);
+			return list.get(list.size() - 1);
 		}
 
 		/**
@@ -277,7 +262,7 @@ public class UberProperties {
 		 * @since ostermillerutils 1.00.00
 		 */
 		public String[] getValues(){
-			return (String[])list.toArray(new String[list.size()]);
+			return list.toArray(new String[list.size()]);
 		}
 	}
 
@@ -287,6 +272,7 @@ public class UberProperties {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public UberProperties(){
+		// Create empty properties
 	}
 
 	/**
@@ -311,9 +297,9 @@ public class UberProperties {
 	private void merge(UberProperties defaults){
 		setComment(defaults.getComment());
 		String[] names = defaults.propertyNames();
-		for (int i=0; i<names.length; i++){
-			setProperties(names[i], defaults.getProperties(names[i]));
-			setComment(names[i], defaults.getComment(names[i]));
+		for (String element: names) {
+			setProperties(element, defaults.getProperties(element));
+			setComment(element, defaults.getComment(element));
 		}
 	}
 
@@ -363,7 +349,7 @@ public class UberProperties {
 		} else {
 			Property property;
 			if (properties.containsKey(name)){
-				property = (Property)properties.get(name);
+				property = properties.get(name);
 				property.set(value);
 			} else {
 				property = new Property(value);
@@ -389,7 +375,7 @@ public class UberProperties {
 		if (values.length == 0) throw new IllegalArgumentException();
 		Property property;
 		if (properties.containsKey(name)){
-			property = (Property)properties.get(name);
+			property = properties.get(name);
 			property.set(values);
 		} else {
 			property = new Property(values);
@@ -454,7 +440,7 @@ public class UberProperties {
 	private void setComment(String name, String comment){
 		if (name == null) throw new NullPointerException();
 		if (!properties.containsKey(name)) throw new IllegalArgumentException();
-		((Property)properties.get(name)).setComment(comment);
+		(properties.get(name)).setComment(comment);
 	}
 
 	/**
@@ -511,7 +497,7 @@ public class UberProperties {
 		if (value == null) throw new NullPointerException();
 		Property property;
 		if (properties.containsKey(name)){
-			property = (Property)properties.get(name);
+			property = properties.get(name);
 			property.add(value);
 		} else {
 			property = new Property(value);
@@ -535,7 +521,7 @@ public class UberProperties {
 		if (values == null) throw new NullPointerException();
 		Property property;
 		if (properties.containsKey(name)){
-			property = (Property)properties.get(name);
+			property = properties.get(name);
 			property.add(values);
 		} else {
 			property = new Property(values);
@@ -622,7 +608,7 @@ public class UberProperties {
 	 * Load these properties from a user file with default properties
 	 * from a system resource.
 	 * <p>
-	 * Ex:
+	 * Example:
 	 * <pre>load(
 	 *     new String(){".java","tld","company","package","component.properties"}
 		 *     "tld/company/package/component.properties",
@@ -675,7 +661,6 @@ public class UberProperties {
 		boolean foundComment = false;
 		StringBuffer name = new StringBuffer();
 		StringBuffer value = new StringBuffer();
-		int last = TYPE_COMMENT;
 		boolean atStart = true;
 		String lastSeparator = null;
 		while ((t = lex.getNextToken()) != null){
@@ -748,7 +733,7 @@ public class UberProperties {
 	/**
 	 * Save these properties from a user file.
 	 * <p>
-	 * Ex:
+	 * Example:
 	 * <pre>save(
 	 *     new String(){"tld","company","package","component.properties"}
 	 * )</pre>
@@ -791,11 +776,11 @@ public class UberProperties {
 		out.write('\n');
 		String[] names = propertyNames();
 		Arrays.sort(names);
-		for (int i=0; i<names.length; i++){
-			writeComment(out, getComment(names[i]));
-			String[] values = getProperties(names[i]);
-			for (int j=0; j<values.length; j++){
-				writeProperty(out, names[i], values[j]);
+		for (String element: names) {
+			writeComment(out, getComment(element));
+			String[] values = getProperties(element);
+			for (String element2: values) {
+				writeProperty(out, element, element2);
 			}
 		}
 		out.flush();
@@ -827,7 +812,7 @@ public class UberProperties {
 
 	private static void writeEscapedISO88591(OutputStream out, String s, int type) throws IOException {
 		for (int i=0; i<s.length(); i++){
-			int c = (int)s.charAt(i);
+			int c = s.charAt(i);
 			if (c < 0x100){
 				boolean escape = false;
 				if (c == '\r' || c == '\n' || c == '\\'){
@@ -905,6 +890,7 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
+	 * @param name Parameter name
 	 * @return the first value of this property, or null if the property does not exist.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -912,7 +898,7 @@ public class UberProperties {
 	public String getProperty(String name){
 		String value = null;
 		if (properties.containsKey(name)){
-			value = ((Property)properties.get(name)).getValue();
+			value = (properties.get(name)).getValue();
 		}
 		return value;
 	}
@@ -924,6 +910,8 @@ public class UberProperties {
 	 * UberProperties is consulted, otherwise, the supplied
 	 * default is used.
 	 *
+	 * @param name Parameter name
+	 * @param defaultValue Value to use when property not present
 	 * @return the first value of this property.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -943,6 +931,7 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
+	 * @param name Parameter name
 	 * @return all the values associated with the given key, or null if the property does not exist.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -950,7 +939,7 @@ public class UberProperties {
 	public String[] getProperties(String name){
 		String[] values = null;
 		if (properties.containsKey(name)){
-			values = ((Property)properties.get(name)).getValues();
+			values = (properties.get(name)).getValues();
 		}
 		return values;
 	}
@@ -965,6 +954,8 @@ public class UberProperties {
 	 * UberProperties is consulted, otherwise, the supplied
 	 * defaults are used.
 	 *
+	 * @param name Parameter name
+	 * @param defaultValues Values to use when property not present
 	 * @return all the values associated with the given key, or null if the property does not exist.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -982,6 +973,7 @@ public class UberProperties {
 	 * but it is in the default UberProperties, the default is
 	 * used.  If no default is found, null is returned.
 	 *
+	 * @param name Parameter name
 	 * @return the comment for this property, or null if there is no comment or the property does not exist.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -989,7 +981,7 @@ public class UberProperties {
 	public String getComment(String name){
 		String comment = null;
 		if (properties.containsKey(name)){
-			comment = ((Property)properties.get(name)).getComment();
+			comment = (properties.get(name)).getComment();
 		}
 		return comment;
 	}
@@ -1005,7 +997,7 @@ public class UberProperties {
 	 */
 	public String[] propertyNames(){
 		Set<String> names = properties.keySet();
-		return (String[])names.toArray(new String[names.size()]);
+		return names.toArray(new String[names.size()]);
 	}
 
 	/**
@@ -1049,7 +1041,7 @@ public class UberProperties {
 	 *
 	 * @since ostermillerutils 1.02.23
 	 */
-	public String toString(){
+	@Override public String toString(){
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
 			this.save(out);

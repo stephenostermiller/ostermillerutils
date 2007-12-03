@@ -1,6 +1,5 @@
 /*
- * Parallelizer tests
- * Copyright (C) 2005 Stephen Ostermiller
+ * Copyright (C) 2005-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,6 +27,10 @@ import java.util.*;
  * @since ostermillerutils 1.04.00
  */
 class ParallelizerTests {
+	/**
+	 * Main method for tests
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main (String[] args){
 		try {
 			final HashMap<String,Date> results = new HashMap<String,Date>();
@@ -55,7 +58,7 @@ class ParallelizerTests {
 			if (results.size() != 100) throw new Exception("Expected results to have 100 items, not " + results.size());
 			for(int i=0; i<100; i++){
 				String hashKey = Integer.toString(i);
-				Date result = (Date)results.get(hashKey);
+				Date result = results.get(hashKey);
 				if (result == null) throw new Exception(hashKey + " not in map");
 			}
 			System.exit(0);

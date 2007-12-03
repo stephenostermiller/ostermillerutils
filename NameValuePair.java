@@ -1,6 +1,5 @@
 /*
- * Name Value Pair
- * Copyright (C) 2004 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -86,7 +85,7 @@ public class NameValuePair {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public String toString(){
+	@Override public String toString(){
 		try {
 			return toString("UTF-8");
 		} catch (UnsupportedEncodingException uex){
@@ -100,6 +99,7 @@ public class NameValuePair {
 	 *
 	 * @param charset Character set to use when URL Encoding.
 	 * @return CGI appropriate representation of the pair.
+	 * @throws UnsupportedEncodingException if the given character set is not supported
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */

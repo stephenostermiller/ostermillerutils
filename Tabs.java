@@ -1,6 +1,6 @@
 /*
  * Adjusts tabs and spaces.
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,6 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import gnu.getopt.*;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Locale;
@@ -40,7 +39,7 @@ public class Tabs {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public static final String version = "1.0";
+	public static final String version = "1.1";
 
 	/**
 	 * Locale specific strings displayed to the user.
@@ -57,6 +56,46 @@ public class Tabs {
 	 */
 	public final static int TABS = -1;
 
+	private enum TabsCmdLnOption {
+		/** --help */
+		HELP(new CmdLnOption(labels.getString("help.option")).setDescription( labels.getString("help.message"))),
+		/** --version */
+		VERSION(new CmdLnOption(labels.getString("version.option")).setDescription(labels.getString("version.message"))),
+		/** --about */
+		ABOUT(new CmdLnOption(labels.getString("about.option")).setDescription(labels.getString("about.message"))),
+		/** --width */
+		WIDTH(new CmdLnOption(labels.getString("width.option"), 'w').setDescription(labels.getString("w.message")).setRequiredArgument()),
+		/** --guess */
+		GUESS(new CmdLnOption(labels.getString("guess.option"), 'g').setDescription(labels.getString("g.message") + " (" + labels.getString("default") + ")")),
+		/** --tabs */
+		TABS(new CmdLnOption(labels.getString("tabs.option"), 't').setDescription(labels.getString("t.message"))),
+		/** --spaces */
+		SPACES(new CmdLnOption(labels.getString("spaces.option"), 's').setDescription(labels.getString("s.message") + " (" + labels.getString("default") + "=4)").setRequiredArgument()),
+		/** --force */
+		FORCE(new CmdLnOption(labels.getString("force.option"), 'f').setDescription(labels.getString("f.message"))),
+		/** --noforce */
+		NOFORCE(new CmdLnOption(labels.getString("noforce.option")).setDescription(labels.getString("noforce.message") + " (" + labels.getString("default") + ")")),
+		/** --reallyverbose */
+		REALLYVERBOSE(new CmdLnOption(labels.getString("reallyverbose.option"), 'V').setDescription(labels.getString("V.message"))),
+		/** --verbose */
+		VERBOSE(new CmdLnOption(labels.getString("verbose.option"), 'v').setDescription(labels.getString("v.message"))),
+		/** --quiet */
+		QUIET(new CmdLnOption(labels.getString("quiet.option"), 'q').setDescription(labels.getString("q.message") + " (" + labels.getString("default") + ")")),
+		/** --reallyquiet */
+		REALLYQUIET(new CmdLnOption(labels.getString("reallyquiet.option"), 'Q').setDescription(labels.getString("Q.message")));
+
+		private CmdLnOption option;
+
+		private TabsCmdLnOption(CmdLnOption option){
+			option.setUserObject(this);
+			this.option = option;
+		}
+
+		private CmdLnOption getCmdLineOption(){
+			return option;
+		}
+	}
+
 	/**
 	 * Converts the tabs in files, or standard input.
 	 * Run with --help argument for more information.
@@ -66,91 +105,42 @@ public class Tabs {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
-		// create the command line options that we are looking for
-		LongOpt[] longopts = {
-			new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
-			new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
-			new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
-			new LongOpt(labels.getString("width.option"), LongOpt.REQUIRED_ARGUMENT, null, 'w'),
-			new LongOpt(labels.getString("guess.option"), LongOpt.NO_ARGUMENT, null, 'g'),
-			new LongOpt(labels.getString("tabs.option"), LongOpt.NO_ARGUMENT, null, 't'),
-			new LongOpt(labels.getString("spaces.option"), LongOpt.REQUIRED_ARGUMENT, null, 's'),
-			new LongOpt(labels.getString("force.option"), LongOpt.NO_ARGUMENT, null, 'f'),
-			new LongOpt(labels.getString("quiet.option"), LongOpt.NO_ARGUMENT, null, 'q'),
-			new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),
-			new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),
-			new LongOpt(labels.getString("reallyverbose.option"), LongOpt.NO_ARGUMENT, null, 'V'),
-			new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
-		};
-		String oneLetterOptions = "w:gts:fVvqQ";
-		Getopt opts = new Getopt(labels.getString("tabs"), args, oneLetterOptions, longopts);
+		CmdLn commandLine = new CmdLn(
+			args
+		).setDescription(
+			labels.getString("tabs") + labels.getString("purpose.message")
+		);
+		for (TabsCmdLnOption option: TabsCmdLnOption.values()){
+			commandLine.addOption(option.getCmdLineOption());
+		}
 		int inputTabWidth = TABS;
 		int outputTabWidth = 4;
 		boolean force = false;
 		boolean printMessages = false;
 		boolean printExtraMessages = false;
 		boolean printErrors = true;
-		int c;
-		while ((c = opts.getopt()) != -1){
-			switch(c){
-					case 1:{
-					// print out the help message
-					String[] helpFlags = new String[]{
-						"--" + labels.getString("help.option"),
-						"--" + labels.getString("version.option"),
-						"--" + labels.getString("about.option"),
-						"-w --" + labels.getString("width.option") + " <" + labels.getString("s.arg") + ">",
-						"-g --" + labels.getString("guess.option"),
-						"-t --" + labels.getString("tabs.option"),
-						"-s --" + labels.getString("spaces.option") + " <" + labels.getString("s.arg") + ">",
-						"-f --" + labels.getString("force.option"),
-						"--" + labels.getString("noforce.option"),
-						"-V --" + labels.getString("reallyverbose.option"),
-						"-v --" + labels.getString("verbose.option"),
-						"-q --" + labels.getString("quiet.option"),
-						"-Q --" + labels.getString("reallyquiet.option"),
-					};
-					int maxLength = 0;
-					for (int i=0; i<helpFlags.length; i++){
-						maxLength = Math.max(maxLength, helpFlags[i].length());
-					}
-					maxLength += 2;
-					System.out.println(
-						labels.getString("tabs") + " [-" + StringHelper.replace(oneLetterOptions,":","") + "] <" + labels.getString("files") +  ">" + "\n" +
-						labels.getString("purpose.message") + "\n" +
-						"  " + labels.getString("stdin.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("w.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("g.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("t.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("s.message") + " (" + labels.getString("default") + "=4)\n" +
-						"  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("f.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("V.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("v.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[11] ,maxLength, ' ') + labels.getString("q.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("Q.message") + "\n"
-					);
+		for(CmdLnResult result: commandLine.getResults()){
+			switch((TabsCmdLnOption)result.getOption().getUserObject()){
+				case HELP:{
+					commandLine.printHelp();
 					System.exit(0);
 				} break;
-				case 2:{
+				case VERSION:{
 					// print out the version message
 					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
-				case 3:{
+				case ABOUT:{
 					System.out.println(
 						labels.getString("tabs") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2002-2007", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
 				} break;
-				case 'w':{
+				case WIDTH:{
 					try {
-						inputTabWidth = Integer.parseInt(opts.getOptarg());
+						inputTabWidth = Integer.parseInt(commandLine.getResult('w').getArgument());
 					} catch (NumberFormatException x){
 						inputTabWidth = -1;
 					}
@@ -159,12 +149,12 @@ public class Tabs {
 						System.exit(1);
 					}
 				} break;
-				case 'g':{
+				case GUESS:{
 					inputTabWidth = TABS;
 				} break;
-				case 's':{
+				case SPACES:{
 					try {
-						outputTabWidth = Integer.parseInt(opts.getOptarg());
+						outputTabWidth = Integer.parseInt(commandLine.getResult('s').getArgument());
 					} catch (NumberFormatException x){
 						outputTabWidth = -1;
 					}
@@ -173,76 +163,72 @@ public class Tabs {
 						System.exit(1);
 					}
 				} break;
-				case 't':{
+				case TABS:{
 					outputTabWidth = TABS;
 				} break;
-				case 'f':{
+				case FORCE:{
 					force = true;
 				} break;
-				case 4:{
+				case NOFORCE:{
 					force = false;
 				} break;
-				case 'V':{
+				case REALLYVERBOSE:{
 					printExtraMessages = true;
 					printMessages = true;
 					printErrors = true;
 				} break;
-				case 'v':{
+				case VERBOSE:{
 					printExtraMessages = false;
 					printMessages = true;
 					printErrors = true;
 				} break;
-				case 'q':{
+				case QUIET:{
 					printExtraMessages = false;
 					printMessages = false;
 					printErrors = true;
 				} break;
-				case 'Q':{
+				case REALLYQUIET:{
 					printExtraMessages = false;
 					printMessages = false;
 					printErrors = false;
 				} break;
-				default:{
-					System.exit(1);
-				}
 			}
 		}
 
 		int exitCond = 0;
 		boolean done = false;
-		for (int i=opts.getOptind(); i<args.length; i++){
-			boolean modified = false;
+		for (String argument: commandLine.getNonOptionArguments()){
 			done = true;
-			File source = new File(args[i]);
+			File source = new File(argument);
 			if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canWrite()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else {
 				try {
 					if(convert (source, inputTabWidth, outputTabWidth, !force)){
 						if (printMessages){
-							System.out.println(MessageFormat.format(labels.getString("modified"), (Object[])new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("modified"), (Object[])new String[] {argument}));
 						}
 					} else {
 						if (printExtraMessages){
-							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), (Object[])new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), (Object[])new String[] {argument}));
 						}
 					}
 				} catch (IOException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage());
+						System.err.println(argument + ": " + x.getMessage());
 					}
 					exitCond = 1;
 				}
@@ -543,10 +529,13 @@ public class Tabs {
 	final private static int MAX_SPACES = 128;
 	final private static int MAX_TABS = 16;
 	final private static int MAX_COMBINED = 256;
+
 	/**
 	 * Guess the number of spaces per tab at the beginning of each line.
 	 *
+	 * @param in Input stream for which to guess tab width
 	 * @return the least value (two or greater) which has some line that starts with n times spaces for n zero to max spaces starting a line.
+	 * @throws IOException if an input or output error occurs.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -560,7 +549,6 @@ public class Tabs {
 		int spaces = 0;
 		int mostTabs = 0;
 		int mostSpaces = 0;
-		boolean spaceUsed = false;
 		while((read = in.read(buffer)) != -1){
 			for (int i=0; i<read; i++){
 				byte b = buffer[i];

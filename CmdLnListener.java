@@ -14,41 +14,26 @@
  *
  * See COPYING.TXT for details.
  */
-
 package com.Ostermiller.util;
 
 /**
- * An illegal line ending was specified.
+ * Call back for when a command line option is found.
+ *
+ * More information about this class and code samples for suggested use are
+ * available from <a target="_top" href=
+ * "http://ostermiller.org/utils/CmdLn.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @since ostermillerutils 1.06.01
+ * @since ostermillerutils 1.07.00
  */
-public class BadLineEndingException extends IllegalArgumentException {
-
+public abstract class CmdLnListener
+{
 	/**
-	 * Serial version id
-	 */
-	private static final long serialVersionUID = -3300235286182152695L;
-
-	/**
-	 * Constructs an exception with null as its error detail message.
+	 * Called when a command line option is found.
 	 *
-	 * @since ostermillerutils 1.06.01
-	 */
-	public BadLineEndingException(){
-		super();
-	}
-
-	/**
-	 * Constructs an exception with the specified detail message.
-	 * The error message string s can later be retrieved by the
-	 * Throwable.getMessage()  method of class java.lang.Throwable.
+	 * @param result The command line option and its arguments
 	 *
-	 * @param s the detail message.
-	 *
-	 * @since ostermillerutils 1.06.01
+	 * @since ostermillerutils 1.07.00
 	 */
-	public BadLineEndingException(String s){
-		super(s);
-	}
+	public abstract void found(CmdLnResult result);
 }

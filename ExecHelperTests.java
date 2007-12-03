@@ -18,7 +18,6 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * Regression test for ExecHelper.  When run, this program
@@ -32,6 +31,10 @@ import java.util.*;
  */
 class ExecHelperTests {
 
+	/**
+	 * Main method to run test
+	 * @param args Command line arguments (ignored
+	 */
 	public static void main(String args[]){
 		try {
 			File temp = File.createTempFile("ExecHelperTests", "tmp");
@@ -44,7 +47,7 @@ class ExecHelperTests {
 			if (!eh.getOutput().equals(s)){
 				throw new Exception("Couldn't read file via cat");
 			}
-			// Test the shell, but only on unix
+			// Test the shell, but only on Unix
 			File sh = new File("/bin/sh");
 			if (sh.exists()){
 				eh = ExecHelper.execUsingShell("sleep 3; echo -n stdin && echo -n stderr 1>&2; exit 11");

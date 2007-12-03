@@ -37,16 +37,16 @@ import java.util.*;
  * </pre>
  * To this:
  * <pre>
- * Parallelizer pll = new Parallelizer();
+ * Parallelizer parallelizer = new Parallelizer();
  * for (int i=0; i<10; i++){
  *     final int j = i;
- *     pll.run(
+ *     parallelizer.run(
  *         new Runnable(){
  *             System.out.println("Hello World " + j);
  *         }
  *     );
  * }
- * pll.join();
+ * parallelizer.join();
  * System.out.println("done");
  *
  * More information about this class is available from <a target="_top" href=
@@ -122,7 +122,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @param job job which is to be run in parallel with other jobs.
@@ -142,7 +142,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @param job job which is to be run in parallel with other jobs.
@@ -163,7 +163,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @param threadGroup group in which this job should be run (null for default group).
@@ -184,7 +184,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @param threadGroup group in which this job should be run (null for default group).
@@ -206,7 +206,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @param threadGroup group in which this job should be run (null for default group).
@@ -300,7 +300,7 @@ public class Parallelizer
 	private void throwFirstException(){
 		synchronized(runningThreads){
 			if (exceptionList.size() > 0){
-				throw (RuntimeException)exceptionList.removeFirst();
+				throw exceptionList.removeFirst();
 			}
 		}
 	}
@@ -318,7 +318,7 @@ public class Parallelizer
 	private void throwFirstError() throws Error {
 		synchronized(runningThreads){
 			if (errorList.size() > 0){
-				throw (Error)errorList.removeFirst();
+				throw errorList.removeFirst();
 			}
 		}
 	}
@@ -341,7 +341,7 @@ public class Parallelizer
 			if (toRunQueue.size() == 0) return;
 
 			// Get a job out of the queue
-			Thread thread = (Thread)toRunQueue.removeFirst();
+			Thread thread = toRunQueue.removeFirst();
 
 			// Put the thread in the list of running threads
 			runningThreads.add(thread);
@@ -355,7 +355,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @return Whether all jobs are done or not.
@@ -377,7 +377,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @throws Error if any of the running threads has thrown an Error.
@@ -387,8 +387,8 @@ public class Parallelizer
 	public void interrupt(){
 		throwFirstError();
 		synchronized(runningThreads){
-			for (Iterator<Thread> i=runningThreads.iterator(); i.hasNext();){
-				((Thread)i.next()).interrupt();
+			for (Thread thread: runningThreads) {
+				(thread).interrupt();
 				throwFirstError();
 			}
 		}
@@ -399,7 +399,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @throws Error if any of the running threads has thrown an Error.
@@ -409,8 +409,10 @@ public class Parallelizer
 	public void dumpStack(){
 		throwFirstError();
 		synchronized(runningThreads){
-			for (Iterator<Thread> i=runningThreads.iterator(); i.hasNext();){
-				((Thread)i.next()).dumpStack();
+			for (Thread thread: runningThreads) {
+				for (StackTraceElement stackTraceElement: thread.getStackTrace()){
+					System.out.println(stackTraceElement.toString());
+				}
 				throwFirstError();
 			}
 		}
@@ -423,7 +425,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an error, that
 	 * error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the error.
 	 *
 	 * @throws Error if any of the running threads has thrown an Error.
@@ -434,7 +436,7 @@ public class Parallelizer
 	public Thread[] getRunningThreads(){
 		throwFirstError();
 		synchronized(runningThreads){
-			return (Thread[])runningThreads.toArray(new Thread[0]);
+			return runningThreads.toArray(new Thread[0]);
 		}
 	}
 
@@ -444,7 +446,7 @@ public class Parallelizer
 	 * <p>
 	 * If this method throws an exception or an error, that
 	 * exception or error may be handled and this method
-	 * may be called again as it will not rethrow the same
+	 * may be called again as it will not re-throw the same
 	 * instance of the exception or error.
 	 *
 	 * @throws InterruptedException if interrupted while waiting.

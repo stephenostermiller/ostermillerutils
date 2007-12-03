@@ -1,5 +1,4 @@
 /*
- * StringHelper regression test.
  * Copyright (C) 2005 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
@@ -18,8 +17,10 @@
 package com.Ostermiller.util;
 
 import java.util.*;
-import java.io.*;
 
+/**
+ * StringHelper regression test.
+ */
 class StringHelperTests {
 
 	private static void equalOrDie(String testName, Object[] a, Object[] b) throws Exception {
@@ -39,6 +40,10 @@ class StringHelperTests {
 		}
 	}
 
+	/**
+	 * Main method for tests
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			equalOrDie(
@@ -73,8 +78,8 @@ class StringHelperTests {
 			);
 			equalOrDie(
 				"Prepad Test 2",
-				StringHelper.prepad("aaaaa", 2),
-				"aaaaa"
+				StringHelper.prepad("AaaAa", 2),
+				"AaaAa"
 			);
 			equalOrDie(
 				"Prepad Test 3",
@@ -82,39 +87,39 @@ class StringHelperTests {
 				"-------a"
 			);
 			equalOrDie(
-				"postpad Test 1",
+				"Postpad Test 1",
 				StringHelper.postpad("a", 8),
 				"a       "
 			);
 			equalOrDie(
-				"postpad Test 2",
-				StringHelper.postpad("aaaaa", 2),
-				"aaaaa"
+				"Postpad Test 2",
+				StringHelper.postpad("AaaAa", 2),
+				"AaaAa"
 			);
 			equalOrDie(
-				"postpad Test 3",
+				"Postpad Test 3",
 				StringHelper.postpad("a", 8, '-'),
 				"a-------"
 			);
 			equalOrDie(
-				"midpad Test 1",
+				"Midpad Test 1",
 				StringHelper.midpad("a", 3),
 				" a "
 			);
 			equalOrDie(
-				"midpad Test 2",
+				"Midpad Test 2",
 				StringHelper.midpad("a", 4),
 				" a  "
 			);
 			equalOrDie(
-				"midpad Test 3",
+				"Midpad Test 3",
 				StringHelper.midpad("a", 5, '-'),
 				"--a--"
 			);
 			equalOrDie(
 				"midpad Test 4",
-				StringHelper.midpad("aaaaa", 2),
-				"aaaaa"
+				StringHelper.midpad("AaaAa", 2),
+				"AaaAa"
 			);
 			equalOrDie(
 				"replace Test 1",
@@ -143,33 +148,33 @@ class StringHelperTests {
 			);
 			equalOrDie(
 				"escapeHTML Test 1",
-				StringHelper.escapeHTML("<>&\"'\0\1\2\n\r\f\thello"),
-				"&lt;&gt;&amp;&quot;&#39;\n\r\f\thello"
+				StringHelper.escapeHTML("<>&\"'\0\1\2\n\r\f\t"+"hello"),
+				"&lt;&gt;&amp;&quot;&#39;\n\r\f\t"+"hello"
 			);
 			equalOrDie(
 				"escapeSQL Test 1",
-				StringHelper.escapeSQL("\0\'\"\r\nhello"),
-				"\\0\\'\\\"\r\nhello"
+				StringHelper.escapeSQL("\0\'\"\r\n"+"hello"),
+				"\\0\\'\\\"\r\n"+"hello"
 			);
 			equalOrDie(
 				"escapeJavaLiteral Test 1",
-				StringHelper.escapeJavaLiteral("\0\'\"\r\nhello"),
-				"\0\\'\\\"\\r\\nhello"
+				StringHelper.escapeJavaLiteral("\0\'\"\r\n"+"hello"),
+				"\0\\'\\\"\\r\\n"+"hello"
 			);
 			equalOrDie(
 				"trim Test 1",
-				StringHelper.trim("- -\r\nhello- -\r\nhello- -\r\n", "\r- \n"),
-				"hello- -\r\nhello"
+				StringHelper.trim("- -\r\n"+"hello- -\r\n"+"hello- -\r\n", "\r- \n"),
+				"hello- -\r\n"+"hello"
 			);
 			equalOrDie(
 				"unescapeHTML Test 1",
-				StringHelper.unescapeHTML("&gt;hello&euro;"),
+				StringHelper.unescapeHTML("&gt;hello"+"&"+"euro"+";"),
 				">hello\u20AC"
 			);
 			trueOrDie(
 				"containsAny Test 1",
 				StringHelper.containsAny(
-					"ontwothre",
+					"on"+"two"+"t"+"h"+"r"+"e",
 					new String[]{
 						"one",
 						"two",
@@ -180,7 +185,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAny Test 2",
 				StringHelper.containsAny(
-					"onetwthre",
+					"one"+"t"+"w"+"t"+"h"+"r"+"e",
 					new String[]{
 						"one",
 						"two",
@@ -191,7 +196,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAny Test 3",
 				StringHelper.containsAny(
-					"ontwthree",
+					"on"+"t"+"w"+"three",
 					new String[]{
 						"one",
 						"two",
@@ -202,7 +207,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAny Test 4",
 				!StringHelper.containsAny(
-					"ontwthre",
+					"on"+"t"+"w"+"t"+"h"+"r"+"e",
 					new String[]{
 						"one",
 						"two",
@@ -224,7 +229,7 @@ class StringHelperTests {
 			trueOrDie(
 				"equalsAny Test 2",
 				!StringHelper.equalsAny(
-					"onetwothree",
+					"one"+"two"+"three",
 					new String[]{
 						"one",
 						"two",
@@ -246,7 +251,7 @@ class StringHelperTests {
 			trueOrDie(
 				"startsWithAny Test 2",
 				!StringHelper.startsWithAny(
-					"ontwothree",
+					"on"+"two"+"three",
 					new String[]{
 						"one",
 						"two",
@@ -268,7 +273,7 @@ class StringHelperTests {
 			trueOrDie(
 				"endsWithAny Test 2",
 				!StringHelper.endsWithAny(
-					"onetwothre",
+					"one"+"two"+"t"+"h"+"r"+"e",
 					new String[]{
 						"one",
 						"two",
@@ -279,7 +284,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAnyIgnoreCase Test 1",
 				StringHelper.containsAnyIgnoreCase(
-					"ontwothre",
+					"on"+"two"+"t"+"h"+"r"+"e",
 					new String[]{
 						"One",
 						"Two",
@@ -290,7 +295,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAnyIgnoreCase Test 2",
 				StringHelper.containsAnyIgnoreCase(
-					"onetwthre",
+					"one"+"t"+"w"+"t"+"h"+"r"+"e",
 					new String[]{
 						"One",
 						"Two",
@@ -301,7 +306,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAnyIgnoreCase Test 3",
 				StringHelper.containsAnyIgnoreCase(
-					"ontwthree",
+					"on"+"t"+"w"+"three",
 					new String[]{
 						"One",
 						"Two",
@@ -312,7 +317,7 @@ class StringHelperTests {
 			trueOrDie(
 				"containsAnyIgnoreCase Test 4",
 				!StringHelper.containsAnyIgnoreCase(
-					"ontwthre",
+					"on"+"t"+"w"+"t"+"h"+"r"+"e",
 					new String[]{
 						"One",
 						"Two",
@@ -334,7 +339,7 @@ class StringHelperTests {
 			trueOrDie(
 				"equalsAnyIgnoreCase Test 2",
 				!StringHelper.equalsAnyIgnoreCase(
-					"onetwothree",
+					"one"+"two"+"three",
 					new String[]{
 						"One",
 						"Two",
@@ -356,7 +361,7 @@ class StringHelperTests {
 			trueOrDie(
 				"startsWithAnyIgnoreCase Test 2",
 				!StringHelper.startsWithAnyIgnoreCase(
-					"ontwothree",
+					"on"+"two"+"three",
 					new String[]{
 						"One",
 						"Two",
@@ -378,7 +383,7 @@ class StringHelperTests {
 			trueOrDie(
 				"endsWithAnyIgnoreCase Test 2",
 				!StringHelper.endsWithAnyIgnoreCase(
-					"onetwothre",
+					"one"+"two"+"t"+"h"+"r"+"e",
 					new String[]{
 						"One",
 						"Two",
@@ -456,7 +461,7 @@ class StringHelperTests {
 						"two",
 					}
 				),
-				"onetwo"
+				"one"+"two"
 			);
 			equalOrDie(
 				"join Test 6",
@@ -469,7 +474,7 @@ class StringHelperTests {
 						"three"
 					}
 				),
-				"onetwothree"
+				"one"+"two"+"three"
 			);
 
 			equalOrDie(

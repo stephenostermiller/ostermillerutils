@@ -1,6 +1,5 @@
 /*
- * MD5 regression test.
- * Copyright (C) 2004 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,15 +16,20 @@
  */
 package com.Ostermiller.util;
 
-import java.util.*;
-import java.io.*;
-
+/**
+ * MD5 regression test.
+ */
 class MD5Tests {
 
 	private static class TestCase {
 		private String md5;
 		private byte[] bytes;
-		public TestCase(String md5, byte[] bytes){
+		/**
+		 * Test case
+		 * @param md5 desired test result
+		 * @param bytes bytes to which apply md5 and compare to the test result
+		 */
+		private TestCase(String md5, byte[] bytes){
 			this.md5 = md5;
 			this.bytes = bytes;
 		}
@@ -47,6 +51,10 @@ class MD5Tests {
 		new TestCase("57edf4a22be3c955ac49da2e2107b67a", new byte[]{'1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0'}),
 	};
 
+	/**
+	 * Main method for regression test
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			for (int i=0; i<testCases.length; i++){

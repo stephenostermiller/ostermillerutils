@@ -326,7 +326,7 @@ public class CSVParser implements CSVParse {
 	 */
 	public String[] getLine() throws IOException{
 		int lineNumber = -1;
-		Vector v = new Vector();
+		ArrayList<String> v = new ArrayList<String>();
 		if (tokenCache != null){
 			v.add(tokenCache);
 			lineNumber = lineCache;
@@ -342,7 +342,7 @@ public class CSVParser implements CSVParse {
 		lastLine = lineNumber;
 		lineCache = lexer.getLineNumber();
 		String[] result = new String[v.size()];
-		return ((String[])v.toArray(result));
+		return v.toArray(result);
 	}
 
 	/**
@@ -362,7 +362,7 @@ public class CSVParser implements CSVParse {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[][] getAllValues() throws IOException {
-		Vector v = new Vector();
+		ArrayList<String[]> v = new ArrayList<String[]>();
 		String[] line;
 		while((line = getLine()) != null){
 			v.add(line);
@@ -371,7 +371,7 @@ public class CSVParser implements CSVParse {
 			return null;
 		}
 		String[][] result = new String[v.size()][];
-		return ((String[][])v.toArray(result));
+		return v.toArray(result);
 	}
 
 	/**
@@ -454,49 +454,6 @@ public class CSVParser implements CSVParse {
 	 */
 	public int getLastLineNumber(){
 		return lastLine;
-	}
-
-	/**
-	 * Parse the given file for comma separated values and print the results
-	 * to System.out.
-	 *
-	 * @param args First argument is the file name. System.in used if no filename given.
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args){
-		InputStream in;
-		try {
-			if (args.length > 0){
-				File f = new File(args[0]);
-				if (f.exists()){
-					if (f.canRead()){
-						in = new FileInputStream(f);
-					} else {
-						throw new IOException("Could not open " + args[0]);
-					}
-				} else {
-					throw new IOException("Could not find " + args[0]);
-				}
-			} else {
-				in = System.in;
-			}
-			CSVParser p = new CSVParser(in);
-			p.setCommentStart("#;!");
-			p.setEscapes("nrtf", "\n\r\t\f");
-			String[] t;
-			while ((t = p.getLine()) != null){
-				for (int i=0; i<t.length; i++){
-					System.out.print('"' + t[i] + '"');
-					if (i<t.length-1){
-						System.out.print(", ");
-					}
-				}
-				System.out.println();
-			}
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
 	}
 
 	/**

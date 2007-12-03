@@ -1,6 +1,5 @@
 /*
- * Tests StringTokenizer.
- * Copyright (C) 2001 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,13 +27,15 @@
  */
 class TokenizerTests {
 
+	/**
+	 * Main method for test
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String args[]){
 		try {
 			java.util.StringTokenizer oldTok;
 			com.Ostermiller.util.StringTokenizer newTok;
 			String token;
-
-			//newTok.test();
 
 			token = "this is a test";
 			oldTok = new java.util.StringTokenizer(token);
@@ -51,7 +52,7 @@ class TokenizerTests {
 			newTok = new com.Ostermiller.util.StringTokenizer(token);
 			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
 
-			token = "no delims";
+			token = "no delimiters";
 			oldTok = new java.util.StringTokenizer(token, "");
 			newTok = new com.Ostermiller.util.StringTokenizer(token, "");
 			assertEqual("" + oldTok.countTokens(), "" + newTok.countTokens());
@@ -223,12 +224,12 @@ class TokenizerTests {
 		// count the number of tokens left first.
 		int newNumTokens = newTok.countTokens();
 		if (tokenCount != newNumTokens){
-			throw new Exception(testName + ": TokenCount does not match. " + tokenCount + " vs " + newNumTokens);
+			throw new Exception(testName + ": TokenCount does not match. " + tokenCount + " versus " + newNumTokens);
 		}
 		boolean hasMoreTokens = (tokenCount > 0);
 		boolean newTokHasMoreTokens = newTok.hasMoreTokens();
 		if (hasMoreTokens != newTokHasMoreTokens){
-			throw new Exception(testName + ": hasMoreTokens does not match. " + hasMoreTokens + " vs " + newTokHasMoreTokens);
+			throw new Exception(testName + ": hasMoreTokens does not match. " + hasMoreTokens + " versus " + newTokHasMoreTokens);
 		}
 	}
 }

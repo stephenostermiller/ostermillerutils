@@ -17,9 +17,7 @@
  */
 package com.Ostermiller.util;
 
-import java.io.Reader;
-import java.io.Writer;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Implements the Circular Buffer producer/consumer model for characters.
@@ -286,10 +284,9 @@ public class CircularCharBuffer {
 			// the mark except one character is available.
 			// In this case it is all in one piece.
 			return (markPosition - writePosition - 1);
-		} else {
-			// space at the beginning and end.
-			return ((buffer.length - 1) - (writePosition - markPosition));
 		}
+		// space at the beginning and end.
+		return ((buffer.length - 1) - (writePosition - markPosition));
 	}
 
 	/**
@@ -303,10 +300,9 @@ public class CircularCharBuffer {
 			// the first write is available.  In this case i
 			// is all in one piece.
 			return (writePosition - readPosition);
-		} else {
-			// space at the beginning and end.
-			return (buffer.length - (readPosition - writePosition));
 		}
+		// space at the beginning and end.
+		return (buffer.length - (readPosition - writePosition));
 	}
 
 	/**
@@ -320,10 +316,9 @@ public class CircularCharBuffer {
 			// the first write is marked.  In this case i
 			// is all in one piece.
 			return (readPosition - markPosition);
-		} else {
-			// space at the beginning and end.
-			return (buffer.length - (markPosition - readPosition));
 		}
+		// space at the beginning and end.
+		return (buffer.length - (markPosition - readPosition));
 	}
 
 	/**
@@ -431,7 +426,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void close() throws IOException {
+		@Override public void close() throws IOException {
 			synchronized (CircularCharBuffer.this){
 				readerClosed = true;
 			}
@@ -451,7 +446,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void mark(int readAheadLimit) throws IOException {
+		@Override public void mark(int readAheadLimit) throws IOException {
 			synchronized (CircularCharBuffer.this){
 				if (readerClosed) throw new IOException("Reader has been closed; cannot mark a closed Reader.");
 				if (buffer.length - 1 <= readAheadLimit) throw new IOException("Cannot mark stream, readAheadLimit bigger than buffer size.");
@@ -467,7 +462,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public boolean markSupported() {
+		@Override public boolean markSupported() {
 			return true;
 		}
 
@@ -482,7 +477,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read() throws IOException {
+		@Override public int read() throws IOException {
 			while (true){
 				synchronized (CircularCharBuffer.this){
 					if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed Reader.");
@@ -519,7 +514,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read(char[] cbuf) throws IOException {
+		@Override public int read(char[] cbuf) throws IOException {
 			return read(cbuf, 0, cbuf.length);
 		}
 
@@ -537,7 +532,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read(char[] cbuf, int off, int len) throws IOException {
+		@Override public int read(char[] cbuf, int off, int len) throws IOException {
 			while (true){
 				synchronized (CircularCharBuffer.this){
 					if (readerClosed) throw new IOException("Reader has been closed; cannot read from a closed Reader.");
@@ -580,7 +575,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public boolean ready() throws IOException {
+		@Override public boolean ready() throws IOException {
 			synchronized (CircularCharBuffer.this){
 				if (readerClosed) throw new IOException("Reader has been closed, it is not ready.");
 				return (available() > 0);
@@ -597,7 +592,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void reset() throws IOException {
+		@Override public void reset() throws IOException {
 			synchronized (CircularCharBuffer.this){
 				if (readerClosed) throw new IOException("Reader has been closed; cannot reset a closed Reader.");
 				readPosition = markPosition;
@@ -616,7 +611,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public long skip(long n) throws IOException, IllegalArgumentException {
+		@Override public long skip(long n) throws IOException, IllegalArgumentException {
 			while (true){
 				synchronized (CircularCharBuffer.this){
 					if (readerClosed) throw new IOException("Reader has been closed; cannot skip characters on a closed Reader.");
@@ -670,7 +665,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void close() throws IOException {
+		@Override public void close() throws IOException {
 			synchronized (CircularCharBuffer.this){
 				if (!writerClosed){
 					flush();
@@ -686,7 +681,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void flush() throws IOException {
+		@Override public void flush() throws IOException {
 			if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed Writer.");
 			if (readerClosed) throw new IOException("Buffer closed by Reader; cannot flush.");
 			// this method needs to do nothing
@@ -705,7 +700,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(char[] cbuf) throws IOException {
+		@Override public void write(char[] cbuf) throws IOException {
 			write(cbuf, 0, cbuf.length);
 		}
 
@@ -724,7 +719,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(char[] cbuf, int off, int len) throws IOException {
+		@Override public void write(char[] cbuf, int off, int len) throws IOException {
 			while (len > 0){
 				synchronized (CircularCharBuffer.this){
 					if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");
@@ -771,14 +766,14 @@ public class CircularCharBuffer {
 		 * If the buffer allows blocking writes, this method will block until
 		 * all the data has been written rather than throw an IOException.
 		 *
-		 * @param c int specifying a character to be written.
+		 * @param c number of characters to be written
 		 * @throws BufferOverflowException if buffer does not allow blocking writes
 		 *   and the buffer is full.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(int c) throws IOException {
+		@Override public void write(int c) throws IOException {
 			boolean written = false;
 			while (!written){
 				synchronized (CircularCharBuffer.this){
@@ -822,7 +817,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(String str) throws IOException {
+		@Override public void write(String str) throws IOException {
 			write(str, 0, str.length());
 		}
 
@@ -841,7 +836,7 @@ public class CircularCharBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(String str, int off, int len) throws IOException {
+		@Override public void write(String str, int off, int len) throws IOException {
 			while (len > 0){
 				synchronized (CircularCharBuffer.this){
 					if (writerClosed) throw new IOException("Writer has been closed; cannot write to a closed Writer.");

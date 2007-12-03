@@ -1,6 +1,5 @@
 /*
- * Streams that are have a different close mechanism.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -58,42 +57,42 @@ public class NoCloseWriter extends Writer implements NoCloseStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(int c) throws IOException {
+	@Override public void write(int c) throws IOException {
 		out.write(c);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(char[] cbuf) throws IOException {
+	@Override public void write(char[] cbuf) throws IOException {
 		out.write(cbuf);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(char[] cbuf, int off, int len) throws IOException {
+	@Override public void write(char[] cbuf, int off, int len) throws IOException {
 		out.write(cbuf, off, len);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(String str) throws IOException {
+	@Override public void write(String str) throws IOException {
 		out.write(str);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(String str, int off, int len) throws IOException {
+	@Override public void write(String str, int off, int len) throws IOException {
 		out.write(str, off, len);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void flush() throws IOException {
+	@Override public void flush() throws IOException {
 		out.flush();
 	}
 
@@ -104,7 +103,8 @@ public class NoCloseWriter extends Writer implements NoCloseStream {
 	 *
 	 * @since ostermillerutils 1.01.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
+		// Does nothing
 	}
 
 	/**

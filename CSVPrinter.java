@@ -809,6 +809,7 @@ public class CSVPrinter implements CSVPrint {
 	/**
 	 * Flush any data written out to underlying streams.
 	 *
+	 * @throws IOException if IO error occurs
 	 * @since ostermillerutils 1.02.26
 	 */
 	public void flush() throws IOException {
@@ -818,6 +819,7 @@ public class CSVPrinter implements CSVPrint {
 	/**
 	 * Close any underlying streams.
 	 *
+	 * @throws IOException if IO error occurs
 	 * @since ostermillerutils 1.02.26
 	 */
 	public void close() throws IOException {
@@ -872,56 +874,5 @@ public class CSVPrinter implements CSVPrint {
 	 */
 	public void setAlwaysQuote(boolean alwaysQuote){
 		this.alwaysQuote = alwaysQuote;
-	}
-
-	/**
-	 * Write some test data to the given file.
-	 *
-	 * @param args First argument is the file name.  System.out used if no filename given.
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args) {
-		OutputStream out;
-		try {
-			if (args.length > 0){
-				File f = new File(args[0]);
-				if (!f.exists()){
-						f.createNewFile();
-					if (f.canWrite()){
-						out = new FileOutputStream(f);
-					} else {
-						throw new IOException("Could not open " + args[0]);
-					}
-				} else {
-					throw new IOException("File already exists: " + args[0]);
-				}
-			} else {
-				out = System.out;
-			}
-			CSVPrinter p  = new CSVPrinter(out);
-			p.print("unquoted");
-			p.print("un\\quoted");
-			p.print("escaped\"quote");
-			p.print("escaped\"quote\\");
-			p.println("comma,comma");
-			p.print("!quoted");
-			p.print("!unquoted");
-			p.print(" quoted");
-			p.print("quoted ");
-			p.printlnComment("A comment.");
-			p.print("one");
-			p.print("");
-			p.print("");
-			p.print("");
-			p.print("");
-			p.printlnComment("Multi\nLine\rComment\r\nto test line breaks\r");
-			p.println("two");
-			p.printlnComment("Comment after explicit new line.");
-			p.print("\nthree\nline\n");
-			p.println("\ttab");
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
 	}
 }

@@ -18,7 +18,7 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import java.util.*;
+import java.util.Random;
 
 /**
  * Regression test for circular buffers.  When run, this program
@@ -88,6 +88,10 @@ class CircularBufferTests {
 
 	private CircularObjectBuffer<String> cob = new CircularObjectBuffer<String>(20);
 
+	/**
+	 * Main test method
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String args[]){
 		try {
 			new CircularBufferTests();
@@ -160,7 +164,10 @@ class CircularBufferTests {
 	}
 
 	private class CCBProducer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				for(int position = 0; !isInterrupted() && position < theGettysburgAddress.length(); position++){
 					int len = rand.nextInt(30);
@@ -208,7 +215,10 @@ class CircularBufferTests {
 	}
 
 	private class CCBConsumer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				boolean done = false;
 				while(!isInterrupted() && !done){
@@ -262,7 +272,10 @@ class CircularBufferTests {
 	}
 
 	private class CBBProducer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				for(int position = 0; !isInterrupted() && position < pi.length; position++){
 					int len = rand.nextInt(30);
@@ -304,7 +317,10 @@ class CircularBufferTests {
 	}
 
 	private class CBBConsumer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				boolean done = false;
 				while(!isInterrupted() && !done){
@@ -358,7 +374,10 @@ class CircularBufferTests {
 	}
 
 	private class COBProducer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				for(int position = 0; !isInterrupted() && position < theGettysburgAddress.length(); position++){
 					int len = rand.nextInt(30);
@@ -400,7 +419,10 @@ class CircularBufferTests {
 	}
 
 	private class COBConsumer extends Thread {
-		public void run() {
+		/**
+		 * @see java.lang.Thread#run()
+		 */
+		@Override public void run() {
 			try {
 				boolean done = false;
 				while(!isInterrupted() && !done){
@@ -414,7 +436,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									tgbaWriter2.write((String)readBuf[i]);
+									tgbaWriter2.write(readBuf[i]);
 								}
 							}
 						} break;
@@ -425,7 +447,7 @@ class CircularBufferTests {
 								done = true;
 							} else {
 								for (int i=0; i<read; i++){
-									tgbaWriter2.write((String)readBuf[i+off]);
+									tgbaWriter2.write(readBuf[i+off]);
 								}
 							}
 						} break;
@@ -436,7 +458,7 @@ class CircularBufferTests {
 								if (read == null){
 									done = true;
 								} else {
-									tgbaWriter2.write((String)read);
+									tgbaWriter2.write(read);
 								}
 							}
 						} break;

@@ -78,18 +78,17 @@ public class MD5InputStream extends FilterInputStream {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		int c = in.read();
 		if (c == -1) {
 			return -1;
-		} else {
-			md5.update((byte)(c & 0xff));
-			return c;
 		}
-	}
+		md5.update((byte)(c & 0xff));
+		return c;
+}
 
 	/**
-	 * Reads up to len bytes of data from this input stream into an
+	 * Reads up to length bytes of data from this input stream into an
 	 * array of bytes. This method blocks until some input is available.
 	 *
 	 * @param bytes the buffer into which the data is read.
@@ -99,14 +98,13 @@ public class MD5InputStream extends FilterInputStream {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(byte[] bytes, int offset, int length) throws IOException {
+	@Override public int read(byte[] bytes, int offset, int length) throws IOException {
 		int	r;
 		if ((r = in.read(bytes, offset, length)) == -1) {
 			return r;
-		} else {
-			md5.update(bytes, offset, r);
-			return r;
 		}
+		md5.update(bytes, offset, r);
+		return r;
 	}
 
 	/**

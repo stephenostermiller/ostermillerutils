@@ -28,6 +28,7 @@ package com.Ostermiller.util;
  * @see CircularByteBuffer
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @param <ElementType> Type of object allowed in this circular buffer
  * @since ostermillerutils 1.00.00
  */
 public class CircularObjectBuffer <ElementType> {
@@ -170,10 +171,7 @@ public class CircularObjectBuffer <ElementType> {
 		}
 	}
 
-	private ElementType[] createArray(int size){
-		// The Java 1.5 compiler complains that this is unsafe
-		// casting - it really isn't and there is no way to
-		// make the compiler think otherwise.
+	@SuppressWarnings("unchecked") private ElementType[] createArray(int size){
 		return (ElementType[]) new Object[size];
 	}
 
@@ -213,10 +211,9 @@ public class CircularObjectBuffer <ElementType> {
 			// the read except one Object is available.
 			// In this case it is all in one piece.
 			return (readPosition - writePosition - 1);
-		} else {
-			// space at the beginning and end.
-			return ((buffer.length - 1) - (writePosition - readPosition));
 		}
+		// space at the beginning and end.
+		return ((buffer.length - 1) - (writePosition - readPosition));
 	}
 
 	/**
@@ -230,10 +227,9 @@ public class CircularObjectBuffer <ElementType> {
 			// the first write is available.  In this case i
 			// is all in one piece.
 			return (writePosition - readPosition);
-		} else {
-			// space at the beginning and end.
-			return (buffer.length - (readPosition - writePosition));
 		}
+		// space at the beginning and end.
+		return (buffer.length - (readPosition - writePosition));
 	}
 
 	/**
@@ -320,7 +316,7 @@ public class CircularObjectBuffer <ElementType> {
 	 * objects are available.
 	 *
 	 * @return The Object read, or null if there are no more objects
-	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 * @throws InterruptedException if the thread is interrupted while waiting.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -352,7 +348,7 @@ public class CircularObjectBuffer <ElementType> {
 	 * @param buf Destination buffer.
 	 * @return The number of Objects read, or -1 there will
 	 *     be no more objects available.
-	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 * @throws InterruptedException if the thread is interrupted while waiting.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -371,7 +367,7 @@ public class CircularObjectBuffer <ElementType> {
 	 * @param len Maximum number of Objects to read.
 	 * @return The number of Objects read, or -1 there will
 	 *     be no more objects available.
-	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 * @throws InterruptedException if the thread is interrupted while waiting.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -412,7 +408,7 @@ public class CircularObjectBuffer <ElementType> {
 	 * @param n The number of Objects to skip
 	 * @return The number of Objects actually skipped
 	 * @throws IllegalArgumentException if n is negative.
-	 * @throws InterruptedException if the thread is inturrupted while waiting.
+	 * @throws InterruptedException if the thread is interrupted while waiting.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */

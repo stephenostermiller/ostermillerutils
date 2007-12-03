@@ -17,9 +17,6 @@
  */
 package com.Ostermiller.util;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * Regression test for ArrayHelper.  When run, this program
  * should nothing unless an error occurs.
@@ -32,6 +29,10 @@ import java.util.*;
  */
 class ArrayHelperTests {
 
+	/**
+	 * Test via command line
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String args[]){
 		try {
 			String[] arr = (String[])ArrayHelper.cat(new String[]{"one","two","three"}, new String[]{"four","five","six"});

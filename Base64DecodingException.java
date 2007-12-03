@@ -30,6 +30,10 @@ import java.io.*;
  * @since ostermillerutils 1.00.00
  */
 public class Base64DecodingException extends IOException {
+	/**
+	 * Serial version ID
+	 */
+	private static final long serialVersionUID = 2411555227634603928L;
 	private char c;
 
 	/**

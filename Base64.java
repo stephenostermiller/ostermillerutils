@@ -1,6 +1,5 @@
 /*
- * Base64 encoding and decoding.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,13 +17,12 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import gnu.getopt.*;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Locale;
 
 /**
- * Implements Base64 encoding and decoding as defined by RFC 2045: "Multipurpose Internet
+ * Implements Base64 encoding and decoding as defined by RFC 2045: "Multi-purpose Internet
  * Mail Extensions (MIME) Part One: Format of Internet Message Bodies" page 23.
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
@@ -45,7 +43,7 @@ import java.util.Locale;
  * identically in all versions of ISO 646, including US-ASCII, and all
  * characters in the subset are also represented identically in all
  * versions of EBCDIC. Other popular encodings, such as the encoding
- * used by the uuencode utility, Macintosh binhex 4.0 [RFC-1741], and
+ * used by the uuencode utility, MacIntosh binhex 4.0 [RFC-1741], and
  * the base85 encoding specified as part of Level 2 PostScript, do no
  * share these properties, and thus do not fulfill the portability
  * requirements a binary transport encoding for mail must meet.</p>
@@ -66,7 +64,7 @@ import java.util.Locale;
  * output string.  These characters, identified in Table 1, below, are
  * selected so as to be universally representable, and the set excludes
  * characters with particular significance to SMTP (e.g., ".", CR, LF)
- * and to the multipart boundary delimiters defined in RFC 2046 (e.g.,
+ * and to the multi-part boundary delimiters defined in RFC 2046 (e.g.,
  * "-").</p>
  * <pre>
  *                  Table 1: The Base64 Alphabet
@@ -129,11 +127,11 @@ import java.util.Locale;
  * converted to canonical form.  In particular, text line breaks must be
  * converted into CRLF sequences prior to base64 encoding.  The
  * important thing to note is that this may be done directly by the
- * encoder rather than in a prior canonization step in some
+ * encoder rather than in a prior canonicalization step in some
  * implementations.</p>
  *
  * <p>NOTE: There is no need to worry about quoting potential boundary
- * delimiters within base64-encoded bodies within multipart entities
+ * delimiters within base64-encoded bodies within multi-part entities
  * because no hyphen characters are used in the base64 encoding.</p>
  * </blockquote>
  *
@@ -176,11 +174,12 @@ public class Base64 {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private Base64(){
+		// should not be called
 	}
 
 	/**
 	 * Table of the sixty-four characters that are used as
-	 * the Base64 alphabet: [A-Za-z0-9+/]
+	 * the Base64 alphabet: [a-z0-9A-Z+/]
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -243,6 +242,60 @@ public class Base64 {
 	private static final int ARGUMENT_STRING = 1;
 	private static final int ARGUMENT_FILE = 2;
 
+	private enum Base64CmdLnOption {
+		/** --help */
+		HELP(new CmdLnOption(labels.getString("help.option")).setDescription( labels.getString("help.message"))),
+		/** --version */
+		VERSION(new CmdLnOption(labels.getString("version.option")).setDescription(labels.getString("version.message"))),
+		/** --about */
+		ABOUT(new CmdLnOption(labels.getString("about.option")).setDescription(labels.getString("about.message"))),
+		/** --guess */
+		GUESS(new CmdLnOption(labels.getString("guess.option"), 'g').setDescription(labels.getString("g.message") + " (" + labels.getString("default") + ")")),
+		/** --encode */
+		ENCODE(new CmdLnOption(labels.getString("encode.option"),'e').setDescription(labels.getString("e.message"))),
+		/** --lines */
+		LINES(new CmdLnOption(labels.getString("lines.option"),'l').setDescription(labels.getString("l.message") + " (" + labels.getString("default") + ")")),
+		/** --nolines */
+		NOLINES(new CmdLnOption(labels.getString("nolines.option")).setDescription(labels.getString("nolines.message"))),
+		/** --decode */
+		DECODE(new CmdLnOption(labels.getString("decode.option"), 'd').setDescription(labels.getString("d.message"))),
+		/** --decodeall */
+		DECODEALL(new CmdLnOption(labels.getString("decodeall.option"), 'a').setDescription(labels.getString("a.message"))),
+		/** --decodegood */
+		DECODEGOOD(new CmdLnOption(labels.getString("decodegood.option")).setDescription(labels.getString("decodegood.message") + " (" + labels.getString("default") + ")")),
+		/** --ext */
+		EXT(new CmdLnOption(labels.getString("ext.option"), 'x').setOptionalArgument().setDescription(labels.getString("x.message"))),
+		/** --force */
+		FORCE(new CmdLnOption(labels.getString("force.option"), 'f').setDescription(labels.getString("f.message"))),
+		/** --noforce */
+		NOFORCE(new CmdLnOption(labels.getString("noforce.option")).setDescription(labels.getString("noforce.message") + " (" + labels.getString("default") + ")")),
+		/** --verbose */
+		VERBOSE(new CmdLnOption(labels.getString("verbose.option"), 'v').setDescription(labels.getString("v.message") + " (" + labels.getString("default") + ")")),
+		/** --quiet */
+		QUIET(new CmdLnOption(labels.getString("quiet.option"), 'q').setDescription(labels.getString("q.message"))),
+		/** --reallyquiet */
+		REALLYQUIET(new CmdLnOption(labels.getString("reallyquiet.option"), 'Q').setDescription(labels.getString("Q.message"))),
+		/** --file */
+		FILE(new CmdLnOption(labels.getString("file.option")).setDescription(labels.getString("file.message"))),
+		/** --string */
+		STRING(new CmdLnOption(labels.getString("string.option")).setDescription(labels.getString("string.message"))),
+		/** --endline */
+		ENDLINE(new CmdLnOption(labels.getString("newline.option"), 'n').setDescription(labels.getString("newline.message"))),
+		/** --noendline */
+		NOENDLINE(new CmdLnOption(labels.getString("nonewline.option")).setDescription(labels.getString("nonewline.message")));
+
+		private CmdLnOption option;
+
+		private Base64CmdLnOption(CmdLnOption option){
+			option.setUserObject(this);
+			this.option = option;
+		}
+
+		private CmdLnOption getCmdLineOption(){
+			return option;
+		}
+	}
+
 	/**
 	 * Converts the line ending on files, or standard input.
 	 * Run with --help argument for more information.
@@ -252,31 +305,14 @@ public class Base64 {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
-		// create the command line options that we are looking for
-		LongOpt[] longopts = {
-			new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
-			new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
-			new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
-			new LongOpt(labels.getString("encode.option"), LongOpt.NO_ARGUMENT, null, 'e'),
-			new LongOpt(labels.getString("lines.option"), LongOpt.NO_ARGUMENT, null, 'l'),
-			new LongOpt(labels.getString("nolines.option"), LongOpt.NO_ARGUMENT, null, 6),
-			new LongOpt(labels.getString("decode.option"), LongOpt.NO_ARGUMENT, null, 'd'),
-			new LongOpt(labels.getString("decodeall.option"), LongOpt.NO_ARGUMENT, null, 'a'),
-			new LongOpt(labels.getString("decodegood.option"), LongOpt.NO_ARGUMENT, null, 5),
-			new LongOpt(labels.getString("guess.option"), LongOpt.NO_ARGUMENT, null, 'g'),
-			new LongOpt(labels.getString("ext.option"), LongOpt.OPTIONAL_ARGUMENT, null, 'x'),
-			new LongOpt(labels.getString("force.option"), LongOpt.NO_ARGUMENT, null, 'f'),
-			new LongOpt(labels.getString("quiet.option"), LongOpt.NO_ARGUMENT, null, 'q'),
-			new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),
-			new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),
-			new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
-			new LongOpt(labels.getString("file.option"), LongOpt.NO_ARGUMENT, null, 7),
-			new LongOpt(labels.getString("string.option"), LongOpt.NO_ARGUMENT, null, 8),
-			new LongOpt(labels.getString("newline.option"), LongOpt.NO_ARGUMENT, null, 'n'),
-			new LongOpt(labels.getString("nonewline.option"), LongOpt.NO_ARGUMENT, null, 9),
-		};
-		String oneLetterOptions = "eldagx::fqQvVn";
-		Getopt opts = new Getopt(labels.getString("base64"), args, oneLetterOptions, longopts);
+		CmdLn commandLine = new CmdLn(
+			args
+		).setDescription(
+			labels.getString("base64") + labels.getString("purpose.message")
+		);
+		for (Base64CmdLnOption option: Base64CmdLnOption.values()){
+			commandLine.addOption(option.getCmdLineOption());
+		}
 		int action = ACTION_GUESS;
 		String extension = "base64";
 		boolean force = false;
@@ -286,150 +322,94 @@ public class Base64 {
 		boolean lineBreaks = true;
 		int argumentType = ARGUMENT_GUESS;
 		boolean decodeEndLine = false;
-		int c;
-		while ((c = opts.getopt()) != -1){
-			switch(c){
-					case 1:{
+		for(CmdLnResult result: commandLine.getResults()){
+			switch((Base64CmdLnOption)result.getOption().getUserObject()){
+				case HELP:{
 					// print out the help message
-					String[] helpFlags = new String[]{
-						"--" + labels.getString("help.option"),
-						"--" + labels.getString("version.option"),
-						"--" + labels.getString("about.option"),
-						"-g --" + labels.getString("guess.option"),
-						"-e --" + labels.getString("encode.option"),
-						"-l --" + labels.getString("lines.option"),
-						"--" + labels.getString("nolines.option"),
-						"-d --" + labels.getString("decode.option"),
-						"-a --" + labels.getString("decodeall.option"),
-						"--" + labels.getString("decodegood.option"),
-						"-x --" + labels.getString("ext.option") + " <" + labels.getString("ext.option") + ">",
-						"-f --" + labels.getString("force.option"),
-						"--" + labels.getString("noforce.option"),
-						"-v --" + labels.getString("verbose.option"),
-						"-q --" + labels.getString("quiet.option"),
-						"-Q --" + labels.getString("reallyquiet.option"),
-						"--" + labels.getString("file.option"),
-						"--" + labels.getString("string.option"),
-						"-n --" + labels.getString("newline.option"),
-						"--" + labels.getString("nonewline.option"),
-					};
-					int maxLength = 0;
-					for (int i=0; i<helpFlags.length; i++){
-						maxLength = Math.max(maxLength, helpFlags[i].length());
-					}
-					maxLength += 2;
-					System.out.println(
-						labels.getString("base64") + " [-" + StringHelper.replace(oneLetterOptions, ":", "") + "] <" + labels.getString("files") + ">\n" +
-						labels.getString("purpose.message") + "\n" +
-						"  " + labels.getString("stdin.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("g.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("e.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("l.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("nolines.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("d.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("a.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("decodegood.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("x.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[11] ,maxLength, ' ') + labels.getString("f.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[13] ,maxLength, ' ') + labels.getString("v.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[14] ,maxLength, ' ') + labels.getString("q.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[15] ,maxLength, ' ') + labels.getString("Q.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[16] ,maxLength, ' ') + labels.getString("file.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[17] ,maxLength, ' ') + labels.getString("string.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[18] ,maxLength, ' ') + labels.getString("newline.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[19] ,maxLength, ' ') + labels.getString("nonewline.message") + "\n"
-					);
+					commandLine.printHelp();
 					System.exit(0);
 				} break;
-				case 2:{
+				case VERSION:{
 					// print out the version message
 					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
-				case 3:{
+				case ABOUT:{
 					System.out.println(
 						labels.getString("base64") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
 				} break;
-				case 'd':{
+				case DECODE:{
 					action = ACTION_DECODE;
 				} break;
-				case 'a':{
+				case DECODEALL:{
 					forceDecode = true;
 				} break;
-				case 5:{
+				case DECODEGOOD:{
 					forceDecode = false;
 				} break;
-				case 'e':{
+				case ENCODE:{
 					action = ACTION_ENCODE;
 				} break;
-				case 'l':{
+				case LINES:{
 					lineBreaks = true;
 				} break;
-				case 6:{
+				case NOLINES:{
 					lineBreaks = false;
 				} break;
-				case 'g':{
+				case GUESS:{
 					action = ACTION_GUESS;
 				} break;
-				case 'x':{
-					extension = opts.getOptarg();
+				case EXT:{
+					extension = result.getArgument();
 					if (extension == null) extension = "";
 				} break;
-				case 'f':{
+				case FORCE:{
 					force = true;
 				} break;
-				case 4:{
+				case NOFORCE:{
 					force = false;
 				} break;
-				case 'v':{
+				case VERBOSE:{
 					printMessages = true;
 					printErrors = true;
 				} break;
-				case 'q':{
+				case QUIET:{
 					printMessages = false;
 					printErrors = true;
 				} break;
-				case 'Q':{
+				case REALLYQUIET:{
 					printMessages = false;
 					printErrors = false;
 				} break;
-				case 7: {
+				case FILE: {
 					argumentType = ARGUMENT_FILE;
 				} break;
-				case 8: {
+				case STRING: {
 					argumentType = ARGUMENT_STRING;
 				} break;
-				case 'n': {
+				case ENDLINE: {
 					decodeEndLine = true;
 				} break;
-				case 9: {
+				case NOENDLINE: {
 					decodeEndLine = false;
 				} break;
-				default:{
-					System.err.println(labels.getString("unknownarg"));
-					System.exit(1);
-				}
 			}
 		}
 
 		int exitCond = 0;
 		boolean done = false;
-		for (int i=opts.getOptind(); i<args.length; i++){
+		for (String argument: commandLine.getNonOptionArguments()){
 			done = true;
-			File source = new File(args[i]);
+			File source = new File(argument);
 			if (argumentType == ARGUMENT_STRING || (argumentType == ARGUMENT_GUESS && !source.exists())){
 				try {
 					int fileAction = action;
 					if (fileAction == ACTION_GUESS){
-						if (isBase64(args[i])){
+						if (isBase64(argument)){
 							fileAction = ACTION_DECODE;
 						} else {
 							fileAction = ACTION_ENCODE;
@@ -439,33 +419,33 @@ public class Base64 {
 						if (printMessages){
 							System.out.println(labels.getString("encodingarg"));
 						}
-						encode(new ByteArrayInputStream(args[i].getBytes()), System.out, lineBreaks);
+						encode(new ByteArrayInputStream(argument.getBytes()), System.out, lineBreaks);
 					} else {
 						if (printMessages){
 							System.out.println(labels.getString("decodingarg"));
 						}
-						decode(new ByteArrayInputStream(args[i].getBytes()), System.out, !forceDecode);
+						decode(new ByteArrayInputStream(argument.getBytes()), System.out, !forceDecode);
 						if (decodeEndLine) System.out.println();
 					}
 				} catch (Base64DecodingException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+						System.err.println(argument + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
 					}
 					exitCond = 1;
 				} catch (IOException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage());
+						System.err.println(argument + ": " + x.getMessage());
 					}
 					exitCond = 1;
 				}
 			} else 	if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else {
@@ -478,13 +458,13 @@ public class Base64 {
 							fileAction = ACTION_ENCODE;
 						}
 					}
-					String outName = args[i];
+					String outName = argument;
 					if (extension.length() > 0){
 						if (fileAction == ACTION_ENCODE){
-							outName = args[i] + "." + extension;
+							outName = argument + "." + extension;
 						} else {
-							if (args[i].endsWith("." + extension)){
-								outName = args[i].substring(0, args[i].length() - (extension.length() + 1));
+							if (argument.endsWith("." + extension)){
+								outName = argument.substring(0, argument.length() - (extension.length() + 1));
 							}
 						}
 					}
@@ -502,24 +482,24 @@ public class Base64 {
 					} else {
 						if (fileAction == ACTION_ENCODE){
 							if (printMessages){
-								System.out.println(MessageFormat.format(labels.getString("encoding"), (Object[])new String[] {args[i], outName}));
+								System.out.println(MessageFormat.format(labels.getString("encoding"), (Object[])new String[] {argument, outName}));
 							}
 							encode(source, outFile, lineBreaks);
 						} else {
 							if (printMessages){
-								System.out.println(MessageFormat.format(labels.getString("decoding"), (Object[])new String[] {args[i], outName}));
+								System.out.println(MessageFormat.format(labels.getString("decoding"), (Object[])new String[] {argument, outName}));
 							}
 							decode(source, outFile, !forceDecode);
 						}
 					}
 				} catch (Base64DecodingException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
+						System.err.println(argument + ": " + x.getMessage() + " " + labels.getString("unexpectedcharforce"));
 					}
 					exitCond = 1;
 				} catch (IOException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage());
+						System.err.println(argument + ": " + x.getMessage());
 					}
 					exitCond = 1;
 				}
@@ -674,6 +654,7 @@ public class Base64 {
 	 * Line breaks will be inserted every 76 characters.
 	 *
 	 * @param fIn File to be encoded (will be overwritten).
+	 * @throws IOException if an input or output error occurs.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -1111,7 +1092,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from one file to the other.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param fIn File to be decoded (will be overwritten).
@@ -1127,7 +1108,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from one file to the other.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param fIn File to be decoded (will be overwritten).
@@ -1144,7 +1125,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from one file to the other.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param fIn File to be decoded.
@@ -1161,7 +1142,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from one file to the other.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param fIn File to be decoded.
@@ -1299,7 +1280,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from the InputStream to the OutputStream.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param in Stream from which to read data that needs to be decoded.
@@ -1316,7 +1297,7 @@ public class Base64 {
 	/**
 	 * Decode Base64 encoded data from the InputStream to the OutputStream.
 	 * Characters in the Base64 alphabet, white space and equals sign are
-	 * expected to be in urlencoded data.  The presence of other characters
+	 * expected to be in url encoded data.  The presence of other characters
 	 * could be a sign that the data is corrupted.
 	 *
 	 * @param in Stream from which to read data that needs to be decoded.
@@ -1387,6 +1368,7 @@ public class Base64 {
 	 * this method off the scent and cause it to return false.
 	 *
 	 * @param bytes data that could be in base64 format.
+	 * @return true iff the array appears to be in base64 format
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -1520,6 +1502,7 @@ public class Base64 {
 			if (read == NON_BASE_64){
 				return false;
 			} else if (read == NON_BASE_64_WHITESPACE){
+				// ignore white space
 			} else if (read == NON_BASE_64_PADDING){
 				numPadding++;
 				numBase64Chars++;

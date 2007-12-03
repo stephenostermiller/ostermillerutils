@@ -17,10 +17,9 @@
  */
 
 package com.Ostermiller.util;
-import java.util.*;
 import java.io.*;
-import java.net.URLEncoder;
 import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * Parses query string data from a CGI request into name value pairs.
@@ -53,11 +52,12 @@ public class CGIParser {
 	 * default character encoding.
 	 *
 	 * @param in Stream containing CGI Encoded name value pairs.
+	 * @throws IOException If an input error occurs
 	 * @deprecated This method does not decode URLEncoded values properly.  Please use a method that specifies a character set.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CGIParser(InputStream in) throws IOException {
+	@Deprecated public CGIParser(InputStream in) throws IOException {
 		if (in == null) return;
 		CGILexer lex = new CGILexer(in);
 		parse(lex, "ISO-8859-1");
@@ -74,6 +74,8 @@ public class CGIParser {
 	 *
 	 * @param in Stream containing CGI Encoded name value pairs.
 	 * @param charset Character encoding to use when converting bytes to characters
+	 * @throws IOException If an input error occurs
+	 * @throws UnsupportedEncodingException If the character set provided is not recognized
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
@@ -90,11 +92,12 @@ public class CGIParser {
 	 * The reader is read until the stream contains no more characters.
 	 *
 	 * @param in Reader containing CGI Encoded name value pairs.
+	 * @throws IOException If an input error occurs
 	 * @deprecated This method does not decode URLEncoded values properly.  Please use a method that specifies a character set.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CGIParser(Reader in) throws IOException {
+	@Deprecated public CGIParser(Reader in) throws IOException {
 		if (in == null) return;
 		CGILexer lex = new CGILexer(in);
 		parse(lex, "ISO-8859-1");
@@ -108,6 +111,8 @@ public class CGIParser {
 	 *
 	 * @param in Reader containing CGI Encoded name value pairs.
 	 * @param charset Character encoding to use when converting bytes to characters
+	 * @throws IOException If an input error occurs
+	 * @throws UnsupportedEncodingException If the character set provided is not recognized
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
@@ -126,7 +131,7 @@ public class CGIParser {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public CGIParser(String s){
+	@Deprecated public CGIParser(String s){
 		if (s == null) return;
 		try {
 			CGILexer lex = new CGILexer(new StringReader(s));
@@ -143,14 +148,17 @@ public class CGIParser {
 	 *
 	 * @param s CGI Encoded name value pairs.
 	 * @param charset Character encoding to use when converting bytes to characters
+	 * @throws UnsupportedEncodingException If the character set provided is not recognized
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public CGIParser(String s, String charset) throws IOException, UnsupportedEncodingException {
+	public CGIParser(String s, String charset) throws UnsupportedEncodingException {
 		if (s == null) return;
 		try {
 			CGILexer lex = new CGILexer(new StringReader(s));
 			parse(lex, charset);
+		} catch (UnsupportedEncodingException uex){
+			throw uex;
 		} catch (IOException x){
 			// This shouldn't be able to happen from a string.
 			throw new RuntimeException(x);
@@ -159,9 +167,10 @@ public class CGIParser {
 
 	/**
 	 * Retrieve the name value pairs from the lexer and hash
-	 * them in the cgi hashtable.
+	 * them in the CGI hash table.
 	 *
 	 * @param lex Lexer that will return the tokens.
+	 * @throws IOException If an input error occurs
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -190,7 +199,7 @@ public class CGIParser {
 			}
 
 			// Hash
-			ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
+			ArrayList<String> values = nameValuePairHash.get(name);
 			if (values == null){
 				values = new ArrayList<String>();
 			}
@@ -213,12 +222,12 @@ public class CGIParser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String[] getParameterValues(String name){
-		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> values = nameValuePairHash.get(name);
 		if (values == null){
 			return null;
 		}
 		String[] valArray = new String[values.size()];
-		return (String[])(values.toArray(valArray));
+		return (values.toArray(valArray));
 	}
 
 	/**
@@ -232,9 +241,9 @@ public class CGIParser {
 	 * @since ostermillerutils 1.02.15
 	 */
 	public void setParameter(String name, String value){
-		Iterator listIterator = nameValuePairList.iterator();
+		Iterator<NameValuePair> listIterator = nameValuePairList.iterator();
 		while (listIterator.hasNext()){
-			NameValuePair nameValuePair = (NameValuePair)listIterator.next();
+			NameValuePair nameValuePair = listIterator.next();
 			if (nameValuePair.getName().equals(name)){
 				listIterator.remove();
 			}
@@ -244,7 +253,7 @@ public class CGIParser {
 			nameValuePairHash.remove(name);
 			return;
 		}
-		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> values = nameValuePairHash.get(name);
 		if (values == null){
 			values = new ArrayList<String>();
 		}
@@ -266,9 +275,9 @@ public class CGIParser {
 	 * @since ostermillerutils 1.02.15
 	 */
 	public void setParameter(String name, String[] values){
-		Iterator listIterator = nameValuePairList.iterator();
+		Iterator<NameValuePair> listIterator = nameValuePairList.iterator();
 		while (listIterator.hasNext()){
-			NameValuePair nameValuePair = (NameValuePair)listIterator.next();
+			NameValuePair nameValuePair = listIterator.next();
 			if (nameValuePair.getName().equals(name)){
 				listIterator.remove();
 			}
@@ -278,17 +287,17 @@ public class CGIParser {
 			nameValuePairHash.remove(name);
 			return;
 		}
-		for (int i=0; i<values.length; i++){
-			if (values[i] == null) throw new NullPointerException();
+		for (String element: values) {
+			if (element == null) throw new NullPointerException();
 		}
-		ArrayList<String> valuesVec = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> valuesVec = nameValuePairHash.get(name);
 		if (valuesVec == null){
 			valuesVec = new ArrayList<String>();
 		}
 		valuesVec.clear();
-		for (int i=0; i<values.length; i++){
-			valuesVec.add(values[i]);
-			nameValuePairList.add(new NameValuePair(name, values[i]));
+		for (String element: values) {
+			valuesVec.add(element);
+			nameValuePairList.add(new NameValuePair(name, element));
 		}
 		nameValuePairHash.put(name, valuesVec);
 	}
@@ -307,7 +316,7 @@ public class CGIParser {
 		if (value == null){
 			return;
 		}
-		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> values = nameValuePairHash.get(name);
 		if (values == null){
 			values = new ArrayList<String>();
 		}
@@ -331,16 +340,16 @@ public class CGIParser {
 		if (values == null || values.length == 0){
 			return;
 		}
-		for (int i=0; i<values.length; i++){
-			if (values[i] == null) throw new NullPointerException();
+		for (String element: values) {
+			if (element == null) throw new NullPointerException();
 		}
-		ArrayList<String> valuesVec = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> valuesVec = nameValuePairHash.get(name);
 		if (valuesVec == null){
 			valuesVec = new ArrayList<String>();
 		}
-		for (int i=0; i<values.length; i++){
-			valuesVec.add(values[i]);
-			nameValuePairList.add(new NameValuePair(name, values[i]));
+		for (String element: values) {
+			valuesVec.add(element);
+			nameValuePairList.add(new NameValuePair(name, element));
 		}
 		nameValuePairHash.put(name, valuesVec);
 	}
@@ -352,7 +361,7 @@ public class CGIParser {
 	 * You should only use this method when you are sure the parameter has only one value.
 	 * If the parameter might have more than one value, use getParameterValues(java.lang.String).
 	 * <P>
-	 * If you use this method with a multivalued parameter, the value returned is equal to
+	 * If you use this method with a multiple valued parameter, the value returned is equal to
 	 * the first value in the array returned by getParameterValues.
 	 *
 	 * @param name a String specifying the name of the parameter
@@ -361,11 +370,11 @@ public class CGIParser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public String getParameter(String name){
-		ArrayList<String> values = (ArrayList<String>)nameValuePairHash.get(name);
+		ArrayList<String> values = nameValuePairHash.get(name);
 		if (values == null){
 			return null;
 		}
-		return (String)(values.get(0));
+		return (values.get(0));
 	}
 
 	/**
@@ -380,7 +389,7 @@ public class CGIParser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public Enumeration<String> getParameterNames(){
-		return (Enumeration<String>)new IteratorEnumeration<String>(nameValuePairHash.keySet().iterator());
+		return new IteratorEnumeration<String>(nameValuePairHash.keySet().iterator());
 	}
 
 	/**
@@ -397,7 +406,7 @@ public class CGIParser {
 	 * @since ostermillerutils 1.03.00
 	 */
 	public String[] getParameterNameList(){
-		return (String[])nameValuePairHash.keySet().toArray(new String[0]);
+		return nameValuePairHash.keySet().toArray(new String[0]);
 	}
 
 	/**
@@ -406,7 +415,7 @@ public class CGIParser {
 	 * @return array of all name value pairs.
 	 */
 	public NameValuePair[] getParameters(){
-		return (NameValuePair[])nameValuePairList.toArray(new NameValuePair[0]);
+		return nameValuePairList.toArray(new NameValuePair[0]);
 	}
 
 	/**
@@ -421,9 +430,9 @@ public class CGIParser {
 	public String toString(String enc) throws UnsupportedEncodingException {
 		StringBuffer sb = new StringBuffer();
 		boolean bFirst = true;
-		Iterator listIterator = nameValuePairList.iterator();
+		Iterator<NameValuePair> listIterator = nameValuePairList.iterator();
 		while (listIterator.hasNext()){
-			NameValuePair nameValuePair = (NameValuePair)listIterator.next();
+			NameValuePair nameValuePair = listIterator.next();
 			if (!bFirst) sb.append('&');
 			bFirst = false;
 			sb.append(nameValuePair.toString(enc));
@@ -439,7 +448,7 @@ public class CGIParser {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public String toString() {
+	@Override public String toString() {
 		try {
 			return toString("UTF-8");
 		} catch (UnsupportedEncodingException uex){

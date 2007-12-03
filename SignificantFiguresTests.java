@@ -1,6 +1,5 @@
 /*
- * Significant Figures regression test.
- * Copyright (C) 2004 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,9 +16,10 @@
  */
 package com.Ostermiller.util;
 
-import java.util.*;
-import java.io.*;
 
+/**
+ * Significant Figures regression test.
+ */
 class SignificantFiguresTests {
 
 	private static class TestCase {
@@ -27,6 +27,12 @@ class SignificantFiguresTests {
 		private int sigfigs;
 		private String desiredResult;
 
+		/**
+		 * Test case
+		 * @param original test number (as string)
+		 * @param sigfigs number of significant figures to use
+		 * @param desiredResult desired test result (number as string)
+		 */
 		public TestCase(String original, int sigfigs, String desiredResult){
 			this.original = original;
 			this.sigfigs = sigfigs;
@@ -61,6 +67,10 @@ class SignificantFiguresTests {
 		new TestCase("12345678", 3, "1.23E7"), // too large without scientific notation
 	};
 
+	/**
+	 * Main method for regression test
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			for (int i=0; i<testCases.length; i++){

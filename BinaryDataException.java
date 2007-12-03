@@ -30,6 +30,11 @@ import java.io.IOException;
 public class BinaryDataException extends IOException {
 
 	/**
+	 * Serial version ID
+	 */
+	private static final long serialVersionUID = 1898699236015077076L;
+
+	/**
 	 * Constructs an IOException with null  as its error detail message.
 	 *
 	 * @since ostermillerutils 1.00.00

@@ -17,7 +17,7 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * An input stream which reads sequentially from multiple sources.
@@ -103,8 +103,8 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.01
 	 */
 	public void addInputStreams(InputStream[] in){
-		for (int i=0; i<in.length; i++){
-			addInputStream(in[i]);
+		for (InputStream element: in) {
+			addInputStream(element);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class ConcatInputStream extends InputStream {
 			synchronized(inputStreamQueue){
 				// inputStream queue index is advanced only by the nextInputStream()
 				// method.  Don't do it here.
-				currentInputStream = (InputStream)inputStreamQueue.get(inputStreamQueueIndex);
+				currentInputStream = inputStreamQueue.get(inputStreamQueueIndex);
 			}
 		}
 		return currentInputStream;
@@ -156,6 +156,7 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.01
 	 */
 	public ConcatInputStream(){
+		// Empty constructor
 	}
 
 	/**
@@ -217,7 +218,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @throws IOException if an I/O error occurs.
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		if (closed) throw new IOException("InputStream closed");
 		int r = -1;
 		while (r == -1){
@@ -262,16 +263,16 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public int read(byte[] b) throws IOException {
+	@Override public int read(byte[] b) throws IOException {
 		return read(b, 0, b.length);
 	}
 
 	/**
-	 * Reads up to len bytes of data from the underlying streams into an array of bytes.
-	 * An attempt is made to read as many as len bytes, but a smaller number may be read,
+	 * Reads up to length bytes of data from the underlying streams into an array of bytes.
+	 * An attempt is made to read as many as length bytes, but a smaller number may be read,
 	 * possibly zero. The number of bytes actually read is returned as an integer.
 	 * <p>
-	 * If len is zero,
+	 * If length is zero,
 	 * then no bytes are read and 0 is returned; otherwise, there is an attempt
 	 * to read at least one byte.
 	 * <p>
@@ -288,9 +289,9 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @throws IOException - If an I/O error occurs
 	 * @throws NullPointerException - If b is null.
-	 * @throws IndexOutOfBoundsException - if len or offset are not possible.
+	 * @throws IndexOutOfBoundsException - if length or offset are not possible.
 	 */
-	public int read(byte[] b, int off, int len) throws IOException {
+	@Override public int read(byte[] b, int off, int len) throws IOException {
 		if (off < 0 || len < 0 || off + len > b.length) throw new IllegalArgumentException();
 		if (closed) throw new IOException("InputStream closed");
 		int r = -1;
@@ -329,7 +330,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public long skip(long n) throws IOException {
+	@Override public long skip(long n) throws IOException {
 		if (closed) throw new IOException("InputStream closed");
 		if (n <= 0) return 0;
 		long s = -1;
@@ -372,7 +373,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public int available() throws IOException {
+	@Override public int available() throws IOException {
 		if (closed) throw new IOException("InputStream closed");
 		InputStream in = getCurrentInputStream();
 		if (in == null) return 0;
@@ -384,10 +385,10 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
 		if (closed) return;
-		for (Iterator i=inputStreamQueue.iterator(); i.hasNext();){
-			((InputStream)i.next()).close();
+		for (Object element: inputStreamQueue) {
+			((InputStream)element).close();
 		}
 		closed = true;
 	}
@@ -397,7 +398,8 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void mark(int readlimit){
+	@Override public void mark(int readlimit){
+		// Mark not supported -- do nothing
 	}
 
 	/**
@@ -407,7 +409,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void reset() throws IOException {
+	@Override public void reset() throws IOException {
 		throw new IOException("Reset not supported");
 	}
 
@@ -418,7 +420,7 @@ public class ConcatInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public boolean markSupported(){
+	@Override public boolean markSupported(){
 		return false;
 	}
 }

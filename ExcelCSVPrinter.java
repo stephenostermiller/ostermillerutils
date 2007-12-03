@@ -619,7 +619,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 					}
 				}
 			} else if (newLine) {
-				// always quote an empty token that is the firs
+				// always quote an empty token that is the first
 				// on the line, as it may be the only thing on the
 				// line.  If it were not quoted in that case,
 				// an empty line has no tokens.
@@ -659,6 +659,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	/**
 	 * Flush any data written out to underlying streams.
 	 *
+	 * @throws IOException if an error occurs while writing.
 	 * @since ostermillerutils 1.02.26
 	 */
 	public void flush() throws IOException {
@@ -668,6 +669,7 @@ public class ExcelCSVPrinter implements CSVPrint {
 	/**
 	 * Close any underlying streams.
 	 *
+	 * @throws IOException if an error occurs while writing.
 	 * @since ostermillerutils 1.02.26
 	 */
 	public void close() throws IOException {
@@ -722,51 +724,5 @@ public class ExcelCSVPrinter implements CSVPrint {
 	 */
 	public void setAutoFlush(boolean autoFlush){
 		this.autoFlush = autoFlush;
-	}
-
-	/**
-	 * Write some test data to the given file.
-	 *
-	 * @param args First argument is the file name.  System.out used if no filename given.
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args) {
-		OutputStream out;
-		try {
-			if (args.length > 0){
-				File f = new File(args[0]);
-				if (!f.exists()){
-					f.createNewFile();
-					if (f.canWrite()){
-						out = new FileOutputStream(f);
-					} else {
-						throw new IOException("Could not open " + args[0]);
-					}
-				} else {
-					throw new IOException("File already exists: " + args[0]);
-				}
-			} else {
-				out = System.out;
-			}
-			ExcelCSVPrinter p  = new ExcelCSVPrinter(out);
-			p.print("unquoted");
-			p.print("escaped\"quote");
-			p.println("comma,comma");
-			p.print("!quoted");
-			p.print("!unquoted");
-			p.print(" quoted");
-			p.println("quoted ");
-			p.print("one");
-			p.print("");
-			p.print("");
-			p.print("");
-			p.println("");
-			p.println("two");
-			p.print("\nthree\nline\n");
-			p.println("\ttab");
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
 	}
 }

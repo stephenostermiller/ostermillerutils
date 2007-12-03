@@ -32,6 +32,10 @@ import java.io.*;
  */
 class LabeledCSVParserTests {
 
+	/**
+	 * Main method for running test
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			test01();
@@ -141,6 +145,7 @@ class LabeledCSVParserTests {
 			parse.getValueByLabel("FIELD01");
 			throw new Exception("IllegalStateException expected");
 		} catch (IllegalStateException iex){
+			// expected
 		}
 		if (parse.getLastLineNumber() != 2){
 			throw new Exception("Expected 2 from getLastLineNumber()");
@@ -159,6 +164,7 @@ class LabeledCSVParserTests {
 			parse.getValueByLabel("FIELD01");
 			throw new Exception("IllegalStateException expected");
 		} catch (IllegalStateException iex){
+			// expected
 		}
 
 		if (parse.getLine() != null){

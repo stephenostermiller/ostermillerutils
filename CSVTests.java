@@ -28,6 +28,11 @@ import java.io.*;
  * @since ostermillerutils 1.00.00
  */
 class CSVTests {
+
+	/**
+	 * Main method for running tests
+	 * @param args Command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			StringWriter sw = new StringWriter();
@@ -50,12 +55,11 @@ class CSVTests {
 				"Two\nTokens",
 				"On the\nSame Line"
 			});
-			csvOut.printlnComment("A two line comment\njust to see that it works");
+			csvOut.printlnComment("A two line comment\n just to see that it works");
 
 			CSVParser shredder = new CSVParser(new StringReader(sw.toString()));
 			shredder.setCommentStart("#;!");
 			shredder.setEscapes("nrtf", "\n\r\t\f");
-			String t;
 			compare(shredder.nextValue(), shredder.lastLineNumber(), "Boston", 4);
 			compare(shredder.nextValue(), shredder.lastLineNumber(), "San Francisco", 4);
 			compare(shredder.nextValue(), shredder.lastLineNumber(), "New York", 4);

@@ -19,7 +19,6 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import gnu.getopt.*;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Locale;
@@ -49,6 +48,46 @@ public class LineEnds {
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.LineEnds",  Locale.getDefault());
 
+	private enum LineEndsCmdLnOption {
+		/** --help */
+		HELP(new CmdLnOption(labels.getString("help.option")).setDescription( labels.getString("help.message"))),
+		/** --version */
+		VERSION(new CmdLnOption(labels.getString("version.option")).setDescription(labels.getString("version.message"))),
+		/** --about */
+		ABOUT(new CmdLnOption(labels.getString("about.option")).setDescription(labels.getString("about.message"))),
+		/** --dos --windows */
+		DOS(new CmdLnOption(new String[]{labels.getString("dos.option"),labels.getString("windows.option")}, new char[]{'d'}).setDescription(labels.getString("d.message"))),
+		/** --unix --java */
+		UNIX(new CmdLnOption(new String[]{labels.getString("unix.option"),labels.getString("java.option")}, new char[]{'n'}).setDescription(labels.getString("n.message"))),
+		/** --mac */
+		MAC(new CmdLnOption(labels.getString("mac.option"), 'r').setDescription(labels.getString("r.message"))),
+		/** --system */
+		SYSTEM(new CmdLnOption(labels.getString("system.option"), 's').setDescription(labels.getString("s.message") + " (" + labels.getString("default") + ")")),
+		/** --force */
+		FORCE(new CmdLnOption(labels.getString("force.option"), 'f').setDescription(labels.getString("f.message"))),
+		/** --quiet */
+		QUIET(new CmdLnOption(labels.getString("quiet.option"), 'q').setDescription(labels.getString("q.message") + " (" + labels.getString("default") + ")")),
+		/** --reallyquiet */
+		REALLYQUIET(new CmdLnOption(labels.getString("reallyquiet.option"), 'Q').setDescription(labels.getString("Q.message"))),
+		/** --verbose */
+		VERBOSE(new CmdLnOption(labels.getString("verbose.option"), 'v').setDescription(labels.getString("v.message"))),
+		/** --reallyverbose */
+		REALLYVERBOSE(new CmdLnOption(labels.getString("reallyverbose.option"), 'V').setDescription(labels.getString("V.message"))),
+		/** --noforce */
+		NOFORCE(new CmdLnOption(labels.getString("noforce.option")).setDescription(labels.getString("noforce.message") + " (" + labels.getString("default") + ")"));
+
+		private CmdLnOption option;
+
+		private LineEndsCmdLnOption(CmdLnOption option){
+			option.setUserObject(this);
+			this.option = option;
+		}
+
+		private CmdLnOption getCmdLineOption(){
+			return option;
+		}
+	}
+
 	/**
 	 * Converts the line ending on files, or standard input.
 	 * Run with --help argument for more information.
@@ -58,82 +97,33 @@ public class LineEnds {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args){
-		// create the command line options that we are looking for
-		LongOpt[] longopts = {
-			new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
-			new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
-			new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
-			new LongOpt(labels.getString("windows.option"), LongOpt.NO_ARGUMENT, null, 'd'),
-			new LongOpt(labels.getString("dos.option"), LongOpt.NO_ARGUMENT, null, 'd'),
-			new LongOpt(labels.getString("unix.option"), LongOpt.NO_ARGUMENT, null, 'n'),
-			new LongOpt(labels.getString("java.option"), LongOpt.NO_ARGUMENT, null, 'n'),
-			new LongOpt(labels.getString("mac.option"), LongOpt.NO_ARGUMENT, null, 'r'),
-			new LongOpt(labels.getString("system.option"), LongOpt.NO_ARGUMENT, null, 's'),
-			new LongOpt(labels.getString("force.option"), LongOpt.NO_ARGUMENT, null, 'f'),
-			new LongOpt(labels.getString("quiet.option"), LongOpt.NO_ARGUMENT, null, 'q'),
-			new LongOpt(labels.getString("reallyquiet.option"), LongOpt.NO_ARGUMENT, null, 'Q'),
-			new LongOpt(labels.getString("verbose.option"), LongOpt.NO_ARGUMENT, null, 'v'),
-			new LongOpt(labels.getString("reallyverbose.option"), LongOpt.NO_ARGUMENT, null, 'V'),
-			new LongOpt(labels.getString("noforce.option"), LongOpt.NO_ARGUMENT, null, 4),
-		};
-		String oneLetterOptions = "dnrsfVvqQ";
-		Getopt opts = new Getopt(labels.getString("lineends"), args, oneLetterOptions, longopts);
+
+		CmdLn commandLine = new CmdLn(
+			args
+		).setDescription(
+			labels.getString("lineends") + labels.getString("purpose.message")
+		);
+		for (LineEndsCmdLnOption option: LineEndsCmdLnOption.values()){
+			commandLine.addOption(option.getCmdLineOption());
+		}
 		int style = STYLE_SYSTEM;
 		boolean force = false;
 		boolean printMessages = false;
 		boolean printExtraMessages = false;
 		boolean printErrors = true;
-		int c;
-		while ((c = opts.getopt()) != -1){
-			switch(c){
-					case 1:{
+		for(CmdLnResult result: commandLine.getResults()){
+			switch((LineEndsCmdLnOption)result.getOption().getUserObject()){
+				case HELP:{
 					// print out the help message
-					String[] helpFlags = new String[]{
-						"--" + labels.getString("help.option"),
-						"--" + labels.getString("version.option"),
-						"--" + labels.getString("about.option"),
-						"-d --" + labels.getString("windows.option") + " --" + labels.getString("dos.option"),
-						"-n --" + labels.getString("unix.option") + " --" + labels.getString("java.option"),
-						"-r --" + labels.getString("mac.option"),
-						"-s --" + labels.getString("system.option"),
-						"-f --" + labels.getString("force.option"),
-						"--" + labels.getString("noforce.option"),
-						"-V --" + labels.getString("reallyverbose.option"),
-						"-v --" + labels.getString("verbose.option"),
-						"-q --" + labels.getString("quiet.option"),
-						"-Q --" + labels.getString("reallyquiet.option"),
-					};
-					int maxLength = 0;
-					for (int i=0; i<helpFlags.length; i++){
-						maxLength = Math.max(maxLength, helpFlags[i].length());
-					}
-					maxLength += 2;
-					System.out.println(
-						labels.getString("lineends") + " [-" + oneLetterOptions + "] <" + labels.getString("files") + ">\n" +
-						labels.getString("purpose.message") + "\n" +
-						"  " + labels.getString("stdin.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("d.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("n.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("r.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("s.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("f.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("noforce.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("V.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("v.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[11] ,maxLength, ' ') + labels.getString("q.message") + " (" + labels.getString("default") + ")\n" +
-						"  " + StringHelper.postpad(helpFlags[12] ,maxLength, ' ') + labels.getString("Q.message") + "\n"
-					);
+					commandLine.printHelp();
 					System.exit(0);
 				} break;
-				case 2:{
+				case VERSION:{
 					// print out the version message
 					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
-				case 3:{
+				case ABOUT:{
 					System.out.println(
 						labels.getString("lineends") + " -- " + labels.getString("purpose.message") + "\n" +
 						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
@@ -141,85 +131,81 @@ public class LineEnds {
 					);
 					System.exit(0);
 				} break;
-				case 'd':{
+				case DOS:{
 					style = STYLE_RN;
 				} break;
-				case 'n':{
+				case UNIX:{
 					style = STYLE_N;
 				} break;
-				case 'r':{
+				case MAC:{
 					style = STYLE_R;
 				} break;
-				case 's':{
+				case SYSTEM:{
 					style = STYLE_SYSTEM;
 				} break;
-				case 'f':{
+				case FORCE:{
 					force = true;
 				} break;
-				case 4:{
+				case NOFORCE:{
 					force = false;
 				} break;
-				case 'V':{
+				case REALLYVERBOSE:{
 					printExtraMessages = true;
 					printMessages = true;
 					printErrors = true;
 				} break;
-				case 'v':{
+				case VERBOSE:{
 					printExtraMessages = false;
 					printMessages = true;
 					printErrors = true;
 				} break;
-				case 'q':{
+				case QUIET:{
 					printExtraMessages = false;
 					printMessages = false;
 					printErrors = true;
 				} break;
-				case 'Q':{
+				case REALLYQUIET:{
 					printExtraMessages = false;
 					printMessages = false;
 					printErrors = false;
 				} break;
-				default:{
-					System.exit(1);
-				}
 			}
 		}
 
 		int exitCond = 0;
 		boolean done = false;
-		for (int i=opts.getOptind(); i<args.length; i++){
-			boolean modified = false;
+		for (String argument: commandLine.getNonOptionArguments()){
 			done = true;
-			File source = new File(args[i]);
+			File source = new File(argument);
 			if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantread"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canWrite()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {args[i]}));
+					System.err.println(MessageFormat.format(labels.getString("cantwrite"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else {
 				try {
 					if(convert (source, style, !force)){
 						if (printMessages){
-							System.out.println(MessageFormat.format(labels.getString("modified"), (Object[])new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("modified"), (Object[])new String[] {argument}));
 						}
 					} else {
 						if (printExtraMessages){
-							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), (Object[])new String[] {args[i]}));
+							System.out.println(MessageFormat.format(labels.getString("alreadycorrect"), (Object[])new String[] {argument}));
 						}
 					}
 				} catch (IOException x){
 					if(printErrors){
-						System.err.println(args[i] + ": " + x.getMessage());
+						System.err.println(argument + ": " + x.getMessage());
 					}
 					exitCond = 1;
 				}
@@ -280,13 +266,13 @@ public class LineEnds {
 	 */
 	public final static int STYLE_JAVA = 2;
 	/**
-	 * The Macintosh line ending ("\r")
+	 * The MacIntosh line ending ("\r")
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_MAC = 3;
 	/**
-	 * The Macintosh line ending ("\r")
+	 * The MacIntosh line ending ("\r")
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */

@@ -1,6 +1,6 @@
 /*
  * Generate random passwords.
- * Copyright (C) 2001-2002 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,6 @@
 package com.Ostermiller.util;
 
 import java.security.SecureRandom;
-import gnu.getopt.*;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Locale;
@@ -70,7 +69,7 @@ public class RandPass {
 	private static final int DEFAULT_PASSWORD_LENGTH = 8;
 
 	/**
-	 * Alphabet consisting of upper and lowercase letters A-Z and
+	 * Alphabet consisting of upper and lower case letters A-Z and
 	 * the digits 0-9.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -119,7 +118,7 @@ public class RandPass {
 	};
 
 	/**
-	 * Alphabet consisting of the lowercase letters A-Z.
+	 * Alphabet consisting of the lower case letters A-Z.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -131,7 +130,7 @@ public class RandPass {
 	};
 
 	/**
-	 * Alphabet consisting of the lowercase letters A-Z and
+	 * Alphabet consisting of the lower case letters A-Z and
 	 * the digits 0-9.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -145,7 +144,7 @@ public class RandPass {
 	};
 
 	/**
-	 * Alphabet consisting of upper and lowercase letters A-Z.
+	 * Alphabet consisting of upper and lower case letters A-Z.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -172,7 +171,7 @@ public class RandPass {
 	};
 
 	/**
-	 * Alphabet consisting of upper and lowercase letters A-Z and
+	 * Alphabet consisting of upper and lower case letters A-Z and
 	 * the digits 0-9 but with characters that are often mistaken
 	 * for each other when typed removed. (I,L,O,U,V,i,l,o,u,v,0,1)
 	 *
@@ -220,7 +219,7 @@ public class RandPass {
 	 * used for the first character
 	 * in the generated passwords.
 	 * <p>
-	 * This value may be null but it mus
+	 * This value may be null but it must
 	 * have at least one element otherwise.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -232,7 +231,7 @@ public class RandPass {
 	 * used for the last character
 	 * in the generated passwords.
 	 * <p>
-	 * This value may be null but it mus
+	 * This value may be null but it must
 	 * have at least one element otherwise.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -292,12 +291,48 @@ public class RandPass {
 	}
 
 	private class Requirement {
-		public Requirement(char[] alphabet, int num){
+		private Requirement(char[] alphabet, int num){
 			this.alphabet = alphabet;
 			this.num = num;
 		}
-		public char[] alphabet;
-		public int num;
+		private char[] alphabet;
+		private int num;
+	}
+
+	private enum RandPassCmdLnOption {
+		/** --help */
+		HELP(new CmdLnOption(labels.getString("help.option")).setDescription( labels.getString("help.message"))),
+		/** --version */
+		VERSION(new CmdLnOption(labels.getString("version.option")).setDescription(labels.getString("version.message"))),
+		/** --about */
+		ABOUT(new CmdLnOption(labels.getString("about.option")).setDescription(labels.getString("about.message"))),
+		/** --alphabet */
+		ALPHABET(new CmdLnOption(labels.getString("alphabet.option"), 'a').setRequiredArgument().setDescription(labels.getString("a.message"))),
+		/** --first */
+		FIRST(new CmdLnOption(labels.getString("first.alphabet.option"), 'F').setRequiredArgument().setDescription(labels.getString("F.message"))),
+		/** --last */
+		LAST(new CmdLnOption(labels.getString("last.alphabet.option"), 'L').setRequiredArgument().setDescription(labels.getString("L.message"))),
+		/** --number */
+		NUMBER(new CmdLnOption(labels.getString("number.option"), 'n').setRequiredArgument().setDescription(labels.getString("n.message"))),
+		/** --reps */
+		REPS(new CmdLnOption(labels.getString("maxrep.option"), 'r').setRequiredArgument().setDescription(labels.getString("r.message"))),
+		/** --length */
+		LENGTH(new CmdLnOption(labels.getString("length.option"), 'l').setRequiredArgument().setDescription(labels.getString("l.message"))),
+		/** --require */
+		REQUIRE(new CmdLnOption(labels.getString("require.option"), 'R').setRequiredArgument().setDescription(labels.getString("R.message"))),
+		/** --verify */
+		VERIFY(new CmdLnOption(labels.getString("verify.option"), 'v').setRequiredArgument().setDescription(labels.getString("v.message")));
+
+		private CmdLnOption option;
+
+		private RandPassCmdLnOption(CmdLnOption option){
+			option.setUserObject(this);
+			this.option = option;
+		}
+
+		private CmdLnOption getCmdLineOption(){
+			return option;
+		}
 	}
 
 	/**
@@ -305,26 +340,19 @@ public class RandPass {
 	 * Run with --help argument for more information.
 	 *
 	 * @param args Command line arguments.
+	 * @throws Exception errors
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static void main(String[] args) throws Exception {
-		// create the command line options that we are looking for
-		LongOpt[] longopts = {
-			new LongOpt(labels.getString("help.option"), LongOpt.NO_ARGUMENT, null, 1),
-			new LongOpt(labels.getString("version.option"), LongOpt.NO_ARGUMENT, null, 2),
-			new LongOpt(labels.getString("about.option"), LongOpt.NO_ARGUMENT, null, 3),
-			new LongOpt(labels.getString("alphabet.option"), LongOpt.REQUIRED_ARGUMENT, null, 'a'),
-			new LongOpt(labels.getString("first.alphabet.option"), LongOpt.REQUIRED_ARGUMENT, null, 'F'),
-			new LongOpt(labels.getString("last.alphabet.option"), LongOpt.REQUIRED_ARGUMENT, null, 'L'),
-			new LongOpt(labels.getString("number.option"), LongOpt.REQUIRED_ARGUMENT, null, 'n'),
-			new LongOpt(labels.getString("maxrep.option"), LongOpt.REQUIRED_ARGUMENT, null, 'r'),
-			new LongOpt(labels.getString("length.option"), LongOpt.REQUIRED_ARGUMENT, null, 'l'),
-			new LongOpt(labels.getString("require.option"), LongOpt.REQUIRED_ARGUMENT, null, 'R'),
-			new LongOpt(labels.getString("verify.option"), LongOpt.REQUIRED_ARGUMENT, null, 'v'),
-		};
-		String oneLetterOptions = "a:n:F:L:r:l:R:v:";
-		Getopt opts = new Getopt(labels.getString("randpass"), args, oneLetterOptions, longopts);
+		CmdLn commandLine = new CmdLn(
+			args
+		).setDescription(
+			labels.getString("randpass") + labels.getString("purpose.message")
+		);
+		for (RandPassCmdLnOption option: RandPassCmdLnOption.values()){
+			commandLine.addOption(option.getCmdLineOption());
+		}
 		int number = 1;
 		char[] alphabet = NONCONFUSING_ALPHABET;
 		char[] firstAlphabet = null;
@@ -333,122 +361,86 @@ public class RandPass {
 		Vector<String> ver = new Vector<String>();
 		int maxreps = 0;
 		int length = 8;
-		int c;
-		while ((c = opts.getopt()) != -1){
-			switch(c){
-				case 1:{
+		for(CmdLnResult result: commandLine.getResults()){
+			switch((RandPassCmdLnOption)result.getOption().getUserObject()){
+				case HELP:{
 					// print out the help message
-					String[] helpFlags = new String[]{
-						"--" + labels.getString("help.option"),
-						"--" + labels.getString("version.option"),
-						"--" + labels.getString("about.option"),
-						"-a --" + labels.getString("alphabet.option") + " " + labels.getString("alphabet.argument"),
-						"-n --" + labels.getString("number.option") + " " + labels.getString("number.argument"),
-						"-F --" + labels.getString("first.alphabet.option") + " " + labels.getString("alphabet.argument"),
-						"-L --" + labels.getString("last.alphabet.option") + " " + labels.getString("alphabet.argument"),
-						"-l --" + labels.getString("length.option") + " " + labels.getString("number.argument"),
-						"-r --" + labels.getString("maxrep.option") + " " + labels.getString("number.argument"),
-						"-R --" + labels.getString("require.option") + " " + labels.getString("alphabet.argument"),
-						"-v --" + labels.getString("verify.option") + " " + labels.getString("class.argument"),
-					};
-					int maxLength = 0;
-					for (int i=0; i<helpFlags.length; i++){
-						maxLength = Math.max(maxLength, helpFlags[i].length());
-					}
-					maxLength += 2;
-					System.out.println(
-						labels.getString("randpass") + " [-" + StringHelper.replace(oneLetterOptions, ":", "") + "]\n" +
-						labels.getString("purpose.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[0] ,maxLength, ' ') + labels.getString("help.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[1] ,maxLength, ' ') + labels.getString("version.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[2] ,maxLength, ' ') + labels.getString("about.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[3] ,maxLength, ' ') + labels.getString("a.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[4] ,maxLength, ' ') + labels.getString("n.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[5] ,maxLength, ' ') + labels.getString("F.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[6] ,maxLength, ' ') + labels.getString("L.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[7] ,maxLength, ' ') + labels.getString("l.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[8] ,maxLength, ' ') + labels.getString("r.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[9] ,maxLength, ' ') + labels.getString("R.message") + "\n" +
-						"  " + StringHelper.postpad(helpFlags[10] ,maxLength, ' ') + labels.getString("v.message") + "\n"
-					);
+					commandLine.printHelp();
 					System.exit(0);
 				} break;
-				case 2:{
+				case VERSION:{
 					// print out the version message
 					System.out.println(MessageFormat.format(labels.getString("version"), (Object[])new String[] {version}));
 					System.exit(0);
 				} break;
-				case 3:{
+				case ABOUT:{
 					System.out.println(
 						labels.getString("randpass") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2002", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);
 				} break;
-				case 'a':{
-					String alph = opts.getOptarg();
+				case ALPHABET:{
+					String alph = result.getArgument();
 					if (alph.length() == 0){
 						alphabet = NONCONFUSING_ALPHABET;
 					} else {
 						alphabet = alph.toCharArray();
 					}
 				} break;
-				case 'F':{
-					String alph = opts.getOptarg();
+				case FIRST:{
+					String alph = result.getArgument();
 					if (alph.length() == 0){
 						firstAlphabet = null;
 					} else {
 						firstAlphabet = alph.toCharArray();
 					}
 				} break;
-				case 'L':{
-					String alph = opts.getOptarg();
+				case LAST:{
+					String alph = result.getArgument();
 					if (alph.length() == 0){
 						lastAlphabet = null;
 					} else {
 						lastAlphabet = alph.toCharArray();
 					}
 				} break;
-				case 'R':{
-					String alph = opts.getOptarg();
+				case REQUIRE:{
+					String alph = result.getArgument();
 					if (alph.length() != 0){
 						reqs.add(alph);
 					}
 				} break;
-				case 'v':{
-					ver.add(opts.getOptarg());
+				case VERIFY:{
+					ver.add(result.getArgument());
 				} break;
-				case 'n':{
+				case NUMBER:{
 					try {
-						number = Integer.parseInt(opts.getOptarg());
+						number = Integer.parseInt(result.getArgument());
 						if (number <= 0) throw new NumberFormatException();
 					} catch (NumberFormatException nfe){
 						System.err.println(labels.getString("number.bad_argument"));
 						System.exit(0);
 					}
 				} break;
-				case 'r':{
+				case REPS:{
 					try {
-						maxreps = Integer.parseInt(opts.getOptarg());
+						maxreps = Integer.parseInt(result.getArgument());
 						if (maxreps < 0) throw new NumberFormatException();
 					} catch (NumberFormatException nfe){
 						System.err.println(labels.getString("number.bad_argument"));
 						System.exit(0);
 					}
 				} break;
-				case 'l':{
+				case LENGTH:{
 					try {
-						length = Integer.parseInt(opts.getOptarg());
+						length = Integer.parseInt(result.getArgument());
 						if (length < 0) throw new NumberFormatException();
 					} catch (NumberFormatException nfe){
 						System.err.println(labels.getString("number.bad_argument"));
 						System.exit(0);
 					}
 				} break;
-				default:{
-					System.exit(0);
-				}
 			}
 		}
 		RandPass randPass = new RandPass();
@@ -457,10 +449,10 @@ public class RandPass {
 		randPass.setLastAlphabet(lastAlphabet);
 		randPass.setMaxRepetition(maxreps);
 		for (int i=0; i<reqs.size(); i++){
-			randPass.addRequirement(((String)(reqs.elementAt(i))).toCharArray(), 1);
+			randPass.addRequirement((reqs.elementAt(i)).toCharArray(), 1);
 		}
 		for (int i=0; i<ver.size(); i++){
-			randPass.addVerifier((PasswordVerifier)((Class.forName((String)(ver.elementAt(i)))).newInstance()));
+			randPass.addVerifier((PasswordVerifier)((Class.forName((ver.elementAt(i)))).newInstance()));
 		}
 		for (int i=0; i<number; i++){
 			System.out.println(randPass.getPass(length));
@@ -604,7 +596,7 @@ public class RandPass {
 			if (requirements != null) applyRequirements(pass);
 			verified = true;
 			for (int i=0; verified && verifiers != null && i<verifiers.size(); i++){
-				verified = ((PasswordVerifier)verifiers.elementAt(i)).verify(pass);
+				verified = verifiers.elementAt(i).verify(pass);
 			}
 		}
 		return(pass);
@@ -638,7 +630,7 @@ public class RandPass {
 				touched[i] = false;
 			}
 			for (int reqNum=0; reqNum<size; reqNum++){
-				Requirement req = (Requirement)requirements.elementAt(reqNum);
+				Requirement req = requirements.elementAt(reqNum);
 				// set the portion of this alphabet available for use.
 				int reqUsedInd = req.alphabet.length;
 				// figure out how much of this requirement is already fulfilled

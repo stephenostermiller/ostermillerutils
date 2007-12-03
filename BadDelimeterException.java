@@ -30,6 +30,11 @@ package com.Ostermiller.util;
 public class BadDelimeterException extends IllegalArgumentException {
 
 	/**
+	 * Serial version ID
+	 */
+	private static final long serialVersionUID = 7603007141975623144L;
+
+	/**
 	 * Constructs an exception with null as its error detail message.
 	 *
 	 * @since ostermillerutils 1.02.08

@@ -27,6 +27,7 @@ import java.util.*;
  * "http://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @param <ElementType> Type of array over which to iterate
  * @since ostermillerutils 1.03.00
  */
 public class ArrayIterator<ElementType> implements Iterator<ElementType> {

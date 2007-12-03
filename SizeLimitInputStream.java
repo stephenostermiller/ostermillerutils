@@ -112,6 +112,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * Get the number of total bytes (including bytes already read)
 	 * that can be read from this stream (as set in the constructor).
+	 * @return Maximum bytes that can be read until the size limit runs out
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
@@ -136,7 +137,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		if (bytesRead >= maxBytesToRead){
 			return -1;
 		}
@@ -151,14 +152,14 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read(byte[] b) throws IOException {
+	@Override public int read(byte[] b) throws IOException {
 		return this.read(b, 0, b.length);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read(byte[] b, int off, int len) throws IOException {
+	@Override public int read(byte[] b, int off, int len) throws IOException {
 		if (bytesRead >= maxBytesToRead){
 			return -1;
 		}
@@ -175,7 +176,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public long skip(long n) throws IOException {
+	@Override public long skip(long n) throws IOException {
 		if (bytesRead >= maxBytesToRead){
 			return -1;
 		}
@@ -189,7 +190,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int available() throws IOException {
+	@Override public int available() throws IOException {
 		int available = in.available();
 		long bytesLeft = getBytesLeft();
 		if (available > bytesLeft){
@@ -209,14 +210,14 @@ public class SizeLimitInputStream extends InputStream {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
 		in.close();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void mark(int readlimit){
+	@Override public void mark(int readlimit){
 		if (in.markSupported()){
 			markReadLimitBytes = readlimit;
 			bytesReadSinceMark = 0;
@@ -227,7 +228,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void reset() throws IOException {
+	@Override public void reset() throws IOException {
 		if (in.markSupported() && bytesReadSinceMark <= markReadLimitBytes){
 			bytesRead -= bytesReadSinceMark;
 			in.reset();
@@ -238,7 +239,7 @@ public class SizeLimitInputStream extends InputStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean markSupported(){
+	@Override public boolean markSupported(){
 		return in.markSupported();
 	}
 }

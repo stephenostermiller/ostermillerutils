@@ -1,6 +1,5 @@
 /*
- * Streams that have a different close mechanism.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -60,28 +59,28 @@ public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(int b) throws IOException {
+	@Override public void write(int b) throws IOException {
 		out.write(b);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(byte[] b) throws IOException {
+	@Override public void write(byte[] b) throws IOException {
 		out.write(b);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void write(byte[] b, int off, int len) throws IOException {
+	@Override public void write(byte[] b, int off, int len) throws IOException {
 		out.write(b, off, len);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void flush() throws IOException {
+	@Override public void flush() throws IOException {
 		out.flush();
 	}
 
@@ -92,7 +91,8 @@ public class NoCloseOutputStream extends OutputStream implements NoCloseStream {
 	 *
 	 * @since ostermillerutils 1.01.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
+		// Does nothing
 	}
 
 	/**

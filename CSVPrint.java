@@ -230,6 +230,7 @@ public interface CSVPrint {
 
 	/**
 	 * Flush any data written out to underlying streams.
+	 * @throws IOException if an IO error occurs
 	 *
 	 * @since ostermillerutils 1.02.26
 	 */
@@ -237,6 +238,7 @@ public interface CSVPrint {
 
 	/**
 	 * Close any underlying streams.
+	 * @throws IOException if an IO error occurs
 	 *
 	 * @since ostermillerutils 1.02.26
 	 */

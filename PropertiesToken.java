@@ -1,6 +1,5 @@
 /*
- * This file is part of UberProperties
- * Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,12 +28,25 @@ package com.Ostermiller.util;
  */
 class PropertiesToken {
 
+	/** comment -- 0 */
 	public final static int COMMENT = 0x0;
+
+	/** end of line white space -- 1 */
 	public final static int END_LINE_WHITE_SPACE = 0x1;
+
+	/** white space -- 2 */
 	public final static int WHITE_SPACE = 0x2;
+
+	/** separator -- 3 */
 	public final static int SEPARATOR = 0x3;
+
+	/** continue line -- 4 */
 	public final static int CONTINUE_LINE = 0x4;
+
+	/** name -- 5 */
 	public final static int NAME = 0x5;
+
+	/** value -- 6 */
 	public final static int VALUE = 0x6;
 
 	private int ID;
@@ -76,7 +88,14 @@ class PropertiesToken {
 		return (contents);
 	}
 
-	public String toString(){
+	/**
+	 * String representation appropriate for debugging.
+	 *
+	 * @return String representation
+	 *
+	 * @since ostermillerutils 1.00.00
+	 */
+	@Override public String toString(){
 			String idString = "";
 			switch (ID){
 				case COMMENT: idString = "COMMENT"; break;

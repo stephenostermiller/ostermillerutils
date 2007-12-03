@@ -29,6 +29,11 @@ package com.Ostermiller.util;
 public class BadDelimiterException extends BadDelimeterException {
 
 	/**
+	 * Serial Version ID
+	 */
+	private static final long serialVersionUID = -3250803278822032684L;
+
+	/**
 	 * Constructs an exception with null as its error detail message.
 	 *
 	 * @since ostermillerutils 1.02.20
@@ -43,7 +48,6 @@ public class BadDelimiterException extends BadDelimeterException {
 	 * Throwable.getMessage()  method of class java.lang.Throwable.
 	 *
 	 * @param s the detail message.
-	 *
 	 * @since ostermillerutils 1.02.20
 	 */
 	public BadDelimiterException(String s){

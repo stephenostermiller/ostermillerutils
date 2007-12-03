@@ -1,6 +1,5 @@
 /*
- * A password dialog box.
- * Copyright (C) 2001, 2002 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,11 +17,10 @@
 
 package com.Ostermiller.util;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ResourceBundle;
-import java.util.Locale;
+import java.util.*;
+import javax.swing.*;
 
 /**
  * A modal dialog that asks the user for a user name and password.
@@ -47,6 +45,11 @@ import java.util.Locale;
 public class PasswordDialog extends JDialog {
 
 	/**
+	 * Serial version id
+	 */
+	private static final long serialVersionUID = -832548326686122133L;
+
+	/**
 	 * Locale specific strings displayed to the user.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -61,7 +64,7 @@ public class PasswordDialog extends JDialog {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void setLocale(Locale locale){
+	@Override public void setLocale(Locale locale){
 		labels = ResourceBundle.getBundle("com.Ostermiller.util.PasswordDialog",  locale);
 	}
 
@@ -111,7 +114,7 @@ public class PasswordDialog extends JDialog {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void setName(String name){
+	@Override public void setName(String name){
 		this.name.setText(name);
 	}
 
@@ -188,7 +191,7 @@ public class PasswordDialog extends JDialog {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public String getName(){
+	@Override public String getName(){
 		return name.getText();
 	}
 
@@ -274,7 +277,7 @@ public class PasswordDialog extends JDialog {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	protected void dialogInit(){
+	@Override protected void dialogInit(){
 
 		if (labels == null){
 			setLocale(Locale.getDefault());
@@ -290,7 +293,7 @@ public class PasswordDialog extends JDialog {
 		super.dialogInit();
 
 		KeyListener keyListener = (new KeyAdapter() {
-			public void keyPressed(KeyEvent e){
+			@Override public void keyPressed(KeyEvent e){
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE ||
 						(e.getSource() == cancelButton
 						&& e.getKeyCode() == KeyEvent.VK_ENTER)){
@@ -326,8 +329,6 @@ public class PasswordDialog extends JDialog {
 		c.insets.bottom = 5;
 		JPanel pane = new JPanel(gridbag);
 		pane.setBorder(BorderFactory.createEmptyBorder(10, 20, 5, 20));
-		JLabel label;
-
 		c.anchor = GridBagConstraints.EAST;
 		gridbag.setConstraints(nameLabel, c);
 		pane.add(nameLabel);
@@ -374,33 +375,5 @@ public class PasswordDialog extends JDialog {
 	public boolean showDialog(){
 		setVisible(true);
 		return okPressed();
-	}
-
-	/**
-	 * A simple example to show how this might be used.
-	 * If there are arguments passed to this program, the first
-	 * is treated as the default name, the second as the default password
-	 *
-	 * @param args command line arguments: name and password (optional)
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args){
-		PasswordDialog p = new PasswordDialog();
-		if(args.length > 0){
-			p.setName(args[0]);
-		}
-		if(args.length > 1){
-			p.setPass(args[1]);
-		}
-		if(p.showDialog()){
-			System.out.println("Name: " + p.getName());
-			System.out.println("Pass: " + p.getPass());
-		} else {
-			System.out.println("User selected cancel");
-		}
-		p.dispose();
-		p = null;
-		System.exit(0);
 	}
 }

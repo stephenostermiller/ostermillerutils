@@ -15,11 +15,10 @@
  *
  * See COPYING.TXT for details.
  */
-
 package com.Ostermiller.util;
 
-import java.lang.reflect.*;
-import java.io.*;
+import java.io.IOException;
+import java.lang.reflect.Array;
 
 /**
  * Convenience methods for working with Java arrays.
@@ -48,10 +47,10 @@ public final class ArrayHelper {
 	 */
 	public static Object[] cat(Object[] arr1, Object[] arr2){
 		// Use reflection to find the super class of both arrays
-		Class commonSuperClass = Object.class;
+		Class<?> commonSuperClass = Object.class;
 		boolean foundcommonSuperClass=false;
-		for (Class c1 = arr1.getClass().getComponentType(); !foundcommonSuperClass && !c1.equals(Object.class); c1 = c1.getSuperclass()){
-			for (Class c2 = arr2.getClass().getComponentType(); !foundcommonSuperClass && !c2.equals(Object.class); c2 = c2.getSuperclass()){
+		for (Class<?> c1 = arr1.getClass().getComponentType(); !foundcommonSuperClass && !c1.equals(Object.class); c1 = c1.getSuperclass()){
+			for (Class<?> c2 = arr2.getClass().getComponentType(); !foundcommonSuperClass && !c2.equals(Object.class); c2 = c2.getSuperclass()){
 				if (c2.equals(c1)){
 					foundcommonSuperClass = true;
 					commonSuperClass = c1;
@@ -76,8 +75,8 @@ public final class ArrayHelper {
 	public static void print(Object[] arr){
 		try {
 			CSVPrinter csvp = new CSVPrinter(System.out);
-			for (int i=0; i<arr.length; i++){
-				csvp.write(arr[i].toString());
+			for (Object element: arr) {
+				csvp.write(element.toString());
 			}
 			csvp.writeln();
 			csvp.flush();
@@ -93,6 +92,7 @@ public final class ArrayHelper {
 	 *
 	 * @param arr1 first array
 	 * @param arr2 second array
+	 * @return true iff two arguments are equal
 	 * @since ostermillerutils 1.06.00
 	 */
 	public static boolean equal(Object[] arr1, Object[] arr2){

@@ -10,7 +10,7 @@
 
 /*
  * Tokenize a command line into application and arguments.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,44 +40,7 @@ import java.io.*;
 %apiprivate
 %function getToken
 %type String
-%{
-	/**
-	 * Prints out tokens and line numbers from a file or System.in.
-	 * If no arguments are given, System.in will be used for input.
-	 * If more arguments are given, the first argument will be used as
-	 * the name of the file to use as input
-	 *
-	 * @param args program arguments, of which the first is a filename
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args) {
-		InputStream in;
-		try {
-			if (args.length > 0){
-				File f = new File(args[0]);
-				if (f.exists()){
-					if (f.canRead()){
-						in = new FileInputStream(f);
-					} else {
-						throw new IOException("Could not open " + args[0]);
-					}
-				} else {
-					throw new IOException("Could not find " + args[0]);
-				}
-			} else {
-				in = System.in;
-			}
-			BrowserCommandLexer shredder = new BrowserCommandLexer(in);
-			String t;
-			while ((t = shredder.getNextToken()) != null) {
-				System.out.println(t);
-			}
-		} catch (IOException e){
-			System.out.println(e.getMessage());
-		}
-	}
-    
+%{    
     /**
      * Return the next token from the browser command.
      *
@@ -102,7 +65,7 @@ import java.io.*;
 
 %unicode
 
-AnyChar=([A]|[^A])
+AnyChar=([^])
 Escape=([\\]{AnyChar})
 NonQuoted=((([^\t\f\r\n\\ ])|{Escape})*)
 Quoted=([\"]([^\"]|{Escape})*[\"])
@@ -118,4 +81,5 @@ Quoted=([\"]([^\"]|{Escape})*[\"])
 }
 
 <YYINITIAL> {AnyChar} {
+	// Do nothing
 }

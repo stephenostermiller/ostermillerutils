@@ -28,6 +28,11 @@ import java.io.*;
  * @since ostermillerutils 1.04.00
  */
 class ConcatTests {
+
+	/**
+	 * Main method for tests
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			ConcatReader cr = new ConcatReader(
@@ -63,10 +68,11 @@ class ConcatTests {
 			cr1.addReader(new StringReader("two"));
 			read(cr1, "netwo");
 			new Thread(){
-				public void run(){
+				@Override public void run(){
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException ix){
+						throw new RuntimeException(ix);
 					}
 					cr1.addReader(new StringReader("three"));
 				}
@@ -105,10 +111,11 @@ class ConcatTests {
 			cis1.addInputStream(new ByteArrayInputStream("two".getBytes("ASCII")));
 			read(cis1, "netwo");
 			new Thread(){
-				public void run(){
+				@Override public void run(){
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException ix){
+						throw new RuntimeException(ix);
 					}
 					try {
 						cis1.addInputStream(new ByteArrayInputStream("three".getBytes("ASCII")));
@@ -141,12 +148,12 @@ class ConcatTests {
 
 	private static void read(Reader in, char expected) throws Exception {
 		int c = in.read();
-		if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
+		if (c != expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
 	}
 
 	private static void read(InputStream in, char expected) throws Exception {
 		int c = in.read();
-		if (c != (int)expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
+		if (c != expected) throw new Exception ("Expected to read " + expected + " but read " + (char)c);
 	}
 
 	private static void read(Reader in, String expected) throws Exception {

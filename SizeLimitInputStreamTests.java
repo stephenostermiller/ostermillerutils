@@ -1,6 +1,5 @@
 /*
- * SizeLimitInputStream tests
- * Copyright (C) 2004 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,6 +27,10 @@ import java.io.*;
  * @since ostermillerutils 1.04.00
  */
 class SizeLimitInputStreamTests {
+	/**
+	 * Main method for regression test
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main (String[] args){
 		try {
 			SizeLimitInputStream slis;
@@ -59,7 +62,7 @@ class SizeLimitInputStreamTests {
 			if (slis.read() != -1) throw new Exception ("Expected -1");
 
 			InputStream in = new ByteArrayInputStream(
-				"onetwothreefourfivesixseven".getBytes("ASCII")
+				("one"+"two"+"three"+"four"+"five"+"six"+"seven").getBytes("ASCII")
 			);
 			compare("one", readFully(new SizeLimitInputStream(in,3)));
 			compare("", readFully(new SizeLimitInputStream(in,0)));

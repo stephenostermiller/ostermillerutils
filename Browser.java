@@ -18,20 +18,14 @@
  */
 package com.Ostermiller.util;
 
-import java.io.*;
-import java.text.MessageFormat;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLClassLoader;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Properties;
-import java.util.Vector;
-import java.util.ResourceBundle;
-import java.util.Locale;
-import java.io.StringReader;
-import java.lang.reflect.*;
+import java.io.*;
+import java.lang.reflect.Method;
+import java.net.*;
+import java.text.MessageFormat;
+import java.util.*;
+import javax.swing.*;
 
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
@@ -99,50 +93,58 @@ public class Browser {
 
 	/**
 	 * Retrieve the default commands to open a browser for this system.
+	 * @return list of commands
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public static String[] defaultCommands(){
-		String[] exec = null;
+		String[] execLocal = null;
 		if ( System.getProperty("os.name").startsWith("Windows")){
-			exec = new String[]{
+			execLocal = new String[]{
 				"rundll32 url.dll,FileProtocolHandler {0}",
 			};
 		} else if (System.getProperty("os.name").startsWith("Mac")){
-			Vector browsers = new Vector();
+			ArrayList<String> browsers = new ArrayList<String>();
 			try {
 				Process p = Runtime.getRuntime().exec("which open");
 				if (p.waitFor() == 0){
 					browsers.add("open {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			if (browsers.size() == 0){
-				exec = null;
+				execLocal = null;
 			} else {
-				exec = (String[])browsers.toArray(new String[0]);
+				execLocal = browsers.toArray(new String[0]);
 			}
 		} else if (System.getProperty("os.name").startsWith("SunOS")) {
-			exec = new String[]{"/usr/dt/bin/sdtwebclient {0}"};
+			execLocal = new String[]{"/usr/dt/bin/sdtwebclient {0}"};
 		} else {
-			Vector browsers = new Vector();
+			ArrayList<String> browsers = new ArrayList<String>();
 			try {
-				Process p = Runtime.getRuntime().exec("which firebird");
+				Process p = Runtime.getRuntime().exec("which firefox");
 				if (p.waitFor() == 0){
-					browsers.add("firebird -remote openURL({0})");
-					browsers.add("firebird {0}");
+					browsers.add("firefox -remote openURL({0})");
+					browsers.add("firefox {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
-			}try {
+				// failure -- nothing added to list
+			}
+			try {
 				Process p = Runtime.getRuntime().exec("which mozilla");
 				if (p.waitFor() == 0){
 					browsers.add("mozilla -remote openURL({0})");
 					browsers.add("mozilla {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			try {
 				Process p = Runtime.getRuntime().exec("which opera");
@@ -151,7 +153,9 @@ public class Browser {
 					browsers.add("opera {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			try {
 				Process p = Runtime.getRuntime().exec("which galeon");
@@ -159,7 +163,9 @@ public class Browser {
 					browsers.add("galeon {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			try {
 				Process p = Runtime.getRuntime().exec("which konqueror");
@@ -167,7 +173,9 @@ public class Browser {
 					browsers.add("konqueror {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			try {
 				Process p = Runtime.getRuntime().exec("which netscape");
@@ -176,7 +184,9 @@ public class Browser {
 					browsers.add("netscape {0}");
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			try {
 				Process p = Runtime.getRuntime().exec("which xterm");
@@ -187,15 +197,17 @@ public class Browser {
 					}
 				}
 			} catch (IOException e){
+				// failure -- nothing added to list
 			} catch (InterruptedException e){
+				// failure -- nothing added to list
 			}
 			if (browsers.size() == 0){
-				exec = null;
+				execLocal = null;
 			} else {
-				exec = (String[])browsers.toArray(new String[0]);
+				execLocal = browsers.toArray(new String[0]);
 			}
 		}
-		return exec;
+		return execLocal;
 	}
 
 	/**
@@ -214,10 +226,10 @@ public class Browser {
 	public static void save(Properties props){
 		boolean saveBrowser = false;
 		if (Browser.exec != null && Browser.exec.length > 0){
-			String[] exec = Browser.defaultCommands();
-			if (exec != null && exec.length == Browser.exec.length){
-				for (int i=0; i<exec.length; i++){
-					if (!exec[i].equals(Browser.exec[i])){
+			String[] execLocal = Browser.defaultCommands();
+			if (execLocal != null && execLocal.length == Browser.exec.length){
+				for (int i=0; i<execLocal.length; i++){
+					if (!execLocal[i].equals(Browser.exec[i])){
 						saveBrowser = true;
 					}
 				}
@@ -249,7 +261,11 @@ public class Browser {
 	 */
 	public static void load(Properties props){
 		if (props.containsKey("com.Ostermiller.util.Browser.open")){
-			java.util.StringTokenizer tok = new java.util.StringTokenizer(props.getProperty("com.Ostermiller.util.Browser.open"), "\r\n", false);
+			java.util.StringTokenizer tok = new java.util.StringTokenizer(
+				props.getProperty("com.Ostermiller.util.Browser.open"),
+				"\r\n",
+				false
+			);
 			int count = tok.countTokens();
 			String[] exec = new String[count];
 			for (int i=0; i < count; i++){
@@ -280,24 +296,26 @@ public class Browser {
 		if (exec == null || exec.length == 0){
 			if (System.getProperty("os.name").startsWith("Mac")){
 				boolean success = false;
-			try {
-				Class nSWorkspace;
-					if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
-						 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
-						 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
-						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
-					} else {
-						 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
-					}
-					Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
-					Object workspace = sharedWorkspace.invoke(null, new Object[] {});
-					Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
-					success = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();
-				//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
-			} catch (Exception x) {}
+				try {
+					Class<?> nSWorkspace;
+						if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
+							 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
+							 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
+							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
+						} else {
+							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
+						}
+						Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
+						Object workspace = sharedWorkspace.invoke(null, new Object[] {});
+						Method openURL = nSWorkspace.getMethod("openURL", new Class[] {Class.forName("java.net.URL")});
+						success = ((Boolean)openURL.invoke(workspace, new Object[] {new java.net.URL(url)})).booleanValue();
+					//success = com.apple.cocoa.application.NSWorkspace.sharedWorkspace().openURL(new java.net.URL(url));
+				} catch (Exception x) {
+					success = false;
+				}
 				if (!success){
 					try {
-						 Class mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
+						 Class<?> mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
 						 Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
 						 openURL.invoke(null, new Object[] {url});
 						 //com.apple.mrj.MRJFileUtils.openURL(url);
@@ -312,7 +330,7 @@ public class Browser {
 		} else {
 			// for security, see if the url is valid.
 			// this is primarily to catch an attack in which the url
-			// starts with a - to fool the command line flags, bu
+			// starts with a - to fool the command line flags, but
 			// it could catch other stuff as well, and will throw a
 			// MalformedURLException which will give the caller of this
 			// function useful information.
@@ -330,7 +348,7 @@ public class Browser {
 					//characters that are necessary for URLs and should be safe
 					//to pass to exec.  Exec uses a default string tokenizer with
 					//the default arguments (whitespace) to separate command line
-					//arguments, so there should be no problem with anything bu
+					//arguments, so there should be no problem with anything but
 					//whitespace.
 					sb.append(c);
 				} else {
@@ -353,17 +371,17 @@ public class Browser {
 						// stick the url into the command
 						command = MessageFormat.format(exec[i], (Object[])messageArray);
 						// parse the command line.
-						Vector argsVector = new Vector();
+						ArrayList<String> argumentList = new ArrayList<String>();
 						BrowserCommandLexer lex = new BrowserCommandLexer(new StringReader(command));
 						String t;
 						while ((t = lex.getNextToken()) != null) {
-							argsVector.add(t);
+							argumentList.add(t);
 						}
-						String[] args = new String[argsVector.size()];
-						args = (String[])argsVector.toArray(args);
+						String[] args = new String[argumentList.size()];
+						args = argumentList.toArray(args);
 						// the windows url protocol handler doesn't work well with file URLs.
 						// Correct those problems here before continuing
-						// Java File.toURL() gives only one / following file: bu
+						// Java File.toURL() gives only one / following file: but
 						// we need two.
 						// If there are escaped characters in the url, we will have
 						// to create an Internet shortcut and open that, as the command
@@ -401,9 +419,10 @@ public class Browser {
 						// seem to show that 1000 milliseconds is enough
 						// time for the browsers I'm using.
 						for (int j=0; j<2; j++){
-							 try{
-									Thread.currentThread().sleep(1000);
-							 } catch (InterruptedException inte){
+							 try {
+								Thread.sleep(1000);
+							 } catch (InterruptedException ix){
+								 throw new RuntimeException(ix);
 							 }
 						}
 						if (p.exitValue() == 0){
@@ -471,8 +490,8 @@ public class Browser {
 		out.println("</head>");
 		out.println("<body onload=\"javascript:displayURLs()\">");
 		out.println("<noscript>");
-		for (int i=0; i<urls.length; i++){
-			out.println("<a target=\"_blank\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
+		for (String element: urls) {
+			out.println("<a target=\"_blank\" href=\"" + element + "\">" + element + "</a><br>");
 		}
 		out.println("</noscript>");
 		out.println("</body>");
@@ -556,8 +575,8 @@ public class Browser {
 		out.println("</head>");
 		out.println("<body onload=\"javascript:displayURLs()\">");
 		out.println("<noscript>");
-		for (int i=0; i<urls.length; i++){
-			out.println("<a target=\"_blank\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
+		for (String element: urls) {
+			out.println("<a target=\"_blank\" href=\"" + element + "\">" + element + "</a><br>");
 		}
 		out.println("</noscript>");
 		out.println("</body>");
@@ -625,8 +644,8 @@ public class Browser {
 		out.println("</head>");
 		out.println("<body onload=\"javascript:displayURLs()\">");
 		out.println("<noscript>");
-		for (int i=0; i<urls.length; i++){
-			out.println("<a target=\"" + ((namedWindows==null||namedWindows.length==0||namedWindows[0]==null)?"_blank":namedWindows[0]) + "\" href=\"" + urls[i] + "\">" + urls[i] + "</a><br>");
+		for (String element: urls) {
+			out.println("<a target=\"" + ((namedWindows==null||namedWindows.length==0||namedWindows[0]==null)?"_blank":namedWindows[0]) + "\" href=\"" + element + "\">" + element + "</a><br>");
 		}
 		out.println("</noscript>");
 		out.println("</body>");
@@ -677,7 +696,8 @@ public class Browser {
 			}
 			try {
 				Thread.sleep(10000);
-			} catch (InterruptedException x){
+			} catch (InterruptedException ix){
+				throw new RuntimeException(ix);
 			}
 		} catch (IOException e){
 			System.err.println(e.getMessage());
@@ -690,6 +710,7 @@ public class Browser {
 	 * command lines used for starting a browser on their system.
 	 *
 	 * @param owner The frame that owns the dialog.
+	 * @return whether or not the dialog has changed
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -716,11 +737,12 @@ public class Browser {
 	 *
 	 * @param owner The frame that owns this dialog.
 	 * @param props contains the strings used in the dialog.
+	 * @return whether or not the dialog has changed
 	 * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public static boolean dialogConfiguration(Frame owner, Properties props){
+	@Deprecated public static boolean dialogConfiguration(Frame owner, Properties props){
 		if (Browser.dialog == null){
 			Browser.dialog = new BrowserDialog(owner);
 		}
@@ -792,6 +814,7 @@ public class Browser {
 	 * }
 	 *
 	 * @param parent window into which panel with eventually be placed.
+	 * @return the dialog
 	 * @since ostermillerutils 1.02.22
 	 */
 	public static JPanel getDialogPanel(Window parent){
@@ -846,8 +869,6 @@ public class Browser {
 			c.insets.bottom = 5;
 			dialogPanel = new JPanel(gridbag);
 			dialogPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 5, 20));
-			JLabel label;
-
 
 			c.gridwidth = GridBagConstraints.REMAINDER;
 			c.anchor = GridBagConstraints.WEST;
@@ -883,6 +904,11 @@ public class Browser {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private static class BrowserDialog extends JDialog {
+
+		/**
+		 * Serial version ID
+		 */
+		private static final long serialVersionUID = -6021583796243635266L;
 
 		/**
 		 * The OK button.
@@ -924,10 +950,9 @@ public class Browser {
 		 * com.Ostermiller.util.BrowserDialog.cancel<br>
 		 *
 		 * @deprecated  Use the com.Ostermiller.util.Browser resource bundle to set strings for the given locale.
-		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		private void setProps(Properties props){
+		@Deprecated private void setProps(Properties props){
 			if (props.containsKey("com.Ostermiller.util.BrowserDialog.title")){
 				setTitle(props.getProperty("com.Ostermiller.util.BrowserDialog.title"));
 			}
@@ -959,7 +984,7 @@ public class Browser {
 		 * If called before the dialog is displayed and closed, the results
 		 * are not defined.
 		 *
-		 * @returns if the user made changes to the browser configuration.
+		 * @return if the user made changes to the browser configuration.
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
@@ -971,8 +996,6 @@ public class Browser {
 		 * Create this dialog with the given parent and title.
 		 *
 		 * @param parent window from which this dialog is launched
-		 * @param title the title for the dialog box window
-		 *
 		 * @since ostermillerutils 1.00.00
 		 */
 		public BrowserDialog(Frame parent) {
@@ -986,7 +1009,7 @@ public class Browser {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		protected void dialogInit(){
+		@Override protected void dialogInit(){
 
 			super.dialogInit();
 
@@ -1023,11 +1046,14 @@ public class Browser {
 		 * @since ostermillerutils 1.00.00
 		 * @deprecated use setVisible(true);
 		 */
-		public void show(){
+		@Override @Deprecated public void show(){
 			setVisible(true);
 		}
 
-		public void setVisible(boolean visible){
+		/**
+		 * @see java.awt.Component#setVisible(boolean)
+		 */
+		@Override public void setVisible(boolean visible){
 			if (visible){
 				initPanel();
 				super.setVisible(true);

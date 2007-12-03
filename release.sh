@@ -20,7 +20,7 @@ humanreadable () {
 size=`wc -c utils.jar`
 size=`humanreadable $size`
 
-if [ -z "`grep -i $size download.html`" ]
+if [ -z "`grep -i $size src/download.html`" ]
 then
     echo "utils.jar size is $size but download.html does not show that."
     exit 1

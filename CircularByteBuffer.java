@@ -17,9 +17,7 @@
  */
 package com.Ostermiller.util;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Implements the Circular Buffer producer/consumer model for bytes.
@@ -286,10 +284,9 @@ public class CircularByteBuffer {
 			// the mark except one byte is available.
 			// In this case it is all in one piece.
 			return (markPosition - writePosition - 1);
-		} else {
-			// space at the beginning and end.
-			return ((buffer.length - 1) - (writePosition - markPosition));
 		}
+		// space at the beginning and end.
+		return ((buffer.length - 1) - (writePosition - markPosition));
 	}
 
 	/**
@@ -303,10 +300,9 @@ public class CircularByteBuffer {
 			// the first write is available.  In this case i
 			// is all in one piece.
 			return (writePosition - readPosition);
-		} else {
-			// space at the beginning and end.
-			return (buffer.length - (readPosition - writePosition));
 		}
+		// space at the beginning and end.
+		return (buffer.length - (readPosition - writePosition));
 	}
 
 	/**
@@ -320,10 +316,9 @@ public class CircularByteBuffer {
 			// the first write is marked.  In this case i
 			// is all in one piece.
 			return (readPosition - markPosition);
-		} else {
-			// space at the beginning and end.
-			return (buffer.length - (markPosition - readPosition));
 		}
+		// space at the beginning and end.
+		return (buffer.length - (markPosition - readPosition));
 	}
 
 	/**
@@ -432,7 +427,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int available() throws IOException {
+		@Override public int available() throws IOException {
 			synchronized (CircularByteBuffer.this){
 				if (inputStreamClosed) throw new IOException("InputStream has been closed, it is not ready.");
 				return (CircularByteBuffer.this.available());
@@ -448,7 +443,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void close() throws IOException {
+		@Override public void close() throws IOException {
 			synchronized (CircularByteBuffer.this){
 				inputStreamClosed = true;
 			}
@@ -467,7 +462,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void mark(int readAheadLimit) {
+		@Override public void mark(int readAheadLimit) {
 			synchronized (CircularByteBuffer.this){
 				//if (inputStreamClosed) throw new IOException("InputStream has been closed; cannot mark a closed InputStream.");
 				if (buffer.length - 1 > readAheadLimit) {
@@ -484,7 +479,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public boolean markSupported() {
+		@Override public boolean markSupported() {
 			return true;
 		}
 
@@ -499,7 +494,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read() throws IOException {
+		@Override public int read() throws IOException {
 			while (true){
 				synchronized (CircularByteBuffer.this){
 					if (inputStreamClosed) throw new IOException("InputStream has been closed; cannot read from a closed InputStream.");
@@ -536,7 +531,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read(byte[] cbuf) throws IOException {
+		@Override public int read(byte[] cbuf) throws IOException {
 			return read(cbuf, 0, cbuf.length);
 		}
 
@@ -554,7 +549,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public int read(byte[] cbuf, int off, int len) throws IOException {
+		@Override public int read(byte[] cbuf, int off, int len) throws IOException {
 			while (true){
 				synchronized (CircularByteBuffer.this){
 					if (inputStreamClosed) throw new IOException("InputStream has been closed; cannot read from a closed InputStream.");
@@ -597,7 +592,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void reset() throws IOException {
+		@Override public void reset() throws IOException {
 			synchronized (CircularByteBuffer.this){
 				if (inputStreamClosed) throw new IOException("InputStream has been closed; cannot reset a closed InputStream.");
 				readPosition = markPosition;
@@ -616,7 +611,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public long skip(long n) throws IOException, IllegalArgumentException {
+		@Override public long skip(long n) throws IOException, IllegalArgumentException {
 			while (true){
 				synchronized (CircularByteBuffer.this){
 					if (inputStreamClosed) throw new IOException("InputStream has been closed; cannot skip bytes on a closed InputStream.");
@@ -670,7 +665,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void close() throws IOException {
+		@Override public void close() throws IOException {
 			synchronized (CircularByteBuffer.this){
 				if (!outputStreamClosed){
 					flush();
@@ -686,7 +681,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void flush() throws IOException {
+		@Override public void flush() throws IOException {
 			if (outputStreamClosed) throw new IOException("OutputStream has been closed; cannot flush a closed OutputStream.");
 			if (inputStreamClosed) throw new IOException("Buffer closed by inputStream; cannot flush.");
 			// this method needs to do nothing
@@ -705,7 +700,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(byte[] cbuf) throws IOException {
+		@Override public void write(byte[] cbuf) throws IOException {
 			write(cbuf, 0, cbuf.length);
 		}
 
@@ -724,7 +719,7 @@ public class CircularByteBuffer {
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(byte[] cbuf, int off, int len) throws IOException {
+		@Override public void write(byte[] cbuf, int off, int len) throws IOException {
 			while (len > 0){
 				synchronized (CircularByteBuffer.this){
 					if (outputStreamClosed) throw new IOException("OutputStream has been closed; cannot write to a closed OutputStream.");
@@ -771,14 +766,14 @@ public class CircularByteBuffer {
 		 * If the buffer allows blocking writes, this method will block until
 		 * all the data has been written rather than throw an IOException.
 		 *
-		 * @param c int specifying a byte to be written.
+		 * @param c number of bytes to be written
 		 * @throws BufferOverflowException if buffer does not allow blocking writes
 		 *   and the buffer is full.
 		 * @throws IOException if the stream is closed, or the write is interrupted.
 		 *
 		 * @since ostermillerutils 1.00.00
 		 */
-		public void write(int c) throws IOException {
+		@Override public void write(int c) throws IOException {
 			boolean written = false;
 			while (!written){
 				synchronized (CircularByteBuffer.this){

@@ -20,8 +20,7 @@ all:
 	@$(MAKE) -s --no-print-directory spell
 	@$(MAKE) -s --no-print-directory neaten
 	@$(MAKE) -s --no-print-directory build
-	@$(MAKE) -s --no-print-directory javadoc
-	@$(MAKE) -s --no-print-directory htmlsource
+	@$(MAKE) -s --no-print-directory htaccess
 
 spell: *.bte *.java
 	@echo Make: Running spell check.$?
@@ -48,9 +47,11 @@ junkclean:
 clean:
 	ant clean
 
-doc: javadoc
+doc: src/doc
 
-javadoc: *.java
+javadoc: src/doc
+
+src/doc: *.java
 	@echo Make: Generating javadoc
 	@rm -rf src/doc
 	@mkdir -p src/doc
@@ -76,11 +77,13 @@ test:
 	$(JAVA) com.Ostermiller.util.MD5Tests
 	$(JAVA) com.Ostermiller.util.SizeLimitInputStreamTests
 	$(JAVA) com.Ostermiller.util.SignificantFiguresTests
+	$(JAVA) com.Ostermiller.util.StraightStreamReaderTests
 	$(JAVA) com.Ostermiller.util.ConcatTests
 	$(JAVA) com.Ostermiller.util.ParallelizerTests
 	$(JAVA) com.Ostermiller.util.StringHelperTests
 	$(JAVA) com.Ostermiller.util.ExecHelperTests
 	$(JAVA) com.Ostermiller.util.ArrayHelperTests
+	$(JAVA) com.Ostermiller.util.CmdLnTests
 	@rm -f out.txt
 
 .PHONY: update
@@ -101,18 +104,10 @@ htmlsource: *.java *.properties *.lex source.sh *.bte
 	cp *.bte *.css install.sh *.jar src/
 	bte src/
 	
-htaccess: *.java *.properties *.lex
-	@for file in *.java *.properties *.lex; \
-	do \
-	  base=`echo $$file | sed -r 's/\.[^\.]+$$//g'` ;\
-	  if [ ! -e $$base.html ]; \
-	  then \
-	    if [ `grep -c "Redirect.*/utils/$$base.html " .htaccess` == 0 ]; \
-	    then \
-	      echo Redirect permanent /utils/$$base.html http://ostermiller.org/utils/ >> .htaccess ;\
-	    fi \
-	  fi \
-	done
+htaccess: src/.htaccess
+
+src/.htaccess: *.java *.properties *.lex src/doc htmlsource
+	./genhtaccess.sh && cp .htaccess src/
 
 	
 	

@@ -75,13 +75,13 @@ public class MD5OutputStream extends FilterOutputStream {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void write(int b) throws IOException {
+	@Override public void write(int b) throws IOException {
 		out.write(b);
 		md5.update((byte)(b & 0xff));
 	}
 
 	/**
-	 * Writes len bytes from the specified byte array starting a
+	 * Writes length bytes from the specified byte array starting a
 	 * offset off to this output stream.
 	 *
 	 * @param b the data.
@@ -91,7 +91,7 @@ public class MD5OutputStream extends FilterOutputStream {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void write(byte b[], int off, int len) throws IOException {
+	@Override public void write(byte b[], int off, int len) throws IOException {
 		out.write(b, off, len);
 		md5.update(b, off, len);
 	}

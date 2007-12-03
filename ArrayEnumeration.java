@@ -1,6 +1,5 @@
 /*
- * Converts an array to an enumerator.
- * Copyright (C) 2004-2006 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,6 +26,7 @@ import java.util.*;
  * "http://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @param <ElementType> Type of object enumerated
  * @since ostermillerutils 1.03.00
  */
 public class ArrayEnumeration<ElementType> implements Enumeration<ElementType> {

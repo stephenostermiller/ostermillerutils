@@ -35,6 +35,7 @@
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkCGIParser%><%/bte.grp%></li>
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkCircularBuffer%><%/bte.grp%></li>
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkConcat%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkCmdLn%><%/bte.grp%></li>
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkCSV%><%/bte.grp%></li>
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkExecHelper%><%/bte.grp%></li>
   <li><%bte.grp ondefault=ok%><%bte.inc name=linkExcelCSV%><%/bte.grp%></li>
@@ -124,6 +125,7 @@ or FITNESS FOR A PARTICULAR PURPOSE. See the
 <%bte.tpl name=linkCGIParser%><a href="CGIParser.html">CGI Query String Parser</a><%/bte.tpl%>
 <%bte.tpl name=linkCircularBuffer%><a href="CircularBuffer.html">Circular Buffers</a><%/bte.tpl%>
 <%bte.tpl name=linkConcat%><a href="Concat.html">Concatenation Streams</a><%/bte.tpl%>
+<%bte.tpl name=linkCmdLn%><a href="CmdLn.html">Command Line Parser</a><%/bte.tpl%>
 <%bte.tpl name=linkCSV%><a href="CSV.html">Comma Separated Values (CSV)</a><%/bte.tpl%>
 <%bte.tpl name=linkExecHelper%><a href="ExecHelper.html">Exec Helper</a><%/bte.tpl%>
 <%bte.tpl name=linkExcelCSV%><a href="ExcelCSV.html">Excel CSV</a><%/bte.tpl%>

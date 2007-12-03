@@ -1,6 +1,5 @@
 /*
- * Base64 regression test.
- * Copyright (C) 2004 Stephen Ostermiller
+ * Copyright (C) 2004-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,13 +17,19 @@
 package com.Ostermiller.util;
 
 import java.util.*;
-import java.io.*;
 
+/**
+ * Test cases for Base64
+ */
 class Base64Tests {
 
 	private static class TestCase {
 		private String encoded;
 		private byte[] decoded;
+		/**
+		 * @param encoded
+		 * @param decoded
+		 */
 		public TestCase(String encoded, byte[] decoded){
 			this.encoded = encoded;
 			this.decoded = decoded;
@@ -56,6 +61,10 @@ class Base64Tests {
 		new TestCase("Y29i", new byte[]{'c','o','b'}),
 	};
 
+	/**
+	 * Main method for tests
+	 * @param args command line arguments (ignored)
+	 */
 	public static void main(String[] args){
 		try {
 			for (int i=0; i<testCases.length; i++){
@@ -65,7 +74,7 @@ class Base64Tests {
 				byte[] before = randBytes();
 				byte[] after = Base64.decodeToBytes(Base64.encodeToString(before));
 				if (!byteArraysEqual(before,after)){
-					throw new Exception("Could not decode and then reencode:\nbefore: " + bytesToString(before) + "\nafter:  " + bytesToString(after));
+					throw new Exception("Could not decode and then re-encode:\n before: " + bytesToString(before) + "\n after:  " + bytesToString(after));
 				}
 			}
 
@@ -80,7 +89,7 @@ class Base64Tests {
 	private static String bytesToString(byte[] b){
 		StringBuffer sb = new StringBuffer();
 		for (int i=0; i<b.length; i++){
-			sb.append("'").append((int)b[i]).append("',");
+			sb.append("'").append(b[i]).append("',");
 		}
 		return sb.toString();
 	}

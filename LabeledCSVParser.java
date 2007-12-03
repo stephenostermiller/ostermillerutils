@@ -21,8 +21,7 @@
 package com.Ostermiller.util;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Decorate a CSVParse object to provide an index of field names.  Many (most?)
@@ -86,7 +85,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public LabeledCSVParser(CSVParse parse) throws IOException {
+	@SuppressWarnings("unused") public LabeledCSVParser(CSVParse parse) throws IOException {
 		this.parse = parse;
 	}
 
@@ -237,7 +236,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * Initialize the LabeledCSVParser.labels member and LabeledCSVParser.labelMap
 	 * member.
 	 *
-	 * @throws java.io.IOException
+	 * @throws IOException if an IO error occurs
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
@@ -255,6 +254,7 @@ public class LabeledCSVParser implements CSVParse {
 	 * of the CSV file.
 	 *
 	 * @return Field names.
+	 * @throws IOException if an IO error occurs
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
@@ -276,7 +276,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	public int getLabelIndex(String label){
+	@Deprecated public int getLabelIndex(String label){
 		try {
 			return getLabelIdx(label);
 		} catch (IOException iox){
@@ -293,6 +293,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @param label The field name.
 	 * @return The index of the field name, or -1 if the label does not exist.
+	 * @throws IOException if an IO error occurs
 	 *
 	 * @since ostermillerutils 1.04.02
 	 */
@@ -300,7 +301,7 @@ public class LabeledCSVParser implements CSVParse {
 		if (labels == null) setLabels();
 		if (labelMap == null) return -1;
 		if (!labelMap.containsKey(label)) return -1;
-		return ((Integer)labelMap.get(label)).intValue();
+		return (labelMap.get(label)).intValue();
 	}
 
 	/**

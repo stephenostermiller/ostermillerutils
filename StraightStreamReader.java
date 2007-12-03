@@ -77,7 +77,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
 		in.close();
 	}
 
@@ -93,7 +93,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void mark(int readAheadLimit) throws IOException {
+	@Override public void mark(int readAheadLimit) throws IOException {
 		in.mark(readAheadLimit);
 	}
 
@@ -104,7 +104,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public boolean markSupported(){
+	@Override public boolean markSupported(){
 		return in.markSupported();
 	}
 
@@ -118,7 +118,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		return in.read();
 	}
 
@@ -132,7 +132,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(char[] cbuf) throws IOException {
+	@Override public int read(char[] cbuf) throws IOException {
 		return read(cbuf, 0, cbuf.length);
 	}
 
@@ -148,7 +148,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public int read(char[] cbuf, int off, int len) throws IOException {
+	@Override public int read(char[] cbuf, int off, int len) throws IOException {
 		// ensure the capacity of the buffer that we will be using
 		// to read from the input stream
 		if (buffer == null || buffer.length < len){
@@ -171,7 +171,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public boolean ready() throws IOException {
+	@Override public boolean ready() throws IOException {
 		return (in.available() > 0);
 	}
 
@@ -187,7 +187,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public void reset() throws IOException {
+	@Override public void reset() throws IOException {
 		in.reset();
 	}
 
@@ -202,114 +202,7 @@ public class StraightStreamReader extends Reader{
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	public long skip(long n) throws IOException {
+	@Override public long skip(long n) throws IOException {
 		return in.skip(n);
-	}
-
-	/**
-	 * Regression test for this class.  If this class is working, this should
-	 * run and print no errors.
-	 * <P>
-	 * This method creates a temporary file in the working directory called "test.txt".
-	 * This file should not exist before hand, and the program should have create,
-	 * read, write, and delete access to this file.
-	 *
-	 * @param args command line arguments (ignored)
-	 *
-	 * @since ostermillerutils 1.00.00
-	 */
-	private static void main(String[] args){
-		try {
-			File f = new File("test.txt");
-			if (f.exists()){
-				throw new IOException(f + " already exists.  I don't want to overwrite it.");
-			}
-			StraightStreamReader in;
-			char[] cbuf = new char[0x1000];
-			int read;
-			int totRead;
-
-			// write a file with all possible values of bytes
-			FileOutputStream out = new FileOutputStream(f);
-			for (int i=0x00; i<0x100; i++){
-				out.write(i);
-			}
-			out.close();
-
-			// read it back using the read single character method
-			in = new StraightStreamReader(new FileInputStream(f));
-			for (int i=0x00; i<0x100; i++){
-				read = in.read();
-				if (read != i){
-					System.err.println("Error: " + i + " read as " + read);
-				}
-			}
-			in.close();
-
-			// read as much of it back as possible with one simple buffer read.
-			in = new StraightStreamReader(new FileInputStream(f));
-			totRead = in.read(cbuf);
-			if (totRead != 0x100){
-				System.err.println("Simple buffered read did not read the full amount: 0x" + Integer.toHexString(totRead));
-			}
-			for (int i=0x00; i<totRead; i++){
-				 if (cbuf[i] != i){
-					System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i]);
-				}
-			}
-			in.close();
-
-			// read it back using buffer read method.
-			in = new StraightStreamReader(new FileInputStream(f));
-			totRead = 0;
-			while (totRead <= 0x100 && (read = in.read(cbuf, totRead, 0x100 - totRead)) > 0){
-				totRead += read;
-			}
-			if (totRead != 0x100){
-				System.err.println("Not enough read. Bytes read: " + Integer.toHexString(totRead));
-			}
-			for (int i=0x00; i<totRead; i++){
-				 if (cbuf[i] != i){
-					System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i]);
-				}
-			}
-			in.close();
-
-			// read it back using an offset buffer read method.
-			in = new StraightStreamReader(new FileInputStream(f));
-			totRead = 0;
-			while (totRead <= 0x100 && (read = in.read(cbuf, totRead+0x123, 0x100 - totRead)) > 0){
-				totRead += read;
-			}
-			if (totRead != 0x100){
-				System.err.println("Not enough read. Bytes read: " + Integer.toHexString(totRead));
-			}
-			for (int i=0x00; i<totRead; i++){
-				 if (cbuf[i+0x123] != i){
-					System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i+0x123]);
-				}
-			}
-			in.close();
-
-			// read it back using a partial offset buffer read method.
-			in = new StraightStreamReader(new FileInputStream(f));
-			totRead = 0;
-			while (totRead <= 0x100 && (read = in.read(cbuf, totRead+0x123, 7)) > 0){
-				totRead += read;
-			}
-			if (totRead != 0x100){
-				System.err.println("Not enough read. Bytes read: " + Integer.toHexString(totRead));
-			}
-			for (int i=0x00; i<totRead; i++){
-				 if (cbuf[i+0x123] != i){
-					System.err.println("Error: 0x" + i + " read as 0x" + cbuf[i+0x123]);
-				}
-			}
-			in.close();
-
-			f.delete();
-		} catch (IOException x){
-			System.err.println(x.getMessage());
-		}
 	}
 }

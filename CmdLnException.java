@@ -1,6 +1,5 @@
 /*
- * Binary data exception.
- * Copyright (C) 2003-2007 Stephen Ostermiller
+ * Copyright (C) 2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -15,41 +14,33 @@
  *
  * See COPYING.TXT for details.
  */
-
 package com.Ostermiller.util;
 
 /**
- * An illegal quote was specified.
+ * Exception thrown when a command line cannot be parsed.
+ *
+ * More information about this class and code samples for suggested use are
+ * available from <a target="_top" href=
+ * "http://ostermiller.org/utils/CmdLn.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @since ostermillerutils 1.02.16
+ * @since ostermillerutils 1.07.00
  */
-public class BadQuoteException extends IllegalArgumentException {
-
+public class CmdLnException extends IllegalArgumentException
+{
 	/**
 	 * serial version id
+	 *
+	 * @since ostermillerutils 1.07.00
 	 */
-	private static final long serialVersionUID = -5926914821468886713L;
+	private static final long serialVersionUID = 3984942697362044497L;
 
 	/**
-	 * Constructs an exception with null as its error detail message.
+	 * @param message detail message
 	 *
-	 * @since ostermillerutils 1.02.16
+	 * @since ostermillerutils 1.07.00
 	 */
-	public BadQuoteException(){
-		super();
-	}
-
-	/**
-	 * Constructs an exception with the specified detail message.
-	 * The error message string s can later be retrieved by the
-	 * Throwable.getMessage()  method of class java.lang.Throwable.
-	 *
-	 * @param s the detail message.
-	 *
-	 * @since ostermillerutils 1.02.16
-	 */
-	public BadQuoteException(String s){
-		super(s);
+	CmdLnException(String message) {
+		super(message);
 	}
 }

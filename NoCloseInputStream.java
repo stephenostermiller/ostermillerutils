@@ -1,6 +1,5 @@
 /*
- * Streams that have a different close mechanism.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -60,35 +59,35 @@ public class NoCloseInputStream extends InputStream implements NoCloseStream {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		return in.read();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read(byte[] b) throws IOException {
+	@Override public int read(byte[] b) throws IOException {
 		return in.read(b);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public int read(byte[] b, int off, int len) throws IOException {
+	@Override public int read(byte[] b, int off, int len) throws IOException {
 		return in.read(b, off, len);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public long skip(long n) throws IOException {
+	@Override public long skip(long n) throws IOException {
 		return in.skip(n);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public int available() throws IOException {
+	@Override public int available() throws IOException {
 		return in.available();
 	}
 
@@ -99,27 +98,28 @@ public class NoCloseInputStream extends InputStream implements NoCloseStream {
 	 *
 	 * @since ostermillerutils 1.01.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
+		// Does nothing
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void mark(int readlimit) {
+	@Override public void mark(int readlimit) {
 		in.mark(readlimit);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void reset() throws IOException {
+	@Override public void reset() throws IOException {
 		in.reset();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean markSupported(){
+	@Override public boolean markSupported(){
 		return in.markSupported();
 	}
 

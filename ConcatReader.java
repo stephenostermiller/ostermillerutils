@@ -17,7 +17,7 @@
 package com.Ostermiller.util;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * A reader which reads sequentially from multiple sources.
@@ -102,8 +102,8 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.01
 	 */
 	public void addReaders(Reader[] in){
-		for (int i=0; i<in.length; i++){
-			addReader(in[i]);
+		for (Reader element: in) {
+			addReader(element);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class ConcatReader extends Reader {
 			synchronized(readerQueue){
 				// reader queue index is advanced only by the nextReader()
 				// method.  Don't do it here.
-				currentReader = (Reader)readerQueue.get(readerQueueIndex);
+				currentReader = readerQueue.get(readerQueueIndex);
 			}
 		}
 		return currentReader;
@@ -154,6 +154,7 @@ public class ConcatReader extends Reader {
 	 * @since ostermillerutils 1.04.01
 	 */
 	public ConcatReader(){
+		// Empty Constructor
 	}
 
 	/**
@@ -228,7 +229,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public int read() throws IOException {
+	@Override public int read() throws IOException {
 		if (closed) throw new IOException("Reader closed");
 		int r = -1;
 		while (r == -1){
@@ -261,11 +262,11 @@ public class ConcatReader extends Reader {
 	 * @return The number of characters read, or -1 if the end of the stream has been reached
 	 *
 	 * @throws IOException - If an I/O error occurs
-	 * @throws NullPointerException - If cbuf is null.
+	 * @throws NullPointerException - If the buffer is null.
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public int read(char[] cbuf) throws IOException {
+	@Override public int read(char[] cbuf) throws IOException {
 		return read(cbuf, 0, cbuf.length);
 	}
 
@@ -284,12 +285,12 @@ public class ConcatReader extends Reader {
 	 * @return The number of characters read, or -1 if the end of the stream has been reached
 	 *
 	 * @throws IOException - If an I/O error occurs
-	 * @throws NullPointerException - If cbuf is null.
-	 * @throws IndexOutOfBoundsException - if len or offset are not possible.
+	 * @throws NullPointerException - If the buffer is null.
+	 * @throws IndexOutOfBoundsException - if length or offset are not possible.
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public int read(char[] cbuf, int off, int len) throws IOException {
+	@Override public int read(char[] cbuf, int off, int len) throws IOException {
 		if (off < 0 || len < 0 || off + len > cbuf.length) throw new IndexOutOfBoundsException();
 		if (closed) throw new IOException("Reader closed");
 		int r = -1;
@@ -326,7 +327,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public long skip(long n) throws IOException {
+	@Override public long skip(long n) throws IOException {
 		if (closed) throw new IOException("Reader closed");
 		if (n <= 0) return 0;
 		long s = -1;
@@ -371,7 +372,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public boolean ready() throws IOException {
+	@Override public boolean ready() throws IOException {
 		if (closed) throw new IOException("Reader closed");
 		Reader in = getCurrentReader();
 		if (in == null) return false;
@@ -388,10 +389,10 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void close() throws IOException {
+	@Override public void close() throws IOException {
 		if (closed) return;
-		for (Iterator i=readerQueue.iterator(); i.hasNext();){
-			((Reader)i.next()).close();
+		for (Reader reader: readerQueue) {
+			reader.close();
 		}
 		closed = true;
 	}
@@ -403,7 +404,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void mark(int readlimit) throws IOException {
+	@Override public void mark(int readlimit) throws IOException {
 		throw new IOException("Mark not supported");
 	}
 
@@ -414,7 +415,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public void reset() throws IOException {
+	@Override public void reset() throws IOException {
 		throw new IOException("Reset not supported");
 	}
 
@@ -425,7 +426,7 @@ public class ConcatReader extends Reader {
 	 *
 	 * @since ostermillerutils 1.04.00
 	 */
-	public boolean markSupported(){
+	@Override public boolean markSupported(){
 		return false;
 	}
 }

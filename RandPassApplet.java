@@ -1,6 +1,5 @@
 /*
- * Generate random passwords.
- * Copyright (C) 2003 Stephen Ostermiller
+ * Copyright (C) 2003-2007 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Random+Password+Generator+Applet
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,7 +20,6 @@ package com.Ostermiller.util;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import com.Ostermiller.util.*;
 
 /**
  * An applet that will let the user generate random passwords.
@@ -31,6 +29,7 @@ import com.Ostermiller.util.*;
  */
 public class RandPassApplet extends JApplet {
 
+	private static final long serialVersionUID = 1838771003552061341L;
 	private JTextArea display = new JTextArea();
 	private JButton clearButton = new JButton("Clear");
 	private JButton generateButton = new JButton("Generate");
@@ -47,11 +46,11 @@ public class RandPassApplet extends JApplet {
 	private JPanel preferencesPanel = new JPanel(preferencesPanelLayout);
 
 	/**
-	 * Start the applet (to be called by the appletviewer)
+	 * Start the applet (to be called by the applet viewer)
 	 *
 	 * @since ostermillerutils 1.02.00
 	 */
-	public void init() {
+	@Override public void init() {
 		getContentPane().removeAll();
 		JMenuBar menuBar = new JMenuBar();
 		JMenu editMenu = new JMenu("Edit");
@@ -105,6 +104,7 @@ public class RandPassApplet extends JApplet {
 							passwordLength = length;
 						}
 					} catch (NumberFormatException x){
+						// Password length could not be set
 					}
 					String alphabetString = alphabetField.getText();
 					passwordAlphabet = new char[alphabetString.length()];
@@ -154,7 +154,7 @@ public class RandPassApplet extends JApplet {
 	 *
 	 * @since ostermillerutils 1.02.00
 	 */
-	public String getAppletInfo() {
+	@Override public String getAppletInfo() {
 		return (
 			"Title: Random Password Generator\n" +
 			"Author: Stephen Ostermiller\n" +

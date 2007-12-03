@@ -15,8 +15,9 @@
  *
  * See COPYING.TXT for details.
  */
-
  package com.Ostermiller.util;
+
+ import java.util.NoSuchElementException;
 
 /**
  * The string tokenizer class allows an application to break a string into
@@ -32,7 +33,7 @@
  * The set of delimiters (the characters that separate tokens) may be specified
  * either at creation time or on a per-token basis.
  * <p>
- * There are two kinds of delimiters: token delimiters and nontoken delimiters.
+ * There are two kinds of delimiters: token delimiters and non-token delimiters.
  * A token is either one token delimiter character, or a maximal sequence of
  * consecutive characters that are not delimiters.
  * <p>
@@ -45,15 +46,15 @@
  * must be provided.
  * <p>
  * The following is one example of the use of the tokenizer. It also
- * demonstrates the usefulness of having both token and nontoken delimiters in
+ * demonstrates the usefulness of having both token and non-token delimiters in
  * one <code>StringTokenizer</code>.
  * <p>
  * The code:
  * <blockquote><code>
  * String s = " &nbsp;( &nbsp; aaa  \t &nbsp;* (b+c1 ))";<br>
- * StringTokenizer st = new StringTokenizer(s, " \t\n\r\f", "()+*");<br>
- * while (st.hasMoreTokens()) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(st.nextToken());<br>
+ * StringTokenizer tokenizer = new StringTokenizer(s, " \t\n\r\f", "()+*");<br>
+ * while (tokenizer.hasMoreTokens()) {<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(tokenizer.nextToken());<br>
  * };
  * </code></blockquote>
  * <p>
@@ -78,10 +79,10 @@
  * current position before the beginning of the next token. Thus, the code:
  * <blockquote><code>
  * String s = "x=a,b,c";<br>
- * java.util.StringTokenizer st = new java.util.StringTokenizer(s,"=");<br>
- * System.out.println(st.nextToken());<br>
- * while (st.hasMoreTokens()) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(st.nextToken(","));<br>
+ * java.util.StringTokenizer tokenizer = new java.util.StringTokenizer(s,"=");<br>
+ * System.out.println(tokenizer.nextToken());<br>
+ * while (tokenizer.hasMoreTokens()) {<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(tokenizer.nextToken(","));<br>
  * };
  * </code></blockquote>
  * <p>
@@ -110,18 +111,18 @@
  * should be modified as:
  * <blockquote><code>
  * String s = "x=a,b,c";<br>
- * StringTokenizer st = new StringTokenizer(s,"=");<br>
- * System.out.println(st.nextToken());<br>
- * st.skipDelimiters();<br>
- * while (st.hasMoreTokens()) {<br>
- * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(st.nextToken(","));<br>
+ * StringTokenizer tokenizer = new StringTokenizer(s,"=");<br>
+ * System.out.println(tokenizer.nextToken());<br>
+ * tokenizer.skipDelimiters();<br>
+ * while (tokenizer.hasMoreTokens()) {<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(tokenizer.nextToken(","));<br>
  * };
  * </code></blockquote>
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
-public class StringTokenizer implements java.util.Enumeration, java.util.Iterator {
+public class StringTokenizer implements java.util.Enumeration<String>, java.util.Iterator<String> {
 
 	/**
 	 * The string to be tokenized.
@@ -141,7 +142,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	protected int strLength;
 
 	/**
-	 * The set of nontoken delimiters.
+	 * The set of non-token delimiters.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -189,7 +190,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * than any letter for example).  Given this, we can check easily check
 	 * to see if a character is not a delimiter by comparing it to the max
 	 * delimiter.  If it is greater than the max delimiter, then it is no
-	 * a delimiter otherwise we have to do some more in depth analysis. (ie
+	 * a delimiter otherwise we have to do some more in depth analysis. (for example
 	 * search the delimiter string.)  This will reduce the running time of
 	 * the algorithm not to depend on the length of the delimiter string
 	 * for the common case.
@@ -200,9 +201,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Whether empty tokens should be returned.
-	 * ie if "" should be returned when text starts with
-	 * a delim, has two delims next to each other, or
-	 * ends with a delim.
+	 * for example, if "" should be returned when text starts with
+	 * a delimiter, has two delimiters next to each other, or
+	 * ends with a delimiter.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -212,7 +213,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * Indicates at which position the delimiters last changed.  This
 	 * will effect how null tokens are returned.  Any
 	 * time that delimiters are changed, the string will be treated as if
-	 * it is being parsed from position zero, ie, null strings are possible
+	 * it is being parsed from position zero, for example, null strings are possible
 	 * at the very beginning.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -230,12 +231,12 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Constructs a string tokenizer for the specified string. Both token and
-	 * nontoken delimiters are specified.
+	 * non-token delimiters are specified.
 	 * <p>
 	 * The current position is set at the beginning of the string.
 	 *
 	 * @param text a string to be parsed.
-	 * @param nontokenDelims the nontoken delimiters, i.e. the delimiters that only separate
+	 * @param nontokenDelims the non-token delimiters, i.e. the delimiters that only separate
 	 *     tokens and are not returned as separate tokens.
 	 * @param tokenDelims the token delimiters, i.e. delimiters that both separate tokens,
 	 *     and are themselves returned as tokens.
@@ -249,7 +250,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Constructs a string tokenizer for the specified string. Both token and
-	 * nontoken delimiters are specified and whether or not empty tokens are returned
+	 * non-token delimiters are specified and whether or not empty tokens are returned
 	 * is specified.
 	 * <p>
 	 * Empty tokens are tokens that are between consecutive delimiters.
@@ -260,7 +261,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * The current position is set at the beginning of the string.
 	 *
 	 * @param text a string to be parsed.
-	 * @param nontokenDelims the nontoken delimiters, i.e. the delimiters that only separate
+	 * @param nontokenDelims the non-token delimiters, i.e. the delimiters that only separate
 	 *     tokens and are not returned as separate tokens.
 	 * @param tokenDelims the token delimiters, i.e. delimiters that both separate tokens,
 	 *     and are themselves returned as tokens.
@@ -277,24 +278,24 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Constructs a string tokenizer for the specified string. Either token or
-	 * nontoken delimiters are specified.
+	 * non-token delimiters are specified.
 	 * <p>
 	 * Is equivalent to:
 	 * <ul>
 	 * <li> If the third parameter is <code>false</code> --
-	 *      <code>StringTokenizer(text,delims, null)</code>
+	 *      <code>StringTokenizer(text, delimiters, null)</code>
 	 * <li> If the third parameter is <code>true</code> --
-	 *      <code>StringTokenizer(text, null ,delims)</code>
+	 *      <code>StringTokenizer(text, null, delimiters)</code>
 	 * </ul>
 	 *
 	 * @param text a string to be parsed.
 	 * @param delims the delimiters.
 	 * @param delimsAreTokens
 	 *     flag indicating whether the second parameter specifies token or
-	 *     nontoken delimiters: <code>false</code> -- the second parameter
-	 *     specifies nontoken delimiters, the set of token delimiters is
+	 *     non-token delimiters: <code>false</code> -- the second parameter
+	 *     specifies non-token delimiters, the set of token delimiters is
 	 *     empty; <code>true</code> -- the second parameter specifies token
-	 *     delimiters, the set of nontoken delimiters is empty.
+	 *     delimiters, the set of non-token delimiters is empty.
 	 * @throws NullPointerException if text is null.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -311,7 +312,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * Is equivalent to <code>StringTokenizer(text,nontokenDelims, null)</code>.
 	 *
 	 * @param text a string to be parsed.
-	 * @param nontokenDelims the nontoken delimiters.
+	 * @param nontokenDelims the non-token delimiters.
 	 * @throws NullPointerException if text is null.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -322,7 +323,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 
 	/**
 	 * Constructs a string tokenizer for the specified string. The tokenizer uses
-	 * " \t\n\r\f" as a delimiter set of nontoken delimiters, and an empty token
+	 * " \t\n\r\f" as a delimiter set of non-token delimiters, and an empty token
 	 * delimiter set.
 	 * <p>
 	 * Is equivalent to <code>StringTokenizer(text, " \t\n\r\f", null);
@@ -339,7 +340,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Set the text to be tokenized in this StringTokenizer.
 	 * <p>
-	 * This is useful when for StringTokenizer re-use so that new string tokenizers do no
+	 * This is useful when for StringTokenizer re-use so that new string tokenizers do not
 	 * have to be created for each string you want to tokenizer.
 	 * <p>
 	 * The string will be tokenized from the beginning of the string.
@@ -478,13 +479,13 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 			workingEmptyReturned = emptyReturned;
 			onToken = advancePosition();
 		}
-		throw new java.util.NoSuchElementException();
+		throw new NoSuchElementException();
 	}
 
 	/**
 	 * Advances the current position so it is before the next token.
 	 * <p>
-	 * This method skips nontoken delimiters but does not skip
+	 * This method skips non-token delimiters but does not skip
 	 * token delimiters.
 	 * <p>
 	 * This method is useful when switching to the new delimiter sets (see the
@@ -574,9 +575,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	}
 
 	/**
-	 * Set the delimiters used to this set of (nontoken) delimiters.
+	 * Set the delimiters used to this set of (non-token) delimiters.
 	 *
-	 * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
+	 * @param delims the new set of non-token delimiters (the set of token delimiters will be empty).
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -589,9 +590,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param delims the new set of delimiters.
 	 * @param delimsAreTokens flag indicating whether the first parameter specifies
-	 *    token or nontoken delimiters: false -- the first parameter specifies nontoken
+	 *    token or non-token delimiters: false -- the first parameter specifies non-token
 	 *    delimiters, the set of token delimiters is empty; true -- the first parameter
-	 *    specifies token delimiters, the set of nontoken delimiters is empty.
+	 *    specifies token delimiters, the set of non-token delimiters is empty.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -602,7 +603,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Set the delimiters used to this set of delimiters.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 *
 	 * @since ostermillerutils 1.00.00
@@ -614,7 +615,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Set the delimiters used to this set of delimiters.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
 	 *
@@ -628,11 +629,11 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Calculates the number of times that this tokenizer's <code>nextToken</code>
 	 * method can be called before it generates an exception using the given set of
-	 * (nontoken) delimiters.  The delimiters given will be used for future calls to
+	 * (non-token) delimiters.  The delimiters given will be used for future calls to
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
-	 * @param delims the new set of nontoken delimiters (the set of token delimiters will be empty).
+	 * @param delims the new set of non-token delimiters (the set of token delimiters will be empty).
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
 	 *
@@ -653,9 +654,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 *
 	 * @param delims the new set of delimiters.
 	 * @param delimsAreTokens flag indicating whether the first parameter specifies
-	 *    token or nontoken delimiters: false -- the first parameter specifies nontoken
+	 *    token or non-token delimiters: false -- the first parameter specifies non-token
 	 *    delimiters, the set of token delimiters is empty; true -- the first parameter
-	 *    specifies token delimiters, the set of nontoken delimiters is empty.
+	 *    specifies token delimiters, the set of non-token delimiters is empty.
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
 	 *
@@ -674,7 +675,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @return the number of tokens remaining in the string using the new
 	 *    delimiter set.
@@ -694,7 +695,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * nextToken() unless new delimiters are given. The current position
 	 * is not advanced.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
 	 * @return the number of tokens remaining in the string using the new
@@ -728,23 +729,20 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 			(delimsChangedPosition == position ||
 			(position == -1 && strLength == delimsChangedPosition))){
 			if (strLength == delimsChangedPosition){
-				// Case in which the string (since delim change)
+				// Case in which the string (since delimiter change)
 				// is empty, but because we are returning empty
 				// tokens, a single empty token should be returned.
 				emptyReturned = true;
-				/*System.out.println("Empty token for empty string.");*/
 				return true;
-			} else {
-				char c = text.charAt(position);
-				if (c <= maxDelimChar &&
-					(nontokenDelims != null && nontokenDelims.indexOf(c) != -1) ||
-					(tokenDelims != null && tokenDelims.indexOf(c) != -1)){
-					// There is delimiter at the very start of the string
-					// so we must return an empty token at the beginning.
-					emptyReturned = true;
-					/*System.out.println("Empty token at beginning.");*/
-					return true;
-				}
+			}
+			char c = text.charAt(position);
+			if (c <= maxDelimChar &&
+				(nontokenDelims != null && nontokenDelims.indexOf(c) != -1) ||
+				(tokenDelims != null && tokenDelims.indexOf(c) != -1)){
+				// There is delimiter at the very start of the string
+				// so we must return an empty token at the beginning.
+				emptyReturned = true;
+				return true;
 			}
 		}
 		// The main loop
@@ -811,7 +809,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Returns the next token in this string tokenizer's string.
 	 * <p>
-	 * First, the sets of token and nontoken delimiters are changed to be the
+	 * First, the sets of token and non-token delimiters are changed to be the
 	 * <code>tokenDelims</code> and <code>nontokenDelims</code>, respectively.
 	 * Then the next token (with respect to new delimiters) in the string after the
 	 * current position is returned.
@@ -820,7 +818,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * <p>
 	 * The new delimiter sets remains the used ones after this call.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
@@ -836,7 +834,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Returns the next token in this string tokenizer's string.
 	 * <p>
-	 * First, the sets of token and nontoken delimiters are changed to be the
+	 * First, the sets of token and non-token delimiters are changed to be the
 	 * <code>tokenDelims</code> and <code>nontokenDelims</code>, respectively;
 	 * and whether or not to return empty tokens is set.
 	 * Then the next token (with respect to new delimiters) in the string after the
@@ -847,7 +845,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * The new delimiter set remains the one used for this call and empty tokens are
 	 * returned in the future as they are in this call.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters.
+	 * @param nontokenDelims the new set of non-token delimiters.
 	 * @param tokenDelims the new set of token delimiters.
 	 * @param returnEmptyTokens true if empty tokens may be returned; false otherwise.
 	 * @return the next token, after switching to the new delimiter set.
@@ -868,18 +866,18 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * Is equivalent to:
 	 * <ul>
 	 * <li> If the second parameter is <code>false</code> --
-	 *      <code>nextToken(delims, null)</code>
+	 *      <code>nextToken(delimiters, null)</code>
 	 * <li> If the second parameter is <code>true</code> --
-	 *      <code>nextToken(null ,delims)</code>
+	 *      <code>nextToken(null, delimiters)</code>
 	 * </ul>
 	 * <p>
-	 * @param delims the new set of token or nontoken delimiters.
+	 * @param delims the new set of token or non-token delimiters.
 	 * @param delimsAreTokens
 	 *     flag indicating whether the first parameter specifies token or
-	 *     nontoken delimiters: <code>false</code> -- the first parameter
-	 *     specifies nontoken delimiters, the set of token delimiters is
+	 *     non-token delimiters: <code>false</code> -- the first parameter
+	 *     specifies non-token delimiters, the set of token delimiters is
 	 *     empty; <code>true</code> -- the first parameter specifies token
-	 *     delimiters, the set of nontoken delimiters is empty.
+	 *     delimiters, the set of non-token delimiters is empty.
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this tokenizer's string.
 	 *
@@ -893,9 +891,9 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	/**
 	 * Returns the next token in this string tokenizer's string.
 	 * <p>
-	 * Is equivalent to <code>nextToken(delims, null)</code>.
+	 * Is equivalent to <code>nextToken(delimiters, null)</code>.
 	 *
-	 * @param nontokenDelims the new set of nontoken delimiters (the set of
+	 * @param nontokenDelims the new set of non-token delimiters (the set of
 	 *     token delimiters will be empty).
 	 * @return the next token, after switching to the new delimiter set.
 	 * @throws NoSuchElementException if there are no more tokens in this
@@ -961,7 +959,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @see #nextToken()
 	 * @since ostermillerutils 1.00.00
 	 */
-	public Object nextElement(){
+	public String nextElement(){
 		return nextToken();
 	}
 
@@ -993,7 +991,7 @@ public class StringTokenizer implements java.util.Enumeration, java.util.Iterato
 	 * @see #nextToken()
 	 * @since ostermillerutils 1.00.00
 	 */
-	public Object next(){
+	public String next(){
 		return nextToken();
 	}
 
