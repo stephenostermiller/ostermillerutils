@@ -328,7 +328,7 @@ public class CircularCharBuffer {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private void ensureMark(){
-		if (marked() >= markSize){
+		if (marked() > markSize){
 			markPosition = readPosition;
 			markSize = 0;
 		}
@@ -682,8 +682,10 @@ public class CircularCharBuffer {
 		 * @since ostermillerutils 1.00.00
 		 */
 		@Override public void flush() throws IOException {
-			if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed Writer.");
-			if (readerClosed) throw new IOException("Buffer closed by Reader; cannot flush.");
+			synchronized (CircularCharBuffer.this){
+				if (writerClosed) throw new IOException("Writer has been closed; cannot flush a closed Writer.");
+				if (readerClosed) throw new IOException("Buffer closed by Reader; cannot flush.");
+			}
 			// this method needs to do nothing
 		}
 

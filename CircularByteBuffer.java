@@ -328,7 +328,7 @@ public class CircularByteBuffer {
 	 * @since ostermillerutils 1.00.00
 	 */
 	private void ensureMark(){
-		if (marked() >= markSize){
+		if (marked() > markSize){
 			markPosition = readPosition;
 			markSize = 0;
 		}
@@ -682,8 +682,10 @@ public class CircularByteBuffer {
 		 * @since ostermillerutils 1.00.00
 		 */
 		@Override public void flush() throws IOException {
-			if (outputStreamClosed) throw new IOException("OutputStream has been closed; cannot flush a closed OutputStream.");
-			if (inputStreamClosed) throw new IOException("Buffer closed by inputStream; cannot flush.");
+			synchronized (CircularByteBuffer.this){
+				if (outputStreamClosed) throw new IOException("OutputStream has been closed; cannot flush a closed OutputStream.");
+				if (inputStreamClosed) throw new IOException("Buffer closed by inputStream; cannot flush.");
+			}
 			// this method needs to do nothing
 		}
 
