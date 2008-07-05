@@ -86,9 +86,9 @@ Version modified for compatibility with the older Java 1.3 release.  Modificatio
 <h2>Version History</h2>
 The major version number will remain unchanged until backward compatibility is severely broken (hopefully never).  The middle number will be incremented whenever new utilities are added.  The final number is reserved for bug fix releases.</p>
 <ul>
+<li>Version 1.07.01 -  <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=237">The flush() method isn't synchronized</a>;  <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=236">Mark position invalidated too early.</a></li>
 <li>Version 1.07.00 - New command line parser: <a href="CmdLn.html">CmdLn</a>.  Extensive code cleanup to reduce lint warnings.</li>
 <li>Version 1.06.02 - <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=150">MD5 methods don't close the file</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=148">ExecHelper directory not passed into Runtime.exec()</a></li>
-<li>Version 1.06.01 - <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=5">CSV changeQuote doesn't check if same character is used again</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=6">String Helper padding methods could be more efficient</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=7">CSV line ending character(s) should be settable, not unix \n by default</a></li>
 <li><a href="history.html">Older Changes...</a></li>
 </ul>
 </div>

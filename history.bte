@@ -7,6 +7,7 @@
 <div class=history>
 <h2>Version History</h2>
 <ul>
+<li>Version 1.06.01 - <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=5">CSV changeQuote doesn't check if same character is used again</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=6">String Helper padding methods could be more efficient</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=7">CSV line ending character(s) should be settable, not unix \n by default</a></li>
 <li>Version 1.06.00 - ArrayHelper; ExecHelper; CircularBuffers no longer eat space when skip() is called.</li>
 <li>Version 1.05.00 - New Parallelizer thread utility;  Added "mark of the web" to html files produced by the Browser opener to work better with Internet Explorer Windows XP service pack 2; Added splitIncludeDelimiters and join methods to StringHelper.</li>
 <li>Version 1.04.03 - Generics support for CircularObjectBuffer, ArrayIterator, ArrayEnumeration, IteratorEnumeration, and EnumerationIterator.</li>
