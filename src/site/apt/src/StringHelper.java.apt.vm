@@ -7,8 +7,8 @@
 
 StringHelper.java Source Code
 
-  * {{{../StringHelper.html}StringHelper Documentation and Examples}}
+    * {{{../StringHelper.html}StringHelper Documentation and Examples}}
 
-  * {{{../javadoc/StringHelper.html}StringHelper Javadoc}}
+    * {{{../javadoc/StringHelper.html}StringHelper Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/StringHelper.java}

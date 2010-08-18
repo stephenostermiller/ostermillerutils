@@ -9,6 +9,6 @@ ArrayIterator.java Source Code
 
 
 
-  * {{{../javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
+    * {{{../javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ArrayIterator.java}

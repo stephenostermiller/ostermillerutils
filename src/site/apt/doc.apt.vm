@@ -9,4 +9,129 @@ Documentation for com.Ostermiller.util Java Utilities
 
   API Documentation for the Java utilities is available in javadoc form
 
-  * {{{doc/}Browse the JavaDoc}}
+    * {{{doc/}Browse the JavaDoc}}
+
+  JavaDoc for individual classes: 
+  
+~~ BEGIN GENERATED JAVADOC LIST
+    * {{{javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
+
+    * {{{javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
+
+    * {{{javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
+
+    * {{{javadoc/BadDelimeterException.html}BadDelimeterException Javadoc}}
+
+    * {{{javadoc/BadDelimiterException.html}BadDelimiterException Javadoc}}
+
+    * {{{javadoc/BadLineEndingException.html}BadLineEndingException Javadoc}}
+
+    * {{{javadoc/BadQuoteException.html}BadQuoteException Javadoc}}
+
+    * {{{javadoc/Base64.html}Base64 Javadoc}}
+
+    * {{{javadoc/Base64DecodingException.html}Base64DecodingException Javadoc}}
+
+    * {{{javadoc/BinaryDataException.html}BinaryDataException Javadoc}}
+
+    * {{{javadoc/Browser.html}Browser Javadoc}}
+
+    * {{{javadoc/BufferOverflowException.html}BufferOverflowException Javadoc}}
+
+    * {{{javadoc/CGIParser.html}CGIParser Javadoc}}
+
+    * {{{javadoc/CSVParse.html}CSVParse Javadoc}}
+
+    * {{{javadoc/CSVParser.html}CSVParser Javadoc}}
+
+    * {{{javadoc/CSVPrint.html}CSVPrint Javadoc}}
+
+    * {{{javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
+
+    * {{{javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
+
+    * {{{javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
+
+    * {{{javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
+
+    * {{{javadoc/CmdLn.html}CmdLn Javadoc}}
+
+    * {{{javadoc/CmdLnArgumentException.html}CmdLnArgumentException Javadoc}}
+
+    * {{{javadoc/CmdLnException.html}CmdLnException Javadoc}}
+
+    * {{{javadoc/CmdLnListener.html}CmdLnListener Javadoc}}
+
+    * {{{javadoc/CmdLnOption.html}CmdLnOption Javadoc}}
+
+    * {{{javadoc/CmdLnResult.html}CmdLnResult Javadoc}}
+
+    * {{{javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
+
+    * {{{javadoc/ConcatReader.html}ConcatReader Javadoc}}
+
+    * {{{javadoc/EnumerationIterator.html}EnumerationIterator Javadoc}}
+
+    * {{{javadoc/ExcelCSVParser.html}ExcelCSVParser Javadoc}}
+
+    * {{{javadoc/ExcelCSVPrinter.html}ExcelCSVPrinter Javadoc}}
+
+    * {{{javadoc/ExecHelper.html}ExecHelper Javadoc}}
+
+    * {{{javadoc/ExtraCmdLnArgumentException.html}ExtraCmdLnArgumentException Javadoc}}
+
+    * {{{javadoc/FileHelper.html}FileHelper Javadoc}}
+
+    * {{{javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
+
+    * {{{javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
+
+    * {{{javadoc/LineEnds.html}LineEnds Javadoc}}
+
+    * {{{javadoc/MD5.html}MD5 Javadoc}}
+
+    * {{{javadoc/MD5InputStream.html}MD5InputStream Javadoc}}
+
+    * {{{javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
+
+    * {{{javadoc/MissingCmdLnArgumentException.html}MissingCmdLnArgumentException Javadoc}}
+
+    * {{{javadoc/NameValuePair.html}NameValuePair Javadoc}}
+
+    * {{{javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
+
+    * {{{javadoc/NoCloseOutputStream.html}NoCloseOutputStream Javadoc}}
+
+    * {{{javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
+
+    * {{{javadoc/NoCloseStream.html}NoCloseStream Javadoc}}
+
+    * {{{javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
+
+    * {{{javadoc/Parallelizer.html}Parallelizer Javadoc}}
+
+    * {{{javadoc/PasswordDialog.html}PasswordDialog Javadoc}}
+
+    * {{{javadoc/PasswordVerifier.html}PasswordVerifier Javadoc}}
+
+    * {{{javadoc/RandPass.html}RandPass Javadoc}}
+
+    * {{{javadoc/RandPassApplet.html}RandPassApplet Javadoc}}
+
+    * {{{javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
+
+    * {{{javadoc/SizeLimitInputStream.html}SizeLimitInputStream Javadoc}}
+
+    * {{{javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
+
+    * {{{javadoc/StringHelper.html}StringHelper Javadoc}}
+
+    * {{{javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
+
+    * {{{javadoc/Tabs.html}Tabs Javadoc}}
+
+    * {{{javadoc/UberProperties.html}UberProperties Javadoc}}
+
+    * {{{javadoc/UnknownCmdLnOptionException.html}UnknownCmdLnOptionException Javadoc}}
+
+~~ END GENERATED JAVADOC LIST

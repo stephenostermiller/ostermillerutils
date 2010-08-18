@@ -9,6 +9,6 @@ NoCloseReader.java Source Code
 
 
 
-  * {{{../javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
+    * {{{../javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseReader.java}

@@ -9,6 +9,6 @@ BadLineEndingException.java Source Code
 
 
 
-  * {{{../javadoc/BadLineEndingException.html}BadLineEndingException Javadoc}}
+    * {{{../javadoc/BadLineEndingException.html}BadLineEndingException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadLineEndingException.java}

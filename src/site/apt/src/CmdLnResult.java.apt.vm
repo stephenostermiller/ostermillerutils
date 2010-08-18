@@ -9,6 +9,6 @@ CmdLnResult.java Source Code
 
 
 
-  * {{{../javadoc/CmdLnResult.html}CmdLnResult Javadoc}}
+    * {{{../javadoc/CmdLnResult.html}CmdLnResult Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CmdLnResult.java}

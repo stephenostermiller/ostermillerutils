@@ -9,6 +9,6 @@ NoCloseWriter.java Source Code
 
 
 
-  * {{{../javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
+    * {{{../javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseWriter.java}

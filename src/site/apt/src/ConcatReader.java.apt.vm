@@ -9,6 +9,6 @@ ConcatReader.java Source Code
 
 
 
-  * {{{../javadoc/ConcatReader.html}ConcatReader Javadoc}}
+    * {{{../javadoc/ConcatReader.html}ConcatReader Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ConcatReader.java}

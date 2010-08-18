@@ -9,6 +9,6 @@ ExtraCmdLnArgumentException.java Source Code
 
 
 
-  * {{{../javadoc/ExtraCmdLnArgumentException.html}ExtraCmdLnArgumentException Javadoc}}
+    * {{{../javadoc/ExtraCmdLnArgumentException.html}ExtraCmdLnArgumentException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ExtraCmdLnArgumentException.java}

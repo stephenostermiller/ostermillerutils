@@ -9,6 +9,6 @@ ArrayEnumeration.java Source Code
 
 
 
-  * {{{../javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
+    * {{{../javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ArrayEnumeration.java}

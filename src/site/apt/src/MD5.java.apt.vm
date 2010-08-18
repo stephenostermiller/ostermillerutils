@@ -7,8 +7,8 @@
 
 MD5.java Source Code
 
-  * {{{../MD5.html}MD5 Documentation and Examples}}
+    * {{{../MD5.html}MD5 Documentation and Examples}}
 
-  * {{{../javadoc/MD5.html}MD5 Javadoc}}
+    * {{{../javadoc/MD5.html}MD5 Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/MD5.java}

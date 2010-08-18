@@ -7,8 +7,8 @@
 
 FileHelper.java Source Code
 
-  * {{{../FileHelper.html}FileHelper Documentation and Examples}}
+    * {{{../FileHelper.html}FileHelper Documentation and Examples}}
 
-  * {{{../javadoc/FileHelper.html}FileHelper Javadoc}}
+    * {{{../javadoc/FileHelper.html}FileHelper Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/FileHelper.java}

@@ -9,6 +9,6 @@ CircularCharBuffer.java Source Code
 
 
 
-  * {{{../javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
+    * {{{../javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CircularCharBuffer.java}

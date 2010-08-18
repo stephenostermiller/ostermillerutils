@@ -7,8 +7,8 @@
 
 RandPass.java Source Code
 
-  * {{{../RandPass.html}RandPass Documentation and Examples}}
+    * {{{../RandPass.html}RandPass Documentation and Examples}}
 
-  * {{{../javadoc/RandPass.html}RandPass Javadoc}}
+    * {{{../javadoc/RandPass.html}RandPass Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/RandPass.java}

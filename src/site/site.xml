@@ -45,7 +45,7 @@
       <item name="Components" href="components.html" collapse="true">
         <item name="ArrayHelper" href="/ArrayHelper.html" />
         <item name="Base64" href="/Base64.html" />
-        <item name="Browser" href="/Browser.html" />
+        <item name="Browser Opener" href="/Browser.html" />
         <item name="CGI Query String Parser" href="/CGIParser.html" />
         <item name="Circular Buffers" href="/CircularBuffer.html" />
         <item name="Command Line Parser" href="/CmdLn.html" />

@@ -7,8 +7,8 @@
 
 CGIParser.java Source Code
 
-  * {{{../CGIParser.html}CGIParser Documentation and Examples}}
+    * {{{../CGIParser.html}CGIParser Documentation and Examples}}
 
-  * {{{../javadoc/CGIParser.html}CGIParser Javadoc}}
+    * {{{../javadoc/CGIParser.html}CGIParser Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CGIParser.java}

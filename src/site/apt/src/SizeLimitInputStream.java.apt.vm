@@ -7,8 +7,8 @@
 
 SizeLimitInputStream.java Source Code
 
-  * {{{../SizeLimitInputStream.html}SizeLimitInputStream Documentation and Examples}}
+    * {{{../SizeLimitInputStream.html}SizeLimitInputStream Documentation and Examples}}
 
-  * {{{../javadoc/SizeLimitInputStream.html}SizeLimitInputStream Javadoc}}
+    * {{{../javadoc/SizeLimitInputStream.html}SizeLimitInputStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/SizeLimitInputStream.java}

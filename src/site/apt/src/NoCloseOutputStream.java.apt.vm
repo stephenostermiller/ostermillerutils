@@ -9,6 +9,6 @@ NoCloseOutputStream.java Source Code
 
 
 
-  * {{{../javadoc/NoCloseOutputStream.html}NoCloseOutputStream Javadoc}}
+    * {{{../javadoc/NoCloseOutputStream.html}NoCloseOutputStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseOutputStream.java}

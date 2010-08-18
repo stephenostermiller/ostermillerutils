@@ -9,6 +9,6 @@ ConcatInputStream.java Source Code
 
 
 
-  * {{{../javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
+    * {{{../javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ConcatInputStream.java}

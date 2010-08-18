@@ -7,8 +7,8 @@
 
 LabeledCSVParser.java Source Code
 
-  * {{{../LabeledCSVParser.html}LabeledCSVParser Documentation and Examples}}
+    * {{{../LabeledCSVParser.html}LabeledCSVParser Documentation and Examples}}
 
-  * {{{../javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
+    * {{{../javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/LabeledCSVParser.java}

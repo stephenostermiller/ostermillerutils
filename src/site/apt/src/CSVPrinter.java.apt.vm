@@ -9,6 +9,6 @@ CSVPrinter.java Source Code
 
 
 
-  * {{{../javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
+    * {{{../javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CSVPrinter.java}

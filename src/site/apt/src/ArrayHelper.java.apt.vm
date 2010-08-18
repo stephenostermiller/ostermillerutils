@@ -7,8 +7,8 @@
 
 ArrayHelper.java Source Code
 
-  * {{{../ArrayHelper.html}ArrayHelper Documentation and Examples}}
+    * {{{../ArrayHelper.html}ArrayHelper Documentation and Examples}}
 
-  * {{{../javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
+    * {{{../javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ArrayHelper.java}

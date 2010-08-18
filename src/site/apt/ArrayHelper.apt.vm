@@ -7,41 +7,15 @@
 
 Helper Methods for Arrays
 
+    * {{{src/ArrayHelper.java.html}ArrayHelper.java Source Code}}
 
+    * {{{javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
 
+  Methods that are useful when working with arrays.  Contains utilities to 
+  concatenate arrays, print arrays, and compare arrays.
 
+*Example
 
-
-Methods that are useful when working with arrays.  Contains utilities to concatenate arrays, print arrays, and compare arrays.
-
-
-<div class=examplecode><h3>Example</h3>
-<pre></span><span class=identifier>ArrayHelper</span><span class=separator>.</span><span class=identifier>print</span><span class=separator>(
-    </span><span class=identifier>ArrayHelper</span><span class=separator>.</span><span class=identifier>cat</span><span class=separator>(
-        </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
-            </span><span class=literal>&quot;one&quot;</span><span class=separator>,
-            </span><span class=literal>&quot;two&quot;
-        </span><span class=separator>},        
-        </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
-            </span><span class=literal>&quot;three&quot;</span><span class=separator>,
-            </span><span class=literal>&quot;four&quot;
-        </span><span class=separator>}
-    )
-);</span></pre>
-</div>
-
-
-
-
-<b>ArrayHelper</b>
-
-  * {{{ArrayHelper.java.html}Source}}
-
-  * {{{doc/com/Ostermiller/util/ArrayHelper.html}Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=ArrayHelper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+  Concatenate two arrays into a single longer array
+  
+%{code-snippet|brush=java|file=src/site/snippet/ArrayHelperCat.java.snippet}

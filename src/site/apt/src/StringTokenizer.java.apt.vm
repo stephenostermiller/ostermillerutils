@@ -7,8 +7,8 @@
 
 StringTokenizer.java Source Code
 
-  * {{{../StringTokenizer.html}StringTokenizer Documentation and Examples}}
+    * {{{../StringTokenizer.html}StringTokenizer Documentation and Examples}}
 
-  * {{{../javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
+    * {{{../javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/StringTokenizer.java}

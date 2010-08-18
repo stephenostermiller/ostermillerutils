@@ -7,8 +7,8 @@
 
 CmdLn.java Source Code
 
-  * {{{../CmdLn.html}CmdLn Documentation and Examples}}
+    * {{{../CmdLn.html}CmdLn Documentation and Examples}}
 
-  * {{{../javadoc/CmdLn.html}CmdLn Javadoc}}
+    * {{{../javadoc/CmdLn.html}CmdLn Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CmdLn.java}

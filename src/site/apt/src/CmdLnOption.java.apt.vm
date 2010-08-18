@@ -9,6 +9,6 @@ CmdLnOption.java Source Code
 
 
 
-  * {{{../javadoc/CmdLnOption.html}CmdLnOption Javadoc}}
+    * {{{../javadoc/CmdLnOption.html}CmdLnOption Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CmdLnOption.java}

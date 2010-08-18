@@ -9,6 +9,6 @@ CSVParser.java Source Code
 
 
 
-  * {{{../javadoc/CSVParser.html}CSVParser Javadoc}}
+    * {{{../javadoc/CSVParser.html}CSVParser Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CSVParser.java}

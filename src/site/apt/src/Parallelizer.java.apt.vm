@@ -7,8 +7,8 @@
 
 Parallelizer.java Source Code
 
-  * {{{../Parallelizer.html}Parallelizer Documentation and Examples}}
+    * {{{../Parallelizer.html}Parallelizer Documentation and Examples}}
 
-  * {{{../javadoc/Parallelizer.html}Parallelizer Javadoc}}
+    * {{{../javadoc/Parallelizer.html}Parallelizer Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Parallelizer.java}

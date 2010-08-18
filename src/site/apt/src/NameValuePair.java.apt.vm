@@ -9,6 +9,6 @@ NameValuePair.java Source Code
 
 
 
-  * {{{../javadoc/NameValuePair.html}NameValuePair Javadoc}}
+    * {{{../javadoc/NameValuePair.html}NameValuePair Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NameValuePair.java}

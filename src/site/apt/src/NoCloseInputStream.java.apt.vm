@@ -9,6 +9,6 @@ NoCloseInputStream.java Source Code
 
 
 
-  * {{{../javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
+    * {{{../javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseInputStream.java}

@@ -9,6 +9,6 @@ IteratorEnumeration.java Source Code
 
 
 
-  * {{{../javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
+    * {{{../javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/IteratorEnumeration.java}

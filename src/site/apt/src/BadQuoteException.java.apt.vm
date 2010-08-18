@@ -9,6 +9,6 @@ BadQuoteException.java Source Code
 
 
 
-  * {{{../javadoc/BadQuoteException.html}BadQuoteException Javadoc}}
+    * {{{../javadoc/BadQuoteException.html}BadQuoteException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadQuoteException.java}

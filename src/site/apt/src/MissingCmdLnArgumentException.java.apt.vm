@@ -9,6 +9,6 @@ MissingCmdLnArgumentException.java Source Code
 
 
 
-  * {{{../javadoc/MissingCmdLnArgumentException.html}MissingCmdLnArgumentException Javadoc}}
+    * {{{../javadoc/MissingCmdLnArgumentException.html}MissingCmdLnArgumentException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/MissingCmdLnArgumentException.java}

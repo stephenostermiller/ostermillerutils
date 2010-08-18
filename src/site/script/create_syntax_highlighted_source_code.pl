@@ -12,6 +12,7 @@ if ($dir !~ /\/src\/site\/script\/?$/){
 
 my $sourceList = "";
 my $menuList = "";
+my $javadocMenuList = "";
 my $javadocList = "";
 
 my @files = split(/\n/, `find ../../main/ -type f`);
@@ -34,18 +35,19 @@ for my $file (sort @files){
     my $public = `grep -c -E 'public .*(class|interface)' $file`;
     if ($public > 0){
       $javadocHref = "../doc/$classpath$barename.html";
-      $javadocAptLink = "  * {{{../javadoc/$barename.html}$barename Javadoc}}";
-      $javadocList .= "        <item name=\"$barename\" href=\"/javadoc/$barename.html\" />\n";
+      $javadocAptLink = "    * {{{../javadoc/$barename.html}$barename Javadoc}}";
+      $javadocMenuList .= "        <item name=\"$barename\" href=\"/javadoc/$barename.html\" />\n";
+      $javadocList .= "    * {{{javadoc/$barename.html}$barename Javadoc}}\n\n";
       $javadocFile = "../xdoc/javadoc/$barename.xml";
     }
   }
   my $srcXdocLink = "<li><a href=\"../src/$srchtmlhref\">$basename Source Code</a></li>";
   if (-f "../apt/$barename.apt.vm"){
-    $docAptLink = "  * {{{../$barename.html}$barename Documentation and Examples}}";
+    $docAptLink = "    * {{{../$barename.html}$barename Documentation and Examples}}";
     $docXdocLink = "<li><a href=\"../$barename.html\">$barename Documentation and Examples</a></li>";
   }
   
-  $sourceList .= "  * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
+  $sourceList .= "    * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
   $menuList .= "        <item name=\"$basename\" href=\"/src/$srchtmlhref\" />\n";
   
   &createSrcFile($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname);
@@ -55,8 +57,9 @@ for my $file (sort @files){
 }
 
 &replaceInFile("../apt/source.apt.vm", "GENERATED SOURCES LIST", $sourceList);
+&replaceInFile("../apt/doc.apt.vm", "GENERATED JAVADOC LIST", $javadocList);
 &replaceInFile("../site.xml", "GENERATED SOURCES MENU", $menuList);
-&replaceInFile("../site.xml", "GENERATED JAVADOC MENU", $javadocList);
+&replaceInFile("../site.xml", "GENERATED JAVADOC MENU", $javadocMenuList);
 
 sub createSrcFile(){
   my ($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname) = @_;

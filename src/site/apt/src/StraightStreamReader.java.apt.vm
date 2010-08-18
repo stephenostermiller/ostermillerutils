@@ -7,8 +7,8 @@
 
 StraightStreamReader.java Source Code
 
-  * {{{../StraightStreamReader.html}StraightStreamReader Documentation and Examples}}
+    * {{{../StraightStreamReader.html}StraightStreamReader Documentation and Examples}}
 
-  * {{{../javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
+    * {{{../javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/StraightStreamReader.java}

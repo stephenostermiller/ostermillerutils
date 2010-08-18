@@ -9,6 +9,6 @@ MD5OutputStream.java Source Code
 
 
 
-  * {{{../javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
+    * {{{../javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/MD5OutputStream.java}

@@ -9,6 +9,6 @@ CmdLnArgumentException.java Source Code
 
 
 
-  * {{{../javadoc/CmdLnArgumentException.html}CmdLnArgumentException Javadoc}}
+    * {{{../javadoc/CmdLnArgumentException.html}CmdLnArgumentException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CmdLnArgumentException.java}

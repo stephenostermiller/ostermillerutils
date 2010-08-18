@@ -9,6 +9,6 @@ CmdLnException.java Source Code
 
 
 
-  * {{{../javadoc/CmdLnException.html}CmdLnException Javadoc}}
+    * {{{../javadoc/CmdLnException.html}CmdLnException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CmdLnException.java}

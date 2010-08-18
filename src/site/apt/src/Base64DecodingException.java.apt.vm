@@ -9,6 +9,6 @@ Base64DecodingException.java Source Code
 
 
 
-  * {{{../javadoc/Base64DecodingException.html}Base64DecodingException Javadoc}}
+    * {{{../javadoc/Base64DecodingException.html}Base64DecodingException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Base64DecodingException.java}

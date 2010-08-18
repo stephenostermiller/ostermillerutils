@@ -9,6 +9,6 @@ CSVPrint.java Source Code
 
 
 
-  * {{{../javadoc/CSVPrint.html}CSVPrint Javadoc}}
+    * {{{../javadoc/CSVPrint.html}CSVPrint Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CSVPrint.java}

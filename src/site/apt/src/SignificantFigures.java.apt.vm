@@ -7,8 +7,8 @@
 
 SignificantFigures.java Source Code
 
-  * {{{../SignificantFigures.html}SignificantFigures Documentation and Examples}}
+    * {{{../SignificantFigures.html}SignificantFigures Documentation and Examples}}
 
-  * {{{../javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
+    * {{{../javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/SignificantFigures.java}

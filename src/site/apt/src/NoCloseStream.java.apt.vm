@@ -7,8 +7,8 @@
 
 NoCloseStream.java Source Code
 
-  * {{{../NoCloseStream.html}NoCloseStream Documentation and Examples}}
+    * {{{../NoCloseStream.html}NoCloseStream Documentation and Examples}}
 
-  * {{{../javadoc/NoCloseStream.html}NoCloseStream Javadoc}}
+    * {{{../javadoc/NoCloseStream.html}NoCloseStream Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseStream.java}

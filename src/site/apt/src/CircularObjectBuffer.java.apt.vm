@@ -9,6 +9,6 @@ CircularObjectBuffer.java Source Code
 
 
 
-  * {{{../javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
+    * {{{../javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CircularObjectBuffer.java}

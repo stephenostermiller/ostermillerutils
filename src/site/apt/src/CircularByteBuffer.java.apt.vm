@@ -9,6 +9,6 @@ CircularByteBuffer.java Source Code
 
 
 
-  * {{{../javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
+    * {{{../javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/CircularByteBuffer.java}

@@ -7,90 +7,95 @@
 
 Browser Opener
 
+    * {{{src/Browser.java.html}Browser.java Source Code}}
 
+    * {{{javadoc/Browser.html}Browser Javadoc}}
 
+  Open a browser from a Java application on Windows, Unix, or Macintosh.
 
+    * <<Windows>> -  Opens the url in the system browser by calling a url.dll 
+    that can open the url using FileProtocolHandler.  This dll fails to open 
+    file urls with spaces.  In that case, a url shortcut is written to the 
+    hard drive, and the shortcut is then opened.
 
+    * <<Macintosh>> -  Opens the url trying first the using the Cocoa 
+    NSWorkspace and then the MRJ classes provided by Apple.  NSWorkspace is 
+    used because the MRJ toolkit for Mac OS X does not implement openURL() 
+    yet.  This class links to the Cocoa NSWorkspace and the MRJ dynamically 
+    at runtime, so this class will compile even on computers such as Windows 
+    and Linux which do not have the Cocoa NSWorkspace and the MRJ installed.
 
-<p>Open a browser from a Java application on Windows, Unix, or Macintosh.</p>
+    * <<Unix, Linux, and other systems>> -  Checks to see if the following 
+    browsers are in the path using the 'which' command:  Mozilla, Netscape, 
+    and Lynx.  It can open the url in any of these browsers.
 
+  Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
+  on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be
+  annoying for developers trying to open a bunch of urls using this class, but have each url in its own
+  window.  Workaround methods that use Javascript to try and open urls in new windows have been provided for
+  cases in which all in the same window is not desirable.</p>
 
-<div class=i18n>
-    Internationalization - included languages:
+*Example
+  
+%{code-snippet|brush=java|file=src/site/snippet/BrowserOpen.java.snippet}
+
+* GUI Configuration
+
+  There is a configuration dialog box (Swing) that can be used in GUI 
+  applications that use this class.  This allows users to choose their own 
+  browser or command line which should be used to open the url.  The default 
+  command line parsing in Java tokenizes only on spaces.  This class uses a 
+  custom command line parser that allows quoted strings and escape characters 
+  so that the command line to the browser can be specified more easily on a 
+  variety of platforms.
+
+[./BrowserDialog.png] Browser Configuration Dialog
+
+*History
+
+  The original idea for this class came from a JavaWorld 
+  {{{http://www.javaworld.com/javaworld/javatips/jw-javatip66.html}Java Tip}}.  That  implementation has some serious problems:
+
+    * Security -  With the JavaWorld example it would be possible to give 
+    the class a url to open that would fool the command line parser and 
+    possibly allow something other than the browser to be executed.  
+    (Any url with white space in it would break the example.)  
+    com.Ostermiller.util.Browser manipulates the url and urlencodes 
+    characters which might confuse the command line parser.
+
+    * Out of date - There are a variety of browsers available on Linux.  
+    It would be nice to check for something better than Netscape.  
+    com.Ostermiller.util.Browser checks for a variety of browsers.
+
+    * Blocking - If you are using Netscape under Linux, a Java program using 
+    this library will wait for Netscape to close before continuing. 
+    com.Ostermiller.util.Browser waits for one second to check if it is still 
+    running rather than blocking.
+
+*Internationalization
+
+  Included languages:
     
-    <li>&#268;esky
-
-    <li>Dansk
-
-    <li>Deutsch
-
-    <li>English
-
-    <li>Espa&ntilde;ol
-
-    <li>Fran&ccedil;ais
-
-    <li>Italiano
-
-	<li>Polska
-
+    * \u010Cesky
     
-    Translations gladly accepted.  Please translate
-    {{{Browser.properties.html}Browser.properties}}.<br>
-	You may want to use:
-	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
-</div>
-
-
-  * <b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.
-
-  * <b>Macintosh</b> -  Opens the url trying first the using the {{{http://developer.apple.com/techpubs/macosx/Cocoa/Reference/ApplicationKit/Java/Classes/NSWorkspace.html}Cocoa NSWorkspace}} and then the {{{http://developer.apple.com/qa/java/java12.html}MRJ}} classes provided by Apple.  NSWorkspace is used because the MRJ toolkit for Mac OS X does not implement openURL() yet.  This class links to the Cocoa NSWorkspace and the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the Cocoa NSWorkspace and the MRJ and  installed.
-
-  * <b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.
-
-
-
-<p>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
-on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be
-annoying for developers trying to open a bunch of urls using this class, but have each url in its own
-window.  Workaround methods that use Javascript to try and open urls in new windows have been provided for
-cases in which all in the same window is not desirable.</p>
-
-<br clear=all>
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Initialize the class.
-// Needs to be done once.
-</span><span class=identifier>Browser</span><span class=separator>.</span><span class=identifier>init</span><span class=separator>();
-
-</span><span class=comment>// Display this page
-</span><span class=identifier>Browser</span><span class=separator>.</span><span class=identifier>displayURL</span><span class=separator>(</span><span class=literal>&quot;http://ostermiller.org/utils/Browser.html&quot;</span><span class=separator>);</span></pre>
-</div>
-
-<p>There is also a configuration dialog box (Swing) that can be used in GUI applications that use this class.  This allows users to choose their own browser or command line which should be used to open the url.  The default command line parsing in Java tokenizes only on spaces.  This class uses a custom command line parser that allows quoted strings and escape characters so that the command line to the browser can be specified more easily on a variety of platforms. </p>
-
-<p><img src="BrowserDialog.png" alt="Browser Configuration Dialog" width="490" height="345"></p>
-
-<p> The original idea for this class came from a JavaWorld {{{http://www.javaworld.com/javaworld/javatips/jw-javatip66.html}Java Tip}}.  That  implementation has some serious problems:
-<ol>
-    <li>Security -  With the JavaWorld example it would be possible to give the class a url to open that would fool the command line parser and possibly allow something other than the browser to be executed.  (Any url with white space in it would break the example.)  com.Ostermiller.util.Browser manipulates the url and urlencodes characters which might confuse the command line parser.
-
-    <li>Out of date - There are a variety of browsers available on Linux.  It would be nice to check for something better than Netscape.  com.Ostermiller.util.Browser checks for a variety of browsers.
-    <li>Blocking - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing. com.Ostermiller.util.Browser waits for one second to check if it is still running rather than blocking.
-
-</ol></p>
-
-<p>Locale specific string for this class are in the {{{http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Browser.properties/HEAD}com.Ostermiller.util.Browser resource bundle}}. Translations are welcome and appreciated.</p>
-
-
-<b>Browser</b>
-
-  * {{{Browser.java.html}Source}}
-
-  * {{{doc/com/Ostermiller/util/Browser.html}Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Browser&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
+    * Dansk
+    
+    * Deutsch
+    
+    * English
+    
+    * Espa\xF1ol
+    
+    * Fran\xC7ais
+    
+    * Italiano
+    
+    * Polska
+    
+  Translations gladly accepted.  Please translate
+  {{{./src/Browser.properties.html}Browser.properties}}.
+  You may want to use:
+  {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 
 
 

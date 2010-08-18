@@ -9,6 +9,6 @@ BadDelimeterException.java Source Code
 
 
 
-  * {{{../javadoc/BadDelimeterException.html}BadDelimeterException Javadoc}}
+    * {{{../javadoc/BadDelimeterException.html}BadDelimeterException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadDelimeterException.java}

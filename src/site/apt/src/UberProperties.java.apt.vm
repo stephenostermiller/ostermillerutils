@@ -7,8 +7,8 @@
 
 UberProperties.java Source Code
 
-  * {{{../UberProperties.html}UberProperties Documentation and Examples}}
+    * {{{../UberProperties.html}UberProperties Documentation and Examples}}
 
-  * {{{../javadoc/UberProperties.html}UberProperties Javadoc}}
+    * {{{../javadoc/UberProperties.html}UberProperties Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/UberProperties.java}

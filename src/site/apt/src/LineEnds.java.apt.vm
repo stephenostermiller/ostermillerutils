@@ -7,8 +7,8 @@
 
 LineEnds.java Source Code
 
-  * {{{../LineEnds.html}LineEnds Documentation and Examples}}
+    * {{{../LineEnds.html}LineEnds Documentation and Examples}}
 
-  * {{{../javadoc/LineEnds.html}LineEnds Javadoc}}
+    * {{{../javadoc/LineEnds.html}LineEnds Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/LineEnds.java}

@@ -7,8 +7,8 @@
 
 Tabs.java Source Code
 
-  * {{{../Tabs.html}Tabs Documentation and Examples}}
+    * {{{../Tabs.html}Tabs Documentation and Examples}}
 
-  * {{{../javadoc/Tabs.html}Tabs Javadoc}}
+    * {{{../javadoc/Tabs.html}Tabs Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Tabs.java}

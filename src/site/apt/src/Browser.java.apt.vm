@@ -7,8 +7,8 @@
 
 Browser.java Source Code
 
-  * {{{../Browser.html}Browser Documentation and Examples}}
+    * {{{../Browser.html}Browser Documentation and Examples}}
 
-  * {{{../javadoc/Browser.html}Browser Javadoc}}
+    * {{{../javadoc/Browser.html}Browser Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Browser.java}
