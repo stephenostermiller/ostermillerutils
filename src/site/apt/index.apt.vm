@@ -2,80 +2,18 @@
   Java Utilities OstermillerUtils
   ----
   Stephen Ostermiller;
-  meta-description=va Utilities - OstermillerUtils;
+  meta-description=Open source (GPL) Java utilities maintained by Stephen Ostermiller with help from many contributors.
   ----
 
 Java Utilities - OstermillerUtils
 
-  Open source (GPL) Java utilities maintained by Stephen Ostermiller with help 
-  from {{{contributors.html}many contributors}}.   The utilities can
-  be obtained in .jar format from the {{{download.html}download page}}.
-
-Components
-
-  * {{{ArrayHelper.html}ArrayHelper}} - Helpful utilities for working with arrays.
-
-  * {{{Base64.html}Base64}} - Encode and decode base 64.
-
-  * {{{Browser.html}Browser}} - Open a browser from an application on Windows, Unix, or Macintosh.
-
-  * {{{CGIParser.html}CGI Query String Parser}} - Libraries to to parse the query data supplied by HTTP GET or POST requests.
-
-  * {{{CircularBuffer.html}Circular Buffers}} - Implements the circular buffer producer/consumer model for bytes.
-
-  * {{{CmdLn.html}Command Line Parser}} - Handle options and arguments to Java command line programs.
-
-  * {{{Concat.html}Concatenation Streams}} - Combine multiple streams of incoming data to create a single stream.
-
-  * {{{CSV.html}Comma Separated Values (CSV)}} - Libraries to read and write files in Comma Separated Value (CSV) format. ({{{ExcelCSV.html}Excel CSV Format}} also available)
-
-  * {{{ExecHelper.html}Exec Helper}} - Convenience methods for executing external applications that output data.
-
-  * {{{FileHelper.html}File Helper}} - Methods for manipulating files.
-
-  * {{{Iterator_Enumeration.html}Iterators and Enumerations}} - Convert between Iterators and Enumerations or convert arrays to Iterators or Enumerations.
-
-  * {{{LineEnds.html}Line Ends}} - Converts text files between various system formats.
-
-  * {{{MD5.html}MD5 Sums}} - Classes for generating MD5 checksums on String, Byte arrays, Streams, or Files.
-
-  * {{{NoCloseStream.html}NoClose Streams}} - Create streams that cannot be closed with the regular close() mechanism.
-
-  * {{{Parallelizer.html}Parallelizer}} - Runs multiple jobs in parallel, n threads at a time, and waits until all threads are complete before continuing.
-
-  * {{{PasswordDialog.html}Password Dialog}} - A password dialog box written for Swing.
-
-  * {{{RandPass.html}Random Password Generator}} - Generate a random String using a cryptographically secure random number generator.
-
-  * {{{SignificantFigures.html}Significant Figures}} - Handles parsing, rounding, and displaying numbers for scientific applications.
-
-  * {{{SizeLimitInputStream.html}Size Limit Input Stream}} - Create a sub-stream of a specified length from an existing input stream.
-
-  * {{{StringHelper.html}String Helper}} - Methods for formatting, manipulating, and querying Strings.
-
-  * {{{StringTokenizer.html}String Tokenizer}} - A StringTokenizer replacement with enhancements.
-
-  * {{{StraightStreamReader.html}Straight Stream Reader}} - An input stream reader that does no character class translation.
-
-  * {{{Tabs.html}Tabs}} - Tab adjuster that can convert tabs to spaces and vice versa.
-
-  * {{{UberProperties.html}Uber Properties}} - A replacement for the java.utils.Properties class with enhancements.
-
-Modifications
-
-  Several tools are useful if you want to modify and recompile these utilities:
-
-  * {{{http://java.sun.com/javase/downloads/index.jsp}Java SDK}} - Includes the Java compiler.
-
-  * {{{http://ant.apache.org/}Apache Ant}} - for building distribution files.
-
-  * {{{http://jflex.de/}JFlex}} - to generate lexers used by several utilities.
-
-  * {{{http://ostermiller.org/bte/}Better Template Engine}} - To compile the website documentation.
-
-  * {{{http://ostermiller.org/syntax/}com.Ostermiller.Syntax package}} - To color the HTML source code.
-
-  * Make - (optional in addition to ant) to automate the build.  Consider "make", "make install", "make clean", "make build", and "make javadoc".
-
-  * {{{http://cygwin.com/}Cygwin}} - to get Unix utilities (including make and CVS) for Windows.
+  The com.ostermiller.util package is open source (GPL) Java utilities 
+  maintained by Stephen Ostermiller with help from 
+  {{{contributors.html}many contributors}}.   The utilities can
+  be obtained from the {{{download.html}download page}}.
+  
+  There are dozens of {{{./components.html}components}} including {{{./CSV.html}CSV parsing}}, 
+  {{{./Base64.html}base 64 Encoding}}, and {{{./Browser.html}opening a web 
+  browser}}.  The most recent version of the OstermillerUtils is 
+  ${project.version}.
 

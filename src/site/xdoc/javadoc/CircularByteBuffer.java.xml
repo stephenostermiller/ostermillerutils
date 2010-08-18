@@ -1,0 +1,22 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  <properties>
+    <title>CircularByteBuffer OstermillerUtils JavaDoc</title>
+    <author>Stephen Ostermiller</author>
+  </properties>
+  <head>
+    <meta name="description" content="View JavaDoc for CircularByteBuffer from the com.Ostermiller.util package." />
+  </head>
+  <body>
+    <section name="CircularByteBuffer OstermillerUtils JavaDoc">
+      <ul>
+        
+        <li><a href="../src/CircularByteBuffer.java.html">CircularByteBuffer.java Source Code</a></li>
+      </ul>
+      <iframe src="../doc/com/Ostermiller/util/CircularByteBuffer.html" width="100%" height="100%"></iframe>
+    </section>
+  </body>
+</document>

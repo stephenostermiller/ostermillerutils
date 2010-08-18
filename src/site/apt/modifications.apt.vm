@@ -1,0 +1,25 @@
+  ----
+  Modifications
+  ----
+  Stephen Ostermiller;
+  meta-description=Instructions for making modifications to the OstermillerUtils libraries.;
+  ----
+
+Modifying the com.Ostermiller.util Java utilities
+
+  Several tools are useful if you want to modify and recompile these utilities:
+
+  * {{{http://java.sun.com/javase/downloads/index.jsp}Java SDK}} - Includes the Java compiler.
+
+  * {{{http://ant.apache.org/}Apache Ant}} - for building distribution files.
+
+  * {{{http://jflex.de/}JFlex}} - to generate lexers used by several utilities.
+
+  * {{{http://ostermiller.org/bte/}Better Template Engine}} - To compile the website documentation.
+
+  * {{{http://ostermiller.org/syntax/}com.Ostermiller.Syntax package}} - To color the HTML source code.
+
+  * Make - (optional in addition to ant) to automate the build.  Consider "make", "make install", "make clean", "make build", and "make javadoc".
+
+  * {{{http://cygwin.com/}Cygwin}} - to get Unix utilities (including make and CVS) for Windows.
+

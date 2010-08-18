@@ -1,0 +1,14 @@
+  ----
+  NoCloseInputStream.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for NoCloseInputStream.java from the OstermillerUtils Java utilities.;
+  ----
+
+NoCloseInputStream.java Source Code
+
+
+
+  * {{{../javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseInputStream.java}

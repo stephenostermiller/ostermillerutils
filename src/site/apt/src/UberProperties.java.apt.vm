@@ -1,0 +1,14 @@
+  ----
+  UberProperties.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for UberProperties.java from the OstermillerUtils Java utilities.;
+  ----
+
+UberProperties.java Source Code
+
+  * {{{../UberProperties.html}UberProperties Documentation and Examples}}
+
+  * {{{../javadoc/UberProperties.html}UberProperties Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/UberProperties.java}

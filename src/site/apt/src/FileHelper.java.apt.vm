@@ -1,0 +1,14 @@
+  ----
+  FileHelper.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for FileHelper.java from the OstermillerUtils Java utilities.;
+  ----
+
+FileHelper.java Source Code
+
+  * {{{../FileHelper.html}FileHelper Documentation and Examples}}
+
+  * {{{../javadoc/FileHelper.html}FileHelper Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/FileHelper.java}

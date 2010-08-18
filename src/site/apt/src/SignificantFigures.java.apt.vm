@@ -1,0 +1,14 @@
+  ----
+  SignificantFigures.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for SignificantFigures.java from the OstermillerUtils Java utilities.;
+  ----
+
+SignificantFigures.java Source Code
+
+  * {{{../SignificantFigures.html}SignificantFigures Documentation and Examples}}
+
+  * {{{../javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/SignificantFigures.java}

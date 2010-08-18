@@ -1,0 +1,22 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  <properties>
+    <title>StringHelper OstermillerUtils JavaDoc</title>
+    <author>Stephen Ostermiller</author>
+  </properties>
+  <head>
+    <meta name="description" content="View JavaDoc for StringHelper from the com.Ostermiller.util package." />
+  </head>
+  <body>
+    <section name="StringHelper OstermillerUtils JavaDoc">
+      <ul>
+        <li><a href="../StringHelper.html">StringHelper Documentation and Examples</a></li>
+        <li><a href="../src/StringHelper.java.html">StringHelper.java Source Code</a></li>
+      </ul>
+      <iframe src="../doc/com/Ostermiller/util/StringHelper.html" width="100%" height="800"></iframe>
+    </section>
+  </body>
+</document>

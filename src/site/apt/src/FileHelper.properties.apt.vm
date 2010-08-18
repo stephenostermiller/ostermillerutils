@@ -1,0 +1,14 @@
+  ----
+  FileHelper.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for FileHelper.properties from the OstermillerUtils Java utilities.;
+  ----
+
+FileHelper.properties Source Code
+
+  * {{{../FileHelper.html}FileHelper Documentation and Examples}}
+
+
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/FileHelper.properties}

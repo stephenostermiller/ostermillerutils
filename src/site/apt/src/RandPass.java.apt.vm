@@ -1,0 +1,14 @@
+  ----
+  RandPass.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for RandPass.java from the OstermillerUtils Java utilities.;
+  ----
+
+RandPass.java Source Code
+
+  * {{{../RandPass.html}RandPass Documentation and Examples}}
+
+  * {{{../javadoc/RandPass.html}RandPass Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/RandPass.java}

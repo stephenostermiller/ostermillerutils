@@ -18,31 +18,222 @@
   
   <body>
     <links>
-      <item name="Download" href="download.html" />
-      <item name="Install" href="install.html" />
-      <item name="Libraries" href="./" />
-      <item name="JavaDoc" href="doc/" />
-      <item name="Source" href="source.html" />
-      <item name="Bugs" href="bugs.html" />
-      <item name="Changelog" href="history.html" />
-      <item name="Contributors" href="contributors.html" />
-      <item name="License" href="licenseFAQ.html" />
+      <item name="Home" href="./" />
+      <item name="Download" href="/download.html" />
+      <item name="Install" href="/install.html" />          
+      <item name="Components" href="components.html"/>
+      <item name="JavaDoc" href="/doc/" />
+      <item name="Source" href="/source.html" />
+      <item name="Bugs" href="/bugs.html" />
+      <item name="License" href="/licenseFAQ.html" />
     </links>
 
-    <menu name="OstermillerUtils" href="./" >
-      <item name="Download" href="download.html" />
-      <item name="Installation Instructions" href="install.html" />
-      <item name="JavaDoc" href="doc/" />
-      <item name="Browse Source Code" href="source.html" collapse="true">
-      <!-- BEGIN GENERATED SOURCES LIST -->
-      
-      <!-- BEGIN GENERATED END LIST -->
-      </item>
-      <item name="Bugs and Features" href="bugs.html" />
-      <item name="Version History" href="history.html" />
-      <item name="Contributors" href="contributors.html" />
-      <item name="License" href="licenseFAQ.html" />
+    <menu name="OstermillerUtils">
+      <item name="Download" href="/download.html" />
+      <item name="Installation Instructions" href="/install.html" />      
+      <item name="Components" href="components.html"/>
+      <item name="JavaDoc" href="/doc.html"/>
+      <item name="Browse Source Code" href="/source.html" />
+      <item name="Bugs and Features" href="/bugs.html" />
+      <item name="Version History" href="/history.html" />
+      <item name="Modifications" href="/modifications.html" />
+      <item name="Contributors" href="/contributors.html" />
+      <item name="License" href="/licenseFAQ.html" />
     </menu>
-
+    
+    <menu name="Documentation">
+      <item name="Components" href="components.html" collapse="true">
+        <item name="ArrayHelper" href="/ArrayHelper.html" />
+        <item name="Base64" href="/Base64.html" />
+        <item name="Browser" href="/Browser.html" />
+        <item name="CGI Query String Parser" href="/CGIParser.html" />
+        <item name="Circular Buffers" href="/CircularBuffer.html" />
+        <item name="Command Line Parser" href="/CmdLn.html" />
+        <item name="Concatenation Streams" href="/Concat.html" />
+        <item name="Excel CSV Format" href="/ExcelCSV.html" />
+        <item name="Exec Helper" href="/ExecHelper.html" />
+        <item name="File Helper" href="/FileHelper.html" />
+        <item name="Iterators and Enumerations" href="/Iterator_Enumeration.html" />
+        <item name="Line Ends" href="/LineEnds.html" />
+        <item name="MD5 Sums" href="/MD5.html" />
+        <item name="NoClose Streams" href="/NoCloseStream.html" />
+        <item name="Parallelizer" href="/Parallelizer.html" />
+        <item name="Password Dialog" href="/PasswordDialog.html" />
+        <item name="Random Password Generator" href="/RandPass.html" />
+        <item name="Significant Figures" href="/SignificantFigures.html" />
+        <item name="Size Limit Input Stream" href="/SizeLimitInputStream.html" />
+        <item name="String Helper" href="/StringHelper.html" />
+        <item name="String Tokenizer" href="/StringTokenizer.html" />
+        <item name="Straight Stream Reader" href="/StraightStreamReader.html" />
+        <item name="Tabs" href="/Tabs.html" />
+        <item name="Uber Properties" href="/UberProperties.html" />
+      </item>
+      <item name="JavaDoc" href="/doc.html" collapse="true">
+      <!-- BEGIN GENERATED JAVADOC MENU -->
+        <item name="ArrayEnumeration" href="/javadoc/ArrayEnumeration.html" />
+        <item name="ArrayHelper" href="/javadoc/ArrayHelper.html" />
+        <item name="ArrayIterator" href="/javadoc/ArrayIterator.html" />
+        <item name="BadDelimeterException" href="/javadoc/BadDelimeterException.html" />
+        <item name="BadDelimiterException" href="/javadoc/BadDelimiterException.html" />
+        <item name="BadLineEndingException" href="/javadoc/BadLineEndingException.html" />
+        <item name="BadQuoteException" href="/javadoc/BadQuoteException.html" />
+        <item name="Base64" href="/javadoc/Base64.html" />
+        <item name="Base64DecodingException" href="/javadoc/Base64DecodingException.html" />
+        <item name="BinaryDataException" href="/javadoc/BinaryDataException.html" />
+        <item name="Browser" href="/javadoc/Browser.html" />
+        <item name="BufferOverflowException" href="/javadoc/BufferOverflowException.html" />
+        <item name="CGIParser" href="/javadoc/CGIParser.html" />
+        <item name="CSVParse" href="/javadoc/CSVParse.html" />
+        <item name="CSVParser" href="/javadoc/CSVParser.html" />
+        <item name="CSVPrint" href="/javadoc/CSVPrint.html" />
+        <item name="CSVPrinter" href="/javadoc/CSVPrinter.html" />
+        <item name="CircularByteBuffer" href="/javadoc/CircularByteBuffer.html" />
+        <item name="CircularCharBuffer" href="/javadoc/CircularCharBuffer.html" />
+        <item name="CircularObjectBuffer" href="/javadoc/CircularObjectBuffer.html" />
+        <item name="CmdLn" href="/javadoc/CmdLn.html" />
+        <item name="CmdLnArgumentException" href="/javadoc/CmdLnArgumentException.html" />
+        <item name="CmdLnException" href="/javadoc/CmdLnException.html" />
+        <item name="CmdLnListener" href="/javadoc/CmdLnListener.html" />
+        <item name="CmdLnOption" href="/javadoc/CmdLnOption.html" />
+        <item name="CmdLnResult" href="/javadoc/CmdLnResult.html" />
+        <item name="ConcatInputStream" href="/javadoc/ConcatInputStream.html" />
+        <item name="ConcatReader" href="/javadoc/ConcatReader.html" />
+        <item name="EnumerationIterator" href="/javadoc/EnumerationIterator.html" />
+        <item name="ExcelCSVParser" href="/javadoc/ExcelCSVParser.html" />
+        <item name="ExcelCSVPrinter" href="/javadoc/ExcelCSVPrinter.html" />
+        <item name="ExecHelper" href="/javadoc/ExecHelper.html" />
+        <item name="ExtraCmdLnArgumentException" href="/javadoc/ExtraCmdLnArgumentException.html" />
+        <item name="FileHelper" href="/javadoc/FileHelper.html" />
+        <item name="IteratorEnumeration" href="/javadoc/IteratorEnumeration.html" />
+        <item name="LabeledCSVParser" href="/javadoc/LabeledCSVParser.html" />
+        <item name="LineEnds" href="/javadoc/LineEnds.html" />
+        <item name="MD5" href="/javadoc/MD5.html" />
+        <item name="MD5InputStream" href="/javadoc/MD5InputStream.html" />
+        <item name="MD5OutputStream" href="/javadoc/MD5OutputStream.html" />
+        <item name="MissingCmdLnArgumentException" href="/javadoc/MissingCmdLnArgumentException.html" />
+        <item name="NameValuePair" href="/javadoc/NameValuePair.html" />
+        <item name="NoCloseInputStream" href="/javadoc/NoCloseInputStream.html" />
+        <item name="NoCloseOutputStream" href="/javadoc/NoCloseOutputStream.html" />
+        <item name="NoCloseReader" href="/javadoc/NoCloseReader.html" />
+        <item name="NoCloseStream" href="/javadoc/NoCloseStream.html" />
+        <item name="NoCloseWriter" href="/javadoc/NoCloseWriter.html" />
+        <item name="Parallelizer" href="/javadoc/Parallelizer.html" />
+        <item name="PasswordDialog" href="/javadoc/PasswordDialog.html" />
+        <item name="PasswordVerifier" href="/javadoc/PasswordVerifier.html" />
+        <item name="RandPass" href="/javadoc/RandPass.html" />
+        <item name="RandPassApplet" href="/javadoc/RandPassApplet.html" />
+        <item name="SignificantFigures" href="/javadoc/SignificantFigures.html" />
+        <item name="SizeLimitInputStream" href="/javadoc/SizeLimitInputStream.html" />
+        <item name="StraightStreamReader" href="/javadoc/StraightStreamReader.html" />
+        <item name="StringHelper" href="/javadoc/StringHelper.html" />
+        <item name="StringTokenizer" href="/javadoc/StringTokenizer.html" />
+        <item name="Tabs" href="/javadoc/Tabs.html" />
+        <item name="UberProperties" href="/javadoc/UberProperties.html" />
+        <item name="UnknownCmdLnOptionException" href="/javadoc/UnknownCmdLnOptionException.html" />
+      <!-- END GENERATED JAVADOC MENU -->
+      </item>
+      <item name="Browse Source Code" href="source.html" collapse="true">
+      <!-- BEGIN GENERATED SOURCES MENU -->
+        <item name="ArrayEnumeration.java" href="/src/ArrayEnumeration.java.html" />
+        <item name="ArrayHelper.java" href="/src/ArrayHelper.java.html" />
+        <item name="ArrayIterator.java" href="/src/ArrayIterator.java.html" />
+        <item name="BadDelimeterException.java" href="/src/BadDelimeterException.java.html" />
+        <item name="BadDelimiterException.java" href="/src/BadDelimiterException.java.html" />
+        <item name="BadLineEndingException.java" href="/src/BadLineEndingException.java.html" />
+        <item name="BadQuoteException.java" href="/src/BadQuoteException.java.html" />
+        <item name="Base64.java" href="/src/Base64.java.html" />
+        <item name="Base64DecodingException.java" href="/src/Base64DecodingException.java.html" />
+        <item name="BinaryDataException.java" href="/src/BinaryDataException.java.html" />
+        <item name="Browser.java" href="/src/Browser.java.html" />
+        <item name="BufferOverflowException.java" href="/src/BufferOverflowException.java.html" />
+        <item name="CGIParser.java" href="/src/CGIParser.java.html" />
+        <item name="CSVParse.java" href="/src/CSVParse.java.html" />
+        <item name="CSVParser.java" href="/src/CSVParser.java.html" />
+        <item name="CSVPrint.java" href="/src/CSVPrint.java.html" />
+        <item name="CSVPrinter.java" href="/src/CSVPrinter.java.html" />
+        <item name="CircularByteBuffer.java" href="/src/CircularByteBuffer.java.html" />
+        <item name="CircularCharBuffer.java" href="/src/CircularCharBuffer.java.html" />
+        <item name="CircularObjectBuffer.java" href="/src/CircularObjectBuffer.java.html" />
+        <item name="CmdLn.java" href="/src/CmdLn.java.html" />
+        <item name="CmdLnArgumentException.java" href="/src/CmdLnArgumentException.java.html" />
+        <item name="CmdLnException.java" href="/src/CmdLnException.java.html" />
+        <item name="CmdLnListener.java" href="/src/CmdLnListener.java.html" />
+        <item name="CmdLnOption.java" href="/src/CmdLnOption.java.html" />
+        <item name="CmdLnResult.java" href="/src/CmdLnResult.java.html" />
+        <item name="ConcatInputStream.java" href="/src/ConcatInputStream.java.html" />
+        <item name="ConcatReader.java" href="/src/ConcatReader.java.html" />
+        <item name="EnumerationIterator.java" href="/src/EnumerationIterator.java.html" />
+        <item name="ExcelCSVParser.java" href="/src/ExcelCSVParser.java.html" />
+        <item name="ExcelCSVPrinter.java" href="/src/ExcelCSVPrinter.java.html" />
+        <item name="ExecHelper.java" href="/src/ExecHelper.java.html" />
+        <item name="ExtraCmdLnArgumentException.java" href="/src/ExtraCmdLnArgumentException.java.html" />
+        <item name="FileHelper.java" href="/src/FileHelper.java.html" />
+        <item name="IteratorEnumeration.java" href="/src/IteratorEnumeration.java.html" />
+        <item name="LabeledCSVParser.java" href="/src/LabeledCSVParser.java.html" />
+        <item name="LineEnds.java" href="/src/LineEnds.java.html" />
+        <item name="MD5.java" href="/src/MD5.java.html" />
+        <item name="MD5InputStream.java" href="/src/MD5InputStream.java.html" />
+        <item name="MD5OutputStream.java" href="/src/MD5OutputStream.java.html" />
+        <item name="MissingCmdLnArgumentException.java" href="/src/MissingCmdLnArgumentException.java.html" />
+        <item name="NameValuePair.java" href="/src/NameValuePair.java.html" />
+        <item name="NoCloseInputStream.java" href="/src/NoCloseInputStream.java.html" />
+        <item name="NoCloseOutputStream.java" href="/src/NoCloseOutputStream.java.html" />
+        <item name="NoCloseReader.java" href="/src/NoCloseReader.java.html" />
+        <item name="NoCloseStream.java" href="/src/NoCloseStream.java.html" />
+        <item name="NoCloseWriter.java" href="/src/NoCloseWriter.java.html" />
+        <item name="Parallelizer.java" href="/src/Parallelizer.java.html" />
+        <item name="PasswordDialog.java" href="/src/PasswordDialog.java.html" />
+        <item name="PasswordVerifier.java" href="/src/PasswordVerifier.java.html" />
+        <item name="PropertiesToken.java" href="/src/PropertiesToken.java.html" />
+        <item name="RandPass.java" href="/src/RandPass.java.html" />
+        <item name="RandPassApplet.java" href="/src/RandPassApplet.java.html" />
+        <item name="SignificantFigures.java" href="/src/SignificantFigures.java.html" />
+        <item name="SizeLimitInputStream.java" href="/src/SizeLimitInputStream.java.html" />
+        <item name="StraightStreamReader.java" href="/src/StraightStreamReader.java.html" />
+        <item name="StringHelper.java" href="/src/StringHelper.java.html" />
+        <item name="StringTokenizer.java" href="/src/StringTokenizer.java.html" />
+        <item name="Tabs.java" href="/src/Tabs.java.html" />
+        <item name="UberProperties.java" href="/src/UberProperties.java.html" />
+        <item name="UnknownCmdLnOptionException.java" href="/src/UnknownCmdLnOptionException.java.html" />
+        <item name="BrowserCommandLexer.lex" href="/src/BrowserCommandLexer.lex.html" />
+        <item name="CGILexer.lex" href="/src/CGILexer.lex.html" />
+        <item name="PropertiesLexer.lex" href="/src/PropertiesLexer.lex.html" />
+        <item name="CSVLexer.lex" href="/src/CSVLexer.lex.html" />
+        <item name="ExcelCSVLexer.lex" href="/src/ExcelCSVLexer.lex.html" />
+        <item name="csv.jflex.skel" href="/src/csv.jflex.skel.html" />
+        <item name="Base64.properties" href="/src/Base64.properties.html" />
+        <item name="Browser.properties" href="/src/Browser.properties.html" />
+        <item name="Browser_cz.properties" href="/src/Browser_cz.properties.html" />
+        <item name="Browser_da.properties" href="/src/Browser_da.properties.html" />
+        <item name="Browser_de.properties" href="/src/Browser_de.properties.html" />
+        <item name="Browser_en.properties" href="/src/Browser_en.properties.html" />
+        <item name="Browser_en_US.properties" href="/src/Browser_en_US.properties.html" />
+        <item name="Browser_es.properties" href="/src/Browser_es.properties.html" />
+        <item name="Browser_fr.properties" href="/src/Browser_fr.properties.html" />
+        <item name="Browser_it.properties" href="/src/Browser_it.properties.html" />
+        <item name="Browser_pl.properties" href="/src/Browser_pl.properties.html" />
+        <item name="FileHelper.properties" href="/src/FileHelper.properties.html" />
+        <item name="LineEnds.properties" href="/src/LineEnds.properties.html" />
+        <item name="PasswordDialog.properties" href="/src/PasswordDialog.properties.html" />
+        <item name="PasswordDialog_cz.properties" href="/src/PasswordDialog_cz.properties.html" />
+        <item name="PasswordDialog_da.properties" href="/src/PasswordDialog_da.properties.html" />
+        <item name="PasswordDialog_de.properties" href="/src/PasswordDialog_de.properties.html" />
+        <item name="PasswordDialog_en.properties" href="/src/PasswordDialog_en.properties.html" />
+        <item name="PasswordDialog_en_US.properties" href="/src/PasswordDialog_en_US.properties.html" />
+        <item name="PasswordDialog_es.properties" href="/src/PasswordDialog_es.properties.html" />
+        <item name="PasswordDialog_fr.properties" href="/src/PasswordDialog_fr.properties.html" />
+        <item name="PasswordDialog_it.properties" href="/src/PasswordDialog_it.properties.html" />
+        <item name="PasswordDialog_nl.properties" href="/src/PasswordDialog_nl.properties.html" />
+        <item name="PasswordDialog_pl.properties" href="/src/PasswordDialog_pl.properties.html" />
+        <item name="RandPass.properties" href="/src/RandPass.properties.html" />
+        <item name="RandPass_de.properties" href="/src/RandPass_de.properties.html" />
+        <item name="RandPass_de_DE.properties" href="/src/RandPass_de_DE.properties.html" />
+        <item name="RandPass_en.properties" href="/src/RandPass_en.properties.html" />
+        <item name="RandPass_en_US.properties" href="/src/RandPass_en_US.properties.html" />
+        <item name="Tabs.properties" href="/src/Tabs.properties.html" />
+      <!-- END GENERATED SOURCES MENU -->
+      </item>
+    </menu>
+    
   </body> 
 </project>

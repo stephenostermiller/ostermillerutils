@@ -7,200 +7,206 @@
 
 Source Code -- Java Utilities - OstermillerUtils
 
-  A list of all source files for the Ostermiller Java Utilites appears below. Each has been has syntax highlighting for easy reading. All the source code is also included in the downloadable .jar file. 
+  A source code bundle is available on the {{{./download.html}download page}} 
+  for the purposes of {{{./modifications.html}making modifications}} to the libraries.
 
-  * {{{./ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
+  A list of all source files for the Ostermiller Java Utilites appears below.
+  Each has syntax highlighting for easy reading.
+  
+~~ BEGIN GENERATED SOURCES LIST
+  * {{{./src/ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
 
-  * {{{./ArrayHelper.java.html}ArrayHelper.java Source Code}}
+  * {{{./src/ArrayHelper.java.html}ArrayHelper.java Source Code}}
 
-  * {{{./ArrayIterator.java.html}ArrayIterator.java Source Code}}
+  * {{{./src/ArrayIterator.java.html}ArrayIterator.java Source Code}}
 
-  * {{{./BadDelimeterException.java.html}BadDelimeterException.java Source Code}}
+  * {{{./src/BadDelimeterException.java.html}BadDelimeterException.java Source Code}}
 
-  * {{{./BadDelimiterException.java.html}BadDelimiterException.java Source Code}}
+  * {{{./src/BadDelimiterException.java.html}BadDelimiterException.java Source Code}}
 
-  * {{{./BadLineEndingException.java.html}BadLineEndingException.java Source Code}}
+  * {{{./src/BadLineEndingException.java.html}BadLineEndingException.java Source Code}}
 
-  * {{{./BadQuoteException.java.html}BadQuoteException.java Source Code}}
+  * {{{./src/BadQuoteException.java.html}BadQuoteException.java Source Code}}
 
-  * {{{./Base64.java.html}Base64.java Source Code}}
+  * {{{./src/Base64.java.html}Base64.java Source Code}}
 
-  * {{{./Base64DecodingException.java.html}Base64DecodingException.java Source Code}}
+  * {{{./src/Base64DecodingException.java.html}Base64DecodingException.java Source Code}}
 
-  * {{{./BinaryDataException.java.html}BinaryDataException.java Source Code}}
+  * {{{./src/BinaryDataException.java.html}BinaryDataException.java Source Code}}
 
-  * {{{./Browser.java.html}Browser.java Source Code}}
+  * {{{./src/Browser.java.html}Browser.java Source Code}}
 
-  * {{{./BufferOverflowException.java.html}BufferOverflowException.java Source Code}}
+  * {{{./src/BufferOverflowException.java.html}BufferOverflowException.java Source Code}}
 
-  * {{{./CGIParser.java.html}CGIParser.java Source Code}}
+  * {{{./src/CGIParser.java.html}CGIParser.java Source Code}}
 
-  * {{{./CSVParse.java.html}CSVParse.java Source Code}}
+  * {{{./src/CSVParse.java.html}CSVParse.java Source Code}}
 
-  * {{{./CSVParser.java.html}CSVParser.java Source Code}}
+  * {{{./src/CSVParser.java.html}CSVParser.java Source Code}}
 
-  * {{{./CSVPrint.java.html}CSVPrint.java Source Code}}
+  * {{{./src/CSVPrint.java.html}CSVPrint.java Source Code}}
 
-  * {{{./CSVPrinter.java.html}CSVPrinter.java Source Code}}
+  * {{{./src/CSVPrinter.java.html}CSVPrinter.java Source Code}}
 
-  * {{{./CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}
+  * {{{./src/CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}
 
-  * {{{./CircularCharBuffer.java.html}CircularCharBuffer.java Source Code}}
+  * {{{./src/CircularCharBuffer.java.html}CircularCharBuffer.java Source Code}}
 
-  * {{{./CircularObjectBuffer.java.html}CircularObjectBuffer.java Source Code}}
+  * {{{./src/CircularObjectBuffer.java.html}CircularObjectBuffer.java Source Code}}
 
-  * {{{./CmdLn.java.html}CmdLn.java Source Code}}
+  * {{{./src/CmdLn.java.html}CmdLn.java Source Code}}
 
-  * {{{./CmdLnArgumentException.java.html}CmdLnArgumentException.java Source Code}}
+  * {{{./src/CmdLnArgumentException.java.html}CmdLnArgumentException.java Source Code}}
 
-  * {{{./CmdLnException.java.html}CmdLnException.java Source Code}}
+  * {{{./src/CmdLnException.java.html}CmdLnException.java Source Code}}
 
-  * {{{./CmdLnListener.java.html}CmdLnListener.java Source Code}}
+  * {{{./src/CmdLnListener.java.html}CmdLnListener.java Source Code}}
 
-  * {{{./CmdLnOption.java.html}CmdLnOption.java Source Code}}
+  * {{{./src/CmdLnOption.java.html}CmdLnOption.java Source Code}}
 
-  * {{{./CmdLnResult.java.html}CmdLnResult.java Source Code}}
+  * {{{./src/CmdLnResult.java.html}CmdLnResult.java Source Code}}
 
-  * {{{./ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
+  * {{{./src/ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
 
-  * {{{./ConcatReader.java.html}ConcatReader.java Source Code}}
+  * {{{./src/ConcatReader.java.html}ConcatReader.java Source Code}}
 
-  * {{{./EnumerationIterator.java.html}EnumerationIterator.java Source Code}}
+  * {{{./src/EnumerationIterator.java.html}EnumerationIterator.java Source Code}}
 
-  * {{{./ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
+  * {{{./src/ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
 
-  * {{{./ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
+  * {{{./src/ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
 
-  * {{{./ExecHelper.java.html}ExecHelper.java Source Code}}
+  * {{{./src/ExecHelper.java.html}ExecHelper.java Source Code}}
 
-  * {{{./ExtraCmdLnArgumentException.java.html}ExtraCmdLnArgumentException.java Source Code}}
+  * {{{./src/ExtraCmdLnArgumentException.java.html}ExtraCmdLnArgumentException.java Source Code}}
 
-  * {{{./FileHelper.java.html}FileHelper.java Source Code}}
+  * {{{./src/FileHelper.java.html}FileHelper.java Source Code}}
 
-  * {{{./IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}
+  * {{{./src/IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}
 
-  * {{{./LabeledCSVParser.java.html}LabeledCSVParser.java Source Code}}
+  * {{{./src/LabeledCSVParser.java.html}LabeledCSVParser.java Source Code}}
 
-  * {{{./LineEnds.java.html}LineEnds.java Source Code}}
+  * {{{./src/LineEnds.java.html}LineEnds.java Source Code}}
 
-  * {{{./MD5.java.html}MD5.java Source Code}}
+  * {{{./src/MD5.java.html}MD5.java Source Code}}
 
-  * {{{./MD5InputStream.java.html}MD5InputStream.java Source Code}}
+  * {{{./src/MD5InputStream.java.html}MD5InputStream.java Source Code}}
 
-  * {{{./MD5OutputStream.java.html}MD5OutputStream.java Source Code}}
+  * {{{./src/MD5OutputStream.java.html}MD5OutputStream.java Source Code}}
 
-  * {{{./MissingCmdLnArgumentException.java.html}MissingCmdLnArgumentException.java Source Code}}
+  * {{{./src/MissingCmdLnArgumentException.java.html}MissingCmdLnArgumentException.java Source Code}}
 
-  * {{{./NameValuePair.java.html}NameValuePair.java Source Code}}
+  * {{{./src/NameValuePair.java.html}NameValuePair.java Source Code}}
 
-  * {{{./NoCloseInputStream.java.html}NoCloseInputStream.java Source Code}}
+  * {{{./src/NoCloseInputStream.java.html}NoCloseInputStream.java Source Code}}
 
-  * {{{./NoCloseOutputStream.java.html}NoCloseOutputStream.java Source Code}}
+  * {{{./src/NoCloseOutputStream.java.html}NoCloseOutputStream.java Source Code}}
 
-  * {{{./NoCloseReader.java.html}NoCloseReader.java Source Code}}
+  * {{{./src/NoCloseReader.java.html}NoCloseReader.java Source Code}}
 
-  * {{{./NoCloseStream.java.html}NoCloseStream.java Source Code}}
+  * {{{./src/NoCloseStream.java.html}NoCloseStream.java Source Code}}
 
-  * {{{./NoCloseWriter.java.html}NoCloseWriter.java Source Code}}
+  * {{{./src/NoCloseWriter.java.html}NoCloseWriter.java Source Code}}
 
-  * {{{./Parallelizer.java.html}Parallelizer.java Source Code}}
+  * {{{./src/Parallelizer.java.html}Parallelizer.java Source Code}}
 
-  * {{{./PasswordDialog.java.html}PasswordDialog.java Source Code}}
+  * {{{./src/PasswordDialog.java.html}PasswordDialog.java Source Code}}
 
-  * {{{./PasswordVerifier.java.html}PasswordVerifier.java Source Code}}
+  * {{{./src/PasswordVerifier.java.html}PasswordVerifier.java Source Code}}
 
-  * {{{./PropertiesToken.java.html}PropertiesToken.java Source Code}}
+  * {{{./src/PropertiesToken.java.html}PropertiesToken.java Source Code}}
 
-  * {{{./RandPass.java.html}RandPass.java Source Code}}
+  * {{{./src/RandPass.java.html}RandPass.java Source Code}}
 
-  * {{{./RandPassApplet.java.html}RandPassApplet.java Source Code}}
+  * {{{./src/RandPassApplet.java.html}RandPassApplet.java Source Code}}
 
-  * {{{./SignificantFigures.java.html}SignificantFigures.java Source Code}}
+  * {{{./src/SignificantFigures.java.html}SignificantFigures.java Source Code}}
 
-  * {{{./SizeLimitInputStream.java.html}SizeLimitInputStream.java Source Code}}
+  * {{{./src/SizeLimitInputStream.java.html}SizeLimitInputStream.java Source Code}}
 
-  * {{{./StraightStreamReader.java.html}StraightStreamReader.java Source Code}}
+  * {{{./src/StraightStreamReader.java.html}StraightStreamReader.java Source Code}}
 
-  * {{{./StringHelper.java.html}StringHelper.java Source Code}}
+  * {{{./src/StringHelper.java.html}StringHelper.java Source Code}}
 
-  * {{{./StringTokenizer.java.html}StringTokenizer.java Source Code}}
+  * {{{./src/StringTokenizer.java.html}StringTokenizer.java Source Code}}
 
-  * {{{./Tabs.java.html}Tabs.java Source Code}}
+  * {{{./src/Tabs.java.html}Tabs.java Source Code}}
 
-  * {{{./UberProperties.java.html}UberProperties.java Source Code}}
+  * {{{./src/UberProperties.java.html}UberProperties.java Source Code}}
 
-  * {{{./UnknownCmdLnOptionException.java.html}UnknownCmdLnOptionException.java Source Code}}
+  * {{{./src/UnknownCmdLnOptionException.java.html}UnknownCmdLnOptionException.java Source Code}}
 
-  * {{{./BrowserCommandLexer.lex.html}BrowserCommandLexer.lex Source Code}}
+  * {{{./src/BrowserCommandLexer.lex.html}BrowserCommandLexer.lex Source Code}}
 
-  * {{{./CGILexer.lex.html}CGILexer.lex Source Code}}
+  * {{{./src/CGILexer.lex.html}CGILexer.lex Source Code}}
 
-  * {{{./PropertiesLexer.lex.html}PropertiesLexer.lex Source Code}}
+  * {{{./src/PropertiesLexer.lex.html}PropertiesLexer.lex Source Code}}
 
-  * {{{./CSVLexer.lex.html}CSVLexer.lex Source Code}}
+  * {{{./src/CSVLexer.lex.html}CSVLexer.lex Source Code}}
 
-  * {{{./ExcelCSVLexer.lex.html}ExcelCSVLexer.lex Source Code}}
+  * {{{./src/ExcelCSVLexer.lex.html}ExcelCSVLexer.lex Source Code}}
 
-  * {{{./csv.jflex.skel.html}csv.jflex.skel Source Code}}
+  * {{{./src/csv.jflex.skel.html}csv.jflex.skel Source Code}}
 
-  * {{{./Base64.properties.html}Base64.properties Source Code}}
+  * {{{./src/Base64.properties.html}Base64.properties Source Code}}
 
-  * {{{./Browser.properties.html}Browser.properties Source Code}}
+  * {{{./src/Browser.properties.html}Browser.properties Source Code}}
 
-  * {{{./Browser_cz.properties.html}Browser_cz.properties Source Code}}
+  * {{{./src/Browser_cz.properties.html}Browser_cz.properties Source Code}}
 
-  * {{{./Browser_da.properties.html}Browser_da.properties Source Code}}
+  * {{{./src/Browser_da.properties.html}Browser_da.properties Source Code}}
 
-  * {{{./Browser_de.properties.html}Browser_de.properties Source Code}}
+  * {{{./src/Browser_de.properties.html}Browser_de.properties Source Code}}
 
-  * {{{./Browser_en.properties.html}Browser_en.properties Source Code}}
+  * {{{./src/Browser_en.properties.html}Browser_en.properties Source Code}}
 
-  * {{{./Browser_en_US.properties.html}Browser_en_US.properties Source Code}}
+  * {{{./src/Browser_en_US.properties.html}Browser_en_US.properties Source Code}}
 
-  * {{{./Browser_es.properties.html}Browser_es.properties Source Code}}
+  * {{{./src/Browser_es.properties.html}Browser_es.properties Source Code}}
 
-  * {{{./Browser_fr.properties.html}Browser_fr.properties Source Code}}
+  * {{{./src/Browser_fr.properties.html}Browser_fr.properties Source Code}}
 
-  * {{{./Browser_it.properties.html}Browser_it.properties Source Code}}
+  * {{{./src/Browser_it.properties.html}Browser_it.properties Source Code}}
 
-  * {{{./Browser_pl.properties.html}Browser_pl.properties Source Code}}
+  * {{{./src/Browser_pl.properties.html}Browser_pl.properties Source Code}}
 
-  * {{{./FileHelper.properties.html}FileHelper.properties Source Code}}
+  * {{{./src/FileHelper.properties.html}FileHelper.properties Source Code}}
 
-  * {{{./LineEnds.properties.html}LineEnds.properties Source Code}}
+  * {{{./src/LineEnds.properties.html}LineEnds.properties Source Code}}
 
-  * {{{./PasswordDialog.properties.html}PasswordDialog.properties Source Code}}
+  * {{{./src/PasswordDialog.properties.html}PasswordDialog.properties Source Code}}
 
-  * {{{./PasswordDialog_cz.properties.html}PasswordDialog_cz.properties Source Code}}
+  * {{{./src/PasswordDialog_cz.properties.html}PasswordDialog_cz.properties Source Code}}
 
-  * {{{./PasswordDialog_da.properties.html}PasswordDialog_da.properties Source Code}}
+  * {{{./src/PasswordDialog_da.properties.html}PasswordDialog_da.properties Source Code}}
 
-  * {{{./PasswordDialog_de.properties.html}PasswordDialog_de.properties Source Code}}
+  * {{{./src/PasswordDialog_de.properties.html}PasswordDialog_de.properties Source Code}}
 
-  * {{{./PasswordDialog_en.properties.html}PasswordDialog_en.properties Source Code}}
+  * {{{./src/PasswordDialog_en.properties.html}PasswordDialog_en.properties Source Code}}
 
-  * {{{./PasswordDialog_en_US.properties.html}PasswordDialog_en_US.properties Source Code}}
+  * {{{./src/PasswordDialog_en_US.properties.html}PasswordDialog_en_US.properties Source Code}}
 
-  * {{{./PasswordDialog_es.properties.html}PasswordDialog_es.properties Source Code}}
+  * {{{./src/PasswordDialog_es.properties.html}PasswordDialog_es.properties Source Code}}
 
-  * {{{./PasswordDialog_fr.properties.html}PasswordDialog_fr.properties Source Code}}
+  * {{{./src/PasswordDialog_fr.properties.html}PasswordDialog_fr.properties Source Code}}
 
-  * {{{./PasswordDialog_it.properties.html}PasswordDialog_it.properties Source Code}}
+  * {{{./src/PasswordDialog_it.properties.html}PasswordDialog_it.properties Source Code}}
 
-  * {{{./PasswordDialog_nl.properties.html}PasswordDialog_nl.properties Source Code}}
+  * {{{./src/PasswordDialog_nl.properties.html}PasswordDialog_nl.properties Source Code}}
 
-  * {{{./PasswordDialog_pl.properties.html}PasswordDialog_pl.properties Source Code}}
+  * {{{./src/PasswordDialog_pl.properties.html}PasswordDialog_pl.properties Source Code}}
 
-  * {{{./RandPass.properties.html}RandPass.properties Source Code}}
+  * {{{./src/RandPass.properties.html}RandPass.properties Source Code}}
 
-  * {{{./RandPass_de.properties.html}RandPass_de.properties Source Code}}
+  * {{{./src/RandPass_de.properties.html}RandPass_de.properties Source Code}}
 
-  * {{{./RandPass_de_DE.properties.html}RandPass_de_DE.properties Source Code}}
+  * {{{./src/RandPass_de_DE.properties.html}RandPass_de_DE.properties Source Code}}
 
-  * {{{./RandPass_en.properties.html}RandPass_en.properties Source Code}}
+  * {{{./src/RandPass_en.properties.html}RandPass_en.properties Source Code}}
 
-  * {{{./RandPass_en_US.properties.html}RandPass_en_US.properties Source Code}}
+  * {{{./src/RandPass_en_US.properties.html}RandPass_en_US.properties Source Code}}
 
-  * {{{./Tabs.properties.html}Tabs.properties Source Code}}
+  * {{{./src/Tabs.properties.html}Tabs.properties Source Code}}
 
+~~ END GENERATED SOURCES LIST
 

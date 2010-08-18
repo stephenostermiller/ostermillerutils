@@ -2,23 +2,11 @@
   Documentation for com.Ostermiller.util Java Utilities
   ----
   Stephen Ostermiller;
-  meta-description=cumentation for com.Ostermiller.util Java Utilities;
+  meta-description=View the OstermillerUtil Javadoc documentation for com.Ostermiller.util Java Utilities;
   ----
 
 Documentation for com.Ostermiller.util Java Utilities
 
+  API Documentation for the Java utilities is available in javadoc form
 
-
-Documentation for com.Ostermiller.util Java Utilities
-
-
-API Documentation for the Java utilities is available in javadoc form
-
-
-<h3>Javadoc</h3>
-
-{{{doc/}Browse the JavaDoc}}
-
-
-<b>JavaDoc</b>
-
+  * {{{doc/}Browse the JavaDoc}}

@@ -1,0 +1,14 @@
+  ----
+  BadLineEndingException.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for BadLineEndingException.java from the OstermillerUtils Java utilities.;
+  ----
+
+BadLineEndingException.java Source Code
+
+
+
+  * {{{../javadoc/BadLineEndingException.html}BadLineEndingException Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadLineEndingException.java}

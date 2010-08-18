@@ -1,0 +1,14 @@
+  ----
+  BadQuoteException.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for BadQuoteException.java from the OstermillerUtils Java utilities.;
+  ----
+
+BadQuoteException.java Source Code
+
+
+
+  * {{{../javadoc/BadQuoteException.html}BadQuoteException Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadQuoteException.java}

@@ -1,0 +1,14 @@
+  ----
+  Browser_it.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for Browser_it.properties from the OstermillerUtils Java utilities.;
+  ----
+
+Browser_it.properties Source Code
+
+
+
+
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/Browser_it.properties}

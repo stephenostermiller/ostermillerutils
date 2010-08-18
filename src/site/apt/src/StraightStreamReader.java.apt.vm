@@ -1,0 +1,14 @@
+  ----
+  StraightStreamReader.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for StraightStreamReader.java from the OstermillerUtils Java utilities.;
+  ----
+
+StraightStreamReader.java Source Code
+
+  * {{{../StraightStreamReader.html}StraightStreamReader Documentation and Examples}}
+
+  * {{{../javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/StraightStreamReader.java}

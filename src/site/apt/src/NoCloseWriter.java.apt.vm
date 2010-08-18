@@ -1,0 +1,14 @@
+  ----
+  NoCloseWriter.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for NoCloseWriter.java from the OstermillerUtils Java utilities.;
+  ----
+
+NoCloseWriter.java Source Code
+
+
+
+  * {{{../javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseWriter.java}

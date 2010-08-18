@@ -1,0 +1,14 @@
+  ----
+  BinaryDataException.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for BinaryDataException.java from the OstermillerUtils Java utilities.;
+  ----
+
+BinaryDataException.java Source Code
+
+
+
+  * {{{../javadoc/BinaryDataException.html}BinaryDataException Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BinaryDataException.java}

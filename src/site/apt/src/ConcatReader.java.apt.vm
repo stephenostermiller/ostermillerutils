@@ -1,0 +1,14 @@
+  ----
+  ConcatReader.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for ConcatReader.java from the OstermillerUtils Java utilities.;
+  ----
+
+ConcatReader.java Source Code
+
+
+
+  * {{{../javadoc/ConcatReader.html}ConcatReader Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/ConcatReader.java}

@@ -1,0 +1,14 @@
+  ----
+  StringHelper.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for StringHelper.java from the OstermillerUtils Java utilities.;
+  ----
+
+StringHelper.java Source Code
+
+  * {{{../StringHelper.html}StringHelper Documentation and Examples}}
+
+  * {{{../javadoc/StringHelper.html}StringHelper Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/StringHelper.java}

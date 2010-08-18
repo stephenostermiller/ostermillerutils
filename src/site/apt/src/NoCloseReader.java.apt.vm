@@ -1,0 +1,14 @@
+  ----
+  NoCloseReader.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for NoCloseReader.java from the OstermillerUtils Java utilities.;
+  ----
+
+NoCloseReader.java Source Code
+
+
+
+  * {{{../javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/NoCloseReader.java}

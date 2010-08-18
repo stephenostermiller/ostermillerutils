@@ -1,0 +1,14 @@
+  ----
+  PropertiesLexer.lex Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for PropertiesLexer.lex from the OstermillerUtils Java utilities.;
+  ----
+
+PropertiesLexer.lex Source Code
+
+
+
+
+
+%{code-snippet|file=src/main/jflex/com/Ostermiller/util/PropertiesLexer.lex}
