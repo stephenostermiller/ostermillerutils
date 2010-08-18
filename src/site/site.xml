@@ -20,6 +20,7 @@
     <links>
       <item name="Download" href="download.html" />
       <item name="Install" href="install.html" />
+      <item name="Libraries" href="./" />
       <item name="JavaDoc" href="doc/" />
       <item name="Source" href="source.html" />
       <item name="Bugs" href="bugs.html" />
@@ -28,11 +29,15 @@
       <item name="License" href="licenseFAQ.html" />
     </links>
 
-    <menu name="OstermillerUtils">
+    <menu name="OstermillerUtils" href="./" >
       <item name="Download" href="download.html" />
       <item name="Installation Instructions" href="install.html" />
       <item name="JavaDoc" href="doc/" />
-      <item name="Browse the Source Code" href="source.html" />
+      <item name="Browse Source Code" href="source.html" collapse="true">
+      <!-- BEGIN GENERATED SOURCES LIST -->
+      
+      <!-- BEGIN GENERATED END LIST -->
+      </item>
       <item name="Bugs and Features" href="bugs.html" />
       <item name="Version History" href="history.html" />
       <item name="Contributors" href="contributors.html" />
