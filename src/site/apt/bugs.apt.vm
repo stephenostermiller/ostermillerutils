@@ -5,25 +5,16 @@
   meta-description=File bugs, request features, or view open issues with com.Ostermiller.util Java Utilities;
   ----
 
-BuBugs, Features, and Open Issues with com.Ostermiller.util Java Utilities
+Bugs, Features, and Open Issues with com.Ostermiller.util Java Utilities
 
+  Bugs and features are tracked using bugzilla.
 
+*Open issues
 
-Bugs, Features, and Issues  com.Ostermiller.util Java Utilities
-
-
-Bugs and features are tracked using bugzilla.
-
-
-<h3>Open issues</h3>
-
-{{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Check existing open issues}}
+  {{{http://bugzilla.ostermiller.com/buglist.cgi?quicksearch=JavaUtils}Check existing open issues}}
   
 
-<h3>New issues</h3>
+*New issues
 
-{{{http://bugzilla.ostermiller.com/enter_bug.cgi?product=JavaUtils}Report a bug or request a feature}}
-
-
-<b>Bugs/Features</b>
+  {{{http://bugzilla.ostermiller.com/enter_bug.cgi?product=JavaUtils}Report a bug or request a feature}}
 
