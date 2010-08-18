@@ -85,7 +85,7 @@ public class LabeledCSVParser implements CSVParse {
 	 *
 	 * @since ostermillerutils 1.03.00
 	 */
-	@SuppressWarnings("unused") public LabeledCSVParser(CSVParse parse) throws IOException {
+	public LabeledCSVParser(CSVParse parse) throws IOException {
 		this.parse = parse;
 	}
 
