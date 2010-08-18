@@ -1,0 +1,16 @@
+  ----
+  License (GPL version 2)
+  ----
+  Stephen Ostermiller;
+  meta-description=View the full GPL version 2 license for the OstermillerUtils Java utilities.;
+  ----
+
+OstermillerUtils License 
+
+  The OstermillerUtils are licensed under the GNU General Public License 
+  version 2 (GPL).  The full text of the license is below.  You may also wish
+  to read the {{{./licenseFAQ.html}frequently asked questions about why this license is used}}.
+
+*Full License
+
+%{code-snippet|file=LICENSE}

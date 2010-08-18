@@ -1,0 +1,27 @@
+  ----
+  Install
+  ----
+  Stephen Ostermiller;
+  meta-description=How to install the open source OstermillerUtil Java utilities.;
+  ----
+
+Installation Instructions for the com.Ostermiller.util Java Utilities
+
+* Install the binary jar file (ostermillerutils-{$project.version}.jar)
+
+  The binary jar file can be used as a dependency for your application.  Binary packages can be obtained from the {{{./download.html}download page}}.
+  Place the jar file somewhere that it can be found by your application.  Use one of the following
+  options:
+
+  * Put the jar file in the Java extensions directory. ($JAVA_HOME/jre/lib/ext/)
+
+  * Set your CLASSPATH environment variable to include the jar file.
+
+  * Specify the jar file in the command line classpath when you compile 
+    and run your programs.
+
+  * Extract the jar file to a folder already in your classpath.
+
+  * Include the contents of the jar file in your program's jar file.
+
+  * Reference the jar file from the manifest file in your program's jar file.
