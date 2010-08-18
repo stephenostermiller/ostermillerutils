@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>MD5<%/bte.tpl%>
-<%bte.tpl name=description%>Generate MD5 hash sums.<%/bte.tpl%>
-<%bte.tpl name=keywords%>md5, md5 hash generator, md5 checksum, md5 library, java md5, check sum md5, message digest, fingerprint md5, signature md5, md5 input stream, md5inputstream, md5 output stream, md5outputstream<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  MD5
+  ----
+  Stephen Ostermiller;
+  meta-description=Generate MD5 hash sums.;
+  ----
+
+MD5
+
+
+
+
+
+
 MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for Java Strings, byte arrays, or streams.  MD5 is now considered a weak algorithm.  New applications should consider more secure one way hashes.
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(
@@ -30,8 +39,8 @@ digest. The MD5 algorithm is intended for digital signature applications, where
 a large file must be "compressed" in a secure manner before being encrypted with 
 a private (secret) key under a public-key cryptosystem such as RSA.</p>
 
-<p>This class is based on work by <a href="http://www.helsinki.fi/~sjpaavol/programs/md5/">Santeri Paavolainen</a>.
-and <a href="http://www.ietf.org/rfc/rfc1321.txt">RFC1321</a>.  This implementation is several times
+<p>This class is based on work by {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
+and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation is several times
 faster and much more memory efficient than Santeri's implementation.</p>
 
 <br clear=all>
@@ -64,18 +73,25 @@ faster and much more memory efficient than Santeri's implementation.</p>
 <p>A filtered output stream that computes an MD5 sum for anything written.</p>
 
 <br clear=all>
-<%/bte.tpl%>
 
-<%bte.tpl name=linkMD5%><b>MD5 Sums</b>
-<ul>
-<li><a href="MD5.java.html">MD5 Source</a></li>
-<li><a href="doc/com/Ostermiller/util/MD5.html">MD5 Documentation</a></li>
-<li><a href="MD5InputStream.java.html">MD5InputStream Source</a></li>
-<li><a href="doc/com/Ostermiller/util/MD5InputStream.html">MD5InputStream Documentation</a></li>
-<li><a href="MD5OutputStream.java.html">MD5OutputStream Source</a></li>
-<li><a href="doc/com/Ostermiller/util/MD5OutputStream.html">MD5OutputStream Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=MD5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>MD5 Sums</b>
+
+  * {{{MD5.java.html}MD5 Source}}
+
+  * {{{doc/com/Ostermiller/util/MD5.html}MD5 Documentation}}
+
+  * {{{MD5InputStream.java.html}MD5InputStream Source}}
+
+  * {{{doc/com/Ostermiller/util/MD5InputStream.html}MD5InputStream Documentation}}
+
+  * {{{MD5OutputStream.java.html}MD5OutputStream Source}}
+
+  * {{{doc/com/Ostermiller/util/MD5OutputStream.html}MD5OutputStream Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=MD5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

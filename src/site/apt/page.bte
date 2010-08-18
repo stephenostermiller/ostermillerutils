@@ -1,0 +1,149 @@
+<%bte.doc output="false"%>
+<%bte.tpl name=page %><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head><title><%bte.inc name=pageTitle %></title><%bte.grp onNoResolve=warning %>
+<meta name="description" content="<%bte.inc name=description %>"><%/bte.grp %><%bte.grp onNoResolve=warning %>
+<meta name="keywords" content="<%bte.inc name=keywords %>"><%/bte.grp %>
+<link rel="stylesheet" media="screen" title="Utilites Look and Feel" href="utils.css" type="text/css">
+<%bte.grp onNoResolve=ok %><%bte.inc name=extraheader %><%/bte.grp %></head>
+<body>
+
+<div class=titlebox>
+<h1><a href="http://ostermiller.org/utils/"><img border="0" align="absmiddle" alt="Ostermillerutil Java Utilities"src="http://ostermiller.org/javacup.png"></a> <%bte.inc name=firstLine %></h1>
+</div>
+<table><tr>
+<td valign="top" width="200" class=nav>
+<div class=linksbox>
+<ul>
+<li><%bte.grp ondefault=ok%><%bte.inc name=linkutilies%><%/bte.grp%>
+  <ul>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkdownload%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linksource%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkdoc%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkbugs%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkcontrib%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linklicense%><%/bte.grp%></li>
+  </ul>
+</li>
+</ul>
+<ul>
+<li><%bte.grp ondefault=ok%><%bte.inc name=linkutilies%><%/bte.grp%>
+  <ul>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkArrayHelper%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkBase64%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkBrowser%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkCGIParser%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkCircularBuffer%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkConcat%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkCmdLn%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkCSV%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkExecHelper%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkExcelCSV%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkFileHelper%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkIteratorEnumeration%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkLabeledCSVParser%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkLineEnds%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkMD5%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkNoCloseStream%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkParallelizer%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkPasswordDialog%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkRandPass%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkSignificantFigures%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkSizeLimitInputStream%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkStraightStreamReader%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkStringHelper%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkStringTokenizer%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkTabs%><%/bte.grp%></li>
+  <li><%bte.grp ondefault=ok%><%bte.inc name=linkUberProperties%><%/bte.grp%></li>
+  </ul>
+</li>
+</ul>
+</div>
+</td>
+<td valign="top" class=main>
+
+<%bte.grp onNoResolve=ok %><%bte.inc name=topcontent %><%/bte.grp%>
+
+<br clear="all">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-2385172974335864";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "A8DDA0";
+google_color_bg = "EBFFED";
+google_color_link = "0000CC";
+google_color_url = "008000";
+google_color_text = "6F6F6F";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br clear="all">
+
+<%bte.inc name=content %>
+
+</td>
+</tr></table>
+
+<hr>
+
+<h2><a name="license">License</a></h2>
+
+<p>OstermillerUtil Java Utilities Copyright (c) 2001-2007 by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a> and <a href="contributors.html">other contributors</a></p>
+
+<p>The OstermillerUtils library is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published
+by the Free Software Foundation; either version 2 of the License or (at
+your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the
+<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+
+<p><a href="licenseFAQ.html">License FAQs</a> - Why GPL? How about the LGPL or something else?</p>
+
+<div class=sitenav><a href="http://ostermiller.org/">ostermiller.org</a> (<a href="http://ostermiller.org/siteindex.html">site index</a>)</div>
+
+</body>
+</html><%/bte.tpl%>
+<%bte.tpl name=linkutilies%><a href="./">Utilities</a><%/bte.tpl%>
+<%bte.tpl name=linkdownload%><a href="download.html">Download</a><%/bte.tpl%>
+<%bte.tpl name=linksource%><a href="source.html">Browse Source</a><%/bte.tpl%>
+<%bte.tpl name=linkdoc%><a href="doc.html">JavaDoc</a><%/bte.tpl%>
+<%bte.tpl name=linkbugs%><a href="bugs.html">Bugs/Features</a><%/bte.tpl%>
+<%bte.tpl name=linkcontrib%><a href="contributors.html">Contributors</a><%/bte.tpl%>
+<%bte.tpl name=linklicense%><a href="licenseFAQ.html">License</a><%/bte.tpl%>
+
+<%bte.tpl name=linkArrayHelper%><a href="ArrayHelper.html">ArrayHelper</a><%/bte.tpl%>
+<%bte.tpl name=linkBase64%><a href="Base64.html">Base64</a><%/bte.tpl%>
+<%bte.tpl name=linkBrowser%><a href="Browser.html">Browser</a><%/bte.tpl%>
+<%bte.tpl name=linkCGIParser%><a href="CGIParser.html">CGI Query String Parser</a><%/bte.tpl%>
+<%bte.tpl name=linkCircularBuffer%><a href="CircularBuffer.html">Circular Buffers</a><%/bte.tpl%>
+<%bte.tpl name=linkConcat%><a href="Concat.html">Concatenation Streams</a><%/bte.tpl%>
+<%bte.tpl name=linkCmdLn%><a href="CmdLn.html">Command Line Parser</a><%/bte.tpl%>
+<%bte.tpl name=linkCSV%><a href="CSV.html">Comma Separated Values (CSV)</a><%/bte.tpl%>
+<%bte.tpl name=linkExecHelper%><a href="ExecHelper.html">Exec Helper</a><%/bte.tpl%>
+<%bte.tpl name=linkExcelCSV%><a href="ExcelCSV.html">Excel CSV</a><%/bte.tpl%>
+<%bte.tpl name=linkFileHelper%><a href="FileHelper.html">File Helper</a><%/bte.tpl%>
+<%bte.tpl name=linkIteratorEnumeration%><a href="Iterator_Enumeration.html">Iterators and Enumerations</a><%/bte.tpl%>
+<%bte.tpl name=linkLabeledCSVParser%><a href="LabeledCSVParser.html">Labeled CSV Parser</a><%/bte.tpl%>
+<%bte.tpl name=linkLineEnds%><a href="LineEnds.html">Line Ends</a><%/bte.tpl%>
+<%bte.tpl name=linkMD5%><a href="MD5.html">MD5 Sums</a><%/bte.tpl%>
+<%bte.tpl name=linkNoCloseStream%><a href="NoCloseStream.html">NoClose Streams</a><%/bte.tpl%>
+<%bte.tpl name=linkParallelizer%><a href="Parallelizer.html">Parallelizer</a><%/bte.tpl%>
+<%bte.tpl name=linkPasswordDialog%><a href="PasswordDialog.html">Password Dialog</a><%/bte.tpl%>
+<%bte.tpl name=linkRandPass%><a href="RandPass.html">Random Password Generator</a><%/bte.tpl%>
+<%bte.tpl name=linkSignificantFigures%><a href="SignificantFigures.html">Significant Figures</a><%/bte.tpl%>
+<%bte.tpl name=linkSizeLimitInputStream%><a href="SizeLimitInputStream.html">Size Limit Input Stream</a><%/bte.tpl%>
+<%bte.tpl name=linkStringHelper%><a href="StringHelper.html">String Helper</a><%/bte.tpl%>
+<%bte.tpl name=linkStringTokenizer%><a href="StringTokenizer.html">String Tokenizer</a><%/bte.tpl%>
+<%bte.tpl name=linkStraightStreamReader%><a href="StraightStreamReader.html">Straight Stream Reader</a><%/bte.tpl%>
+<%bte.tpl name=linkTabs%><a href="Tabs.html">Tabs</a><%/bte.tpl%>
+<%bte.tpl name=linkUberProperties%><a href="UberProperties.html">Uber Properties</a><%/bte.tpl%>
+
+<%/bte.doc%>

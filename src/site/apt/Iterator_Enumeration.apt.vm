@@ -1,69 +1,50 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Basic Iterators and Enumerations<%/bte.tpl%>
-<%bte.tpl name=description%>Java libraries to provide basic iterator and enumerations: convert between iterators and enumerations and convert an array to an iterator or enumeration..<%/bte.tpl%>
-<%bte.tpl name=keywords%>enumerationiterator, enumeration iterator, arrayiterator, array iterator, arrayenumeration, array enumeration, iterator enumeration, iteratorenumeration, convert iterator to enumeration, java iterator to enumeration, convert enumeration to iterator, java enumeration to iterator, convert array to iterator, java array to iterator, convert array to enumeration java array to iterator<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
-<p>Classes to convert between enumerations and iterators.  Also classes to convert arrays to enumerations or iterators.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  Basic Iterators and Enumerations
+  ----
+  Stephen Ostermiller;
+  meta-description=Java libraries to provide basic iterator and enumerations: convert between iterators and enumerations and convert an array to an iterator or enumeration..;
+  ----
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>Enumeration e </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>IteratorEnumeration</span><span class=separator>(
-    </span><span class=identifier>collection</span><span class=separator>.</span><span class=identifier>iterator</span><span class=separator>()
-);</span></pre>
-</div>
+Basic Iterators and Enumerations
 
-<h2>Convert an Iterator to an Enumeration: IteratorEnumeration</h2>
+  Classes to convert between enumerations and iterators and to 
+  convert arrays to enumerations or iterators.
+  
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Iterators+and+Enumerations&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Iterator and Enumerator Bugs/Features}}
+  
+  
+Convert an Iterator to an Enumeration: IteratorEnumeration
 
-<br clear=all>
-<hr>
+%{code-snippet|brush=java|file=src/site/snippet/IteratorToEnumeration.java.snippet}
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>Iterator i </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>EnumerationIterator</span><span class=separator>(
-    </span><span class=identifier>vector</span><span class=separator>.</span><span class=identifier>elements</span><span class=separator>()
-);</span></pre>
-</div>
+  * {{{IteratorEnumeration.java.html}IteratorEnumeration Source}}
 
-<h2>Convert an Enumeration to an Iterator: EnumerationIterator</h2>
-
-<br clear=all>
-<hr>
-
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>Enumeration e </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>ArrayEnumeration</span><span class=separator>(
-    </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{</span><span class=literal>&quot;one&quot;</span><span class=separator>,</span><span class=literal>&quot;two&quot;</span><span class=separator>,</span><span class=literal>&quot;three&quot;</span><span class=separator>}
-);</span></pre>
-</div>
-
-<h2>Convert an array to an Enumeration: ArrayEnumeration</h2>
+  * {{{doc/com/Ostermiller/util/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
 
 
-<br clear=all>
-<hr>
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>Iterator i </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>ArrayIterator</span><span class=separator>(
-    </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{</span><span class=literal>&quot;one&quot;</span><span class=separator>,</span><span class=literal>&quot;two&quot;</span><span class=separator>,</span><span class=literal>&quot;three&quot;</span><span class=separator>}
-);</span></pre>
-</div>
+Convert an Enumeration to an Iterator: EnumerationIterator
 
-<h2>Convert an array to an Iterator: ArrayIterator</h2>
+%{code-snippet|brush=java|file=src/site/snippet/EnumerationToIterator.java.snippet}
 
-<br clear=all>
-<%/bte.tpl%>
+  * {{{EnumerationIterator.java.html}EnumerationIterator Source}}
 
-<%bte.tpl name=linkIteratorEnumeration%><b>Iterators and Enumerations</b>
-<ul>
-<li><a href="IteratorEnumeration.java.html">IteratorEnumeration Source</a></li>
-<li><a href="doc/com/Ostermiller/util/IteratorEnumeration.html">IteratorEnumeration Documentation</a></li>
-<li><a href="EnumerationIterator.java.html">EnumerationIterator Source</a></li>
-<li><a href="doc/com/Ostermiller/util/EnumerationIterator.html">EnumerationIterator Documentation</a></li>
-<li><a href="ArrayEnumeration.java.html">ArrayEnumeration Source</a></li>
-<li><a href="doc/com/Ostermiller/util/ArrayEnumeration.html">ArrayEnumeration Documentation</a></li>
-<li><a href="ArrayIterator.java.html">ArrayIterator Source</a></li>
-<li><a href="doc/com/Ostermiller/util/ArrayIterator.html">ArrayIterator Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Iterators+and+Enumerations&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
+  * {{{doc/com/Ostermiller/util/EnumerationIterator.html}EnumerationIterator Javadoc}}
 
-<%/bte.doc%>
+
+Convert an array to an Enumeration: ArrayEnumeration
+
+%{code-snippet|brush=java|file=src/site/snippet/ArrayToEnumeration.java.snippet}
+
+  * {{{ArrayEnumeration.java.html}ArrayEnumeration Source}}
+
+  * {{{doc/com/Ostermiller/util/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
+
+
+Convert an array to an Iterator: ArrayIterator
+
+%{code-snippet|brush=java|file=src/site/snippet/ArrayToIterator.java.snippet}
+
+  * {{{ArrayIterator.java.html}ArrayIterator Source}}
+
+  * {{{doc/com/Ostermiller/util/ArrayIterator.html}ArrayIterator Javadoc}}

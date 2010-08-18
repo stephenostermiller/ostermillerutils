@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Significant Figures<%/bte.tpl%>
-<%bte.tpl name=description%>Handles parsing, rounding, and displaying numbers for scientific applications.<%/bte.tpl%>
-<%bte.tpl name=keywords%>significant figures java library, significant digits java library, scientific rounding java library, java significant figures<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Significant Figures
+  ----
+  Stephen Ostermiller;
+  meta-description=Handles parsing, rounding, and displaying numbers for scientific applications.;
+  ----
+
+Significant Figures
+
+
+
+
+
+
 <p>A Java number class for figuring out how many significant figures each of the
-numbers in a calculation has and displaying the result appropriately.</p><%/bte.tpl%>
-<%bte.tpl name=content%>
+numbers in a calculation has and displaying the result appropriately.</p>
+
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Numbers to multiply
@@ -50,17 +59,20 @@ Figure significant figures for multiplication of numbers.
 Figure significant figures for addition of numbers.
 </div>
 
-<p>See also: <a href="/calc/significant_figures.html">JavaScript routines and an HTML interface for significant figures calculations</a>.</p>
+<p>See also: {{{/calc/significant_figures.html}JavaScript routines and an HTML interface for significant figures calculations}}.</p>
 
 <br clear=all>
-<%/bte.tpl%>
 
-<%bte.tpl name=linkSignificantFigures%><b>Significant Figures</b>
-<ul>
-<li><a href="SignificantFigures.java.html">SignificantFigures Source</a></li>
-<li><a href="doc/com/Ostermiller/util/SignificantFigures.html">SignificantFigures Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Significant Figures</b>
+
+  * {{{SignificantFigures.java.html}SignificantFigures Source}}
+
+  * {{{doc/com/Ostermiller/util/SignificantFigures.html}SignificantFigures Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

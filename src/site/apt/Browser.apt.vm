@@ -1,34 +1,54 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Browser Opener<%/bte.tpl%>
-<%bte.tpl name=description%>Open a browser from a Java application on Windows, Unix, or Macintosh.<%/bte.tpl%>
-<%bte.tpl name=keywords%>open url in browser from java, java open url, browser open from java, <%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Browser Opener
+  ----
+  Stephen Ostermiller;
+  meta-description=Open a browser from a Java application on Windows, Unix, or Macintosh.;
+  ----
+
+Browser Opener
+
+
+
+
+
+
 <p>Open a browser from a Java application on Windows, Unix, or Macintosh.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 <div class=i18n>
     Internationalization - included languages:
-    <ul>
-    <li>&#268;esky</li>
-    <li>Dansk</li>
-    <li>Deutsch</li>
-    <li>English</li>
-    <li>Espa&ntilde;ol</li>
-    <li>Fran&ccedil;ais</li>
-    <li>Italiano</li>
-	<li>Polska</li>
-    </ul>
+    
+    <li>&#268;esky
+
+    <li>Dansk
+
+    <li>Deutsch
+
+    <li>English
+
+    <li>Espa&ntilde;ol
+
+    <li>Fran&ccedil;ais
+
+    <li>Italiano
+
+	<li>Polska
+
+    
     Translations gladly accepted.  Please translate
-    <a href="Browser.properties.html">Browser.properties</a>.<br>
+    {{{Browser.properties.html}Browser.properties}}.<br>
 	You may want to use:
-	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
+	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 </div>
 
-<ul>
-<li><b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.</li>
-<li><b>Macintosh</b> -  Opens the url trying first the using the <a href="http://developer.apple.com/techpubs/macosx/Cocoa/Reference/ApplicationKit/Java/Classes/NSWorkspace.html">Cocoa NSWorkspace</a> and then the <a href="http://developer.apple.com/qa/java/java12.html">MRJ</a> classes provided by Apple.  NSWorkspace is used because the MRJ toolkit for Mac OS X does not implement openURL() yet.  This class links to the Cocoa NSWorkspace and the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the Cocoa NSWorkspace and the MRJ and  installed.</li>
-<li><b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.</li>
-</ul>
+
+  * <b>Windows</b> -  Opens the url in the system browser by calling a url.dll that can open the url using FileProtocolHandler.  This dll fails to open file urls with spaces.  In that case, a url shortcut is written to the hard drive, and the shortcut is then opened.
+
+  * <b>Macintosh</b> -  Opens the url trying first the using the {{{http://developer.apple.com/techpubs/macosx/Cocoa/Reference/ApplicationKit/Java/Classes/NSWorkspace.html}Cocoa NSWorkspace}} and then the {{{http://developer.apple.com/qa/java/java12.html}MRJ}} classes provided by Apple.  NSWorkspace is used because the MRJ toolkit for Mac OS X does not implement openURL() yet.  This class links to the Cocoa NSWorkspace and the MRJ dynamically at runtime, so this class will compile even on computers such as Windows and Linux which do not have the Cocoa NSWorkspace and the MRJ and  installed.
+
+  * <b>Unix, Linux, and other systems</b> -  Checks to see if the following browsers are in the path using the 'which' command:  Mozilla, Netscape, and Lynx.  It can open the url in any of these browsers.
+
+
 
 <p>Usually the browser chooses if the url should be opened in a new window or not.  Internet Explorer
 on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be
@@ -50,22 +70,27 @@ cases in which all in the same window is not desirable.</p>
 
 <p><img src="BrowserDialog.png" alt="Browser Configuration Dialog" width="490" height="345"></p>
 
-<p> The original idea for this class came from a JavaWorld <a href="http://www.javaworld.com/javaworld/javatips/jw-javatip66.html">Java Tip</a>.  That  implementation has some serious problems:
+<p> The original idea for this class came from a JavaWorld {{{http://www.javaworld.com/javaworld/javatips/jw-javatip66.html}Java Tip}}.  That  implementation has some serious problems:
 <ol>
-    <li>Security -  With the JavaWorld example it would be possible to give the class a url to open that would fool the command line parser and possibly allow something other than the browser to be executed.  (Any url with white space in it would break the example.)  com.Ostermiller.util.Browser manipulates the url and urlencodes characters which might confuse the command line parser.</li>
+    <li>Security -  With the JavaWorld example it would be possible to give the class a url to open that would fool the command line parser and possibly allow something other than the browser to be executed.  (Any url with white space in it would break the example.)  com.Ostermiller.util.Browser manipulates the url and urlencodes characters which might confuse the command line parser.
+
     <li>Out of date - There are a variety of browsers available on Linux.  It would be nice to check for something better than Netscape.  com.Ostermiller.util.Browser checks for a variety of browsers.
-    <li>Blocking - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing. com.Ostermiller.util.Browser waits for one second to check if it is still running rather than blocking.</li>
+    <li>Blocking - If you are using Netscape under Linux, a Java program using this library will wait for Netscape to close before continuing. com.Ostermiller.util.Browser waits for one second to check if it is still running rather than blocking.
+
 </ol></p>
 
-<p>Locale specific string for this class are in the <a href="http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Browser.properties/HEAD">com.Ostermiller.util.Browser resource bundle</a>. Translations are welcome and appreciated.</p>
-<%/bte.tpl%>
+<p>Locale specific string for this class are in the {{{http://www.gjt.org/servlets/JCVSlet/show/gjt/com/Ostermiller/util/Browser.properties/HEAD}com.Ostermiller.util.Browser resource bundle}}. Translations are welcome and appreciated.</p>
 
-<%bte.tpl name=linkBrowser%><b>Browser</b>
-<ul>
-<li><a href="Browser.java.html">Source</a></li>
-<li><a href="doc/com/Ostermiller/util/Browser.html">Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Browser&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Browser</b>
+
+  * {{{Browser.java.html}Source}}
+
+  * {{{doc/com/Ostermiller/util/Browser.html}Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Browser&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

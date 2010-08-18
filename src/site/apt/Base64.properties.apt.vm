@@ -1,0 +1,14 @@
+  ----
+  Base64.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for Base64.properties from the OstermillerUtils Java utilities.;
+  ----
+
+  * {{{./Base64.html}Base64 Documentation and Examples}}
+
+
+
+Base64.properties Source Code
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/Base64.properties}

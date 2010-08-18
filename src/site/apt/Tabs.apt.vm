@@ -1,28 +1,39 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Tabs<%/bte.tpl%>
-<%bte.tpl name=description%>Tab adjuster that can convert tabs to spaces and vice versa.<%/bte.tpl%>
-<%bte.tpl name=keywords%>adjust tabs, modify tabs, tabs to spaces, spaces to tabs, java tabs library, library for tabs, tabs utility<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Tabs
+  ----
+  Stephen Ostermiller;
+  meta-description=Tab adjuster that can convert tabs to spaces and vice versa.;
+  ----
+
+Tabs
+
+
+
+
+
+
 <p>Converts tabs to spaces or spaces to tabs at the beginning of each line of files.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 
 <div class=i18n>
     Internationalization - included languages:
-    <ul>	
+    	
     <li>English</li> 
-    </ul>
+    
     Translations gladly accepted.  Please translate
-    <a href="Tabs.properties.html">Tabs.properties</a>.<br>
+    {{{Tabs.properties.html}Tabs.properties}}.<br>
 	You may want to use: 
-	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>.
+	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}.
 </div>
 
 <h3>Features</h3>
-<ul>
-<li>Detects binary files and does not modify those files unless forced.</li>
-<li>Can guess the tab spacing in a file and convert from the guess.</li>
-</ul>
+
+  * Detects binary files and does not modify those files unless forced.
+
+  * Can guess the tab spacing in a file and convert from the guess.
+
+
 
 <p>To run the program use the following command line:<br>
 <b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;&lt;file&gt;</b></p>
@@ -45,14 +56,17 @@ Adjusts the tabs and spaces at the beginning of each line in files.
   -Q --reallyquiet    Print nothing.
 </pre>
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linkTabs%><b>Tabs</b>
-<ul>
-<li><a href="Tabs.java.html">Tabs Source</a></li>
-<li><a href="doc/com/Ostermiller/util/Tabs.html">Tabs Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Tabs&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Tabs</b>
+
+  * {{{Tabs.java.html}Tabs Source}}
+
+  * {{{doc/com/Ostermiller/util/Tabs.html}Tabs Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Tabs&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

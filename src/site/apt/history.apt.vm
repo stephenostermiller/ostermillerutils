@@ -1,53 +1,100 @@
-<%bte.doc super="page.bte" %>
-<%bte.tpl name=pageTitle%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=firstLine%>History of com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=description%>Download open source (GPL) Java utilities for common tasks such as CSV, Base64, MD5, String manipulation.<%/bte.tpl%>
-<%bte.tpl name=keywords%>history of utilities, changelog of utilities, utilities history, java utilities history, ostermillerutils history<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  History of com.Ostermiller.util Java Utilities
+  ----
+  Stephen Ostermiller;
+  meta-description=story of com.Ostermiller.util Java Utilities;
+  ----
+
+History of com.Ostermiller.util Java Utilities
+
+
+
+History of com.Ostermiller.util Java Utilities
+
+
+
 <div class=history>
 <h2>Version History</h2>
-<ul>
-<li>Version 1.06.01 - <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=5">CSV changeQuote doesn't check if same character is used again</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=6">String Helper padding methods could be more efficient</a>; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=7">CSV line ending character(s) should be settable, not unix \n by default</a></li>
-<li>Version 1.06.00 - ArrayHelper; ExecHelper; CircularBuffers no longer eat space when skip() is called.</li>
-<li>Version 1.05.00 - New Parallelizer thread utility;  Added "mark of the web" to html files produced by the Browser opener to work better with Internet Explorer Windows XP service pack 2; Added splitIncludeDelimiters and join methods to StringHelper.</li>
-<li>Version 1.04.03 - Generics support for CircularObjectBuffer, ArrayIterator, ArrayEnumeration, IteratorEnumeration, and EnumerationIterator.</li>
-<li>Version 1.04.02 - LabeledCSVParser does not parse labels until they are needed rather than in the constructor.</li>
-<li>Version 1.04.02 - Enumerations and Iterators have better support for generics.</li>
-<li>Version 1.04.01 - ConcatStreams can dynamically accept more input sources, ExcelCSVParser saves input streams so it can later close them.</li>
-<li>Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.</li>
-<li>Version 1.03.00 - Labeled CSV class; new Iterator and Enumeration classes; NameValuePair class for CGI; CGI parameter order preserved; CGI character set bug fixed.</li>
-<li>Version 1.02.27 - Fixed a possible ArrayOutOfBoundsException in the MD5 libraries.</li>
-<li>Version 1.02.26 - CSVPrint updated with new methods for proper stream handling: flush, close, write methods that throw exceptions, auto flush control, and quoting behavior control..  CSVParse updated with a close method.</li>
-<li>Version 1.02.25 - Additional StringHelper methods for escaping regular expressions and comparing a string to multiple others.</li>
-<li>Version 1.02.24 - MD5 sums were not correctly computed for certain odd byte lengths.  Convenience methods/constructors to CSV to change delimiters.</li>
-<li>Version 1.02.23 - Fixed numerous inconsistencies between UberProperties and java.util.Properties, added unit test.</li>
-<li>Version 1.02.22 - Fixed //" bug in CSVParser, configuration panel added to Browser.</li>
-<li>Version 1.02.21 - BadDelimiterException neglected for use in one place.</li>
-<li>Version 1.02.20 - Fixed crash when loading some properties files with the UberProperties class, BadDelimiterException class created to fix spelling error.</li>
-<li>Version 1.02.19 - CSV Printers no longer throw an exception when changing delimiters to the current delimiter.</li>
-<li>Version 1.02.18 - Ability to change quotes and delimiters on all CSVPrinters; @since tags on all javadoc.</li>
-<li>Version 1.02.17 - UberProperties ignore blank lines when reading, can save empty name value pairs.</li>
-<li>Version 1.02.16 - Browser opens better on OS X, more options for unix; More Base64 encoding options; Ability to change quotes on CSVParsers.</li>
-<li>Version 1.02.15 - Set methods for CGI params in CGIParser, Better command line options for Base64.</li>
-<li>Version 1.02.14 - Documented lexer skeleton files for build, corrected another change delimiter bug.</li>
-<li>Version 1.02.13 - Convenience returns for significant figure methods, include skeleton file in distribution, new download page on website.</li>
-<li>Version 1.02.12 - CSV bug fixed: delim change not possible for second instance.</li>
-<li>Version 1.02.11 - More examples, fixed CLASSPATH compile problem for JDK 1.4.</li>
-<li>Version 1.02.10 - Properties no longer lost at UberProperties EOF, examples for CSV, Circular Buffers.</li>
-<li>Version 1.02.08 - Ability to change delimiters in CSV parsers.</li>
-<li>Version 1.02.07 - Added convenience methods to sigfigs, browser doesn't escape forward slash.</li>
-<li>Version 1.02.06 - Updated French translations.</li>
-<li>Version 1.02.05 - Two Polish translations.</li>
-<li>Version 1.02.04 - Created build file for Ant.</li>
-<li>Version 1.02.03 - Convenience methods in CSV parsers.</li>
-<li>Version 1.02.02 - Unclosed quoted value in CSV bug.</li>
-<li>Version 1.02.01 - Documentation improvement.</li>
-<li>Version 1.02.00 - Applet added for Random Passwords.</li>
-<li>Version 1.01.00 - NoClose Streams</li>
-<li>Version 1.00.00 - First versioned release.</li>
-</ul>
-<p>No version number was available before January 2003, old versions are not available for download.  <a href="http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/">CVS from gjt.org</a> can be used to answer specific questions about revisions to a particular file.</div>
+
+  * Version 1.06.01 - {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=5}CSV changeQuote doesn't check if same character is used again}}; {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=6}String Helper padding methods could be more efficient}}; <a href="http://bugzilla.ostermiller.com/show_bug.cgi?id=7">CSV line ending character(s) should be settable, not unix \n by default</a>
+
+  * Version 1.06.00 - ArrayHelper; ExecHelper; CircularBuffers no longer eat space when skip() is called.
+
+  * Version 1.05.00 - New Parallelizer thread utility;  Added "mark of the web" to html files produced by the Browser opener to work better with Internet Explorer Windows XP service pack 2; Added splitIncludeDelimiters and join methods to StringHelper.
+
+  * Version 1.04.03 - Generics support for CircularObjectBuffer, ArrayIterator, ArrayEnumeration, IteratorEnumeration, and EnumerationIterator.
+
+  * Version 1.04.02 - LabeledCSVParser does not parse labels until they are needed rather than in the constructor.
+
+  * Version 1.04.02 - Enumerations and Iterators have better support for generics.
+
+  * Version 1.04.01 - ConcatStreams can dynamically accept more input sources, ExcelCSVParser saves input streams so it can later close them.
+
+  * Version 1.04.00 - SizeLimitInputStream class; Concatenation Streams classes; Updated all scanner definitions to work with JFlex 1.4; CGIParser catches IllegalArgementException thrown by URLDecoder; New unit tests for several classes; Unit tests standalone programs with no output on success.
+
+  * Version 1.03.00 - Labeled CSV class; new Iterator and Enumeration classes; NameValuePair class for CGI; CGI parameter order preserved; CGI character set bug fixed.
+
+  * Version 1.02.27 - Fixed a possible ArrayOutOfBoundsException in the MD5 libraries.
+
+  * Version 1.02.26 - CSVPrint updated with new methods for proper stream handling: flush, close, write methods that throw exceptions, auto flush control, and quoting behavior control..  CSVParse updated with a close method.
+
+  * Version 1.02.25 - Additional StringHelper methods for escaping regular expressions and comparing a string to multiple others.
+
+  * Version 1.02.24 - MD5 sums were not correctly computed for certain odd byte lengths.  Convenience methods/constructors to CSV to change delimiters.
+
+  * Version 1.02.23 - Fixed numerous inconsistencies between UberProperties and java.util.Properties, added unit test.
+
+  * Version 1.02.22 - Fixed //" bug in CSVParser, configuration panel added to Browser.
+
+  * Version 1.02.21 - BadDelimiterException neglected for use in one place.
+
+  * Version 1.02.20 - Fixed crash when loading some properties files with the UberProperties class, BadDelimiterException class created to fix spelling error.
+
+  * Version 1.02.19 - CSV Printers no longer throw an exception when changing delimiters to the current delimiter.
+
+  * Version 1.02.18 - Ability to change quotes and delimiters on all CSVPrinters; @since tags on all javadoc.
+
+  * Version 1.02.17 - UberProperties ignore blank lines when reading, can save empty name value pairs.
+
+  * Version 1.02.16 - Browser opens better on OS X, more options for unix; More Base64 encoding options; Ability to change quotes on CSVParsers.
+
+  * Version 1.02.15 - Set methods for CGI params in CGIParser, Better command line options for Base64.
+
+  * Version 1.02.14 - Documented lexer skeleton files for build, corrected another change delimiter bug.
+
+  * Version 1.02.13 - Convenience returns for significant figure methods, include skeleton file in distribution, new download page on website.
+
+  * Version 1.02.12 - CSV bug fixed: delim change not possible for second instance.
+
+  * Version 1.02.11 - More examples, fixed CLASSPATH compile problem for JDK 1.4.
+
+  * Version 1.02.10 - Properties no longer lost at UberProperties EOF, examples for CSV, Circular Buffers.
+
+  * Version 1.02.08 - Ability to change delimiters in CSV parsers.
+
+  * Version 1.02.07 - Added convenience methods to sigfigs, browser doesn't escape forward slash.
+
+  * Version 1.02.06 - Updated French translations.
+
+  * Version 1.02.05 - Two Polish translations.
+
+  * Version 1.02.04 - Created build file for Ant.
+
+  * Version 1.02.03 - Convenience methods in CSV parsers.
+
+  * Version 1.02.02 - Unclosed quoted value in CSV bug.
+
+  * Version 1.02.01 - Documentation improvement.
+
+  * Version 1.02.00 - Applet added for Random Passwords.
+
+  * Version 1.01.00 - NoClose Streams
+
+  * Version 1.00.00 - First versioned release.
+
+
+<p>No version number was available before January 2003, old versions are not available for download.  {{{http://www.gjt.org/servlets/JCVSlet/list/gjt/com/Ostermiller/util/}CVS from gjt.org}} can be used to answer specific questions about revisions to a particular file.</div>
 </div>
 <br clear=all>
-<%/bte.tpl%>
-<%/bte.doc%>
+
+

@@ -1,19 +1,31 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>File Helper<%/bte.tpl%>
-<%bte.tpl name=description%>Methods for manipulating Files.<%/bte.tpl%>
-<%bte.tpl name=keywords%>file helper, filehelper, java filehelper, move file in java<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  File Helper
+  ----
+  Stephen Ostermiller;
+  meta-description=Methods for manipulating Files.;
+  ----
+
+File Helper
+
+
+
+
+
+
 <p>This file helper utility contains methods to make manipulating files easier from Java</p>
-<%/bte.tpl%><%bte.tpl name=content%>
+
 <p>Includes a method to move a file, even when it can't be renamed.</p>
-<%/bte.tpl%>
 
-<%bte.tpl name=linkFileHelper%><b>File Helper</b>
-<ul>
-<li><a href="FileHelper.java.html">Source</a></li>
-<li><a href="doc/com/Ostermiller/util/FileHelper.html">Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=File+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>File Helper</b>
+
+  * {{{FileHelper.java.html}Source}}
+
+  * {{{doc/com/Ostermiller/util/FileHelper.html}Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=File+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

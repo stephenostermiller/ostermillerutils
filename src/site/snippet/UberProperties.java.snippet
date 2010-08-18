@@ -1,0 +1,26 @@
+// create the properties
+UberProperties props = new UberProperties();
+
+// File in which changes will be stored
+// relative to the users home directory
+String[] userFile = new String[]{
+	".java","uberpropertiestest.properties"
+};
+
+// This file must exist for this example to work
+// this file should contain default values.
+// In this case, it would be best to have the following line:
+// lastDate=This example was just run for the first time.
+String systemResource = "uberpropertiestest.properties";
+
+// load the properties
+props.load(userFile, systemResource);
+
+// Display the date for the last time this example was run.
+System.out.println( props.getProperty("lastDate"));
+
+// set the date
+props.setProperty("lastDate", new Date().toString());
+
+// resave the properties so the date will be printed next time
+props.save(userFile);

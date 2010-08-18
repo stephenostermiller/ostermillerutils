@@ -1,21 +1,33 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Straight Stream Reader<%/bte.tpl%>
-<%bte.tpl name=description%>An input stream reader that does no character class translation.<%/bte.tpl%>
-<%bte.tpl name=keywords%>staightstreamreader, straight stream reader, reader without character set<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Straight Stream Reader
+  ----
+  Stephen Ostermiller;
+  meta-description=An input stream reader that does no character class translation.;
+  ----
+
+Straight Stream Reader
+
+
+
+
+
+
 An input stream reader that does not do character class translation. 
-<%/bte.tpl%>
-<%bte.tpl name=content%>
-<P>You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some <a href="http://www.jflex.de/manual.html#SECTION00063000000000000000">discussion</a> in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linkStraightStreamReader%><b>Straight Stream Reader</b>
-<ul>
-<li><a href="StraightStreamReader.java.html">StraightStreamReader Source</a></li>
-<li><a href="doc/com/Ostermiller/util/StraightStreamReader.html">StraightStreamReader Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
+<P>You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some {{{http://www.jflex.de/manual.html#SECTION00063000000000000000}discussion}} in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
 
-<%/bte.doc%>
+
+
+<b>Straight Stream Reader</b>
+
+  * {{{StraightStreamReader.java.html}StraightStreamReader Source}}
+
+  * {{{doc/com/Ostermiller/util/StraightStreamReader.html}StraightStreamReader Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

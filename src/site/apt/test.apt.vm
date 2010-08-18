@@ -1,0 +1,19 @@
+  ----
+  OstermillerUtils Java Utilities
+  ----
+  Stephen Ostermiller;
+  meta-description=Ostermiller utilities meta description.;
+  ----
+
+Heading
+
+  First line of first paragraph.
+  Second line of first paragraph.
+  Third line of first paragraph.
+  
+Current version: ${project.version}
+
+%{code-snippet|brush=java|file=src/site/snippet/snippet.java.snippet}
+
+  Line 1 of paragraph 2 (separated from first paragraph by an open line).
+  Line 2 of paragraph 2.

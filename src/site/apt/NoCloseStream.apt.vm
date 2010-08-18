@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>NoClose Streams<%/bte.tpl%>
-<%bte.tpl name=description%>Create streams that cannot be closed with the regular close() mechanism.<%/bte.tpl%>
-<%bte.tpl name=keywords%>no close stream, noclosestream, unclosable stream library, java stream that can't be closed<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  NoClose Streams
+  ----
+  Stephen Ostermiller;
+  meta-description=Create streams that cannot be closed with the regular close() mechanism.;
+  ----
+
+NoClose Streams
+
+
+
+
+
+
 <p>Create streams that cannot be closed with the normal close() mechanism.  Instead, a reallyClose() method is provided while the close() method does nothing.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 <p>This is useful when you have a stream to pass to methods that either read or write using the stream.  If any of the methods call the stream's close method before you are done with the stream, this class is useful.  Simply wrap your stream in one of the NoClose Streams, and pass that around.  When the other method calls the close method it will have no effect.  You can later close your stream by calling the reallyClose() method.</p>
 
 <h2>NoCloseStream</h2>
@@ -58,20 +67,31 @@ Interface for all four of the following classes.
 </span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>reallyClose</span><span class=separator>();</span></pre>
 </div>
 
-<%/bte.tpl%>
-<%bte.tpl name=linkNoCloseStream%><b>NoClose Streams</b>
-<ul>
-<li><a href="NoCloseStream.java.html">NoCloseStream Source</a></li>
-<li><a href="doc/com/Ostermiller/util/NoCloseStream.html">NoCloseStream Documentation</a></li>
-<li><a href="NoCloseInputStream.java.html">NoCloseInputStream Source</a></li>
-<li><a href="doc/com/Ostermiller/util/NoCloseInputStream.html">NoCloseInputStream Documentation</a></li>
-<li><a href="NoCloseOutputStream.java.html">NoCloseOutputStream Source</a></li>
-<li><a href="doc/com/Ostermiller/util/NoCloseOutputStream.html">NoCloseOutputStream Documentation</a></li>
-<li><a href="NoCloseReader.java.html">NoCloseReader Source</a></li>
-<li><a href="doc/com/Ostermiller/util/NoCloseReader.html">NoCloseReader Documentation</a></li>
-<li><a href="NoCloseWriter.java.html">NoCloseWriter Source</a></li>
-<li><a href="doc/com/Ostermiller/util/NoCloseWriter.html">NoCloseWriter Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=NoClose+Streams5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
-<%/bte.doc%>
+
+<b>NoClose Streams</b>
+
+  * {{{NoCloseStream.java.html}NoCloseStream Source}}
+
+  * {{{doc/com/Ostermiller/util/NoCloseStream.html}NoCloseStream Documentation}}
+
+  * {{{NoCloseInputStream.java.html}NoCloseInputStream Source}}
+
+  * {{{doc/com/Ostermiller/util/NoCloseInputStream.html}NoCloseInputStream Documentation}}
+
+  * {{{NoCloseOutputStream.java.html}NoCloseOutputStream Source}}
+
+  * {{{doc/com/Ostermiller/util/NoCloseOutputStream.html}NoCloseOutputStream Documentation}}
+
+  * {{{NoCloseReader.java.html}NoCloseReader Source}}
+
+  * {{{doc/com/Ostermiller/util/NoCloseReader.html}NoCloseReader Documentation}}
+
+  * {{{NoCloseWriter.java.html}NoCloseWriter Source}}
+
+  * {{{doc/com/Ostermiller/util/NoCloseWriter.html}NoCloseWriter Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=NoClose+Streams5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+

@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Excel Comma Separated Values (CSV)<%/bte.tpl%>
-<%bte.tpl name=description%>Java libraries to read and write files in Excel Comma Separated Value (CSV) format.<%/bte.tpl%>
-<%bte.tpl name=keywords%>excel csv java, java excel csv, comma separated values excel java, cvs excel java, microsoft excel csv format java<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
-Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by <a href="http://rfc.net/rfc4180.html">RFC4180</a>.  <a href="CSV.html">Libraries for other CSV formats</a> are available.
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  Excel Comma Separated Values (CSV)
+  ----
+  Stephen Ostermiller;
+  meta-description=Java libraries to read and write files in Excel Comma Separated Value (CSV) format.;
+  ----
+
+Excel Comma Separated Values (CSV)
+
+
+
+
+
+
+Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.  {{{CSV.html}Libraries for other CSV formats}} are available.
+
+
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the printer
 </span><span class=identifier>ExcelCSVPrinter ecsvp </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>ExcelCSVPrinter</span><span class=separator>(
@@ -25,7 +34,7 @@ Utilities for reading and writing CSV (comma separated value) text files in the 
 escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
 
 <p>To write standard CSV files that some applications other than Excel can understand use the 
-<a href="CSV.html">standard CSV</a> format.  Both CSVPrinter and ExcelCSVPrinter
+{{{CSV.html}standard CSV}} format.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
 <br clear=all>
@@ -52,27 +61,32 @@ implement the CSVPrint interface.</p>
 <h2><a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a></h2>
 
 <p>Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
-However it fails to use the <a href="CSV.html">standard CSV file format</a>.  Excel does
+However it fails to use the {{{CSV.html}standard CSV file format}}.  Excel does
 not use the backslash as an escape character, but instead escapes quote literals with two quotes.
 It also does not quote values that have leading or trailing whitespace.  This special CSV parser
-can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by <a href="http://rfc.net/rfc4180.html">RFC4180</a>.</p>
+can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.</p>
 
 <p>To read standard CSV files that some applications other than Excel can understand use the 
-<a href="CSV.html">standard CSV</a> format.  Both CSVParser and ExcelCSVParser
+{{{CSV.html}standard CSV}} format.  Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.</p>
 
-<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
+<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}</p>
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linkExcelCSV%><b>Excel CSV</b>
-<ul>
-<li><a href="ExcelCSVPrinter.java.html">ExcelCSVPrinter Source</a></li>
-<li><a href="doc/com/Ostermiller/util/ExcelCSVPrinter.html">ExcelCSVPrinter Documentation</a></li>
-<li><a href="ExcelCSVParser.java.html">ExcelCSVParser Source</a></li>
-<li><a href="doc/com/Ostermiller/util/ExcelCSVParser.html">ExcelCSVParser Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Excel CSV</b>
+
+  * {{{ExcelCSVPrinter.java.html}ExcelCSVPrinter Source}}
+
+  * {{{doc/com/Ostermiller/util/ExcelCSVPrinter.html}ExcelCSVPrinter Documentation}}
+
+  * {{{ExcelCSVParser.java.html}ExcelCSVParser Source}}
+
+  * {{{doc/com/Ostermiller/util/ExcelCSVParser.html}ExcelCSVParser Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

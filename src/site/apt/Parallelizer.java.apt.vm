@@ -1,0 +1,14 @@
+  ----
+  Parallelizer.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for Parallelizer.java from the OstermillerUtils Java utilities.;
+  ----
+
+  * {{{./Parallelizer.html}Parallelizer Documentation and Examples}}
+
+  * {{{./doc/com/Ostermiller/util/Parallelizer.html}Parallelizer Javadoc}}
+
+Parallelizer.java Source Code
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Parallelizer.java}

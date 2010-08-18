@@ -1,19 +1,31 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>String Helper<%/bte.tpl%>
-<%bte.tpl name=description%>Methods for formatting, manipulating, and querying Java Strings.<%/bte.tpl%>
-<%bte.tpl name=keywords%>stringhelper, string helper,library for strings, java string utilities<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
-String manipulation helper utilities for Java
-<%/bte.tpl%>
-<%bte.tpl name=content%>
-<p>A String helper class with methods for padding a string to a given length, and splitting a string based on a literal delimiter.</p>
-<%/bte.tpl%>
-<%bte.tpl name=linkStringHelper%><b>String Helper</b>
-<ul>
-<li><a href="StringHelper.java.html">StringHelper Source</a></li>
-<li><a href="doc/com/Ostermiller/util/StringHelper.html">StringHelper Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=String+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
+  ----
+  String Helper
+  ----
+  Stephen Ostermiller;
+  meta-description=Methods for formatting, manipulating, and querying Java Strings.;
+  ----
 
-<%/bte.doc%>
+String Helper
+
+
+
+
+
+
+String manipulation helper utilities for Java
+
+
+<p>A String helper class with methods for padding a string to a given length, and splitting a string based on a literal delimiter.</p>
+
+<b>String Helper</b>
+
+  * {{{StringHelper.java.html}StringHelper Source}}
+
+  * {{{doc/com/Ostermiller/util/StringHelper.html}StringHelper Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=String+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

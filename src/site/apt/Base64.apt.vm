@@ -1,20 +1,29 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Base64<%/bte.tpl%>
-<%bte.tpl name=description%>Encode and decode base 64 in Java.<%/bte.tpl%>
-<%bte.tpl name=keywords%>base 64, base64, encode base64, decode base64, java base64<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Base64
+  ----
+  Stephen Ostermiller;
+  meta-description=Encode and decode base 64 in Java.;
+  ----
+
+Base64
+
+
+
+
+
+
 <p>Base64 encoding and decoding of data from Java.  Encode and decode methods for Strings, byte arrays, and streams.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 <div class=i18n>
     Internationalization - included languages:
-    <ul>	
+    	
     <li>English</li> 
-    </ul>
+    
     Translations gladly accepted.  Please translate
-    <a href="Base64.properties.html">Base64.properties</a>.<br>
+    {{{Base64.properties.html}Base64.properties}}.<br>
 	You may want to use: 
-	<a href="http://attesoro.org/">Attesoro - A Java Translation Editor</a>
+	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 </div>
 
 <p>Base64 is needed in many places other than its original use as an encoding format for transferring attachments in email.
@@ -80,7 +89,7 @@ Encode or decode using the base64 format.
 <tr><th>Author</th><th>License</th><th>Features</th></tr>
 <tr><td>
 Stephen Ostermiller<br>
-<a href="http://ostermiller.org/utils/Base64.html">com.Ostermiller.util.Base64</a>
+{{{http://ostermiller.org/utils/Base64.html}com.Ostermiller.util.Base64}}
 </td><td>
 Open source, GPL
 </td><td>
@@ -89,7 +98,7 @@ Encodes and decodes strings, byte arrays, files, and streams from static methods
 
 <tr><td>
 Robert W. Harder<br>
-<a href="http://iharder.sourceforge.net/base64/">Base64</a>
+{{{http://iharder.sourceforge.net/base64/}Base64}}
 </td><td>
 Open source, public domain
 </td><td>
@@ -99,8 +108,8 @@ encode and decode streams if you instantiate a Base64.InputStream or a Base64.Ou
 
 <tr><td>
 Roedy Green<br>
-<a href="http://mindprod.com/jgloss/base64.html">Java Glossary</a>
-<a href="http://mindprod.com/products1.html#BASE64">com.mindprod.base64.base64</a>
+{{{http://mindprod.com/jgloss/base64.html}Java Glossary}}
+{{{http://mindprod.com/products1.html#BASE64}com.mindprod.base64.base64}}
 </td><td>
 Open source, freeware (except military)
 </td><td>
@@ -109,7 +118,7 @@ Encodes from byte arrays to strings, decodes from strings to byte arrays.
 
 <tr><td>
 Tom Daley<br>
-<a href="http://www.javaworld.com/javaworld/javatips/jw-javatip36-p2.html">JavaWorld Tip</a>
+{{{http://www.javaworld.com/javaworld/javatips/jw-javatip36-p2.html}JavaWorld Tip}}
 </td><td>
 unknown
 </td><td>
@@ -119,7 +128,7 @@ Base64 encoding works. Supports byte array to byte array operations.
 
 <tr><td>
 Sinotar<br>
-<a href="http://www.sinotar.com/download/base64/README.html">com.sinotar.algorithm.Base64</a>
+{{{http://www.sinotar.com/download/base64/README.html}com.sinotar.algorithm.Base64}}
 </td><td>
 Open source, free only for personal use.
 </td><td>
@@ -127,14 +136,17 @@ Encodes from byte arrays to strings, decodes from strings to byte arrays.
 </td></tr>
 
 </table>
-<%/bte.tpl%>
 
-<%bte.tpl name=linkBase64%><b>Base64</b>
-<ul>
-<li><a href="Base64.java.html">Source</a></li>
-<li><a href="doc/com/Ostermiller/util/Base64.html">Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Base64&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Base64</b>
+
+  * {{{Base64.java.html}Source}}
+
+  * {{{doc/com/Ostermiller/util/Base64.html}Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Base64&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

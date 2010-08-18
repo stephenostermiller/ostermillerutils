@@ -1,0 +1,14 @@
+  ----
+  LineEnds.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for LineEnds.properties from the OstermillerUtils Java utilities.;
+  ----
+
+  * {{{./LineEnds.html}LineEnds Documentation and Examples}}
+
+
+
+LineEnds.properties Source Code
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/LineEnds.properties}

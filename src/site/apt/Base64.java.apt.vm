@@ -1,0 +1,14 @@
+  ----
+  Base64.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for Base64.java from the OstermillerUtils Java utilities.;
+  ----
+
+  * {{{./Base64.html}Base64 Documentation and Examples}}
+
+  * {{{./doc/com/Ostermiller/util/Base64.html}Base64 Javadoc}}
+
+Base64.java Source Code
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/Base64.java}

@@ -1,9 +1,18 @@
-<%bte.doc super="page.bte" %>
-<%bte.tpl name=pageTitle%>com.Ostermiller.util License FAQ<%/bte.tpl%>
-<%bte.tpl name=firstLine%>com.Ostermiller.util License FAQ<%/bte.tpl%>
-<%bte.tpl name=description%>Why the GPL is used as the license for the com.Ostermiller.util Java utilities.<%/bte.tpl%>
-<%bte.tpl name=keywords%>ostermillerutils license, license for ostermillerutils, why gpl license<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  License FAQ
+  ----
+  Stephen Ostermiller;
+  meta-description=m.Ostermiller.util License FAQ;
+  ----
+
+com.Ostermiller.util License FAQ
+
+
+
+com.Ostermiller.util License FAQ
+
+
+
 
 <h2>Under what license are these utilities available?</h2>
 <p>The OstermillerUtils library is free software; you can redistribute it and/or modify
@@ -14,7 +23,7 @@ your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE. See the
-<a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a> for more details.</p>
+{{{http://www.gnu.org/copyleft/gpl.html}GNU General Public License}} for more details.</p>
 
 <h2>Why is the GPL used?</h2>
 Stephen chose to license the com.Ostermiller.util Java utilities under the GNU General Public License.
@@ -32,8 +41,8 @@ The com.Ostermiller.util utilities have many contributing authors.  Requesting t
 those authors is not possible since they do not all believe that one-time licenses should be awarded
 no matter how deserving the project.
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linklicense%><b>License</b><%/bte.tpl%>
 
-<%/bte.doc%>
+<b>License</b>
+
+

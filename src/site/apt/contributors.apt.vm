@@ -1,27 +1,35 @@
-<%bte.doc super="page.bte" %>
-<%bte.tpl name=pageTitle%>Contributors to com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=firstLine%>Contributors to  com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=description%>List of people who have made contribution to the open source(GPL) com.Ostermiller.util Java utilities.<%/bte.tpl%>
-<%bte.tpl name=keywords%>ostermillerutils contributors, contributors java utilities, java utilities contributors<%/bte.tpl%>
-<%bte.tpl name=topcontent%>These Java Utilities were mainly written by Stephen Ostermiller, but many others listed below have given much needed help.<%/bte.tpl%>
-<%bte.tpl name=content%>
-<div class=contributors>
-<ul>
-<li>Santeri Paavolainen - <a href="http://www.helsinki.fi/~sjpaavol/programs/md5/">Initial MD5 implementation</a>.</li>
-<li><a href="http://dmoz.org/profiles/wkn.html">Werner</a> - Danish translations.</li>
-<li><a href="http://dmoz.org/profiles/stn77.html">Stephan Natschlaeger</a> - German translations</li>
-<li>Daniel Kuhn - German translations</li>
-<li>Miriam Ferrari Stella - Spanish translations</li>
-<li>Miniwark - French translations</li>
-<li>Rocco Curcio - Italian translations</li>
-<li>Marcin Drzymala - Polish translations</li>
-<li>Carlo Magnaghi - Fixes to the UberProperties</li>
-<li>Pierre Dittgen - Added changeQuote and changeDelimiter methods to CSVPrint and implementations.</li>
-<li>Allen T. Campbell - Wrote the labeled CSV parser.</li>
-<li>Jonathan Faivre-Vuillin - Bug fix to IteratorEnumeration.</li>
-</ul>
-</div>
-<br clear=all>
-<%/bte.tpl%>
-<%bte.tpl name=linkcontrib%><b>Contributors</b><%/bte.tpl%>
-<%/bte.doc%>
+  ----
+  Contributors
+  ----
+  Stephen Ostermiller;
+  meta-description=View the people that have contributed source code to the OstermillerUtils Java utilities.;
+  ----
+
+Contributors to  com.Ostermiller.util Java Utilities
+
+  These Java Utilities were mainly written by Stephen Ostermiller, but many others listed below have given much needed help.
+
+
+  * Santeri Paavolainen - {{{http://santtu.iki.fi/md5/}Initial MD5 implementation}}.
+
+  * {{{http://dmoz.org/profiles/wkn.html}Werner}} - Danish translations.
+
+  * {{{http://dmoz.org/profiles/stn77.html}Stephan Natschlaeger}} - German translations
+
+  * Daniel Kuhn - German translations
+
+  * Miriam Ferrari Stella - Spanish translations
+
+  * Miniwark - French translations
+
+  * Rocco Curcio - Italian translations
+
+  * Marcin Drzymala - Polish translations
+
+  * Carlo Magnaghi - Fixes to the UberProperties
+
+  * Pierre Dittgen - Added changeQuote and changeDelimiter methods to CSVPrint and implementations.
+
+  * Allen T. Campbell - Wrote the labeled CSV parser.
+
+  * Jonathan Faivre-Vuillin - Bug fix to IteratorEnumeration.

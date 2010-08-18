@@ -1,20 +1,29 @@
-<%bte.doc super="page.bte" %>
-<%bte.tpl name=pageTitle%>Bugs, Features, and Issues with com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=firstLine%>Bugs, Features, and Issues  com.Ostermiller.util Java Utilities<%/bte.tpl%>
-<%bte.tpl name=description%>Open issues and instructions to file new bugs or request features.<%/bte.tpl%>
-<%bte.tpl name=keywords%>utils bugs, utils issues, utils features<%/bte.tpl%>
-<%bte.tpl name=topcontent%>Bugs and features are tracked using bugzilla.<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  Bugs and Features
+  ----
+  Stephen Ostermiller;
+  meta-description=File bugs, request features, or view open issues with com.Ostermiller.util Java Utilities;
+  ----
+
+BuBugs, Features, and Open Issues with com.Ostermiller.util Java Utilities
+
+
+
+Bugs, Features, and Issues  com.Ostermiller.util Java Utilities
+
+
+Bugs and features are tracked using bugzilla.
+
 
 <h3>Open issues</h3>
 
-<a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Check existing open issues</a>
+{{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Check existing open issues}}
   
 
 <h3>New issues</h3>
 
-<a href="http://bugzilla.ostermiller.com/enter_bug.cgi?product=JavaUtils">Report a bug or request a feature</a>
+{{{http://bugzilla.ostermiller.com/enter_bug.cgi?product=JavaUtils}Report a bug or request a feature}}
 
-<%/bte.tpl%>
-<%bte.tpl name=linkbugs%><b>Bugs/Features</b><%/bte.tpl%>
-<%/bte.doc%>
+
+<b>Bugs/Features</b>
+

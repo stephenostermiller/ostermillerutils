@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Random Password Generator<%/bte.tpl%>
-<%bte.tpl name=description%>Java library to generate a random String using a cryptographically secure random number generator.<%/bte.tpl%>
-<%bte.tpl name=keywords%>random password java library, java library for passwords, password library for java, secure password library<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  Random Password Generator
+  ----
+  Stephen Ostermiller;
+  meta-description=Java library to generate a random String using a cryptographically secure random number generator.;
+  ----
+
+Random Password Generator
+
+
+
+
+
+
 <p>Generate random passwords of arbitrary length and arbitrary alphabet.</p> 
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Get an eight character password 
@@ -17,7 +26,7 @@
 
 <p>You could use the command line:<br>
 <b>java com.ostermiller.util.RandPass</b><br>
-to generate a random password from the command line.  You may also <a href="RandPassApplet.html">run this program as an applet</a> in your web browser</p>
+to generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an applet}} in your web browser</p>
 
 <p>A cryptographically secure pseudo-random number generator is used to generate the passwords.
 Limitations an passwords such as the length, required characters, or amount of repetition may be used.</p>
@@ -43,12 +52,15 @@ Generate secure random passwords.
   -v --verify class    Java subclass of PasswordVerifier to use.</pre>
 </div>
 
-<%/bte.tpl%>
-<%bte.tpl name=linkRandPass%><b>Random Password Generator</b>
-<ul>
-<li><a href="RandPass.java.html">RandPass Source</a></li>
-<li><a href="doc/com/Ostermiller/util/RandPass.html">RandPass Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
-<%/bte.doc%>
+
+<b>Random Password Generator</b>
+
+  * {{{RandPass.java.html}RandPass Source}}
+
+  * {{{doc/com/Ostermiller/util/RandPass.html}RandPass Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+

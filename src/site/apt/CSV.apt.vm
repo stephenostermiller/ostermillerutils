@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Comma Separated Values (CSV)<%/bte.tpl%>
-<%bte.tpl name=description%>Java libraries to read and write files in Comma Separated Value (CSV) format.<%/bte.tpl%>
-<%bte.tpl name=keywords%>csv, comma separated values, java csv library, library for csv, utilities csv java, csv file format java<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
-Utilities for reading and writing CSV (comma separated value) text files.  CSV as supported by these classes uses backslashes to escape quotes and new lines.  For CSV that is compatible with Microsoft Excel, <a href="ExcelCSV.html">separate Excel CSV libraries</a> are available.
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  Comma Separated Values (CSV)
+  ----
+  Stephen Ostermiller;
+  meta-description=Java libraries to read and write files in Comma Separated Value (CSV) format.;
+  ----
+
+Comma Separated Values (CSV)
+
+
+
+
+
+
+Utilities for reading and writing CSV (comma separated value) text files.  CSV as supported by these classes uses backslashes to escape quotes and new lines.  For CSV that is compatible with Microsoft Excel, {{{ExcelCSV.html}separate Excel CSV libraries}} are available.
+
+
 <div class=examplecode><h3>Example</h3>
 <pre><span class=comment>// Create the printer
 </span><span class=identifier>CSVPrinter csvp </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>CSVPrinter</span><span class=separator>(
@@ -26,7 +35,7 @@ escape special characters.  Comments can easily be written and correct line begi
 
 <p>Some applications do not accept CSV input according to the generally accepted standards.  One such application is the Microsoft Excel 
 spreadsheet.  A separate class must be use to write 
-<a href="ExcelCSV.html">Excel CSV</a>.  Both CSVPrinter and ExcelCSVPrinter
+{{{ExcelCSV.html}Excel CSV}}.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.</p>
 
 <br clear=all>
@@ -61,17 +70,17 @@ the values can be returned individually with the number of the line from which t
 <p>Some applications do not output CSV according to the generally accepted standards and this parse may
 not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A 
 separate class must be use to read 
-<a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.  Both CSVParser and ExcelCSVParser
+{{{http://ostermiller.org/utils/ExcelCSV.html}Excel CSV}}.  Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.</p>
 
-<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a <a href="LabeledCSVParser.html">Labeled CSV Parser.</a></p>
+<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}</p>
 
 <h3>CSV Character Sets</h3>
 <p>Several people have asked how to read CSV files that are in other character sets such as
 Chinese or Japanese.  To parse such files, simple use the CSVParser constructor that takes a reader.
 Make sure the reader has been initialized to read the correct character set.  An example that reads
-Simplified Chinese (charset GB2312) CSV values from <a href="CSVCharsetTest.gb2312csv">CSVCharsetTest.gb2312csv</a>
-can be found in <a href="CSVCharsetTest.java">CSVCharsetTest.java</a>.  If you have a Chinese font 
+Simplified Chinese (charset GB2312) CSV values from {{{CSVCharsetTest.gb2312csv}CSVCharsetTest.gb2312csv}}
+can be found in {{{CSVCharsetTest.java}CSVCharsetTest.java}}.  If you have a Chinese font 
 installed and Java is set up to use it, the example will show a dialog with each of the Chinese 
 words on it.</p>
 
@@ -79,12 +88,12 @@ words on it.</p>
 
 <h3>CSVLexer</h3>
 
-<p>The lexer (CSVLexer) created using <a href="http://www.jflex.de/">JFlex</a> is still available in the download and is
+<p>The lexer (CSVLexer) created using {{{http://www.jflex.de/}JFlex}} is still available in the download and is
 still supported.  In fact,  CSVParser uses it behind the scenes.  However, CSVParser has a much cleaner, full-featured API
 and its use is recommended.</p>
 
-<p>A CSVLexer <a href="CSVRegressionTest.csv">regression test</a> and the expected
-<a href="CSVRegressionTestResults.txt">results</a> of that test are available.</p>
+<p>A CSVLexer {{{CSVRegressionTest.csv}regression test}} and the expected
+{{{CSVRegressionTestResults.txt}results}} of that test are available.</p>
 
 <h2><a name="links"></a>Links</h2>
 <table border=2 cellpadding=5>
@@ -92,7 +101,7 @@ and its use is recommended.</p>
 
 <tr><td>
 Stephen Ostermiller<br>
-<a href="http://ostermiller.org/utils/CSV.html">ostermillerutils CSV and ExcelCSV for Java</a>
+{{{http://ostermiller.org/utils/CSV.html}ostermillerutils CSV and ExcelCSV for Java}}
 </td><td>
 Open source, GPL
 </td><td>
@@ -101,7 +110,7 @@ Parses CSV streams into Java Strings or arrays of Strings.
 
 <tr><td>
 Ricebridge<br>
-<a href="http://www.ricebridge.com/products/csvman/index.htm">CSV Manager</a>
+{{{http://www.ricebridge.com/products/csvman/index.htm}CSV Manager}}
 </td><td>
 Commercial, with various license price points.
 </td><td>
@@ -111,7 +120,7 @@ configured to parse standard CSV, Excel CSV, or other user specified variants.
 
 <tr><td>
 E.Allen Soard<br>
-<a href="http://sourceforge.net/projects/javacsv/"> Java CSV Library</a>
+{{{http://sourceforge.net/projects/javacsv/} Java CSV Library}}
 </td><td>
 Open source, LGPL
 </td><td>
@@ -120,7 +129,7 @@ Parses CSV files into Java objects contained entirely in memory.
 
 <tr><td>
 Nilo de Roock<br>
-<a href="http://xlsql.sourceforge.net/">xlSQL </a>
+{{{http://xlsql.sourceforge.net/}xlSQL }}
 </td><td>
 Open source, GPL
 </td><td>
@@ -129,7 +138,7 @@ Provides a JDBC interface for accessing CSV files.
 
 <tr><td>
 Bruce Dunwiddie<br>
-<a href="http://www.csvreader.com/">CsvReader </a>
+{{{http://www.csvreader.com/}CsvReader }}
 </td><td>
 Commercial, with various license price points.
 </td><td>
@@ -138,7 +147,7 @@ Reads CSV files one line at a time and values may be obtained by name (similar t
 
 <tr><td>
 Roedy Green<br>
-<a href="http://mindprod.com/jgloss/csv.html">Mindprod CSV</a>
+{{{http://mindprod.com/jgloss/csv.html}Mindprod CSV}}
 </td><td>
 Open source, freeware (except military)
 </td><td>
@@ -147,16 +156,21 @@ CSV definition and libraries.
 
 </table>
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linkCSV%><b>Comma Separated Values (CSV)</b>
-<ul>
-<li><a href="CSVPrinter.java.html">CSVPrinter Source</a></li>
-<li><a href="doc/com/Ostermiller/util/CSVPrinter.html">CSVPrinter Documentation</a></li>
-<li><a href="CSVParser.java.html">CSVParser Source</a></li>
-<li><a href="doc/com/Ostermiller/util/CSVParser.html">CSVParser Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Comma Separated Values (CSV)</b>
+
+  * {{{CSVPrinter.java.html}CSVPrinter Source}}
+
+  * {{{doc/com/Ostermiller/util/CSVPrinter.html}CSVPrinter Documentation}}
+
+  * {{{CSVParser.java.html}CSVParser Source}}
+
+  * {{{doc/com/Ostermiller/util/CSVParser.html}CSVParser Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

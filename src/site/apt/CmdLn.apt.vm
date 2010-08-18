@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>CmdLn: Java Command Line Parser<%/bte.tpl%>
-<%bte.tpl name=description%>A Java utility to parse command line arguments and options.<%/bte.tpl%>
-<%bte.tpl name=keywords%>java command line, cmdln<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
+  ----
+  CmdLn: Java Command Line Parser
+  ----
+  Stephen Ostermiller;
+  meta-description=A Java utility to parse command line arguments and options.;
+  ----
+
+CmdLn: Java Command Line Parser
+
+
+
+
+
+
 <p>A command line parser for array of strings passed to Java main methods.</p>
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+
+
 
 There are three ways to use the command line parser, as detailed with three examples below.  Each of the examples creates a command line application that accepts --help --file and --delay arguments with the following help message:
 <pre>demo command line application
@@ -178,14 +187,17 @@ There are three ways to use the command line parser, as detailed with three exam
 </span><span class=separator>}</span><span class=whitespace>
 </span></pre>
 
-<%/bte.tpl%>
 
-<%bte.tpl name=linkCmdLn%><b>Command Line Parser</b>
-<ul>
-<li><a href="CmdLn.java.html">Command Line Source</a></li>
-<li><a href="doc/com/Ostermiller/util/CmdLn.html">Command Line Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CmdLn&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Command Line Parser</b>
+
+  * {{{CmdLn.java.html}Command Line Source}}
+
+  * {{{doc/com/Ostermiller/util/CmdLn.html}Command Line Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CmdLn&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+

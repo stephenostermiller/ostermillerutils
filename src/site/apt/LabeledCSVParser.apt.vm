@@ -1,11 +1,20 @@
-<%bte.doc super="item.bte" %>
-<%bte.tpl name=pageTitle%>Labeled Comma Separated Values (CSV)<%/bte.tpl%>
-<%bte.tpl name=description%>Read a CSV file and treat the first line as column titles.<%/bte.tpl%>
-<%bte.tpl name=keywords%>labeled csv parser, labeledcsvparser, java labeled csv, comma separated values with labels, java csv labeled, column headings on csv<%/bte.tpl%>
-<%bte.tpl name=topcontent%>
-Decorates either a href="CSV.html">CSV</a> or the <a href="ExcelCSV.html">Excel CSV</a> parsers such that the first row read is a row of labels.
-<%/bte.tpl%>
-<%bte.tpl name=content%>
+  ----
+  Labeled Comma Separated Values (CSV)
+  ----
+  Stephen Ostermiller;
+  meta-description=Read a CSV file and treat the first line as column titles.;
+  ----
+
+Labeled Comma Separated Values (CSV)
+
+
+
+
+
+
+Decorates either a href="CSV.html">CSV</a> or the {{{ExcelCSV.html}Excel CSV}} parsers such that the first row read is a row of labels.
+
+
 
 <div class=examplecode><h3>Example</h3>
 <pre><span class=identifier>LabeledCSVParser lcsvp </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>LabeledCSVParser</span><span class=separator>(
@@ -30,15 +39,18 @@ Decorates either a href="CSV.html">CSV</a> or the <a href="ExcelCSV.html">Excel 
 
 <h2>CSV with column headings: LabeledCSVParser</a></h2>
 
-<p>The labeled CSV parser allows you to use either the <a href="CSV.html">CSV</a> or the <a href="ExcelCSV.html">Excel CSV</a> parsers, treating them as if the first line were the column headings.</p>
+<p>The labeled CSV parser allows you to use either the {{{CSV.html}CSV}} or the {{{ExcelCSV.html}Excel CSV}} parsers, treating them as if the first line were the column headings.</p>
 
-<%/bte.tpl%>
-<%bte.tpl name=linkLabeledCSVParser%><b>Labeled CSV Parser</b>
-<ul>
-<li><a href="LabeledCSVParser.java.html">Source</a></li>
-<li><a href="doc/com/Ostermiller/util/LabeledCSVParser.html">Documentation</a></li>
-<li><a href="http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED">Bugs/Features</a></li>
-</ul>
-<%/bte.tpl%>
 
-<%/bte.doc%>
+<b>Labeled CSV Parser</b>
+
+  * {{{LabeledCSVParser.java.html}Source}}
+
+  * {{{doc/com/Ostermiller/util/LabeledCSVParser.html}Documentation}}
+
+  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+
+
+
+
+
