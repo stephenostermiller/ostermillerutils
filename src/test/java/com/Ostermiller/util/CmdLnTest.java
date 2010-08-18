@@ -16,6 +16,8 @@
  */
 package com.Ostermiller.util;
 
+import junit.framework.TestCase;
+
 /**
  * Regression tests for the command line options.
  *
@@ -26,341 +28,398 @@ package com.Ostermiller.util;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.07.00
  */
-class CmdLnTests {
+public class CmdLnTest extends TestCase {
+	
+	private CmdLnOption fullHelpOption = new CmdLnOption("help",'h').setDescription("this is the description, it can be long");
+	
+	public void test80CharHelp(){
+		assertEquals("  -h --help  this is the description, it can be long", fullHelpOption.getHelp("--","-",0,80));
+	}
 
-	/**
-	 * Main method for tests
-	 * @param args command line options (ignored)
-	 *
-	 * @since ostermillerutils 1.07.00
-	 */
-	public static void main(String[] args){
-		try {
+	public void test37CharHelp(){
+		assertEquals("  -h --help  this is the description,\n        it can be long", fullHelpOption.getHelp("--","-",0,37));
+	}
+	
+	public void test38CharHelp(){
+		assertEquals("  -h --help  this is the description,\n        it can be long", fullHelpOption.getHelp("--","-",0,38));
+	}
+	
+	public void test39CharHelp(){
+		assertEquals("  -h --help  this is the description,\n        it can be long", fullHelpOption.getHelp("--","-",0,39));
+	}
+	
+	private CmdLnOption shortHelpOption = new CmdLnOption('h').setDescription("description");
 
-			CmdLnOption option;
+	public void test10CharHelp(){
+		assertEquals("  -h  description", shortHelpOption.getHelp("--","-",0,10));
+	}
+	
+	private CmdLnOption shortHelpOptionalOption = new CmdLnOption('h').setDescription("description").setOptionalArgument();
 
-			option = new CmdLnOption("help",'h').setDescription("this is the description, it can be long");
-			if (!"  -h --help  this is the description, it can be long".equals(option.getHelp("--","-",0,80))){
-				throw new Exception("80 char help string should be: '  -h --help  this is the description, it can be long'");
-			}
-			if (!"  -h --help  this is the description,\n        it can be long".equals(option.getHelp("--","-",0,37))){
-				throw new Exception("37 char help string should be: '  -h --help  this is the description,\n        it can be long'");
-			}
-			if (!"  -h --help  this is the description,\n        it can be long".equals(option.getHelp("--","-",0,38))){
-				throw new Exception("38 char help string should be: '  -h --help  this is the description,\n        it can be long'");
-			}
-			if (!"  -h --help  this is the description,\n        it can be long".equals(option.getHelp("--","-",0,39))){
-				throw new Exception("39 char help string should be: '  -h --help  this is the description,\n        it can be long'");
-			}
+	public void test60CharHelp(){
+		assertEquals("  -h <?>  description", shortHelpOptionalOption.getHelp("--","-",0,60));
+	}
+	
+	private CmdLn dashDashHelpCmdLn = new CmdLn(
+		new String[]{"--help"}
+	).addOption(
+		new CmdLnOption("help", 'h')
+	);
+	
+	public void testDashDashHelpH(){
+		assertNotNull(dashDashHelpCmdLn.getResult('h'));
+	}
+	
+	public void testDashDashHelpHelp(){
+		assertNotNull(dashDashHelpCmdLn.getResult("help"));
+	}
+	
+	public void testDashDashHelpCapH(){
+		assertNull(dashDashHelpCmdLn.getResult('H'));
+	}
+	
+	public void testDashDashHelpCapHelp(){
+		assertNull(dashDashHelpCmdLn.getResult("HELP"));
+	}
+	
+	public void testDashDashHelpLongH(){
+		assertNull(dashDashHelpCmdLn.getResult("h"));
+	}
 
-			option = new CmdLnOption('h').setDescription("description");
-			if (!"  -h  description".equals(option.getHelp("--","-",0,10))){
-				throw new Exception("10 char help string should be: '  -h  description'");
-			}
-			option = new CmdLnOption('h').setDescription("description").setOptionalArgument();
-			if (!"  -h <?>  description".equals(option.getHelp("--","-",0,60))){
-				throw new Exception("60 char help string should be: '  -h <?>  description'");
-			}
+	public void testDashDashHelpNoLeftOvers(){
+		assertEquals(0, dashDashHelpCmdLn.getNonOptionArguments().size());
+	}
+	
+	private CmdLn dashHAndOptionalArgumentCmdLn = new CmdLn(
+		new String[]{"-h"}
+	).addOption(
+		new CmdLnOption("help", 'h')
+	).addOption(
+		new CmdLnOption("argument").setOptionalArgument()
+	);
+	
+	public void testDashHandOptionArgumentH(){
+		assertNotNull(dashHAndOptionalArgumentCmdLn.getResult('h'));
+	}
 
-			CmdLn clo;
+	public void testDashHandOptionArgumentHelp(){
+		assertNotNull(dashHAndOptionalArgumentCmdLn.getResult("help"));
+	}
 
-			clo = new CmdLn(
-				new String[]{"--help"}
-			).addOption(
-				new CmdLnOption("help", 'h')
-			);
-			if (clo.getResult('h') == null){
-				throw new Exception("h option should have been present");
-			}
-			if (clo.getResult("help") == null){
-				throw new Exception("help option should have been present");
-			}
-			if (clo.present('H')){
-				throw new Exception("H option should not have been present");
-			}
-			if (clo.present("HELP")){
-				throw new Exception("HELP option should not have been present");
-			}
-			if (clo.present("h")){
-				throw new Exception("h long option should not have been present");
-			}
-			if (clo.getNonOptionArguments().size() != 0){
-				throw new Exception("there should not have been left over arguments");
-			}
+	public void testDashHandOptionArgumentNotPresent(){
+		assertNull(dashHAndOptionalArgumentCmdLn.getResult("argument"));
+	}
 
-			clo = new CmdLn(
-				new String[]{"-h"}
-			).addOption(
-				new CmdLnOption("help", 'h')
-			).addOption(
-				new CmdLnOption("argument").setOptionalArgument()
-			);
-			if (clo.getResult('h') == null){
-				throw new Exception("h option should have been present");
-			}
-			if (clo.getResult("help") == null){
-				throw new Exception("help option should have been present");
-			}
-			if (clo.getResult("argument") != null){
-				throw new Exception("argument option should not have been present");
-			}
-			if (clo.getNonOptionArguments().size() != 0){
-				throw new Exception("there should not have been left over arguments");
-			}
+	public void testDashHandOptionArgumentNoLeftOvers(){
+		assertEquals(0, dashHAndOptionalArgumentCmdLn.getNonOptionArguments().size());
+	}
+	
+	private CmdLn fileAndLeftoverCmdLn = new CmdLn(
+		new String[]{"-f","file","one"}
+	).addOption(
+		new CmdLnOption('f').setRequiredArgument()
+	);
+	
+	public void testfileAndLeftoverCmdLnF(){
+		assertNotNull(fileAndLeftoverCmdLn.getResult('f'));
+	}
+	
+	public void testfileAndLeftoverCmdLnFArgumentCount(){
+		assertEquals(1, fileAndLeftoverCmdLn.getResult('f').getArgumentCount());
+	}
+	
+	public void testfileAndLeftoverCmdLnFArgument(){
+		assertEquals("file", fileAndLeftoverCmdLn.getResult('f').getArgument());
+	}
+	
+	public void testfileAndLeftoverCmdLnLeftoverSize(){
+		assertEquals(1, fileAndLeftoverCmdLn.getNonOptionArguments().size());
+	}
+	
+	public void testfileAndLeftoverCmdLnLeftoverArgument(){
+		assertEquals("one", fileAndLeftoverCmdLn.getNonOptionArguments().get(0));
+	}
+	
+	private CmdLn manyArgsCmdLn = new CmdLn(
+		new String[]{"-f","-","2","3","-it=hello","--car:thirty","-p "}
+	).addOption(
+		new CmdLnOption('f').setUnlimitedArguments()
+	).addOption(
+		new CmdLnOption('i').setUnlimitedArguments()
+	).addOption(
+		new CmdLnOption('t').setOptionalArgument()
+	).addOption(
+		new CmdLnOption("car").setRequiredArgument()
+	).addOption(
+		new CmdLnOption('p').setRequiredArgument()
+	);
+	
+	public void testManyArgsCmdLnF(){
+		assertNotNull(manyArgsCmdLn.getResult('f') == null);
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f","file","one"}
-			).addOption(
-				new CmdLnOption('f').setRequiredArgument()
-			);
-			if (clo.getResult('f') == null){
-				throw new Exception("f option should have been present");
-			}
-			if (clo.getResult('f').getArgumentCount() != 1){
-				throw new Exception("f should have had one argument");
-			}
-			if (!"file".equals(clo.getResult('f').getArgument())){
-				throw new Exception("f should have had an argument 'file'");
-			}
-			if (clo.getNonOptionArguments().size() != 1){
-				throw new Exception("there should have been one left over argument");
-			}
-			if (!"one".equals(clo.getNonOptionArguments().get(0))){
-				throw new Exception("left over argument should have been 'one'");
-			}
+	public void testManyArgsCmdLnFArgumentCount(){
+		assertEquals(3, manyArgsCmdLn.getResult('f').getArgumentCount());
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f","-","2","3","-it=hello","--car:thirty","-p "}
-			).addOption(
-				new CmdLnOption('f').setUnlimitedArguments()
-			).addOption(
-				new CmdLnOption('i').setUnlimitedArguments()
-			).addOption(
-				new CmdLnOption('t').setOptionalArgument()
-			).addOption(
-				new CmdLnOption("car").setRequiredArgument()
-			).addOption(
-				new CmdLnOption('p').setRequiredArgument()
-			);
-			if (clo.getResult('f') == null){
-				throw new Exception("f option should have been present");
-			}
-			if (clo.getResult('f').getArgumentCount() != 3){
-				throw new Exception("f should have had three arguments");
-			}
-			if (!"-".equals(clo.getResult('f').getArgument())){
-				throw new Exception("f should have had an argument '-'");
-			}
-			if (!"-".equals(clo.getResult('f').getArguments().get(0))){
-				throw new Exception("f should have had an argument '-'");
-			}
-			if (!"2".equals(clo.getResult('f').getArguments().get(1))){
-				throw new Exception("f should have had an argument '1'");
-			}
-			if (!"3".equals(clo.getResult('f').getArguments().get(2))){
-				throw new Exception("f should have had an argument '2'");
-			}
-			if (clo.getNonOptionArguments().size() != 0){
-				throw new Exception("there should have been no left over arguments");
-			}
-			if (!clo.present('t')){
-				throw new Exception("t option should have been present");
-			}
-			if (!"hello".equals(clo.getResult('t').getArgument())){
-				throw new Exception("t option should have had argument 'hello'");
-			}
-			if (!clo.present("car")){
-				throw new Exception("t option should have been present");
-			}
-			if (!"thirty".equals(clo.getResult("car").getArgument())){
-				throw new Exception("car option should have had argument 'thirty'");
-			}
-			if (!clo.present('p')){
-				throw new Exception("p option should have been present");
-			}
-			if (!"".equals(clo.getResult('p').getArgument())){
-				throw new Exception("p option should have had argument ''");
-			}
+	public void testManyArgsCmdLnFArgument(){
+		assertEquals("-", manyArgsCmdLn.getResult('f').getArgument());
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-help"}
-			).addOption(
-				new CmdLnOption("help")
-			).setOptionStarts("-", null);
-			if (!clo.present("help")){
-				throw new Exception("help option should have been present");
-			}
-			if (clo.present('h')){
-				throw new Exception("h option should not have been present");
-			}
+	public void testManyArgsCmdLnFFirstArgument(){
+		assertEquals("-", manyArgsCmdLn.getResult('f').getArguments().get(0));
+	}	
 
-			clo = new CmdLn(
-				new String[]{"!!!air=wall","@@@bed=soft","###fog","$$$hum"}
-			).addOptions(
-				new CmdLnOption[]{
-					new CmdLnOption('a'),
-					new CmdLnOption('i'),
-					new CmdLnOption('r').setOptionalArgument(),
-					new CmdLnOption("bed").setOptionalArgument(),
-					new CmdLnOption('f'),
-					new CmdLnOption('o'),
-					new CmdLnOption('g'),
-					new CmdLnOption("hum"),
-				}
-			).setOptionStarts(new String[]{"@@@","$$$"},new String[]{"!!!","###"});
-			if (!clo.present('a')){
-				throw new Exception("a option should have been present");
-			}
-			if (!clo.present('i')){
-				throw new Exception("i option should have been present");
-			}
-			if (!clo.present('r')){
-				throw new Exception("r option should have been present");
-			}
-			if (!"wall".equals(clo.getResult('r').getArgument())){
-				throw new Exception("r should have had arument 'wall'");
-			}
-			if (!clo.present("bed")){
-				throw new Exception("bed option should have been present");
-			}
-			if (!"soft".equals(clo.getResult("bed").getArgument())){
-				throw new Exception("bed should have had arument 'soft'");
-			}
-			if (!clo.present('f')){
-				throw new Exception("f option should have been present");
-			}
-			if (!clo.present('o')){
-				throw new Exception("o option should have been present");
-			}
-			if (!clo.present('g')){
-				throw new Exception("g option should have been present");
-			}
-			if (!clo.present("hum")){
-				throw new Exception("hum option should have been present");
-			}
+	public void testManyArgsCmdLnFSecondArgument(){
+		assertEquals("2", manyArgsCmdLn.getResult('f').getArguments().get(1));
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-i","1","-t","2","3","4","-i","5","-s","6","7","8","9","10","11","12","-p"}
-			).addOptions(
-				new CmdLnOption[]{
-					new CmdLnOption('i').setRequiredArgument(),
-					new CmdLnOption('s').setArgumentBounds(1,4),
-					new CmdLnOption('t').setOptionalArgument(),
-					new CmdLnOption('p').setOptionalArgument(),
-					new CmdLnOption('r').setRequiredArgument(),
-				}
-			);
-			if (clo.getNonOptionArguments().size() != 5){
-				throw new Exception("there should have been five left over arguments");
-			}
-			if (clo.getResult('r') != null){
-				throw new Exception("r should not have been present");
-			}
-			if (clo.getResult('p') == null){
-				throw new Exception("p should have been present");
-			}
-			if (clo.getResult('p').getArgument() != null){
-				throw new Exception("p should not have had an argument");
-			}
-			if (!"2".equals(clo.getResult('t').getArgument())){
-				throw new Exception("t should have had an argument '2'");
-			}
-			if (!"3".equals(clo.getNonOptionArguments().get(0))){
-				throw new Exception("'3' should have been a left over argument");
-			}
-			if (!"4".equals(clo.getNonOptionArguments().get(1))){
-				throw new Exception("'4' should have been a left over argument");
-			}
-			if (!"5".equals(clo.getResult('i').getArgument())){
-				throw new Exception("i should have had an argument '5'");
-			}
-			if (!"6".equals(clo.getResult('s').getArgument())){
-				throw new Exception("i should have had an argument '6'");
-			}
-			if (clo.getResult('s').getArgumentCount() != 4){
-				throw new Exception("s should have had 4 arguments");
-			}
-			if (!"10".equals(clo.getNonOptionArguments().get(2))){
-				throw new Exception("'10' should have been a left over argument");
-			}
+	public void testManyArgsCmdLnFThirdArgument(){
+		assertEquals("3", manyArgsCmdLn.getResult('f').getArguments().get(2));
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f","--","-t"}
-			).addOption(
-				new CmdLnOption('f')
-			);
-			if (!clo.present('f')){
-				throw new Exception("f option should have been present");
-			}
-			if (clo.getResult('f').getArgumentCount() != 0){
-				throw new Exception("f should have had no arguments");
-			}
-			if (clo.present('t')){
-				throw new Exception("t option should not have been present");
-			}
-			if (clo.getNonOptionArguments().size() != 1){
-				throw new Exception("should have had one non optional argument");
-			}
-			if (!"-t".equals(clo.getNonOptionArguments().get(0))){
-				throw new Exception("'-t' should have been non-optional argument");
-			}
+	public void testManyArgsCmdLnNonOptionArgumentsSize(){
+		assertEquals(0, manyArgsCmdLn.getNonOptionArguments().size());
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f"}
-			);
-			UnknownCmdLnOptionException uclox = null;
-			try {
-				clo.parse();
-			} catch (UnknownCmdLnOptionException x){
-				uclox = x;
-			}
-			if (uclox == null){
-				throw new Exception("f option should have thrown exception");
-			}
-			if (!"f".equals(uclox.getOption())){
-				throw new Exception("exception should have been for option f");
-			}
+	public void testManyArgsCmdLnT(){
+		assertTrue(manyArgsCmdLn.present('t'));
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f=oops"}
-			).addOption(
-				new CmdLnOption('f')
-			);
-			ExtraCmdLnArgumentException eclax = null;
-			try {
-				clo.parse();
-			} catch (ExtraCmdLnArgumentException x){
-				eclax = x;
-			}
-			if (eclax == null){
-				throw new Exception("f option should have thrown exception");
-			}
-			if (!"f".equals(eclax.getOption().toString())){
-				throw new Exception("exception should have been for option f");
-			}
+	public void testManyArgsCmdLnTArgument(){
+		assertEquals("hello", manyArgsCmdLn.getResult('t').getArgument());
+	}	
 
-			clo = new CmdLn(
-				new String[]{"-f"}
-			).addOption(
-				new CmdLnOption('f').setRequiredArgument()
-			);
-			MissingCmdLnArgumentException mclax = null;
-			try {
-				clo.parse();
-			} catch (MissingCmdLnArgumentException x){
-				mclax = x;
-			}
-			if (mclax == null){
-				throw new Exception("f option should have thrown exception");
-			}
-			if (!"f".equals(mclax.getOption().toString())){
-				throw new Exception("exception should have been for option f");
-			}
+	public void testManyArgsCmdLnCar(){
+		assertNotNull(manyArgsCmdLn.present("car"));
+	}	
 
-		} catch (Exception x){
-			x.printStackTrace();
-			System.exit(1);
+	public void testManyArgsCmdLnCarArgument(){
+		assertEquals("thirty", manyArgsCmdLn.getResult("car").getArgument());
+	}	
+
+	public void testManyArgsCmdLnP(){
+		assertNotNull(manyArgsCmdLn.present('p'));
+	}	
+
+	public void testManyArgsCmdLnPArgument(){
+		assertEquals("", manyArgsCmdLn.getResult('p').getArgument());
+	}
+	private CmdLn dashHelpCmdLn = new CmdLn(
+		new String[]{"-help"}
+	).addOption(
+		new CmdLnOption("help")
+	).setOptionStarts("-", null);
+	
+	public void testDashHelpCmdLnHelp(){
+		assertTrue(dashHelpCmdLn.present("help"));
+	}
+
+	public void testDashHelpCmdLnH(){
+		assertFalse(dashHelpCmdLn.present('h'));
+	}
+	
+	CmdLn startCharsCmdLn = new CmdLn(
+		new String[]{"!!!air=wall","@@@bed=soft","###fog","$$$hum"}
+	).addOptions(
+		new CmdLnOption[]{
+			new CmdLnOption('a'),
+			new CmdLnOption('i'),
+			new CmdLnOption('r').setOptionalArgument(),
+			new CmdLnOption("bed").setOptionalArgument(),
+			new CmdLnOption('f'),
+			new CmdLnOption('o'),
+			new CmdLnOption('g'),
+			new CmdLnOption("hum"),
 		}
-		System.exit(0);
+	).setOptionStarts(new String[]{"@@@","$$$"},new String[]{"!!!","###"});
+	
+	public void testStartCharsCmdLnA(){
+		assertTrue(startCharsCmdLn.present('a'));
+	}
+	
+	public void testStartCharsCmdLnI(){
+		assertTrue(startCharsCmdLn.present('i'));
+	}
+	
+	public void testStartCharsCmdLnR(){
+		assertTrue(startCharsCmdLn.present('r'));
+	}
+	
+	public void testStartCharsCmdLnRArgument(){
+		assertEquals("wall", startCharsCmdLn.getResult('r').getArgument());
+	}
+	
+	public void testStartCharsCmdLnBed(){
+		assertTrue(startCharsCmdLn.present("bed"));
+	}
+	
+	public void testStartCharsCmdLnBedArgument(){
+		assertEquals("soft",startCharsCmdLn.getResult("bed").getArgument());
+	}
+	
+	public void testStartCharsCmdLnF(){
+		assertTrue(startCharsCmdLn.present('f'));
+	}
+	
+	public void testStartCharsCmdLnO(){
+		assertTrue(startCharsCmdLn.present('o'));
+	}
+	
+	public void testStartCharsCmdLnG(){
+		assertTrue(startCharsCmdLn.present('g'));
+	}
+	
+	public void testStartCharsCmdLnHum(){
+		assertTrue(startCharsCmdLn.present("hum"));
+	}
+
+	CmdLn argBoundsCmdLn = new CmdLn(
+		new String[]{"-i","1","-t","2","3","4","-i","5","-s","6","7","8","9","10","11","12","-p"}
+	).addOptions(
+		new CmdLnOption[]{
+			new CmdLnOption('i').setRequiredArgument(),
+			new CmdLnOption('s').setArgumentBounds(1,4),
+			new CmdLnOption('t').setOptionalArgument(),
+			new CmdLnOption('p').setOptionalArgument(),
+			new CmdLnOption('r').setRequiredArgument(),
+		}
+	);
+	
+	public void testArgBoundsCmdLn(){
+		assertEquals(5, argBoundsCmdLn.getNonOptionArguments().size());
+	}
+
+	public void testArgBoundsCmdLnR(){
+		assertNull(argBoundsCmdLn.getResult('r'));
+	}
+
+	public void testArgBoundsCmdLnP(){
+		assertNotNull(argBoundsCmdLn.getResult('p'));
+	}
+
+	public void testArgBoundsCmdLnPArgument(){
+		assertNull(argBoundsCmdLn.getResult('p').getArgument());
+	}
+
+	public void testArgBoundsCmdLnTArgument(){
+		assertEquals("2", argBoundsCmdLn.getResult('t').getArgument());
+	}
+
+	public void testArgBoundsCmdLnFirstNonOptionAgument(){
+		assertEquals("3", argBoundsCmdLn.getNonOptionArguments().get(0));
+	}
+
+	public void testArgBoundsCmdLnSecondNonOptionArgument(){
+		assertEquals("4", argBoundsCmdLn.getNonOptionArguments().get(1));
+	}
+
+	public void testArgBoundsCmdLnIArgument(){
+		assertEquals("5", argBoundsCmdLn.getResult('i').getArgument());
+	}
+
+	public void testArgBoundsCmdLnSArgument(){
+		assertEquals("6", argBoundsCmdLn.getResult('s').getArgument());
+	}
+
+	public void testArgBoundsCmdLnSArgumentCount(){
+		assertEquals(4, argBoundsCmdLn.getResult('s').getArgumentCount());
+	}
+
+	public void testArgBoundsCmdLnThirdNonOptionArgument(){
+		assertEquals("10", argBoundsCmdLn.getNonOptionArguments().get(2));
+	}
+	
+	private CmdLn endOptionsCmdLn = new CmdLn(
+		new String[]{"-f","--","-t"}
+	).addOption(
+		new CmdLnOption('f')
+	);
+	
+	public void testEndOptionsCmdLnF(){
+		assertTrue(endOptionsCmdLn.present('f'));
+	}
+
+	public void testEndOptionsCmdLnFArgumentCount(){
+		assertEquals(0, endOptionsCmdLn.getResult('f').getArgumentCount());
+	}
+
+	public void testEndOptionsCmdLnT(){
+		assertFalse(endOptionsCmdLn.present('t'));
+	}
+
+	public void testEndOptionsCmdLnNonOptionArgumentsSize(){
+		assertEquals(1, endOptionsCmdLn.getNonOptionArguments().size());
+	}
+
+	public void testEndOptionsCmdLnFirstNonOptionArgument(){
+		assertEquals("-t", endOptionsCmdLn.getNonOptionArguments().get(0));
+	}
+
+	private UnknownCmdLnOptionException uclox = generateUnknownCmdLnOptionException();
+	private UnknownCmdLnOptionException generateUnknownCmdLnOptionException() {
+		CmdLn cmdLn = new CmdLn(
+			new String[]{"-f"}
+		);
+		try {
+			cmdLn.parse();
+		} catch (UnknownCmdLnOptionException x){
+			return x;
+		}
+		return null;
+	}
+	
+	public void testUnknownCmdLnOptionExceptionGenerated(){
+		assertNotNull(uclox);
+	}
+	
+	public void testUnknownCmdLnOptionExceptionForF(){
+		assertEquals("f", uclox.getOption());
+	}
+	
+	private ExtraCmdLnArgumentException eclax = generateExtraCmdLnArgumentException();
+	private ExtraCmdLnArgumentException generateExtraCmdLnArgumentException(){
+		CmdLn cmdLn = new CmdLn(
+			new String[]{"-f=oops"}
+		).addOption(
+			new CmdLnOption('f')
+		);
+		try {
+			cmdLn.parse();
+		} catch (ExtraCmdLnArgumentException x){
+			return x;
+		}
+		return null;
+	}
+
+	public void testExtraCmdLnArgumentExceptionGenerated(){
+		assertNotNull(eclax);
+	}
+	
+	public void testExtraCmdLnArgumentExceptionForF(){
+		assertEquals("f", eclax.getOption().toString());
+	}
+	
+	private MissingCmdLnArgumentException mclax = generateMissingCmdLnArgumentException();
+	private MissingCmdLnArgumentException generateMissingCmdLnArgumentException(){
+		CmdLn cmdLn = new CmdLn(
+			new String[]{"-f"}
+		).addOption(
+			new CmdLnOption('f').setRequiredArgument()
+		);
+		try {
+			cmdLn.parse();
+		} catch (MissingCmdLnArgumentException x){
+			return x;
+		}
+		return null;
+	}
+	
+	public void testMissingCmdLnArgumentExceptionGenerated(){
+		assertNotNull(mclax);
+	}
+	
+	public void MissingCmdLnArgumentExceptionForF(){
+		assertEquals("f", mclax.getOption().toString());
 	}
 }
