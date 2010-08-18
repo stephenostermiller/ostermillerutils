@@ -1,0 +1,9 @@
+Package: [[name]]
+Version: [[version]]
+Section: misc
+Priority: optional
+Architecture: all
+Depends: jdk (>= 1.5)
+Maintainer: Stephen Ostermiller
+Description: Open source (GPL) Java utilities maintained by Stephen Ostermiller with help from many contributors.
+Distribution: development
