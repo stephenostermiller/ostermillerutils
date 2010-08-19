@@ -52,9 +52,6 @@ Redirect permanent /utils/Excel http://ostermiller.org/utils/ExcelCSV.html
 Redirect permanent /utils/excelcsv.html http://ostermiller.org/utils/ExcelCSV.html
 Redirect permanent /utils/excelcsv http://ostermiller.org/utils/ExcelCSV.html
 Redirect permanent /utils/ExcelCSV http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/ExcelCSVLexer.html http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/ExcelCSVPrinter.html http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/ExcelCSVParser.html http://ostermiller.org/utils/ExcelCSV.html
 
 Redirect permanent /utils/base64.html http://ostermiller.org/utils/Base64.html
 Redirect permanent /utils/base64/ http://ostermiller.org/utils/Base64.html
