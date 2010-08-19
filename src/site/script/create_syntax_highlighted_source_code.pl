@@ -14,7 +14,9 @@ my $sourceList = "";
 my $menuList = "";
 my $javadocMenuList = "";
 my $javadocList = "";
+my $htaccessList = "";
 
+$htaccessList .= "\n# No documentation and no javadoc redirects\n";
 my @files = split(/\n/, `find ../../main/ -type f`);
 for my $file (sort @files){
   my ($path, $barename, $ext) = $file =~ /^\.\.\/\.\.\/(.*\/)([^\/]+)(\.[^\/\.]+)/;
@@ -45,8 +47,13 @@ for my $file (sort @files){
   if (-f "../apt/$barename.apt.vm"){
     $docAptLink = "    * {{{../$barename.html}$barename Documentation and Examples}}";
     $docXdocLink = "<li><a href=\"../$barename.html\">$barename Documentation and Examples</a></li>";
+  } else {
+    $htaccessList .= "Redirect permanent /utils/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
+    $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
+    $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
   }
-  
+    
+  $htaccessList .= "Redirect permanent /utils/$srchtmlhref http://ostermiller.org/utils/src/$srchtmlhref\n";
   $sourceList .= "    * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
   $menuList .= "        <item name=\"$basename\" href=\"/src/$srchtmlhref\" />\n";
   
@@ -56,10 +63,36 @@ for my $file (sort @files){
   }
 }
 
+$htaccessList .= "\n# Unit test file redirects\n";
+@files = split(/\n/, `find ../../test/ -type f`);
+for my $file (sort @files){
+  my ($path, $barename, $ext) = $file =~ /^\.\.\/\.\.\/(.*\/)([^\/]+)(\.[^\/\.]+)/;
+  if ($barename =~ /Test/){
+      my $barenametest = $barename;
+      my $barenametests = $barename;  
+      if ($barename =~ /Tests/){
+        $barenametest =~ s/Tests/Test/g;
+      } else {
+        $barenametests =~ s/Test/Tests/g;
+      }
+      $htaccessList .= "Redirect permanent /utils/$barenametest.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/javadoc/$barenametest.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametest.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/$barenametests.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/javadoc/$barenametests.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametests.html http://ostermiller.org/utils/\n";
+   } else {
+      $htaccessList .= "Redirect permanent /utils/$barename.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/\n";
+      $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/\n";
+   }
+}
+
 &replaceInFile("../apt/source.apt.vm", "GENERATED SOURCES LIST", $sourceList);
 &replaceInFile("../apt/doc.apt.vm", "GENERATED JAVADOC LIST", $javadocList);
 &replaceInFile("../site.xml", "GENERATED SOURCES MENU", $menuList);
 &replaceInFile("../site.xml", "GENERATED JAVADOC MENU", $javadocMenuList);
+&replaceInFile("../resources/.htaccess", "GENERATED HTACCESS LIST", $htaccessList);
 
 sub createSrcFile(){
   my ($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname) = @_;
