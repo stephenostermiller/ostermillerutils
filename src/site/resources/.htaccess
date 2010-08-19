@@ -42,8 +42,6 @@ Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/csv http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/cvs/ http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/cvs http://ostermiller.org/utils/CSV.html
-Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSV.html
-Redirect permanent /utils/csv http://ostermiller.org/utils/CSV.html
 
 Redirect permanent /utils/excel.html http://ostermiller.org/utils/ExcelCSV.html
 Redirect permanent /utils/Excel.html http://ostermiller.org/utils/ExcelCSV.html
