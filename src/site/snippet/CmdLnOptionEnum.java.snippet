@@ -1,0 +1,61 @@
+import com.Ostermiller.util.*;
+/**
+ * Associate each option with a Java enum.
+ * Good when:
+ * Need for a static context.
+ * Compiler can enforce handling of all command line options.
+ * Properly preserves argument ordering when a later option may cancel out an earlier option.
+ * Drawbacks:
+ * Glue code to associate each command line option with an enum.
+ * Can create a long switch statement to deal with arguments
+ * Does not work when arguments not known at compile time
+ */
+public class OptionEnum {
+    private enum EnumOptions {
+        HELP(new CmdLnOption("help",'h')),
+        FILE(new CmdLnOption("file",'f').setRequiredArgument().setDescription("file to open")),
+        DELAY(new CmdLnOption("delay").setOptionalArgument().setDescription("delay in seconds (default 5 seconds)"));
+        private CmdLnOption option;
+        private EnumOptions(CmdLnOption option){
+            option.setUserObject(this);
+            this.option = option;
+        }
+        private CmdLnOption getCmdLineOption(){
+            return option;
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        CmdLn cmdLn = new CmdLn(args).setDescription("demo command line application");
+        for (EnumOptions option: EnumOptions.values()){
+            cmdLn.addOption(option.getCmdLineOption());
+        }
+        String fileName = null;
+        int delay = 0;
+        for(CmdLnResult result: cmdLn.getResults()){
+            switch((EnumOptions)result.getOption().getUserObject()){
+                case HELP:{
+                    cmdLn.printHelp();
+                    System.exit(0);
+                } break;
+                case FILE:{
+                    fileName = result.getArgument();
+                } break;
+                case DELAY:{
+                    delay = 5000;
+                    if (result.getArgumentCount() > 0){
+                        delay = Integer.parseInt(result.getArgument()) * 1000;
+                    }
+                } break;
+            }
+        }
+        if (delay > 0){
+            Thread.sleep(delay);
+        }
+        if (fileName != null){
+            // open file and do work...
+        }        
+        for(String argument: cmd.getNonOptionArguments()){
+            // other arguments
+        }
+    }
+}

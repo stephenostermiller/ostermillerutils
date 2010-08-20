@@ -7,197 +7,30 @@
 
 CmdLn: Java Command Line Parser
 
+    * {{{src/CmdLn.java.html}CmdLn.java Source Code}}
 
-
-
-
+    * {{{javadoc/CmdLn.html}CmdLn Javadoc}}
 
   A command line parser for array of strings passed to Java main methods.
 
-
-
-There are three ways to use the command line parser, as detailed with three examples below.  Each of the examples creates a command line application that accepts --help --file and --delay arguments with the following help message:
-<pre>demo command line application
+  There are three ways to use the command line parser, as detailed with three examples 
+  below.  Each of the examples creates a command line application that accepts 
+  --help --file and --delay arguments with the following help message:
+  
+----------------------------------------
+demo command line application
   -f --file <?>   file to open
-  --delay <?>     delay in seconds (default 5 seconds)</pre>
-Option Enum
-<pre>import com.Ostermiller.util.*;
-/**
- * Associate each option with a Java enum.
- * Good when:
- * Need for a static context.
- * Compiler can enforce handling of all command line options.
- * Properly preserves argument ordering when a later option may cancel out an earlier option.
- * Drawbacks:
- * Glue code to associate each command line option with an enum.
- * Can create a long switch statement to deal with arguments
- * Does not work when arguments not known at compile time
- */
-public class OptionEnum {
-    private enum EnumOptions {
-        HELP(new CmdLnOption(&quot;help&quot;,'h')),
-        FILE(new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;)),
-        DELAY(new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;));
-        private CmdLnOption option;
-        private EnumOptions(CmdLnOption option){
-            option.setUserObject(this);
-            this.option = option;
-        }
-        private CmdLnOption getCmdLineOption(){
-            return option;
-        }
-    }
-    public static void main(String[] args) throws Exception {
-        CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
-        for (EnumOptions option: EnumOptions.values()){
-            cmdLn.addOption(option.getCmdLineOption());
-        }
-        String fileName = null;
-        int delay = 0;
-        for(CmdLnResult result: cmdLn.getResults()){
-            switch((EnumOptions)result.getOption().getUserObject()){
-                case HELP:{
-                    cmdLn.printHelp();
-                    System.exit(0);
-                } break;
-                case FILE:{
-                    fileName = result.getArgument();
-                } break;
-                case DELAY:{
-                    delay = 5000;
-                    if (result.getArgumentCount() &gt; 0){
-                        delay = Integer.parseInt(result.getArgument()) * 1000;
-                    }
-                } break;
-            }
-        }
-        if (delay &gt; 0){
-            Thread.sleep(delay);
-        }
-        if (fileName != null){
-            // open file and do work...
-        }        
-        for(String argument: cmd.getNonOptionArguments()){
-            // other arguments
-        }
-    }
-}
-</pre>
+  --delay <?>     delay in seconds (default 5 seconds)
+----------------------------------------
 
-Call Back to Listeners
-<pre>import com.Ostermiller.util.*;
-/**
- * Associate each option with a listener.
- * Good when:
- * Multiple places need to know about command line options.
- * Properly preserves argument ordering when a later option may cancel out an earlier option.
- * Drawbacks:
- * Requires non-static context.
- */
-public class OptionCallback {
-    private String fileName = null;
-    private int delay = 0;
-    private void parseCommandLine(String[] args){
-        final CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
-        cmdLn.addOption(
-            new CmdLnOption(&quot;help&quot;,'h').setListener(
-                new CmdLnListener(){
-                    public void found(CmdLnResult result){
-                        cmdLn.printHelp();
-                        System.exit(0);
-                    }
-                }
-            )
-        );
-        cmdLn.addOption(
-            new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;).setListener(
-                new CmdLnListener(){
-                    public void found(CmdLnResult result){
-                        fileName = result.getArgument();
-                    }
-                }
-            )
-        );
-        cmdLn.addOption(
-            new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;).setListener(
-                new CmdLnListener(){
-                    public void found(CmdLnResult result){
-                        delay = 5000;
-                        if (result.getArgumentCount() &gt; 0){
-                            delay = Integer.parseInt(result.getArgument()) * 1000;
-                        }
-                    }
-                }
-            )
-        );
-        cmdLn.parse();
-    }
-    public static void main(String[] args) throws Exception {
-        OptionCallback optionCallback = new OptionCallback();
-        optionCallback.parseCommandLine(args);
-        if (optionCallback.delay &gt; 0){
-            Thread.sleep(optionCallback.delay);
-        }
-        if (fileName != null){
-            // open file and do work...
-        }        
-        for(String argument: cmd.getNonOptionArguments()){
-            // other arguments
-        }
-    }
-}
-</pre>
+*Option Enum
 
+%{code-snippet|brush=java|file=src/site/snippet/CmdLnOptionEnum.java.snippet}
 
-Options by Name
-<pre>import com.Ostermiller.util.*;
-/**
- * Query the command line for each option by name.
- * Good when:
- * Compact code desired.
- * Drawbacks:
- * Does not properly preserve argument ordering when a later option may cancel out an earlier option.
- */
-public class OptionCallback {
-    public static void main(String[] args) throws Exception {
-        CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
-        cmdLn.addOptions(new CmdLnOption[]{
-            new CmdLnOption(&quot;help&quot;,'h'),
-            new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;),
-            new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;).
-        });
-        if(cmdLn.getResult('h').present()){
-            cmdLn.printHelp();
-            System.exit(0);
-        }
-        if(cmdLn.getResult(&quot;delay&quot;).present()){
-            delay = 5000;
-            if (cmdLn.getResult(&quot;delay&quot;).getArgumentCount() &gt; 0){
-                delay = Integer.parseInt(cmdLn.getResult(&quot;delay&quot;).getArgument()) * 1000;
-            }
-            Thread.sleep(delay);
-        }
-        if(cmdLn.getResult('f').present()){
-            // open file and do work...
-        }
-        for(String argument: cmd.getNonOptionArguments()){
-            // other arguments
-        }
-    }
-}
-</pre>
+*Call Back to Listeners
 
+%{code-snippet|brush=java|file=src/site/snippet/CmdLnCallBack.java.snippet}
 
+*Options by Name
 
-<b>Command Line Parser</b>
-
-  * {{{CmdLn.java.html}Command Line Source}}
-
-  * {{{doc/com/Ostermiller/util/CmdLn.html}Command Line Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CmdLn&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+%{code-snippet|brush=java|file=src/site/snippet/CmdLnByName.java.snippet}

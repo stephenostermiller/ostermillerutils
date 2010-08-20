@@ -1,0 +1,35 @@
+import com.Ostermiller.util.*;
+/**
+ * Query the command line for each option by name.
+ * Good when:
+ * Compact code desired.
+ * Drawbacks:
+ * Does not properly preserve argument ordering when a later option may cancel out an earlier option.
+ */
+public class OptionCallback {
+    public static void main(String[] args) throws Exception {
+        CmdLn cmdLn = new CmdLn(args).setDescription("demo command line application");
+        cmdLn.addOptions(new CmdLnOption[]{
+            new CmdLnOption("help",'h'),
+            new CmdLnOption("file",'f').setRequiredArgument().setDescription("file to open"),
+            new CmdLnOption("delay").setOptionalArgument().setDescription("delay in seconds (default 5 seconds)").
+        });
+        if(cmdLn.getResult('h').present()){
+            cmdLn.printHelp();
+            System.exit(0);
+        }
+        if(cmdLn.getResult("delay").present()){
+            delay = 5000;
+            if (cmdLn.getResult("delay").getArgumentCount() > 0){
+                delay = Integer.parseInt(cmdLn.getResult("delay").getArgument()) * 1000;
+            }
+            Thread.sleep(delay);
+        }
+        if(cmdLn.getResult('f').present()){
+            // open file and do work...
+        }
+        for(String argument: cmd.getNonOptionArguments()){
+            // other arguments
+        }
+    }
+}
