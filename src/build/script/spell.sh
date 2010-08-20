@@ -1,30 +1,20 @@
 #!/bin/bash
 
-files="$@"
-
-for file in $files
-do
-	ext="${file/*./}"
-	if [ "$ext" == "bte" ] || [ "$ext" == "html" ] 
-	then
-		mode="sgml"
-	else
-		mode="url"
-	fi
-	if [ "$ext" != "java" ] || [ ! -e "${file/java/lex}" ]
-	then
-		cp "$file" temp
-		aspell check --mode=$mode -x -p ./util.dict temp
-		if [ "`diff "temp" "$file"`" ] 
-		then
-			mv temp "$file"
-		fi
-	fi
-done
-head -n 1 "util.dict" > temp
-tail -n +2 "util.dict" | sort | uniq >> temp
-if [ "`diff "temp" "util.dict"`" ] 
+if [ ! -e pom.xml ]
 then
-	mv temp "util.dict"
+  echo "Expected this script to be called from ostermillerutils base directory"
+  exit 1;
 fi
-rm -f temp temp.bak
+
+DICT=./src/build/spell/util.dict
+
+for file in `(find src -name "*.java" && find src -name "*.java.snippet"&& find src -name "*.apt.vm")`
+do
+  aspell check --mode=url -x -p "$DICT" "$file"
+done
+
+# Sort the dict file
+TMPFILE=$(mktemp) || { echo "Failed to create temp file"; exit 1; }
+head -n 1 "$DICT" > $TMPFILE
+tail -n +2 "$DICT" | sort | uniq >> $TMPFILE
+mv $TMPFILE "$DICT"
