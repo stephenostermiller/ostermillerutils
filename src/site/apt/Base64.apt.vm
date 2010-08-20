@@ -63,7 +63,7 @@ Encode or decode using the base64 format.
   -d --decode       Remove base64 encoding.
   -a --decodeall    When decoding, attempt badly formatted files.
   --decodegood      Don't decode badly formatted files.  (default)
-  -x --ext &lt;ext&gt;    File extension to use. (default: base64)
+  -x --ext <ext>    File extension to use. (default: base64)
   -f --force        Overwrite files without prompting
   --noforce         Don't overwrite files.  (default)
   -v --verbose      Print a message for each file encoded or decoded. (default)

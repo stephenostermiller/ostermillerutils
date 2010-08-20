@@ -29,7 +29,7 @@ Example
 CircularObjectBuffer cob = new CircularObjectBuffer();
 
 // Fill the buffer.
-cob.write(&quot;Hello World!\n&quot;);
+cob.write("Hello World!\n");
 
 // Empty the buffer.
 System.out.print((String)(cob.read()));</pre>
@@ -51,7 +51,7 @@ Example
 CircularCharBuffer ccb = new CircularCharBuffer();
 
 // Fill the buffer.
-ccb.getWriter().write(&quot;Hello World!\n&quot;);
+ccb.getWriter().write("Hello World!\n");
 ccb.getWriter().close();
 
 // Empty the buffer.

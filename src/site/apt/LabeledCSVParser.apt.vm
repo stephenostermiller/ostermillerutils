@@ -20,19 +20,19 @@ Example
 <pre>LabeledCSVParser lcsvp = new LabeledCSVParser(
     new CSVParser(
         new StringReader(
-            &quot;Name,Phone\n&quot; +
-            &quot;Stewart,212-555-3233\n&quot; +
-            &quot;Cindy,212-555-8492\n&quot;
+            "Name,Phone\n" +
+            "Stewart,212-555-3233\n" +
+            "Cindy,212-555-8492\n"
         )
     )
 );
 
 while(lcsvp.getLine() != null){
     System.out.println(
-        &quot;Name: &quot; + lcsvp.getValueByLabel(&quot;Name&quot;)
+        "Name: " + lcsvp.getValueByLabel("Name")
     );
     System.out.println(
-        &quot;Phone: &quot; + lcsvp.getValueByLabel(&quot;Phone&quot;)
+        "Phone: " + lcsvp.getValueByLabel("Phone")
     );
 }</pre>
 

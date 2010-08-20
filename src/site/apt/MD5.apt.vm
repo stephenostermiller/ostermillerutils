@@ -19,7 +19,7 @@ MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for Ja
 Example
 <pre>System.out.println(
     MD5.getHashString(
-        &quot;Hello World&quot;
+        "Hello World"
     )
 );</pre>
 
@@ -64,7 +64,7 @@ Example
 <pre>// Write out hello world
 // and print its MD5 hash 
 MD5OutputStream out = new MD5OutputStream(System.out);
-out.write(&quot;Hello World\n&quot;.getBytes());
+out.write("Hello World\n".getBytes());
 System.out.println(out.getHashString());</pre>
 
 

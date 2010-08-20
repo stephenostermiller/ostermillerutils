@@ -18,13 +18,13 @@ Utilities to make executing other programs from Java easier.
 Example
 <pre>// Read a file using cat
 String file = ExecHelper.exec(
-    &quot;cat&quot;,
-    &quot;myfile.txt&quot;
+    "cat",
+    "myfile.txt"
 ).getOutput();
 
 // Similar to Perl or bash back ticks
 String hello = ExecHelper.execUsingShell(
-    &quot;echo 'Hello World'&quot;
+    "echo 'Hello World'"
 ).getOutput();</pre>
 
 

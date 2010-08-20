@@ -36,18 +36,18 @@ Features
 
 
   To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;&lt;file&gt;</b>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;<file></b>
 
-<pre>Tabs [-wgtsfVvqQ] &lt;files&gt;
+<pre>Tabs [-wgtsfVvqQ] <files>
 Adjusts the tabs and spaces at the beginning of each line in files.
   If no files are specified standard input and output will be used.
   --help              Print this help message.
   --version           Print out the version number.
   --about             Print out license and contact info.
-  -w --width &lt;num&gt;    Tab width (in spaces) of the input.
+  -w --width <num>    Tab width (in spaces) of the input.
   -g --guess          Guess the tab width of the input file. (default)
   -t --tabs           Use tabs in the output.
-  -s --spaces &lt;num&gt;   Use this many spaces (not tabs) in the output. (default=4)
+  -s --spaces <num>   Use this many spaces (not tabs) in the output. (default=4)
   -f --force          Always modify unformatted files, even binary files.
   --noforce           Don't modify binary files.  (default)
   -V --reallyverbose  Print a message for each file.

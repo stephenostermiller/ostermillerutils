@@ -24,7 +24,7 @@ ExcelCSVPrinter ecsvp = new ExcelCSVPrinter(
 // Write to the printer
 ecsvp.writeln(
     new String[]{
-        &quot;hello&quot;,&quot;world&quot;
+        "hello","world"
     }
 );</pre>
 
@@ -44,17 +44,17 @@ Example
 <pre>// Parse the data
 String[][] values = ExcelCSVParser.parse(
     new StringReader(
-        &quot;hello,world\n&quot; +
-        &quot;how,are,you&quot;
+        "hello,world\n" +
+        "how,are,you"
     )
 );
 
 // Display the parsed data
-for (int i=0; i&lt;values.length; i++){
-    for (int j=0; j&lt;values[i].length; j++){
+for (int i=0; i<values.length; i++){
+    for (int j=0; j<values[i].length; j++){
         System.out.println(values[i][j]);
     }
-    System.out.println(&quot;-----&quot;);
+    System.out.println("-----");
 }</pre>
 
 

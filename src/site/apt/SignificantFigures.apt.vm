@@ -18,11 +18,11 @@ numbers in a calculation has and displaying the result appropriately.
 
 Example
 <pre>// Numbers to multiply
-String[] args = {&quot;1.0&quot;, &quot;2.0&quot;}; 
+String[] args = {"1.0", "2.0"}; 
 SignificantFigures number;
 int sigs = Integer.MAX_VALUE;
 double result = 1D;
-for (int i=0; i&lt;args.length; i++){
+for (int i=0; i<args.length; i++){
     // For each number, figure out significant figures
     // and multiply the numbers
     number = new SignificantFigures(args[i]);
@@ -39,12 +39,12 @@ Figure significant figures for multiplication of numbers.
 <br clear=all>
 Example
 <pre>// Numbers to add
-String[] args = {&quot;1.0&quot;, &quot;2.0&quot;}; 
+String[] args = {"1.0", "2.0"}; 
 SignificantFigures number;
 int lsd = Integer.MIN_VALUE;
 int msd = Integer.MIN_VALUE;
 double result = 0D;
-for (int i=0; i&lt;args.length; i++){
+for (int i=0; i<args.length; i++){
     // for each number figure most and least
     // significant digit then add the number.
     number = new SignificantFigures(args[i]);

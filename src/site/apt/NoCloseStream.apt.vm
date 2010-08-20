@@ -49,7 +49,7 @@ NoCloseReader
 
 Example
 <pre>// prevent a file reader from being closed
-NoCloseReader in = new NoCloseReader(new FileReader(&quot;file.txt&quot;));
+NoCloseReader in = new NoCloseReader(new FileReader("file.txt"));
 // pass in to other classes:
 /* somebodyelse.dosomething(in); */
 in.reallyClose();</pre>
@@ -61,7 +61,7 @@ NoCloseWriter
 
 Example
 <pre>// prevent a file writer from being closed
-NoCloseWriter out = new NoCloseWriter(new FileWriter(&quot;file.txt&quot;));
+NoCloseWriter out = new NoCloseWriter(new FileWriter("file.txt"));
 // pass out to other classes:
 /* somebodyelse.dosomething(out); */
 out.reallyClose();</pre>

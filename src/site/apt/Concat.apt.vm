@@ -18,7 +18,7 @@ Concatenation Streams
 
 ConcatInputStream
 Example
-<pre>// Pre-pend data to a InputStream &quot;in&quot;
+<pre>// Pre-pend data to a InputStream "in"
 // giving a new stream.
 in = new ConcatInputStream(
     new ByteArrayInputStream(
@@ -37,11 +37,11 @@ in = new ConcatInputStream(
 ConcatReader
 
 Example
-<pre>// Pre-pend data to a Reader &quot;in&quot;
+<pre>// Pre-pend data to a Reader "in"
 // giving a new reader.
 in = new ConcatReader(
     new StringReader(
-        &quot;Pre-pending this data.&quot;
+        "Pre-pending this data."
     ),
     in
 );
