@@ -56,7 +56,8 @@ Features
   To run the program use the following command line:<br>
 <b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;<files></b>
 
-<pre>LineEnds [-dnrsfvqQ] <files>
+----------------------------------------
+LineEnds [-dnrsfvqQ] <files>
 
    Adjusts the line endings in files.
    If no files are specified standard in and out will be used.
@@ -72,7 +73,8 @@ Features
    --noforce              Don't modify binary files. (default)
    -v --verbose           Print a message for each file modified.
    -q --quiet             Print error messages. (default)
-   -Q --reallyquiet       Print nothing.</pre>
+   -Q --reallyquiet       Print nothing.
+----------------------------------------
 
 
 

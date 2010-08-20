@@ -16,7 +16,8 @@ Utilities for reading and writing CSV (comma separated value) text files in the 
 
 
 Example
-<pre>// Create the printer
+----------------------------------------
+// Create the printer
 ExcelCSVPrinter ecsvp = new ExcelCSVPrinter(
     System.out
 );
@@ -26,7 +27,8 @@ ecsvp.writeln(
     new String[]{
         "hello","world"
     }
-);</pre>
+);
+----------------------------------------
 
 
 Writing Excel CSV files: ExcelCSVPrinter
@@ -41,7 +43,8 @@ implement the CSVPrint interface.
 <hr>
 
 Example
-<pre>// Parse the data
+----------------------------------------
+// Parse the data
 String[][] values = ExcelCSVParser.parse(
     new StringReader(
         "hello,world\n" +
@@ -55,7 +58,8 @@ for (int i=0; i<values.length; i++){
         System.out.println(values[i][j]);
     }
     System.out.println("-----");
-}</pre>
+}
+----------------------------------------
 
 
 <a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a>

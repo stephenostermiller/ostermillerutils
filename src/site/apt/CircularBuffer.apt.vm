@@ -25,14 +25,16 @@ for these classes.
 <hr>
 
 Example
-<pre>// Create the buffer.
+----------------------------------------
+// Create the buffer.
 CircularObjectBuffer cob = new CircularObjectBuffer();
 
 // Fill the buffer.
 cob.write("Hello World!\n");
 
 // Empty the buffer.
-System.out.print((String)(cob.read()));</pre>
+System.out.print((String)(cob.read()));
+----------------------------------------
 This example only works because "Hello World" is one object.  If you try to write more objects than the size of 
 the buffer, the buffer will block until space is available.
 In this single thread example, that will appear to cause a program hang.  You can 
@@ -47,7 +49,8 @@ get around this by making the buffer infinite size or emptying the buffer in ano
 <hr>
 
 Example
-<pre>// Create the buffer.
+----------------------------------------
+// Create the buffer.
 CircularCharBuffer ccb = new CircularCharBuffer();
 
 // Fill the buffer.
@@ -58,7 +61,8 @@ ccb.getWriter().close();
 int c;
 while ((c = ccb.getReader().read()) != -1){
     System.out.print((char)c);
-}</pre>
+}
+----------------------------------------
 This example only works because "Hello World" is short.  If you try to write more data than the size of 
 the buffer, the buffer will block until space is available.
 In this single thread example, that will appear to cause a program hang.  You can 
@@ -80,7 +84,8 @@ classes and connecting them.
 <hr>
 
 Example
-<pre>// Create the buffer.
+----------------------------------------
+// Create the buffer.
 CircularByteBuffer cbb = new CircularByteBuffer();
 
 // Fill the buffer.
@@ -96,7 +101,8 @@ cbb.getOutputStream().close();
 int c;
 while ((c = cbb.getInputStream().read()) != -1){
     System.out.print((char)c);
-}</pre>
+}
+----------------------------------------
 This example only works because "Hello World" is short.  If you try to write more data than the size of 
 the buffer, the buffer will block until space is available.
 In this single thread example, that will appear to cause a program hang.  You can 

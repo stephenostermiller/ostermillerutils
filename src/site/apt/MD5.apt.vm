@@ -17,11 +17,13 @@ MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for Ja
 
 
 Example
-<pre>System.out.println(
+----------------------------------------
+System.out.println(
     MD5.getHashString(
         "Hello World"
     )
-);</pre>
+);
+----------------------------------------
 
 
 Security Alert
@@ -46,12 +48,14 @@ faster and much more memory efficient than Santeri's implementation.
 <br clear=all>
 
 Example
-<pre>// Print the MD5 hash for a line
+----------------------------------------
+// Print the MD5 hash for a line
 // read from standard input
 MD5InputStream in = new MD5InputStream(System.in);
 int b;
 while ((b = in.read()) != -1 &amp;&amp; b != '\r' &amp;&amp; b != '\n');
-System.out.println(in.getHashString());</pre>
+System.out.println(in.getHashString());
+----------------------------------------
 
 
 <H2>Input Stream
@@ -61,11 +65,13 @@ System.out.println(in.getHashString());</pre>
 <br clear=all>
 
 Example
-<pre>// Write out hello world
+----------------------------------------
+// Write out hello world
 // and print its MD5 hash 
 MD5OutputStream out = new MD5OutputStream(System.out);
 out.write("Hello World\n".getBytes());
-System.out.println(out.getHashString());</pre>
+System.out.println(out.getHashString());
+----------------------------------------
 
 
 <H2>Output Stream

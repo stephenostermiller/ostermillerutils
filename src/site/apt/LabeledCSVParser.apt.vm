@@ -17,7 +17,8 @@ Decorates either a href="CSV.html">CSV</a> or the {{{ExcelCSV.html}Excel CSV}} p
 
 
 Example
-<pre>LabeledCSVParser lcsvp = new LabeledCSVParser(
+----------------------------------------
+LabeledCSVParser lcsvp = new LabeledCSVParser(
     new CSVParser(
         new StringReader(
             "Name,Phone\n" +
@@ -34,7 +35,8 @@ while(lcsvp.getLine() != null){
     System.out.println(
         "Phone: " + lcsvp.getValueByLabel("Phone")
     );
-}</pre>
+}
+----------------------------------------
 
 
 CSV with column headings: LabeledCSVParser</a>

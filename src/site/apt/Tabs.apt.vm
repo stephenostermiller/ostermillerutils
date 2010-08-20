@@ -38,7 +38,8 @@ Features
   To run the program use the following command line:<br>
 <b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;<file></b>
 
-<pre>Tabs [-wgtsfVvqQ] <files>
+----------------------------------------
+Tabs [-wgtsfVvqQ] <files>
 Adjusts the tabs and spaces at the beginning of each line in files.
   If no files are specified standard input and output will be used.
   --help              Print this help message.
@@ -54,7 +55,8 @@ Adjusts the tabs and spaces at the beginning of each line in files.
   -v --verbose        Print a message for each file modified.
   -q --quiet          Print error messages. (default)
   -Q --reallyquiet    Print nothing.
-</pre>
+
+----------------------------------------
 
 
 

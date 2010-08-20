@@ -8,7 +8,8 @@
 
 
 Example
-<pre>Parallelizer pll = new Parallelizer();
+----------------------------------------
+Parallelizer pll = new Parallelizer();
 for (int i=0; i<10; i++){
     final int j = i;
     pll.run(
@@ -18,7 +19,8 @@ for (int i=0; i<10; i++){
     );
 }
 pll.join();
-</pre>
+
+----------------------------------------
 
 
   To use the Parallelizer, a developer would typically:

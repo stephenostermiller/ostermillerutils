@@ -24,11 +24,13 @@ Interface for all four of the following classes.
 NoCloseInputStream
 
 Example
-<pre>// prevent system.in from being closed
+----------------------------------------
+// prevent system.in from being closed
 NoCloseInputStream in = new NoCloseInputStream(System.in);
 // pass in to other classes:
 /* somebodyelse.dosomething(in); */
-in.reallyClose();</pre>
+in.reallyClose();
+----------------------------------------
 
 
 <br clear=all>
@@ -36,11 +38,13 @@ in.reallyClose();</pre>
 NoCloseOutputStream
 
 Example
-<pre>// prevent system.out from being closed
+----------------------------------------
+// prevent system.out from being closed
 NoCloseOutputStream out = new NoCloseOutputStream(System.out);
 // pass out to other classes:
 /* somebodyelse.dosomething(out); */
-out.reallyClose();</pre>
+out.reallyClose();
+----------------------------------------
 
 
 <br clear=all>
@@ -48,11 +52,13 @@ out.reallyClose();</pre>
 NoCloseReader
 
 Example
-<pre>// prevent a file reader from being closed
+----------------------------------------
+// prevent a file reader from being closed
 NoCloseReader in = new NoCloseReader(new FileReader("file.txt"));
 // pass in to other classes:
 /* somebodyelse.dosomething(in); */
-in.reallyClose();</pre>
+in.reallyClose();
+----------------------------------------
 
 
 <br clear=all>
@@ -60,11 +66,13 @@ in.reallyClose();</pre>
 NoCloseWriter
 
 Example
-<pre>// prevent a file writer from being closed
+----------------------------------------
+// prevent a file writer from being closed
 NoCloseWriter out = new NoCloseWriter(new FileWriter("file.txt"));
 // pass out to other classes:
 /* somebodyelse.dosomething(out); */
-out.reallyClose();</pre>
+out.reallyClose();
+----------------------------------------
 
 
 

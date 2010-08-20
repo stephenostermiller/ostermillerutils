@@ -16,7 +16,8 @@ Utilities to make executing other programs from Java easier.
 
 
 Example
-<pre>// Read a file using cat
+----------------------------------------
+// Read a file using cat
 String file = ExecHelper.exec(
     "cat",
     "myfile.txt"
@@ -25,7 +26,8 @@ String file = ExecHelper.exec(
 // Similar to Perl or bash back ticks
 String hello = ExecHelper.execUsingShell(
     "echo 'Hello World'"
-).getOutput();</pre>
+).getOutput();
+----------------------------------------
 
 
   The Runtime.exec method is particularly difficult to use to call external applications to do data processing compared to such functionality in other languages.  For example in Perl and bash, the target can be placed in back ticks and the standard output is placed directly into a variable. To achieve this functionality in Java, one would need to use Runtime.exec, get the process, read from both the output and the error streams, and buffer the data into a String yourself.  Or this library can be used.

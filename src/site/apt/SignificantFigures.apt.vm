@@ -17,7 +17,8 @@ numbers in a calculation has and displaying the result appropriately.
 
 
 Example
-<pre>// Numbers to multiply
+----------------------------------------
+// Numbers to multiply
 String[] args = {"1.0", "2.0"}; 
 SignificantFigures number;
 int sigs = Integer.MAX_VALUE;
@@ -32,13 +33,15 @@ for (int i=0; i<args.length; i++){
 // format and display the result
 number = new SignificantFigures(result);
 number.setNumberSignificantFigures(sigs);
-System.out.println(number);</pre>
+System.out.println(number);
+----------------------------------------
 Figure significant figures for multiplication of numbers.
 
 
 <br clear=all>
 Example
-<pre>// Numbers to add
+----------------------------------------
+// Numbers to add
 String[] args = {"1.0", "2.0"}; 
 SignificantFigures number;
 int lsd = Integer.MIN_VALUE;
@@ -55,7 +58,8 @@ for (int i=0; i<args.length; i++){
 // format and display the result
 number = new SignificantFigures(result);
 number.setLMSD(lsd, msd);
-System.out.println(number);</pre>
+System.out.println(number);
+----------------------------------------
 Figure significant figures for addition of numbers.
 
 

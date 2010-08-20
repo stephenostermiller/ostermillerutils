@@ -18,7 +18,8 @@ Concatenation Streams
 
 ConcatInputStream
 Example
-<pre>// Pre-pend data to a InputStream "in"
+----------------------------------------
+// Pre-pend data to a InputStream "in"
 // giving a new stream.
 in = new ConcatInputStream(
     new ByteArrayInputStream(
@@ -27,7 +28,8 @@ in = new ConcatInputStream(
         }
     ),
     in
-);</pre>
+);
+----------------------------------------
 
 
 
@@ -37,7 +39,8 @@ in = new ConcatInputStream(
 ConcatReader
 
 Example
-<pre>// Pre-pend data to a Reader "in"
+----------------------------------------
+// Pre-pend data to a Reader "in"
 // giving a new reader.
 in = new ConcatReader(
     new StringReader(
@@ -45,7 +48,8 @@ in = new ConcatReader(
     ),
     in
 );
-</pre>
+
+----------------------------------------
 
 
   Combines multiple character stream sources into a single character stream.  
