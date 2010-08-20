@@ -1,0 +1,32 @@
+public void doGet (HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException { 
+    doPostGet(
+        request, 
+        response, 
+        new CGIParser(
+            request.getQueryString(),
+            // Use the same character set
+            // used in response.setContentType
+            "UTF-8"
+        )
+    );
+}
+
+public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+    doPostGet(
+        request, 
+        response, 
+        new CGIParser(
+            request.getReader(),
+            // Use the same character set
+            // used in response.setContentType
+            "UTF-8"
+        )
+    );
+}
+
+private void doPostGet(HttpServletRequest request, HttpServletResponse response, CGIParser params)
+    throws ServletException, IOException {
+    ...
+}
