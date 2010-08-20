@@ -17,7 +17,7 @@ import junit.framework.TestCase;
  * Unit test for ArrayHelper. More information about this class is available
  * from <a target="_top" href=
  * "http://ostermiller.org/utils/ArrayHelper.html">ostermiller.org</a>.
- * 
+ *
  * @author Stephen Ostermiller
  *         http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.06.00

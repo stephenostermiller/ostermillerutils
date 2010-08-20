@@ -70,14 +70,14 @@ public class CSVTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	public void testNormal(){
 		String input = ",\"a\",\",\t'\\\"\"";
 		String[][] output = new String[][]{{"", "a", ",\t'\""}};
 		CSVParser csvParser = new CSVParser(new StringReader(input));
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testTabs(){
 		String tabInput = "\t\"a\"\t\",\t'\\\"\"";
 		String[][] output = new String[][]{{"", "a", ",\t'\""}};
@@ -85,7 +85,7 @@ public class CSVTest extends TestCase {
 		csvParser.changeDelimiter('\t');
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testApostrophes(){
 		String input = ",'a',',\t\\'\"'";
 		String[][] output = new String[][]{{"", "a", ",\t'\""}};
@@ -93,7 +93,7 @@ public class CSVTest extends TestCase {
 		csvParser.changeQuote('\'');
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testCommasAndQuotesSwapped(){
 		String input = "\",a,\",\\,\t'\\\",";
 		String[][] output = new String[][]{{"", "a", ",\t'\""}};
@@ -103,35 +103,35 @@ public class CSVTest extends TestCase {
 		csvParser.changeDelimiter('"');
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testBackslashAtEndOfQuoted(){
 		String input = "\"test\\\\\",test";
 		String[][] output = new String[][]{{"test\\", "test"}};
 		CSVParser csvParser = new CSVParser(new StringReader(input));
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testWhitSpaceAroundFields(){
 		String input = "field1,field2 ,    field3,field4   ,  field5   ,field6";
 		String[][] output = new String[][]{{"field1", "field2", "field3", "field4", "field5", "field6"}};
 		CSVParser csvParser = new CSVParser(new StringReader(input));
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testEmptyFields(){
 		String input = ",field2,, ,field5,";
 		String[][] output = new String[][]{{"", "field2", "", "", "field5", ""}};
 		CSVParser csvParser = new CSVParser(new StringReader(input));
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testVariousLengths(){
 		String input = "1,to,tre,four,five5,sixsix";
 		String[][] output = new String[][]{{"1", "to", "tre", "four", "five5", "sixsix"}};
 		CSVParser csvParser = new CSVParser(new StringReader(input));
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	public void testCommentMustStartAtbeginningOfLine(){
 		String input = "!comment\n !field1\n;comment\n ;field2\n#comment\n #field3";
 		String[][] output = new String[][]{{"!field1"},{";field2"},{"#field3"}};
@@ -139,7 +139,7 @@ public class CSVTest extends TestCase {
 		csvParser.setCommentStart("#;!");
 		compare(output, getAllValues(csvParser));
 	}
-	
+
 	private static String[][] getAllValues(CSVParser csvParser){
 		try {
 			return csvParser.getAllValues();
@@ -154,7 +154,7 @@ public class CSVTest extends TestCase {
 	}
 
 	private static void compare(String[][] a, String[][] b){
-		assertEquals(a.length,b.length);		
+		assertEquals(a.length,b.length);
 		for(int i=0; i<a.length; i++){
 			assertEquals(a[i].length,b[i].length);
 			for (int j=0; j<a[i].length; j++){

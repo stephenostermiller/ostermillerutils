@@ -41,12 +41,12 @@ public class ExecHelperTest extends TestCase {
 			out.write(s);
 			out.close();
 			ExecHelper eh = ExecHelper.exec(new String[]{"cat", temp.toString()});
-			assertEquals(s, eh.getOutput());			
+			assertEquals(s, eh.getOutput());
 		} catch (IOException x){
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	public void testStdinStdoutExitStatus(){
 		if (shExists()){
 			try {
@@ -59,15 +59,15 @@ public class ExecHelperTest extends TestCase {
 			}
 		}
 	}
-	
+
 	/**
 	 * Test to see if a shell exists
 	 */
 	private static boolean shExists(){
 		File sh = new File("/bin/sh");
-		return sh.exists();		
+		return sh.exists();
 	}
-	
+
 	private static final int CREATE_LARGE_STRING_SIZE=1000;
 	private static final String LARGE_STRING_CONTENTS="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

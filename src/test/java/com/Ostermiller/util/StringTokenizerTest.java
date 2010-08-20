@@ -28,7 +28,7 @@ import junit.framework.TestCase;
  * @since ostermillerutils 1.00.00
  */
 public class StringTokenizerTest extends TestCase {
-	
+
 	public void testBasic(){
 		String input = "this is a test";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input);
@@ -40,14 +40,14 @@ public class StringTokenizerTest extends TestCase {
 			compareState("Test 1", oldTok, newTok);
 		}
 	}
-	
+
 	public void testEmptyInput(){
 		String input = "";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input);
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input);
 		assertEquals(oldTok.countTokens(), newTok.countTokens());
 	}
-	
+
 	public void testNoDelims(){
 		String input = "no delimiters";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input, "");
@@ -58,7 +58,7 @@ public class StringTokenizerTest extends TestCase {
 			assertEquals(oldTok.nextToken(), newTok.nextToken());
 		}
 	}
-	
+
 	public void testAbTokens(){
 		String input = "AstringB";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input, "AB");
@@ -68,7 +68,7 @@ public class StringTokenizerTest extends TestCase {
 			assertEquals(oldTok.nextToken(), newTok.nextToken());
 		}
 	}
-	
+
 	public void testAbTokensReturned(){
 		String input = "AstringB";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input, "AB", true);
@@ -78,7 +78,7 @@ public class StringTokenizerTest extends TestCase {
 			assertEquals(oldTok.nextToken(), newTok.nextToken());
 		}
 	}
-	
+
 	public void testCgiParse(){
 		String input = "someURL?name=value&name=value";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input);
@@ -89,7 +89,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals(oldTok.nextToken(), newTok.nextToken());
 		assertEquals(oldTok.nextToken(), newTok.nextToken());
 	}
-	
+
 	public void testCgiParseChangeTokens(){
 		String input = "someURL?name=value&name=value";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input);
@@ -100,7 +100,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals("name", newTok.nextToken());
 		assertEquals("value", newTok.nextToken());
 	}
-	
+
 	public void testTokenAndNonTokenDelims(){
 		String input = "  (   aaa	\t	* (b+c1 ))";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, " \t\n\r\f", "()+*");
@@ -115,7 +115,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals(")", newTok.nextToken());
 		assertEquals(")", newTok.nextToken());
 	}
-	
+
 	public void testCommaDelim(){
 		String input = "one,two,,four,five,,,eight,";
 		java.util.StringTokenizer  oldTok = new java.util.StringTokenizer(input, ",");
@@ -125,42 +125,42 @@ public class StringTokenizerTest extends TestCase {
 			assertEquals(oldTok.nextToken(), newTok.nextToken());
 		}
 	}
-	
+
 	public void testReturnEmptyTokens(){
 		String input = "one,two,,four,five,,,eight";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",");
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(8, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensBeginAndEnd(){
 		String input = ",two,,four,five,,,eight,";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",");
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(9, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensDelimInput(){
 		String input = ",";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",");
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(2, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensEmptyInput(){
 		String input = "";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",");
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(1, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensDelimitersAsTokens(){
 		String input = ",two,,four,five,,,eight,";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",", true);
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(17, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensSetHalfwayThrough(){
 		String input = ",one,,,four,";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, ",", null, false);
@@ -168,7 +168,7 @@ public class StringTokenizerTest extends TestCase {
 		newTok.setReturnEmptyTokens(true);
 		assertEquals(4, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensNoneLeftOver(){
 		String input = "list=";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, "=");
@@ -178,7 +178,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals("", newTok.nextToken(","));
 		assertEquals(0, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensOneLeftOver(){
 		String input = "list=,";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, "=");
@@ -188,7 +188,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals("", newTok.nextToken(","));
 		assertEquals(1, newTok.countTokens());
 	}
-	
+
 	public void testReturnEmptyTokensTwoLeftOver(){
 		String input = "list=,two,";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, "=");
@@ -198,7 +198,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals("", newTok.nextToken(","));
 		assertEquals(2, newTok.countTokens());
 	}
-	
+
 	public void testToArray(){
 		String input = "this is a test";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input);
@@ -208,7 +208,7 @@ public class StringTokenizerTest extends TestCase {
 			assertEquals(tokens[i], newTok.nextToken());
 		}
 	}
-	
+
 	public void testRestOfString(){
 		String input = "token rest of string";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input);
@@ -217,7 +217,7 @@ public class StringTokenizerTest extends TestCase {
 		assertEquals("rest of string", newTok.restOfText());
 		assertFalse(newTok.hasMoreTokens());
 	}
-	
+
 	public void testPeek(){
 		String input = "testing the peek method";
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input);

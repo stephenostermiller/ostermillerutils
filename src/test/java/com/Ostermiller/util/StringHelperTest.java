@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 /**
  * StringHelper regression test.
  */
-public class StringHelperTest extends TestCase {	
+public class StringHelperTest extends TestCase {
 
 	public void assertEquals(Object[] a, Object[] b) {
 		assertTrue(Arrays.equals(a,b));

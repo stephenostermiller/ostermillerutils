@@ -23,7 +23,7 @@ do
   if [ $trailCount != 0 ]
   then
     echo "Removing trailing white space from: $file"
-    sed -ir 's/[ 	]+$//' "$file"
+    sed -r -i 's/[ 	]+$//' "$file"
   fi
   tablist="$tablist $file"  
 done

@@ -28,8 +28,8 @@ import java.io.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
-public class ConcatTest extends TestCase {	
-	
+public class ConcatTest extends TestCase {
+
 	public void testConcatReader(){
 		ConcatReader cr = new ConcatReader(
 			new Reader[]{
@@ -57,7 +57,7 @@ public class ConcatTest extends TestCase {
 		read(cr, -1);
 		close(cr);
 	}
-	
+
 	public void testConcatReaderAdd(){
 		final ConcatReader cr = new ConcatReader();
 		assertFalse(ready(cr));
@@ -79,7 +79,7 @@ public class ConcatTest extends TestCase {
 		cr.lastReaderAdded();
 		read(cr, -1);
 	}
-		
+
 	public void testConcatInputStream(){
 		ConcatInputStream cis = new ConcatInputStream(
 			new InputStream[]{
@@ -104,7 +104,7 @@ public class ConcatTest extends TestCase {
 		read(cis, -1);
 		read(cis, -1);
 	}
-	
+
 	public void testConcatInputStreamAdd(){
 		final ConcatInputStream cis = new ConcatInputStream();
 		assertTrue(available(cis) == 0);
@@ -126,7 +126,7 @@ public class ConcatTest extends TestCase {
 		cis.lastInputStreamAdded();
 		read(cis, -1);
 	}
-	
+
 	private static InputStream getInputStream(String s){
 		try {
 			return new ByteArrayInputStream(s.getBytes("ASCII"));
@@ -155,7 +155,7 @@ public class ConcatTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	private static void read(Reader in, int expected) {
 		try {
 			int c = in.read();
@@ -182,7 +182,7 @@ public class ConcatTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	private static void read(Reader in, String expected) {
 		try {
 			int totalRead = 0;
@@ -216,7 +216,7 @@ public class ConcatTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	public static boolean ready(Reader in){
 		try {
 			return in.ready();
@@ -224,7 +224,7 @@ public class ConcatTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	public static int available(InputStream in){
 		try {
 			return in.available();
@@ -232,7 +232,7 @@ public class ConcatTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-	
+
 	public static void close(Reader in){
 		try {
 			in.close();
