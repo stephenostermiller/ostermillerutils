@@ -53,11 +53,27 @@
 	      <groupId>org.apache.maven.plugins</groupId>
 	      <artifactId>maven-jar-plugin</artifactId>
 	      <executions>
-		    <execution>
-			  <goals>
-		        <goal>jar</goal>
-			  </goals>
-		    </execution>
+		      <execution>
+            <id>utilsjar</id>
+			      <goals>
+		          <goal>jar</goal>
+			      </goals>
+		      </execution>
+		      <execution>
+            <id>randpassjar</id>
+			      <goals>
+		          <goal>jar</goal>
+			      </goals>            
+            <phase>site</phase>
+            <configuration>
+              <finalName>randpass</finalName>
+              <outputDirectory>${project.build.directory}/site</outputDirectory>
+              <includes>
+                <include>**/RandPass*</include>
+                <include>**/*.TXT</include>
+              </includes>
+            </configuration>
+		      </execution>
 	      </executions>
 	    </plugin>
       <plugin>
@@ -66,7 +82,7 @@
 	      <executions>
 		    <execution>
 			  <goals>
-		        <goal>jar</goal>
+		      <goal>jar</goal>
 			  </goals>
 		    </execution>
 	      </executions>
