@@ -24,7 +24,7 @@ padding:1cm;
 }
 </style>
 
-<div class=applet>
+
 <object 
 classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
 width=200
@@ -37,11 +37,11 @@ codetype="application/x-java-applet"
 classid="java:com/Ostermiller/utils/RandPassApplet.class"
 archive="randpass.jar"
 width=200 
-height=340><div class=noapplet>
+height=340>
 The Random Password Generator could not be run in your browser.  
 To run the applet, you must have a <a href="http://java.sun.com/j2se/downloads.html">
 recent version of Java</a> installed, configured, and enabled.
-</div></object></comment></object></div>
+</object></comment></object>
 
   * You must have {{{http://java.sun.com/j2se/downloads.html}Java 1.3 or later}} installed, configured, and enabled to use the password generator in your web browser.
 

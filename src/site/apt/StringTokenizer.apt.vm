@@ -12,10 +12,10 @@ String Tokenizer
 
 
 
-<p>A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.</p>
+  A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.
 
 
-<p>This implementation of StringTokenizer tries to fix the following bugs:
+  This implementation of StringTokenizer tries to fix the following bugs:
     <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4086845}Bug 4086845}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4140850}Bug 4140850}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4233089}Bug 4233089}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4287338}Bug 4287338}} Report empty/null tokens</b> - It would be nice to have the string "one,two,,four" have four tokens.  This implementation has the option to return empty tokens as an empty string ("").
 
     <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4232593}Bug 4232593}} Performance improvements</b> - StringTokenizer can be optimized for some common cases.  The optimizations that were implemented in java.util.StringTokenizer involving maximum characters from this suggestion have also been implemented here.  Also token count is cached between calls.
@@ -39,7 +39,7 @@ String Tokenizer
     <li><b>Peek at the next token</b> - A peek() method is available for looking ahead at the next token.  (Inspired by {{{http://www.gjt.org/servlets/JCVSlet/log/gjt/com/tinyplanet/docwiz/PeekStringTokenizer.java/0}com.tinyplanet.docwiz.PeekStringTokenizer}})
 
 
-</p>
+
 
 
 <b>String Tokenizer</b>

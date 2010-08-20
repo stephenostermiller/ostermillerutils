@@ -12,11 +12,11 @@ Tabs
 
 
 
-<p>Converts tabs to spaces or spaces to tabs at the beginning of each line of files.</p>
+  Converts tabs to spaces or spaces to tabs at the beginning of each line of files.
 
 
 
-<div class=i18n>
+
     Internationalization - included languages:
     	
     <li>English</li> 
@@ -25,9 +25,9 @@ Tabs
     {{{Tabs.properties.html}Tabs.properties}}.<br>
 	You may want to use: 
 	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}.
-</div>
 
-<h3>Features</h3>
+
+Features
 
   * Detects binary files and does not modify those files unless forced.
 
@@ -35,8 +35,8 @@ Tabs
 
 
 
-<p>To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;&lt;file&gt;</b></p>
+  To run the program use the following command line:<br>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.Tabs&nbsp;&lt;file&gt;</b>
 
 <pre>Tabs [-wgtsfVvqQ] &lt;files&gt;
 Adjusts the tabs and spaces at the beginning of each line in files.

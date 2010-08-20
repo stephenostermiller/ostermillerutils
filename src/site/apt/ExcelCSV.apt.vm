@@ -15,62 +15,62 @@ Excel Comma Separated Values (CSV)
 Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.  {{{CSV.html}Libraries for other CSV formats}} are available.
 
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Create the printer
-</span><span class=identifier>ExcelCSVPrinter ecsvp </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>ExcelCSVPrinter</span><span class=separator>(
-    </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out
-</span><span class=separator>);
+Example
+<pre>// Create the printer
+ExcelCSVPrinter ecsvp = new ExcelCSVPrinter(
+    System.out
+);
 
-</span><span class=comment>// Write to the printer
-</span><span class=identifier>ecsvp</span><span class=separator>.</span><span class=identifier>writeln</span><span class=separator>(
-    </span><span class=reservedWord>new </span><span class=identifier>String</span><span class=separator>[]{
-        </span><span class=literal>&quot;hello&quot;</span><span class=separator>,</span><span class=literal>&quot;world&quot;
-    </span><span class=separator>}
-);</span></pre>
-</div>
+// Write to the printer
+ecsvp.writeln(
+    new String[]{
+        &quot;hello&quot;,&quot;world&quot;
+    }
+);</pre>
 
-<h2>Writing Excel CSV files: ExcelCSVPrinter</h2>
-<p>This class makes it easy to output Excel CSV.  Given values, it will automatically determine if they need to be quoted and
-escape special characters.  Comments can easily be written and correct line beginnings will be added.</p>
 
-<p>To write standard CSV files that some applications other than Excel can understand use the 
+Writing Excel CSV files: ExcelCSVPrinter
+  This class makes it easy to output Excel CSV.  Given values, it will automatically determine if they need to be quoted and
+escape special characters.  Comments can easily be written and correct line beginnings will be added.
+
+  To write standard CSV files that some applications other than Excel can understand use the 
 {{{CSV.html}standard CSV}} format.  Both CSVPrinter and ExcelCSVPrinter
-implement the CSVPrint interface.</p>
+implement the CSVPrint interface.
 
 <br clear=all>
 <hr>
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Parse the data
-</span><span class=identifier>String</span><span class=separator>[][] </span><span class=identifier>values </span><span class=operator>= </span><span class=identifier>ExcelCSVParser</span><span class=separator>.</span><span class=identifier>parse</span><span class=separator>(
-    </span><span class=reservedWord>new </span><span class=identifier>StringReader</span><span class=separator>(
-        </span><span class=literal>&quot;hello,world\n&quot; </span><span class=operator>+
-        </span><span class=literal>&quot;how,are,you&quot;
-    </span><span class=separator>)
+Example
+<pre>// Parse the data
+String[][] values = ExcelCSVParser.parse(
+    new StringReader(
+        &quot;hello,world\n&quot; +
+        &quot;how,are,you&quot;
+    )
 );
 
-</span><span class=comment>// Display the parsed data
-</span><span class=reservedWord>for </span><span class=separator>(</span><span class=reservedWord>int </span><span class=identifier>i</span><span class=operator>=</span><span class=literal>0</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>&lt;</span><span class=identifier>values</span><span class=separator>.</span><span class=identifier>length</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>++</span><span class=separator>){
-    </span><span class=reservedWord>for </span><span class=separator>(</span><span class=reservedWord>int </span><span class=identifier>j</span><span class=operator>=</span><span class=literal>0</span><span class=separator>; </span><span class=identifier>j</span><span class=operator>&lt;</span><span class=identifier>values</span><span class=separator>[</span><span class=identifier>i</span><span class=separator>].</span><span class=identifier>length</span><span class=separator>; </span><span class=identifier>j</span><span class=operator>++</span><span class=separator>){
-        </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>values</span><span class=separator>[</span><span class=identifier>i</span><span class=separator>][</span><span class=identifier>j</span><span class=separator>]);
+// Display the parsed data
+for (int i=0; i&lt;values.length; i++){
+    for (int j=0; j&lt;values[i].length; j++){
+        System.out.println(values[i][j]);
     }
-    </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=literal>&quot;-----&quot;</span><span class=separator>);
-}</span></pre>
-</div>
+    System.out.println(&quot;-----&quot;);
+}</pre>
 
-<h2><a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a></h2>
 
-<p>Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
+<a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a>
+
+  Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
 However it fails to use the {{{CSV.html}standard CSV file format}}.  Excel does
 not use the backslash as an escape character, but instead escapes quote literals with two quotes.
 It also does not quote values that have leading or trailing whitespace.  This special CSV parser
-can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.</p>
+can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.
 
-<p>To read standard CSV files that some applications other than Excel can understand use the 
+  To read standard CSV files that some applications other than Excel can understand use the 
 {{{CSV.html}standard CSV}} format.  Both CSVParser and ExcelCSVParser
-implement the CSVParse interface.</p>
+implement the CSVParse interface.
 
-<p>If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}</p>
+  If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}
 
 
 

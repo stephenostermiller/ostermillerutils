@@ -33,7 +33,7 @@ Browser Opener
   on windows opens each URL in the same window while Mozilla opens each in a new window.  This can be
   annoying for developers trying to open a bunch of urls using this class, but have each url in its own
   window.  Workaround methods that use Javascript to try and open urls in new windows have been provided for
-  cases in which all in the same window is not desirable.</p>
+  cases in which all in the same window is not desirable.
 
 *Example
   

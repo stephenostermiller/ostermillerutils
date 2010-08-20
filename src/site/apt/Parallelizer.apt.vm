@@ -3,25 +3,25 @@
 
 
 
-<p>The Parallelizer class is a Java thread utility that allows one to easily convert their serial code to parallel code.  The class would typically be used to execute each iteration of a loop at once rather than one after another.  Good candidates for such an optimization would be when the order of execution does not matter and each iteration does slow operations such as sleeping or making network connections.</p>
+  The Parallelizer class is a Java thread utility that allows one to easily convert their serial code to parallel code.  The class would typically be used to execute each iteration of a loop at once rather than one after another.  Good candidates for such an optimization would be when the order of execution does not matter and each iteration does slow operations such as sleeping or making network connections.
 
 
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>Parallelizer pll </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>Parallelizer</span><span class=separator>();
-</span><span class=reservedWord>for </span><span class=separator>(</span><span class=reservedWord>int </span><span class=identifier>i</span><span class=operator>=</span><span class=literal>0</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>&lt;</span><span class=literal>10</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>++</span><span class=separator>){
-    </span><span class=reservedWord>final int </span><span class=identifier>j </span><span class=operator>= </span><span class=identifier>i</span><span class=separator>;
-    </span><span class=identifier>pll</span><span class=separator>.</span><span class=identifier>run</span><span class=separator>(
-        </span><span class=reservedWord>new </span><span class=identifier>Runnable</span><span class=separator>(){
-            </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=literal>&quot;Hello World &quot; </span><span class=operator>+ </span><span class=identifier>j</span><span class=separator>);
+Example
+<pre>Parallelizer pll = new Parallelizer();
+for (int i=0; i&lt;10; i++){
+    final int j = i;
+    pll.run(
+        new Runnable(){
+            System.out.println(&quot;Hello World &quot; + j);
         }
     );
 }
-</span><span class=identifier>pll</span><span class=separator>.</span><span class=identifier>join</span><span class=separator>();
-</span></pre>
-</div>
+pll.join();
+</pre>
 
-<p>To use the Parallelizer, a developer would typically:</p>
+
+  To use the Parallelizer, a developer would typically:
 <ol>
   * Create a new Parallelizer before the loop.
 

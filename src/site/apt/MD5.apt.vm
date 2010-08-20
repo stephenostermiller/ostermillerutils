@@ -16,61 +16,61 @@ MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for Ja
 
 
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(
-    </span><span class=identifier>MD5</span><span class=separator>.</span><span class=identifier>getHashString</span><span class=separator>(
-        </span><span class=literal>&quot;Hello World&quot;
-    </span><span class=separator>)
-);</span></pre>
-</div>
+Example
+<pre>System.out.println(
+    MD5.getHashString(
+        &quot;Hello World&quot;
+    )
+);</pre>
 
-<div class=securityalert><h3>Security Alert</h3>
+
+Security Alert
 The MD5 class had a bug in version 1.02.23 and earlier that miscalculated MD5 sums for inputs
 of certain odd byte lengths.  Please consider the implications for your application and
 upgrade to the most recent version.
-</div>
 
 
-<p>This class takes as input a message of arbitrary length and produces as output
+
+  This class takes as input a message of arbitrary length and produces as output
 a 128-bit "fingerprint" or "message digest" of the input. It is conjectured that 
 it is computationally infeasible to produce two messages having the same message 
 digest, or to produce any message having a given pre-specified target message 
 digest. The MD5 algorithm is intended for digital signature applications, where 
 a large file must be "compressed" in a secure manner before being encrypted with 
-a private (secret) key under a public-key cryptosystem such as RSA.</p>
+a private (secret) key under a public-key cryptosystem such as RSA.
 
-<p>This class is based on work by {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
+  This class is based on work by {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
 and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation is several times
-faster and much more memory efficient than Santeri's implementation.</p>
+faster and much more memory efficient than Santeri's implementation.
 
 <br clear=all>
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Print the MD5 hash for a line
+Example
+<pre>// Print the MD5 hash for a line
 // read from standard input
-</span><span class=identifier>MD5InputStream in </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>MD5InputStream</span><span class=separator>(</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>in</span><span class=separator>);
-</span><span class=reservedWord>int </span><span class=identifier>b</span><span class=separator>;
-</span><span class=reservedWord>while </span><span class=separator>((</span><span class=identifier>b </span><span class=operator>= </span><span class=identifier>in</span><span class=separator>.</span><span class=identifier>read</span><span class=separator>()) </span><span class=operator>!= -</span><span class=literal>1 </span><span class=operator>&amp;&amp; </span><span class=identifier>b </span><span class=operator>!= </span><span class=literal>'\r' </span><span class=operator>&amp;&amp; </span><span class=identifier>b </span><span class=operator>!= </span><span class=literal>'\n'</span><span class=separator>);
-</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>in</span><span class=separator>.</span><span class=identifier>getHashString</span><span class=separator>());</span></pre>
-</div>
+MD5InputStream in = new MD5InputStream(System.in);
+int b;
+while ((b = in.read()) != -1 &amp;&amp; b != '\r' &amp;&amp; b != '\n');
+System.out.println(in.getHashString());</pre>
 
-<H2>Input Stream</h2>
 
-<p>A filtered input stream that computes an MD5 sum for anything read.</p>
+<H2>Input Stream
+
+  A filtered input stream that computes an MD5 sum for anything read.
 
 <br clear=all>
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Write out hello world
+Example
+<pre>// Write out hello world
 // and print its MD5 hash 
-</span><span class=identifier>MD5OutputStream out </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>MD5OutputStream</span><span class=separator>(</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>);
-</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>write</span><span class=separator>(</span><span class=literal>&quot;Hello World\n&quot;</span><span class=separator>.</span><span class=identifier>getBytes</span><span class=separator>());
-</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>getHashString</span><span class=separator>());</span></pre>
-</div>
+MD5OutputStream out = new MD5OutputStream(System.out);
+out.write(&quot;Hello World\n&quot;.getBytes());
+System.out.println(out.getHashString());</pre>
 
-<H2>Output Stream</h2>
 
-<p>A filtered output stream that computes an MD5 sum for anything written.</p>
+<H2>Output Stream
+
+  A filtered output stream that computes an MD5 sum for anything written.
 
 <br clear=all>
 

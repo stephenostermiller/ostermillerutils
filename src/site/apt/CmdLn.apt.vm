@@ -12,7 +12,7 @@ CmdLn: Java Command Line Parser
 
 
 
-<p>A command line parser for array of strings passed to Java main methods.</p>
+  A command line parser for array of strings passed to Java main methods.
 
 
 
@@ -20,9 +20,9 @@ There are three ways to use the command line parser, as detailed with three exam
 <pre>demo command line application
   -f --file <?>   file to open
   --delay <?>     delay in seconds (default 5 seconds)</pre>
-<div class=examplecode><h3>Option Enum</h3>
-<pre><span class=reservedWord>import</span><span class=whitespace> </span><span class=identifier>com</span><span class=separator>.</span><span class=identifier>Ostermiller</span><span class=separator>.</span><span class=identifier>util</span><span class=separator>.</span><span class=operator>*</span><span class=separator>;</span><span class=whitespace>
-</span><span class=comment>/**
+Option Enum
+<pre>import com.Ostermiller.util.*;
+/**
  * Associate each option with a Java enum.
  * Good when:
  * Need for a static context.
@@ -32,160 +32,160 @@ There are three ways to use the command line parser, as detailed with three exam
  * Glue code to associate each command line option with an enum.
  * Can create a long switch statement to deal with arguments
  * Does not work when arguments not known at compile time
- */</span><span class=whitespace>
-</span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>class</span><span class=whitespace> </span><span class=identifier>OptionEnum</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-    </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=identifier>enum</span><span class=whitespace> </span><span class=identifier>EnumOptions</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-        </span><span class=identifier>HELP</span><span class=separator>(</span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;help&quot;</span><span class=separator>,</span><span class=literal>'h'</span><span class=separator>)),</span><span class=whitespace>
-        </span><span class=identifier>FILE</span><span class=separator>(</span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;file&quot;</span><span class=separator>,</span><span class=literal>'f'</span><span class=separator>).</span><span class=identifier>setRequiredArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;file to open&quot;</span><span class=separator>)),</span><span class=whitespace>
-        </span><span class=identifier>DELAY</span><span class=separator>(</span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>setOptionalArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;delay in seconds (default 5 seconds)&quot;</span><span class=separator>));</span><span class=whitespace>
-        </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=whitespace> </span><span class=identifier>option</span><span class=separator>;</span><span class=whitespace>
-        </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=identifier>EnumOptions</span><span class=separator>(</span><span class=identifier>CmdLnOption</span><span class=whitespace> </span><span class=identifier>option</span><span class=separator>){</span><span class=whitespace>
-            </span><span class=identifier>option</span><span class=separator>.</span><span class=identifier>setUserObject</span><span class=separator>(</span><span class=reservedWord>this</span><span class=separator>);</span><span class=whitespace>
-            </span><span class=reservedWord>this</span><span class=separator>.</span><span class=identifier>option</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>option</span><span class=separator>;</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=whitespace> </span><span class=identifier>getCmdLineOption</span><span class=separator>(){</span><span class=whitespace>
-            </span><span class=reservedWord>return</span><span class=whitespace> </span><span class=identifier>option</span><span class=separator>;</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>static</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>main</span><span class=separator>(</span><span class=identifier>String</span><span class=separator>[]</span><span class=whitespace> </span><span class=identifier>args</span><span class=separator>)</span><span class=whitespace> </span><span class=reservedWord>throws</span><span class=whitespace> </span><span class=identifier>Exception</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-        </span><span class=identifier>CmdLn</span><span class=whitespace> </span><span class=identifier>cmdLn</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLn</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>).</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;demo command line application&quot;</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=reservedWord>for</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>EnumOptions</span><span class=whitespace> </span><span class=identifier>option</span><span class=operator>:</span><span class=whitespace> </span><span class=identifier>EnumOptions</span><span class=separator>.</span><span class=identifier>values</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>addOption</span><span class=separator>(</span><span class=identifier>option</span><span class=separator>.</span><span class=identifier>getCmdLineOption</span><span class=separator>());</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=identifier>String</span><span class=whitespace> </span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>null</span><span class=separator>;</span><span class=whitespace>
-        </span><span class=reservedWord>int</span><span class=whitespace> </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>;</span><span class=whitespace>
-        </span><span class=reservedWord>for</span><span class=separator>(</span><span class=identifier>CmdLnResult</span><span class=whitespace> </span><span class=identifier>result</span><span class=operator>:</span><span class=whitespace> </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResults</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=reservedWord>switch</span><span class=separator>((</span><span class=identifier>EnumOptions</span><span class=separator>)</span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getOption</span><span class=separator>().</span><span class=identifier>getUserObject</span><span class=separator>()){</span><span class=whitespace>
-                </span><span class=reservedWord>case</span><span class=whitespace> </span><span class=identifier>HELP</span><span class=operator>:</span><span class=separator>{</span><span class=whitespace>
-                    </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>printHelp</span><span class=separator>();</span><span class=whitespace>
-                    </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>exit</span><span class=separator>(</span><span class=literal>0</span><span class=separator>);</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace> </span><span class=reservedWord>break</span><span class=separator>;</span><span class=whitespace>
-                </span><span class=reservedWord>case</span><span class=whitespace> </span><span class=identifier>FILE</span><span class=operator>:</span><span class=separator>{</span><span class=whitespace>
-                    </span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgument</span><span class=separator>();</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace> </span><span class=reservedWord>break</span><span class=separator>;</span><span class=whitespace>
-                </span><span class=reservedWord>case</span><span class=whitespace> </span><span class=identifier>DELAY</span><span class=operator>:</span><span class=separator>{</span><span class=whitespace>
-                    </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>5000</span><span class=separator>;</span><span class=whitespace>
-                    </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgumentCount</span><span class=separator>()</span><span class=whitespace> </span><span class=operator>&gt;</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>){</span><span class=whitespace>
-                        </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>parseInt</span><span class=separator>(</span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgument</span><span class=separator>())</span><span class=whitespace> </span><span class=operator>*</span><span class=whitespace> </span><span class=literal>1000</span><span class=separator>;</span><span class=whitespace>
-                    </span><span class=separator>}</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace> </span><span class=reservedWord>break</span><span class=separator>;</span><span class=whitespace>
-            </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>&gt;</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>){</span><span class=whitespace>
-            </span><span class=identifier>Thread</span><span class=separator>.</span><span class=identifier>sleep</span><span class=separator>(</span><span class=identifier>delay</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>!=</span><span class=whitespace> </span><span class=literal>null</span><span class=separator>){</span><span class=whitespace>
-            </span><span class=comment>// open file and do work...</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>        
-        </span><span class=reservedWord>for</span><span class=separator>(</span><span class=identifier>String</span><span class=whitespace> </span><span class=identifier>argument</span><span class=operator>:</span><span class=whitespace> </span><span class=identifier>cmd</span><span class=separator>.</span><span class=identifier>getNonOptionArguments</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=comment>// other arguments</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=separator>}</span><span class=whitespace>
-</span><span class=separator>}</span><span class=whitespace>
-</span></pre></div>
+ */
+public class OptionEnum {
+    private enum EnumOptions {
+        HELP(new CmdLnOption(&quot;help&quot;,'h')),
+        FILE(new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;)),
+        DELAY(new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;));
+        private CmdLnOption option;
+        private EnumOptions(CmdLnOption option){
+            option.setUserObject(this);
+            this.option = option;
+        }
+        private CmdLnOption getCmdLineOption(){
+            return option;
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
+        for (EnumOptions option: EnumOptions.values()){
+            cmdLn.addOption(option.getCmdLineOption());
+        }
+        String fileName = null;
+        int delay = 0;
+        for(CmdLnResult result: cmdLn.getResults()){
+            switch((EnumOptions)result.getOption().getUserObject()){
+                case HELP:{
+                    cmdLn.printHelp();
+                    System.exit(0);
+                } break;
+                case FILE:{
+                    fileName = result.getArgument();
+                } break;
+                case DELAY:{
+                    delay = 5000;
+                    if (result.getArgumentCount() &gt; 0){
+                        delay = Integer.parseInt(result.getArgument()) * 1000;
+                    }
+                } break;
+            }
+        }
+        if (delay &gt; 0){
+            Thread.sleep(delay);
+        }
+        if (fileName != null){
+            // open file and do work...
+        }        
+        for(String argument: cmd.getNonOptionArguments()){
+            // other arguments
+        }
+    }
+}
+</pre>
 
-<div class=examplecode><h3>Call Back to Listeners</h3>
-<pre><span class=reservedWord>import</span><span class=whitespace> </span><span class=identifier>com</span><span class=separator>.</span><span class=identifier>Ostermiller</span><span class=separator>.</span><span class=identifier>util</span><span class=separator>.</span><span class=operator>*</span><span class=separator>;</span><span class=whitespace>
-</span><span class=comment>/**
+Call Back to Listeners
+<pre>import com.Ostermiller.util.*;
+/**
  * Associate each option with a listener.
  * Good when:
  * Multiple places need to know about command line options.
  * Properly preserves argument ordering when a later option may cancel out an earlier option.
  * Drawbacks:
  * Requires non-static context.
- */</span><span class=whitespace>
-</span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>class</span><span class=whitespace> </span><span class=identifier>OptionCallback</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-    </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=identifier>String</span><span class=whitespace> </span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>null</span><span class=separator>;</span><span class=whitespace>
-    </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=reservedWord>int</span><span class=whitespace> </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>;</span><span class=whitespace>
-    </span><span class=reservedWord>private</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>parseCommandLine</span><span class=separator>(</span><span class=identifier>String</span><span class=separator>[]</span><span class=whitespace> </span><span class=identifier>args</span><span class=separator>){</span><span class=whitespace>
-        </span><span class=reservedWord>final</span><span class=whitespace> </span><span class=identifier>CmdLn</span><span class=whitespace> </span><span class=identifier>cmdLn</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLn</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>).</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;demo command line application&quot;</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>addOption</span><span class=separator>(</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;help&quot;</span><span class=separator>,</span><span class=literal>'h'</span><span class=separator>).</span><span class=identifier>setListener</span><span class=separator>(</span><span class=whitespace>
-                </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnListener</span><span class=separator>(){</span><span class=whitespace>
-                    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>found</span><span class=separator>(</span><span class=identifier>CmdLnResult</span><span class=whitespace> </span><span class=identifier>result</span><span class=separator>){</span><span class=whitespace>
-                        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>printHelp</span><span class=separator>();</span><span class=whitespace>
-                        </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>exit</span><span class=separator>(</span><span class=literal>0</span><span class=separator>);</span><span class=whitespace>
-                    </span><span class=separator>}</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace>
-            </span><span class=separator>)</span><span class=whitespace>
-        </span><span class=separator>);</span><span class=whitespace>
-        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>addOption</span><span class=separator>(</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;file&quot;</span><span class=separator>,</span><span class=literal>'f'</span><span class=separator>).</span><span class=identifier>setRequiredArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;file to open&quot;</span><span class=separator>).</span><span class=identifier>setListener</span><span class=separator>(</span><span class=whitespace>
-                </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnListener</span><span class=separator>(){</span><span class=whitespace>
-                    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>found</span><span class=separator>(</span><span class=identifier>CmdLnResult</span><span class=whitespace> </span><span class=identifier>result</span><span class=separator>){</span><span class=whitespace>
-                        </span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgument</span><span class=separator>();</span><span class=whitespace>
-                    </span><span class=separator>}</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace>
-            </span><span class=separator>)</span><span class=whitespace>
-        </span><span class=separator>);</span><span class=whitespace>
-        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>addOption</span><span class=separator>(</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>setOptionalArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;delay in seconds (default 5 seconds)&quot;</span><span class=separator>).</span><span class=identifier>setListener</span><span class=separator>(</span><span class=whitespace>
-                </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnListener</span><span class=separator>(){</span><span class=whitespace>
-                    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>found</span><span class=separator>(</span><span class=identifier>CmdLnResult</span><span class=whitespace> </span><span class=identifier>result</span><span class=separator>){</span><span class=whitespace>
-                        </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>5000</span><span class=separator>;</span><span class=whitespace>
-                        </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgumentCount</span><span class=separator>()</span><span class=whitespace> </span><span class=operator>&gt;</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>){</span><span class=whitespace>
-                            </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>parseInt</span><span class=separator>(</span><span class=identifier>result</span><span class=separator>.</span><span class=identifier>getArgument</span><span class=separator>())</span><span class=whitespace> </span><span class=operator>*</span><span class=whitespace> </span><span class=literal>1000</span><span class=separator>;</span><span class=whitespace>
-                        </span><span class=separator>}</span><span class=whitespace>
-                    </span><span class=separator>}</span><span class=whitespace>
-                </span><span class=separator>}</span><span class=whitespace>
-            </span><span class=separator>)</span><span class=whitespace>
-        </span><span class=separator>);</span><span class=whitespace>
-        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>parse</span><span class=separator>();</span><span class=whitespace>
-    </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>static</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>main</span><span class=separator>(</span><span class=identifier>String</span><span class=separator>[]</span><span class=whitespace> </span><span class=identifier>args</span><span class=separator>)</span><span class=whitespace> </span><span class=reservedWord>throws</span><span class=whitespace> </span><span class=identifier>Exception</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-        </span><span class=identifier>OptionCallback</span><span class=whitespace> </span><span class=identifier>optionCallback</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>OptionCallback</span><span class=separator>();</span><span class=whitespace>
-        </span><span class=identifier>optionCallback</span><span class=separator>.</span><span class=identifier>parseCommandLine</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>optionCallback</span><span class=separator>.</span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>&gt;</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>){</span><span class=whitespace>
-            </span><span class=identifier>Thread</span><span class=separator>.</span><span class=identifier>sleep</span><span class=separator>(</span><span class=identifier>optionCallback</span><span class=separator>.</span><span class=identifier>delay</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>fileName</span><span class=whitespace> </span><span class=operator>!=</span><span class=whitespace> </span><span class=literal>null</span><span class=separator>){</span><span class=whitespace>
-            </span><span class=comment>// open file and do work...</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>        
-        </span><span class=reservedWord>for</span><span class=separator>(</span><span class=identifier>String</span><span class=whitespace> </span><span class=identifier>argument</span><span class=operator>:</span><span class=whitespace> </span><span class=identifier>cmd</span><span class=separator>.</span><span class=identifier>getNonOptionArguments</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=comment>// other arguments</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=separator>}</span><span class=whitespace>
-</span><span class=separator>}</span><span class=whitespace>
-</span></pre>
-</div>
+ */
+public class OptionCallback {
+    private String fileName = null;
+    private int delay = 0;
+    private void parseCommandLine(String[] args){
+        final CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
+        cmdLn.addOption(
+            new CmdLnOption(&quot;help&quot;,'h').setListener(
+                new CmdLnListener(){
+                    public void found(CmdLnResult result){
+                        cmdLn.printHelp();
+                        System.exit(0);
+                    }
+                }
+            )
+        );
+        cmdLn.addOption(
+            new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;).setListener(
+                new CmdLnListener(){
+                    public void found(CmdLnResult result){
+                        fileName = result.getArgument();
+                    }
+                }
+            )
+        );
+        cmdLn.addOption(
+            new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;).setListener(
+                new CmdLnListener(){
+                    public void found(CmdLnResult result){
+                        delay = 5000;
+                        if (result.getArgumentCount() &gt; 0){
+                            delay = Integer.parseInt(result.getArgument()) * 1000;
+                        }
+                    }
+                }
+            )
+        );
+        cmdLn.parse();
+    }
+    public static void main(String[] args) throws Exception {
+        OptionCallback optionCallback = new OptionCallback();
+        optionCallback.parseCommandLine(args);
+        if (optionCallback.delay &gt; 0){
+            Thread.sleep(optionCallback.delay);
+        }
+        if (fileName != null){
+            // open file and do work...
+        }        
+        for(String argument: cmd.getNonOptionArguments()){
+            // other arguments
+        }
+    }
+}
+</pre>
 
-<div class=examplecode><h3>Options by Name</h3>
-<pre><span class=reservedWord>import</span><span class=whitespace> </span><span class=identifier>com</span><span class=separator>.</span><span class=identifier>Ostermiller</span><span class=separator>.</span><span class=identifier>util</span><span class=separator>.</span><span class=operator>*</span><span class=separator>;</span><span class=whitespace>
-</span><span class=comment>/**
+
+Options by Name
+<pre>import com.Ostermiller.util.*;
+/**
  * Query the command line for each option by name.
  * Good when:
  * Compact code desired.
  * Drawbacks:
  * Does not properly preserve argument ordering when a later option may cancel out an earlier option.
- */</span><span class=whitespace>
-</span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>class</span><span class=whitespace> </span><span class=identifier>OptionCallback</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-    </span><span class=reservedWord>public</span><span class=whitespace> </span><span class=reservedWord>static</span><span class=whitespace> </span><span class=reservedWord>void</span><span class=whitespace> </span><span class=identifier>main</span><span class=separator>(</span><span class=identifier>String</span><span class=separator>[]</span><span class=whitespace> </span><span class=identifier>args</span><span class=separator>)</span><span class=whitespace> </span><span class=reservedWord>throws</span><span class=whitespace> </span><span class=identifier>Exception</span><span class=whitespace> </span><span class=separator>{</span><span class=whitespace>
-        </span><span class=identifier>CmdLn</span><span class=whitespace> </span><span class=identifier>cmdLn</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLn</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>).</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;demo command line application&quot;</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>addOptions</span><span class=separator>(</span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>[]{</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;help&quot;</span><span class=separator>,</span><span class=literal>'h'</span><span class=separator>),</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;file&quot;</span><span class=separator>,</span><span class=literal>'f'</span><span class=separator>).</span><span class=identifier>setRequiredArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;file to open&quot;</span><span class=separator>),</span><span class=whitespace>
-            </span><span class=reservedWord>new</span><span class=whitespace> </span><span class=identifier>CmdLnOption</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>setOptionalArgument</span><span class=separator>().</span><span class=identifier>setDescription</span><span class=separator>(</span><span class=literal>&quot;delay in seconds (default 5 seconds)&quot;</span><span class=separator>).</span><span class=whitespace>
-        </span><span class=separator>});</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=separator>(</span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResult</span><span class=separator>(</span><span class=literal>'h'</span><span class=separator>).</span><span class=identifier>present</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>printHelp</span><span class=separator>();</span><span class=whitespace>
-            </span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>exit</span><span class=separator>(</span><span class=literal>0</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=separator>(</span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResult</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>present</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=literal>5000</span><span class=separator>;</span><span class=whitespace>
-            </span><span class=reservedWord>if</span><span class=whitespace> </span><span class=separator>(</span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResult</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>getArgumentCount</span><span class=separator>()</span><span class=whitespace> </span><span class=operator>&gt;</span><span class=whitespace> </span><span class=literal>0</span><span class=separator>){</span><span class=whitespace>
-                </span><span class=identifier>delay</span><span class=whitespace> </span><span class=operator>=</span><span class=whitespace> </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>parseInt</span><span class=separator>(</span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResult</span><span class=separator>(</span><span class=literal>&quot;delay&quot;</span><span class=separator>).</span><span class=identifier>getArgument</span><span class=separator>())</span><span class=whitespace> </span><span class=operator>*</span><span class=whitespace> </span><span class=literal>1000</span><span class=separator>;</span><span class=whitespace>
-            </span><span class=separator>}</span><span class=whitespace>
-            </span><span class=identifier>Thread</span><span class=separator>.</span><span class=identifier>sleep</span><span class=separator>(</span><span class=identifier>delay</span><span class=separator>);</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>if</span><span class=separator>(</span><span class=identifier>cmdLn</span><span class=separator>.</span><span class=identifier>getResult</span><span class=separator>(</span><span class=literal>'f'</span><span class=separator>).</span><span class=identifier>present</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=comment>// open file and do work...</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-        </span><span class=reservedWord>for</span><span class=separator>(</span><span class=identifier>String</span><span class=whitespace> </span><span class=identifier>argument</span><span class=operator>:</span><span class=whitespace> </span><span class=identifier>cmd</span><span class=separator>.</span><span class=identifier>getNonOptionArguments</span><span class=separator>()){</span><span class=whitespace>
-            </span><span class=comment>// other arguments</span><span class=whitespace>
-        </span><span class=separator>}</span><span class=whitespace>
-    </span><span class=separator>}</span><span class=whitespace>
-</span><span class=separator>}</span><span class=whitespace>
-</span></pre>
+ */
+public class OptionCallback {
+    public static void main(String[] args) throws Exception {
+        CmdLn cmdLn = new CmdLn(args).setDescription(&quot;demo command line application&quot;);
+        cmdLn.addOptions(new CmdLnOption[]{
+            new CmdLnOption(&quot;help&quot;,'h'),
+            new CmdLnOption(&quot;file&quot;,'f').setRequiredArgument().setDescription(&quot;file to open&quot;),
+            new CmdLnOption(&quot;delay&quot;).setOptionalArgument().setDescription(&quot;delay in seconds (default 5 seconds)&quot;).
+        });
+        if(cmdLn.getResult('h').present()){
+            cmdLn.printHelp();
+            System.exit(0);
+        }
+        if(cmdLn.getResult(&quot;delay&quot;).present()){
+            delay = 5000;
+            if (cmdLn.getResult(&quot;delay&quot;).getArgumentCount() &gt; 0){
+                delay = Integer.parseInt(cmdLn.getResult(&quot;delay&quot;).getArgument()) * 1000;
+            }
+            Thread.sleep(delay);
+        }
+        if(cmdLn.getResult('f').present()){
+            // open file and do work...
+        }
+        for(String argument: cmd.getNonOptionArguments()){
+            // other arguments
+        }
+    }
+}
+</pre>
 
 
 

@@ -12,9 +12,9 @@ File Helper
 
 
 
-<p>This file helper utility contains methods to make manipulating files easier from Java</p>
+  This file helper utility contains methods to make manipulating files easier from Java
 
-<p>Includes a method to move a file, even when it can't be renamed.</p>
+  Includes a method to move a file, even when it can't be renamed.
 
 
 <b>File Helper</b>

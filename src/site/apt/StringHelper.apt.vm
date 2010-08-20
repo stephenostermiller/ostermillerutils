@@ -15,7 +15,7 @@ String Helper
 String manipulation helper utilities for Java
 
 
-<p>A String helper class with methods for padding a string to a given length, and splitting a string based on a literal delimiter.</p>
+  A String helper class with methods for padding a string to a given length, and splitting a string based on a literal delimiter.
 
 <b>String Helper</b>
 

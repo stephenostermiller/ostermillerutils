@@ -12,30 +12,30 @@ Random Password Generator
 
 
 
-<p>Generate random passwords of arbitrary length and arbitrary alphabet.</p> 
+  Generate random passwords of arbitrary length and arbitrary alphabet. 
 
 
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Get an eight character password 
+Example
+<pre>// Get an eight character password 
 // made up of the letters A, B, and C.
-</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(
-	</span><span class=reservedWord>new </span><span class=identifier>RandPass</span><span class=separator>(</span><span class=reservedWord>new char</span><span class=separator>[]{</span><span class=literal>'A'</span><span class=separator>,</span><span class=literal>'B'</span><span class=separator>,</span><span class=literal>'C'</span><span class=separator>}).</span><span class=identifier>getPass</span><span class=separator>(</span><span class=literal>8</span><span class=separator>)
-);</span></pre>
-</div>
+System.out.println(
+	new RandPass(new char[]{'A','B','C'}).getPass(8)
+);</pre>
 
-<p>You could use the command line:<br>
+
+  You could use the command line:<br>
 <b>java com.ostermiller.util.RandPass</b><br>
-to generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an applet}} in your web browser</p>
+to generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an applet}} in your web browser
 
-<p>A cryptographically secure pseudo-random number generator is used to generate the passwords.
-Limitations an passwords such as the length, required characters, or amount of repetition may be used.</p>
+  A cryptographically secure pseudo-random number generator is used to generate the passwords.
+Limitations an passwords such as the length, required characters, or amount of repetition may be used.
 
 <br clear=all>
 
-<div class=programinstructions>
-<p>To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.RandPass</b></p>
+
+  To run the program use the following command line:<br>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.RandPass</b>
 
 <pre>RandPass [-anFLrlRv]
 Generate secure random passwords.
@@ -50,7 +50,7 @@ Generate secure random passwords.
   -r --reps num        Maximum chars that may be repeated.
   -R --require chars   Require a character from given alphabet be present.
   -v --verify class    Java subclass of PasswordVerifier to use.</pre>
-</div>
+
 
 
 <b>Random Password Generator</b>

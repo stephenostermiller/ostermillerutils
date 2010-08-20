@@ -12,10 +12,10 @@ Line Ending Conversion
 
 
 
-<p>Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.</p>
+  Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.
 
 
-<div class=i18n>
+
     Internationalization - included languages:
     	
     <li>English</li> 
@@ -24,9 +24,9 @@ Line Ending Conversion
     {{{LineEnds.properties.html}LineEnds.properties}}.<br>
 	You may want to use: 
 	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
-</div>
 
-<h3>Features</h3>
+
+Features
 
   * Text formats supported
 
@@ -52,9 +52,9 @@ Line Ending Conversion
 
 
 
-<div class=programinstructions>
-<p>To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;&lt;files&gt;</b></p>
+
+  To run the program use the following command line:<br>
+<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;&lt;files&gt;</b>
 
 <pre>LineEnds [-dnrsfvqQ] &lt;files&gt;
 
@@ -73,7 +73,7 @@ Line Ending Conversion
    -v --verbose           Print a message for each file modified.
    -q --quiet             Print error messages. (default)
    -Q --reallyquiet       Print nothing.</pre>
-</div>
+
 
 
 

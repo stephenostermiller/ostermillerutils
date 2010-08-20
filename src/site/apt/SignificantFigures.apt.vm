@@ -12,54 +12,54 @@ Significant Figures
 
 
 
-<p>A Java number class for figuring out how many significant figures each of the
-numbers in a calculation has and displaying the result appropriately.</p>
+  A Java number class for figuring out how many significant figures each of the
+numbers in a calculation has and displaying the result appropriately.
 
 
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Numbers to multiply
-</span><span class=identifier>String</span><span class=separator>[] </span><span class=identifier>args </span><span class=operator>= </span><span class=separator>{</span><span class=literal>&quot;1.0&quot;</span><span class=separator>, </span><span class=literal>&quot;2.0&quot;</span><span class=separator>}; 
-</span><span class=identifier>SignificantFigures number</span><span class=separator>;
-</span><span class=reservedWord>int </span><span class=identifier>sigs </span><span class=operator>= </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>MAX_VALUE</span><span class=separator>;
-</span><span class=reservedWord>double </span><span class=identifier>result </span><span class=operator>= </span><span class=literal>1D</span><span class=separator>;
-</span><span class=reservedWord>for </span><span class=separator>(</span><span class=reservedWord>int </span><span class=identifier>i</span><span class=operator>=</span><span class=literal>0</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>&lt;</span><span class=identifier>args</span><span class=separator>.</span><span class=identifier>length</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>++</span><span class=separator>){
-    </span><span class=comment>// For each number, figure out significant figures
+Example
+<pre>// Numbers to multiply
+String[] args = {&quot;1.0&quot;, &quot;2.0&quot;}; 
+SignificantFigures number;
+int sigs = Integer.MAX_VALUE;
+double result = 1D;
+for (int i=0; i&lt;args.length; i++){
+    // For each number, figure out significant figures
     // and multiply the numbers
-    </span><span class=identifier>number </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>SignificantFigures</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>[</span><span class=identifier>i</span><span class=separator>]);
-    </span><span class=identifier>sigs </span><span class=operator>= </span><span class=identifier>Math</span><span class=separator>.</span><span class=identifier>min</span><span class=separator>(</span><span class=identifier>sigs</span><span class=separator>, </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>getNumberSignificantFigures</span><span class=separator>());
-    </span><span class=identifier>result </span><span class=operator>*= </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>doubleValue</span><span class=separator>();
+    number = new SignificantFigures(args[i]);
+    sigs = Math.min(sigs, number.getNumberSignificantFigures());
+    result *= number.doubleValue();
 }
-</span><span class=comment>// format and display the result
-</span><span class=identifier>number </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>SignificantFigures</span><span class=separator>(</span><span class=identifier>result</span><span class=separator>);
-</span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>setNumberSignificantFigures</span><span class=separator>(</span><span class=identifier>sigs</span><span class=separator>);
-</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>number</span><span class=separator>);</span></pre>
+// format and display the result
+number = new SignificantFigures(result);
+number.setNumberSignificantFigures(sigs);
+System.out.println(number);</pre>
 Figure significant figures for multiplication of numbers.
-</div>
+
 
 <br clear=all>
-<div class=examplecode><h3>Example</h3>
-<pre><span class=comment>// Numbers to add
-</span><span class=identifier>String</span><span class=separator>[] </span><span class=identifier>args </span><span class=operator>= </span><span class=separator>{</span><span class=literal>&quot;1.0&quot;</span><span class=separator>, </span><span class=literal>&quot;2.0&quot;</span><span class=separator>}; 
-</span><span class=identifier>SignificantFigures number</span><span class=separator>;
-</span><span class=reservedWord>int </span><span class=identifier>lsd </span><span class=operator>= </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>MIN_VALUE</span><span class=separator>;
-</span><span class=reservedWord>int </span><span class=identifier>msd </span><span class=operator>= </span><span class=identifier>Integer</span><span class=separator>.</span><span class=identifier>MIN_VALUE</span><span class=separator>;
-</span><span class=reservedWord>double </span><span class=identifier>result </span><span class=operator>= </span><span class=literal>0D</span><span class=separator>;
-</span><span class=reservedWord>for </span><span class=separator>(</span><span class=reservedWord>int </span><span class=identifier>i</span><span class=operator>=</span><span class=literal>0</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>&lt;</span><span class=identifier>args</span><span class=separator>.</span><span class=identifier>length</span><span class=separator>; </span><span class=identifier>i</span><span class=operator>++</span><span class=separator>){
-    </span><span class=comment>// for each number figure most and least
+Example
+<pre>// Numbers to add
+String[] args = {&quot;1.0&quot;, &quot;2.0&quot;}; 
+SignificantFigures number;
+int lsd = Integer.MIN_VALUE;
+int msd = Integer.MIN_VALUE;
+double result = 0D;
+for (int i=0; i&lt;args.length; i++){
+    // for each number figure most and least
     // significant digit then add the number.
-    </span><span class=identifier>number </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>SignificantFigures</span><span class=separator>(</span><span class=identifier>args</span><span class=separator>[</span><span class=identifier>i</span><span class=separator>]);
-    </span><span class=identifier>lsd </span><span class=operator>= </span><span class=identifier>Math</span><span class=separator>.</span><span class=identifier>max</span><span class=separator>(</span><span class=identifier>lsd</span><span class=separator>, </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>getLSD</span><span class=separator>());
-    </span><span class=identifier>msd </span><span class=operator>= </span><span class=identifier>Math</span><span class=separator>.</span><span class=identifier>max</span><span class=separator>(</span><span class=identifier>msd</span><span class=separator>, </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>getMSD</span><span class=separator>());
-    </span><span class=identifier>result </span><span class=operator>+= </span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>doubleValue</span><span class=separator>();
+    number = new SignificantFigures(args[i]);
+    lsd = Math.max(lsd, number.getLSD());
+    msd = Math.max(msd, number.getMSD());
+    result += number.doubleValue();
 }
-</span><span class=comment>// format and display the result
-</span><span class=identifier>number </span><span class=operator>= </span><span class=reservedWord>new </span><span class=identifier>SignificantFigures</span><span class=separator>(</span><span class=identifier>result</span><span class=separator>);
-</span><span class=identifier>number</span><span class=separator>.</span><span class=identifier>setLMSD</span><span class=separator>(</span><span class=identifier>lsd</span><span class=separator>, </span><span class=identifier>msd</span><span class=separator>);
-</span><span class=identifier>System</span><span class=separator>.</span><span class=identifier>out</span><span class=separator>.</span><span class=identifier>println</span><span class=separator>(</span><span class=identifier>number</span><span class=separator>);</span></pre>
+// format and display the result
+number = new SignificantFigures(result);
+number.setLMSD(lsd, msd);
+System.out.println(number);</pre>
 Figure significant figures for addition of numbers.
-</div>
 
-<p>See also: {{{/calc/significant_figures.html}JavaScript routines and an HTML interface for significant figures calculations}}.</p>
+
+  See also: {{{/calc/significant_figures.html}JavaScript routines and an HTML interface for significant figures calculations}}.
 
 <br clear=all>
 
