@@ -2,13 +2,13 @@
 
 use strict;
 
-my $dir=`pwd`;
-if ($dir !~ /\/src\/site\/script\/?$/){
-  die "Must be run from src/site/script/";
+if (! -e "pom.xml"){
+  print "Expected this script to be called from ostermillerutils base directory";
+  exit 1;
 }
 
-`mkdir -p ../xdoc/javadoc`;
-`mkdir -p ../apt/src`;
+`mkdir -p src/site/xdoc/javadoc`;
+`mkdir -p src/site/apt/src`;
 
 my $sourceList = "";
 my $menuList = "";
@@ -17,15 +17,15 @@ my $javadocList = "";
 my $htaccessList = "";
 
 $htaccessList .= "\n# No documentation and no javadoc redirects\n";
-my @files = split(/\n/, `find ../../main/ -type f`);
+my @files = split(/\n/, `find src/main/ -type f`);
 for my $file (sort @files){
-  my ($path, $barename, $ext) = $file =~ /^\.\.\/\.\.\/(.*\/)([^\/]+)(\.[^\/\.]+)/;
+  my ($path, $barename, $ext) = $file =~ /^(.*\/)([^\/]+)(\.[^\/\.]+)/;
   my $classpath = $path;
-  $classpath =~ s/^[^\/]+\/[^\/]+\///g;
+  $classpath =~ s/^(?:[^\/]+\/){3}//g;
   my $basename = "$barename$ext";
-  my $mavenrootname = "src/$path$basename";
+  my $mavenrootname = $file;
   my $srchtmlhref="$basename.html";
-  my $srcAptVmFile="../apt/src/$basename.apt.vm";
+  my $srcAptVmFile="src/site/apt/src/$basename.apt.vm";
   my $brush = "";
   my $javadocHref = "";
   my $javadocAptLink = "";
@@ -40,11 +40,11 @@ for my $file (sort @files){
       $javadocAptLink = "    * {{{../javadoc/$barename.html}$barename Javadoc}}";
       $javadocMenuList .= "        <item name=\"$barename\" href=\"/javadoc/$barename.html\" />\n";
       $javadocList .= "    * {{{javadoc/$barename.html}$barename Javadoc}}\n\n";
-      $javadocFile = "../xdoc/javadoc/$barename.xml";
+      $javadocFile = "src/site/xdoc/javadoc/$barename.xml";
     }
   }
   my $srcXdocLink = "<li><a href=\"../src/$srchtmlhref\">$basename Source Code</a></li>";
-  if (-f "../apt/$barename.apt.vm"){
+  if (-f "src/site/apt/$barename.apt.vm"){
     $docAptLink = "    * {{{../$barename.html}$barename Documentation and Examples}}";
     $docXdocLink = "<li><a href=\"../$barename.html\">$barename Documentation and Examples</a></li>";
   } else {
@@ -64,9 +64,10 @@ for my $file (sort @files){
 }
 
 $htaccessList .= "\n# Unit test file redirects\n";
-@files = split(/\n/, `find ../../test/ -type f`);
+@files = split(/\n/, `find src/test/ -type f`);
+push(@files, "src/test/java/com/Ostermiller/util/TokenizerTests.java");
 for my $file (sort @files){
-  my ($path, $barename, $ext) = $file =~ /^\.\.\/\.\.\/(.*\/)([^\/]+)(\.[^\/\.]+)/;
+  my ($barename, $ext) = $file =~ /\/([^\/]+)(\.[^\/\.]+)$/;
   if ($barename =~ /Test/){
       my $barenametest = $barename;
       my $barenametests = $barename;  
@@ -88,11 +89,11 @@ for my $file (sort @files){
    }
 }
 
-&replaceInFile("../apt/source.apt.vm", "GENERATED SOURCES LIST", $sourceList);
-&replaceInFile("../apt/doc.apt.vm", "GENERATED JAVADOC LIST", $javadocList);
-&replaceInFile("../site.xml", "GENERATED SOURCES MENU", $menuList);
-&replaceInFile("../site.xml", "GENERATED JAVADOC MENU", $javadocMenuList);
-&replaceInFile("../resources/.htaccess", "GENERATED HTACCESS LIST", $htaccessList);
+&replaceInFile("src/site/apt/source.apt.vm", "GENERATED SOURCES LIST", $sourceList);
+&replaceInFile("src/site/apt/doc.apt.vm", "GENERATED JAVADOC LIST", $javadocList);
+&replaceInFile("src/site/site.xml", "GENERATED SOURCES MENU", $menuList);
+&replaceInFile("src/site/site.xml", "GENERATED JAVADOC MENU", $javadocMenuList);
+&replaceInFile("src/site/resources/.htaccess", "GENERATED HTACCESS LIST", $htaccessList);
 
 sub createSrcFile(){
   my ($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname) = @_;

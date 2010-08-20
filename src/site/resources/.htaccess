@@ -472,6 +472,12 @@ Redirect permanent /utils/doc/com/Ostermiller/util/StringHelperTest.html http://
 Redirect permanent /utils/StringHelperTests.html http://ostermiller.org/utils/
 Redirect permanent /utils/javadoc/StringHelperTests.html http://ostermiller.org/utils/
 Redirect permanent /utils/doc/com/Ostermiller/util/StringHelperTests.html http://ostermiller.org/utils/
+Redirect permanent /utils/StringTokenizerTest.html http://ostermiller.org/utils/
+Redirect permanent /utils/javadoc/StringTokenizerTest.html http://ostermiller.org/utils/
+Redirect permanent /utils/doc/com/Ostermiller/util/StringTokenizerTest.html http://ostermiller.org/utils/
+Redirect permanent /utils/StringTokenizerTests.html http://ostermiller.org/utils/
+Redirect permanent /utils/javadoc/StringTokenizerTests.html http://ostermiller.org/utils/
+Redirect permanent /utils/doc/com/Ostermiller/util/StringTokenizerTests.html http://ostermiller.org/utils/
 Redirect permanent /utils/TokenizerTest.html http://ostermiller.org/utils/
 Redirect permanent /utils/javadoc/TokenizerTest.html http://ostermiller.org/utils/
 Redirect permanent /utils/doc/com/Ostermiller/util/TokenizerTest.html http://ostermiller.org/utils/
