@@ -11,6 +11,7 @@
  */
 package com.Ostermiller.util;
 
+import java.io.IOException;
 import junit.framework.TestCase;
 import java.io.ByteArrayInputStream;
 import java.util.*;
@@ -122,7 +123,7 @@ public class UberPropertiesTest extends TestCase {
 			UberProperties up2 = new UberProperties();
 			up2.load(cbb.getInputStream());
 			compare(up, up2);
-		} catch (Exception x) {
+		} catch (IOException x) {
 			throw new RuntimeException(x);
 		}
 	}
