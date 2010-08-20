@@ -70,7 +70,7 @@
               <outputDirectory>${project.build.directory}/site</outputDirectory>
               <includes>
                 <include>**/RandPass*</include>
-                <include>**/*.TXT</include>
+                <include>**/LICENSE*</include>
               </includes>
             </configuration>
 		      </execution>
@@ -128,7 +128,7 @@
         <version>2.4.3</version>
         <executions>
           <execution>
-            <id>maven-resources-plugin-resources</id>
+            <id>archivesToSite</id>
             <phase>site</phase>
             <goals>
               <goal>copy-resources</goal>
@@ -149,7 +149,7 @@
             </configuration>            
           </execution>          
           <execution>
-            <id>copy-resources</id>
+            <id>licenseToClasses</id>
             <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
