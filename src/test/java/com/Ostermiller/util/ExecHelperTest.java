@@ -17,6 +17,7 @@
  */
 package com.Ostermiller.util;
 
+import junit.framework.TestCase;
 import java.io.*;
 
 /**
@@ -29,13 +30,9 @@ import java.io.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.06.00
  */
-class ExecHelperTests {
+public class ExecHelperTest extends TestCase {
 
-	/**
-	 * Main method to run test
-	 * @param args Command line arguments (ignored
-	 */
-	public static void main(String args[]){
+	public void testReadFileWithCat(){
 		try {
 			File temp = File.createTempFile("ExecHelperTests", "tmp");
 			temp.deleteOnExit();
@@ -44,34 +41,40 @@ class ExecHelperTests {
 			out.write(s);
 			out.close();
 			ExecHelper eh = ExecHelper.exec(new String[]{"cat", temp.toString()});
-			if (!eh.getOutput().equals(s)){
-				throw new Exception("Couldn't read file via cat");
-			}
-			// Test the shell, but only on Unix
-			File sh = new File("/bin/sh");
-			if (sh.exists()){
-				eh = ExecHelper.execUsingShell("sleep 3; echo -n stdin && echo -n stderr 1>&2; exit 11");
-				if (!eh.getOutput().equals("stdin")){
-					throw new Exception("Couldn't echo to stdin through a shell.");
-				}
-				if (!eh.getError().equals("stderr")){
-					throw new Exception("Couldn't echo to stderr through a shell.");
-				}
-				if (eh.getStatus() != 11){
-					throw new Exception("Expected exit status of 11.");
-				}
-			}
-		} catch (Exception x){
-			x.printStackTrace();
-			System.exit(1);
+			assertEquals(s, eh.getOutput());			
+		} catch (IOException x){
+			throw new RuntimeException(x);
 		}
-		System.exit(0);
 	}
+	
+	public void testStdinStdoutExitStatus(){
+		if (shExists()){
+			try {
+				ExecHelper eh = ExecHelper.execUsingShell("echo -n stdin && echo -n stderr 1>&2; exit 11");
+				assertEquals("stdin", eh.getOutput());
+				assertEquals("stderr", eh.getError());
+				assertEquals(11, eh.getStatus());
+			} catch (IOException x){
+				throw new RuntimeException(x);
+			}
+		}
+	}
+	
+	/**
+	 * Test to see if a shell exists
+	 */
+	private static boolean shExists(){
+		File sh = new File("/bin/sh");
+		return sh.exists();		
+	}
+	
+	private static final int CREATE_LARGE_STRING_SIZE=1000;
+	private static final String LARGE_STRING_CONTENTS="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	private static String createLargeString(){
-		StringBuffer sb = new StringBuffer(40000*26);
-		for (int i=0; i<40000; i++){
-			sb.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		StringBuilder sb = new StringBuilder(CREATE_LARGE_STRING_SIZE*LARGE_STRING_CONTENTS.length());
+		for (int i=0; i<CREATE_LARGE_STRING_SIZE; i++){
+			sb.append(LARGE_STRING_CONTENTS);
 		}
 		return sb.toString();
 
