@@ -71,7 +71,6 @@ public class SizeLimitInputStreamTest extends TestCase {
 		
 	public void testManySmallStreamsFromSameBaseStream(){
 		try {
-
 			InputStream in = new ByteArrayInputStream(
 				("one"+"two"+"three"+"four"+"five"+"six"+"seven").getBytes("ASCII")
 			);
@@ -84,7 +83,6 @@ public class SizeLimitInputStreamTest extends TestCase {
 			assertEquals("six", readFully(new SizeLimitInputStream(in,3)));
 			assertEquals("s", readFully(new SizeLimitInputStream(in,1)));
 			assertEquals("even", readFully(new SizeLimitInputStream(in,4)));
-
 		} catch (IOException x){
 			throw new RuntimeException(x);
 		}
