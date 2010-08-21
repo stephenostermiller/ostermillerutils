@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import junit.framework.TestCase;
 import java.io.*;
 
 /**
@@ -26,12 +27,9 @@ import java.io.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
-class SizeLimitInputStreamTests {
-	/**
-	 * Main method for regression test
-	 * @param args command line arguments (ignored)
-	 */
-	public static void main (String[] args){
+public class SizeLimitInputStreamTest extends TestCase {
+	
+	public void testSizeThreeOfFour(){
 		try {
 			SizeLimitInputStream slis;
 
@@ -43,12 +41,18 @@ class SizeLimitInputStreamTests {
 				),
 				3
 			);
-			if (slis.read() != 1) throw new Exception ("Expected 1");
-			if (slis.read() != 2) throw new Exception ("Expected 2");
-			if (slis.read() != 3) throw new Exception ("Expected 3");
-			if (slis.read() != -1) throw new Exception ("Expected -1");
-
-			slis = new SizeLimitInputStream(
+			assertEquals(1, slis.read());
+			assertEquals(2, slis.read());
+			assertEquals(3, slis.read());
+			assertEquals(-1, slis.read());
+		} catch (IOException x){
+			throw new RuntimeException(x);
+		}
+	}
+		
+	public void testSizeSixOfNine(){
+		try {
+			SizeLimitInputStream slis = new SizeLimitInputStream(
 				new ByteArrayInputStream(
 					new byte[] {
 						1,2,3,4,5,6,7,8,9
@@ -56,29 +60,34 @@ class SizeLimitInputStreamTests {
 				),
 				6
 			);
-			if (slis.read() != 1) throw new Exception ("Expected 1");
-			if (slis.read(new byte[4]) != 4) throw new Exception("Expected 4 read");
-			if (slis.read(new byte[4]) != 1) throw new Exception("Expected 2 read");
-			if (slis.read() != -1) throw new Exception ("Expected -1");
+			assertEquals(1, slis.read());
+			assertEquals(4, slis.read(new byte[4]));
+			assertEquals(1, slis.read(new byte[4]));
+			assertEquals(-1, slis.read());
+		} catch (IOException x){
+			throw new RuntimeException(x);
+		}
+	}
+		
+	public void testManySmallStreamsFromSameBaseStream(){
+		try {
 
 			InputStream in = new ByteArrayInputStream(
 				("one"+"two"+"three"+"four"+"five"+"six"+"seven").getBytes("ASCII")
 			);
-			compare("one", readFully(new SizeLimitInputStream(in,3)));
-			compare("", readFully(new SizeLimitInputStream(in,0)));
-			compare("two", readFully(new SizeLimitInputStream(in,3)));
-			compare("three", readFully(new SizeLimitInputStream(in,5)));
-			compare("four", readFully(new SizeLimitInputStream(in,4)));
-			compare("five", readFully(new SizeLimitInputStream(in,4)));
-			compare("six", readFully(new SizeLimitInputStream(in,3)));
-			compare("s", readFully(new SizeLimitInputStream(in,1)));
-			compare("even", readFully(new SizeLimitInputStream(in,4)));
+			assertEquals("one", readFully(new SizeLimitInputStream(in,3)));
+			assertEquals("", readFully(new SizeLimitInputStream(in,0)));
+			assertEquals("two", readFully(new SizeLimitInputStream(in,3)));
+			assertEquals("three", readFully(new SizeLimitInputStream(in,5)));
+			assertEquals("four", readFully(new SizeLimitInputStream(in,4)));
+			assertEquals("five", readFully(new SizeLimitInputStream(in,4)));
+			assertEquals("six", readFully(new SizeLimitInputStream(in,3)));
+			assertEquals("s", readFully(new SizeLimitInputStream(in,1)));
+			assertEquals("even", readFully(new SizeLimitInputStream(in,4)));
 
-		} catch (Exception x){
-			System.err.println(x.getMessage());
-			System.exit(1);
+		} catch (IOException x){
+			throw new RuntimeException(x);
 		}
-
 	}
 
 	private static String readFully(InputStream in) throws IOException {
@@ -89,9 +98,4 @@ class SizeLimitInputStreamTests {
 		}
 		return sb.toString();
 	}
-
-	private static void compare(String s1, String s2) throws Exception {
-		if (!s1.equals(s2)) throw new Exception ("Expected " + s1 + " but got " + s2);
-	}
-
 }
