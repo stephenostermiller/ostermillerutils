@@ -28,7 +28,7 @@ import java.io.*;
  * @since ostermillerutils 1.04.00
  */
 public class SizeLimitInputStreamTest extends TestCase {
-	
+
 	public void testSizeThreeOfFour(){
 		try {
 			SizeLimitInputStream slis;
@@ -49,7 +49,7 @@ public class SizeLimitInputStreamTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-		
+
 	public void testSizeSixOfNine(){
 		try {
 			SizeLimitInputStream slis = new SizeLimitInputStream(
@@ -68,7 +68,7 @@ public class SizeLimitInputStreamTest extends TestCase {
 			throw new RuntimeException(x);
 		}
 	}
-		
+
 	public void testManySmallStreamsFromSameBaseStream(){
 		try {
 			InputStream in = new ByteArrayInputStream(
