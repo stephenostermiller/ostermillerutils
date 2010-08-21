@@ -27,6 +27,6 @@ CGI Query String Parser
 
 *Example
 
-  Use the GCI parser to power the get and post methods of a servlet:
+  Use the CGI parser to power the get and post methods of a servlet:
   
 %{code-snippet|brush=java|file=src/site/snippet/CgiGetPost.java.snippet}

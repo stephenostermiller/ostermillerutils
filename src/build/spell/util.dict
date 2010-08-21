@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1663 
+personal_ws-1.1 en 1695 
 aa
 aA
 aaa
@@ -93,6 +93,7 @@ assertEquals
 assertFalse
 assertNotNull
 assertNull
+assertSigFigs
 assertTrue
 AstringB
 asymp
@@ -401,6 +402,7 @@ ensureOptionsSatisfied
 enum
 enumerationiterator
 EnumerationIterator
+EnumOptions
 envp
 EOF
 equalInd
@@ -450,6 +452,7 @@ filehelper
 FileHelper
 FileInputStream
 filename
+fileName
 FileNotFoundException
 FileOutputStream
 FileProtocolHandler
@@ -494,6 +497,7 @@ generateExtraCmdLnArgumentException
 generateMissingCmdLnArgumentException
 generater
 generateUnknownCmdLnOptionException
+getallBytesArray
 getAllValues
 getAppletInfo
 getArgument
@@ -983,6 +987,8 @@ openurls
 oplus
 optionArgument
 optionArgumentDelimiters
+optionCallback
+OptionEnum
 optionHelp
 optionIndent
 optionName
@@ -1018,6 +1024,7 @@ ParallelizerTests
 param
 params
 parseByte
+parseCommandLine
 parseDouble
 parseFloat
 parseInt
@@ -1260,6 +1267,7 @@ sigfigs
 sigFigs
 sigmaf
 significantFigures
+SignificantFiguresTest
 SignificantFiguresTests
 sigs
 sim
@@ -1268,6 +1276,7 @@ sixsix
 sizelimitinputstream
 SizeLimitInputStream
 SizeLimitInputStreams
+SizeLimitInputStreamTest
 SizeLimitInputStreamTests
 skipDelimiters
 slis
@@ -1303,6 +1312,7 @@ stillname
 stName
 str
 StraightStreamReader
+StraightStreamReaderTest
 StraightStreamReaderTests
 StreamTokenizer
 StringBuffer
@@ -1356,6 +1366,7 @@ testArgBoundsCmdLnTArgument
 testArgBoundsCmdLnThirdNonOptionArgument
 testBackslashAtEndOfQuoted
 testBasic
+testCanBeRepresentedWithoutScientificNotation
 TestCase
 testCases
 testCat
@@ -1383,6 +1394,7 @@ testDashHandOptionArgumentNoLeftOvers
 testDashHandOptionArgumentNotPresent
 testDashHelpCmdLnH
 testDashHelpCmdLnHelp
+testDecimalPointAtEnd
 testEmpty
 testEmptyFields
 testEmptyInput
@@ -1418,8 +1430,13 @@ testfileAndLeftoverCmdLnFArgument
 testfileAndLeftoverCmdLnFArgumentCount
 testfileAndLeftoverCmdLnLeftoverArgument
 testfileAndLeftoverCmdLnLeftoverSize
+testFourSigfigsToOneInteger
+testFourSigfigsToThreeDecimal
+testGetsLeadingZero
 testH
+testIntegerFourSigFigsToThree
 testJoin
+testKeepsLeadingZeroCanBeRepresentedWithoutScientificNotation
 testManyArgsCmdLnCar
 testManyArgsCmdLnCarArgument
 testManyArgsCmdLnF
@@ -1433,16 +1450,25 @@ testManyArgsCmdLnP
 testManyArgsCmdLnPArgument
 testManyArgsCmdLnT
 testManyArgsCmdLnTArgument
+testManySmallStreamsFromSameBaseStream
 testMidpad
 testMissingCmdLnArgumentExceptionGenerated
 testName
+testNoDecimalPointAtEnd
 testNoDelims
 testNormal
+testNotRepresentableWithoutScientificNotation
+testNotRepresentableWithoutScientificNotationLong
 testPeek
 testPostpad
 testPrepad
 testRandom
+testReadAllBytesAsChars
+testReadAllBytesMultipleCharBufferReads
+testReadAllBytesOffsetBuffer
+testReadAllBytesSingleCharBufferRead
 testReadFileWithCat
+testReadPartialBytesOffsetBuffer
 testReplace
 testRestOfString
 testReturnEmptyTokens
@@ -1454,6 +1480,9 @@ testReturnEmptyTokensNoneLeftOver
 testReturnEmptyTokensOneLeftOver
 testReturnEmptyTokensSetHalfwayThrough
 testReturnEmptyTokensTwoLeftOver
+testRoundingOnAFiveSpecialEvenOddRule
+testSizeSixOfNine
+testSizeThreeOfFour
 testSplit
 testSplitIncludeDelimiters
 testStartCharsCmdLnA
@@ -1474,11 +1503,14 @@ testTabs
 testTe
 testToArray
 testTokenAndNonTokenDelims
+testTooLargeWithoutScientificNotation
+testTooSmallWithoutScientificNotation
 testTrim
 testUnescapeHTML
 testUnknownCmdLnOptionExceptionForF
 testUnknownCmdLnOptionExceptionGenerated
 testVariousLengths
+testWhenMoreDigitsSpecialEvenOddRuleDoesNotApplyWhenRoundingOnAFive
 testWhitSpaceAroundFields
 tgbaWriter
 th
