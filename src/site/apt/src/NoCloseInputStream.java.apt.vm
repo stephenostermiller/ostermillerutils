@@ -7,7 +7,7 @@
 
 NoCloseInputStream.java Source Code
 
-
+    * {{{../NoCloseStream.html}NoCloseStream Documentation and Examples}}
 
     * {{{../javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
 

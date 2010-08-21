@@ -13,7 +13,7 @@
   <body>
     <section name="CircularObjectBuffer OstermillerUtils JavaDoc">
       <ul>
-        
+        <li><a href="../CircularBuffer.html">CircularBuffer Documentation and Examples</a></li>
         <li><a href="../src/CircularObjectBuffer.java.html">CircularObjectBuffer.java Source Code</a></li>
       </ul>
       <iframe src="../doc/com/Ostermiller/util/CircularObjectBuffer.html" width="100%" height="800"></iframe>

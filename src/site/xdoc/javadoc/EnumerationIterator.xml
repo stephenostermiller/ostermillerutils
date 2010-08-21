@@ -13,7 +13,7 @@
   <body>
     <section name="EnumerationIterator OstermillerUtils JavaDoc">
       <ul>
-        
+        <li><a href="../Iterator_Enumeration.html">Iterator_Enumeration Documentation and Examples</a></li>
         <li><a href="../src/EnumerationIterator.java.html">EnumerationIterator.java Source Code</a></li>
       </ul>
       <iframe src="../doc/com/Ostermiller/util/EnumerationIterator.html" width="100%" height="800"></iframe>

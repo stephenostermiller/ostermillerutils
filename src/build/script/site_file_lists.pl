@@ -10,6 +10,17 @@ if (! -e "pom.xml"){
 `mkdir -p src/site/xdoc/javadoc`;
 `mkdir -p src/site/apt/src`;
 
+
+my %sourceMap = ();
+for my $line (split(/\n/, `grep -i '\.java\.html.* Source' src/site/apt/*.apt.vm`)){
+  if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z]([A-Za-z]+)\.java/){
+    my ($webdoc, $javafile) = ($1, $2);
+    if ($webdoc ne "source"){
+      $sourceMap{$javafile} = "$webdoc"
+    }
+  }
+}
+
 my $sourceList = "";
 my $menuList = "";
 my $javadocMenuList = "";
@@ -44,10 +55,12 @@ for my $file (sort @files){
     }
   }
   my $srcXdocLink = "<li><a href=\"../src/$srchtmlhref\">$basename Source Code</a></li>";
-  if (-f "src/site/apt/$barename.apt.vm"){
-    $docAptLink = "    * {{{../$barename.html}$barename Documentation and Examples}}";
-    $docXdocLink = "<li><a href=\"../$barename.html\">$barename Documentation and Examples</a></li>";
-  } else {
+  my $webDoc = &getWebDoc($barename);
+  if ($webDoc){
+    $docAptLink = "    * {{{../$webDoc.html}$webDoc Documentation and Examples}}";
+    $docXdocLink = "<li><a href=\"../$webDoc.html\">$webDoc Documentation and Examples</a></li>";
+  }
+  if (! -f "src/site/apt/$barename.apt.vm"){
     $htaccessList .= "Redirect permanent /utils/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
     $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
     $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
@@ -161,4 +174,15 @@ sub replaceInFile(){
   open(FILE, ">$filename") or die $?;
   print FILE $contents;
   close(FILE);  
+}
+
+sub getWebDoc(){
+  my ($barename) = @_;
+  if (-f "src/site/apt/$barename.apt.vm"){
+    return "$barename"
+  }
+  if ($sourceMap{$barename}){
+    return "$sourceMap{$barename}"
+  }
+  return "";  
 }
