@@ -25,16 +25,4 @@ Parallelizer Thread Control
 
 *Example
 
-----------------------------------------
-Parallelizer pll = new Parallelizer();
-for (int i=0; i<10; i++){
-    final int j = i;
-    pll.run(
-        new Runnable(){
-            System.out.println("Hello World " + j);
-        }
-    );
-}
-pll.join();
-
-----------------------------------------
+%{code-snippet|brush=java|file=src/site/snippet/ParallelizerExample.java.snippet}

@@ -7,26 +7,22 @@
 
 Line Ending Conversion
 
+    * {{{src/LineEnds.java.html}LineEnds.java Source Code}}
 
+    * {{{javadoc/LineEnds.html}LineEnds Javadoc}}
 
+  Converts text files so that they can be read by text editors on various systems.  Text editors 
+  such as Notepad often display squares in place of line endings they can't understand, causing 
+  text formatting to be lost.
 
-
-
-  Converts text files so that they can be read by text editors on various systems.  Text editors such as Notepad often display squares in place of line endings they can't understand, causing text formatting to be lost.
-
-
-
-    Internationalization - included languages:
+  Internationalization - included languages:
     	
-    <li>English</li> 
+    * English
     
-    Translations gladly accepted.  Please translate
-    {{{LineEnds.properties.html}LineEnds.properties}}.<br>
-	You may want to use: 
-	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
+  Translations gladly accepted.  Please translate {{{LineEnds.properties.html}LineEnds.properties}}.
+  You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 
-
-Features
+*Features
 
   * Text formats supported
 
@@ -40,8 +36,6 @@ Features
 
   * Mac
 
-
-
   * Reads files in any of the supported formats, or files that are in mixed formats.
 
   * Can re-write in any format, but defaults to the correct format for the current system.
@@ -50,11 +44,13 @@ Features
 
   * Detects binary files and does not modify those files unless forced.
 
+*Command Line Program
 
-
-
-  To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.LineEnds&nbsp;<files></b>
+  To run the program use the following command line:
+  
+----------------------------------------  
+java -classpath utils.jar com.Ostermiller.util.LineEnds <files>
+----------------------------------------
 
 ----------------------------------------
 LineEnds [-dnrsfvqQ] <files>
@@ -75,19 +71,3 @@ LineEnds [-dnrsfvqQ] <files>
    -q --quiet             Print error messages. (default)
    -Q --reallyquiet       Print nothing.
 ----------------------------------------
-
-
-
-
-<b>Line Ends</b>
-
-  * {{{LineEnds.java.html}Source}}
-
-  * {{{doc/com/Ostermiller/util/LineEnds.html}Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Line+Ends&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-

@@ -9,42 +9,35 @@ Basic Iterators and Enumerations
 
   Classes to convert between enumerations and iterators and to 
   convert arrays to enumerations or iterators.
-  
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Iterators+and+Enumerations&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Iterator and Enumerator Bugs/Features}}
-  
-  
-Convert an Iterator to an Enumeration: IteratorEnumeration
+ 
+*Convert an Iterator to an Enumeration: IteratorEnumeration
+
+    * {{{src/IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}
+
+    * {{{javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/IteratorToEnumeration.java.snippet}
 
-  * {{{IteratorEnumeration.java.html}IteratorEnumeration Source}}
+*Convert an Enumeration to an Iterator: EnumerationIterator
 
-  * {{{doc/com/Ostermiller/util/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
+    * {{{src/EnumerationIterator.java.html}EnumerationIterator.java Source Code}}
 
-
-
-Convert an Enumeration to an Iterator: EnumerationIterator
+    * {{{javadoc/EnumerationIterator.html}EnumerationIterator Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/EnumerationToIterator.java.snippet}
 
-  * {{{EnumerationIterator.java.html}EnumerationIterator Source}}
+*Convert an array to an Enumeration: ArrayEnumeration
 
-  * {{{doc/com/Ostermiller/util/EnumerationIterator.html}EnumerationIterator Javadoc}}
+    * {{{src/ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
 
-
-Convert an array to an Enumeration: ArrayEnumeration
+    * {{{javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/ArrayToEnumeration.java.snippet}
 
-  * {{{ArrayEnumeration.java.html}ArrayEnumeration Source}}
+*Convert an array to an Iterator: ArrayIterator
 
-  * {{{doc/com/Ostermiller/util/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
+    * {{{src/ArrayIterator.java.html}ArrayIterator.java Source Code}}
 
-
-Convert an array to an Iterator: ArrayIterator
+    * {{{javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/ArrayToIterator.java.snippet}
-
-  * {{{ArrayIterator.java.html}ArrayIterator Source}}
-
-  * {{{doc/com/Ostermiller/util/ArrayIterator.html}ArrayIterator Javadoc}}
