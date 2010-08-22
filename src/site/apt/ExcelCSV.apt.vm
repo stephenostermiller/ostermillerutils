@@ -7,90 +7,49 @@
 
 Excel Comma Separated Values (CSV)
 
-
-
-
-
-
-Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.  {{{CSV.html}Libraries for other CSV formats}} are available.
-
-
-Example
-----------------------------------------
-// Create the printer
-ExcelCSVPrinter ecsvp = new ExcelCSVPrinter(
-    System.out
-);
-
-// Write to the printer
-ecsvp.writeln(
-    new String[]{
-        "hello","world"
-    }
-);
-----------------------------------------
-
+  Utilities for reading and writing CSV (comma separated value) text files in the same format as Microsoft Excel.  CSV as supported by these classes uses double quotes as the escape for a literal quote as specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.  {{{CSV.html}Libraries for other CSV formats}} are available.
 
 Writing Excel CSV files: ExcelCSVPrinter
-  This class makes it easy to output Excel CSV.  Given values, it will automatically determine if they need to be quoted and
-escape special characters.  Comments can easily be written and correct line beginnings will be added.
 
-  To write standard CSV files that some applications other than Excel can understand use the 
-{{{CSV.html}standard CSV}} format.  Both CSVPrinter and ExcelCSVPrinter
-implement the CSVPrint interface.
+    * {{{src/ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
 
-<br clear=all>
-<hr>
+    * {{{javadoc/ExcelCSVPrinter.html}ExcelCSVPrinter Javadoc}}
 
-Example
-----------------------------------------
-// Parse the data
-String[][] values = ExcelCSVParser.parse(
-    new StringReader(
-        "hello,world\n" +
-        "how,are,you"
-    )
-);
+  This class makes it easy to output Excel CSV.  Given values, it will 
+  automatically determine if they need to be quoted and escape special 
+  characters.  Comments can easily be written and correct line beginnings 
+  will be added.
 
-// Display the parsed data
-for (int i=0; i<values.length; i++){
-    for (int j=0; j<values[i].length; j++){
-        System.out.println(values[i][j]);
-    }
-    System.out.println("-----");
-}
-----------------------------------------
+  To write standard CSV files that some applications other than Excel can 
+  understand use the {{{CSV.html}standard CSV}} format.  Both CSVPrinter 
+  and ExcelCSVPrinter implement the CSVPrint interface.
 
+*Example
 
-<a name="csv_parser">Reading Excel CSV files: ExcelCSVParser</a>
+  
+%{code-snippet|brush=java|file=src/site/snippet/CsvExcelPrinter.java.snippet}
 
-  Microsoft's Excel spreadsheet has on option to export to comma separated value format. 
-However it fails to use the {{{CSV.html}standard CSV file format}}.  Excel does
-not use the backslash as an escape character, but instead escapes quote literals with two quotes.
-It also does not quote values that have leading or trailing whitespace.  This special CSV parser
-can read Excel format CSV files.  Excel CSV has become a defacto standard of its own.  It is now specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.
+Reading Excel CSV files: ExcelCSVParser
 
-  To read standard CSV files that some applications other than Excel can understand use the 
-{{{CSV.html}standard CSV}} format.  Both CSVParser and ExcelCSVParser
-implement the CSVParse interface.
+    * {{{src/ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
 
-  If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}
+    * {{{ExcelCSVParser/Browser.html}ExcelCSVParser Javadoc}}
 
+  Microsoft's Excel spreadsheet has on option to export to comma separated 
+  value format. However it fails to use the {{{CSV.html}standard CSV file 
+  format}}.  Excel does not use the backslash as an escape character, but 
+  instead escapes quote literals with two quotes. It also does not quote 
+  values that have leading or trailing whitespace.  This special CSV parser
+  can read Excel format CSV files.  Excel CSV has become a defacto standard 
+  of its own.  It is now specified by {{{http://rfc.net/rfc4180.html}RFC4180}}.
 
+  To read standard CSV files that some applications other than Excel can 
+  understand use the {{{CSV.html}standard CSV}} format.  Both CSVParser and 
+  ExcelCSVParser implement the CSVParse interface.
 
-<b>Excel CSV</b>
+  If the first line of your CSV file is a row of column headings, consider 
+  wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}
 
-  * {{{ExcelCSVPrinter.java.html}ExcelCSVPrinter Source}}
+*Example
 
-  * {{{doc/com/Ostermiller/util/ExcelCSVPrinter.html}ExcelCSVPrinter Documentation}}
-
-  * {{{ExcelCSVParser.java.html}ExcelCSVParser Source}}
-
-  * {{{doc/com/Ostermiller/util/ExcelCSVParser.html}ExcelCSVParser Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+%{code-snippet|brush=java|file=src/site/snippet/CsvExcelParser.java.snippet}

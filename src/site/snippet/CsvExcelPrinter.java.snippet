@@ -1,0 +1,11 @@
+// Create the printer
+ExcelCSVPrinter ecsvp = new ExcelCSVPrinter(
+    System.out
+);
+
+// Write to the printer
+ecsvp.writeln(
+    new String[]{
+        "hello","world"
+    }
+);
