@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import junit.framework.TestCase;
 import java.util.*;
 
 /**
@@ -26,12 +27,9 @@ import java.util.*;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
-class ParallelizerTests {
-	/**
-	 * Main method for tests
-	 * @param args command line arguments (ignored)
-	 */
-	public static void main (String[] args){
+public class ParallelizerTest extends TestCase {
+
+	public void testSuccessfulRun(){
 		try {
 			final HashMap<String,Date> results = new HashMap<String,Date>();
 			final Random random = new Random();
@@ -42,28 +40,29 @@ class ParallelizerTests {
 					new Runnable(){
 						public void run(){
 							try {
-								Thread.sleep(random.nextInt(5000));
+								Thread.sleep(random.nextInt(50));
 								results.put(hashKey,new Date());
-							} catch (RuntimeException rx){
-								throw rx;
-							} catch (Exception x){
+							} catch (InterruptedException x){
 								throw new RuntimeException(x);
 							}
 						}
 					}
 				);
 			}
-			if (results.size() == 100) throw new Exception("Expected results to not yet have 100 items in it.");
+			assertFalse(results.size() == 100);
 			pll.join();
-			if (results.size() != 100) throw new Exception("Expected results to have 100 items, not " + results.size());
+			assertEquals(100, results.size());
 			for(int i=0; i<100; i++){
-				String hashKey = Integer.toString(i);
-				Date result = results.get(hashKey);
-				if (result == null) throw new Exception(hashKey + " not in map");
+				assertNotNull(results.get(Integer.toString(i)));
 			}
-			System.exit(0);
+		} catch (InterruptedException x){
+			throw new RuntimeException(x);
+		}
+	}
 
-			pll = new Parallelizer();
+	public void testRunWithException(){
+		try {
+			Parallelizer pll = new Parallelizer();
 			pll.run(
 				new Runnable(){
 					public void run(){
@@ -71,19 +70,16 @@ class ParallelizerTests {
 					}
 				}
 			);
-
+			RuntimeException rx = null;
 			try {
 				pll.join();
-				throw new Exception("Parallelizer appears not to have thrown expected exception");
 			} catch (RuntimeException rtx){
-				if (!"Testing Parallelizer".equals(rtx.getMessage())){
-					throw new Exception("Expected Testing Parallelizer as message to exception");
-				}
+				rx = rtx;
 			}
-
-		} catch (Throwable x){
-			x.printStackTrace(System.err);
-			System.exit(1);
+			assertNotNull(rx);
+			assertEquals("Testing Parallelizer", rx.getMessage());
+		} catch (InterruptedException x){
+			throw new RuntimeException(x);
 		}
 	}
 }

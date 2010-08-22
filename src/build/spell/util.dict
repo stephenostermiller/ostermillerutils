@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1695 
+personal_ws-1.1 en 1698 
 aa
 aA
 aaa
@@ -1020,6 +1020,7 @@ outputTabWidth
 Paavolainen
 padlen
 parallelizer
+ParallelizerTest
 ParallelizerTests
 param
 params
@@ -1481,6 +1482,7 @@ testReturnEmptyTokensOneLeftOver
 testReturnEmptyTokensSetHalfwayThrough
 testReturnEmptyTokensTwoLeftOver
 testRoundingOnAFiveSpecialEvenOddRule
+testRunWithException
 testSizeSixOfNine
 testSizeThreeOfFour
 testSplit
@@ -1499,6 +1501,7 @@ testStartsWithAny
 testStartsWithAnyIgnoreCase
 testStdinStdoutExitStatus
 testStepByStep
+testSuccessfulRun
 testTabs
 testTe
 testToArray
