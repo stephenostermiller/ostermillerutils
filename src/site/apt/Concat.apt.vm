@@ -7,70 +7,28 @@
 
 Concatenation Streams
 
-
-
-
-
-
   Concatenation Streams allow multiple input sources to be combined into a singe source stream.
 
-
-
 ConcatInputStream
-Example
-----------------------------------------
-// Pre-pend data to a InputStream "in"
-// giving a new stream.
-in = new ConcatInputStream(
-    new ByteArrayInputStream(
-        new byte[]{
-            3,1,4,1,5,9
-        }
-    ),
-    in
-);
-----------------------------------------
 
+    * {{{src/ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
 
+    * {{{javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
+  
+  Combines multiple byte stream sources into a single byte stream.
 
-<br clear=all>
-<hr>
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/ConcatInputPrepend.java.snippet}
 
 ConcatReader
+  
+    * {{{src/ConcatReader.java.html}ConcatReader.java Source Code}}
 
-Example
-----------------------------------------
-// Pre-pend data to a Reader "in"
-// giving a new reader.
-in = new ConcatReader(
-    new StringReader(
-        "Pre-pending this data."
-    ),
-    in
-);
+    * {{{javadoc/ConcatReader.html}ConcatReader Javadoc}}
 
-----------------------------------------
+  Combines multiple character stream sources into a single character stream.
 
+*Example
 
-  Combines multiple character stream sources into a single character stream.  
-<br clear=all>
-
-
-
-<b>Concatenation Streams</b>
-
-  * {{{ConcatInputStream.java.html}ConcatInputStream Source}}
-
-  * {{{doc/com/Ostermiller/util/ConcatInputStream.html}ConcatInputStream Documentation}}
-
-  * {{{ConcatReader.java.html}ConcatReader Source}}
-
-  * {{{doc/com/Ostermiller/util/ConcatReader.html}ConcatReader Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Concatenation+Streams&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
-
+%{code-snippet|brush=java|file=src/site/snippet/ConcatReaderPrepend.java.snippet}

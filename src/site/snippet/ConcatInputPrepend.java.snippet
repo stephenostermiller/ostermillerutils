@@ -1,0 +1,10 @@
+// Pre-pend data to a InputStream "in"
+// giving a new stream.
+in = new ConcatInputStream(
+    new ByteArrayInputStream(
+        new byte[]{
+            3,1,4,1,5,9
+        }
+    ),
+    in
+);

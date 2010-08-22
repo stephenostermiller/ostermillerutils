@@ -1,0 +1,8 @@
+// Pre-pend data to a Reader "in"
+// giving a new reader.
+in = new ConcatReader(
+    new StringReader(
+        "Pre-pending this data."
+    ),
+    in
+);
