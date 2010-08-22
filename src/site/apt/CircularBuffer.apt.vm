@@ -7,139 +7,76 @@
 
 Circular Buffers
 
+  The com.Ostermiller.util package contains three flavors of circular buffer.  
+  Each type is presented here along with a simple example.
 
+Circular Object Buffer
 
+    * {{{src/CircularObjectBuffer.java.html}CircularObjectBuffer.java Source Code}}
 
-
-
-  The com.Ostermiller.util package contains three flavors of circular buffer.  Each type 
-is presented here along with a simple example.  For a more complex example that uses 
-threads and blocks input, please see the 
-{{{http://ostermiller.org/utils/CircularBufferTests.java.html}unit test}}
-for these classes.
-
-
-
-  {{{#circularobjectbuffer}CircularObjectBuffer}} | {{{#circularcharbuffer}CircularCharBuffer}} | {{{#circularbytebuffer}CircularByteBuffer}}
-
-<hr>
-
-Example
-----------------------------------------
-// Create the buffer.
-CircularObjectBuffer cob = new CircularObjectBuffer();
-
-// Fill the buffer.
-cob.write("Hello World!\n");
-
-// Empty the buffer.
-System.out.print((String)(cob.read()));
-----------------------------------------
-This example only works because "Hello World" is one object.  If you try to write more objects than the size of 
-the buffer, the buffer will block until space is available.
-In this single thread example, that will appear to cause a program hang.  You can 
-get around this by making the buffer infinite size or emptying the buffer in another thread.
-
-
-<a name="circularobjectbuffer">Circular Object Buffer</a>
+    * {{{javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for Objects.
 
-<br clear=all>
-<hr>
+*Example
 
-Example
-----------------------------------------
-// Create the buffer.
-CircularCharBuffer ccb = new CircularCharBuffer();
+%{code-snippet|brush=java|file=src/site/snippet/CircularObjects.java.snippet}
 
-// Fill the buffer.
-ccb.getWriter().write("Hello World!\n");
-ccb.getWriter().close();
+  This example only works because "Hello World" is one object.  If you try to 
+  write more objects than the size of the buffer, the buffer will block until 
+  space is available.  In this single thread example, that will appear to cause 
+  a program hang.  You can get around this by making the buffer infinite size 
+  or emptying the buffer in another thread.
 
-// Empty the buffer.
-int c;
-while ((c = ccb.getReader().read()) != -1){
-    System.out.print((char)c);
-}
-----------------------------------------
-This example only works because "Hello World" is short.  If you try to write more data than the size of 
-the buffer, the buffer will block until space is available.
-In this single thread example, that will appear to cause a program hang.  You can 
-get around this by making the buffer infinite size or emptying the buffer in another thread.
+Circular Character Buffer
 
+    * {{{src/CircularCharBuffer.java.html}CircularCharBuffer.java Source Code}}
 
-<a name="circularcharbuffer">Circular Character Buffer</a>
+    * {{{javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for characters. 
-Filling and emptying the buffer is done with standard Java Readers and Writers.
+  Filling and emptying the buffer is done with standard Java Readers and 
+  Writers.
 
   Using this class is a simpler alternative to using a PipedReader
-and a PipedWriter. PipedReaders and PipedWriters don't support the
-mark operation, don't allow you to control buffer sizes that they use,
-and have a more complicated API that requires a instantiating two
-classes and connecting them.
- 
-<br clear=all>
-<hr>
+  and a PipedWriter. PipedReaders and PipedWriters don't support the
+  mark operation, don't allow you to control buffer sizes that they use,
+  and have a more complicated API that requires a instantiating two
+  classes and connecting them.
 
-Example
-----------------------------------------
-// Create the buffer.
-CircularByteBuffer cbb = new CircularByteBuffer();
+*Example
 
-// Fill the buffer.
-cbb.getOutputStream().write(
-    new byte[]{
-        'H','e','l','l','o',' ',
-        'W','o','r','l','d','!','\n'
-    }
-);
-cbb.getOutputStream().close();
+%{code-snippet|brush=java|file=src/site/snippet/CircularCharacters.java.snippet}
 
-// Empty the buffer.
-int c;
-while ((c = cbb.getInputStream().read()) != -1){
-    System.out.print((char)c);
-}
-----------------------------------------
-This example only works because "Hello World" is short.  If you try to write more data than the size of 
-the buffer, the buffer will block until space is available.
-In this single thread example, that will appear to cause a program hang.  You can 
-get around this by making the buffer infinite size or emptying the buffer in another thread.
+  This example only works because "Hello World" is short.  If you try to write 
+  more data than the size of the buffer, the buffer will block until space 
+  is available.  In this single thread example, that will appear to cause a 
+  program hang.  You can get around this by making the buffer infinite size or 
+  emptying the buffer in another thread.
 
 
-<a name="circularbytebuffer">Circular Byte Buffer</a>
+Circular Byte Buffer
+
+    * {{{src/CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}
+
+    * {{{javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for bytes.
-Filling and emptying the buffer is done with standard Java InputStreams and OutputStreams.
+  Filling and emptying the buffer is done with standard Java InputStreams and 
+  OutputStreams.
 
   Using this class is a simpler alternative to using a PipedInputStream
-and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
-mark operation, don't allow you to control buffer sizes that they use,
-and have a more complicated API that requires a instantiating two
-classes and connecting them.
+  and a PipedOutputStream. PipedInputStreams and PipedOutputStreams don't support the
+  mark operation, don't allow you to control buffer sizes that they use,
+  and have a more complicated API that requires a instantiating two
+  classes and connecting them.
+ 
+*Example
 
-<br clear=all>
+%{code-snippet|brush=java|file=src/site/snippet/CircularBytes.java.snippet}
 
-
-<b>Circular Buffers</b>
-
-  * {{{CircularByteBuffer.java.html}CircularByteBuffer Source}}
-
-  * {{{doc/com/Ostermiller/util/CircularByteBuffer.html}CircularByteBuffer Documentation}}
-
-  * {{{CircularCharBuffer.java.html}CircularCharBuffer Source}}
-
-  * {{{doc/com/Ostermiller/util/CircularCharBuffer.html}CircularCharBuffer Documentation}}
-
-  * {{{CircularObjectBuffer.java.html}CircularObjectBuffer Source}}
-
-  * {{{doc/com/Ostermiller/util/CircularObjectBuffer.html}CircularObjectBuffer Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Circular+Buffers&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+  This example only works because "Hello World" is short.  If you try to write 
+  more data than the size of the buffer, the buffer will block until space is 
+  available.  In this single thread example, that will appear to cause a 
+  program hang.  You can get around this by making the buffer infinite size or 
+  emptying the buffer in another thread.

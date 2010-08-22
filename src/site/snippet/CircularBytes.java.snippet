@@ -1,0 +1,17 @@
+// Create the buffer.
+CircularByteBuffer cbb = new CircularByteBuffer();
+
+// Fill the buffer.
+cbb.getOutputStream().write(
+    new byte[]{
+        'H','e','l','l','o',' ',
+        'W','o','r','l','d','!','\n'
+    }
+);
+cbb.getOutputStream().close();
+
+// Empty the buffer.
+int c;
+while ((c = cbb.getInputStream().read()) != -1){
+    System.out.print((char)c);
+}

@@ -1,0 +1,12 @@
+// Create the buffer.
+CircularCharBuffer ccb = new CircularCharBuffer();
+
+// Fill the buffer.
+ccb.getWriter().write("Hello World!\n");
+ccb.getWriter().close();
+
+// Empty the buffer.
+int c;
+while ((c = ccb.getReader().read()) != -1){
+    System.out.print((char)c);
+}
