@@ -1,0 +1,10 @@
+// Read a file using cat
+String file = ExecHelper.exec(
+    "cat",
+    "myfile.txt"
+).getOutput();
+
+// Similar to Perl or bash back ticks
+String hello = ExecHelper.execUsingShell(
+    "echo 'Hello World'"
+).getOutput();

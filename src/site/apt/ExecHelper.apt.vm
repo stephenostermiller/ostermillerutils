@@ -7,44 +7,27 @@
 
 Helper Methods for Runtime.exec
 
+    * {{{src/ExecHelper.java.html}ExecHelper.java Source Code}}
 
+    * {{{javadoc/ExecHelper.html}ExecHelper Javadoc}}
 
+  Utilities to make executing other programs from Java easier.
 
+  The Runtime.exec method is particularly difficult to use to call external 
+  applications to do data processing compared to such functionality in other 
+  languages.  For example in Perl and bash, the target can be placed in back 
+  ticks and the standard output is placed directly into a variable. To 
+  achieve this functionality in Java, one would need to use Runtime.exec, get 
+  the process, read from both the output and the error streams, and buffer 
+  the data into a String yourself.  Or this library can be used.
 
+  This class contains convenience methods to call Runtime.exec with a given 
+  command.  The methods block until the process exits and all the data 
+  returned by the command is buffered and returned to the application in a 
+  ExecHelper object.  The object has three fields: standard output, standard 
+  input, and the exit status.
 
-Utilities to make executing other programs from Java easier.
+*Example
 
-
-Example
-----------------------------------------
-// Read a file using cat
-String file = ExecHelper.exec(
-    "cat",
-    "myfile.txt"
-).getOutput();
-
-// Similar to Perl or bash back ticks
-String hello = ExecHelper.execUsingShell(
-    "echo 'Hello World'"
-).getOutput();
-----------------------------------------
-
-
-  The Runtime.exec method is particularly difficult to use to call external applications to do data processing compared to such functionality in other languages.  For example in Perl and bash, the target can be placed in back ticks and the standard output is placed directly into a variable. To achieve this functionality in Java, one would need to use Runtime.exec, get the process, read from both the output and the error streams, and buffer the data into a String yourself.  Or this library can be used.
-
-  This class contains convenience methods to call Runtime.exec with a given command.  The methods block until the process exits and all the data returned by the command is buffered and returned to the application in a ExecHelper object.  The object has three fields: standard output, standard input, and the exit status.
-
-
-
-<b>Exec Helper</b>
-
-  * {{{ExecHelper.java.html}Source}}
-
-  * {{{doc/com/Ostermiller/util/ExecHelper.html}Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Exec+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
+%{code-snippet|brush=java|file=src/site/snippet/ExecHelper.java.snippet}
 
