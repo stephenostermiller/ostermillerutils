@@ -2,30 +2,14 @@
   File Helper
   ----
   Stephen Ostermiller;
-  meta-description=Methods for manipulating Files.;
+  meta-description=Java utility methods for manipulating Files.;
   ----
 
 File Helper
 
+    * {{{src/FileHelper.java.html}FileHelper.java Source Code}}
 
+    * {{{javadoc/FileHelper.html}FileHelper Javadoc}}
 
-
-
-
-  This file helper utility contains methods to make manipulating files easier from Java
-
-  Includes a method to move a file, even when it can't be renamed.
-
-
-<b>File Helper</b>
-
-  * {{{FileHelper.java.html}Source}}
-
-  * {{{doc/com/Ostermiller/util/FileHelper.html}Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=File+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+  This file helper utility contains methods to make manipulating files easier 
+  from Java. Includes a method to move a file, even when it can't be renamed.
