@@ -2,7 +2,7 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.Ostermiller</groupId>
+	<groupId>com.ostermiller</groupId>
 	<artifactId>ostermillerutils</artifactId>
 	<inceptionYear>2001</inceptionYear>
 	<version>1.07.01.SNAPSHOT</version>
@@ -23,6 +23,11 @@
 	<scm>
 		<connection>scm:git:ssh://steveo@deadsea.mine.nu/home/gitroot/ostermillerutils.git</connection>
 	</scm>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>4</version>
+  </parent>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
