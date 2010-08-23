@@ -1,0 +1,6 @@
+// Print the MD5 hash for a line
+// read from standard input
+MD5InputStream in = new MD5InputStream(System.in);
+int b;
+while ((b = in.read()) != -1 && b != '\r' && b != '\n');
+System.out.println(in.getHashString());

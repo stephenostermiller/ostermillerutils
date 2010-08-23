@@ -26,7 +26,7 @@ MD5
   public-key cryptosystem such as RSA.
 
   This class is based on work by 
-  {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
+  {{{http://santtu.iki.fi/md5/}Santeri Paavolainen}}.
   and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation 
   is several times faster and much more memory efficient than Santeri's 
   implementation.
@@ -34,13 +34,7 @@ MD5
 
 *Example
 
-----------------------------------------
-System.out.println(
-    MD5.getHashString(
-        "Hello World"
-    )
-);
-----------------------------------------
+%{code-snippet|brush=java|file=src/site/snippet/MD5HelloWorld.java.snippet}
 
 MD5 Input Stream
 
@@ -52,14 +46,7 @@ MD5 Input Stream
   
 *Example
 
-----------------------------------------
-// Print the MD5 hash for a line
-// read from standard input
-MD5InputStream in = new MD5InputStream(System.in);
-int b;
-while ((b = in.read()) != -1 && b != '\r' && b != '\n');
-System.out.println(in.getHashString());
-----------------------------------------
+%{code-snippet|brush=java|file=src/site/snippet/MD5InputStreamExample.java.snippet}
 
 MD5 Output Stream
 
@@ -71,13 +58,7 @@ MD5 Output Stream
 
 *Example
 
-----------------------------------------
-// Write out hello world
-// and print its MD5 hash 
-MD5OutputStream out = new MD5OutputStream(System.out);
-out.write("Hello World\n".getBytes());
-System.out.println(out.getHashString());
-----------------------------------------
+%{code-snippet|brush=java|file=src/site/snippet/MD5OutputStreamExample.java.snippet}
 
 *Security Alert
 
