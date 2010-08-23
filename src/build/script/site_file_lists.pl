@@ -13,9 +13,10 @@ if (! -e "pom.xml"){
 
 my %sourceMap = ();
 for my $line (split(/\n/, `grep -i '\.java\.html.* Source' src/site/apt/*.apt.vm`)){
-  if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z]([A-Za-z]+)\.java/){
+  if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z0-9]([A-Za-z0-9]+)\.java/){
     my ($webdoc, $javafile) = ($1, $2);
     if ($webdoc ne "source"){
+      print "$webdoc $javafile\n";
       $sourceMap{$javafile} = "$webdoc"
     }
   }
