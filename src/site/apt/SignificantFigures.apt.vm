@@ -70,11 +70,11 @@ Figure significant figures for addition of numbers.
 
 <b>Significant Figures</b>
 
-  * {{{SignificantFigures.java.html}SignificantFigures Source}}
+    * {{{SignificantFigures.java.html}SignificantFigures Source}}
 
-  * {{{doc/com/Ostermiller/util/SignificantFigures.html}SignificantFigures Documentation}}
+    * {{{doc/com/Ostermiller/util/SignificantFigures.html}SignificantFigures Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

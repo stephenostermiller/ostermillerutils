@@ -24,25 +24,25 @@ Line Ending Conversion
 
 *Features
 
-  * Text formats supported
+    * Text formats supported
 
-  * DOS
+    * DOS
 
-  * Windows
+    * Windows
 
-  * UNIX
+    * UNIX
 
-  * Java
+    * Java
 
-  * Mac
+    * Mac
 
-  * Reads files in any of the supported formats, or files that are in mixed formats.
+    * Reads files in any of the supported formats, or files that are in mixed formats.
 
-  * Can re-write in any format, but defaults to the correct format for the current system.
+    * Can re-write in any format, but defaults to the correct format for the current system.
 
-  * Only re-writes files which are not already in the correct format.
+    * Only re-writes files which are not already in the correct format.
 
-  * Detects binary files and does not modify those files unless forced.
+    * Detects binary files and does not modify those files unless forced.
 
 *Command Line Program
 

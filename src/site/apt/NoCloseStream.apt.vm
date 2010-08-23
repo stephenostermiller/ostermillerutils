@@ -78,27 +78,27 @@ out.reallyClose();
 
 <b>NoClose Streams</b>
 
-  * {{{NoCloseStream.java.html}NoCloseStream Source}}
+    * {{{NoCloseStream.java.html}NoCloseStream Source}}
 
-  * {{{doc/com/Ostermiller/util/NoCloseStream.html}NoCloseStream Documentation}}
+    * {{{doc/com/Ostermiller/util/NoCloseStream.html}NoCloseStream Documentation}}
 
-  * {{{NoCloseInputStream.java.html}NoCloseInputStream Source}}
+    * {{{NoCloseInputStream.java.html}NoCloseInputStream Source}}
 
-  * {{{doc/com/Ostermiller/util/NoCloseInputStream.html}NoCloseInputStream Documentation}}
+    * {{{doc/com/Ostermiller/util/NoCloseInputStream.html}NoCloseInputStream Documentation}}
 
-  * {{{NoCloseOutputStream.java.html}NoCloseOutputStream Source}}
+    * {{{NoCloseOutputStream.java.html}NoCloseOutputStream Source}}
 
-  * {{{doc/com/Ostermiller/util/NoCloseOutputStream.html}NoCloseOutputStream Documentation}}
+    * {{{doc/com/Ostermiller/util/NoCloseOutputStream.html}NoCloseOutputStream Documentation}}
 
-  * {{{NoCloseReader.java.html}NoCloseReader Source}}
+    * {{{NoCloseReader.java.html}NoCloseReader Source}}
 
-  * {{{doc/com/Ostermiller/util/NoCloseReader.html}NoCloseReader Documentation}}
+    * {{{doc/com/Ostermiller/util/NoCloseReader.html}NoCloseReader Documentation}}
 
-  * {{{NoCloseWriter.java.html}NoCloseWriter Source}}
+    * {{{NoCloseWriter.java.html}NoCloseWriter Source}}
 
-  * {{{doc/com/Ostermiller/util/NoCloseWriter.html}NoCloseWriter Documentation}}
+    * {{{doc/com/Ostermiller/util/NoCloseWriter.html}NoCloseWriter Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=NoClose+Streams5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=NoClose+Streams5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

@@ -19,11 +19,11 @@ String manipulation helper utilities for Java
 
 <b>String Helper</b>
 
-  * {{{StringHelper.java.html}StringHelper Source}}
+    * {{{StringHelper.java.html}StringHelper Source}}
 
-  * {{{doc/com/Ostermiller/util/StringHelper.html}StringHelper Documentation}}
+    * {{{doc/com/Ostermiller/util/StringHelper.html}StringHelper Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=String+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=String+Helper&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

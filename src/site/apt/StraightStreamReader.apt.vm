@@ -21,11 +21,11 @@ An input stream reader that does not do character class translation.
 
 <b>Straight Stream Reader</b>
 
-  * {{{StraightStreamReader.java.html}StraightStreamReader Source}}
+    * {{{StraightStreamReader.java.html}StraightStreamReader Source}}
 
-  * {{{doc/com/Ostermiller/util/StraightStreamReader.html}StraightStreamReader Documentation}}
+    * {{{doc/com/Ostermiller/util/StraightStreamReader.html}StraightStreamReader Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

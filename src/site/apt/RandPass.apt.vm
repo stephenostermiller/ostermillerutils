@@ -59,11 +59,11 @@ Generate secure random passwords.
 
 <b>Random Password Generator</b>
 
-  * {{{RandPass.java.html}RandPass Source}}
+    * {{{RandPass.java.html}RandPass Source}}
 
-  * {{{doc/com/Ostermiller/util/RandPass.html}RandPass Documentation}}
+    * {{{doc/com/Ostermiller/util/RandPass.html}RandPass Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

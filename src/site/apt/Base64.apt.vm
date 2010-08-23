@@ -76,7 +76,7 @@ Encode or decode using the base64 format.
 
   included languages:
 
-  * English
+    * English
 
   Translations gladly accepted.  Please translate
   {{{src/Base64.properties.html}Base64.properties}}.

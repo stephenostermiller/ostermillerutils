@@ -29,9 +29,9 @@ Tabs
 
 Features
 
-  * Detects binary files and does not modify those files unless forced.
+    * Detects binary files and does not modify those files unless forced.
 
-  * Can guess the tab spacing in a file and convert from the guess.
+    * Can guess the tab spacing in a file and convert from the guess.
 
 
 
@@ -62,11 +62,11 @@ Adjusts the tabs and spaces at the beginning of each line in files.
 
 <b>Tabs</b>
 
-  * {{{Tabs.java.html}Tabs Source}}
+    * {{{Tabs.java.html}Tabs Source}}
 
-  * {{{doc/com/Ostermiller/util/Tabs.html}Tabs Documentation}}
+    * {{{doc/com/Ostermiller/util/Tabs.html}Tabs Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Tabs&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Tabs&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

@@ -33,11 +33,11 @@ SizeLimitInputStream.
 
 <b>Size Limit Input Stream</b>
 
-  * {{{SizeLimitInputStream.java.html}SizeLimitInputStream Source}}
+    * {{{SizeLimitInputStream.java.html}SizeLimitInputStream Source}}
 
-  * {{{doc/com/Ostermiller/util/SizeLimitInputStream.html}SizeLimitInputStream Documentation}}
+    * {{{doc/com/Ostermiller/util/SizeLimitInputStream.html}SizeLimitInputStream Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Size+Limit+Input+Stream&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Size+Limit+Input+Stream&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

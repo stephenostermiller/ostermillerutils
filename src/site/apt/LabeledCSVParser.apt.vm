@@ -46,11 +46,11 @@ CSV with column headings: LabeledCSVParser</a>
 
 <b>Labeled CSV Parser</b>
 
-  * {{{LabeledCSVParser.java.html}Source}}
+    * {{{LabeledCSVParser.java.html}Source}}
 
-  * {{{doc/com/Ostermiller/util/LabeledCSVParser.html}Documentation}}
+    * {{{doc/com/Ostermiller/util/LabeledCSVParser.html}Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 
