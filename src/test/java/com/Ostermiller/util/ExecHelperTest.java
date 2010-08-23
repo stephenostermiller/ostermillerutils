@@ -32,31 +32,23 @@ import java.io.*;
  */
 public class ExecHelperTest extends TestCase {
 
-	public void testReadFileWithCat(){
-		try {
-			File temp = File.createTempFile("ExecHelperTests", "tmp");
-			temp.deleteOnExit();
-			String s = createLargeString();
-			Writer out = new FileWriter(temp);
-			out.write(s);
-			out.close();
-			ExecHelper eh = ExecHelper.exec(new String[]{"cat", temp.toString()});
-			assertEquals(s, eh.getOutput());
-		} catch (IOException x){
-			throw new RuntimeException(x);
-		}
+	public void testReadFileWithCat() throws IOException {
+		File temp = File.createTempFile("ExecHelperTests", "tmp");
+		temp.deleteOnExit();
+		String s = createLargeString();
+		Writer out = new FileWriter(temp);
+		out.write(s);
+		out.close();
+		ExecHelper eh = ExecHelper.exec(new String[]{"cat", temp.toString()});
+		assertEquals(s, eh.getOutput());
 	}
 
-	public void testStdinStdoutExitStatus(){
+	public void testStdinStdoutExitStatus() throws IOException {
 		if (shExists()){
-			try {
-				ExecHelper eh = ExecHelper.execUsingShell("echo -n stdin && echo -n stderr 1>&2; exit 11");
-				assertEquals("stdin", eh.getOutput());
-				assertEquals("stderr", eh.getError());
-				assertEquals(11, eh.getStatus());
-			} catch (IOException x){
-				throw new RuntimeException(x);
-			}
+			ExecHelper eh = ExecHelper.execUsingShell("echo stdin && echo stderr 1>&2; exit 11");
+			assertEquals("stdin", eh.getOutput().trim());
+			assertEquals("stderr", eh.getError().trim());
+			assertEquals(11, eh.getStatus());
 		}
 	}
 
