@@ -7,9 +7,9 @@
 
 Components
 
-    * {{{ArrayHelper.html}ArrayHelper}} - Helpful utilities for working with arrays.
+    * {{{ArrayHelper.html}Array Helper}} - Helpful utilities for working with arrays.
 
-    * {{{Base64.html}Base64}} - Encode and decode base 64.
+    * {{{Base64.html}Base 64}} - Encode and decode base 64.
 
     * {{{Browser.html}Browser}} - Open a browser from an application on Windows, Unix, or Macintosh.
 
@@ -33,7 +33,7 @@ Components
 
     * {{{MD5.html}MD5 Sums}} - Classes for generating MD5 checksums on String, Byte arrays, Streams, or Files.
 
-    * {{{NoCloseStream.html}NoClose Streams}} - Create streams that cannot be closed with the regular close() mechanism.
+    * {{{NoCloseStream.html}No Close Streams}} - Create streams that cannot be closed with the regular close() mechanism.
 
     * {{{Parallelizer.html}Parallelizer}} - Runs multiple jobs in parallel, n threads at a time, and waits until all threads are complete before continuing.
 

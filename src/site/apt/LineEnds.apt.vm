@@ -15,26 +15,19 @@ Line Ending Conversion
   such as Notepad often display squares in place of line endings they can't understand, causing
   text formatting to be lost.
 
-  Internationalization - included languages:
-
-    * English
-
-  Translations gladly accepted.  Please translate {{{LineEnds.properties.html}LineEnds.properties}}.
-  You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
-
 *Features
 
     * Text formats supported
 
-    * DOS
+        * DOS
 
-    * Windows
+        * Windows
 
-    * UNIX
+        * UNIX
 
-    * Java
+        * Java
 
-    * Mac
+        * Mac
 
     * Reads files in any of the supported formats, or files that are in mixed formats.
 
@@ -71,3 +64,13 @@ LineEnds [-dnrsfvqQ] <files>
    -q --quiet             Print error messages. (default)
    -Q --reallyquiet       Print nothing.
 ----------------------------------------
+
+*Internationalization
+  
+  Included languages:
+
+    * English
+
+  Translations gladly accepted.  Please translate {{{src/LineEnds.properties.html}LineEnds.properties}}.
+  You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
+

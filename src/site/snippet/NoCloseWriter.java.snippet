@@ -1,0 +1,5 @@
+// prevent a file writer from being closed
+NoCloseWriter out = new NoCloseWriter(new FileWriter("file.txt"));
+// pass out to other classes:
+/* somebodyelse.dosomething(out); */
+out.reallyClose();

@@ -43,8 +43,8 @@
 
     <menu name="Documentation">
       <item name="Components" href="components.html" collapse="true">
-        <item name="ArrayHelper" href="/ArrayHelper.html" />
-        <item name="Base64" href="/Base64.html" />
+        <item name="Array Helper" href="/ArrayHelper.html" />
+        <item name="Base 64" href="/Base64.html" />
         <item name="Browser Opener" href="/Browser.html" />
         <item name="CGI Query String Parser" href="/CGIParser.html" />
         <item name="Circular Buffers" href="/CircularBuffer.html" />
@@ -56,7 +56,7 @@
         <item name="Iterators and Enumerations" href="/Iterator_Enumeration.html" />
         <item name="Line Ends" href="/LineEnds.html" />
         <item name="MD5 Sums" href="/MD5.html" />
-        <item name="NoClose Streams" href="/NoCloseStream.html" />
+        <item name="No Close Streams" href="/NoCloseStream.html" />
         <item name="Parallelizer" href="/Parallelizer.html" />
         <item name="Password Dialog" href="/PasswordDialog.html" />
         <item name="Random Password Generator" href="/RandPass.html" />
