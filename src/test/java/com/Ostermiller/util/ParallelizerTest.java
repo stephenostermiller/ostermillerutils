@@ -29,57 +29,49 @@ import java.util.*;
  */
 public class ParallelizerTest extends TestCase {
 
-	public void testSuccessfulRun(){
-		try {
-			final HashMap<String,Date> results = new HashMap<String,Date>();
-			final Random random = new Random();
-			Parallelizer pll = new Parallelizer(8);
-			for(int i=0; i<100; i++){
-				final String hashKey = Integer.toString(i);
-				pll.run(
-					new Runnable(){
-						public void run(){
-							try {
-								Thread.sleep(random.nextInt(50));
-								results.put(hashKey,new Date());
-							} catch (InterruptedException x){
-								throw new RuntimeException(x);
-							}
-						}
-					}
-				);
-			}
-			assertFalse(results.size() == 100);
-			pll.join();
-			assertEquals(100, results.size());
-			for(int i=0; i<100; i++){
-				assertNotNull(results.get(Integer.toString(i)));
-			}
-		} catch (InterruptedException x){
-			throw new RuntimeException(x);
-		}
-	}
-
-	public void testRunWithException(){
-		try {
-			Parallelizer pll = new Parallelizer();
+	public void testSuccessfulRun() throws InterruptedException {
+		final HashMap<String,Date> results = new HashMap<String,Date>();
+		final Random random = new Random();
+		Parallelizer pll = new Parallelizer(8);
+		for(int i=0; i<100; i++){
+			final String hashKey = Integer.toString(i);
 			pll.run(
 				new Runnable(){
 					public void run(){
-						throw new RuntimeException("Testing Parallelizer");
+						try {
+							Thread.sleep(random.nextInt(50));
+							results.put(hashKey,new Date());
+						} catch (InterruptedException x){
+							throw new RuntimeException(x);
+						}
 					}
 				}
 			);
-			RuntimeException rx = null;
-			try {
-				pll.join();
-			} catch (RuntimeException rtx){
-				rx = rtx;
-			}
-			assertNotNull(rx);
-			assertEquals("Testing Parallelizer", rx.getMessage());
-		} catch (InterruptedException x){
-			throw new RuntimeException(x);
 		}
+		assertFalse(results.size() == 100);
+		pll.join();
+		assertEquals(100, results.size());
+		for(int i=0; i<100; i++){
+			assertNotNull(results.get(Integer.toString(i)));
+		}
+	}
+
+	public void testRunWithException() throws InterruptedException {
+		Parallelizer pll = new Parallelizer();
+		pll.run(
+			new Runnable(){
+				public void run(){
+					throw new RuntimeException("Testing Parallelizer");
+				}
+			}
+		);
+		RuntimeException rx = null;
+		try {
+			pll.join();
+		} catch (RuntimeException rtx){
+			rx = rtx;
+		}
+		assertNotNull(rx);
+		assertEquals("Testing Parallelizer", rx.getMessage());
 	}
 }
