@@ -11,23 +11,23 @@ Base64 Java Library
 
     * {{{javadoc/Base64.html}Base64 Javadoc}}
 
-  Base64 encoding and decoding of data from Java.  Encode and decode methods 
+  Base64 encoding and decoding of data from Java.  Encode and decode methods
   for Strings, byte arrays, and streams.
 
-  Base64 is needed in many places other than its original use as an encoding 
-  format for transferring attachments in email.  It can be used anytime binary 
-  or arbitrary data needs to be represented in common printable characters.  
-  For example to connect to a web page that requires a username and password 
+  Base64 is needed in many places other than its original use as an encoding
+  format for transferring attachments in email.  It can be used anytime binary
+  or arbitrary data needs to be represented in common printable characters.
+  For example to connect to a web page that requires a username and password
   (basic authentication) you need to Base64 encode the username and password.
 
 *Example
- 
+
   Use base64 to add a basic authentication to an HTTP request
 
 %{code-snippet|brush=java|file=src/site/snippet/Base64BasicAuthentication.java.snippet}
 
 *Base64 is not Encryption
-  
+
   Be aware that Base64 encoding in <not> encryption.  Base64 scrambles the
   output and it may appear to be unreadable, but it is easily deciphered by
   anybody with a little experience or time.  Base64 encoded strings will often end
@@ -44,7 +44,7 @@ Base64 Java Library
 *Command Line Program
 
   To run Base64 as a stand alone program use the following command line:
-  
+
 ----------------------------------------
 java -classpath utils.jar com.Ostermiller.util.Base64 <files>
 ----------------------------------------
@@ -73,14 +73,14 @@ Encode or decode using the base64 format.
 
 
 *Internationalization
-  
+
   included languages:
-    	
-  * English
-    
+
+    * English
+
   Translations gladly accepted.  Please translate
   {{{src/Base64.properties.html}Base64.properties}}.
-	You may want to use: {{{http://attesoro.org/}Attesoro - 
+	You may want to use: {{{http://attesoro.org/}Attesoro -
   A Java Translation Editor}}
 
 

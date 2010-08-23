@@ -11,44 +11,37 @@ Line Ending Conversion
 
     * {{{javadoc/LineEnds.html}LineEnds Javadoc}}
 
-  Converts text files so that they can be read by text editors on various systems.  Text editors 
-  such as Notepad often display squares in place of line endings they can't understand, causing 
+  Converts text files so that they can be read by text editors on various systems.  Text editors
+  such as Notepad often display squares in place of line endings they can't understand, causing
   text formatting to be lost.
-
-  Internationalization - included languages:
-    	
-    * English
-    
-  Translations gladly accepted.  Please translate {{{LineEnds.properties.html}LineEnds.properties}}.
-  You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 
 *Features
 
-  * Text formats supported
+    * Text formats supported
 
-  * DOS
+        * DOS
 
-  * Windows
+        * Windows
 
-  * UNIX
+        * UNIX
 
-  * Java
+        * Java
 
-  * Mac
+        * Mac
 
-  * Reads files in any of the supported formats, or files that are in mixed formats.
+    * Reads files in any of the supported formats, or files that are in mixed formats.
 
-  * Can re-write in any format, but defaults to the correct format for the current system.
+    * Can re-write in any format, but defaults to the correct format for the current system.
 
-  * Only re-writes files which are not already in the correct format.
+    * Only re-writes files which are not already in the correct format.
 
-  * Detects binary files and does not modify those files unless forced.
+    * Detects binary files and does not modify those files unless forced.
 
 *Command Line Program
 
   To run the program use the following command line:
-  
-----------------------------------------  
+
+----------------------------------------
 java -classpath utils.jar com.Ostermiller.util.LineEnds <files>
 ----------------------------------------
 
@@ -71,3 +64,13 @@ LineEnds [-dnrsfvqQ] <files>
    -q --quiet             Print error messages. (default)
    -Q --reallyquiet       Print nothing.
 ----------------------------------------
+
+*Internationalization
+  
+  Included languages:
+
+    * English
+
+  Translations gladly accepted.  Please translate {{{src/LineEnds.properties.html}LineEnds.properties}}.
+  You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
+

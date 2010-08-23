@@ -7,7 +7,7 @@
     <version>2.0</version>
   </skin>
 
-  <publishDate position="none"/> 
+  <publishDate position="none"/>
   <version position="none"/>
 
   <bannerLeft>
@@ -15,12 +15,12 @@
     <src>javacup.png</src>
     <href>./</href>
   </bannerLeft>
-  
+
   <body>
     <links>
       <item name="Home" href="./" />
       <item name="Download" href="/download.html" />
-      <item name="Install" href="/install.html" />          
+      <item name="Install" href="/install.html" />
       <item name="Components" href="components.html"/>
       <item name="JavaDoc" href="/doc/" />
       <item name="Source" href="/source.html" />
@@ -30,7 +30,7 @@
 
     <menu name="OstermillerUtils">
       <item name="Download" href="/download.html" />
-      <item name="Installation Instructions" href="/install.html" />      
+      <item name="Installation Instructions" href="/install.html" />
       <item name="Components" href="components.html"/>
       <item name="JavaDoc" href="/doc.html"/>
       <item name="Browse Source Code" href="/source.html" />
@@ -40,11 +40,11 @@
       <item name="Contributors" href="/contributors.html" />
       <item name="License" href="/licenseFAQ.html" />
     </menu>
-    
+
     <menu name="Documentation">
       <item name="Components" href="components.html" collapse="true">
-        <item name="ArrayHelper" href="/ArrayHelper.html" />
-        <item name="Base64" href="/Base64.html" />
+        <item name="Array Helper" href="/ArrayHelper.html" />
+        <item name="Base 64" href="/Base64.html" />
         <item name="Browser Opener" href="/Browser.html" />
         <item name="CGI Query String Parser" href="/CGIParser.html" />
         <item name="Circular Buffers" href="/CircularBuffer.html" />
@@ -56,7 +56,7 @@
         <item name="Iterators and Enumerations" href="/Iterator_Enumeration.html" />
         <item name="Line Ends" href="/LineEnds.html" />
         <item name="MD5 Sums" href="/MD5.html" />
-        <item name="NoClose Streams" href="/NoCloseStream.html" />
+        <item name="No Close Streams" href="/NoCloseStream.html" />
         <item name="Parallelizer" href="/Parallelizer.html" />
         <item name="Password Dialog" href="/PasswordDialog.html" />
         <item name="Random Password Generator" href="/RandPass.html" />
@@ -234,6 +234,6 @@
       <!-- END GENERATED SOURCES MENU -->
       </item>
     </menu>
-    
-  </body> 
+
+  </body>
 </project>

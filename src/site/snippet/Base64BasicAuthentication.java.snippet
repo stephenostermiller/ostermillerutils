@@ -1,9 +1,9 @@
 URL url = new URL("http://....");
 HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 connection.setRequestProperty(
-    "Authorization", 
+    "Authorization",
     "Basic " + Base64.encode(
         username + ":" + password
     )
-);      
+);
 InputStream in = connection.getInputStream();

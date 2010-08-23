@@ -7,37 +7,35 @@
 
 Random Password Generator
 
+  Generate random passwords of arbitrary length and arbitrary alphabet.
 
+*Example
 
-
-
-
-  Generate random passwords of arbitrary length and arbitrary alphabet. 
-
-
-
-Example
 ----------------------------------------
-// Get an eight character password 
+// Get an eight character password
 // made up of the letters A, B, and C.
 System.out.println(
 	new RandPass(new char[]{'A','B','C'}).getPass(8)
 );
 ----------------------------------------
 
-
   You could use the command line:<br>
-<b>java com.ostermiller.util.RandPass</b><br>
-to generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an applet}} in your web browser
+
+----------------------------------------
+java com.ostermiller.util.RandPass
+----------------------------------------
+
+  That will generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an 
+  applet}} in your web browser.
 
   A cryptographically secure pseudo-random number generator is used to generate the passwords.
-Limitations an passwords such as the length, required characters, or amount of repetition may be used.
-
-<br clear=all>
-
+  Limitations an passwords such as the length, required characters, or amount of repetition may be used.
 
   To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.RandPass</b>
+  
+----------------------------------------
+java -classpath utils.jar com.Ostermiller.util.RandPass
+----------------------------------------
 
 ----------------------------------------
 RandPass [-anFLrlRv]
@@ -55,15 +53,13 @@ Generate secure random passwords.
   -v --verify class    Java subclass of PasswordVerifier to use.
 ----------------------------------------
 
-
-
 <b>Random Password Generator</b>
 
-  * {{{RandPass.java.html}RandPass Source}}
+    * {{{RandPass.java.html}RandPass Source}}
 
-  * {{{doc/com/Ostermiller/util/RandPass.html}RandPass Documentation}}
+    * {{{doc/com/Ostermiller/util/RandPass.html}RandPass Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Random+Password+Generator&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

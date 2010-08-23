@@ -7,9 +7,9 @@
 
 Basic Iterators and Enumerations
 
-  Classes to convert between enumerations and iterators and to 
+  Classes to convert between enumerations and iterators and to
   convert arrays to enumerations or iterators.
- 
+
 *Convert an Iterator to an Enumeration: IteratorEnumeration
 
     * {{{src/IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}

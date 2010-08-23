@@ -13,10 +13,10 @@ CmdLn: Java Command Line Parser
 
   A command line parser for array of strings passed to Java main methods.
 
-  There are three ways to use the command line parser, as detailed with three examples 
-  below.  Each of the examples creates a command line application that accepts 
+  There are three ways to use the command line parser, as detailed with three examples
+  below.  Each of the examples creates a command line application that accepts
   --help --file and --delay arguments with the following help message:
-  
+
 ----------------------------------------
 demo command line application
   -f --file <?>   file to open

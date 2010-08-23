@@ -1,0 +1,18 @@
+// Numbers to add
+String[] args = {"1.0", "2.0"};
+SignificantFigures number;
+int lsd = Integer.MIN_VALUE;
+int msd = Integer.MIN_VALUE;
+double result = 0D;
+for (int i = 0; i < args.length; i++){
+    // for each number figure most and least
+    // significant digit then add the number.
+    number = new SignificantFigures(args[i]);
+    lsd = Math.max(lsd, number.getLSD());
+    msd = Math.max(msd, number.getMSD());
+    result += number.doubleValue();
+}
+// format and display the result
+number = new SignificantFigures(result);
+number.setLMSD(lsd, msd);
+System.out.println(number);

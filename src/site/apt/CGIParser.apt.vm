@@ -15,18 +15,18 @@ CGI Query String Parser
 
 *CGIParser Usage in Servlets
 
-  If using this class in servlets, you would request the parameters from the params 
+  If using this class in servlets, you would request the parameters from the params
   object rather than from the request.
 
-  Some servlet implementations do not parse the CGI name value pairs correctly for 
-  either POST or GET requests when there is a large amount of query data.  Luckily, 
-  you can parse the query data yourself.  I have written a class to do so.  Its methods 
-  for retrieving the name value pairs are identical to the three methods in the http 
-  request of the servlet.  The class can be created from the string of the GET request 
+  Some servlet implementations do not parse the CGI name value pairs correctly for
+  either POST or GET requests when there is a large amount of query data.  Luckily,
+  you can parse the query data yourself.  I have written a class to do so.  Its methods
+  for retrieving the name value pairs are identical to the three methods in the http
+  request of the servlet.  The class can be created from the string of the GET request
   or the stream of the POST request.
 
 *Example
 
   Use the CGI parser to power the get and post methods of a servlet:
-  
+
 %{code-snippet|brush=java|file=src/site/snippet/CgiGetPost.java.snippet}

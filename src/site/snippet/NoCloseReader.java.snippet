@@ -1,0 +1,5 @@
+// prevent a file reader from being closed
+NoCloseReader in = new NoCloseReader(new FileReader("file.txt"));
+// pass in to other classes:
+/* somebodyelse.dosomething(in); */
+in.reallyClose();

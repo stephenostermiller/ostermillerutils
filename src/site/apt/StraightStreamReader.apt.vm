@@ -12,7 +12,7 @@ Straight Stream Reader
 
 
 
-An input stream reader that does not do character class translation. 
+An input stream reader that does not do character class translation.
 
 
 <P>You might find this class useful for reading binary files using an API that only support Reader and not InputStreams.  One such example is the lexical analyzer JFlex.  There is some {{{http://www.jflex.de/manual.html#SECTION00063000000000000000}discussion}} in its manual about how a class like this might come in handy.  This class is included with the binary scanning example that comes with JFlex.</P>
@@ -21,11 +21,11 @@ An input stream reader that does not do character class translation.
 
 <b>Straight Stream Reader</b>
 
-  * {{{StraightStreamReader.java.html}StraightStreamReader Source}}
+    * {{{StraightStreamReader.java.html}StraightStreamReader Source}}
 
-  * {{{doc/com/Ostermiller/util/StraightStreamReader.html}StraightStreamReader Documentation}}
+    * {{{doc/com/Ostermiller/util/StraightStreamReader.html}StraightStreamReader Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Straight+Stream+Reader&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

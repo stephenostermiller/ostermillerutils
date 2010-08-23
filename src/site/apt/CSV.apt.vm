@@ -35,8 +35,8 @@ Writing CSV files: CSVPrinter
   This class makes it easy to output CSV.  Given values, it will automatically determine if they need to be quoted and
 escape special characters.  Comments can easily be written and correct line beginnings will be added.
 
-  Some applications do not accept CSV input according to the generally accepted standards.  One such application is the Microsoft Excel 
-spreadsheet.  A separate class must be use to write 
+  Some applications do not accept CSV input according to the generally accepted standards.  One such application is the Microsoft Excel
+spreadsheet.  A separate class must be use to write
 {{{ExcelCSV.html}Excel CSV}}.  Both CSVPrinter and ExcelCSVPrinter
 implement the CSVPrint interface.
 
@@ -68,12 +68,12 @@ for (int i=0; i<values.length; i++){
   Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
 First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get
 Strings in quotes that have commas inside them.  This CSV parser takes care of those issues and
-support line numbering, escape characters, and comments.  Each line of values can be returned as an array, or 
+support line numbering, escape characters, and comments.  Each line of values can be returned as an array, or
 the values can be returned individually with the number of the line from which they came.
 
   Some applications do not output CSV according to the generally accepted standards and this parse may
-not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A 
-separate class must be use to read 
+not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A
+separate class must be use to read
 {{{http://ostermiller.org/utils/ExcelCSV.html}Excel CSV}}.  Both CSVParser and ExcelCSVParser
 implement the CSVParse interface.
 
@@ -84,8 +84,8 @@ CSV Character Sets
 Chinese or Japanese.  To parse such files, simple use the CSVParser constructor that takes a reader.
 Make sure the reader has been initialized to read the correct character set.  An example that reads
 Simplified Chinese (charset GB2312) CSV values from {{{CSVCharsetTest.gb2312csv}CSVCharsetTest.gb2312csv}}
-can be found in {{{CSVCharsetTest.java}CSVCharsetTest.java}}.  If you have a Chinese font 
-installed and Java is set up to use it, the example will show a dialog with each of the Chinese 
+can be found in {{{CSVCharsetTest.java}CSVCharsetTest.java}}.  If you have a Chinese font
+installed and Java is set up to use it, the example will show a dialog with each of the Chinese
 words on it.
 
 <br clear=all>
@@ -164,15 +164,15 @@ CSV definition and libraries.
 
 <b>Comma Separated Values (CSV)</b>
 
-  * {{{CSVPrinter.java.html}CSVPrinter Source}}
+    * {{{CSVPrinter.java.html}CSVPrinter Source}}
 
-  * {{{doc/com/Ostermiller/util/CSVPrinter.html}CSVPrinter Documentation}}
+    * {{{doc/com/Ostermiller/util/CSVPrinter.html}CSVPrinter Documentation}}
 
-  * {{{CSVParser.java.html}CSVParser Source}}
+    * {{{CSVParser.java.html}CSVParser Source}}
 
-  * {{{doc/com/Ostermiller/util/CSVParser.html}CSVParser Documentation}}
+    * {{{doc/com/Ostermiller/util/CSVParser.html}CSVParser Documentation}}
 
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
+    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
 
 
 

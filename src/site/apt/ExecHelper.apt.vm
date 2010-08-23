@@ -13,18 +13,18 @@ Helper Methods for Runtime.exec
 
   Utilities to make executing other programs from Java easier.
 
-  The Runtime.exec method is particularly difficult to use to call external 
-  applications to do data processing compared to such functionality in other 
-  languages.  For example in Perl and bash, the target can be placed in back 
-  ticks and the standard output is placed directly into a variable. To 
-  achieve this functionality in Java, one would need to use Runtime.exec, get 
-  the process, read from both the output and the error streams, and buffer 
+  The Runtime.exec method is particularly difficult to use to call external
+  applications to do data processing compared to such functionality in other
+  languages.  For example in Perl and bash, the target can be placed in back
+  ticks and the standard output is placed directly into a variable. To
+  achieve this functionality in Java, one would need to use Runtime.exec, get
+  the process, read from both the output and the error streams, and buffer
   the data into a String yourself.  Or this library can be used.
 
-  This class contains convenience methods to call Runtime.exec with a given 
-  command.  The methods block until the process exits and all the data 
-  returned by the command is buffered and returned to the application in a 
-  ExecHelper object.  The object has three fields: standard output, standard 
+  This class contains convenience methods to call Runtime.exec with a given
+  command.  The methods block until the process exits and all the data
+  returned by the command is buffered and returned to the application in a
+  ExecHelper object.  The object has three fields: standard output, standard
   input, and the exit status.
 
 *Example

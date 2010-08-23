@@ -9,27 +9,26 @@ Contributors to  com.Ostermiller.util Java Utilities
 
   These Java Utilities were mainly written by Stephen Ostermiller, but many others listed below have given much needed help.
 
+    * Santeri Paavolainen - {{{http://santtu.iki.fi/md5/}Initial MD5 implementation}}.
 
-  * Santeri Paavolainen - {{{http://santtu.iki.fi/md5/}Initial MD5 implementation}}.
+    * {{{http://dmoz.org/profiles/wkn.html}Werner}} - Danish translations.
 
-  * {{{http://dmoz.org/profiles/wkn.html}Werner}} - Danish translations.
+    * {{{http://dmoz.org/profiles/stn77.html}Stephan Natschlaeger}} - German translations
 
-  * {{{http://dmoz.org/profiles/stn77.html}Stephan Natschlaeger}} - German translations
+    * Daniel Kuhn - German translations
 
-  * Daniel Kuhn - German translations
+    * Miriam Ferrari Stella - Spanish translations
 
-  * Miriam Ferrari Stella - Spanish translations
+    * Miniwark - French translations
 
-  * Miniwark - French translations
+    * Rocco Curcio - Italian translations
 
-  * Rocco Curcio - Italian translations
+    * Marcin Drzymala - Polish translations
 
-  * Marcin Drzymala - Polish translations
+    * Carlo Magnaghi - Fixes to the UberProperties
 
-  * Carlo Magnaghi - Fixes to the UberProperties
+    * Pierre Dittgen - Added changeQuote and changeDelimiter methods to CSVPrint and implementations.
 
-  * Pierre Dittgen - Added changeQuote and changeDelimiter methods to CSVPrint and implementations.
+    * Allen T. Campbell - Wrote the labeled CSV parser.
 
-  * Allen T. Campbell - Wrote the labeled CSV parser.
-
-  * Jonathan Faivre-Vuillin - Bug fix to IteratorEnumeration.
+    * Jonathan Faivre-Vuillin - Bug fix to IteratorEnumeration.

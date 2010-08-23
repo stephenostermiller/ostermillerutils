@@ -2,7 +2,7 @@
  * edit CSVLexer.lex to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
  * <a href="http://jflex.de">the JFlex website</a>.
- * This file was tested to work with jflex 1.4 (and may not 
+ * This file was tested to work with jflex 1.4 (and may not
  * work with more recent version because it needs a skeleton file)
  * Run: <br>
  * jflex --skel csv.jflex.skel CSVLexer.lex<br>

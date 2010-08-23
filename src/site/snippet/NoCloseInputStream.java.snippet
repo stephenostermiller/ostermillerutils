@@ -1,0 +1,5 @@
+// prevent system.in from being closed
+NoCloseInputStream in = new NoCloseInputStream(System.in);
+// pass in to other classes:
+/* somebodyelse.dosomething(in); */
+in.reallyClose();

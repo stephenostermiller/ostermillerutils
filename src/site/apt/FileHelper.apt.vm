@@ -11,5 +11,11 @@ File Helper
 
     * {{{javadoc/FileHelper.html}FileHelper Javadoc}}
 
-  This file helper utility contains methods to make manipulating files easier 
+  This file helper utility contains methods to make manipulating files easier
   from Java. Includes a method to move a file, even when it can't be renamed.
+
+*Example
+
+  Move the file "source.txt" to "destination.txt"
+
+%{code-snippet|brush=java|file=src/site/snippet/FileHelperMove.java.snippet}

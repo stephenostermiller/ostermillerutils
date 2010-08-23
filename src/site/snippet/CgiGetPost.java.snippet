@@ -1,8 +1,8 @@
 public void doGet (HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException { 
+    throws ServletException, IOException {
     doPostGet(
-        request, 
-        response, 
+        request,
+        response,
         new CGIParser(
             request.getQueryString(),
             // Use the same character set
@@ -15,8 +15,8 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
     doPostGet(
-        request, 
-        response, 
+        request,
+        response,
         new CGIParser(
             request.getReader(),
             // Use the same character set

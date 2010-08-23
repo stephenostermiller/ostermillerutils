@@ -9,35 +9,35 @@ com.Ostermiller.util License FAQ
 
 *Under what license are these utilities available?
 
-  The OstermillerUtils library is free software; you can redistribute it 
-  and/or modify it under the terms of the GNU General Public License as 
-  published by the Free Software Foundation; either version 2 of the 
+  The OstermillerUtils library is free software; you can redistribute it
+  and/or modify it under the terms of the GNU General Public License as
+  published by the Free Software Foundation; either version 2 of the
   License or (at your option) any later version.
 
   This program is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-  or FITNESS FOR A PARTICULAR PURPOSE. See the 
-  {{{./license.html}GNU General Public License}} for 
+  or FITNESS FOR A PARTICULAR PURPOSE. See the
+  {{{./license.html}GNU General Public License}} for
   more details.
 
 *Why is the GPL used?
 
-  Stephen chose to license the com.Ostermiller.util Java utilities under the 
-  GNU General Public License. The GPL encourages open source development by 
-  requiring that derivatives remain open source. Anybody who distributes code 
+  Stephen chose to license the com.Ostermiller.util Java utilities under the
+  GNU General Public License. The GPL encourages open source development by
+  requiring that derivatives remain open source. Anybody who distributes code
   based on these utilities must license that code under the GPL.
 
 *Could it be licensed under something less restrictive?
 
-  Many people request they receive a copy of the utilities licensed under the 
-  Library General Public License (LGPL) or a BSD style license.  The answer is 
-  firmly "no".  Those Licenses do not ensure that derivative works remain 
-  liberated.  If such a license were given, the libraries could then be used 
+  Many people request they receive a copy of the utilities licensed under the
+  Library General Public License (LGPL) or a BSD style license.  The answer is
+  firmly "no".  Those Licenses do not ensure that derivative works remain
+  liberated.  If such a license were given, the libraries could then be used
   in closed source applications.
 
 *How about a special one-time license just for this awesome project?
 
-  The com.Ostermiller.util utilities have many contributing authors.  
-  Requesting the permission of all those authors is not possible since they 
-  do not all believe that one-time licenses should be awarded no matter how 
+  The com.Ostermiller.util utilities have many contributing authors.
+  Requesting the permission of all those authors is not possible since they
+  do not all believe that one-time licenses should be awarded no matter how
   deserving the project.

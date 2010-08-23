@@ -1,0 +1,5 @@
+// prevent system.out from being closed
+NoCloseOutputStream out = new NoCloseOutputStream(System.out);
+// pass out to other classes:
+/* somebodyelse.dosomething(out); */
+out.reallyClose();
