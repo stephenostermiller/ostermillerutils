@@ -7,16 +7,33 @@
 
 MD5
 
+    * {{{src/MD5.java.html}MD5.java Source Code}}
+
+    * {{{javadoc/MD5.html}MD5 Javadoc}}
 
 
+  MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for
+  Java Strings, byte arrays, or streams.  MD5 is now considered a weak 
+  algorithm.  New applications should consider more secure one way hashes.
+
+  This class takes as input a message of arbitrary length and produces as 
+  output a 128-bit "fingerprint" or "message digest" of the input. It is 
+  conjectured that it is computationally infeasible to produce two messages 
+  having the same message digest, or to produce any message having a given 
+  pre-specified target message digest. The MD5 algorithm is intended for 
+  digital signature applications, where a large file must be "compressed" in a 
+  secure manner before being encrypted with a private (secret) key under a 
+  public-key cryptosystem such as RSA.
+
+  This class is based on work by 
+  {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
+  and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation 
+  is several times faster and much more memory efficient than Santeri's 
+  implementation.
 
 
+*Example
 
-MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for Java Strings, byte arrays, or streams.  MD5 is now considered a weak algorithm.  New applications should consider more secure one way hashes.
-
-
-
-Example
 ----------------------------------------
 System.out.println(
     MD5.getHashString(
@@ -25,46 +42,35 @@ System.out.println(
 );
 ----------------------------------------
 
+MD5 Input Stream
 
-Security Alert
-The MD5 class had a bug in version 1.02.23 and earlier that miscalculated MD5 sums for inputs
-of certain odd byte lengths.  Please consider the implications for your application and
-upgrade to the most recent version.
+    * {{{src/MD5InputStream.java.html}MD5InputStream.java Source Code}}
 
+    * {{{javadoc/MD5InputStream.html}MD5InputStream Javadoc}}
 
+  A filtered input stream that computes an MD5 sum for anything read.
+  
+*Example
 
-  This class takes as input a message of arbitrary length and produces as output
-a 128-bit "fingerprint" or "message digest" of the input. It is conjectured that 
-it is computationally infeasible to produce two messages having the same message 
-digest, or to produce any message having a given pre-specified target message 
-digest. The MD5 algorithm is intended for digital signature applications, where 
-a large file must be "compressed" in a secure manner before being encrypted with 
-a private (secret) key under a public-key cryptosystem such as RSA.
-
-  This class is based on work by {{{http://www.helsinki.fi/~sjpaavol/programs/md5/}Santeri Paavolainen}}.
-and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation is several times
-faster and much more memory efficient than Santeri's implementation.
-
-<br clear=all>
-
-Example
 ----------------------------------------
 // Print the MD5 hash for a line
 // read from standard input
 MD5InputStream in = new MD5InputStream(System.in);
 int b;
-while ((b = in.read()) != -1 &amp;&amp; b != '\r' &amp;&amp; b != '\n');
+while ((b = in.read()) != -1 && b != '\r' && b != '\n');
 System.out.println(in.getHashString());
 ----------------------------------------
 
+MD5 Output Stream
 
-<H2>Input Stream
+    * {{{src/MD5OutputStream.java.html}MD5OutputStream.java Source Code}}
 
-  A filtered input stream that computes an MD5 sum for anything read.
+    * {{{javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
 
-<br clear=all>
+  A filtered output stream that computes an MD5 sum for anything written.
 
-Example
+*Example
+
 ----------------------------------------
 // Write out hello world
 // and print its MD5 hash 
@@ -73,31 +79,8 @@ out.write("Hello World\n".getBytes());
 System.out.println(out.getHashString());
 ----------------------------------------
 
+*Security Alert
 
-<H2>Output Stream
-
-  A filtered output stream that computes an MD5 sum for anything written.
-
-<br clear=all>
-
-
-<b>MD5 Sums</b>
-
-  * {{{MD5.java.html}MD5 Source}}
-
-  * {{{doc/com/Ostermiller/util/MD5.html}MD5 Documentation}}
-
-  * {{{MD5InputStream.java.html}MD5InputStream Source}}
-
-  * {{{doc/com/Ostermiller/util/MD5InputStream.html}MD5InputStream Documentation}}
-
-  * {{{MD5OutputStream.java.html}MD5OutputStream Source}}
-
-  * {{{doc/com/Ostermiller/util/MD5OutputStream.html}MD5OutputStream Documentation}}
-
-  * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=MD5&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+  The MD5 class had a bug in version 1.02.23 and earlier that miscalculated 
+  MD5 sums for inputs of certain odd byte lengths.  Please consider the 
+  implications for your application and upgrade to the most recent version.
