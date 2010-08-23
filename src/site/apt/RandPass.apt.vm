@@ -25,14 +25,14 @@ System.out.println(
 java com.ostermiller.util.RandPass
 ----------------------------------------
 
-  That will generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an 
+  That will generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an
   applet}} in your web browser.
 
   A cryptographically secure pseudo-random number generator is used to generate the passwords.
   Limitations an passwords such as the length, required characters, or amount of repetition may be used.
 
   To run the program use the following command line:<br>
-  
+
 ----------------------------------------
 java -classpath utils.jar com.Ostermiller.util.RandPass
 ----------------------------------------

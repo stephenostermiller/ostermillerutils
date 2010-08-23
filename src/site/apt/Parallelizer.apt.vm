@@ -11,9 +11,9 @@ Parallelizer Thread Control
 
     * {{{javadoc/Parallelizer.html}Parallelizer Javadoc}}
 
-  The Parallelizer class is a Java thread utility that allows one to easily convert their serial code to parallel code.  
-  The class would typically be used to execute each iteration of a loop at once rather than one after another.  Good 
-  candidates for such an optimization would be when the order of execution does not matter and each iteration does slow 
+  The Parallelizer class is a Java thread utility that allows one to easily convert their serial code to parallel code.
+  The class would typically be used to execute each iteration of a loop at once rather than one after another.  Good
+  candidates for such an optimization would be when the order of execution does not matter and each iteration does slow
   operations such as sleeping or making network connections.
 
   To use the Parallelizer, a developer would typically:

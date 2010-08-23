@@ -23,10 +23,10 @@ Significant Figures
 *Example
 
   Adding numbers using significant figures.
-  
+
 %{code-snippet|brush=java|file=src/site/snippet/SigFigAdding.java.snippet}
 
 *See also
 
-  {{{http://ostermiller.org/calc/significant_figures.html}JavaScript routines and an HTML 
+  {{{http://ostermiller.org/calc/significant_figures.html}JavaScript routines and an HTML
   interface for significant figures calculations}}.

@@ -7,13 +7,13 @@
 
 NoClose Streams
 
-  Create streams that cannot be closed with the normal close() mechanism.  Instead, a 
+  Create streams that cannot be closed with the normal close() mechanism.  Instead, a
   reallyClose() method is provided while the close() method does nothing.
 
-  This is useful when you have a stream to pass to methods that either read or write using the 
-  stream.  If any of the methods call the stream's close method before you are done with the 
-  stream, this class is useful.  Simply wrap your stream in one of the NoClose Streams, and pass 
-  that around.  When the other method calls the close method it will have no effect.  You can 
+  This is useful when you have a stream to pass to methods that either read or write using the
+  stream.  If any of the methods call the stream's close method before you are done with the
+  stream, this class is useful.  Simply wrap your stream in one of the NoClose Streams, and pass
+  that around.  When the other method calls the close method it will have no effect.  You can
   later close your stream by calling the reallyClose() method.
 
 NoCloseStream
