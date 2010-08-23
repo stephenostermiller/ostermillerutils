@@ -7,16 +7,10 @@
 
 Random Password Generator
 
-
-
-
-
-
   Generate random passwords of arbitrary length and arbitrary alphabet.
 
+*Example
 
-
-Example
 ----------------------------------------
 // Get an eight character password
 // made up of the letters A, B, and C.
@@ -25,19 +19,23 @@ System.out.println(
 );
 ----------------------------------------
 
-
   You could use the command line:<br>
-<b>java com.ostermiller.util.RandPass</b><br>
-to generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an applet}} in your web browser
+
+----------------------------------------
+java com.ostermiller.util.RandPass
+----------------------------------------
+
+  That will generate a random password from the command line.  You may also {{{RandPassApplet.html}run this program as an 
+  applet}} in your web browser.
 
   A cryptographically secure pseudo-random number generator is used to generate the passwords.
-Limitations an passwords such as the length, required characters, or amount of repetition may be used.
-
-<br clear=all>
-
+  Limitations an passwords such as the length, required characters, or amount of repetition may be used.
 
   To run the program use the following command line:<br>
-<b>java&nbsp;-classpath&nbsp;utils.jar&nbsp;com.Ostermiller.util.RandPass</b>
+  
+----------------------------------------
+java -classpath utils.jar com.Ostermiller.util.RandPass
+----------------------------------------
 
 ----------------------------------------
 RandPass [-anFLrlRv]
@@ -54,8 +52,6 @@ Generate secure random passwords.
   -R --require chars   Require a character from given alphabet be present.
   -v --verify class    Java subclass of PasswordVerifier to use.
 ----------------------------------------
-
-
 
 <b>Random Password Generator</b>
 
