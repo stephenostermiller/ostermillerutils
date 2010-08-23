@@ -7,76 +7,26 @@
 
 Significant Figures
 
+    * {{{src/SignificantFigures.java.html}SignificantFigures.java Source Code}}
 
-
-
-
+    * {{{javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
 
   A Java number class for figuring out how many significant figures each of the
-numbers in a calculation has and displaying the result appropriately.
+  numbers in a calculation has and displaying the result appropriately.
 
+*Example
 
-Example
-----------------------------------------
-// Numbers to multiply
-String[] args = {"1.0", "2.0"};
-SignificantFigures number;
-int sigs = Integer.MAX_VALUE;
-double result = 1D;
-for (int i=0; i<args.length; i++){
-    // For each number, figure out significant figures
-    // and multiply the numbers
-    number = new SignificantFigures(args[i]);
-    sigs = Math.min(sigs, number.getNumberSignificantFigures());
-    result *= number.doubleValue();
-}
-// format and display the result
-number = new SignificantFigures(result);
-number.setNumberSignificantFigures(sigs);
-System.out.println(number);
-----------------------------------------
-Figure significant figures for multiplication of numbers.
+  Multiplying numbers using significant figures.
 
+%{code-snippet|brush=java|file=src/site/snippet/SigFigMultiplying.java.snippet}
 
-<br clear=all>
-Example
-----------------------------------------
-// Numbers to add
-String[] args = {"1.0", "2.0"};
-SignificantFigures number;
-int lsd = Integer.MIN_VALUE;
-int msd = Integer.MIN_VALUE;
-double result = 0D;
-for (int i=0; i<args.length; i++){
-    // for each number figure most and least
-    // significant digit then add the number.
-    number = new SignificantFigures(args[i]);
-    lsd = Math.max(lsd, number.getLSD());
-    msd = Math.max(msd, number.getMSD());
-    result += number.doubleValue();
-}
-// format and display the result
-number = new SignificantFigures(result);
-number.setLMSD(lsd, msd);
-System.out.println(number);
-----------------------------------------
-Figure significant figures for addition of numbers.
+*Example
 
+  Adding numbers using significant figures.
+  
+%{code-snippet|brush=java|file=src/site/snippet/SigFigAdding.java.snippet}
 
-  See also: {{{/calc/significant_figures.html}JavaScript routines and an HTML interface for significant figures calculations}}.
+*See also
 
-<br clear=all>
-
-
-<b>Significant Figures</b>
-
-    * {{{SignificantFigures.java.html}SignificantFigures Source}}
-
-    * {{{doc/com/Ostermiller/util/SignificantFigures.html}SignificantFigures Documentation}}
-
-    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=Significant+Figures&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+  {{{http://ostermiller.org/calc/significant_figures.html}JavaScript routines and an HTML 
+  interface for significant figures calculations}}.

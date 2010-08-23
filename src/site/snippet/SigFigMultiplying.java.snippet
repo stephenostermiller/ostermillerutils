@@ -1,0 +1,16 @@
+// Numbers to multiply
+String[] args = {"1.0", "2.0"};
+SignificantFigures number;
+int sigs = Integer.MAX_VALUE;
+double result = 1D;
+for (int i = 0; i < args.length; i++){
+    // For each number, figure out significant figures
+    // and multiply the numbers
+    number = new SignificantFigures(args[i]);
+    sigs = Math.min(sigs, number.getNumberSignificantFigures());
+    result *= number.doubleValue();
+}
+// format and display the result
+number = new SignificantFigures(result);
+number.setNumberSignificantFigures(sigs);
+System.out.println(number);
