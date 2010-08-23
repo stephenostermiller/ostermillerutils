@@ -18,12 +18,12 @@ Tabs
 
 
     Internationalization - included languages:
-    	
-    <li>English</li> 
-    
+
+    <li>English</li>
+
     Translations gladly accepted.  Please translate
     {{{Tabs.properties.html}Tabs.properties}}.<br>
-	You may want to use: 
+	You may want to use:
 	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}.
 
 

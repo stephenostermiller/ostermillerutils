@@ -25,20 +25,20 @@ padding:1cm;
 </style>
 
 
-<object 
+<object
 classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
 width=200
 height=340
 codebase="http://java.sun.com/products/plugin/autodl/jinstall-1_4_0-win.cab">
 <param name="code" value="com/Ostermiller/utils/RandPassApplet.class">
 <param name="archive" value="randpass.jar">
-<param name="type" value="application/x-java-applet;jpi-version=1.4.0"><comment><object 
+<param name="type" value="application/x-java-applet;jpi-version=1.4.0"><comment><object
 codetype="application/x-java-applet"
 classid="java:com/Ostermiller/utils/RandPassApplet.class"
 archive="randpass.jar"
-width=200 
+width=200
 height=340>
-The Random Password Generator could not be run in your browser.  
+The Random Password Generator could not be run in your browser.
 To run the applet, you must have a <a href="http://java.sun.com/j2se/downloads.html">
 recent version of Java</a> installed, configured, and enabled.
 </object></comment></object>

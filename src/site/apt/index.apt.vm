@@ -7,13 +7,13 @@
 
 Java Utilities - OstermillerUtils
 
-  The com.ostermiller.util package is open source (GPL) Java utilities 
-  maintained by Stephen Ostermiller with help from 
+  The com.ostermiller.util package is open source (GPL) Java utilities
+  maintained by Stephen Ostermiller with help from
   {{{contributors.html}many contributors}}.   The utilities can
   be obtained from the {{{download.html}download page}}.
-  
-  There are dozens of {{{./components.html}components}} including {{{./CSV.html}CSV parsing}}, 
-  {{{./Base64.html}base 64 Encoding}}, and {{{./Browser.html}opening a web 
-  browser}}.  The most recent version of the OstermillerUtils is 
+
+  There are dozens of {{{./components.html}components}} including {{{./CSV.html}CSV parsing}},
+  {{{./Base64.html}base 64 Encoding}}, and {{{./Browser.html}opening a web
+  browser}}.  The most recent version of the OstermillerUtils is
   ${project.version}.
 

@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://maven.apache.org/XDOC/2.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -13,7 +12,7 @@
   <body>
     <section name="ExtraCmdLnArgumentException OstermillerUtils JavaDoc">
       <ul>
-        
+
         <li><a href="../src/ExtraCmdLnArgumentException.java.html">ExtraCmdLnArgumentException.java Source Code</a></li>
       </ul>
       <iframe src="../doc/com/Ostermiller/util/ExtraCmdLnArgumentException.html" width="100%" height="800"></iframe>

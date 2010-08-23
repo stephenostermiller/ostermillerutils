@@ -8,7 +8,7 @@
 Uber Properties
 
   A replacement for the java.utils.Properties class.  This version can read and
-  write properties files that are in the same format but it can handle multiple 
+  write properties files that are in the same format but it can handle multiple
   properties with the same name and makes comments from the files available.
 
 %{code-snippet|brush=java|file=src/site/snippet/UberProperties.java.snippet}

@@ -11,11 +11,11 @@ Helper Methods for Arrays
 
     * {{{javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
 
-  Methods that are useful when working with arrays.  Contains utilities to 
+  Methods that are useful when working with arrays.  Contains utilities to
   concatenate arrays, print arrays, and compare arrays.
 
 *Example
 
   Concatenate two arrays into a single longer array
-  
+
 %{code-snippet|brush=java|file=src/site/snippet/ArrayHelperCat.java.snippet}

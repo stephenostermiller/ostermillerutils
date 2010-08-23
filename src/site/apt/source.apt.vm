@@ -7,12 +7,12 @@
 
 Source Code -- Java Utilities - OstermillerUtils
 
-  A source code bundle is available on the {{{./download.html}download page}} 
+  A source code bundle is available on the {{{./download.html}download page}}
   for the purposes of {{{./modifications.html}making modifications}} to the libraries.
 
   A list of all source files for the Ostermiller Java Utilites appears below.
   Each has syntax highlighting for easy reading.
-  
+
 ~~ BEGIN GENERATED SOURCES LIST
     * {{{./src/ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
 

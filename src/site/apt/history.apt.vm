@@ -8,27 +8,27 @@
 Version History of com.Ostermiller.util Java Utilities
 
 
-  The major version number will remain unchanged until backward compatibility 
+  The major version number will remain unchanged until backward compatibility
   is severely broken (hopefully never).  The middle number will be incremented
-  whenever new utilities are added.  The final number is reserved for bug fix 
+  whenever new utilities are added.  The final number is reserved for bug fix
   releases.
 
   * Version 1.07.01
-    
+
     * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=237}The flush() method isn't synchronized}}
-    
+
     * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=236}Mark position invalidated too early.}}
 
   * Version 1.07.00
-  
+
     * New command line parser: {{{CmdLn.html}CmdLn}}
-    
+
     * Extensive code cleanup to reduce lint warnings.
 
   * Version 1.06.02
-    
+
     * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=150}MD5 methods don't close the file}}
-    
+
     * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=148}ExecHelper directory not passed into Runtime.exec()}}
 
 
@@ -43,17 +43,17 @@ Version History of com.Ostermiller.util Java Utilities
   * Version 1.06.00
 
     * ArrayHelper
-    
+
     * ExecHelper
-    
+
     * CircularBuffers no longer eat space when skip() is called.
 
   * Version 1.05.00
 
     * New Parallelizer thread utility
-    
+
     * Added "mark of the web" to html files produced by the Browser opener to work better with Internet Explorer Windows XP service pack 2
-    
+
     * Added splitIncludeDelimiters and join methods to StringHelper.
 
   * Version 1.04.03
@@ -79,23 +79,23 @@ Version History of com.Ostermiller.util Java Utilities
     * Concatenation Streams classes
 
     * Updated all scanner definitions to work with JFlex 1.4
-    
+
     * CGIParser catches IllegalArgementException thrown by URLDecoder
-    
+
     * New unit tests for several classes
-    
+
     * Unit tests standalone programs with no output on success.
 
   * Version 1.03.00
 
     * Labeled CSV class
-    
+
     * new Iterator and Enumeration classes
-    
+
     * NameValuePair class for CGI
-    
+
     * CGI parameter order preserved
-    
+
     * CGI character set bug fixed.
 
   * Version 1.02.27
@@ -137,7 +137,7 @@ Version History of com.Ostermiller.util Java Utilities
   * Version 1.02.18
 
     * Ability to change quotes and delimiters on all CSVPrinters
-    
+
     * @since tags on all javadoc.
 
   * Version 1.02.17
@@ -147,9 +147,9 @@ Version History of com.Ostermiller.util Java Utilities
   * Version 1.02.16
 
     * Browser opens better on OS X, more options for unix
-    
+
     * More Base64 encoding options
-    
+
     * Ability to change quotes on CSVParsers.
 
   * Version 1.02.15
@@ -220,6 +220,6 @@ Version History of com.Ostermiller.util Java Utilities
 
     * First versioned release.
 
-  No version number was available before January 2003. Old versions are not 
-  available for download from this site. 
+  No version number was available before January 2003. Old versions are not
+  available for download from this site.
 

@@ -11,7 +11,7 @@
 
 /*
  * Goes with UberProperties
- * Copyright (C) 2002-2004 Stephen Ostermiller 
+ * Copyright (C) 2002-2004 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,7 +31,7 @@ package com.Ostermiller.util;
 
 import java.io.*;
 
-/** 
+/**
  * PropertiesLexer is a Java Properties file lexer.  Created with JFlex.  An example of how it is used:
  *  <CODE>
  *  <PRE>
@@ -46,7 +46,7 @@ import java.io.*;
  * @see PropertiesToken
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
- */ 
+ */
 
 %%
 
@@ -59,7 +59,7 @@ import java.io.*;
 %{
 	private int lastToken;
 	private int nextState=YYINITIAL;
-		
+
 	/**
 	 * Prints out tokens from a file or System.in.
 	 * If no arguments are given, System.in will be used for input.
@@ -97,7 +97,7 @@ import java.io.*;
 		} catch (IOException e){
 			System.err.println(e.getMessage());
 		}
-	}  
+	}
 
     /**
      * Return the next token from the properties.
@@ -149,7 +149,7 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
 
 %%
 
-<YYINITIAL> {Comment} { 
+<YYINITIAL> {Comment} {
 	nextState = LINE_END;
 	lastToken = PropertiesToken.COMMENT;
 	String text = yytext();
@@ -158,7 +158,7 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
 	return (t);
 }
 <YYINITIAL> {WhiteSpace}+ {
-	nextState = WHITE_SPACE;	
+	nextState = WHITE_SPACE;
 	lastToken = PropertiesToken.WHITE_SPACE;
 	String text = yytext();
 	PropertiesToken t = new PropertiesToken(lastToken,text);
@@ -264,7 +264,7 @@ FullValue=((({NameTextWSeparators}+){ValueText}*)?)
 }
 <YYINITIAL,LINE_END,WHITE_SPACE,NAME,NAME_SPACE,SEPARATOR,VALUE,MID_NAME,MID_NAME_NEW_LINE,MID_VALUE> [^] {
 	System.err.println("Unmatched input.");
-	String state = "";	
+	String state = "";
 	String text = yytext();
 	switch (nextState){
 		case YYINITIAL: state = "YYINITIAL"; break;

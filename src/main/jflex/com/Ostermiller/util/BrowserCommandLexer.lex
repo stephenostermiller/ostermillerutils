@@ -40,7 +40,7 @@ import java.io.*;
 %apiprivate
 %function getToken
 %type String
-%{    
+%{
     /**
      * Return the next token from the browser command.
      *

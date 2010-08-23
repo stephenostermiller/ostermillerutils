@@ -19,7 +19,7 @@ numbers in a calculation has and displaying the result appropriately.
 Example
 ----------------------------------------
 // Numbers to multiply
-String[] args = {"1.0", "2.0"}; 
+String[] args = {"1.0", "2.0"};
 SignificantFigures number;
 int sigs = Integer.MAX_VALUE;
 double result = 1D;
@@ -42,7 +42,7 @@ Figure significant figures for multiplication of numbers.
 Example
 ----------------------------------------
 // Numbers to add
-String[] args = {"1.0", "2.0"}; 
+String[] args = {"1.0", "2.0"};
 SignificantFigures number;
 int lsd = Integer.MIN_VALUE;
 int msd = Integer.MIN_VALUE;

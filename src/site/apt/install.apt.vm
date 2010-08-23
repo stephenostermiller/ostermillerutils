@@ -17,7 +17,7 @@ Installation Instructions for the com.Ostermiller.util Java Utilities
 
   * Set your CLASSPATH environment variable to include the jar file.
 
-  * Specify the jar file in the command line classpath when you compile 
+  * Specify the jar file in the command line classpath when you compile
     and run your programs.
 
   * Extract the jar file to a folder already in your classpath.

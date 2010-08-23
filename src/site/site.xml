@@ -7,7 +7,7 @@
     <version>2.0</version>
   </skin>
 
-  <publishDate position="none"/> 
+  <publishDate position="none"/>
   <version position="none"/>
 
   <bannerLeft>
@@ -15,12 +15,12 @@
     <src>javacup.png</src>
     <href>./</href>
   </bannerLeft>
-  
+
   <body>
     <links>
       <item name="Home" href="./" />
       <item name="Download" href="/download.html" />
-      <item name="Install" href="/install.html" />          
+      <item name="Install" href="/install.html" />
       <item name="Components" href="components.html"/>
       <item name="JavaDoc" href="/doc/" />
       <item name="Source" href="/source.html" />
@@ -30,7 +30,7 @@
 
     <menu name="OstermillerUtils">
       <item name="Download" href="/download.html" />
-      <item name="Installation Instructions" href="/install.html" />      
+      <item name="Installation Instructions" href="/install.html" />
       <item name="Components" href="components.html"/>
       <item name="JavaDoc" href="/doc.html"/>
       <item name="Browse Source Code" href="/source.html" />
@@ -40,7 +40,7 @@
       <item name="Contributors" href="/contributors.html" />
       <item name="License" href="/licenseFAQ.html" />
     </menu>
-    
+
     <menu name="Documentation">
       <item name="Components" href="components.html" collapse="true">
         <item name="ArrayHelper" href="/ArrayHelper.html" />
@@ -234,6 +234,6 @@
       <!-- END GENERATED SOURCES MENU -->
       </item>
     </menu>
-    
-  </body> 
+
+  </body>
 </project>

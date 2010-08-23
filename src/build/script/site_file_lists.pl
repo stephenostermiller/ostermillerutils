@@ -16,8 +16,7 @@ for my $line (split(/\n/, `grep -i '\.java\.html.* Source' src/site/apt/*.apt.vm
   if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z0-9]([A-Za-z0-9]+)\.java/){
     my ($webdoc, $javafile) = ($1, $2);
     if ($webdoc ne "source"){
-      print "$webdoc $javafile\n";
-      $sourceMap{$javafile} = "$webdoc"
+       $sourceMap{$javafile} = "$webdoc"
     }
   }
 }
@@ -55,22 +54,22 @@ for my $file (sort @files){
       $javadocFile = "src/site/xdoc/javadoc/$barename.xml";
     }
   }
-  my $srcXdocLink = "<li><a href=\"../src/$srchtmlhref\">$basename Source Code</a></li>";
+  my $srcXdocLink = "        <li><a href=\"../src/$srchtmlhref\">$basename Source Code</a></li>";
   my $webDoc = &getWebDoc($barename);
   if ($webDoc){
     $docAptLink = "    * {{{../$webDoc.html}$webDoc Documentation and Examples}}";
-    $docXdocLink = "<li><a href=\"../$webDoc.html\">$webDoc Documentation and Examples</a></li>";
+    $docXdocLink = "        <li><a href=\"../$webDoc.html\">$webDoc Documentation and Examples</a></li>";
   }
   if (! -f "src/site/apt/$barename.apt.vm"){
     $htaccessList .= "Redirect permanent /utils/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
     $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
     $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
   }
-    
+
   $htaccessList .= "Redirect permanent /utils/$srchtmlhref http://ostermiller.org/utils/src/$srchtmlhref\n";
   $sourceList .= "    * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
   $menuList .= "        <item name=\"$basename\" href=\"/src/$srchtmlhref\" />\n";
-  
+
   &createSrcFile($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname);
   if ($javadocHref){
     &createJavadocFile($javadocFile, $barename, $javadocHref, $docXdocLink, $srcXdocLink);
@@ -84,7 +83,7 @@ for my $file (sort @files){
   my ($barename, $ext) = $file =~ /\/([^\/]+)(\.[^\/\.]+)$/;
   if ($barename =~ /Test/){
       my $barenametest = $barename;
-      my $barenametests = $barename;  
+      my $barenametests = $barename;
       if ($barename =~ /Tests/){
         $barenametest =~ s/Tests/Test/g;
       } else {
@@ -129,14 +128,13 @@ $javadocAptLink
 ";
 
   close (FILE);
-  
+
 }
 
 sub createJavadocFile(){
   my ($javadocFile, $barename, $javadocHref, $docXdocLink, $srcXdocLink) = @_;
   open (FILE, ">$javadocFile") or die $?;
-  print FILE "
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+  print FILE "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <document xmlns=\"http://maven.apache.org/XDOC/2.0\"
   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
   xsi:schemaLocation=\"http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd\">
@@ -150,8 +148,8 @@ sub createJavadocFile(){
   <body>
     <section name=\"$barename OstermillerUtils JavaDoc\">
       <ul>
-        $docXdocLink
-        $srcXdocLink
+$docXdocLink
+$srcXdocLink
       </ul>
       <iframe src=\"$javadocHref\" width=\"100%\" height=\"800\"></iframe>
     </section>
@@ -159,12 +157,12 @@ sub createJavadocFile(){
 </document>
 ";
   close (FILE);
-  
+
 }
 
 sub replaceInFile(){
   my ($filename, $section, $generated) = @_;
-  
+
   open(FILE, $filename) or die $?;
   my $contents = "";
   while (my $line = <FILE>){
@@ -174,7 +172,7 @@ sub replaceInFile(){
   $contents =~ s/(BEGIN $section[^\r\n]*)(?:.|[\r\n])*?([^\r\n]*END $section)/\1\n$generated\2/g;
   open(FILE, ">$filename") or die $?;
   print FILE $contents;
-  close(FILE);  
+  close(FILE);
 }
 
 sub getWebDoc(){
@@ -185,5 +183,5 @@ sub getWebDoc(){
   if ($sourceMap{$barename}){
     return "$sourceMap{$barename}"
   }
-  return "";  
+  return "";
 }

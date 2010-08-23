@@ -11,8 +11,8 @@ Documentation for com.Ostermiller.util Java Utilities
 
     * {{{doc/}Browse the JavaDoc}}
 
-  JavaDoc for individual classes: 
-  
+  JavaDoc for individual classes:
+
 ~~ BEGIN GENERATED JAVADOC LIST
     * {{{javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
 

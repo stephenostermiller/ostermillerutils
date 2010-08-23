@@ -15,9 +15,7 @@ then
   echo "Ensure the project has been built"
 fi
 
-tablist=""
-
-for file in `find src/*/java -name "*.java"`
+for file in `find src/ -type f`
 do
   trailCount=`grep -c -E '[ 	]+$' $file`
   if [ $trailCount != 0 ]
@@ -25,7 +23,7 @@ do
     echo "Removing trailing white space from: $file"
     sed -r -i 's/[ 	]+$//' "$file"
   fi
-  tablist="$tablist $file"  
 done
 
-java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4 $tablist
+find src/*/java -name "*.java" | xargs java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4
+java -classpath "$CLASSES" com.Ostermiller.util.Tabs -s 4 -v -w 4 src/site/snippet/*.java.snippet

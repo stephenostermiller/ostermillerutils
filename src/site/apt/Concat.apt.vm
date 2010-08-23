@@ -14,7 +14,7 @@ ConcatInputStream
     * {{{src/ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
 
     * {{{javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
-  
+
   Combines multiple byte stream sources into a single byte stream.
 
 *Example
@@ -22,7 +22,7 @@ ConcatInputStream
 %{code-snippet|brush=java|file=src/site/snippet/ConcatInputPrepend.java.snippet}
 
 ConcatReader
-  
+
     * {{{src/ConcatReader.java.html}ConcatReader.java Source Code}}
 
     * {{{javadoc/ConcatReader.html}ConcatReader Javadoc}}

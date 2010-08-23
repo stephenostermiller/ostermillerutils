@@ -21,7 +21,7 @@ Parallelizer Thread Control
 
   * Copy all loop variables used inside the Runnable instance into finals
 
-  * Call join() after the loop to wait until the threads are done and it is safe to proceed</li> 
+  * Call join() after the loop to wait until the threads are done and it is safe to proceed</li>
 
 *Example
 
