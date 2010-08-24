@@ -29,30 +29,42 @@ import java.util.*;
  */
 public class ParallelizerTest extends TestCase {
 
+  private static final int NUMBER_OF_RUNS = 20;
+  private static final int THREADS_PER_RUN = 6;
+  private static final int SIMULTANEOUS_THREADS = 3;
+
+
 	public void testSuccessfulRun() throws InterruptedException {
-		final HashMap<String,Date> results = new HashMap<String,Date>();
-		final Random random = new Random();
-		Parallelizer pll = new Parallelizer(8);
-		for(int i=0; i<100; i++){
-			final String hashKey = Integer.toString(i);
-			pll.run(
-				new Runnable(){
-					public void run(){
-						try {
-							Thread.sleep(random.nextInt(50));
-							results.put(hashKey,new Date());
-						} catch (InterruptedException x){
-							throw new RuntimeException(x);
+		for (int j=0; j<NUMBER_OF_RUNS; j++){
+			final Date[] results = new Date[THREADS_PER_RUN];
+			final Random random = new Random();
+			Parallelizer pll = new Parallelizer(SIMULTANEOUS_THREADS);
+			for(int i=0; i<THREADS_PER_RUN; i++){
+				final int threadNum = i;
+				pll.run(
+					new Runnable(){
+						public void run(){
+							try {
+								Thread.sleep(random.nextInt(50));
+								results[threadNum] = new Date();
+							} catch (InterruptedException x){
+								throw new RuntimeException(x);
+							}
 						}
 					}
-				}
-			);
-		}
-		assertFalse(results.size() == 100);
-		pll.join();
-		assertEquals(100, results.size());
-		for(int i=0; i<100; i++){
-			assertNotNull(results.get(Integer.toString(i)));
+				);
+			}
+      boolean somethingDidntRun = false;
+			for(int i=0; i<THREADS_PER_RUN; i++){
+				if (results[i] == null){
+          somethingDidntRun = true;
+        }
+			}      
+			assertTrue(somethingDidntRun);
+			pll.join();
+			for(int i=0; i<THREADS_PER_RUN; i++){
+				assertNotNull("Thread " + i + " never ran", results[i]);
+			}
 		}
 	}
 
