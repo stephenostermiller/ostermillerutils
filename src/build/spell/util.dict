@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1717 
+personal_ws-1.1 en 1720 
 aa
 aA
 aaa
@@ -157,6 +157,7 @@ bytesRead
 bytesReadSinceMark
 bytesToString
 byteValue
+bz
 calc
 callListeners
 cancelButton
@@ -622,6 +623,7 @@ gridwidth
 gridy
 gts
 guessTabWidth
+gz
 harr
 hArr
 hasAllArguments
@@ -859,6 +861,7 @@ msd
 msg
 multi
 multipart
+mvn
 mydialog
 myfile
 nabla

@@ -1,6 +1,5 @@
 /*
- * Read files in Excel comma separated value format.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,11 +23,12 @@ import java.util.Vector;
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  * <P>
- * Excel CSV is a file format used as a portable representation of a database.
+ * Excel CSV is a file format used as a portable representation of a database. The file
+ * format is described by RFC 4180.
+ * <P>
  * Each line is one entry or record and the fields in a record are separated by commas.
- * <P>
  * If field includes a comma or a new line, the whole field must be surrounded with double quotes.
  * When the field is in quotes, any quote literals must be escaped by two quotes ("").
  * Text that comes after quotes that have been closed but come before the next comma will be ignored.
@@ -41,7 +41,7 @@ import java.util.Vector;
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
  * comment character as set by the setCommentStart() method.
  * <P>
- * An example of how CVSLexer might be used:
+ * An example of how ExcelCSVParser might be used:
  * <pre>
  * ExcelCSVParser shredder = new ExcelCSVParser(System.in);
  * String t;
@@ -50,9 +50,7 @@ import java.util.Vector;
  * }
  * </pre>
  * <P>
- * The CSV that Excel outputs differs from the
- * <a href="http://ostermiller.org/utils/CSVLexer.html">standard</a>
- * in several respects:
+ * The CSV that Excel outputs differs the format read by com.Ostermiller.util.CSVParser:
  * <ul><li>Leading and trailing whitespace is significant.</li>
  * <li>A backslash is not a special character and is not used to escape anything.</li>
  * <li>Quotes inside quoted strings are escaped with a double quote rather than a backslash.</li>
@@ -61,7 +59,7 @@ import java.util.Vector;
  * <li>New lines in the data are always represented as the UNIX new line. ("\n")</li>
  * <li>Numbers that are greater than 12 digits may be represented in truncated
  * scientific notation form.</li></ul>
- * This parser does not attempt to fix these excel conversions, but users should be aware
+ * This parser does not attempt to fix these Excel conversions, but users should be aware
  * of them.</li></ul>
  *
  * @see com.Ostermiller.util.CSVParser

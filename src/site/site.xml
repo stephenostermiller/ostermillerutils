@@ -22,7 +22,8 @@
       <item name="Download" href="/download.html" />
       <item name="Install" href="/install.html" />
       <item name="Components" href="components.html"/>
-      <item name="JavaDoc" href="/doc/" />
+      <item name="Build" href="/modifications.html" />
+      <item name="JavaDoc" href="/doc.html" />
       <item name="Source" href="/source.html" />
       <item name="Bugs" href="/bugs.html" />
       <item name="License" href="/licenseFAQ.html" />
@@ -36,7 +37,7 @@
       <item name="Browse Source Code" href="/source.html" />
       <item name="Bugs and Features" href="/bugs.html" />
       <item name="Version History" href="/history.html" />
-      <item name="Modifications" href="/modifications.html" />
+      <item name="Compile Modifications" href="/modifications.html" />
       <item name="Contributors" href="/contributors.html" />
       <item name="License" href="/licenseFAQ.html" />
     </menu>

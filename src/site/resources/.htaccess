@@ -212,6 +212,9 @@ Redirect permanent /utils/IteratorEnumeration.html http://ostermiller.org/utils/
 Redirect permanent /utils/javadoc/IteratorEnumeration.html http://ostermiller.org/utils/src/IteratorEnumeration.java.html
 Redirect permanent /utils/doc/com/Ostermiller/util/IteratorEnumeration.html http://ostermiller.org/utils/src/IteratorEnumeration.java.html
 Redirect permanent /utils/IteratorEnumeration.java.html http://ostermiller.org/utils/src/IteratorEnumeration.java.html
+Redirect permanent /utils/LabeledCSVParser.html http://ostermiller.org/utils/src/LabeledCSVParser.java.html
+Redirect permanent /utils/javadoc/LabeledCSVParser.html http://ostermiller.org/utils/src/LabeledCSVParser.java.html
+Redirect permanent /utils/doc/com/Ostermiller/util/LabeledCSVParser.html http://ostermiller.org/utils/src/LabeledCSVParser.java.html
 Redirect permanent /utils/LabeledCSVParser.java.html http://ostermiller.org/utils/src/LabeledCSVParser.java.html
 Redirect permanent /utils/LineEnds.java.html http://ostermiller.org/utils/src/LineEnds.java.html
 Redirect permanent /utils/MD5.java.html http://ostermiller.org/utils/src/MD5.java.html

@@ -1,25 +1,24 @@
   ----
-  Modifications
+  Modifying, Compiling, and Building
   ----
   Stephen Ostermiller;
-  meta-description=Instructions for making modifications to the OstermillerUtils libraries.;
+  meta-description=Instructions for modifying, compiling and building the OstermillerUtils libraries.;
   ----
 
-Modifying the com.Ostermiller.util Java utilities
+Modifying, Compiling, and Building the com.Ostermiller.util Java utilities
 
-  Several tools are useful if you want to modify and recompile these utilities:
+  The com.Ostermiller.util package is open source you can download the
+  source code, make modifications, and distribute your changes in accordance
+  with the {{{./license.html}license}}.  To get started, choose the "latest
+  source code" from the {{{./downloads.html}downloads}}.  Extract the package
+  and build it with {{{http://maven.apache.org/}Maven}}.
 
-    * {{{http://java.sun.com/javase/downloads/index.jsp}Java SDK}} - Includes the Java compiler.
+----------------------------------------
+mvn package
+----------------------------------------
 
-    * {{{http://ant.apache.org/}Apache Ant}} - for building distribution files.
-
-    * {{{http://jflex.de/}JFlex}} - to generate lexers used by several utilities.
-
-    * {{{http://ostermiller.org/bte/}Better Template Engine}} - To compile the website documentation.
-
-    * {{{http://ostermiller.org/syntax/}com.Ostermiller.Syntax package}} - To color the HTML source code.
-
-    * Make - (optional in addition to ant) to automate the build.  Consider "make", "make install", "make clean", "make build", and "make javadoc".
-
-    * {{{http://cygwin.com/}Cygwin}} - to get Unix utilities (including make and CVS) for Windows.
+  There are several build dependencies such as {{{http://jflex.de/}JFlex}},
+  however, Maven will take care of them for you and download all needed
+  libraries and software.  Upon a successful build, you should find several
+  .jar, .zip, .gz, and .bz2 files built in the target directory.
 

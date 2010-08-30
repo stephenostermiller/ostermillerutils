@@ -30,7 +30,7 @@ Download com.Ostermiller.util Java Utilities
 **Latest source code
 
   The source release contains the source code for the project and the website.
-  See the {{{./build.html} build instructions}} to be able to compile the
+  See the {{{./modifications.html} build instructions}} to be able to compile the
   utilities yourself.  Choose one of the following:
 
     * {{{./ostermillerutils-${project.version}-project.tar.bz2}ostermillerutils-${project.version}-project.tar.bz2}}

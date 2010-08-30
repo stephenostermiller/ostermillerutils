@@ -10,8 +10,7 @@
  */
 
 /*
- * Read files in comma separated value format.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -32,6 +31,8 @@ import java.io.*;
 
 /**
  * Read files in comma separated value format.
+ * More information about this class is available from <a href=
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * The use of this class is no longer recommended.	It is now recommended that you use
  * com.Ostermiller.util.CSVParser instead.	That class, has a cleaner API, and methods

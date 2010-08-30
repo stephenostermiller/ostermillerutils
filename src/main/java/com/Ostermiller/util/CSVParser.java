@@ -1,6 +1,5 @@
 /*
- * Read files in comma separated value format.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,7 +22,7 @@ import java.util.*;
 /**
  * Read files in comma separated value format.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CSVLexer.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.
@@ -45,7 +44,7 @@ import java.util.*;
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
  * comment character as set by the setCommentStart() method.
  * <P>
- * An example of how CVSLexer might be used:
+ * An example of how CSVParser might be used:
  * <pre>
  * CSVParser shredder = new CSVParser(System.in);
  * shredder.setCommentStart("#;!");
@@ -56,10 +55,11 @@ import java.util.*;
  * }
  * </pre>
  * <P>
- * Some applications do not output CSV according to the generally accepted standards and this parse may
- * not be able to handle it. One such application is the Microsoft Excel spreadsheet. A
- * separate class must be use to read
- * <a href="http://ostermiller.org/utils/ExcelCSV.html">Excel CSV</a>.
+ * Many applications use the CSV formatted that Microsoft supports in Excel Spreadsheet.
+ * It is subtly different than the CSV format implemented by this class.  It does not
+ * use backslash as an escape character, for example.  For reading
+ * CSV for interoperability with Microsoft Excel or RFC 4180 use the
+ * com.Ostermiller.util.ExcelCSVParser class.
  *
  * @see com.Ostermiller.util.ExcelCSVParser
  *

@@ -10,8 +10,7 @@
  */
 
 /*
- * Read files in comma separated value format.
- * Copyright (C) 2001-2004 Stephen Ostermiller
+ * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,7 +33,7 @@ import java.io.*;
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
- * "http://ostermiller.org/utils/ExcelCSV.html">ostermiller.org</a>.
+ * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  * <P>
  * Excel CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.
