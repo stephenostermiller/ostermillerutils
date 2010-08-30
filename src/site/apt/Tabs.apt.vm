@@ -11,7 +11,7 @@ Tabs
 
     * {{{javadoc/Tabs.html}Tabs Javadoc}}
 
-  Converts tabs to spaces or spaces to tabs at the beginning of each line of 
+  Converts tabs to spaces or spaces to tabs at the beginning of each line of
   files.
 
 Features
@@ -52,7 +52,7 @@ Internationalization
 
     * English
 
-  Translations gladly accepted.  Please translate 
+  Translations gladly accepted.  Please translate
   {{{./src/Tabs.properties.html}Tabs.properties}}.
 	You may want to use:
 	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}.
