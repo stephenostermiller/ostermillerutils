@@ -43,7 +43,6 @@ Adjusts the tabs and spaces at the beginning of each line in files.
   -v --verbose        Print a message for each file modified.
   -q --quiet          Print error messages. (default)
   -Q --reallyquiet    Print nothing.
-
 ----------------------------------------
 
 Internationalization
