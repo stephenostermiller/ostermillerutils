@@ -8,73 +8,40 @@
   </properties>
   <head>
     <meta name="description" content="Generate secure random passwords directly in your web browser using this Java applet." />
-    <style type="text/css">
-    div.applet {
-    border:4px gray outset;
-    float:left;
-    margin-right:1cm;
-    padding:0;
-    }
-    div.noapplet {
-    width:2in;
-    padding:1cm;
-    }
-    </style>
   </head>
   <body>
     <section name="Random Password Generator Applet">
     
     <applet
-    classid="clsid:CAFEEFAC-0015-0000-0000-ABCDEFFEDCBA" 
-  archive="http://ostermiller.org/utils/randpass.jar"
-  code="com/Ostermiller/utils/RandPassApplet.class"
-          width="200"
-          height="340"></applet>
-
-      <!--<object
-          classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
-          width="200"
-          height="340"
-          codebase="http://java.sun.com/products/plugin/autodl/jinstall-1_4_0-win.cab">
-        <param name="code" value="com/Ostermiller/utils/RandPassApplet.class"/>
-        <param name="archive" value="randpass.jar"/>
-        <param name="type" value="application/x-java-applet;jpi-version=1.4.0"/>
-        <comment>
-          <object
-              codetype="application/x-java-applet"
-              classid="java:com/Ostermiller/utils/RandPassApplet"
-              archive="randpass.jar"
-              width="200"
-              height="340">
-            The Random Password Generator could not be run in your browser.
-            To run the applet, you must have a <a href="http://www.java.com/en/">
-            recent version of Java</a> installed, configured, and enabled.
-          </object>
-        </comment>
-      </object>-->
+      classid="clsid:CAFEEFAC-0015-0000-0000-ABCDEFFEDCBA" 
+      archive="randpass.jar"
+      code="com/Ostermiller/util/RandPassApplet.class" 
+      width="200"
+      height="340"></applet>
       <ul>
         <li>
           You must have <a href="http://www.java.com/en/">Java 1.5 or later</a> installed,
-          configured, and enabled to use the password generator in your web browser.
+          configured, and enabled to use the password generator in your web 
+          browser.
         </li>
         <li>
-          The password length, and characters that can appear in the password can be set in the 
-          preferences.
+          The password length, and characters that can appear in the password 
+          can be set in Edit -&gt; Preferences.
         </li>
         <li>
           Preferences are not remembered between visits and page reloads.
         </li>
         <li>
-          This applet is part of the <a href="http://ostermiller.org/utils/">com.Ostermiller.util Java
-           Utilities</a>
+          This applet is part of the <a href="http://ostermiller.org/utils/">
+          com.Ostermiller.util Java Utilities</a>
         </li>
         <li>
-          <a href="http://ostermiller.org/utils/RandPass.html">A command line and a Java library</a>
-          version of this program is also available.
+          <a href="http://ostermiller.org/utils/RandPass.html">A command line 
+          and a Java library</a> version of this program is also available.
         </li>
         <li>
-          The <a href="http://ostermiller.org/utils/download.html">source code for this applet</a> is 
-          available.
+          The <a href="http://ostermiller.org/utils/download.html">source code 
+          for this applet</a> is available.
         </li>
       </ul>          
     </section>
