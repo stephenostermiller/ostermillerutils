@@ -50,7 +50,7 @@ import java.io.*;
  * Blank lines are always ignored.	Other lines will be ignored if they start with a
  * comment character as set by the setCommentStart() method.
  * <P>
- * An example of how CVSLexer might be used:
+ * An example of how ExcelCSVLexer might be used:
  * <pre>
  * ExcelCSVLexer shredder = new ExcelCSVLexer(System.in);
  * String t;
@@ -66,7 +66,7 @@ import java.io.*;
  * <li>Excel may convert data before putting it in CSV format:<ul>
  * <li>Tabs are converted to a single space.</li>
  * <li>New lines in the data are always represented as the unix new line. ("\n")</li>
- * <li>Numbers that are greater than 12 digits may be represented in trunkated
+ * <li>Numbers that are greater than 12 digits may be represented in truncated
  * scientific notation form.</li></ul>
  * This parser does not attempt to fix these excel conversions, but users should be aware
  * of them.</li></ul>
