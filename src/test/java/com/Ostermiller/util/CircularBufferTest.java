@@ -88,7 +88,7 @@ public class CircularBufferTest extends TestCase {
 	private OutputStream cbbout;
 
 	private CircularObjectBuffer<String> cob = new CircularObjectBuffer<String>(20);
-	
+
 	private static final int SLEEP_BASE=10;
 	private static final int UP_TO_ADDITIONAL_SLEEP=20;
 

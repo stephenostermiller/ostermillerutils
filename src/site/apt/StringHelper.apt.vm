@@ -11,6 +11,6 @@ String Helper
 
     * {{{javadoc/StringHelper.html}StringHelper Javadoc}}
 
-  String manipulation helper utilities for Java.  Methods include padding a 
-  string to a given length, and splitting a string based on a literal 
+  String manipulation helper utilities for Java.  Methods include padding a
+  string to a given length, and splitting a string based on a literal
   delimiter.

@@ -54,12 +54,12 @@ public class ParallelizerTest extends TestCase {
 					}
 				);
 			}
-      boolean somethingDidntRun = false;
+	  boolean somethingDidntRun = false;
 			for(int i=0; i<THREADS_PER_RUN; i++){
 				if (results[i] == null){
-          somethingDidntRun = true;
-        }
-			}      
+		  somethingDidntRun = true;
+		}
+			}
 			assertTrue(somethingDidntRun);
 			pll.join();
 			for(int i=0; i<THREADS_PER_RUN; i++){
