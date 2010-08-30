@@ -1,0 +1,15 @@
+    CSVParser shredder = new CSVParser(
+        new InputStreamReader(
+            new FileInputStream("CSVCharsetTest.gb2312csv"),
+            "GB2312"
+        )
+    );
+    String t;
+    while ((t = shredder.nextValue()) != null) {
+        JOptionPane.showMessageDialog(
+            null,
+            t,
+            "Value from line " + shredder.getLastLineNumber(),
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }

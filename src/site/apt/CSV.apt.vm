@@ -7,174 +7,152 @@
 
 Comma Separated Values (CSV)
 
+  Utilities for reading and writing CSV (comma separated value) text files.
 
+  The CSV parser classes take care of reading CSV files including: splitting out
+  fields (even quoted and escaped fields), escaped data, line numbering, escape
+  and comments.  Each  line of values can be returned as an array, or the values
+  can be returned individually with the number of the line from which they came.
 
+  The CSV printer classes take care of writing CSV files including determining
+  if the data needs to be escaped.
 
+  This utility supports two flavors of CSV:
 
+    * UNIX style
 
-Utilities for reading and writing CSV (comma separated value) text files.  CSV as supported by these classes uses backslashes to escape quotes and new lines.  For CSV that is compatible with Microsoft Excel, {{{ExcelCSV.html}separate Excel CSV libraries}} are available.
+      * backslash escape character for quotes (\"), new lines (\n), and
+        backslashes (\\)
 
+      * Each record must be on its own line.  If a field contains a new line,
+        the new line must be escaped.
 
-Example
-----------------------------------------
-// Create the printer
-CSVPrinter csvp = new CSVPrinter(
-    System.out
-);
+      * Leading and trailing white space on an unquoted field is ignored.
 
-// Write to the printer
-csvp.writeln(
-    new String[]{
-        "hello","world"
-    }
-);
-----------------------------------------
+      * Compatible with standard unix text processing tools such as grep and sed
+        that work on a line by line basis.
 
+      * Reader: CSVParser, Writer: CSVPrinter
 
-Writing CSV files: CSVPrinter
-  This class makes it easy to output CSV.  Given values, it will automatically determine if they need to be quoted and
-escape special characters.  Comments can easily be written and correct line beginnings will be added.
+    * Microsoft Excel Style
 
-  Some applications do not accept CSV input according to the generally accepted standards.  One such application is the Microsoft Excel
-spreadsheet.  A separate class must be use to write
-{{{ExcelCSV.html}Excel CSV}}.  Both CSVPrinter and ExcelCSVPrinter
-implement the CSVPrint interface.
+      * Two quotes escape character ("" escapes "), no other characters are
+        escaped.
 
-<br clear=all>
-<hr>
+      * Compatible with Microsoft Excel and many other programs that have adopted
+        the format for data import and export.
 
-Example
-----------------------------------------
-// Parse the data
-String[][] values = CSVParser.parse(
-    new StringReader(
-        "hello,world\n" +
-        "how,are,you"
-    )
-);
+      * Leading and trailing white space on an unquoted field is significant.
 
-// Display the parsed data
-for (int i=0; i<values.length; i++){
-    for (int j=0; j<values[i].length; j++){
-        System.out.println(values[i][j]);
-    }
-    System.out.println("-----");
-}
-----------------------------------------
+      * Specified by {{{http://tools.ietf.org/html/rfc4180}RFC4180}}.
 
+      * Reader: ExcelCSVParser, Writer: ExcelCSVPrinter
 
-<a name="csv_parser">Reading CSV files: CSVParser</a>
+  Note that for simple field data that does not contain quotes or new lines, the
+  two formats are fairly equivalent.
 
-  Java's StringTokenizer does not make it easy to parse files of comma separated values for two reasons.
-First StringTokenizer doesn't handle empty strings and second it doesn't have a way to easily get
-Strings in quotes that have commas inside them.  This CSV parser takes care of those issues and
-support line numbering, escape characters, and comments.  Each line of values can be returned as an array, or
-the values can be returned individually with the number of the line from which they came.
+Labeled CSV Parser
 
-  Some applications do not output CSV according to the generally accepted standards and this parse may
-not be able to handle it.  One such application is the Microsoft Excel spreadsheet.  A
-separate class must be use to read
-{{{http://ostermiller.org/utils/ExcelCSV.html}Excel CSV}}.  Both CSVParser and ExcelCSVParser
-implement the CSVParse interface.
+    * {{{src/LabeledCSVParser.java.html}LabeledCSVParser.java Source Code}}
 
-  If the first line of your CSV file is a row of column headings, consider wrapping this parser in a {{{LabeledCSVParser.html}Labeled CSV Parser.}}
+    * {{{javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
+
+  Decorates either any flavor of CSV parser such that the first row read is a
+  row of labels.  Data in each row can be read by column name.
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/LabeledCSVParser.java.snippet}
+
+CSV Printer (UNIX Style CSV Writer)
+
+    * {{{src/CSVPrinter.java.html}CSVPrinter.java Source Code}}
+
+    * {{{javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
+
+  This class makes it easy to output CSV.  Given values, it will automatically
+  determine if they need to be quoted and escape special characters.  Comments
+  can easily be written and system appropriate line beginnings will be added.
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/CSVPrinter.java.snippet}
+
+CSV Parser (UNIX Style CSV Reader)
+
+    * {{{src/CSVParser.java.html}CSVParser.java Source Code}}
+
+    * {{{javadoc/CSVParser.html}CSVParser Javadoc}}
+
+  This class makes it easy to input CSV.  Given a stream, it will parse the
+  stream and return the fields as strings, the lines as string arrays, or the
+  whole file as a two dimensional string array.
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/CSVParser.java.snippet}
+
+Excel CSV Printer (Microsoft Excel Style CSV Writer)
+
+    * {{{src/ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
+
+    * {{{javadoc/ExcelCSVPrinter.html}ExcelCSVPrinter Javadoc}}
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/CsvExcelPrinter.java.snippet}
+
+Excel CSV Parser (Microsoft Excel Style CSV Reader)
+
+    * {{{src/ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
+
+    * {{{javadoc/ExcelCSVParser.html}ExcelCSVParser Javadoc}}
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/CsvExcelParser.java.snippet}
 
 CSV Character Sets
-  Several people have asked how to read CSV files that are in other character sets such as
-Chinese or Japanese.  To parse such files, simple use the CSVParser constructor that takes a reader.
-Make sure the reader has been initialized to read the correct character set.  An example that reads
-Simplified Chinese (charset GB2312) CSV values from {{{CSVCharsetTest.gb2312csv}CSVCharsetTest.gb2312csv}}
-can be found in {{{CSVCharsetTest.java}CSVCharsetTest.java}}.  If you have a Chinese font
-installed and Java is set up to use it, the example will show a dialog with each of the Chinese
-words on it.
 
-<br clear=all>
+  Several people have asked how to read CSV files that are in other character
+  sets such as Chinese or Japanese.  To parse such files, use the parser
+  constructor that takes a reader. Make sure the reader has been initialized
+  to read the correct character set.  The following example reads Simplified
+  Chinese (charset GB2312) CSV values from
+  {{{./CSVCharsetTest.gb2312csv}CSVCharsetTest.gb2312csv}} If you have a Chinese
+  font installed and Java is set up to use it, the example will show a dialog
+  with each of the Chinese words on it.
 
-CSVLexer
+*Example
 
-  The lexer (CSVLexer) created using {{{http://www.jflex.de/}JFlex}} is still available in the download and is
-still supported.  In fact,  CSVParser uses it behind the scenes.  However, CSVParser has a much cleaner, full-featured API
-and its use is recommended.
+%{code-snippet|brush=java|file=src/site/snippet/CSVCharset.java.snippet}
 
-  A CSVLexer {{{CSVRegressionTest.csv}regression test}} and the expected
-{{{CSVRegressionTestResults.txt}results}} of that test are available.
+CSV Lexer
 
-<a name="links"></a>Links
-<table border=2 cellpadding=5>
-<tr><th>Author</th><th>License</th><th>Features</th></tr>
+    * {{{src/CSVLexer.lex.html}CSVLexer.lex Source Code}}
 
-<tr><td>
-Stephen Ostermiller<br>
-{{{http://ostermiller.org/utils/CSV.html}ostermillerutils CSV and ExcelCSV for Java}}
-</td><td>
-Open source, GPL
-</td><td>
-Parses CSV streams into Java Strings or arrays of Strings.
-</td></tr>
+    * {{{javadoc/CSVLexer.html}CSVLexer Javadoc}}
 
-<tr><td>
-Ricebridge<br>
-{{{http://www.ricebridge.com/products/csvman/index.htm}CSV Manager}}
-</td><td>
-Commercial, with various license price points.
-</td><td>
-Parses CSV streams with callback methods when data is found. Single CSV parsing class can be
+  The lexer (CSVLexer) created using {{{http://www.jflex.de/}JFlex}} is still
+  available in the download and is still supported.  In fact,  CSVParser uses
+  it behind the scenes.  However, CSVParser has a much cleaner, full-featured
+  API and its use is recommended.
+
+Links
+
+*-----*------*-----*
+Author | License | Features
+*-----*------*-----*
+Stephen Ostermiller {{{http://ostermiller.org/utils/CSV.html}ostermillerutils CSV and ExcelCSV for Java}} | Open source, GPL | Parses CSV streams into Java Strings or arrays of Strings.
+*-----*------*-----*
+Ricebridge {{{http://www.ricebridge.com/products/csvman/}CSV Manager}} | Commercial, with various license price points. | Parses CSV streams with callback methods when data is found. Single CSV parsing class can be
 configured to parse standard CSV, Excel CSV, or other user specified variants.
-</td></tr>
-
-<tr><td>
-E.Allen Soard<br>
-{{{http://sourceforge.net/projects/javacsv/} Java CSV Library}}
-</td><td>
-Open source, LGPL
-</td><td>
-Parses CSV files into Java objects contained entirely in memory.
-</td></tr>
-
-<tr><td>
-Nilo de Roock<br>
-{{{http://xlsql.sourceforge.net/}xlSQL }}
-</td><td>
-Open source, GPL
-</td><td>
-Provides a JDBC interface for accessing CSV files.
-</td></tr>
-
-<tr><td>
-Bruce Dunwiddie<br>
-{{{http://www.csvreader.com/}CsvReader }}
-</td><td>
-Commercial, with various license price points.
-</td><td>
-Reads CSV files one line at a time and values may be obtained by name (similar to LabeledCSVParser) or by index. Single CSV parsing class can be configured to parse standard CSV, Excel CSV, or other user specified variants. A .Net version of the parser is also available.
-</td></tr>
-
-<tr><td>
-Roedy Green<br>
-{{{http://mindprod.com/jgloss/csv.html}Mindprod CSV}}
-</td><td>
-Open source, freeware (except military)
-</td><td>
-CSV definition and libraries.
-</td></tr>
-
-</table>
-
-
-
-<b>Comma Separated Values (CSV)</b>
-
-    * {{{CSVPrinter.java.html}CSVPrinter Source}}
-
-    * {{{doc/com/Ostermiller/util/CSVPrinter.html}CSVPrinter Documentation}}
-
-    * {{{CSVParser.java.html}CSVParser Source}}
-
-    * {{{doc/com/Ostermiller/util/CSVParser.html}CSVParser Documentation}}
-
-    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=CSV&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+*-----*------*-----*
+E.Allen Soard {{{http://sourceforge.net/projects/javacsv/} Java CSV Library}} | Open source, LGPL | Parses CSV files into Java objects contained entirely in memory.
+*-----*------*-----*
+Nilo de Roock {{{http://xlsql.sourceforge.net/}xlSQL }} | Open source, GPL | Provides a JDBC interface for accessing CSV files.
+*-----*------*-----*
+Bruce Dunwiddie {{{http://www.csvreader.com/}CsvReader }} | Commercial, with various license price points. | Reads CSV files one line at a time and values may be obtained by name (similar to LabeledCSVParser) or by index. Single CSV parsing class can be configured to parse standard CSV, Excel CSV, or other user specified variants. A .Net version of the parser is also available.
+*-----*------*-----*
+Roedy Green {{{http://mindprod.com/jgloss/csv.html}Mindprod CSV}} | Open source, freeware (except military) | CSV definition and libraries.
+*-----*------*-----*

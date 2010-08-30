@@ -1,0 +1,18 @@
+LabeledCSVParser lcsvp = new LabeledCSVParser(
+    new CSVParser(
+        new StringReader(
+            "Name,Phone\n" +
+            "Stewart,212-555-3233\n" +
+            "Cindy,212-555-8492\n"
+        )
+    )
+);
+
+while(lcsvp.getLine() != null){
+    System.out.println(
+        "Name: " + lcsvp.getValueByLabel("Name")
+    );
+    System.out.println(
+        "Phone: " + lcsvp.getValueByLabel("Phone")
+    );
+}

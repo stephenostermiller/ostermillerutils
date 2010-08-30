@@ -42,14 +42,23 @@ Redirect permanent /utils/csv/ http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/csv http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/cvs/ http://ostermiller.org/utils/CSV.html
 Redirect permanent /utils/cvs http://ostermiller.org/utils/CSV.html
-
-Redirect permanent /utils/excel.html http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/Excel.html http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/excel http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/Excel http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/excelcsv.html http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/excelcsv http://ostermiller.org/utils/ExcelCSV.html
-Redirect permanent /utils/ExcelCSV http://ostermiller.org/utils/ExcelCSV.html
+Redirect permanent /utils/CSV/ http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSV http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/excel.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/Excel.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/excel http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/Excel http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/excelcsv.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/excelcsv http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/ExcelCSV http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/ExcelCSV.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/LabeledCSVParser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/LabeledCSVParser http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/labeledcsvparser.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/labeledcsvparser http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVCharsetTest.java http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVCharsetTest.java.html http://ostermiller.org/utils/CSV.html
+Redirect permanent /utils/CSVCharsetTest.csv http://ostermiller.org/utils/CSVCharsetTest.gb2312csv
 
 Redirect permanent /utils/base64.html http://ostermiller.org/utils/Base64.html
 Redirect permanent /utils/base64/ http://ostermiller.org/utils/Base64.html
@@ -76,7 +85,6 @@ Redirect permanent /utils/stringtokenizer http://ostermiller.org/utils/StringTok
 Redirect permanent /utils/tokenizer.html http://ostermiller.org/utils/StringTokenizer.html
 Redirect permanent /utils/tokenizer/ http://ostermiller.org/utils/StringTokenizer.html
 Redirect permanent /utils/tokenizer http://ostermiller.org/utils/StringTokenizer.html
-Redirect permanent /utils/CSVCharsetTest.csv http://ostermiller.org/utils/CSVCharsetTest.gb2312csv
 
 Redirect permanent /utils/StringHelper.html: http://ostermiller.org/utils/StringHelper.html
 Redirect permanent /utils/StringHelper.java: http://ostermiller.org/utils/StringHelper.html
@@ -251,6 +259,9 @@ Redirect permanent /utils/javadoc/PropertiesToken.html http://ostermiller.org/ut
 Redirect permanent /utils/doc/com/Ostermiller/util/PropertiesToken.html http://ostermiller.org/utils/src/PropertiesToken.java.html
 Redirect permanent /utils/PropertiesToken.java.html http://ostermiller.org/utils/src/PropertiesToken.java.html
 Redirect permanent /utils/RandPass.java.html http://ostermiller.org/utils/src/RandPass.java.html
+Redirect permanent /utils/RandPassApplet.html http://ostermiller.org/utils/src/RandPassApplet.java.html
+Redirect permanent /utils/javadoc/RandPassApplet.html http://ostermiller.org/utils/src/RandPassApplet.java.html
+Redirect permanent /utils/doc/com/Ostermiller/util/RandPassApplet.html http://ostermiller.org/utils/src/RandPassApplet.java.html
 Redirect permanent /utils/RandPassApplet.java.html http://ostermiller.org/utils/src/RandPassApplet.java.html
 Redirect permanent /utils/SignificantFigures.java.html http://ostermiller.org/utils/src/SignificantFigures.java.html
 Redirect permanent /utils/SizeLimitInputStream.java.html http://ostermiller.org/utils/src/SizeLimitInputStream.java.html

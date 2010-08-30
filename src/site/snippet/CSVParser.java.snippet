@@ -1,0 +1,15 @@
+// Parse the data
+String[][] values = CSVParser.parse(
+    new StringReader(
+        "hello,world\n" +
+        "how,are,you"
+    )
+);
+
+// Display the parsed data
+for (int i=0; i<values.length; i++){
+    for (int j=0; j<values[i].length; j++){
+        System.out.println(values[i][j]);
+    }
+    System.out.println("-----");
+}

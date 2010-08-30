@@ -50,7 +50,7 @@
         <item name="Circular Buffers" href="/CircularBuffer.html" />
         <item name="Command Line Parser" href="/CmdLn.html" />
         <item name="Concatenation Streams" href="/Concat.html" />
-        <item name="Excel CSV Format" href="/ExcelCSV.html" />
+        <item name="CSV Format" href="/CSV.html" />
         <item name="Exec Helper" href="/ExecHelper.html" />
         <item name="File Helper" href="/FileHelper.html" />
         <item name="Iterators and Enumerations" href="/Iterator_Enumeration.html" />
