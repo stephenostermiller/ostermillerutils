@@ -32,15 +32,15 @@
           Preferences are not remembered between visits and page reloads.
         </li>
         <li>
-          This applet is part of the <a href="http://ostermiller.org/utils/">
+          This applet is part of the <a href="./">
           com.Ostermiller.util Java Utilities</a>
         </li>
         <li>
-          <a href="http://ostermiller.org/utils/RandPass.html">A command line 
+          <a href="./RandPass.html">A command line 
           and a Java library</a> version of this program is also available.
         </li>
         <li>
-          The <a href="http://ostermiller.org/utils/download.html">source code 
+          The <a href="./download.html">source code 
           for this applet</a> is available.
         </li>
       </ul>          
