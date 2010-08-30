@@ -17,6 +17,7 @@
  */
 package com.Ostermiller.util;
 
+import junit.framework.TestCase;
 import java.io.*;
 import java.util.Random;
 
@@ -30,7 +31,7 @@ import java.util.Random;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
-class CircularBufferTests {
+public class CircularBufferTest extends TestCase {
 
 	private byte[] pi = {
 		3,
@@ -87,22 +88,12 @@ class CircularBufferTests {
 	private OutputStream cbbout;
 
 	private CircularObjectBuffer<String> cob = new CircularObjectBuffer<String>(20);
+	
+	private static final int SLEEP_BASE=10;
+	private static final int UP_TO_ADDITIONAL_SLEEP=20;
 
-	/**
-	 * Main test method
-	 * @param args command line arguments (ignored)
-	 */
-	public static void main(String args[]){
-		try {
-			new CircularBufferTests();
-		} catch (Exception x){
-			x.printStackTrace();
-			System.exit(1);
-		}
-		System.exit(0);
-	}
 
-	private CircularBufferTests() throws Exception{
+	public void testAll() throws Exception {
 
 		ccbin = ccb.getReader();
 		ccbout = ccb.getWriter();
@@ -202,7 +193,7 @@ class CircularBufferTests {
 					}
 					position += (len - 1);
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Producer thread interrupted.");
 					}
@@ -260,7 +251,7 @@ class CircularBufferTests {
 						} break;
 					}
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Consumer thread interrupted.");
 					}
@@ -304,7 +295,7 @@ class CircularBufferTests {
 					}
 					position += (len - 1);
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Producer thread interrupted.");
 					}
@@ -362,7 +353,7 @@ class CircularBufferTests {
 						} break;
 					}
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Consumer thread interrupted.");
 					}
@@ -406,7 +397,7 @@ class CircularBufferTests {
 					}
 					position += (len - 1);
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Producer thread interrupted.");
 					}
@@ -464,7 +455,7 @@ class CircularBufferTests {
 						} break;
 					}
 					try {
-						Thread.sleep(50 + rand.nextInt(100));
+						Thread.sleep(SLEEP_BASE + rand.nextInt(UP_TO_ADDITIONAL_SLEEP));
 					} catch(Exception x){
 						throw new IOException("Consumer thread interrupted.");
 					}
