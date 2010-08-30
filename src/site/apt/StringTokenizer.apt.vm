@@ -7,50 +7,72 @@
 
 String Tokenizer
 
+    * {{{src/StringTokenizer.java.html}StringTokenizer.java Source Code}}
 
-
-
-
+    * {{{javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
 
   A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.
 
-
   This implementation of StringTokenizer tries to fix the following bugs:
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4086845}Bug 4086845}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4140850}Bug 4140850}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4233089}Bug 4233089}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4287338}Bug 4287338}} Report empty/null tokens</b> - It would be nice to have the string "one,two,,four" have four tokens.  This implementation has the option to return empty tokens as an empty string ("").
+  
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4086845}Bug 
+      4086845}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4140850}
+      Bug 4140850}}, 
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4233089}Bug 4233089}},
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4287338}Bug 4287338}}
+      Report empty/null tokens>> - It would be nice to have the string 
+      "one,two,,four" have four tokens.  This implementation has the option to 
+      return empty tokens as an empty string ("").
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4232593}Bug 4232593}} Performance improvements</b> - StringTokenizer can be optimized for some common cases.  The optimizations that were implemented in java.util.StringTokenizer involving maximum characters from this suggestion have also been implemented here.  Also token count is cached between calls.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4232593}Bug 
+      4232593}} Performance improvements>> - StringTokenizer can be optimized 
+      for some common cases.  The optimizations that were implemented in 
+      java.util.StringTokenizer involving maximum characters from this 
+      suggestion have also been implemented here.  Also token count is cached 
+      between calls.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4232770}Bug 4232770}} Null parameter handling not specified</b> - The string to parse should not be null, but the delimiter lists may be null in this implementation.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4232770}Bug 
+      4232770}} Null parameter handling not specified>> - The string to parse 
+      should not be null, but the delimiter lists may be null in this 
+      implementation.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4229450}Bug 4229450}} Add a String[] toArray method</b> - Convenience method added for returning all the tokens as an array of Strings.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4229450}Bug 
+      4229450}} Add a String[] toArray method>> - Convenience method added 
+      for returning all the tokens as an array of Strings.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4391919}Bug 4391919}} getPosition() method</b> - Exposes the internal state of the StringTokenizer.  In addition, other internal state variables are protected and well documented so this class can be easily sub-classed.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4391919}Bug 
+      4391919}} getPosition() method>> - Exposes the internal state of the 
+      StringTokenizer.  In addition, other internal state variables are 
+      protected and well documented so this class can be easily sub-classed.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4228047}Bug 4228047}} Allow re-use to minimize heap activity</b> - A setText() method was added for this purpose.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4228047}Bug 
+      4228047}} Allow re-use to minimize heap activity>> - A setText() method 
+      was added for this purpose.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4238266}Bug 4238266}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4080058}Bug 4080058}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4280213}Bug 4280213}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4310962}Bug 4310962}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4338282}Bug 4338282}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4377004}Bug 4377004}}, {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 4359719}} Fixed hasMoreElements() side-effect (no easy way to deal with code broken by this fix)</b> - hasMoreElements() had an unexpected side-effect.  Some people relied on this and the fix broke their code.  In the fixed version there was no good way to recover the functionality of the broken code.  Methods are introduced here to correct that (API taken from {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 4359719}}).
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4238266}Bug 4238266}}, 
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4080058}Bug 4080058}}, 
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4280213}Bug 4280213}},
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4310962}Bug 4310962}},
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4338282}Bug 4338282}},
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4377004}Bug 4377004}},
+      {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 4359719}}
+      Fixed hasMoreElements() side-effect (no easy way to deal with code 
+      broken by this fix)>> - hasMoreElements() had an unexpected side-effect.  Some people relied on this and the fix broke their code.  In the fixed version there was no good way to recover the functionality of the broken code.  Methods are introduced here to correct that (API taken from {{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 4359719}}).
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 4359719}} token delimiters and nontoken delimiters</b> - Some delimiters may be returned as tokens and at the same time, other should not be returned.  This bug report contains code with a nice API that I have used for this implementation.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4359719}Bug 
+      4359719}} token delimiters and nontoken delimiters>> - Some delimiters 
+      may be returned as tokens and at the same time, other should not be 
+      returned.  This bug report contains code with a nice API that I have 
+      used for this implementation.
 
-    <li><b>{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4215241}Bug 4215241}} restOfText() method</b> - Return the remaining un-tokenized portion of the string.
+    * <<{{{http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4215241}Bug 
+      4215241}} restOfText() method>> - Return the remaining un-tokenized 
+      portion of the string.
 
-    <li><b>Change delimiters without returning token</b> - Contains methods for changing the delimiters midstream while getting a token, counting tokens, or not associated with another action.
+    * <<Change delimiters without returning token>> - Contains methods for 
+      changing the delimiters midstream while getting a token, counting tokens, 
+      or not associated with another action.
 
-    <li><b>Peek at the next token</b> - A peek() method is available for looking ahead at the next token.  (Inspired by {{{http://www.gjt.org/servlets/JCVSlet/log/gjt/com/tinyplanet/docwiz/PeekStringTokenizer.java/0}com.tinyplanet.docwiz.PeekStringTokenizer}})
-
-
-
-
-
-<b>String Tokenizer</b>
-
-    * {{{StringTokenizer.java.html}StringTokenizer Source}}
-
-    * {{{doc/com/Ostermiller/util/StringTokenizer.html}StringTokenizer Documentation}}
-
-    * {{{http://bugzilla.ostermiller.com/buglist.cgi?product=JavaUtils&component=String+Tokenizer&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED}Bugs/Features}}
-
-
-
-
-
+    * <<Peek at the next token>> - A peek() method is available for looking 
+      ahead at the next token.  (Inspired by 
+      com.tinyplanet.docwiz.PeekStringTokenizer)
