@@ -311,8 +311,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
 		<m2st-renderDefaultPoweredByLogoIfNotSpecified>false</m2st-renderDefaultPoweredByLogoIfNotSpecified>
-		<m2st-syntaxHighlighter-urlBase>http://alexgorbatchev.com/pub/sh/current</m2st-syntaxHighlighter-urlBase>
+		<m2st-syntaxHighlighter-urlBase>syntax</m2st-syntaxHighlighter-urlBase>
 		<m2st-syntaxHighlighter-brushFiles>shBrushJava.js</m2st-syntaxHighlighter-brushFiles>
-		<m2st-syntaxHighlighter-themeCssFile>shThemeDefault.css</m2st-syntaxHighlighter-themeCssFile>
+		<m2st-syntaxHighlighter-themeCssFile>shTheme.css</m2st-syntaxHighlighter-themeCssFile>
 	</properties>
 </project>
