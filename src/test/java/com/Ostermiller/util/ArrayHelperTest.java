@@ -1,5 +1,5 @@
 /*
- * Regression tests for ArrayHelper Copyright (C) 2005 Stephen Ostermiller
+ * Regression tests for ArrayHelper Copyright (C) 2005-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities This program is
  * free software; you can redistribute it and/or modify it under the terms of
  * the GNU General Public License as published by the Free Software Foundation;

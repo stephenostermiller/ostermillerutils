@@ -22,7 +22,7 @@ if (! -e "pom.xml"){
   exit 1;
 }
 
-FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script -type f`)){
+FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script src/test -type f`)){
   my @years=split(/[ \n]/, `git log --follow "$file" | grep "Date:" | grep -oE ' 20[0-9]{2} ' | sort | uniq | xargs`);
   my $yearCount = scalar @years;
   if ($yearCount == 0){
