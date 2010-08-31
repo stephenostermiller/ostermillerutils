@@ -87,5 +87,4 @@ sub saveFile(){
   open(FILE, ">$file") or die $!;
   print FILE $contents;
   close(FILE);
-
 }
