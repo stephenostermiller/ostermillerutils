@@ -1067,7 +1067,7 @@ public class StringHelper {
 		htmlEntities.put("amp", new Integer(38));
 		htmlEntities.put("lt", new Integer(60));
 		htmlEntities.put("gt", new Integer(62));
-		htmlEntities.put("OElig", new Integer(338));
+		htmlEntities.put("OE"+"lig", new Integer(338));
 		htmlEntities.put("o"+"e"+"l"+"i"+"g", new Integer(339));
 		htmlEntities.put("Scar"+"on", new Integer(352));
 		htmlEntities.put("scar"+"on", new Integer(353));

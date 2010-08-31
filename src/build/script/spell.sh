@@ -23,9 +23,22 @@ fi
 
 DICT=./src/build/spell/util.dict
 
-for file in `(find src -name "*.java" && find src -name "*.java.snippet"&& find src -name "*.apt.vm")`
+for file in `(find src -name "*.java" && find src -name "*.java.snippet")`
 do
-  aspell check --mode=url -x -p "$DICT" "$file"
+  aspell check --mode=ccpp --run-together --ignore 4 -x -p "$DICT" "$file"
+  if [ $? -ne 0 ]
+  then
+    exit $?
+  fi
+done
+
+for file in `(find src -name "*.apt.vm")`
+do
+  aspell check --mode=url --run-together --ignore 4 -x -p "$DICT" "$file"
+  if [ $? -ne 0 ]
+  then
+    exit $?
+  fi
 done
 
 # Sort the dict file
@@ -33,3 +46,5 @@ TMPFILE=$(mktemp) || { echo "Failed to create temp file"; exit 1; }
 head -n 1 "$DICT" > $TMPFILE
 tail -n +2 "$DICT" | sort | uniq >> $TMPFILE
 mv $TMPFILE "$DICT"
+
+find . -name "*.new" -type f | xargs rm -f

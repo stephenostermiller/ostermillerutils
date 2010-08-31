@@ -210,9 +210,9 @@ public class ConcatInputStream extends InputStream {
 	 * blocks until input data is available, the end of the stream is detected, or
 	 * an exception is thrown.
 	 * <p>
-	 * If this class in not done accepting inputstreams and the end of the last known
+	 * If this class in not done accepting input streams and the end of the last known
 	 * stream is reached, this method will block forever unless another thread
-	 * adds an inputstream or interrupts.
+	 * adds an input stream or interrupts.
 	 *
 	 * @return the next byte of data, or -1 if the end of the stream is reached.
 	 *
@@ -251,9 +251,9 @@ public class ConcatInputStream extends InputStream {
 	 * The read(b) method for class InputStream has the same effect as:<br>
 	 * read(b, 0, b.length)
 	 * <p>
-	 * If this class in not done accepting inputstreams and the end of the last known
+	 * If this class in not done accepting input streams and the end of the last known
 	 * stream is reached, this method will block forever unless another thread
-	 * adds an inputstream or interrupts.
+	 * adds an input stream or interrupts.
 	 *
 	 * @param b - Destination buffer
 	 * @return The number of bytes read, or -1 if the end of the stream has been reached
@@ -278,9 +278,9 @@ public class ConcatInputStream extends InputStream {
 	 * <p>
 	 * This method blocks until input data is available
 	 * <p>
-	 * If this class in not done accepting inputstreams and the end of the last known
+	 * If this class in not done accepting input streams and the end of the last known
 	 * stream is reached, this method will block forever unless another thread
-	 * adds an inputstream or interrupts.
+	 * adds an input stream or interrupts.
 	 *
 	 * @param b Destination buffer
 	 * @param off Offset at which to start storing bytes
@@ -319,9 +319,9 @@ public class ConcatInputStream extends InputStream {
 	 * file before n bytes have been skipped is only one possibility. The actual number
 	 * of bytes skipped is returned. If n is negative, no bytes are skipped.
 	 * <p>
-	 * If this class in not done accepting inputstreams and the end of the last known
+	 * If this class in not done accepting input streams and the end of the last known
 	 * stream is reached, this method will block forever unless another thread
-	 * adds an inputstream or interrupts.
+	 * adds an input stream or interrupts.
 	 *
 	 * @param n he number of characters to skip
 	 * @return The number of characters actually skipped

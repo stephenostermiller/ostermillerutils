@@ -40,7 +40,7 @@ public final class ExecHelper {
 	 *
 	 * @param cmdarray array containing the command to call and its arguments.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -62,7 +62,7 @@ public final class ExecHelper {
 	 * @param cmdarray array containing the command to call and its arguments.
 	 * @param envp array of strings, each element of which has environment variable settings in format name=value.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -83,9 +83,9 @@ public final class ExecHelper {
 	 *
 	 * @param cmdarray array containing the command to call and its arguments.
 	 * @param envp array of strings, each element of which has environment variable settings in format name=value.
-	 * @param dir the working directory of the subprocess, or null if the subprocess should inherit the working directory of the current process.
+	 * @param dir the working directory of the sub process, or null if the sub process should inherit the working directory of the current process.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -105,7 +105,7 @@ public final class ExecHelper {
 	 * @param cmdarray array containing the command to call and its arguments.
 	 * @param charset Output from the executed command is expected to be in this character set.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -126,7 +126,7 @@ public final class ExecHelper {
 	 * @param envp array of strings, each element of which has environment variable settings in format name=value.
 	 * @param charset Output from the executed command is expected to be in this character set.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -145,10 +145,10 @@ public final class ExecHelper {
 	 *
 	 * @param cmdarray array containing the command to call and its arguments.
 	 * @param envp array of strings, each element of which has environment variable settings in format name=value.
-	 * @param dir the working directory of the subprocess, or null if the subprocess should inherit the working directory of the current process.
+	 * @param dir the working directory of the sub process, or null if the sub process should inherit the working directory of the current process.
 	 * @param charset Output from the executed command is expected to be in this character set.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).
@@ -172,7 +172,7 @@ public final class ExecHelper {
 	 *
 	 * @param command String containing a command to be parsed by the shell and executed.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if command is null
 	 *
@@ -194,7 +194,7 @@ public final class ExecHelper {
 	 * @param command String containing a command to be parsed by the shell and executed.
 	 * @param charset Output from the executed command is expected to be in this character set.
 	 * @return The results of the execution in an ExecHelper object.
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if command is null
 	 *
@@ -218,7 +218,7 @@ public final class ExecHelper {
 	 * Take a process, record its standard error and standard out streams, wait for it to finish
 	 *
 	 * @param process process to watch
-	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a subprocess.
+	 * @throws SecurityException if a security manager exists and its checkExec method doesn't allow creation of a sub process.
 	 * @throws IOException - if an I/O error occurs
 	 * @throws NullPointerException - if cmdarray is null
 	 * @throws IndexOutOfBoundsException - if cmdarray is an empty array (has length 0).

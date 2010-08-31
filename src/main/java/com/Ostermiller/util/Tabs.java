@@ -202,7 +202,7 @@ public class Tabs {
 			File source = new File(argument);
 			if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
+					System.err.println(MessageFormat.format(labels.getString("does"+"not"+"exist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){

@@ -49,22 +49,22 @@ public class CSVTest extends TestCase {
 			csvOut.println();
 			csvOut.println(""); // an empty value on a line by itself.
 			csvOut.println(new String[] {
-				"Two\nTokens",
-				"On the\nSame Line"
+				"Two\n"+"Tokens",
+				"On the\n"+"Same Line"
 			});
 			csvOut.printlnComment("A two line comment\n just to see that it works");
 
 			CSVParser csvParser = new CSVParser(new StringReader(sw.toString()));
 			csvParser.setCommentStart("#;!");
-			csvParser.setEscapes("nrtf", "\n\r\t\f");
+			csvParser.setEscapes("nr"+"tf", "\n\r\t\f");
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "Boston", 4);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "San Francisco", 4);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "New York", 4);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "Chicago", 4);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "Houston", 4);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "", 6);
-			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "Two\nTokens", 7);
-			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "On the\nSame Line", 7);
+			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "Two\n"+"Tokens", 7);
+			compare(csvParser.nextValue(), csvParser.lastLineNumber(), "On the\n"+"Same Line", 7);
 			compare(csvParser.nextValue(), csvParser.lastLineNumber(), null, 9);
 		} catch (Exception x){
 			throw new RuntimeException(x);

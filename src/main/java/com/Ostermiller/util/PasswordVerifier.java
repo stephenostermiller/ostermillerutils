@@ -26,13 +26,13 @@ package com.Ostermiller.util;
  */
 public interface PasswordVerifier {
 	/**
-	 * Verify that this password is an ok password.  If a password
+	 * Verify that this password is an OK password.  If a password
 	 * is not verified it is thrown out and a new password is tried.
 	 * Always returning false from this method will cause an infinite
 	 * loop.
 	 *
 	 * @param password an array of characters representing a password.
-	 * @return true iff this password is ok.
+	 * @return true iff this password is OK.
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */

@@ -72,8 +72,8 @@ public class StringHelperTest extends TestCase {
 
 	public void testPrepad2(){
 		assertEquals(
-			StringHelper.prepad("AaaAa", 2),
-			"AaaAa"
+			StringHelper.prepad("Aaa"+"Aa", 2),
+			"Aaa"+"Aa"
 		);
 	}
 
@@ -93,8 +93,8 @@ public class StringHelperTest extends TestCase {
 
 	public void testPostpad2(){
 		assertEquals(
-			StringHelper.postpad("AaaAa", 2),
-			"AaaAa"
+			StringHelper.postpad("Aaa"+"Aa", 2),
+			"Aaa"+"Aa"
 		);
 	}
 
@@ -128,8 +128,8 @@ public class StringHelperTest extends TestCase {
 
 	public void testMidpad4(){
 		assertEquals(
-			StringHelper.midpad("AaaAa", 2),
-			"AaaAa"
+			StringHelper.midpad("Aaa"+"Aa", 2),
+			"Aaa"+"Aa"
 		);
 	}
 

@@ -37,7 +37,7 @@ Adjusts the tabs and spaces at the beginning of each line in files.
   -g --guess          Guess the tab width of the input file. (default)
   -t --tabs           Use tabs in the output.
   -s --spaces <num>   Use this many spaces (not tabs) in the output. (default=4)
-  -f --force          Always modify unformatted files, even binary files.
+  -f --force          Always modify un-formatted files, even binary files.
   --noforce           Don't modify binary files.  (default)
   -V --reallyverbose  Print a message for each file.
   -v --verbose        Print a message for each file modified.

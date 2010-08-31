@@ -64,7 +64,7 @@ public class ConcatTest extends TestCase {
 		cr.addReader(new StringReader("one"));
 		read(cr, 'o');
 		cr.addReader(new StringReader("two"));
-		read(cr, "netwo");
+		read(cr, "ne"+"two");
 		new Thread(){
 			@Override public void run(){
 				try {
@@ -100,7 +100,7 @@ public class ConcatTest extends TestCase {
 		read(cis, '4');
 		read(cis, "fivesi");
 		assertTrue(available(cis) > 0);
-		read(cis, "xseven");
+		read(cis, "x"+"seven");
 		read(cis, -1);
 		read(cis, -1);
 	}
@@ -111,7 +111,7 @@ public class ConcatTest extends TestCase {
 		cis.addInputStream(getInputStream("one"));
 		read(cis, 'o');
 		cis.addInputStream(getInputStream("two"));
-		read(cis, "netwo");
+		read(cis, "ne"+"two");
 		new Thread(){
 			@Override public void run(){
 				try {

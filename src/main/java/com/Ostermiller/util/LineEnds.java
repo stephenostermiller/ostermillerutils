@@ -179,7 +179,7 @@ public class LineEnds {
 			File source = new File(argument);
 			if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
+					System.err.println(MessageFormat.format(labels.getString("does"+"not"+"exist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
@@ -266,13 +266,13 @@ public class LineEnds {
 	 */
 	public final static int STYLE_JAVA = 2;
 	/**
-	 * The MacIntosh line ending ("\r")
+	 * The Macintosh line ending ("\r")
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
 	public final static int STYLE_MAC = 3;
 	/**
-	 * The MacIntosh line ending ("\r")
+	 * The Macintosh line ending ("\r")
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
@@ -510,7 +510,7 @@ public class LineEnds {
 				if (!temp.delete()){
 					throw new IOException(
 						MessageFormat.format(
-							labels.getString("tempdeleteerror"),
+							labels.getString("temp"+"delete"+"error"),
 							(Object[])new String[] {temp.toString()}
 						)
 					);

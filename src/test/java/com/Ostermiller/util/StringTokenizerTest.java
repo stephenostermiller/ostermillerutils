@@ -60,7 +60,7 @@ public class StringTokenizerTest extends TestCase {
 	}
 
 	public void testAbTokens(){
-		String input = "AstringB";
+		String input = "A"+"string"+"B";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input, "AB");
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, "AB");
 		assertEquals(oldTok.countTokens(), newTok.countTokens());
@@ -70,7 +70,7 @@ public class StringTokenizerTest extends TestCase {
 	}
 
 	public void testAbTokensReturned(){
-		String input = "AstringB";
+		String input = "A"+"string"+"B";
 		java.util.StringTokenizer oldTok = new java.util.StringTokenizer(input, "AB", true);
 		com.Ostermiller.util.StringTokenizer newTok = new com.Ostermiller.util.StringTokenizer(input, "AB", true);
 		assertEquals(oldTok.countTokens(), newTok.countTokens());

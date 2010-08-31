@@ -325,7 +325,7 @@ public class Browser {
 					}
 				}
 			} else {
-				throw new IOException(labels.getString("nocommand"));
+				throw new IOException(labels.getString("no"+"command"));
 			}
 		} else {
 			// for security, see if the url is valid.
@@ -347,9 +347,9 @@ public class Browser {
 						|| c == '%' || c =='+' || c == '=' || c == '#' || c == '-' || c == '\\'){
 					//characters that are necessary for URLs and should be safe
 					//to pass to exec.  Exec uses a default string tokenizer with
-					//the default arguments (whitespace) to separate command line
+					//the default arguments (white space) to separate command line
 					//arguments, so there should be no problem with anything but
-					//whitespace.
+					//white space.
 					sb.append(c);
 				} else {
 					c = (char)(c & 0xFF); // get the lowest 8 bits (URLEncoding)

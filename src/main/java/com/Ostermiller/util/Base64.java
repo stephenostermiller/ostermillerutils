@@ -32,7 +32,7 @@ import java.util.Locale;
  * arbitrary sequences of octets in a form that need not be humanly
  * readable.  The encoding and decoding algorithms are simple, but the
  * encoded data are consistently only about 33 percent larger than the
- * unencoded data.  This encoding is virtually identical to the one used
+ * un-encoded data.  This encoding is virtually identical to the one used
  * in Privacy Enhanced Mail (PEM) applications, as defined in RFC 1421.</p>
  *
  * <p>A 65-character subset of US-ASCII is used, enabling 6 bits to be
@@ -43,7 +43,7 @@ import java.util.Locale;
  * identically in all versions of ISO 646, including US-ASCII, and all
  * characters in the subset are also represented identically in all
  * versions of EBCDIC. Other popular encodings, such as the encoding
- * used by the uuencode utility, MacIntosh binhex 4.0 [RFC-1741], and
+ * used by the uuencode utility, Macintosh binhex 4.0 [RFC-1741], and
  * the base85 encoding specified as part of Level 2 PostScript, do no
  * share these properties, and thus do not fulfill the portability
  * requirements a binary transport encoding for mail must meet.</p>
@@ -440,7 +440,7 @@ public class Base64 {
 				}
 			} else 	if (!source.exists()){
 				if(printErrors){
-					System.err.println(MessageFormat.format(labels.getString("doesnotexist"), (Object[])new String[] {argument}));
+					System.err.println(MessageFormat.format(labels.getString("does"+"not"+"exist"), (Object[])new String[] {argument}));
 				}
 				exitCond = 1;
 			} else if (!source.canRead()){
@@ -1312,7 +1312,7 @@ public class Base64 {
 		// Base64 decoding converts four bytes of input to three bytes of output
 		int[] inBuffer = new int[4];
 
-		// read bytes unmapping them from their ASCII encoding in the process
+		// read bytes un-mapping them from their ASCII encoding in the process
 		// we must read at least two bytes to be able to output anything
 		boolean done = false;
 		while (!done && (inBuffer[0] = readBase64(in, throwExceptions)) != END_OF_INPUT
@@ -1353,7 +1353,7 @@ public class Base64 {
 	 * Determines if the byte array is in base64 format.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
-	 * only base64 characters and whitespace with equals sign padding
+	 * only base64 characters and white space with equals sign padding
 	 * on the end so that the number of base64 characters is divisible
 	 * by four.
 	 * <p>
@@ -1389,7 +1389,7 @@ public class Base64 {
 	 * default character encoding.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
-	 * only base64 characters and whitespace with equals sign padding
+	 * only base64 characters and white space with equals sign padding
 	 * on the end so that the number of base64 characters is divisible
 	 * by four.
 	 * <p>
@@ -1416,7 +1416,7 @@ public class Base64 {
 	 * Determines if the String is in base64 format.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
-	 * only base64 characters and whitespace with equals sign padding
+	 * only base64 characters and white space with equals sign padding
 	 * on the end so that the number of base64 characters is divisible
 	 * by four.
 	 * <p>
@@ -1443,7 +1443,7 @@ public class Base64 {
 	 * Determines if the File is in base64 format.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
-	 * only base64 characters and whitespace with equals sign padding
+	 * only base64 characters and white space with equals sign padding
 	 * on the end so that the number of base64 characters is divisible
 	 * by four.
 	 * <p>
@@ -1472,7 +1472,7 @@ public class Base64 {
 	 * in base64 format.
 	 * <p>
 	 * Data will be considered to be in base64 format if it contains
-	 * only base64 characters and whitespace with equals sign padding
+	 * only base64 characters and white space with equals sign padding
 	 * on the end so that the number of base64 characters is divisible
 	 * by four.
 	 * <p>

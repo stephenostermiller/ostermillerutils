@@ -30,11 +30,11 @@ public class UberPropertiesTest extends TestCase {
 	}
 
 	public void test3() {
-		check("C" + "on\\\n" + "e=on\\\n" + "e\n" + "C" + "t" + "w \\\n o=t" + "w \\\n o\nCth\\\n r" + "e" + "e=t" + "h \\\n" + "r" + "e" + "e");
+		check("C" + "on\\\n" + "e=on\\\n" + "e\n" + "C" + "t" + "w \\\n o=t" + "w \\\n o\n"+"Cth\\\n r" + "e" + "e=t" + "h \\\n" + "r" + "e" + "e");
 	}
 
 	public void test4() {
-		check("Done=one\nDone=two\nDone=three");
+		check("Done=one\n"+"Done=two\n"+"Done=three");
 	}
 
 	public void test5() {
@@ -42,7 +42,7 @@ public class UberPropertiesTest extends TestCase {
 	}
 
 	public void test6() {
-		check("#\n# That was a comment\n\nname:value\n" + "name=value\n" + "name value\n name = value \n	name	=	value	\n  name  =  value  ");
+		check("#\n# That was a comment\n\n"+"name:value\n" + "name=value\n" + "name value\n name = value \n	name	=	value	\n  name  =  value  ");
 	}
 
 	public void test7() {
@@ -54,7 +54,7 @@ public class UberPropertiesTest extends TestCase {
 	}
 
 	public void test9() {
-		check("name::value starts with colon\n" + "name=:value starts with colon\n" + "name :value starts with colon\nname:value ends with colon:\n" + "name=value ends with colon:\n" + "name value ends with colon:\n" + "name:=value starts with equal\n" + "name==value starts with equal\n" + "name =value starts with equal\nname:value ends with equal=\n" + "name=value ends with equal=\n" + "name value ends with equal=\n" + "name:!value starts with exclamation\n" + "name=!value starts with exclamation\n" + "name !value starts with exclamation\n" + "name:#value starts with pound\n" + "name=#value starts with pound\n" + "name #value starts with pound\n" + "name=value ends with colon :\n" + "name=value ends with equal =");
+		check("name::value starts with colon\n" + "name=:value starts with colon\n" + "name :value starts with colon\n"+"name:value ends with colon:\n" + "name=value ends with colon:\n" + "name value ends with colon:\n" + "name:=value starts with equal\n" + "name==value starts with equal\n" + "name =value starts with equal\n"+"name:value ends with equal=\n" + "name=value ends with equal=\n" + "name value ends with equal=\n" + "name:!value starts with exclamation\n" + "name=!value starts with exclamation\n" + "name !value starts with exclamation\n" + "name:#value starts with pound\n" + "name=#value starts with pound\n" + "name #value starts with pound\n" + "name=value ends with colon :\n" + "name=value ends with equal =");
 	}
 
 	public void test10() {
