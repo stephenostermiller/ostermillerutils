@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 1996 Santeri Paavolainen, Helsinki Finland
  *
- * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org 
+ * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org
  *
  * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities

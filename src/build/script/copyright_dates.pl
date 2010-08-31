@@ -64,7 +64,7 @@ FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script -type f`
     $contents =~ s/Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/Copyright \(C\) $stephenYears Stephen Ostermiller/g;
     print "Modified copyright dates in: $file\n";
     &saveFile($file, $contents);
-    next FILE_IN_LOOP;    
+    next FILE_IN_LOOP;
   }
   print "Should be Copyright (C) $scmYears: $file\n";
   print join ("\n", @copyrights);
@@ -87,5 +87,5 @@ sub saveFile(){
   open(FILE, ">$file") or die $!;
   print FILE $contents;
   close(FILE);
-    
+
 }

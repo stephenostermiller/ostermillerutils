@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2004-2005 Matt Conway
  * http://simplygenius.com/
- 
+
  * Copyright (C) 2005-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
