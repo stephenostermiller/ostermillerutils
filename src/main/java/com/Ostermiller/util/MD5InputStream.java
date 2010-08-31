@@ -1,9 +1,7 @@
 /*
- * Implements MD5 functionality on a stream.
+ * Copyright (C) 1996 Santeri Paavolainen, Helsinki Finland
  *
- * written Santeri Paavolainen, Helsinki Finland 1996
- * (c) Santeri Paavolainen, Helsinki Finland 1996
- * modifications Copyright (C) 2002 Stephen Ostermiller
+ * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,7 +17,7 @@
  * See COPYING.TXT for details.
  *
  * The original work by Santeri Paavolainen can be found a
- * http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * http://santtu.iki.fi/md5/
  */
 package com.Ostermiller.util;
 
@@ -45,7 +43,7 @@ import java.io.*;
  * @see MD5
  * @see MD5OutputStream
  *
- * @author Santeri Paavolainen http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * @author Santeri Paavolainen http://santtu.iki.fi/md5/
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */

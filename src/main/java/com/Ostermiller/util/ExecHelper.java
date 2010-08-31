@@ -1,6 +1,6 @@
 /*
  * Convenience methods for executing non-Java processes.
- * Copyright (C) 2005 Stephen Ostermiller
+ * Copyright (C) 2005-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify

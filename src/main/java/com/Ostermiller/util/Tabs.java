@@ -1,6 +1,6 @@
 /*
  * Adjusts tabs and spaces.
- * Copyright (C) 2002-2007 Stephen Ostermiller
+ * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify

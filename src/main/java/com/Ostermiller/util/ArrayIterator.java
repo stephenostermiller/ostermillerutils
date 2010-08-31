@@ -1,6 +1,6 @@
 /*
  * Converts an array to an iterator.
- * Copyright (C) 2004-2006 Stephen Ostermiller
+ * Copyright (C) 2004-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify

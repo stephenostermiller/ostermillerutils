@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2007 Stephen Ostermiller
+ * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * Copyright (C) 2003 Carlo Magnaghi <software at tecnosoft dot net>

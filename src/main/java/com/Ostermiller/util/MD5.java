@@ -1,9 +1,10 @@
 /*
- * written Santeri Paavolainen, Helsinki Finland 1996
- * (c) Santeri Paavolainen, Helsinki Finland 1996
- * modifications Copyright (C) 2002-2007 Stephen Ostermiller
+ * Copyright (C) 1996 Santeri Paavolainen, Helsinki Finland
+ *
+ * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org 
+ *
+ * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +19,7 @@
  * See COPYING.TXT for details.
  *
  * The original work by Santeri Paavolainen can be found at
- * http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * http://santtu.iki.fi/md5/
  *
  * This Java class has been derived from the RSA Data Security, Inc. MD5
  * Message-Digest Algorithm and its reference implementation.
@@ -47,7 +48,7 @@ import java.io.*;
  * @see MD5OutputStream
  * @see MD5InputStream
  *
- * @author Santeri Paavolainen http://www.helsinki.fi/~sjpaavol/programs/md5/
+ * @author Santeri Paavolainen http://santtu.iki.fi/md5/
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
