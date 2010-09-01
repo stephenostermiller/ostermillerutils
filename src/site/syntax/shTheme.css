@@ -74,13 +74,13 @@
   color: black !important;
 }
 .syntaxhighlighter .comments, .syntaxhighlighter .comments a {
-  color:green !important;
+  color:#A67000 !important;
 }
 .syntaxhighlighter .string, .syntaxhighlighter .string a {
   color:maroon !important;
 }
 .syntaxhighlighter .keyword {
-  color:blue !important;
+  color:#162F96 !important;
 }
 .syntaxhighlighter .preprocessor {
   color:green !important;
