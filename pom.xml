@@ -165,7 +165,7 @@
 										<include>*.zip</include>
 										<include>*.tar.gz</include>
 										<include>*.tar.bz2</include>
-										<include>*.deb</include>
+										<!--<include>*.deb</include>-->
 									</includes>
 								</resource>
 							</resources>							
@@ -245,19 +245,19 @@
 					</execution>
 				</executions>
 			</plugin> 
-			<plugin>
-				<artifactId>jdeb</artifactId>
-				<groupId>org.vafer</groupId>
-				<version>0.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						 <goals>
-							 <goal>deb</goal>
-						 </goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!--<plugin>
+			  <artifactId>jdeb</artifactId>
+			  <groupId>org.vafer</groupId>
+			  <version>0.3</version>
+			  <executions>
+				<execution>
+				  <phase>package</phase>
+				  <goals>
+					<goal>deb</goal>
+				  </goals>
+				</execution>
+			  </executions>
+			</plugin>-->
 			<!--<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>rpm-maven-plugin</artifactId>

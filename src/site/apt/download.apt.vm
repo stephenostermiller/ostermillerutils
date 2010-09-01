@@ -39,12 +39,6 @@ Download com.Ostermiller.util Java Utilities
 
     * {{{./ostermillerutils-${project.version}-project.zip}ostermillerutils-${project.version}-project.zip}}
 
-**Latest Debian package
-
-  A package is available for Debian or Ubuntu Linux.
-
-    * {{{./ostermillerutils_${project.version}.deb}ostermillerutils_${project.version}.deb}}
-
 *Older releases for specific runtime environments
 
 **Kaffe
