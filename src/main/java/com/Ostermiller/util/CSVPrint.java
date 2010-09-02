@@ -40,7 +40,6 @@ public interface CSVPrint {
 	 * @param newDelimiter The new delimiter character to use.
 	 * @throws BadDelimiterException if the character cannot be used as a delimiter.
 	 *
-	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
 	public void changeDelimiter(char newDelimiter) throws BadDelimiterException;
@@ -51,7 +50,6 @@ public interface CSVPrint {
 	 * @param newQuote The new character to use for quoting.
 	 * @throws BadQuoteException if the character cannot be used as a quote.
 	 *
-	 * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
 	 * @since ostermillerutils 1.02.18
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException;
