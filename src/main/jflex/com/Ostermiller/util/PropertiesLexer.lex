@@ -111,8 +111,6 @@ import java.io.*;
 
 %}
 
-%full
-
 %state LINE_END
 %state WHITE_SPACE
 %state NAME
