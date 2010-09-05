@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * 
+ *
  * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
  * This program is free software; you can redistribute it and/or modify
