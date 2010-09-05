@@ -1,5 +1,4 @@
 /*
- * Static String formatting and query routines.
  * Copyright (C) 2001-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
@@ -18,6 +17,7 @@
 
 package com.Ostermiller.util;
 
+import java.util.Map;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -1598,5 +1598,169 @@ public class StringHelper {
 	 */
 	public static boolean endsWithAnyIgnoreCase(String s, String[] terms){
 		return getEndsWithAnyIgnoreCasePattern(terms).matcher(s).matches();
+	}
+
+	/**
+	 * Liberal parse method for integer values.  If the input string is a representation of
+	 * an integer, that value will be returned.  Otherwise null is returned.
+	 * Surrounding white space is NOT significant.
+	 * <p>
+	 * If the number starts with a base prefix ("0x" for hex, "0b" for binary, "0c" for
+	 * octal), it will be parsed with that radix.  Otherwise, the number will be parsed in
+	 * base 10 radix.
+	 * <p>
+	 * This method does NOT throw number format exceptions.
+	 *
+	 * @param s String containing a integer value to be parsed
+	 * @return parsed integer value or the default value
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static Integer parseInteger(String s){
+		if (s == null) return null;
+		s = s.trim();
+		int radix = 10;
+		if (s.startsWith("0x") || s.startsWith("0X")){
+			radix = 16;
+			s = s.substring(2);
+		}
+		if (s.startsWith("0c") || s.startsWith("0C")){
+			radix = 8;
+			s = s.substring(2);
+		}
+		if (s.startsWith("0b") || s.startsWith("0B")){
+			radix = 2;
+			s = s.substring(2);
+		}
+		return parseInteger(s, radix);
+	}
+
+	/**
+	 * Liberal parse method for integer values.  If the input string is a representation of
+	 * an integer, that value will be returned.  Otherwise null is returned.
+	 * Surrounding white space is NOT significant.
+	 * <p>
+	 * This method does NOT throw number format exceptions.
+	 *
+	 * @param s String containing a integer value to be parsed
+	 * @param radix number base used during parsing
+	 * @return parsed integer value or the default value
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static Integer parseInteger(String s, int radix){
+		if (s == null) return null;
+		s = s.trim();
+		try {
+			return Integer.valueOf(s, radix);
+		} catch (NumberFormatException nfx){
+			return null;
+		}
+	}
+
+	/**
+	 * Liberal parse method for integer values.  If the input string is a representation of
+	 * an integer, that value will be returned.  Otherwise the default value is returned.
+	 * Surrounding white space is NOT significant.
+	 * <p>
+	 * If the number starts with a base prefix ("0x" for hex, "0b" for binary, "0c" for
+	 * octal), it will be parsed with that radix.  Otherwise, the number will be parsed in
+	 * base 10 radix.
+	 * <p>
+	 * This method does NOT throw number format exceptions.
+	 *
+	 * @param s String containing a integer value to be parsed
+	 * @return parsed integer value or the default value
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static int parseInt(String s, int defaultValue){
+		Integer integer = parseInteger(s);
+		if (integer != null) return integer.intValue();
+		return defaultValue;
+	}
+
+	/**
+	 * Liberal parse method for integer values.  If the input string is a representation of
+	 * an integer, that value will be returned.  Otherwise the default value is returned.
+	 * Surrounding white space is NOT significant.
+	 * <p>
+	 * This method does NOT throw number format exceptions.
+	 *
+	 * @param s String containing a integer value to be parsed
+	 * @param radix number base used during parsing
+	 * @return parsed integer value or the default value
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static int parseInt(String s, int radix, int defaultValue){
+		Integer integer = parseInteger(s, radix);
+		if (integer != null) return integer.intValue();
+		return defaultValue;
+	}
+
+	private static Map<String, Boolean> TRUE_FALSE_VALUES = getTrueFalseValues();
+
+	private static Map<String, Boolean> getTrueFalseValues() {
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+
+		map.put("true", Boolean.TRUE);
+		map.put("t", Boolean.TRUE);
+		map.put("yes", Boolean.TRUE);
+		map.put("y", Boolean.TRUE);
+		map.put("ok", Boolean.TRUE);
+		map.put("sure", Boolean.TRUE);
+		map.put("yeah", Boolean.TRUE);
+		map.put("yup", Boolean.TRUE);
+		map.put("1", Boolean.TRUE);
+		map.put("affirmative", Boolean.TRUE);
+		map.put("positive", Boolean.TRUE);
+
+		map.put("false", Boolean.FALSE);
+		map.put("f", Boolean.FALSE);
+		map.put("no", Boolean.FALSE);
+		map.put("n", Boolean.FALSE);
+		map.put("0", Boolean.FALSE);
+		map.put("not", Boolean.FALSE);
+		map.put("nope", Boolean.FALSE);
+		map.put("negative", Boolean.FALSE);
+
+		return map;
+	}
+
+	/**
+	 * Liberal parse method for boolean values.  If the input string is a word that matches
+	 * a boolean value, that boolean value will be returned.  Otherwise null is returned.
+	 * Comparison is case insensitive. Surrounding white space is NOT significant.
+	 * <p>
+	 * true includes: true, t, yes, y, 1, ok
+	 * <p>
+	 * false includes: false, f, no , n, 0, nope
+	 *
+	 * @param s String containing a boolean value to be parsed.
+	 * @return true, false, or null
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static Boolean parseBoolean(String s){
+		if (s == null) return null;
+		s = s.trim();
+		s = s.toLowerCase();
+		return TRUE_FALSE_VALUES.get(s);
+	}
+
+	/**
+	 * Liberal parse method for boolean values.  If the input string is a word that matches
+	 * a boolean value, that boolean value will be returned.  Otherwise the default value is
+	 * returned.  Comparison is case insensitive. Surrounding white space is NOT significant.
+	 * <p>
+	 * true includes: true, t, yes, y, 1, ok
+	 * <p>
+	 * false includes: false, f, no , n, 0, nope
+	 *
+	 * @param s String containing a boolean value to be parsed.
+	 * @param defaultValue returned when the input string does not have a boolean value
+	 * @return true or false
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static boolean parseBoolean(String s, boolean defaultValue){
+		Boolean b = parseBoolean(s);
+		if (b != null) return b.booleanValue();
+		return defaultValue;
 	}
 }

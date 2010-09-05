@@ -646,6 +646,8 @@ public class UberProperties {
 	/**
 	 * Add the properties from the input stream to this
 	 * UberProperties.
+	 * <p>
+	 * The input stream in parsed as ISO-8859-1 (Latin 1) text.
 	 *
 	 * @param in InputStream containing properties.
 	 * @param add whether parameters should add to parameters with the same name or replace them.
@@ -654,7 +656,21 @@ public class UberProperties {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void load(InputStream in, boolean add) throws IOException {
-		PropertiesLexer lex = new PropertiesLexer(new InputStreamReader(in, "ISO-8859-1"));
+		load(new InputStreamReader(in, "ISO-8859-1"), add);
+	}
+
+	/**
+	 * Add the properties from the reader to this
+	 * UberProperties.
+	 *
+	 * @param in Reader containing properties.
+	 * @param add whether parameters should add to parameters with the same name or replace them.
+	 * @throws IOException if an error occurs when reading.
+	 *
+	 * @since ostermillerutils 1.07.01
+	 */
+	public void load(Reader reader, boolean add) throws IOException {
+		PropertiesLexer lex = new PropertiesLexer(reader);
 		PropertiesToken t;
 		HashSet<String> names = new HashSet<String>();
 		StringBuffer comment = new StringBuffer();
@@ -718,6 +734,8 @@ public class UberProperties {
 	 * Add the properties from the input stream to this
 	 * UberProperties.
 	 * <p>
+	 * The input stream in parsed as ISO-8859-1 (Latin 1) text.
+	 * <p>
 	 * Properties that are found replace any properties that
 	 * were there before.
 	 *
@@ -727,6 +745,23 @@ public class UberProperties {
 	 * @since ostermillerutils 1.00.00
 	 */
 	public void load(InputStream in) throws IOException {
+		load(in, false);
+	}
+
+
+	/**
+	 * Add the properties from the reader to this
+	 * UberProperties.
+	 * <p>
+	 * Properties that are found replace any properties that
+	 * were there before.
+	 *
+	 * @param in Reader containing properties.
+	 * @throws IOException if an error occurs when reading.
+	 *
+	 * @since ostermillerutils 1.00.00
+	 */
+	public void load(Reader in) throws IOException {
 		load(in, false);
 	}
 
@@ -764,6 +799,35 @@ public class UberProperties {
 	}
 
 	/**
+	 * Save these properties to the given writer.  The properties are saved without escaping
+	 * high byte characters with backslash u style escape sequences.  This method is intended
+	 * for those who wish to store properties in UTF-8 (or other high byte capable) text file.
+	 * When saved via this method, the properties can only be read back using the read(Reader)
+	 * method, as the read(InputStream) and read(File) methods assume ISO-8859-1 encoded bytes.
+	 * <p>
+	 * Note that this method in NOT compatible with the java.util.Properties class.  This method
+	 * will store unicode characters un-escaped.
+	 *
+	 * @param out writer
+	 * @throws IOException if an input/output error occurs
+	 * @since ostermillerutils 1.07.01
+	 */
+	public void save(Writer out) throws IOException {
+		writeComment(out, comment);
+		out.write('\n');
+		String[] names = propertyNames();
+		Arrays.sort(names);
+		for (String element: names) {
+			writeComment(out, getComment(element));
+			String[] values = getProperties(element);
+			for (String element2: values) {
+				writeProperty(out, element, element2);
+			}
+		}
+		out.flush();
+	}
+
+	/**
 	 * Save these properties to the given stream.
 	 *
 	 * @param out OutputStream to which these properties should be written.
@@ -791,7 +855,14 @@ public class UberProperties {
 		out.write('=');
 		writeEscapedISO88591(out, value, TYPE_VALUE);
 		out.write('\n');
+	}
 
+
+	private static void writeProperty(Writer out, String name, String value) throws IOException {
+		writeEscapedText(out, name, TYPE_NAME);
+		out.write('=');
+		writeEscapedText(out, value, TYPE_VALUE);
+		out.write('\n');
 	}
 
 	private static void writeComment(OutputStream out, String comment) throws IOException {
@@ -802,7 +873,19 @@ public class UberProperties {
 				out.write(' ');
 				writeEscapedISO88591(out, tok.nextToken(), TYPE_COMMENT);
 				out.write('\n');
-						}
+			}
+		}
+	}
+
+	private static void writeComment(Writer out, String comment) throws IOException {
+		if (comment != null){
+			java.util.StringTokenizer tok = new java.util.StringTokenizer(comment, "\r\n");
+			while (tok.hasMoreTokens()){
+				out.write('#');
+				out.write(' ');
+				writeEscapedText(out, tok.nextToken(), TYPE_COMMENT);
+				out.write('\n');
+			}
 		}
 	}
 
@@ -883,7 +966,58 @@ public class UberProperties {
 			}
 		}
 	}
-
+	private static void writeEscapedText(Writer out, String s, int type) throws IOException {
+		for (int i=0; i<s.length(); i++){
+			int c = s.charAt(i);
+			boolean escape = false;
+			if (c == '\r' || c == '\n' || c == '\\'){
+				escape = true;
+			} else if (c == ' ' || c == '\t' || c == '\f'){
+				if(type == TYPE_NAME){
+					escape = true;
+				} else if (type == TYPE_VALUE && (i==0 || i == s.length() - 1)){
+					escape = true;
+				}
+			} else if (type == TYPE_NAME && (c == '=' || c == ':')){
+				escape = true;
+			}
+			if (escape){
+				switch (c){
+					case '\n': {
+						switch (type){
+							case TYPE_COMMENT: {
+								out.write("\n# ");
+							} break;
+							case TYPE_NAME: {
+								out.write("\\n\\\n\t");
+							} break;
+							case TYPE_VALUE: {
+								out.write("\\n\\\n\t\t");
+							} break;
+						}
+					} break;
+					case '\\': {
+						out.write("\\\\");
+					} break;
+					case '\r': {
+						out.write("\\r");
+					} break;
+					case '\t': {
+						out.write("\\t");
+					} break;
+					case '\f': {
+						out.write("\\f");
+					} break;
+					default : {
+						out.write('\\');
+						out.write(c);
+					} break;
+				}
+			} else {
+				out.write(c);
+			}
+		}
+	}
 	/**
 	 * Get the first property with the given name.
 	 * If the property is not specified in this UberProperties
@@ -942,6 +1076,20 @@ public class UberProperties {
 			values = (properties.get(name)).getValues();
 		}
 		return values;
+	}
+
+	/**
+	 * Convert this UberProperties into a java.util.Properties.
+	 *
+	 * @return java properties object.
+	 * @since ostermillerutils 1.07.01
+	 */
+	public Properties toJavaUtilProperties(){
+		Properties p = new Properties();
+		for(String name: propertyNames()){
+			p.put(name, getProperty(name));
+		}
+		return p;
 	}
 
 	/**
@@ -1055,5 +1203,59 @@ public class UberProperties {
 			throw new Error("ISO-8859-1 should be recognized.", uee);
 		}
 		return s;
+	}
+
+	/**
+	 * Liberally parse the property value as an integer.
+	 * Uses StringHelper.parseInteger() to parse the integer.
+	 *
+	 * @param name the property name
+	 * @return the parsed property value, or null if the property does not exist or cannot be parsed.
+	 * @see com.Ostermiller.util.StringHelper#parseInteger(String)
+	 * @since ostermillerutils 1.07.01
+	 */
+	public Integer getIntegerProperty(String name){
+		return StringHelper.parseInteger(getProperty(name));
+	}
+
+	/**
+	 * Liberally parse the property value as an integer.
+	 * Uses StringHelper.parseInt() to parse the integer.
+	 *
+	 * @param name the property name
+	 * @param defaultValue default value to be return in case of error
+	 * @return the parsed property value, or the default if the property does not exist or cannot be parsed.
+	 * @see com.Ostermiller.util.StringHelper#parseInt(String, int)
+	 * @since ostermillerutils 1.07.01
+	 */
+	public int getIntProperty(String name, int defaultValue){
+		return StringHelper.parseInt(getProperty(name), defaultValue);
+	}
+
+	/**
+	 * Liberally parse the property value as a boolean.
+	 * Uses StringHelper.parseBoolean() to parse the boolean.
+	 *
+	 * @param name the property name
+	 * @return the parsed property value, or null if the property does not exist or cannot be parsed.
+	 * @see com.Ostermiller.util.StringHelper#parseBoolean(String)
+	 * @since ostermillerutils 1.07.01
+	 */
+	public Boolean getBooleanProperty(String name){
+		return StringHelper.parseBoolean(getProperty(name));
+	}
+
+	/**
+	 * Liberally parse the property value as a boolean.
+	 * Uses StringHelper.parseBoolean() to parse the boolean.
+	 *
+	 * @param name the property name
+	 * @param defaultValue default value to be return in case of error
+	 * @return the parsed property value, or the default if the property does not exist or cannot be parsed.
+	 * @see com.Ostermiller.util.StringHelper#parseBoolean(String, boolean)
+	 * @since ostermillerutils 1.07.01
+	 */
+	public boolean getBooleanProperty(String name, boolean defaultValue){
+		return StringHelper.parseBoolean(getProperty(name), defaultValue);
 	}
 }

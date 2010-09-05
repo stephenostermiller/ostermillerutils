@@ -1,16 +1,23 @@
 /*
- * Copyright (C) 2003-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities This program is
- * free software; you can redistribute it and/or modify it under the terms of
- * the GNU General Public License as published by the Free Software Foundation;
- * either version 2 of the License, or (at your option) any later version. This
- * program is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * Copyright (C) 2002-2010 Stephen Ostermiller
+ * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ *
+  * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
  * See COPYING.TXT for details.
  */
 package com.Ostermiller.util;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.io.IOException;
 import junit.framework.TestCase;
 import java.io.ByteArrayInputStream;
@@ -21,92 +28,235 @@ import java.util.*;
  */
 public class UberPropertiesTest extends TestCase {
 
-	public void test1() {
-		check("A" + "one=\n" + "A" + "two= \n" + "A" + "three=\t");
+	public void testWhiteSpaceAtValueEnd() {
+		check(
+			"one=\n"+
+			"two= \n"+
+			"three=\t"
+		);
 	}
 
-	public void test2() {
-		check("B" + "one=1\n B" + "two = two \nB" + "three 3\n" + "B" + "four: 4");
+	public void testWhiteSpaceAroundNamesAndValues() {
+		check(
+			"one=1\n"+
+			" two = two \n"+
+			"three 3\n"+
+			"four: 4"
+		);
 	}
 
-	public void test3() {
-		check("C" + "on\\\n" + "e=on\\\n" + "e\n" + "C" + "t" + "w \\\n o=t" + "w \\\n o\n"+"Cth\\\n r" + "e" + "e=t" + "h \\\n" + "r" + "e" + "e");
+	public void testBackslashToNextLine() {
+		check(
+			"on\\\n"+
+			"e=on\\\n"+
+			"e\n"+
+			"tw \\\n"+
+			" o=t" + "w \\\n"+
+			" o\n"+"Cth\\\n"+
+			" ree=t" + "h \\\n"+
+			"ree"
+		);
 	}
 
-	public void test4() {
-		check("Done=one\n"+"Done=two\n"+"Done=three");
+	public void testMultiplePropertiesWithSameName() {
+		check(
+			"Done=one\n"+
+			"Done=two\n"+
+			"Done=three"
+		);
 	}
 
-	public void test5() {
-		check("#Comment\n" + "name value\n!Comment\n" + "name value\n# Comment\\n" + "name value\n #name value\n\t \t!name value");
+	public void testComments() {
+		check(
+			"#Comment\n"+
+			"name value\n"+
+			"!Comment\n"+
+			"name value\n"+
+			"# Comment\\n"+
+			"name value\n"+
+			" #name value\n"+
+			"\t \t!name value"
+		);
 	}
 
-	public void test6() {
-		check("#\n# That was a comment\n\n"+"name:value\n" + "name=value\n" + "name value\n name = value \n	name	=	value	\n  name  =  value  ");
+	public void testNameDelimiterAndSpacing() {
+		check(
+			"#\n"+
+			"# That was a comment\n"+
+			"\n"+
+			"one:value\n"+
+			"two=value\n"+
+			"three value\n"+
+			" four = value \n"+
+			"\tfive\t=\tvalue\t\n"+
+			"  six  =  value  "
+		);
 	}
 
-	public void test7() {
-		check("# empty properties\n" + "name\n" + "name=\n" + "name:\n	name\n  name    ");
+	public void testNamesEmptyValues() {
+		check(
+			"one\n"+
+			"two=\n"+
+			"three:\n"+
+			"	four\n"+
+			"  five    "
+		);
 	}
 
-	public void test8() {
-		check("# property names of length zero\n:value value\n:value\n=value\n :value\n =value\n:value : has colon\n:value ends with equal =\n:value ends with colon :");
+	public void testNamesZeroLength() {
+		check(
+			":value value\n"+
+			":value\n"+
+			"=value\n"+
+			" :value\n"+
+			" =value\n"+
+			":value : has colon\n"+
+			":value ends with equal =\n"+
+			":value ends with colon :"
+		);
 	}
 
-	public void test9() {
-		check("name::value starts with colon\n" + "name=:value starts with colon\n" + "name :value starts with colon\n"+"name:value ends with colon:\n" + "name=value ends with colon:\n" + "name value ends with colon:\n" + "name:=value starts with equal\n" + "name==value starts with equal\n" + "name =value starts with equal\n"+"name:value ends with equal=\n" + "name=value ends with equal=\n" + "name value ends with equal=\n" + "name:!value starts with exclamation\n" + "name=!value starts with exclamation\n" + "name !value starts with exclamation\n" + "name:#value starts with pound\n" + "name=#value starts with pound\n" + "name #value starts with pound\n" + "name=value ends with colon :\n" + "name=value ends with equal =");
+	public void testNameValueDelimiters() {
+		check(
+			"one::value starts with colon\n"+
+			"two=:value starts with colon\n"+
+			"three :value starts with colon\n"+
+			"four:value ends with colon:\n"+
+			"five=value ends with colon:\n"+
+			"six value ends with colon:\n"+
+			"seven:=value starts with equal\n"+
+			"eight==value starts with equal\n"+
+			"nine =value starts with equal\n"+
+			"ten:value ends with equal=\n"+
+			"eleven=value ends with equal=\n"+
+			"twelve value ends with equal=\n"+
+			"thirteen:!value starts with exclamation\n"+
+			"fourteen=!value starts with exclamation\n"+
+			"fifteen !value starts with exclamation\n"+
+			"sixteen:#value starts with pound\n"+
+			"seventeen=#value starts with pound\n"+
+			"eighteen #value starts with pound\n"+
+			"nineteen=value ends with colon :\n"+
+			"twenty=value ends with equal ="
+		);
 	}
 
-	public void test10() {
+	public void testNonDelimiterPuncuation() {
 		check("@!#$%^name value!@#$%^&*(){}");
 	}
 
-	public void test11() {
-		check("\n\n\n\n#comment\n\n \n\t \n ");
+	public void testEmptyLines() {
+		check(
+			"\n"+
+			"\n"+
+			"\n"+
+			"\n"+
+			"#comment\n"+
+			"\n"+
+			" \n"+
+			"\t \n"+
+			" "
+		);
 	}
 
-	public void test12() {
-		check("# escapes\n\\ \\=\\:name=value\\ \\=\\:\n\\u3443\\0233name value\\u3432\\0213");
+	public void testEscapes() {
+		check(
+			"# escapes\n"+
+			"\\ \\=\\:name=value\\ \\=\\:\n"+
+			"\\u3443\\0233name value\\u3432\\0213"
+		);
 	}
 
-	public void test13() {
+	public void testSingleNameOnly() {
 		check("name");
 	}
 
-	public void test14() {
+	public void testSingleNameSpace() {
 		check("name ");
 	}
 
-	public void test15() {
+	public void testSingleNameEquals() {
 		check("name =");
 	}
 
-	public void test16() {
+	public void testLengthZero() {
 		check("");
 	}
 
-	public void test17() {
+	public void testOnlyComment() {
 		check("#comment");
 	}
 
-	public void test18() {
+	public void testNameEqualsSpace() {
 		check("name= ");
 	}
 
-	public void test19() {
+	public void testNameEqualsSpaceValue() {
 		check("name= value");
 	}
 
-	public void test20() {
+	public void testSimpleNameValue() {
 		check("name=value ");
 	}
 
-	public void test21() {
-		check("name\\\n" + "still" + "name value\n" + "name\\\n  still" + "name value\n" + "name\\\n" + "still" + "name\\\n" + "still" + "name value\n" + "name\\\n\\\n \\\n" + "still" + "name value\n" + "name\\\n#still" + "name value\n" + "name\\\n!still" + "name value");
+	public void testLongNames() {
+		check(
+			"name\\\n"+
+			"still" + "name value\n"+
+			"name\\\n"+
+			"  still" + "name value\n"+
+			"name\\\n"+
+			"still" + "name\\\n"+
+			"still" + "name value\n"+
+			"name\\\n"+
+			"\\\n"+
+			" \\\n"+
+			"still" + "name value\n"+
+			"name\\\n"+
+			"#still" + "name value\n"+
+			"name\\\n"+
+			"!still" + "name value"
+		);
 	}
 
-	public void test22(){
-		check("# empty property\n" + "name\\\n\n#comment");
+	public void testEmptyProp(){
+		check("# empty property\n"+
+		"name\\\n"+
+		"\n"+
+		"#comment");
+	}
+
+	public void testBooleanProperty(){
+		UberProperties p = new UberProperties();
+		p.setProperty("a", "TRUE");
+		assertEquals(Boolean.TRUE, p.getBooleanProperty("a"));
+		assertNull(p.getBooleanProperty("b"));
+		assertTrue(p.getBooleanProperty("a", false));
+		assertFalse(p.getBooleanProperty("b", false));
+	}
+
+	public void testIntegerProperty(){
+		UberProperties p = new UberProperties();
+		p.setProperty("a", "3");
+		assertEquals(new Integer(3), p.getIntegerProperty("a"));
+		assertNull(p.getBooleanProperty("b"));
+		assertEquals(3, p.getIntProperty("a", 0));
+		assertEquals(-3, p.getIntProperty("b", -3));
+	}
+
+	private static void checkLoadAndSaveUtf8(String s1) {
+		try {
+			UberProperties p1 = new UberProperties();
+			p1.load(new StringReader(s1));
+			StringWriter sw = new StringWriter();
+			p1.save(sw);
+			UberProperties p2 = new UberProperties();
+			p2.load(new StringReader(sw.toString()));
+			compare(p1,p2);
+		} catch (IOException iox){
+			throw new RuntimeException(iox);
+		}
+
 	}
 
 	private static void check(String properties) {
@@ -126,6 +276,7 @@ public class UberPropertiesTest extends TestCase {
 		} catch (IOException x) {
 			throw new RuntimeException(x);
 		}
+		checkLoadAndSaveUtf8(properties);
 	}
 
 	private static void compare(UberProperties uberProps, Properties props) {

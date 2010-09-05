@@ -648,4 +648,110 @@ public class StringHelperTest extends TestCase {
 			"one||two||three"
 		);
 	}
+
+	public void testParseBooleanTrue(){
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("true"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("t"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("yes"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("y"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("1"));
+	}
+
+	public void testParseBooleanFalse(){
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("false"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("f"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("no"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("n"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("0"));
+	}
+
+	public void testParseInteger(){
+		assertEquals(new Integer(0), StringHelper.parseInteger("0"));
+		assertEquals(new Integer(123456), StringHelper.parseInteger("123456"));
+		assertEquals(new Integer(-654321), StringHelper.parseInteger("-654321"));
+	}
+
+	public void testParseIntegerStartsWithZero(){
+		assertEquals(new Integer(700), StringHelper.parseInteger("0700"));
+	}
+
+	public void testParseIntegerBinary(){
+		assertEquals(new Integer(7), StringHelper.parseInteger("0b111"));
+		assertEquals(new Integer(5), StringHelper.parseInteger("0B101"));
+	}
+
+	public void testParseIntegerOctal(){
+		assertEquals(new Integer(9), StringHelper.parseInteger("0c11"));
+		assertEquals(new Integer(16), StringHelper.parseInteger("0C20"));
+	}
+
+	public void testParseIntegerHex(){
+		assertEquals(new Integer(0x0), StringHelper.parseInteger("0x0"));
+		assertEquals(new Integer(0xbeef), StringHelper.parseInteger("0xBeef"));
+		assertEquals(new Integer(0xfeed), StringHelper.parseInteger("0XfeeD"));
+		assertEquals(new Integer(0xface), StringHelper.parseInteger(" 0xFaCe "));
+	}
+
+	public void testParseIntHex(){
+		assertEquals(0x0, StringHelper.parseInt("0x0", -1));
+		assertEquals(0xbeef, StringHelper.parseInt("0xBeef", -1));
+		assertEquals(0xfeed, StringHelper.parseInt("0XfeeD", -1));
+		assertEquals(0xface, StringHelper.parseInt(" 0xFaCe ", -1));
+	}
+
+	public void testParseIntegerRadix(){
+		assertEquals(new Integer(0), StringHelper.parseInteger("0", 16));
+		assertEquals(new Integer(0xbeef), StringHelper.parseInteger("Beef", 16));
+	}
+
+	public void testParseIntegerWhiteSpace(){
+		assertEquals(new Integer(713838), StringHelper.parseInteger(" 713838 "));
+		assertEquals(new Integer(713838), StringHelper.parseInteger("\t713838\t"));
+		assertEquals(new Integer(713838), StringHelper.parseInteger("\n713838\n"));
+		assertEquals(new Integer(713838), StringHelper.parseInteger("\n \t 713838 \n \t"));
+	}
+
+	public void testParseIntegerNull(){
+		assertNull(StringHelper.parseInteger(null));
+		assertNull(StringHelper.parseInteger(""));
+		assertNull(StringHelper.parseInteger("foo"));
+		assertNull(StringHelper.parseInteger("9999999999999999999999"));
+		assertNull(StringHelper.parseInteger("-9999999999999999999999"));
+		assertNull(StringHelper.parseInteger("- 1"));
+	}
+
+	public void testParseBooleanNull(){
+		assertNull(StringHelper.parseBoolean(""));
+		assertNull(StringHelper.parseBoolean(null));
+		assertNull(StringHelper.parseBoolean("X"));
+		assertNull(StringHelper.parseBoolean("true false"));
+		assertNull(StringHelper.parseBoolean("true t 1"));
+	}
+
+	public void testParseBooleanCaseInsensitive(){
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("TRUE"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("False"));
+		assertEquals(Boolean.FALSE, StringHelper.parseBoolean("nO"));
+	}
+
+	public void testParseBooleanInsignificantWhiteSpace(){
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean(" true "));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("yes\t"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("Y\n"));
+		assertEquals(Boolean.TRUE, StringHelper.parseBoolean("\t\n OK \t \n"));
+	}
+
+	public void testParseBooleanTrueDefault(){
+		assertEquals(true, StringHelper.parseBoolean("true", true));
+		assertEquals(true, StringHelper.parseBoolean("true", false));
+		assertEquals(true, StringHelper.parseBoolean(null, true));
+		assertEquals(true, StringHelper.parseBoolean("", true));
+	}
+
+	public void testParseBooleanFalseDefault(){
+		assertEquals(false, StringHelper.parseBoolean("false", true));
+		assertEquals(false, StringHelper.parseBoolean("false", false));
+		assertEquals(false, StringHelper.parseBoolean(null, false));
+		assertEquals(false, StringHelper.parseBoolean("", false));
+	}
 }
