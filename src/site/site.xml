@@ -10,12 +10,6 @@
   <publishDate position="none"/>
   <version position="none"/>
 
-  <bannerLeft>
-    <name>OstermillerUtils</name>
-    <src>ostermillerutils.png</src>
-    <href>./</href>
-  </bannerLeft>
-
   <body>
     <links>
       <item name="Home" href="./" />
