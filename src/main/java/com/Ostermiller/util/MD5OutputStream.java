@@ -14,7 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * See COPYING.TXT for details.
+ * See LICENSE.txt for details.
  *
  * The original work by Santeri Paavolainen can be found a
  * http://santtu.iki.fi/md5/
