@@ -433,6 +433,32 @@ public class StringHelper {
 
 		return result.toString();
 	}
+	
+	/**
+	 * True for the null string and a string of zero length, false otherwise.
+	 * 
+	 * @param s string to test
+	 * @return Whether or not the string is empty.
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static boolean isEmpty(String s){
+		if (s == null) return true;
+		if (s.length() == 0) return true;
+		return false;
+	}
+	
+	/**
+	 * True if the string is null, or has nothing but whitespace characters, false otherwise.
+	 * 
+	 * @param s string to test
+	 * @return Whether or not the string is blank.
+	 * @since ostermillerutils 1.07.01
+	 */
+	public static boolean isBlank(String s){
+		if (s == null) return true;
+		if (s.trim().length() == 0) return true;
+		return false;
+	}
 
 	/**
 	 * Replace occurrences of a substring.
