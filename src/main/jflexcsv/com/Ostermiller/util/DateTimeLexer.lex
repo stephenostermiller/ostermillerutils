@@ -57,7 +57,7 @@ import java.io.*;
 
 %{
     /**
-     * Return the next token 
+     * Return the next token
      *
      * @return the next token
      * @throws IOException if an error occurs while reading the properties.
@@ -68,13 +68,9 @@ import java.io.*;
 %}
 
 Integer=([0-9]+)
-Word=([a-zA-Z]+)
-Punctuation=([ \:\-\/\,]+)
-OrdinalSt=([23]?[1][sS][tT])
-OrdinalNd=([23]?[2][nN][dD])
-OrdinalRd=([2]?[3][rR][dD])
-OrdinalTh=(([456789]|([1][023456789])|[2][0456789]|"30")[tT][hH])
-Ordinal=(|||)
+Word=([0-9a-zA-Z]*[a-zA-Z]+([0-9a-zA-Z\-][a-zA-Z])*[0-9a-zA-Z]*)
+Punctuation=([ \:\-\/\,\.]+)
+AbbrYear=([\'\u8216\u8217][0-9]{2})
 
 %%
 
@@ -88,6 +84,10 @@ Ordinal=(|||)
 
 <YYINITIAL> {Punctuation} {
 	return new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.PUNCTUATION);
+}
+
+<YYINITIAL> {AbbrYear} {
+  return new DateTimeToken(yytext().substring(1), DateTimeToken.DateTimeTokenType.APOS_YEAR);
 }
 
 <YYINITIAL> [^] {

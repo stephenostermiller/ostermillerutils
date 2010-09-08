@@ -26,38 +26,155 @@ import java.util.*;
  */
 public class DateTimeParse {
 
+	public enum Field {
+		YEAR,
+		MONTH,
+		DAY
+	}
+
 	public DateTimeParse(){
 	}
-	
-	private static final Map<String,Integer> MONTH_WORDS = getMonthWords();
-	
-	private static Map<String,Integer> getMonthWords(){
+
+	private Field[] fieldOrder = new Field[]{Field.MONTH,Field.DAY,Field.YEAR};
+
+	public void setFieldOrder(List<Field> fieldOrder){
+		setFieldOrder((Field[])fieldOrder.toArray());
+	}
+
+	public void setFieldOrder(Field[] fieldOrder){
+		this.fieldOrder = copyAndVerify(fieldOrder);
+	}
+
+	private static Field[] copyAndVerify(Field[] fieldOrder){
+		boolean y = false;
+		boolean m = false;
+		boolean d = false;
+		Field[] result = new Field[3];
+		int i = 0;
+		for (Field f: fieldOrder){
+			switch (f){
+				case YEAR: {
+					if (!y){
+						y = true;
+						result[i] = f;
+					}
+				} break;
+				case MONTH: {
+					if (!m){
+						m = true;
+						result[i] = f;
+					}
+				} break;
+				case DAY: {
+					if (!d){
+						d = true;
+						result[i] = f;
+					}
+				} break;
+			}
+			i++;
+		}
+		for (int j=i; j<3; j++){
+			if (!y){
+				y = true;
+				result[i] = Field.YEAR;
+			} else if (!m){
+				m = true;
+				result[i] = Field.MONTH;
+			} else if (!d){
+				d = true;
+				result[i] = Field.DAY;
+			}
+		}
+		return result;
+	}
+
+	private static List<Field> getFieldOrder(String s){
+		List<Field> l = new ArrayList<Field>();
+		for(String name: s.split("[^A-Za-z]+")){
+			if (name.length() > 0){
+				l.add(Field.valueOf(name.toUpperCase()));
+			}
+		}
+		return l;
+	}
+
+	private static final Map<String,Integer> MONTH_WORDS = getStringIntMap(
+		"jan>1,january>1,feb>2,february>2,mar>3,march>3,apr>4,april>4,may>5,jun>6,"+
+		"june>6,jul>7,july>7,aug>8,august>8,sep>9,sept>9,september>9,oct>10,october>10,"+
+		"nov>11,november>11,dec>12,december>12"
+	);
+
+
+	private static final Set<String> WEEKDAY_WORDS = getStringSet(
+		"sunday,sun,su,monday,mon,mo,tuesday,tues,tue,tu,wednesday,wed,we,thursday,thur,"+
+		"thu,th,friday,fri,fr,saturday,sat,sa,sunday,sun,su"
+	);
+
+	private static final Map<String,Integer> ORDINAL_WORDS = getStringIntMap(
+		"1st>1,1rst>1,first>1,2nd>2,second>2,3rd>3,third>3,4th>4,4rth>4,fourth>4,5th>5,"+
+		"fifth>5,6th>6,sixth>6,7th>7,seventh>7,8th>8,eighth>8,9th>9,ninth>9,10th>10,"+
+		"tenth>10,11th>11,eleventh>11,12th>12,twelth>12,twelvth>12,twelveth>12,"+
+		"twelfth>12,13th>13,thirteenth>13,14th>14,fourteenth>14,four-teenth>14,15th>15,"+
+		"fifteenth>15,16th>16,sixteenth>16,six-teenth>16,17th>17,seventeenth>17,"+
+		"seven-teenth>17,18th>18,eighteenth>18,19th>19,ninteenth>19,nineteenth>19,"+
+		"nine-teenth>19,20th>20,twentieth>20,21st>21,twentyfirst>21,twenty-first>21,"+
+		"22nd>22,twentysecond>22,twenty-second>22,23rd>23,twentythird>23,"+
+		"twenty-third>23,24th>24,twentyfourth>24,twenty-fourth>24,25th>25,"+
+		"twentyfifth>25,twenty-fifth>25,26th>26,twentysixth>26,twenty-sixth>26,27th>27,"+
+		"twentyseventh>27,twenty-seventh>27,28th>28,twentyeighth>28,twenty-eighth>28,"+
+		"29th>29,twentyninth>29,twenty-ninth>29,30th>30,thirtieth>30,31st>31,"+
+		"thirtyfirst>31,thirty-first>31"
+	);
+
+	private static Map<String,Integer> getStringIntMap(String s){
 		HashMap<String,Integer> m = new HashMap<String,Integer>();
-		m.put("jan", 1);
-		m.put("january", 1);
-		m.put("feb", 2);
-		m.put("february", 2);
-		m.put("mar", 3);
-		m.put("march", 3);
-		m.put("apr", 4);
-		m.put("april", 4);
-		m.put("may", 5);
-		m.put("jun", 6);
-		m.put("june", 6);
-		m.put("jul", 7);
-		m.put("july", 7);
-		m.put("aug", 8);
-		m.put("august", 8);
-		m.put("sep", 9);
-		m.put("sept", 9);
-		m.put("september", 9);
-		m.put("oct", 10);
-		m.put("october", 10);
-		m.put("nov", 11);
-		m.put("november", 11);
-		m.put("dec", 12);
-		m.put("december", 12);
+		for(String pair: s.split("\\,")){
+			int sep = pair.lastIndexOf(">");
+			m.put(pair.substring(0, sep), Integer.valueOf(pair.substring(sep+1)));
+		}
 		return m;
+	}
+
+	private static Set<String> getStringSet(String s){
+		HashSet<String> m = new HashSet<String>();
+		for(String v: s.split("\\,")){
+			m.add(v);
+		}
+		return m;
+	}
+
+	private YearExtensionPolicy yearExtensionPolicy = YearExtensionAround.NEAREST;
+
+	private int defaultYear = Calendar.getInstance().get(Calendar.YEAR);
+
+	/**
+	 * Set the default year to use when there is no year in the parsed date.
+	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+	 * @since ostermillerutils 1.08.00
+	 */
+	public void setDefaultYear(int defaultYear){
+		this.defaultYear = defaultYear;
+	}
+
+	/**
+	 * Set the year extension policy.  This policy is responsible for extending two digit
+	 * years into full years.  eg. 99 to 1999
+	 * <p>
+	 * The default policy is <code>YearExtensionAround.NEAREST</code>.  Several other
+	 * pre-canned policies are available.
+	 *
+	 * @see com.Ostermiller.util.YearExtensionAround.NEAREST
+	 * @see com.Ostermiller.util.YearExtensionAround.LATEST
+	 * @see com.Ostermiller.util.YearExtensionAround.CENTURY_1999
+	 * @see com.Ostermiller.util.YearExtensionAround.CENTURY_2000
+	 * @see com.Ostermiller.util.YearExtensionNone.YEAR_EXTENSION_NONE
+	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+	 * @since ostermillerutils 1.08.00
+	 */
+	public DateTimeParse setYearExtensionPolicy(YearExtensionPolicy yearExtensionPolicy){
+		this.yearExtensionPolicy = yearExtensionPolicy;
+		return this;
 	}
 
 	public Date parse(String dateString){
@@ -73,21 +190,35 @@ public class DateTimeParse {
 					case ERROR: return null;
 					case NUMBER: {
 						Integer value = Integer.valueOf(text);
-						Boolean set = work.setObviousDateField(value.intValue());
-						if (set == null){
-							if (poss == null) poss = new LinkedList<Integer>();
-							poss.add(new Integer(value));
-						} else if (Boolean.FALSE.equals(set)) return null;
+						if (work.hasYear() && poss == null && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
+							// Support YYYY-MM-DD format unless
+							// the order is specifically YYYY-DD-MM
+							work.setMonth(value);
+						} else {
+							Boolean set = work.setObviousDateField(value.intValue());
+							if (set == null){
+								if (poss == null) poss = new LinkedList<Integer>();
+								poss.add(new Integer(value));
+							} else if (Boolean.FALSE.equals(set)) return null;
+						}
 					} break;
 					case WORD: {
 						text = text.toLowerCase();
 						if (MONTH_WORDS.containsKey(text)){
 							if (!work.setMonth(MONTH_WORDS.get(text).intValue())) return null;
+						} else if (ORDINAL_WORDS.containsKey(text)){
+							if (!work.setDay(ORDINAL_WORDS.get(text).intValue())) return null;
+						} else if (WEEKDAY_WORDS.contains(text)){
+							// ignore weekday words
 						} else {
 							return null;
 						}
 					} break;
+					case APOS_YEAR: {
+						if (!work.setYear(Integer.parseInt(text))) return null;
+					} break;
 					case PUNCTUATION: break;
+					default: return null;
 				}
 			}
 			boolean assigned = true;
@@ -111,76 +242,98 @@ public class DateTimeParse {
 			return null;
 		}
 	}
-}
 
-class WorkingDateTime {
-	int year = -1;
-	int month = -1;
-	int day = -1;
-	
-	public Date getDate(){
-		if (!hasYear() || !hasMonth() || !hasDay()){
+	private class WorkingDateTime {
+		int year = -1;
+		int month = -1;
+		int day = -1;
+
+		public Date getDate(){
+			if (hasYear() && !hasMonth()){
+				month = 1;
+			}
+			if (hasMonth() && !hasDay()){
+				day = 1;
+			}
+			if (hasMonth() && !hasYear()){
+				year = defaultYear;
+			}
+			if (!hasYear() || !hasMonth() || !hasDay()){
+				return null;
+			}
+			Calendar c = Calendar.getInstance();
+			c.clear();
+			c.set(year, month-1, day);
+			return c.getTime();
+		}
+
+		public boolean hasYear(){
+			return year != -1;
+		}
+		public boolean hasMonth(){
+			return month != -1;
+		}
+		public boolean hasDay(){
+			return day != -1;
+		}
+
+		public boolean setMonth(int value){
+			if (hasMonth()) return false;
+			month = value;
+			return true;
+		}
+
+		public boolean setDay(int value){
+			if (hasDay()) return false;
+			day = value;
+			return true;
+		}
+
+		public boolean setYear(int value){
+			if (hasYear()) return false;
+			if (value < 100){
+				value = yearExtensionPolicy.extendYear(value);
+			}
+			year = value;
+			return true;
+		}
+
+		public boolean setPreferredField(int value){
+			for (Field field: fieldOrder){
+				switch (field){
+					case MONTH:{
+						if (!hasMonth() && value <= 12){
+							return setMonth(value);
+						}
+					} break;
+					case DAY:{
+						if (!hasDay() && value <= 31){
+							return setDay(value);
+						}
+					} break;
+					case YEAR:{
+						if (!hasYear()){
+							return setYear(value);
+						}
+					} break;
+				}
+			}
+			return false;
+		}
+
+		public Boolean setObviousDateField(int value){
+			if (value > 31){
+				return setYear(value);
+			} else if (hasYear() && value > 12 && value <= 31){
+				return setDay(value);
+			} else if (hasYear() && hasDay() && value <= 12){
+				return setMonth(value);
+			} else if (hasYear() && hasMonth() && value <= 31){
+				return setDay(value);
+			} else if (hasDay() && hasMonth()){
+				return setYear(value);
+			}
 			return null;
 		}
-		Calendar c = Calendar.getInstance();
-		c.clear();
-		c.set(year, month-1, day);
-		return c.getTime();
-	}
-	
-	public boolean hasYear(){
-		return year != -1;
-	}
-	public boolean hasMonth(){
-		return month != -1;
-	}
-	public boolean hasDay(){
-		return day != -1;
-	}
-	
-	public boolean setMonth(int value){
-		if (hasMonth()) return false;
-		month = value;
-		return true;
-	}
-	
-	public boolean setDay(int value){
-		if (hasDay()) return false;
-		day = value;
-		return true;
-	}
-	
-	public boolean setYear(int value){
-		if (hasYear()) return false;
-		year = value;
-		return true;
-	}
-	
-	public boolean setPreferredField(int value){
-		if (!hasMonth() && value <= 12){
-			return setMonth(value);		
-		}
-		if (!hasDay() && value <= 31){
-			return setDay(value);		
-		}
-		if (!hasYear()){
-			return setYear(value);		
-		}
-		return false;
-	}
-	
-	public Boolean setObviousDateField(int value){
-		if (value > 31){
-			return setYear(value);
-		} else if (hasYear() && value > 12 && value <= 31){
-			return setDay(value);
-		} else if (hasYear() && hasDay() && value <= 12){
-			return setMonth(value);
-		} else if (hasYear() && hasMonth() && value <= 31){
-			return setDay(value);
-		} else if (hasDay() && hasMonth()){
-			return setYear(value);
-		}
-		return null;
 	}
 }

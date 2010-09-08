@@ -23,12 +23,13 @@ package com.Ostermiller.util;
  * @since ostermillerutils 1.08.00
  */
 class DateTimeToken {
-	
+
 	public enum DateTimeTokenType {
 		ERROR,
 		NUMBER,
 		WORD,
-		PUNCTUATION
+		PUNCTUATION,
+		APOS_YEAR,
 	}
 
 	private String text;
@@ -65,7 +66,7 @@ class DateTimeToken {
 	}
 
 	private DateTimeTokenType type;
-	
+
 	public DateTimeToken(String text, DateTimeTokenType type){
 		this.text = text;
 		this.type = type;
