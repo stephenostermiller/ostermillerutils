@@ -42,6 +42,11 @@ public class DateTimeParseTest extends TestCase {
 		assertNull(parse("foo"));
 	}
 
+	public void testTooLongForYear(){
+		assertNull(parse("10000"));
+		assertNull(parse("999999"));
+	}
+
 	public void testNotDateBadMonthName(){
 		assertNull(new DateTimeParse().parse("1 festival, 1032"));
 	}
@@ -425,6 +430,13 @@ public class DateTimeParseTest extends TestCase {
 
 	public void testYearFirstOverride(){
 		assertJustDateEquals("1997-02-01", parseYearDayMonth("1997-01-02"));
+	}
+
+	public void testEarlyYear(){
+		assertJustDateEquals("0009-01-01", parse("0009"));
+		assertJustDateEquals("0009-01-01", parse("Jan 0009"));
+		assertJustDateEquals("0009-01-02", parse("Jan 0009 2"));
+		assertJustDateEquals("0009-02-03", parse("0009-02-03"));
 	}
 
 	private static DateTimeParse getParser(Field[] fieldOrder){

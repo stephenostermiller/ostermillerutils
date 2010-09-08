@@ -183,22 +183,21 @@ public class DateTimeParse {
 			DateTimeLexer lex = new DateTimeLexer(new StringReader(dateString));
 			DateTimeToken tok;
 			WorkingDateTime work = new WorkingDateTime();
-			LinkedList<Integer> poss = null;
+			LinkedList<String> poss = null;
 			while((tok=lex.getNextToken()) != null){
 				String text = tok.getText();
 				switch(tok.getType()){
-					case ERROR: return null;
 					case NUMBER: {
-						Integer value = Integer.valueOf(text);
+						int value = Integer.parseInt(text);
 						if (work.hasYear() && poss == null && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
 							// Support YYYY-MM-DD format unless
 							// the order is specifically YYYY-DD-MM
 							work.setMonth(value);
 						} else {
-							Boolean set = work.setObviousDateField(value.intValue());
+							Boolean set = work.setObviousDateField(text, value);
 							if (set == null){
-								if (poss == null) poss = new LinkedList<Integer>();
-								poss.add(new Integer(value));
+								if (poss == null) poss = new LinkedList<String>();
+								poss.add(text);
 							} else if (Boolean.FALSE.equals(set)) return null;
 						}
 					} break;
@@ -215,7 +214,7 @@ public class DateTimeParse {
 						}
 					} break;
 					case APOS_YEAR: {
-						if (!work.setYear(Integer.parseInt(text))) return null;
+						if (!work.setYear(text, Integer.parseInt(text))) return null;
 					} break;
 					case PUNCTUATION: break;
 					default: return null;
@@ -224,9 +223,10 @@ public class DateTimeParse {
 			boolean assigned = true;
 			while (assigned && poss != null){
 				assigned = false;
-				for (Iterator<Integer> i = poss.iterator(); i.hasNext(); ){
-					Integer value = i.next();
-					Boolean set = work.setObviousDateField(value.intValue());
+				for (Iterator<String> i = poss.iterator(); i.hasNext(); ){
+					String text = i.next();
+					int value = Integer.parseInt(text);
+					Boolean set = work.setObviousDateField(text, value);
 					if (set != null){
 						if (Boolean.FALSE.equals(set)) return null;
 						assigned = true;
@@ -235,7 +235,8 @@ public class DateTimeParse {
 				}
 			}
 			while (poss != null && poss.size() > 0){
-				work.setPreferredField(poss.removeFirst().intValue());
+				String text = poss.removeFirst();
+				work.setPreferredField(text, Integer.parseInt(text));
 			}
 			return work.getDate();
 		} catch (Exception x){
@@ -289,16 +290,16 @@ public class DateTimeParse {
 			return true;
 		}
 
-		public boolean setYear(int value){
+		public boolean setYear(String text, int value){
 			if (hasYear()) return false;
-			if (value < 100){
+			if (text.length() <= 2 && value < 100){
 				value = yearExtensionPolicy.extendYear(value);
 			}
 			year = value;
 			return true;
 		}
 
-		public boolean setPreferredField(int value){
+		public boolean setPreferredField(String text, int value){
 			for (Field field: fieldOrder){
 				switch (field){
 					case MONTH:{
@@ -313,7 +314,7 @@ public class DateTimeParse {
 					} break;
 					case YEAR:{
 						if (!hasYear()){
-							return setYear(value);
+							return setYear(text, value);
 						}
 					} break;
 				}
@@ -321,9 +322,9 @@ public class DateTimeParse {
 			return false;
 		}
 
-		public Boolean setObviousDateField(int value){
-			if (value > 31){
-				return setYear(value);
+		public Boolean setObviousDateField(String text, int value){
+			if (text.length() >=3 || value > 31){
+				return setYear(text, value);
 			} else if (hasYear() && value > 12 && value <= 31){
 				return setDay(value);
 			} else if (hasYear() && hasDay() && value <= 12){
@@ -331,7 +332,7 @@ public class DateTimeParse {
 			} else if (hasYear() && hasMonth() && value <= 31){
 				return setDay(value);
 			} else if (hasDay() && hasMonth()){
-				return setYear(value);
+				return setYear(text, value);
 			}
 			return null;
 		}

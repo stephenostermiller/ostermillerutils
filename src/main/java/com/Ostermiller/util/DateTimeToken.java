@@ -71,5 +71,4 @@ class DateTimeToken {
 		this.text = text;
 		this.type = type;
 	}
-
 }

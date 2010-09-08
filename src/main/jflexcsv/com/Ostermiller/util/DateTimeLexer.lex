@@ -65,9 +65,11 @@ import java.io.*;
     public DateTimeToken getNextToken() throws IOException {
         return getToken();
     }
+
+    private DateTimeToken last = null;
 %}
 
-Integer=([0-9]+)
+Integer=([0-9]{1,4})
 Word=([0-9a-zA-Z]*[a-zA-Z]+([0-9a-zA-Z\-][a-zA-Z])*[0-9a-zA-Z]*)
 Punctuation=([ \:\-\/\,\.]+)
 AbbrYear=([\'\u8216\u8217][0-9]{2})
@@ -75,23 +77,33 @@ AbbrYear=([\'\u8216\u8217][0-9]{2})
 %%
 
 <YYINITIAL> {Integer} {
-	return new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.NUMBER);
+	if (last != null && last.getType() == DateTimeToken.DateTimeTokenType.NUMBER) {
+		last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.ERROR);
+		return last;
+	} else {
+		last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.NUMBER);
+		return last;
+	}
 }
 
 <YYINITIAL> {Word} {
-	return new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.WORD);
+	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.WORD);
+	return last;
 }
 
 <YYINITIAL> {Punctuation} {
-	return new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.PUNCTUATION);
+	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.PUNCTUATION);
+	return last;
 }
 
 <YYINITIAL> {AbbrYear} {
-  return new DateTimeToken(yytext().substring(1), DateTimeToken.DateTimeTokenType.APOS_YEAR);
+	last = new DateTimeToken(yytext().substring(1), DateTimeToken.DateTimeTokenType.APOS_YEAR);
+	return last;
 }
 
 <YYINITIAL> [^] {
-	return new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.ERROR);
+	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.ERROR);
+	return last;
 }
 
 
