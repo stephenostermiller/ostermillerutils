@@ -45,6 +45,14 @@ public class DateTimeParse {
 		this.fieldOrder = copyAndVerify(fieldOrder);
 	}
 
+	public List<Field> getFieldOrder(){
+		List<Field> l = new ArrayList<Field>();
+		for (Field f: fieldOrder){
+			l.add(f);
+		}
+		return l;
+	}
+
 	private static Field[] copyAndVerify(Field[] fieldOrder){
 		boolean y = false;
 		boolean m = false;
@@ -57,39 +65,41 @@ public class DateTimeParse {
 					if (!y){
 						y = true;
 						result[i] = f;
+						i++;
 					}
 				} break;
 				case MONTH: {
 					if (!m){
 						m = true;
 						result[i] = f;
+						i++;
 					}
 				} break;
 				case DAY: {
 					if (!d){
 						d = true;
 						result[i] = f;
+						i++;
 					}
 				} break;
 			}
-			i++;
 		}
 		for (int j=i; j<3; j++){
 			if (!y){
 				y = true;
-				result[i] = Field.YEAR;
+				result[j] = Field.YEAR;
 			} else if (!m){
 				m = true;
-				result[i] = Field.MONTH;
+				result[j] = Field.MONTH;
 			} else if (!d){
 				d = true;
-				result[i] = Field.DAY;
+				result[j] = Field.DAY;
 			}
 		}
 		return result;
 	}
 
-	private static List<Field> getFieldOrder(String s){
+	private static List<Field> setFieldOrder(String s){
 		List<Field> l = new ArrayList<Field>();
 		for(String name: s.split("[^A-Za-z]+")){
 			if (name.length() > 0){
@@ -103,6 +113,10 @@ public class DateTimeParse {
 		"jan>1,january>1,feb>2,february>2,mar>3,march>3,apr>4,april>4,may>5,jun>6,"+
 		"june>6,jul>7,july>7,aug>8,august>8,sep>9,sept>9,september>9,oct>10,october>10,"+
 		"nov>11,november>11,dec>12,december>12"
+	);
+
+	private static final Map<String,Integer> ERA_WORDS = getStringIntMap(
+		"bc>0,bce>0,ad>1,ce>1"
 	);
 
 
@@ -209,6 +223,8 @@ public class DateTimeParse {
 							if (!work.setDay(ORDINAL_WORDS.get(text).intValue())) return null;
 						} else if (WEEKDAY_WORDS.contains(text)){
 							// ignore weekday words
+						} else if (ERA_WORDS.containsKey(text)){
+							if (!work.setEra(ERA_WORDS.get(text).intValue())) return null;
 						} else {
 							return null;
 						}
@@ -248,6 +264,7 @@ public class DateTimeParse {
 		int year = -1;
 		int month = -1;
 		int day = -1;
+		int era = -1;
 
 		public Date getDate(){
 			if (hasYear() && !hasMonth()){
@@ -262,10 +279,17 @@ public class DateTimeParse {
 			if (!hasYear() || !hasMonth() || !hasDay()){
 				return null;
 			}
-			Calendar c = Calendar.getInstance();
+			Calendar c = new GregorianCalendar();
 			c.clear();
 			c.set(year, month-1, day);
+			if (hasEra()){
+				c.set(Calendar.ERA, era);
+			}
 			return c.getTime();
+		}
+
+		public boolean hasEra(){
+			return era != -1;
 		}
 
 		public boolean hasYear(){
@@ -276,6 +300,12 @@ public class DateTimeParse {
 		}
 		public boolean hasDay(){
 			return day != -1;
+		}
+
+		public boolean setEra(int value){
+			if (hasEra()) return false;
+			era = value;
+			return true;
 		}
 
 		public boolean setMonth(int value){

@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -439,6 +440,123 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateEquals("0009-02-03", parse("0009-02-03"));
 	}
 
+	public void testBc(){
+		assertJustDateEqualsBc("0200-01-01", parse("200 BC"));
+		assertJustDateEqualsBc("1431-01-10", parse("Jan 10 1431 BC"));
+	}
+
+	public void testBce(){
+		assertJustDateEqualsBc("0200-01-01", parse("200 BCE"));
+		assertJustDateEqualsBc("1431-01-10", parse("Jan 10 1431 BCE"));
+	}
+
+	public void testAd(){
+		assertJustDateEquals("0200-01-01", parse("200 AD"));
+		assertJustDateEquals("1431-01-10", parse("Jan 10 1431 AD"));
+	}
+
+	public void testCe(){
+		assertJustDateEquals("0200-01-01", parse("200 CE"));
+		assertJustDateEquals("1431-01-10", parse("Jan 10 1431 CE"));
+	}
+
+	public void testAdBcCaseInsensitive(){
+		assertJustDateEqualsBc("0200-01-01", parse("200 bc"));
+		assertJustDateEqualsBc("1431-01-10", parse("Jan 10 1431 BcE"));
+		assertJustDateEquals("0200-01-01", parse("200 aD"));
+		assertJustDateEquals("1431-01-10", parse("Jan 10 1431 Ce"));
+	}
+
+	public void testFieldOrderMonth(){
+		DateTimeParse p = getParser(new Field[]{Field.MONTH});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.MONTH, fields.get(0));
+		assertEquals(Field.YEAR, fields.get(1));
+		assertEquals(Field.DAY, fields.get(2));
+	}
+
+	public void testFieldOrderDay(){
+		DateTimeParse p = getParser(new Field[]{Field.DAY});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.DAY, fields.get(0));
+		assertEquals(Field.YEAR, fields.get(1));
+		assertEquals(Field.MONTH, fields.get(2));
+	}
+
+	public void testFieldOrderYear(){
+		DateTimeParse p = getParser(new Field[]{Field.YEAR});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.YEAR, fields.get(0));
+		assertEquals(Field.MONTH, fields.get(1));
+		assertEquals(Field.DAY, fields.get(2));
+	}
+
+	public void testFieldOrderMonthDay(){
+		DateTimeParse p = getParser(new Field[]{Field.MONTH, Field.DAY});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.MONTH, fields.get(0));
+		assertEquals(Field.DAY, fields.get(1));
+		assertEquals(Field.YEAR, fields.get(2));
+	}
+
+	public void testFieldOrderMonthYear(){
+		DateTimeParse p = getParser(new Field[]{Field.MONTH, Field.YEAR});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.MONTH, fields.get(0));
+		assertEquals(Field.YEAR, fields.get(1));
+		assertEquals(Field.DAY, fields.get(2));
+	}
+
+	public void testFieldOrderDayMonth(){
+		DateTimeParse p = getParser(new Field[]{Field.DAY, Field.MONTH});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.DAY, fields.get(0));
+		assertEquals(Field.MONTH, fields.get(1));
+		assertEquals(Field.YEAR, fields.get(2));
+	}
+
+	public void testFieldOrderDayYear(){
+		DateTimeParse p = getParser(new Field[]{Field.DAY, Field.YEAR});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.DAY, fields.get(0));
+		assertEquals(Field.YEAR, fields.get(1));
+		assertEquals(Field.MONTH, fields.get(2));
+	}
+
+	public void testFieldOrderYearMonth(){
+		DateTimeParse p = getParser(new Field[]{Field.YEAR, Field.MONTH});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.YEAR, fields.get(0));
+		assertEquals(Field.MONTH, fields.get(1));
+		assertEquals(Field.DAY, fields.get(2));
+	}
+
+	public void testFieldOrderYearDay(){
+		DateTimeParse p = getParser(new Field[]{Field.YEAR, Field.DAY});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.YEAR, fields.get(0));
+		assertEquals(Field.DAY, fields.get(1));
+		assertEquals(Field.MONTH, fields.get(2));
+	}
+
+	public void testFieldOrderDuplicate(){
+		DateTimeParse p = getParser(new Field[]{Field.YEAR, Field.YEAR});
+		List<Field> fields = p.getFieldOrder();
+		assertEquals(3, fields.size());
+		assertEquals(Field.YEAR, fields.get(0));
+		assertEquals(Field.MONTH, fields.get(1));
+		assertEquals(Field.DAY, fields.get(2));
+	}
+
 	private static DateTimeParse getParser(Field[] fieldOrder){
 		DateTimeParse p = new DateTimeParse();
 		p.setDefaultYear(1981);
@@ -500,12 +618,15 @@ public class DateTimeParseTest extends TestCase {
 	}
 
 	public void assertJustDateEquals(String s, String d){
-		assertEquals(s + " 00:00:00", d);
+		assertEquals(s + " AD 00:00:00", d);
+	}
 
+	public void assertJustDateEqualsBc(String s, String d){
+		assertEquals(s + " BC 00:00:00", d);
 	}
 
 	public static String formatDate(Date date){
 		if (date == null) return null;
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		return new SimpleDateFormat("yyyy-MM-dd G HH:mm:ss").format(date);
 	}
 }
