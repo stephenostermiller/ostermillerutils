@@ -70,7 +70,10 @@ import java.io.*;
 %}
 
 Integer=([0-9]{1,4})
-Word=([0-9a-zA-Z]*[a-zA-Z]+([0-9a-zA-Z\-][a-zA-Z])*[0-9a-zA-Z]*)
+BeginEndWordChar=([:letter:]|[:digit:])
+MiddleWordChar=([:letter:]|[:digit:]|[\-])
+RequiredWordChar=[:letter:]
+Word=({BeginEndWordChar}*{RequiredWordChar}+({MiddleWordChar}{RequiredWordChar})*{BeginEndWordChar}*)
 Punctuation=([ \:\-\/\,\.]+)
 AbbrYear=([\'\u8216\u8217][0-9]{2})
 
@@ -86,11 +89,6 @@ AbbrYear=([\'\u8216\u8217][0-9]{2})
 	}
 }
 
-<YYINITIAL> {Word} {
-	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.WORD);
-	return last;
-}
-
 <YYINITIAL> {Punctuation} {
 	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.PUNCTUATION);
 	return last;
@@ -98,6 +96,11 @@ AbbrYear=([\'\u8216\u8217][0-9]{2})
 
 <YYINITIAL> {AbbrYear} {
 	last = new DateTimeToken(yytext().substring(1), DateTimeToken.DateTimeTokenType.APOS_YEAR);
+	return last;
+}
+
+<YYINITIAL> {Word} {
+	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.WORD);
 	return last;
 }
 

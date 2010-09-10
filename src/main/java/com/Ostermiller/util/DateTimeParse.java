@@ -20,8 +20,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Parses a variety of formatted date strings with minimal configuration.  Unlike other 
- * date parsers, there are no formats to specify.  There is a single parse string method.  
+ * Parses a variety of formatted date strings with minimal configuration.  Unlike other
+ * date parsers, there are no formats to specify.  There is a single parse string method.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.08.00
@@ -37,7 +37,7 @@ public class DateTimeParse {
 	public DateTimeParse(){
 		this(Locale.getDefault());
 	}
-	
+
 	public DateTimeParse(Locale locale){
 		loadResources(locale);
 	}
@@ -111,7 +111,6 @@ public class DateTimeParse {
 		for(String name: s.split("[^A-Za-z]+")){
 			if (name.length() > 0){
 				Field field = Field.valueOf(name.toUpperCase());
-				System.out.println("Found field: " + field);
 				l.add(field);
 			}
 		}
@@ -122,14 +121,14 @@ public class DateTimeParse {
 	private Map<String,Integer> eraWords = new HashMap<String,Integer>();
 	private Set<String> weekdayWords = new HashSet<String>();
 	private Map<String,Integer> ordinalWords = new HashMap<String,Integer>();
-	
+
 	private static final String[] ALL_PROPERTIES = {
-		"","en",
+		"","da","de","en","es","fr","it","nl","pl","pt","ro","ru","sv","tr"
 	};
-	
+
 	private void loadResources(Locale locale){
 		Set<String> allKeys = new HashSet<String>();
-		
+
 		if (locale != null && locale.getLanguage() != null && locale.getLanguage().length() > 0){
 			String langProp = locale.getLanguage();
 			if (locale.getCountry() != null && locale.getCountry().length() > 0){
@@ -142,18 +141,17 @@ public class DateTimeParse {
 			}
 			loadProperties(allKeys, langProp);
 		}
-		
+
 		for (String propertyName: ALL_PROPERTIES){
 			loadProperties(allKeys, propertyName);
 		}
 	}
-	
+
 	private void loadProperties(Set<String> allKeys, String propertiesLocale){
 		try {
 			if (!"".equals(propertiesLocale)){
 				propertiesLocale = "_" + propertiesLocale;
 			}
-			System.out.println("Loading properties: DateTimeParse" + propertiesLocale + ".properties");
 			InputStream in = this.getClass().getResourceAsStream(
 				"DateTimeParse" + propertiesLocale + ".properties"
 			);
@@ -172,12 +170,12 @@ public class DateTimeParse {
 			throw new RuntimeException(iox);
 		}
 	}
-	
+
 	private static void addStringInts(Set<String> allKeys, Map<String,Integer> addTo, String s){
 		if (s == null) return;
 		for(String pair: s.split("\\,")){
 			int sep = pair.lastIndexOf(">");
-			String key = pair.substring(0, sep);
+			String key = pair.substring(0, sep).toLowerCase();
 			if (!allKeys.contains(key)){
 				allKeys.add(key);
 				addTo.put(key, Integer.valueOf(pair.substring(sep+1)));
@@ -189,6 +187,7 @@ public class DateTimeParse {
 	private static void addStrings(Set<String> allKeys, Set<String> addTo, String s){
 		if (s == null) return;
 		for(String key: s.split("\\,")){
+			key = key.toLowerCase();
 			if (!allKeys.contains(key)){
 				allKeys.add(key);
 				addTo.add(key);
@@ -228,10 +227,10 @@ public class DateTimeParse {
 		this.yearExtensionPolicy = yearExtensionPolicy;
 		return this;
 	}
-	
+
 	/**
-	 * Parse the given string into a Date. 
-	 * 
+	 * Parse the given string into a Date.
+	 *
 	 * @param dateString String with a date representation.
 	 * @return timestamp represented by the date string, or null if the date could not be parsed.
 	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities

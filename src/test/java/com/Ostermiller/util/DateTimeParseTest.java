@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import java.util.Locale;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -557,8 +558,19 @@ public class DateTimeParseTest extends TestCase {
 		assertEquals(Field.DAY, fields.get(2));
 	}
 
+	public void testGermanAscii(){
+		assertJustDateEquals("2100-05-27", parse("27 Mai 2100"));
+	}
+
+	public void testGermanUmlaut(){
+		assertJustDateEquals("2054-03-25", parse("25 M\u00e4r 2054"));
+	}
+
+
+	// END TESTS
+
 	private static DateTimeParse getParser(Field[] fieldOrder){
-		DateTimeParse p = new DateTimeParse();
+		DateTimeParse p = new DateTimeParse(Locale.US);
 		p.setDefaultYear(1981);
 		p.setFieldOrder(fieldOrder);
 		p.setYearExtensionPolicy(YearExtensionAround.CENTURY_1900);

@@ -35,7 +35,7 @@ do
   if [ "$file" != "src/build/spell/util.dict" ]
   then
     trailCount=`grep -c -E '[ 	]+$' $file`
-    if [ $trailCount != 0 ]
+    if [ "$trailCount" != 0 ]
     then
       echo "Removing trailing white space from: $file"
       sed -r -i 's/[ 	]+$//' "$file"

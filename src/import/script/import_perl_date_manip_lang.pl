@@ -32,7 +32,7 @@ if ( ! -e 'target/import/datemanip' ){
   `cd target/import/datemanip && wget $downloadurl`;
   `cd target/import/datemanip && tar xfvz *.tar.gz`;
 }
-    
+
 my $words;
 
 my $keyForIntMap = {
@@ -48,7 +48,7 @@ my $keyForIntMap = {
 my $keysForCharList = {
   "sepfr" => "fractionSep",
   "sephm" => "hourMinuteSep",
-  "sepms" => "minuteSecondSep",  
+  "sepms" => "minuteSecondSep",
 };
 
 my $keysForList = {
@@ -80,7 +80,7 @@ my $keysForList = {
   "offset_date--0:0:1:0:0:0" => "yesterdayWords",
   "offset_date--0::00:2:0:0:0" => "twoDaysFromNowWords",
   "times-12:30:00" => "halfWords",
-  
+
 };
 
 my $localeMap = {
@@ -112,9 +112,9 @@ for my $file (split(/\n/, `ls -1 target/import/datemanip/Date-Manip-*/lib/Date/M
   my $locale = $localeMap->{$lang};
   die "No locale for $lang" if (!$locale);
   if ($locale ne "-"){
-  
+
     print "Parsing: $file\n";
-    
+
     open (FILE, $file);
     my $section;
     my $sectionCount;
@@ -155,7 +155,7 @@ for my $file (split(/\n/, `ls -1 target/import/datemanip/Date-Manip-*/lib/Date/M
       }
     }
     close (FILE);
-      
+
     $copyright =~ s/\(c\)/(C)/g;
 
     my $propFile = "src/main/resources/com/Ostermiller/util/DateTimeParse_$locale.properties";
@@ -166,7 +166,7 @@ for my $file (split(/\n/, `ls -1 target/import/datemanip/Date-Manip-*/lib/Date/M
       print "\n";
     } else {
       print "Creating: $propFile\n";
-    
+
       open (PROP, ">$propFile");
 
       print PROP $copyright;
@@ -190,13 +190,13 @@ for my $file (split(/\n/, `ls -1 target/import/datemanip/Date-Manip-*/lib/Date/M
       for my $word (sort keys %$words){
         my $value = $words->{$word};
         print PROP "$word=$value\n";
-      }      
+      }
       close(PROP);
-      
+
       my $charset = $charsetMap->{$lang};
       if ($charset){
         `mv "$propFile" /tmp/cs.tmp; cat /tmp/cs.tmp | iconv -f "$charset" -t "UTF-8" > "$propFile"; rm /tmp/cs.tmp`;
-      }      
+      }
     }
   }
 }
@@ -209,20 +209,20 @@ sub toProperty(){
     &addToProp($key,",","$value>$subSection");
     return;
   }
-  
+
   my $key = $keysForCharList->{$section};
   if ($key){
     $value =~ s/[\[\]]//g
     &addToProp($key,"",$value);
     return;
-  }  
-  
+  }
+
   $key = $keysForList->{$section};
   $key = $keysForList->{"$section-$subSection"} if (!$key);
-  if (!$key){  
+  if (!$key){
     print STDERR "No key found for $section-$subSection, $value\n";
     return;
-  }  
+  }
   &addToProp($key,",",$value);
   return;
 }
