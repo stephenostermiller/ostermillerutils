@@ -16,10 +16,12 @@
  */
 package com.Ostermiller.util;
 
-import java.io.StringReader;
+import java.io.*;
 import java.util.*;
 
 /**
+ * Parses a variety of formatted date strings with minimal configuration.  Unlike other 
+ * date parsers, there are no formats to specify.  There is a single parse string method.  
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.08.00
@@ -33,12 +35,17 @@ public class DateTimeParse {
 	}
 
 	public DateTimeParse(){
+		this(Locale.getDefault());
+	}
+	
+	public DateTimeParse(Locale locale){
+		loadResources(locale);
 	}
 
-	private Field[] fieldOrder = new Field[]{Field.MONTH,Field.DAY,Field.YEAR};
+	private Field[] fieldOrder = null;
 
 	public void setFieldOrder(List<Field> fieldOrder){
-		setFieldOrder((Field[])fieldOrder.toArray());
+		setFieldOrder((Field[])(fieldOrder.toArray(new Field[0])));
 	}
 
 	public void setFieldOrder(Field[] fieldOrder){
@@ -99,63 +106,94 @@ public class DateTimeParse {
 		return result;
 	}
 
-	private static List<Field> setFieldOrder(String s){
+	private static List<Field> getFieldOrder(String s){
 		List<Field> l = new ArrayList<Field>();
 		for(String name: s.split("[^A-Za-z]+")){
 			if (name.length() > 0){
-				l.add(Field.valueOf(name.toUpperCase()));
+				Field field = Field.valueOf(name.toUpperCase());
+				System.out.println("Found field: " + field);
+				l.add(field);
 			}
 		}
 		return l;
 	}
 
-	private static final Map<String,Integer> MONTH_WORDS = getStringIntMap(
-		"jan>1,january>1,feb>2,february>2,mar>3,march>3,apr>4,april>4,may>5,jun>6,"+
-		"june>6,jul>7,july>7,aug>8,august>8,sep>9,sept>9,september>9,oct>10,october>10,"+
-		"nov>11,november>11,dec>12,december>12"
-	);
-
-	private static final Map<String,Integer> ERA_WORDS = getStringIntMap(
-		"bc>0,bce>0,ad>1,ce>1"
-	);
-
-
-	private static final Set<String> WEEKDAY_WORDS = getStringSet(
-		"sunday,sun,su,monday,mon,mo,tuesday,tues,tue,tu,wednesday,wed,we,thursday,thur,"+
-		"thu,th,friday,fri,fr,saturday,sat,sa,sunday,sun,su"
-	);
-
-	private static final Map<String,Integer> ORDINAL_WORDS = getStringIntMap(
-		"1st>1,1rst>1,first>1,2nd>2,second>2,3rd>3,third>3,4th>4,4rth>4,fourth>4,5th>5,"+
-		"fifth>5,6th>6,sixth>6,7th>7,seventh>7,8th>8,eighth>8,9th>9,ninth>9,10th>10,"+
-		"tenth>10,11th>11,eleventh>11,12th>12,twelth>12,twelvth>12,twelveth>12,"+
-		"twelfth>12,13th>13,thirteenth>13,14th>14,fourteenth>14,four-teenth>14,15th>15,"+
-		"fifteenth>15,16th>16,sixteenth>16,six-teenth>16,17th>17,seventeenth>17,"+
-		"seven-teenth>17,18th>18,eighteenth>18,19th>19,ninteenth>19,nineteenth>19,"+
-		"nine-teenth>19,20th>20,twentieth>20,21st>21,twentyfirst>21,twenty-first>21,"+
-		"22nd>22,twentysecond>22,twenty-second>22,23rd>23,twentythird>23,"+
-		"twenty-third>23,24th>24,twentyfourth>24,twenty-fourth>24,25th>25,"+
-		"twentyfifth>25,twenty-fifth>25,26th>26,twentysixth>26,twenty-sixth>26,27th>27,"+
-		"twentyseventh>27,twenty-seventh>27,28th>28,twentyeighth>28,twenty-eighth>28,"+
-		"29th>29,twentyninth>29,twenty-ninth>29,30th>30,thirtieth>30,31st>31,"+
-		"thirtyfirst>31,thirty-first>31"
-	);
-
-	private static Map<String,Integer> getStringIntMap(String s){
-		HashMap<String,Integer> m = new HashMap<String,Integer>();
+	private Map<String,Integer> monthWords = new HashMap<String,Integer>();
+	private Map<String,Integer> eraWords = new HashMap<String,Integer>();
+	private Set<String> weekdayWords = new HashSet<String>();
+	private Map<String,Integer> ordinalWords = new HashMap<String,Integer>();
+	
+	private static final String[] ALL_PROPERTIES = {
+		"","en",
+	};
+	
+	private void loadResources(Locale locale){
+		Set<String> allKeys = new HashSet<String>();
+		
+		if (locale != null && locale.getLanguage() != null && locale.getLanguage().length() > 0){
+			String langProp = locale.getLanguage();
+			if (locale.getCountry() != null && locale.getCountry().length() > 0){
+				String countryProp = langProp + "_" + locale.getCountry();
+				if (locale.getVariant() != null && locale.getVariant().length() > 0){
+					String variantProp = countryProp + "_" + locale.getVariant();
+					loadProperties(allKeys, variantProp);
+				}
+				loadProperties(allKeys, countryProp);
+			}
+			loadProperties(allKeys, langProp);
+		}
+		
+		for (String propertyName: ALL_PROPERTIES){
+			loadProperties(allKeys, propertyName);
+		}
+	}
+	
+	private void loadProperties(Set<String> allKeys, String propertiesLocale){
+		try {
+			if (!"".equals(propertiesLocale)){
+				propertiesLocale = "_" + propertiesLocale;
+			}
+			System.out.println("Loading properties: DateTimeParse" + propertiesLocale + ".properties");
+			InputStream in = this.getClass().getResourceAsStream(
+				"DateTimeParse" + propertiesLocale + ".properties"
+			);
+			if (in != null){
+				UberProperties prop = new UberProperties();
+				prop.load(new InputStreamReader(in, "UTF-8"));
+				addStringInts(allKeys, ordinalWords, prop.getProperty("ordinalWords"));
+				addStrings(allKeys, weekdayWords, prop.getProperty("weekdayWords"));
+				addStringInts(allKeys, eraWords, prop.getProperty("eraWords"));
+				addStringInts(allKeys, monthWords, prop.getProperty("monthWords"));
+				if (fieldOrder == null){
+					setFieldOrder(getFieldOrder(prop.getProperty("fieldOrder")));
+				}
+			}
+		} catch (IOException iox){
+			throw new RuntimeException(iox);
+		}
+	}
+	
+	private static void addStringInts(Set<String> allKeys, Map<String,Integer> addTo, String s){
+		if (s == null) return;
 		for(String pair: s.split("\\,")){
 			int sep = pair.lastIndexOf(">");
-			m.put(pair.substring(0, sep), Integer.valueOf(pair.substring(sep+1)));
+			String key = pair.substring(0, sep);
+			if (!allKeys.contains(key)){
+				allKeys.add(key);
+				addTo.put(key, Integer.valueOf(pair.substring(sep+1)));
+			}
 		}
-		return m;
 	}
 
-	private static Set<String> getStringSet(String s){
-		HashSet<String> m = new HashSet<String>();
-		for(String v: s.split("\\,")){
-			m.add(v);
+
+	private static void addStrings(Set<String> allKeys, Set<String> addTo, String s){
+		if (s == null) return;
+		for(String key: s.split("\\,")){
+			if (!allKeys.contains(key)){
+				allKeys.add(key);
+				addTo.add(key);
+			}
 		}
-		return m;
 	}
 
 	private YearExtensionPolicy yearExtensionPolicy = YearExtensionAround.NEAREST;
@@ -190,7 +228,15 @@ public class DateTimeParse {
 		this.yearExtensionPolicy = yearExtensionPolicy;
 		return this;
 	}
-
+	
+	/**
+	 * Parse the given string into a Date. 
+	 * 
+	 * @param dateString String with a date representation.
+	 * @return timestamp represented by the date string, or null if the date could not be parsed.
+	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+	 * @since ostermillerutils 1.08.00
+	 */
 	public Date parse(String dateString){
 		if (dateString == null) return null;
 		try {
@@ -217,14 +263,14 @@ public class DateTimeParse {
 					} break;
 					case WORD: {
 						text = text.toLowerCase();
-						if (MONTH_WORDS.containsKey(text)){
-							if (!work.setMonth(MONTH_WORDS.get(text).intValue())) return null;
-						} else if (ORDINAL_WORDS.containsKey(text)){
-							if (!work.setDay(ORDINAL_WORDS.get(text).intValue())) return null;
-						} else if (WEEKDAY_WORDS.contains(text)){
+						if (monthWords.containsKey(text)){
+							if (!work.setMonth(monthWords.get(text).intValue())) return null;
+						} else if (ordinalWords.containsKey(text)){
+							if (!work.setDay(ordinalWords.get(text).intValue())) return null;
+						} else if (weekdayWords.contains(text)){
 							// ignore weekday words
-						} else if (ERA_WORDS.containsKey(text)){
-							if (!work.setEra(ERA_WORDS.get(text).intValue())) return null;
+						} else if (eraWords.containsKey(text)){
+							if (!work.setEra(eraWords.get(text).intValue())) return null;
 						} else {
 							return null;
 						}
