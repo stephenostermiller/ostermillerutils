@@ -77,6 +77,10 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateEquals("2005-12-25", parse("25.12.2005"));
 	}
 
+	public void testDotsMmDdYyyyAposObvious(){
+		assertJustDateEquals("1992-12-25", parse("25.12.'92"));
+	}
+
 	public void testYearExtend(){
 		assertJustDateEquals("1999-01-01", parse("Jan 1st 99"));
 	}
@@ -565,8 +569,123 @@ public class DateTimeParseTest extends TestCase {
 	public void testGermanUmlaut(){
 		assertJustDateEquals("2054-03-25", parse("25 M\u00e4r 2054"));
 	}
+	
+	public void testGermanFormat(){
+		assertJustDateEquals("1994-08-03", parse("3. Aug. 1994"));
+		assertJustDateEquals("1994-08-03", parse("3. 8 1994"));
+	}
+	
+	public void testSpanish(){
+		assertJustDateEquals("1994-08-01", parse("primero Ago 1994"));		
+	}
+	
+	// Not supported yet	
+	
+	public void testBrazil(){
+		//assertJustDateEquals("1927-05-01", parse("1o. de maio de 1927"));
+	}
+	
+	public void testGermanFormatPeriodAfterDay(){
+		//assertJustDateEquals("1994-08-03", parse("8 3. 1994"));
+	}
+	
+	public void testSpanishWithSpace(){
+		//assertJustDateEquals("1994-08-19", parse("decimo noveno Ago 1994"));		
+	}
+	
+	public void testYearWords(){
+		assertNull(parse("nineteen hundred"));
+		assertNull(parse("twenty eleven"));
+		assertNull(parse("may first nineteen eighty-four"));
+		assertNull(parse("two thousand one"));
+		assertNull(parse("two thousand and two"));
+	}
+	
 
-
+	public void testRelativeDates(){
+		assertNull(parse("now"));
+		assertNull(parse("today"));
+		assertNull(parse("two days ago"));
+		assertNull(parse("yesterday"));
+		assertNull(parse("tomorrow"));
+		assertNull(parse("in 1 day"));
+		assertNull(parse("first saturday of 1974"));
+		assertNull(parse("last thur in sept"));
+	}
+	
+	public void testDateTime(){
+		assertNull(parse("1997-07-16T19:20"));
+		assertNull(parse("1997-07-16T19:20:13"));
+		assertNull(parse("1997-07-16T19:20+01:00"));
+		assertNull(parse("1997-07-16 19:20"));
+		assertNull(parse("1997-07-16 19:20:13"));
+		assertNull(parse("1997-07-16 19:20+01:00"));
+		assertNull(parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
+		assertNull(parse("1994-11-05T08:15:30-05:00"));
+		assertNull(parse("1994-11-05T13:15:30Z"));
+		assertNull(parse("1492-05-11T04:04:40.33423343-4000"));		
+	}
+	
+	public void testHttpTime(){
+		assertNull(parse("Sun, 06 Nov 1994 08:49:37 GMT"));
+		assertNull(parse("Sun, 6 Nov 1994 08:49:37 GMT"));
+		assertNull(parse("Sunday, 06-Nov-94 08:49:37 GMT"));
+		assertNull(parse("Sun Nov 6 08:49:37 1994"));
+	}
+	
+	public void testDateWithWeekNumber(){
+		assertNull(parse("2010-W36-5"));
+		assertNull(parse("1997W01"));
+		assertNull(parse("1997-W01"));
+	}
+	
+	public void testOrdinalDates(){
+		assertNull(parse("2010-253"));
+	}
+	
+	public void testRunTogetherDate(){
+		assertNull(parse("20100704"));		
+	}
+	
+	public void testJustTime(){
+		parse("19:20");
+		parse("8:30");
+		assertNull(parse("23:59:59"));
+		assertNull(parse("23:59:59.9942"));
+		assertNull(parse("235959.9942"));
+		parse("00:00");
+		parse("24:00");
+	}
+	
+	public void testTimeAmPm(){
+		assertNull(parse("8:30 AM"));
+		assertNull(parse("8:30 PM"));
+		assertNull(parse("8:30 a.m."));
+		assertNull(parse("8:30 p.m."));
+		assertNull(parse("8:30AM"));
+		assertNull(parse("8:30PM"));
+	}
+	
+	public void testTimeSpelledOut(){
+		assertNull(parse("midnight"));
+		assertNull(parse("quarter to two"));
+		assertNull(parse("half twelve"));
+		assertNull(parse("eleven thirty"));
+		assertNull(parse("two o'clock"));
+	}
+	
+	public void testDateTimeRunTogether(){
+		assertNull(parse("19951231T235959"));
+	}
+	
+	public void testRelativeTimes(){
+		assertNull(parse("10 seconds ago"));
+		assertNull(parse("10 minutes ago"));
+		assertNull(parse("in an hour"));
+		assertNull(parse("in a minute"));
+		assertNull(parse("an hour from now"));
+	}
+	
 	// END TESTS
 
 	private static DateTimeParse getParser(Field[] fieldOrder){
