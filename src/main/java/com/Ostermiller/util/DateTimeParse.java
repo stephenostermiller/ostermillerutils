@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import com.Ostermiller.util.DateTimeToken.DateTimeTokenType;
 import java.io.*;
 import java.util.*;
 
@@ -121,6 +122,7 @@ public class DateTimeParse {
 	private Map<String,Integer> eraWords = new HashMap<String,Integer>();
 	private Set<String> weekdayWords = new HashSet<String>();
 	private Map<String,Integer> ordinalWords = new HashMap<String,Integer>();
+	private Map<String,Integer> amPmWords = new HashMap<String,Integer>();
 
 	private static final String[] ALL_PROPERTIES = {
 		"","da","de","en","es","fr","it","nl","pl","pt","ro","ru","sv","tr"
@@ -159,6 +161,7 @@ public class DateTimeParse {
 				UberProperties prop = new UberProperties();
 				prop.load(new InputStreamReader(in, "UTF-8"));
 				addStringInts(allKeys, ordinalWords, prop.getProperty("ordinalWords"));
+				addStringInts(allKeys, amPmWords, prop.getProperty("amPmWords"));
 				addStrings(allKeys, weekdayWords, prop.getProperty("weekdayWords"));
 				addStringInts(allKeys, eraWords, prop.getProperty("eraWords"));
 				addStringInts(allKeys, monthWords, prop.getProperty("monthWords"));
@@ -227,6 +230,20 @@ public class DateTimeParse {
 		this.yearExtensionPolicy = yearExtensionPolicy;
 		return this;
 	}
+	
+	private LinkedList<DateTimeToken> getTokens(String dateString) throws IOException {
+		DateTimeLexer lex = new DateTimeLexer(new StringReader(dateString));
+		DateTimeToken token;
+		LinkedList<DateTimeToken> l = new LinkedList<DateTimeToken>();
+		while((token=lex.getNextToken()) != null){
+			switch(token.getType()){
+				case ERROR: return null;
+				case SPACE: break;
+				default: l.add(token);
+			}
+		}
+		return l;		
+	}
 
 	/**
 	 * Parse the given string into a Date.
@@ -238,71 +255,231 @@ public class DateTimeParse {
 	 */
 	public Date parse(String dateString){
 		if (dateString == null) return null;
-		try {
-			DateTimeLexer lex = new DateTimeLexer(new StringReader(dateString));
-			DateTimeToken tok;
+		try {			
+			LinkedList<DateTimeToken> tokens = getTokens(dateString);
+			if (tokens == null || tokens.size() == 0){
+				return null;
+			}
 			WorkingDateTime work = new WorkingDateTime();
-			LinkedList<String> poss = null;
-			while((tok=lex.getNextToken()) != null){
-				String text = tok.getText();
-				switch(tok.getType()){
-					case NUMBER: {
-						int value = Integer.parseInt(text);
-						if (work.hasYear() && poss == null && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
-							// Support YYYY-MM-DD format unless
-							// the order is specifically YYYY-DD-MM
-							work.setMonth(value);
-						} else {
-							Boolean set = work.setObviousDateField(text, value);
-							if (set == null){
-								if (poss == null) poss = new LinkedList<String>();
-								poss.add(text);
-							} else if (Boolean.FALSE.equals(set)) return null;
-						}
-					} break;
-					case WORD: {
-						text = text.toLowerCase();
-						if (monthWords.containsKey(text)){
-							if (!work.setMonth(monthWords.get(text).intValue())) return null;
-						} else if (ordinalWords.containsKey(text)){
-							if (!work.setDay(ordinalWords.get(text).intValue())) return null;
-						} else if (weekdayWords.contains(text)){
-							// ignore weekday words
-						} else if (eraWords.containsKey(text)){
-							if (!work.setEra(eraWords.get(text).intValue())) return null;
-						} else {
-							return null;
-						}
-					} break;
-					case APOS_YEAR: {
-						if (!work.setYear(text, Integer.parseInt(text))) return null;
-					} break;
-					case PUNCTUATION: break;
-					default: return null;
-				}
-			}
-			boolean assigned = true;
-			while (assigned && poss != null){
-				assigned = false;
-				for (Iterator<String> i = poss.iterator(); i.hasNext(); ){
-					String text = i.next();
-					int value = Integer.parseInt(text);
-					Boolean set = work.setObviousDateField(text, value);
-					if (set != null){
-						if (Boolean.FALSE.equals(set)) return null;
-						assigned = true;
-						i.remove();
-					}
-				}
-			}
-			while (poss != null && poss.size() > 0){
-				String text = poss.removeFirst();
-				work.setPreferredField(text, Integer.parseInt(text));
-			}
+			if(!setTime(work, tokens)) return null;
+			if(!setObviousDateFields(work, tokens)) return null;
+			if(!setPreferredDateNumberFields(work, tokens)) return null;
+			if(!containsOnlySpacesAndPunctuation(tokens)) return null;
 			return work.getDate();
 		} catch (Exception x){
 			return null;
 		}
+	}
+	
+	private static final int TIME_STATE_INIT = 0;
+	private static final int TIME_STATE_HOUR = 1;
+	private static final int TIME_STATE_HOUR_SEP = 2;
+	private static final int TIME_STATE_MINUTE= 3;
+	private static final int TIME_STATE_MINUTE_SEP = 4;
+	private static final int TIME_STATE_SECOND= 5;
+	private static final int TIME_STATE_DONE= 6;
+	
+	private boolean setTime(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
+		int start = 0;
+		int end = 0;
+	    int state = TIME_STATE_INIT;
+		{
+			int hour = -1;
+			int position = 0;
+		    Iterator<DateTimeToken> i;
+			for(i = tokens.iterator(); i.hasNext(); position++){
+				DateTimeToken token = i.next();
+				switch(token.getType()){
+					case NUMBER: {
+						switch(state){
+							case TIME_STATE_INIT: 
+							case TIME_STATE_HOUR: {
+								if (token.getValue() <= 24){
+									start = position;
+									hour = token.getValue();
+									state = TIME_STATE_HOUR;
+								}
+							} break;
+							case TIME_STATE_HOUR_SEP: {
+								if (token.getValue() <= 60){
+									work.setHour(hour);
+									work.minute = token.getValue();
+									state = TIME_STATE_MINUTE;
+								} else {
+									return false;
+								}
+							} break;
+							case TIME_STATE_MINUTE_SEP: {
+								if (token.getValue() <= 60){
+									work.second = token.getValue();
+									state = TIME_STATE_SECOND;
+								} else {
+									return false;
+								}
+							} break;
+							default: {
+								end = position;
+								state = TIME_STATE_DONE;
+							} break;
+						}
+					} break;
+					case PUNCTUATION: {					
+						switch(state){
+							case TIME_STATE_INIT:  break;
+							case TIME_STATE_HOUR: {
+								if (":".equals(token.getText())){
+									state = TIME_STATE_HOUR_SEP;
+								} else {
+									start = 0;
+									end = 0;
+									hour = -1;
+									state = TIME_STATE_INIT;
+								}
+							} break;
+							case TIME_STATE_HOUR_SEP: {
+								start = 0;
+								end = 0;
+								hour = -1;
+								state = TIME_STATE_INIT;
+							} break;
+							case TIME_STATE_MINUTE: {
+								if (":".equals(token.getText())){					
+									state = TIME_STATE_MINUTE_SEP;
+								} else {
+									end = position;
+									state = TIME_STATE_DONE;
+								}
+							} break;
+							default: {
+								end = position;
+								state = TIME_STATE_DONE;
+							} break;
+						}
+					} break;
+					case SPACE: break;
+					default: {
+						switch(state){
+							case TIME_STATE_INIT: break;
+							case TIME_STATE_HOUR: {
+								start = 0;
+								end = 0;
+								hour = -1;
+								state = TIME_STATE_INIT;
+							} break;
+							default: {
+								end = position;
+								state = TIME_STATE_DONE;
+							} break;
+						}
+					}
+				}		
+			}
+			if (!i.hasNext()){
+				switch(state){
+					case TIME_STATE_HOUR_SEP:
+					case TIME_STATE_MINUTE_SEP: {
+						return false;
+					}
+					case TIME_STATE_MINUTE:
+					case TIME_STATE_SECOND: {
+						end = tokens.size();
+						state = TIME_STATE_DONE;
+					}
+					default: break;
+				}
+			}
+		}
+		if (state == TIME_STATE_DONE){
+			int position = 0;
+			for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext(); position++){
+				i.next();
+				if (position >= start && position < end){
+					i.remove();
+				}
+			}
+		}
+		return true;
+	}
+	
+	private boolean setPreferredDateNumberFields(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
+		for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
+			DateTimeToken token = i.next();
+			if (token.getType() == DateTimeTokenType.NUMBER){
+				if (!work.setPreferredField(token)) return false;
+			}
+			i.remove();
+		}
+		return true;
+	}
+	
+	private boolean setObviousDateFields(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
+		int numberCount = 0;
+		int tokensToExamine = 0;
+		while (tokensToExamine != tokens.size()){
+			tokensToExamine = tokens.size();
+			for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
+				DateTimeToken token = i.next();
+				String text = token.getText();
+				switch(token.getType()){
+					case NUMBER: {
+						int value = token.getValue();
+						if (work.hasYear() && numberCount == 1 && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
+							// Support YYYY-MM-DD format unless
+							// the order is specifically YYYY-DD-MM
+							if (!work.setMonth(value)) return false;
+							i.remove();
+						} else {
+							Boolean set = work.setObviousDateNumberField(token);
+							if (set != null){
+								if (Boolean.FALSE.equals(set)) return false;
+								i.remove();
+							}
+						}
+						numberCount++;
+					} break;
+					case WORD: {
+						text = text.toLowerCase();
+						if (monthWords.containsKey(text)){
+							if (!work.setMonth(monthWords.get(text).intValue())) return false;
+						} else if (amPmWords.containsKey(text)){
+							if (!work.setAmPm(amPmWords.get(text).intValue())) return false;
+						} else if (ordinalWords.containsKey(text)){
+							if (!work.setDay(ordinalWords.get(text).intValue())) return false;
+						} else if (weekdayWords.contains(text)){
+							// ignore weekday words
+						} else if (eraWords.containsKey(text)){
+							if (!work.setEra(eraWords.get(text).intValue())) return false;
+						} else {
+							return false;
+						}
+						i.remove();
+					} break;
+					case APOS_YEAR: {
+						if (!work.setYear(token)) return false;
+						i.remove();
+					} break;
+					case ORDINAL_DAY: {
+						if (!work.setDay(token.getValue())) return false;
+						i.remove();
+					} break;
+				}
+			}
+		}
+		return true;
+	}
+	
+	private boolean containsOnlySpacesAndPunctuation(LinkedList<DateTimeToken> tokens){
+		for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
+			DateTimeToken token = i.next();
+			switch(token.getType()){
+				case PUNCTUATION: 
+				case SPACE: {
+					i.remove();
+				}break;
+				default: return false;
+			}
+		}
+		return true;
 	}
 
 	private class WorkingDateTime {
@@ -310,6 +487,11 @@ public class DateTimeParse {
 		int month = -1;
 		int day = -1;
 		int era = -1;
+		int hour = -1;
+		int minute = -1;
+		int second = -1;
+		int millisecond = -1;
+		int amPm = -1;
 
 		public Date getDate(){
 			if (hasYear() && !hasMonth()){
@@ -321,6 +503,12 @@ public class DateTimeParse {
 			if (hasMonth() && !hasYear()){
 				year = defaultYear;
 			}
+			if (hasHour() && !hasYear() && !hasMonth() && !hasDay()){
+				Calendar c = new GregorianCalendar();
+				year = c.get(Calendar.YEAR);
+				month = c.get(Calendar.MONTH)+1;
+				day = c.get(Calendar.DATE);
+			}
 			if (!hasYear() || !hasMonth() || !hasDay()){
 				return null;
 			}
@@ -329,6 +517,22 @@ public class DateTimeParse {
 			c.set(year, month-1, day);
 			if (hasEra()){
 				c.set(Calendar.ERA, era);
+			}
+			if (hasHour()){
+				int h = hour;
+				if (isPm()){
+					h += 12;
+				}
+				c.set(Calendar.HOUR, h);
+			}
+			if (hasMinute()){
+				c.set(Calendar.MINUTE, minute);
+			}
+			if (hasSecond()){
+				c.set(Calendar.SECOND, second);
+			}
+			if (hasMillisecond()){
+				c.set(Calendar.MILLISECOND, millisecond);
 			}
 			return c.getTime();
 		}
@@ -340,16 +544,56 @@ public class DateTimeParse {
 		public boolean hasYear(){
 			return year != -1;
 		}
+		
 		public boolean hasMonth(){
 			return month != -1;
 		}
+		
 		public boolean hasDay(){
 			return day != -1;
+		}
+		
+		public boolean hasHour(){
+			return hour != -1;
+		}
+		
+		public boolean hasMinute(){
+			return minute != -1;
+		}
+		
+		public boolean hasSecond(){
+			return second != -1;
+		}
+		
+		public boolean hasAmPm(){
+			return amPm != -1;
+		}
+		
+		public boolean hasMillisecond(){
+			return millisecond != -1;
 		}
 
 		public boolean setEra(int value){
 			if (hasEra()) return false;
 			era = value;
+			return true;
+		}
+		
+		public boolean isPm(){
+			return amPm == 1;
+		}
+		
+		public boolean setHour(int value){
+			if (hasHour()) return false;
+			if (isPm() && value > 12) return false;
+			hour = value;
+			return true;
+		}
+		
+		public boolean setAmPm(int value){
+			if (hasAmPm()) return false;
+			if (hasHour() && hour > 12) return false;
+			amPm = value;
 			return true;
 		}
 
@@ -365,8 +609,10 @@ public class DateTimeParse {
 			return true;
 		}
 
-		public boolean setYear(String text, int value){
+		public boolean setYear(DateTimeToken t){
 			if (hasYear()) return false;
+			String text = t.getText();
+			int value = t.getValue();
 			if (text.length() <= 2 && value < 100){
 				value = yearExtensionPolicy.extendYear(value);
 			}
@@ -374,22 +620,23 @@ public class DateTimeParse {
 			return true;
 		}
 
-		public boolean setPreferredField(String text, int value){
+		public boolean setPreferredField(DateTimeToken t){
+			int value = t.getValue();
 			for (Field field: fieldOrder){
 				switch (field){
 					case MONTH:{
-						if (!hasMonth() && value <= 12){
+						if (!hasMonth() && value >= 1 && value <= 12){
 							return setMonth(value);
 						}
 					} break;
 					case DAY:{
-						if (!hasDay() && value <= 31){
+						if (!hasDay() && value >= 1 && value <= 31){
 							return setDay(value);
 						}
 					} break;
 					case YEAR:{
 						if (!hasYear()){
-							return setYear(text, value);
+							return setYear(t);
 						}
 					} break;
 				}
@@ -397,17 +644,19 @@ public class DateTimeParse {
 			return false;
 		}
 
-		public Boolean setObviousDateField(String text, int value){
+		public Boolean setObviousDateNumberField(DateTimeToken t){
+			String text = t.getText();
+			int value = t.getValue();
 			if (text.length() >=3 || value > 31){
-				return setYear(text, value);
+				return setYear(t);
 			} else if (hasYear() && value > 12 && value <= 31){
 				return setDay(value);
 			} else if (hasYear() && hasDay() && value <= 12){
 				return setMonth(value);
-			} else if (hasYear() && hasMonth() && value <= 31){
+			} else if (hasYear() && hasMonth() && value >= 1 && value <= 31){
 				return setDay(value);
 			} else if (hasDay() && hasMonth()){
-				return setYear(text, value);
+				return setYear(t);
 			}
 			return null;
 		}

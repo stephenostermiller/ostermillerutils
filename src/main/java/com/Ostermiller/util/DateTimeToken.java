@@ -29,8 +29,12 @@ class DateTimeToken {
 		NUMBER,
 		WORD,
 		PUNCTUATION,
+		SPACE,
 		APOS_YEAR,
+		ORDINAL_DAY,
 	}
+	
+	private int value = 0;
 
 	private String text;
 	/**
@@ -47,6 +51,16 @@ class DateTimeToken {
 	 */
 	public void setText(String text) {
 		this.text = text;
+		switch (this.type){
+			case NUMBER:
+			case APOS_YEAR:
+			case ORDINAL_DAY:
+			this.value = Integer.parseInt(text);
+		}
+	}
+	
+	public int getValue(){
+		return this.value;
 	}
 
 	/**
@@ -68,7 +82,7 @@ class DateTimeToken {
 	private DateTimeTokenType type;
 
 	public DateTimeToken(String text, DateTimeTokenType type){
-		this.text = text;
 		this.type = type;
+		setText(text);
 	}
 }

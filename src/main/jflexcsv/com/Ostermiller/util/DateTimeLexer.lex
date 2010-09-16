@@ -73,9 +73,13 @@ Integer=([0-9]{1,4})
 BeginEndWordChar=([:letter:]|[:digit:])
 MiddleWordChar=([:letter:]|[:digit:]|[\-])
 RequiredWordChar=[:letter:]
-Word=({BeginEndWordChar}*{RequiredWordChar}+({MiddleWordChar}{RequiredWordChar})*{BeginEndWordChar}*)
-Punctuation=([ \:\-\/\,\.]+)
+WordWithLetter=({BeginEndWordChar}*{RequiredWordChar}+({MiddleWordChar}{RequiredWordChar})*{BeginEndWordChar}*)
+Acronym=(([A-Za-z]\.){2,10})
+Word=({WordWithLetter}|{Acronym})
+Punctuation=([\:\-\/\,\.]+)
+Space=([ \t\r\n\f]+)
 AbbrYear=([\'\u8216\u8217][0-9]{2})
+OrdinalDay=([0-9]{1,2}\.{Space})
 
 %%
 
@@ -94,8 +98,20 @@ AbbrYear=([\'\u8216\u8217][0-9]{2})
 	return last;
 }
 
+<YYINITIAL> {Space} {
+	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.SPACE);
+	return last;
+}
+
 <YYINITIAL> {AbbrYear} {
 	last = new DateTimeToken(yytext().substring(1), DateTimeToken.DateTimeTokenType.APOS_YEAR);
+	return last;
+}
+
+<YYINITIAL> {OrdinalDay} {
+    String text = yytext();
+    int dotIndex = text.indexOf(".");
+	last = new DateTimeToken(text.substring(0,dotIndex), DateTimeToken.DateTimeTokenType.ORDINAL_DAY);
 	return last;
 }
 
