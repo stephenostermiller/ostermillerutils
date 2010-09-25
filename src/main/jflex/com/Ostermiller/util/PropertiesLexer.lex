@@ -99,15 +99,15 @@ import java.io.*;
 		}
 	}
 
-    /**
-     * Return the next token from the properties.
-     *
-     * @return the next token
-     * @throws IOException if an error occurs while reading the properties.
-     */
-    public PropertiesToken getNextToken() throws IOException {
-        return getToken();
-    }
+	/**
+	 * Return the next token from the properties.
+	 *
+	 * @return the next token
+	 * @throws IOException if an error occurs while reading the properties.
+	 */
+	public PropertiesToken getNextToken() throws IOException {
+		return getToken();
+	}
 
 %}
 

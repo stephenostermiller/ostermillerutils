@@ -122,7 +122,7 @@ public class DateTimeParse {
 	private Map<String,Integer> eraWords = new HashMap<String,Integer>();
 	private Set<String> weekdayWords = new HashSet<String>();
 	private Map<String,Integer> ordinalWords = new HashMap<String,Integer>();
-	private Map<String,Integer> amPmWords = new HashMap<String,Integer>();
+	private Map<String,Integer> ampmWords = new HashMap<String,Integer>();
 
 	private static final String[] ALL_PROPERTIES = {
 		"","da","de","en","es","fr","it","nl","pl","pt","ro","ru","sv","tr"
@@ -161,7 +161,7 @@ public class DateTimeParse {
 				UberProperties prop = new UberProperties();
 				prop.load(new InputStreamReader(in, "UTF-8"));
 				addStringInts(allKeys, ordinalWords, prop.getProperty("ordinalWords"));
-				addStringInts(allKeys, amPmWords, prop.getProperty("amPmWords"));
+				addStringInts(allKeys, ampmWords, prop.getProperty("ampmWords"));
 				addStrings(allKeys, weekdayWords, prop.getProperty("weekdayWords"));
 				addStringInts(allKeys, eraWords, prop.getProperty("eraWords"));
 				addStringInts(allKeys, monthWords, prop.getProperty("monthWords"));
@@ -178,10 +178,13 @@ public class DateTimeParse {
 		if (s == null) return;
 		for(String pair: s.split("\\,")){
 			int sep = pair.lastIndexOf(">");
-			String key = pair.substring(0, sep).toLowerCase();
+			String key = pair.substring(0, sep).trim().toLowerCase();
 			if (!allKeys.contains(key)){
-				allKeys.add(key);
-				addTo.put(key, Integer.valueOf(pair.substring(sep+1)));
+				String value = pair.substring(sep+1).trim();
+				if (!key.equals(value)){ // Don't map numbers to themselves eg 1>1
+					allKeys.add(key);
+					addTo.put(key, Integer.valueOf(value));
+				}
 			}
 		}
 	}
@@ -190,7 +193,7 @@ public class DateTimeParse {
 	private static void addStrings(Set<String> allKeys, Set<String> addTo, String s){
 		if (s == null) return;
 		for(String key: s.split("\\,")){
-			key = key.toLowerCase();
+			key = key.trim().toLowerCase();
 			if (!allKeys.contains(key)){
 				allKeys.add(key);
 				addTo.add(key);
@@ -230,7 +233,7 @@ public class DateTimeParse {
 		this.yearExtensionPolicy = yearExtensionPolicy;
 		return this;
 	}
-	
+
 	private LinkedList<DateTimeToken> getTokens(String dateString) throws IOException {
 		DateTimeLexer lex = new DateTimeLexer(new StringReader(dateString));
 		DateTimeToken token;
@@ -238,11 +241,10 @@ public class DateTimeParse {
 		while((token=lex.getNextToken()) != null){
 			switch(token.getType()){
 				case ERROR: return null;
-				case SPACE: break;
 				default: l.add(token);
 			}
 		}
-		return l;		
+		return l;
 	}
 
 	/**
@@ -255,7 +257,7 @@ public class DateTimeParse {
 	 */
 	public Date parse(String dateString){
 		if (dateString == null) return null;
-		try {			
+		try {
 			LinkedList<DateTimeToken> tokens = getTokens(dateString);
 			if (tokens == null || tokens.size() == 0){
 				return null;
@@ -267,10 +269,11 @@ public class DateTimeParse {
 			if(!containsOnlySpacesAndPunctuation(tokens)) return null;
 			return work.getDate();
 		} catch (Exception x){
+			x.printStackTrace(System.err);
 			return null;
 		}
 	}
-	
+
 	private static final int TIME_STATE_INIT = 0;
 	private static final int TIME_STATE_HOUR = 1;
 	private static final int TIME_STATE_HOUR_SEP = 2;
@@ -278,21 +281,21 @@ public class DateTimeParse {
 	private static final int TIME_STATE_MINUTE_SEP = 4;
 	private static final int TIME_STATE_SECOND= 5;
 	private static final int TIME_STATE_DONE= 6;
-	
+
 	private boolean setTime(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
 		int start = 0;
 		int end = 0;
-	    int state = TIME_STATE_INIT;
+		int state = TIME_STATE_INIT;
 		{
 			int hour = -1;
 			int position = 0;
-		    Iterator<DateTimeToken> i;
+			Iterator<DateTimeToken> i;
 			for(i = tokens.iterator(); i.hasNext(); position++){
 				DateTimeToken token = i.next();
 				switch(token.getType()){
 					case NUMBER: {
 						switch(state){
-							case TIME_STATE_INIT: 
+							case TIME_STATE_INIT:
 							case TIME_STATE_HOUR: {
 								if (token.getValue() <= 24){
 									start = position;
@@ -323,7 +326,7 @@ public class DateTimeParse {
 							} break;
 						}
 					} break;
-					case PUNCTUATION: {					
+					case PUNCTUATION: {
 						switch(state){
 							case TIME_STATE_INIT:  break;
 							case TIME_STATE_HOUR: {
@@ -343,7 +346,7 @@ public class DateTimeParse {
 								state = TIME_STATE_INIT;
 							} break;
 							case TIME_STATE_MINUTE: {
-								if (":".equals(token.getText())){					
+								if (":".equals(token.getText())){
 									state = TIME_STATE_MINUTE_SEP;
 								} else {
 									end = position;
@@ -372,7 +375,7 @@ public class DateTimeParse {
 							} break;
 						}
 					}
-				}		
+				}
 			}
 			if (!i.hasNext()){
 				switch(state){
@@ -400,7 +403,7 @@ public class DateTimeParse {
 		}
 		return true;
 	}
-	
+
 	private boolean setPreferredDateNumberFields(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
 		for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
 			DateTimeToken token = i.next();
@@ -411,48 +414,36 @@ public class DateTimeParse {
 		}
 		return true;
 	}
-	
+
 	private boolean setObviousDateFields(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
 		int numberCount = 0;
 		int tokensToExamine = 0;
 		while (tokensToExamine != tokens.size()){
 			tokensToExamine = tokens.size();
-			for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
+			for(ListIterator<DateTimeToken> i = tokens.listIterator(); i.hasNext();){
+				println(tokens);
 				DateTimeToken token = i.next();
-				String text = token.getText();
 				switch(token.getType()){
 					case NUMBER: {
-						int value = token.getValue();
-						if (work.hasYear() && numberCount == 1 && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
-							// Support YYYY-MM-DD format unless
-							// the order is specifically YYYY-DD-MM
-							if (!work.setMonth(value)) return false;
-							i.remove();
-						} else {
-							Boolean set = work.setObviousDateNumberField(token);
-							if (set != null){
-								if (Boolean.FALSE.equals(set)) return false;
+						if (!setWords(token, work, i)){
+							int value = token.getValue();
+							if (work.hasYear() && numberCount == 1 && !work.hasMonth() && !work.hasDay() && fieldOrder[0] != Field.YEAR && value <= 12){
+								// Support YYYY-MM-DD format unless
+								// the order is specifically YYYY-DD-MM
+								if (!work.setMonth(value)) return false;
 								i.remove();
+							} else {
+								Boolean set = work.setObviousDateNumberField(token);
+								if (set != null){
+									if (Boolean.FALSE.equals(set)) return false;
+									i.remove();
+								}
 							}
+							numberCount++;
 						}
-						numberCount++;
 					} break;
 					case WORD: {
-						text = text.toLowerCase();
-						if (monthWords.containsKey(text)){
-							if (!work.setMonth(monthWords.get(text).intValue())) return false;
-						} else if (amPmWords.containsKey(text)){
-							if (!work.setAmPm(amPmWords.get(text).intValue())) return false;
-						} else if (ordinalWords.containsKey(text)){
-							if (!work.setDay(ordinalWords.get(text).intValue())) return false;
-						} else if (weekdayWords.contains(text)){
-							// ignore weekday words
-						} else if (eraWords.containsKey(text)){
-							if (!work.setEra(eraWords.get(text).intValue())) return false;
-						} else {
-							return false;
-						}
-						i.remove();
+						if (!setWords(token, work, i)) return false;
 					} break;
 					case APOS_YEAR: {
 						if (!work.setYear(token)) return false;
@@ -467,12 +458,85 @@ public class DateTimeParse {
 		}
 		return true;
 	}
-	
+
+	private boolean setWord(String text, WorkingDateTime work) {
+		text = text.toLowerCase();
+		if (monthWords.containsKey(text)){
+			return work.setMonth(monthWords.get(text).intValue());
+		} else if (ampmWords.containsKey(text)){
+			return work.setAmPm(ampmWords.get(text).intValue());
+		} else if (ordinalWords.containsKey(text)){
+			return work.setDay(ordinalWords.get(text).intValue());
+		} else if (weekdayWords.contains(text)){
+			// ignore weekday words
+			return true;
+		} else if (eraWords.containsKey(text)){
+			return work.setEra(eraWords.get(text).intValue());
+		}
+		return false;
+	}
+
+	private void println(LinkedList<DateTimeToken> tokens){
+		for (DateTimeToken token: tokens){
+			System.out.print(token.getText());
+		}
+		System.out.println();
+	}
+
+	private boolean setWords(DateTimeToken token, WorkingDateTime work, ListIterator<DateTimeToken> iterator){
+		if (setWord(token.getText(), work)){
+			iterator.remove();
+			return true;
+		}
+		if (!iterator.hasNext()){
+			return false;
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append(token.getText().toLowerCase());
+		int additionalWords = 0;
+		additionalWordsLoop: while (additionalWords<4){
+			if (!iterator.hasNext()){
+				break additionalWordsLoop;
+			}
+			token = iterator.next();
+			additionalWords++;
+			switch(token.getType()){
+				case NUMBER:
+				case WORD: {
+					sb.append(token.getText().toLowerCase());
+				} break;
+				case SPACE:{
+					sb.append(" ");
+				} break;
+				default: {
+					sb.append(token.getText().toLowerCase());
+					break additionalWordsLoop;
+				}
+			}
+			if (setWord(sb.toString(), work)){
+				System.out.println("IS a word " + additionalWords + ": '" + sb.toString() +"'");
+				for (int i=0; i<additionalWords; i++){
+					iterator.remove();
+					iterator.previous();
+				}
+				iterator.remove();
+				return true;
+			}
+		}
+
+		System.out.println("Not a word " + additionalWords + ": '" + sb.toString() +"'");
+		for (int i=0; i<=additionalWords; i++){
+			iterator.previous();
+		}
+		iterator.next();
+		return false;
+	}
+
 	private boolean containsOnlySpacesAndPunctuation(LinkedList<DateTimeToken> tokens){
 		for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext();){
 			DateTimeToken token = i.next();
 			switch(token.getType()){
-				case PUNCTUATION: 
+				case PUNCTUATION:
 				case SPACE: {
 					i.remove();
 				}break;
@@ -544,31 +608,31 @@ public class DateTimeParse {
 		public boolean hasYear(){
 			return year != -1;
 		}
-		
+
 		public boolean hasMonth(){
 			return month != -1;
 		}
-		
+
 		public boolean hasDay(){
 			return day != -1;
 		}
-		
+
 		public boolean hasHour(){
 			return hour != -1;
 		}
-		
+
 		public boolean hasMinute(){
 			return minute != -1;
 		}
-		
+
 		public boolean hasSecond(){
 			return second != -1;
 		}
-		
+
 		public boolean hasAmPm(){
 			return amPm != -1;
 		}
-		
+
 		public boolean hasMillisecond(){
 			return millisecond != -1;
 		}
@@ -578,18 +642,18 @@ public class DateTimeParse {
 			era = value;
 			return true;
 		}
-		
+
 		public boolean isPm(){
-			return amPm == 1;
+			return amPm == Calendar.PM;
 		}
-		
+
 		public boolean setHour(int value){
 			if (hasHour()) return false;
 			if (isPm() && value > 12) return false;
 			hour = value;
 			return true;
 		}
-		
+
 		public boolean setAmPm(int value){
 			if (hasAmPm()) return false;
 			if (hasHour() && hour > 12) return false;

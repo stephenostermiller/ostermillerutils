@@ -33,7 +33,7 @@ class DateTimeToken {
 		APOS_YEAR,
 		ORDINAL_DAY,
 	}
-	
+
 	private int value = 0;
 
 	private String text;
@@ -58,7 +58,7 @@ class DateTimeToken {
 			this.value = Integer.parseInt(text);
 		}
 	}
-	
+
 	public int getValue(){
 		return this.value;
 	}

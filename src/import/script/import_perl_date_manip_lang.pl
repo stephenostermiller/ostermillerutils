@@ -206,6 +206,9 @@ sub toProperty(){
   return if ($section eq "mode");
   my $key = $keyForIntMap->{$section};
   if ($key){
+    if ($key eq "ampmWords"){
+      $subSection--;
+    }
     &addToProp($key,",","$value>$subSection");
     return;
   }

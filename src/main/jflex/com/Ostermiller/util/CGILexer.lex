@@ -83,15 +83,15 @@ import java.io.*;
 	}
 
 
-    /**
-     * Return the next token from the cgi data.
-     *
-     * @return the next token
-     * @throws IOException if an error occurs while reading the cgi data.
-     */
-    public String nextToken() throws IOException {
-        return getToken();
-    }
+	/**
+	 * Return the next token from the cgi data.
+	 *
+	 * @return the next token
+	 * @throws IOException if an error occurs while reading the cgi data.
+	 */
+	public String nextToken() throws IOException {
+		return getToken();
+	}
 
 	private StringBuffer token = new StringBuffer();
 %}

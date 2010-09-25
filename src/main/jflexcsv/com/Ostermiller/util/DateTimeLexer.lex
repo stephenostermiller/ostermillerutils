@@ -70,8 +70,8 @@ import java.io.*;
 %}
 
 Integer=([0-9]{1,4})
-BeginEndWordChar=([:letter:]|[:digit:])
-MiddleWordChar=([:letter:]|[:digit:]|[\-])
+BeginEndWordChar=([:letter:])
+MiddleWordChar=([:letter:]|[\-])
 RequiredWordChar=[:letter:]
 WordWithLetter=({BeginEndWordChar}*{RequiredWordChar}+({MiddleWordChar}{RequiredWordChar})*{BeginEndWordChar}*)
 Acronym=(([A-Za-z]\.){2,10})

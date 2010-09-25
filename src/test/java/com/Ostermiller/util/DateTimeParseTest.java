@@ -81,6 +81,40 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateEquals("1992-12-25", parse("25.12.'92"));
 	}
 
+	public void testOrdinals(){
+		assertJustDateEquals("1900-01-01", parse("Jan 1st 1900"));
+		assertJustDateEquals("1900-01-02", parse("Jan 2nd 1900"));
+		assertJustDateEquals("1900-01-03", parse("Jan 3rd 1900"));
+		assertJustDateEquals("1900-01-04", parse("Jan 4th 1900"));
+		assertJustDateEquals("1900-01-05", parse("Jan 5th 1900"));
+		assertJustDateEquals("1900-01-06", parse("Jan 6th 1900"));
+		assertJustDateEquals("1900-01-07", parse("Jan 7th 1900"));
+		assertJustDateEquals("1900-01-08", parse("Jan 8th 1900"));
+		assertJustDateEquals("1900-01-09", parse("Jan 9th 1900"));
+		assertJustDateEquals("1900-01-10", parse("Jan 10th 1900"));
+		assertJustDateEquals("1900-01-11", parse("Jan 11th 1900"));
+		assertJustDateEquals("1900-01-12", parse("Jan 12th 1900"));
+		assertJustDateEquals("1900-01-13", parse("Jan 13th 1900"));
+		assertJustDateEquals("1900-01-14", parse("Jan 14th 1900"));
+		assertJustDateEquals("1900-01-15", parse("Jan 15th 1900"));
+		assertJustDateEquals("1900-01-16", parse("Jan 16th 1900"));
+		assertJustDateEquals("1900-01-17", parse("Jan 17th 1900"));
+		assertJustDateEquals("1900-01-18", parse("Jan 18th 1900"));
+		assertJustDateEquals("1900-01-19", parse("Jan 19th 1900"));
+		assertJustDateEquals("1900-01-20", parse("Jan 20th 1900"));
+		assertJustDateEquals("1900-01-21", parse("Jan 21st 1900"));
+		assertJustDateEquals("1900-01-22", parse("Jan 22nd 1900"));
+		assertJustDateEquals("1900-01-23", parse("Jan 23rd 1900"));
+		assertJustDateEquals("1900-01-24", parse("Jan 24th 1900"));
+		assertJustDateEquals("1900-01-25", parse("Jan 25th 1900"));
+		assertJustDateEquals("1900-01-26", parse("Jan 26th 1900"));
+		assertJustDateEquals("1900-01-27", parse("Jan 27th 1900"));
+		assertJustDateEquals("1900-01-28", parse("Jan 28th 1900"));
+		assertJustDateEquals("1900-01-29", parse("Jan 29th 1900"));
+		assertJustDateEquals("1900-01-30", parse("Jan 30th 1900"));
+		assertJustDateEquals("1900-01-31", parse("Jan 31st 1900"));
+	}
+
 	public void testYearExtend(){
 		assertJustDateEquals("1999-01-01", parse("Jan 1st 99"));
 	}
@@ -125,40 +159,6 @@ public class DateTimeParseTest extends TestCase {
 
 	public void testPartMonthDayYearDayFirst(){
 		assertJustDateEquals("2028-01-26", parse("26 Jan 2028"));
-	}
-
-	public void testOrdinals(){
-		assertJustDateEquals("1900-01-01", parse("Jan 1st 1900"));
-		assertJustDateEquals("1900-01-02", parse("Jan 2nd 1900"));
-		assertJustDateEquals("1900-01-03", parse("Jan 3rd 1900"));
-		assertJustDateEquals("1900-01-04", parse("Jan 4th 1900"));
-		assertJustDateEquals("1900-01-05", parse("Jan 5th 1900"));
-		assertJustDateEquals("1900-01-06", parse("Jan 6th 1900"));
-		assertJustDateEquals("1900-01-07", parse("Jan 7th 1900"));
-		assertJustDateEquals("1900-01-08", parse("Jan 8th 1900"));
-		assertJustDateEquals("1900-01-09", parse("Jan 9th 1900"));
-		assertJustDateEquals("1900-01-10", parse("Jan 10th 1900"));
-		assertJustDateEquals("1900-01-11", parse("Jan 11th 1900"));
-		assertJustDateEquals("1900-01-12", parse("Jan 12th 1900"));
-		assertJustDateEquals("1900-01-13", parse("Jan 13th 1900"));
-		assertJustDateEquals("1900-01-14", parse("Jan 14th 1900"));
-		assertJustDateEquals("1900-01-15", parse("Jan 15th 1900"));
-		assertJustDateEquals("1900-01-16", parse("Jan 16th 1900"));
-		assertJustDateEquals("1900-01-17", parse("Jan 17th 1900"));
-		assertJustDateEquals("1900-01-18", parse("Jan 18th 1900"));
-		assertJustDateEquals("1900-01-19", parse("Jan 19th 1900"));
-		assertJustDateEquals("1900-01-20", parse("Jan 20th 1900"));
-		assertJustDateEquals("1900-01-21", parse("Jan 21st 1900"));
-		assertJustDateEquals("1900-01-22", parse("Jan 22nd 1900"));
-		assertJustDateEquals("1900-01-23", parse("Jan 23rd 1900"));
-		assertJustDateEquals("1900-01-24", parse("Jan 24th 1900"));
-		assertJustDateEquals("1900-01-25", parse("Jan 25th 1900"));
-		assertJustDateEquals("1900-01-26", parse("Jan 26th 1900"));
-		assertJustDateEquals("1900-01-27", parse("Jan 27th 1900"));
-		assertJustDateEquals("1900-01-28", parse("Jan 28th 1900"));
-		assertJustDateEquals("1900-01-29", parse("Jan 29th 1900"));
-		assertJustDateEquals("1900-01-30", parse("Jan 30th 1900"));
-		assertJustDateEquals("1900-01-31", parse("Jan 31st 1900"));
 	}
 
 	public void testOrdinalsWords(){
@@ -569,76 +569,100 @@ public class DateTimeParseTest extends TestCase {
 	public void testGermanUmlaut(){
 		assertJustDateEquals("2054-03-25", parse("25 M\u00e4r 2054"));
 	}
-	
+
 	public void testGermanFormat(){
 		assertJustDateEquals("1994-08-03", parse("3. Aug. 1994"));
 		assertJustDateEquals("1994-08-03", parse("3. 8 1994"));
 	}
-	
+
 	public void testSpanish(){
-		assertJustDateEquals("1994-08-01", parse("primero Ago 1994"));		
+		assertJustDateEquals("1994-08-01", parse("primero Ago 1994"));
 	}
 
 	public void testGermanFormatPeriodAfterDay(){
 		assertJustDateEquals("1994-08-03", parse("8 3. 1994"));
 	}
-	
-    public void testTimeHoursMinutes(){
-    	assertJustTimeEquals("19:20:00", parse("19:20"));
-    }
-    
-    public void testTimeHoursMinutesSpaces(){
-    	assertJustTimeEquals("19:20:00", parse(" 19 : 20 "));
-    }
-    
-    public void testTimeHoursMinutesColon(){
-    	assertNull(parse("19:20:"));
-    }
-    
-    public void testTimeMinutesTooBig(){
-    	assertNull(parse("19:70:00"));
-    }
-    
-    public void testTimeSecondsTooBig(){
-    	assertNull(parse("19:20:71"));
-    }
 
-    public void testTimeHoursMinutesSeconds(){
-    	assertJustTimeEquals("19:20:11", parse("19:20:11"));
-    	assertJustTimeEquals("23:59:59", parse("23:59:59"));
-    }
-    
-    public void testDateTimeSimple(){
-    	assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16 19:20"));
-    	assertJustDateTimeEquals("1997-07-16 19:20:13", parse("1997-07-16 19:20:13"));
-    }
-    
-    public void testHttpTimeDateSimple(){
-    	assertJustDateTimeEquals("1994-11-06 08:49:37", parse("Sun Nov 6 08:49:37 1994"));
-    }
-	
-	// Not supported yet
-    
-    public void testTimeHoursTooBig(){
-    	//assertNull(parse("99:20:00"));
-    }
-	
-	public void testBrazil(){
-		//assertJustDateEquals("1927-05-01", parse("1o. de maio de 1927"));
+	public void testTimeHoursMinutes(){
+		assertJustTimeEquals("19:20:00", parse("19:20"));
 	}
-		
+
+	public void testTimeHoursMinutesSpaces(){
+		assertJustTimeEquals("19:20:00", parse(" 19 : 20 "));
+	}
+
+	public void testTimeHoursMinutesColon(){
+		assertNull(parse("19:20:"));
+	}
+
+	public void testTimeMinutesTooBig(){
+		assertNull(parse("19:70:00"));
+	}
+
+	public void testTimeSecondsTooBig(){
+		assertNull(parse("19:20:71"));
+	}
+	public void testTimeMidnight(){
+		assertJustTimeEquals("00:00:00", parse("00:00"));
+		assertJustTimeEquals("00:00:00", parse("24:00"));
+	}
+
+	public void testTimeHoursMinutesSeconds(){
+		assertJustTimeEquals("19:20:11", parse("19:20:11"));
+		assertJustTimeEquals("23:59:59", parse("23:59:59"));
+	}
+
+	public void testDateTimeSimple(){
+		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16 19:20"));
+		assertJustDateTimeEquals("1997-07-16 19:20:13", parse("1997-07-16 19:20:13"));
+	}
+
+	public void testDateTimeTSeparater(){
+		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16T19:20"));
+		assertJustDateTimeEquals("1997-07-16 19:20:13", parse("1997-07-16T19:20:13"));
+	}
+
+	public void testHttpTimeDateSimple(){
+		assertJustDateTimeEquals("1994-11-06 08:49:37", parse("Sun Nov 6 08:49:37 1994"));
+	}
+
+	public void testTimeAmPm(){
+		assertJustTimeEquals("08:30:00", parse("8:30 AM"));
+		assertJustTimeEquals("20:30:00", parse("8:30 PM"));
+	}
+
+	public void testTimeAmWithPeriods(){
+		assertJustTimeEquals("08:30:00", parse("8:30 a.m."));
+		assertJustTimeEquals("20:30:00", parse("8:30 p.m."));
+	}
+
+	public void testTimeAmPmRunTogether(){
+		assertJustTimeEquals("08:30:00", parse("8:30AM"));
+		assertJustTimeEquals("20:30:00", parse("8:30PM"));
+	}
+
+	/* Not supported yet
+
 	public void testSpanishWithSpace(){
-		//assertJustDateEquals("1994-08-19", parse("decimo noveno Ago 1994"));		
+		assertJustDateEquals("1994-08-19", parse("decimo noveno Ago 1994"));
 	}
-	
+
+	public void testTimeHoursTooBig(){
+		assertNull(parse("99:20:00"));
+	}
+
+	public void testBrazil(){
+		assertJustDateEquals("1927-05-01", parse("1o. de maio de 1927"));
+	}
+
 	public void testYearWords(){
-		assertNull(parse("nineteen hundred"));
-		assertNull(parse("twenty eleven"));
-		assertNull(parse("may first nineteen eighty-four"));
-		assertNull(parse("two thousand one"));
-		assertNull(parse("two thousand and two"));
+		assertJustDateEquals("1900-01-01", parse("nineteen hundred"));
+		assertJustDateEquals("2011-01-01", parse("twenty eleven"));
+		assertJustDateEquals("1984-05-02", parse("may second nineteen eighty-four"));
+		assertJustDateEquals("2001-01-01", parse("two thousand one"));
+		assertJustDateEquals("2001-01-01", parse("two thousand and two"));
 	}
-	
+
 
 	public void testRelativeDates(){
 		assertNull(parse("now"));
@@ -650,56 +674,41 @@ public class DateTimeParseTest extends TestCase {
 		assertNull(parse("first saturday of 1974"));
 		assertNull(parse("last thur in sept"));
 	}
-	
+
 	public void testDateTime(){
-		assertNull(parse("1997-07-16T19:20"));
-		assertNull(parse("1997-07-16T19:20:13"));
-		assertNull(parse("1997-07-16T19:20+01:00"));
-		assertNull(parse("1997-07-16 19:20+01:00"));
-		assertNull(parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
-		assertNull(parse("1994-11-05T08:15:30-05:00"));
-		assertNull(parse("1994-11-05T13:15:30Z"));
-		assertNull(parse("1492-05-11T04:04:40.33423343-4000"));		
+		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16T19:20+01:00"));
+		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16 19:20+01:00"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T08:15:30-05:00"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T13:15:30Z"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1492-05-11T04:04:40.33423343-4000"));
 	}
-	
+
 	public void testHttpTime(){
-		assertNull(parse("Sun, 06 Nov 1994 08:49:37 GMT"));
-		assertNull(parse("Sun, 6 Nov 1994 08:49:37 GMT"));
-		assertNull(parse("Sunday, 06-Nov-94 08:49:37 GMT"));
+		assertJustDateTimeEquals("1994-11-06 08:49:37", parse("Sun, 06 Nov 1994 08:49:37 GMT"));
+		assertJustDateTimeEquals("1994-11-06 08:49:37", parse("Sun, 6 Nov 1994 08:49:37 GMT"));
+		assertJustDateTimeEquals("1994-11-06 08:49:37", parse("Sunday, 06-Nov-94 08:49:37 GMT"));
 	}
-	
+
 	public void testDateWithWeekNumber(){
 		assertNull(parse("2010-W36-5"));
 		assertNull(parse("1997W01"));
 		assertNull(parse("1997-W01"));
 	}
-	
+
 	public void testOrdinalDates(){
 		assertNull(parse("2010-253"));
 	}
-	
+
 	public void testRunTogetherDate(){
-		assertNull(parse("20100704"));		
+		assertNull(parse("20100704"));
 	}
-	
+
 	public void testJustTime(){
-		parse("19:20");
-		parse("8:30");
 		parse("23:59:59.9942");
 		assertNull(parse("235959.9942"));
-		parse("00:00");
-		parse("24:00");
 	}
-	
-	public void testTimeAmPm(){
-		assertNull(parse("8:30 AM"));
-		assertNull(parse("8:30 PM"));
-		assertNull(parse("8:30 a.m."));
-		assertNull(parse("8:30 p.m."));
-		assertNull(parse("8:30AM"));
-		assertNull(parse("8:30PM"));
-	}
-	
+
 	public void testTimeSpelledOut(){
 		assertNull(parse("midnight"));
 		assertNull(parse("quarter to two"));
@@ -707,11 +716,11 @@ public class DateTimeParseTest extends TestCase {
 		assertNull(parse("eleven thirty"));
 		assertNull(parse("two o'clock"));
 	}
-	
+
 	public void testDateTimeRunTogether(){
 		assertNull(parse("19951231T235959"));
 	}
-	
+
 	public void testRelativeTimes(){
 		assertNull(parse("10 seconds ago"));
 		assertNull(parse("10 minutes ago"));
@@ -719,7 +728,8 @@ public class DateTimeParseTest extends TestCase {
 		assertNull(parse("in a minute"));
 		assertNull(parse("an hour from now"));
 	}
-	
+	*/
+
 	// END TESTS
 
 	private static DateTimeParse getParser(Field[] fieldOrder){
@@ -785,12 +795,12 @@ public class DateTimeParseTest extends TestCase {
 	public void assertJustDateEquals(String s, String d){
 		assertEquals("AD " + s + " 00:00:00", d);
 	}
-	
+
 	public void assertJustTimeEquals(String s, String d){
 		assertNotNull(d);
 		assertEquals(s, d.substring(14));
 	}
-	
+
 	public void assertJustDateTimeEquals(String s, String d){
 		assertEquals("AD " + s, d);
 	}

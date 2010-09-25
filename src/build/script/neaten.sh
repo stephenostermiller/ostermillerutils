@@ -43,5 +43,5 @@ do
   fi
 done
 
-find src/*/java -name "*.java" | xargs java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4
+(find src/*/java -name "*.java"; find src/*/jflex -name "*.lex") | xargs java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4
 java -classpath "$CLASSES" com.Ostermiller.util.Tabs -s 4 -v -w 4 src/site/snippet/*.java.snippet
