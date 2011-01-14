@@ -84,6 +84,20 @@ public class StringHelperTest extends TestCase {
 		);
 	}
 
+	public void testPrepadInt(){
+		assertEquals(
+			StringHelper.prepad(456, 5),
+			"00456"
+		);
+	}
+
+	public void testPrepadBigInt(){
+		assertEquals(
+			StringHelper.prepad(456456, 5),
+			"456456"
+		);
+	}
+
 	public void testPostpad1(){
 		assertEquals(
 			StringHelper.postpad("a", 8),
