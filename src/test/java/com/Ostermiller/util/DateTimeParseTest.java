@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import java.util.TimeZone;
 import java.util.Locale;
 import java.util.List;
 import java.text.SimpleDateFormat;
@@ -640,6 +641,42 @@ public class DateTimeParseTest extends TestCase {
 		assertJustTimeEquals("08:30:00", parse("8:30AM"));
 		assertJustTimeEquals("20:30:00", parse("8:30PM"));
 	}
+	
+	public void testDateTimeNumericZone(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00+0100"));
+	}
+	
+	public void testDateTimeNumericZoneMinus(){
+		assertJustDateTimeEquals("1997-07-16 20:20:00", parse("1997-07-16 19:20:00-0100"));
+	}
+	
+	public void testDateTimeNumericZoneSpaceBefore(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +0100"));
+	}
+	
+	public void testDateTimeNumericZoneHalfHour(){
+		assertJustDateTimeEquals("1997-07-16 17:50:00", parse("1997-07-16 19:20:00+0130"));
+	}
+
+	public void testDateTimeNumericZoneColon(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00+01:00"));
+	}
+	
+	public void testDateTimeNumericZoneSpaceBeforeWithColon(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +01:00"));
+	}
+	
+	public void testDateTimeNumericZoneSpaceInsteadOfColon(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +01 00"));
+	}
+	
+	public void testDateTimeNumericZoneSpaceAfterPlus(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 + 01:00"));
+	}
+	
+	public void testDateTimeNumericZoneSeparatedT(){
+		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16T19:20+01:00"));
+	}
 
 	/* Not supported yet
 
@@ -662,7 +699,12 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateEquals("2001-01-01", parse("two thousand one"));
 		assertJustDateEquals("2001-01-01", parse("two thousand and two"));
 	}
-
+		
+	public void testDateTime(){
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T13:15:30Z"));
+		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1492-05-11T04:04:40.33423343-4000"));
+	}
 
 	public void testRelativeDates(){
 		assertNull(parse("now"));
@@ -673,15 +715,6 @@ public class DateTimeParseTest extends TestCase {
 		assertNull(parse("in 1 day"));
 		assertNull(parse("first saturday of 1974"));
 		assertNull(parse("last thur in sept"));
-	}
-
-	public void testDateTime(){
-		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16T19:20+01:00"));
-		assertJustDateTimeEquals("1997-07-16 19:20:00", parse("1997-07-16 19:20+01:00"));
-		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
-		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T08:15:30-05:00"));
-		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T13:15:30Z"));
-		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1492-05-11T04:04:40.33423343-4000"));
 	}
 
 	public void testHttpTime(){
@@ -737,6 +770,7 @@ public class DateTimeParseTest extends TestCase {
 		p.setDefaultYear(1981);
 		p.setFieldOrder(fieldOrder);
 		p.setYearExtensionPolicy(YearExtensionAround.CENTURY_1900);
+		p.setTimeZone(TimeZone.getTimeZone("GMT"));
 		return p;
 	}
 
@@ -793,24 +827,26 @@ public class DateTimeParseTest extends TestCase {
 	}
 
 	public void assertJustDateEquals(String s, String d){
-		assertEquals("AD " + s + " 00:00:00", d);
+		assertEquals("AD " + s + " 00:00:00 +0000", d);
 	}
 
 	public void assertJustTimeEquals(String s, String d){
 		assertNotNull(d);
-		assertEquals(s, d.substring(14));
+		assertEquals(s+" +0000", d.substring(14));
 	}
 
 	public void assertJustDateTimeEquals(String s, String d){
-		assertEquals("AD " + s, d);
+		assertEquals("AD " + s + " +0000", d);
 	}
 
 	public void assertJustDateEqualsBc(String s, String d){
-		assertEquals("BC " + s + " 00:00:00", d);
+		assertEquals("BC " + s + " 00:00:00 +0000", d);
 	}
 
 	public static String formatDate(Date date){
 		if (date == null) return null;
-		return new SimpleDateFormat("G yyyy-MM-dd HH:mm:ss").format(date);
+		SimpleDateFormat format = new SimpleDateFormat("G yyyy-MM-dd HH:mm:ss Z");
+		format.setTimeZone(TimeZone.getTimeZone("GMT"));
+		return format.format(date);
 	}
 }

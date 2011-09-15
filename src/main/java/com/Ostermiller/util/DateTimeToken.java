@@ -85,4 +85,8 @@ class DateTimeToken {
 		this.type = type;
 		setText(text);
 	}
+	
+	public String toString(){
+		return getText();
+	}
 }

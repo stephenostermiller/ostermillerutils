@@ -76,7 +76,7 @@ RequiredWordChar=[:letter:]
 WordWithLetter=({BeginEndWordChar}*{RequiredWordChar}+({MiddleWordChar}{RequiredWordChar})*{BeginEndWordChar}*)
 Acronym=(([A-Za-z]\.){2,10})
 Word=({WordWithLetter}|{Acronym})
-Punctuation=([\:\-\/\,\.]+)
+Punctuation=([\:\-\/\,\.\+]+)
 Space=([ \t\r\n\f]+)
 AbbrYear=([\'\u8216\u8217][0-9]{2})
 OrdinalDay=([0-9]{1,2}\.{Space})
@@ -124,6 +124,3 @@ OrdinalDay=([0-9]{1,2}\.{Space})
 	last = new DateTimeToken(yytext(), DateTimeToken.DateTimeTokenType.ERROR);
 	return last;
 }
-
-
-

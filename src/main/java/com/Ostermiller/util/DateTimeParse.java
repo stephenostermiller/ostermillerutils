@@ -16,6 +16,7 @@
  */
 package com.Ostermiller.util;
 
+import java.util.TimeZone;
 import com.Ostermiller.util.DateTimeToken.DateTimeTokenType;
 import java.io.*;
 import java.util.*;
@@ -23,6 +24,32 @@ import java.util.*;
 /**
  * Parses a variety of formatted date strings with minimal configuration.  Unlike other
  * date parsers, there are no formats to specify.  There is a single parse string method.
+ * <p>
+ * A wide variety of formats are supported:
+ * <ul>
+ * <li> Four digit years (1999)
+ * <li> Two digit years with an apostrophe ('99) with customizable year extension policy
+ * <li> Month numbers (11 for November; 7 or 07 for July)
+ * <li> Full month names spelled out (November)
+ * <li> Abbreviated month names (Nov and No)
+ * <li> Month names in several languages (Noviembre)
+ * <li> Day numbers (1 or 01 for the first day of the month)
+ * <li> Ordinal day of the month numbers (June first or 1st)
+ * <li> Ordinal day of the month in several languages (primera, 1o)
+ * <li> Locale appropriate parsing for ambiguous ordering (01-02-1999) with set-able locale
+ * <li> Day of the week in several languages 
+ * <li> Era in several languages (AD, BC, BCE)
+ * <li> Hour minute time (11:52)
+ * <li> Hour minute second time (11:52:33)
+ * <li> Standard date format with a "T" separating date and time (1997-07-16T19:20)
+ * <li> AM/PM in several languages
+ * <li> Numeric time zones (-0500)
+ * 
+ * 
+ * </ul>
+ * 
+ * 
+ * Parsing is locale dependent.  
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.08.00
@@ -204,6 +231,7 @@ public class DateTimeParse {
 	private YearExtensionPolicy yearExtensionPolicy = YearExtensionAround.NEAREST;
 
 	private int defaultYear = Calendar.getInstance().get(Calendar.YEAR);
+	private TimeZone defaultZone = TimeZone.getDefault();
 
 	/**
 	 * Set the default year to use when there is no year in the parsed date.
@@ -264,6 +292,7 @@ public class DateTimeParse {
 			}
 			WorkingDateTime work = new WorkingDateTime();
 			if(!setTime(work, tokens)) return null;
+			if(!setZone(work, tokens)) work.setZone(defaultZone);
 			if(!setObviousDateFields(work, tokens)) return null;
 			if(!setPreferredDateNumberFields(work, tokens)) return null;
 			if(!containsOnlySpacesAndPunctuation(tokens)) return null;
@@ -273,6 +302,177 @@ public class DateTimeParse {
 			return null;
 		}
 	}
+	
+	public DateTimeParse setTimeZone(TimeZone zone){
+		this.defaultZone = zone;
+		return this;
+	}
+
+	private static final int ZONE_STATE_INIT = 0;
+	private static final int ZONE_STATE_PLUS_MINUS = 1;
+	private static final int ZONE_STATE_HOUR = 2;
+	private static final int ZONE_STATE_HOUR_SEP = 3;
+	private static final int ZONE_STATE_DONE = 4;
+
+	private boolean setZone(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
+		int start = 0;
+		int end = 0;
+		int hour = -1;
+		int minute = -1;
+		boolean plusMinus = true;
+		int state = ZONE_STATE_INIT;
+		{
+			int position = 0;
+			Iterator<DateTimeToken> i;
+			for(i = tokens.iterator(); i.hasNext() && state != ZONE_STATE_DONE; position++){
+				DateTimeToken token = i.next();
+				switch(token.getType()){
+					case NUMBER: {
+						switch(state){
+							case ZONE_STATE_PLUS_MINUS: {
+								String tokenText = token.getText();
+								if (tokenText.length() == 4){
+									String hourPart = tokenText.substring(0,2);
+									String minutePart = tokenText.substring(2,4);
+									try {
+										int hours = Integer.parseInt(hourPart);
+										int minutes = Integer.parseInt(minutePart);
+										if (hours <=24 && minutes <= 60){
+											hour = hours;
+											minute = minutes;
+											end = position;
+											state = ZONE_STATE_DONE;
+										} else {
+											start = 0;
+											end = 0;
+											hour = -1;
+											minute = -1;
+											plusMinus = true;
+											state = ZONE_STATE_INIT;
+										}
+									} catch (NumberFormatException nfx){
+										start = 0;
+										end = 0;
+										hour = -1;
+										minute = -1;
+										plusMinus = true;
+										state = ZONE_STATE_INIT;
+									}
+								} else if (token.getValue() <= 24){
+									hour = token.getValue();
+									state = ZONE_STATE_HOUR;
+								} else {
+									start = 0;
+									end = 0;
+									hour = -1;
+									minute = -1;
+									plusMinus = true;
+									state = ZONE_STATE_INIT;
+								}
+							} break;
+							case ZONE_STATE_HOUR_SEP: {
+								if (token.getValue() <= 60){
+									minute = token.getValue();
+									end = position;
+									state = ZONE_STATE_DONE;
+								} else {
+									start = 0;
+									end = 0;
+									hour = -1;
+									minute = -1;
+									plusMinus = true;
+									state = ZONE_STATE_INIT;
+								}
+							} break;
+							default: {
+								start = 0;
+								end = 0;
+								hour = -1;
+								minute = -1;
+								plusMinus = true;
+								state = ZONE_STATE_INIT;
+							} break;
+						}
+					} break;
+					case PUNCTUATION: {
+						switch(state){
+							case ZONE_STATE_INIT:  {
+								if ("+".equals(token.getText())){
+									start = position;
+									plusMinus = true;
+									state = ZONE_STATE_PLUS_MINUS;
+								} else if ("-".equals(token.getText())){
+									start = position;
+									plusMinus = false;
+									state = ZONE_STATE_PLUS_MINUS;
+								} 
+							} break;
+							case ZONE_STATE_HOUR_SEP:
+							case ZONE_STATE_HOUR: {
+								if (":".equals(token.getText())){
+									state = ZONE_STATE_HOUR_SEP;
+								} else {
+									start = 0;
+									end = 0;
+									hour = -1;
+									minute = -1;
+									plusMinus = true;
+									state = ZONE_STATE_INIT;
+								}
+							} break;
+							default: {
+								start = 0;
+								end = 0;
+								hour = -1;
+								minute = -1;
+								plusMinus = true;
+								state = ZONE_STATE_INIT;
+							} break;
+						}
+					} break;
+					case SPACE: {
+						switch(state){
+							case ZONE_STATE_PLUS_MINUS: break;
+							case ZONE_STATE_HOUR_SEP:
+							case ZONE_STATE_HOUR: {
+								state = ZONE_STATE_HOUR_SEP;
+							} break;
+							default: {
+								start = 0;
+								end = 0;
+								hour = -1;
+								minute = -1;
+								plusMinus = true;
+								state = ZONE_STATE_INIT;
+							} break;
+						}
+					} break;
+					default: {
+						start = 0;
+						end = 0;
+						hour = -1;
+						minute = -1;
+						plusMinus = true;
+						state = ZONE_STATE_INIT;
+					} break;
+				}
+			}
+		}
+		if (state == ZONE_STATE_DONE){
+			String zoneOffset = (plusMinus?"+":"-") + StringHelper.prepad(hour, 2) + ":" + StringHelper.prepad(minute, 2);
+			TimeZone zone = TimeZone.getTimeZone("GMT"+zoneOffset);
+			work.setZone(zone);
+			int position = 0;
+			for(Iterator<DateTimeToken> i = tokens.iterator(); i.hasNext(); position++){
+				i.next();
+				if (position >= start && position <= end){
+					i.remove();
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
 	private static final int TIME_STATE_INIT = 0;
 	private static final int TIME_STATE_HOUR = 1;
@@ -280,7 +480,7 @@ public class DateTimeParse {
 	private static final int TIME_STATE_MINUTE= 3;
 	private static final int TIME_STATE_MINUTE_SEP = 4;
 	private static final int TIME_STATE_SECOND= 5;
-	private static final int TIME_STATE_DONE= 6;
+	private static final int TIME_STATE_DONE=6;
 
 	private boolean setTime(WorkingDateTime work, LinkedList<DateTimeToken> tokens){
 		int start = 0;
@@ -290,7 +490,7 @@ public class DateTimeParse {
 			int hour = -1;
 			int position = 0;
 			Iterator<DateTimeToken> i;
-			for(i = tokens.iterator(); i.hasNext(); position++){
+			for(i = tokens.iterator(); i.hasNext() && state != TIME_STATE_DONE; position++){
 				DateTimeToken token = i.next();
 				switch(token.getType()){
 					case NUMBER: {
@@ -421,7 +621,6 @@ public class DateTimeParse {
 		while (tokensToExamine != tokens.size()){
 			tokensToExamine = tokens.size();
 			for(ListIterator<DateTimeToken> i = tokens.listIterator(); i.hasNext();){
-				println(tokens);
 				DateTimeToken token = i.next();
 				switch(token.getType()){
 					case NUMBER: {
@@ -476,13 +675,6 @@ public class DateTimeParse {
 		return false;
 	}
 
-	private void println(LinkedList<DateTimeToken> tokens){
-		for (DateTimeToken token: tokens){
-			System.out.print(token.getText());
-		}
-		System.out.println();
-	}
-
 	private boolean setWords(DateTimeToken token, WorkingDateTime work, ListIterator<DateTimeToken> iterator){
 		if (setWord(token.getText(), work)){
 			iterator.remove();
@@ -514,7 +706,6 @@ public class DateTimeParse {
 				}
 			}
 			if (setWord(sb.toString(), work)){
-				System.out.println("IS a word " + additionalWords + ": '" + sb.toString() +"'");
 				for (int i=0; i<additionalWords; i++){
 					iterator.remove();
 					iterator.previous();
@@ -524,7 +715,6 @@ public class DateTimeParse {
 			}
 		}
 
-		System.out.println("Not a word " + additionalWords + ": '" + sb.toString() +"'");
 		for (int i=0; i<=additionalWords; i++){
 			iterator.previous();
 		}
@@ -556,6 +746,7 @@ public class DateTimeParse {
 		int second = -1;
 		int millisecond = -1;
 		int amPm = -1;
+        TimeZone zone = null;
 
 		public Date getDate(){
 			if (hasYear() && !hasMonth()){
@@ -598,6 +789,7 @@ public class DateTimeParse {
 			if (hasMillisecond()){
 				c.set(Calendar.MILLISECOND, millisecond);
 			}
+			c.setTimeZone(zone);
 			return c.getTime();
 		}
 
@@ -632,6 +824,10 @@ public class DateTimeParse {
 		public boolean hasAmPm(){
 			return amPm != -1;
 		}
+		
+		public boolean hasZone(){
+			return zone != null;
+		}
 
 		public boolean hasMillisecond(){
 			return millisecond != -1;
@@ -640,6 +836,12 @@ public class DateTimeParse {
 		public boolean setEra(int value){
 			if (hasEra()) return false;
 			era = value;
+			return true;
+		}
+		
+		public boolean setZone(TimeZone zone){
+			if (hasZone()) return false;
+			this.zone = zone;
 			return true;
 		}
 
