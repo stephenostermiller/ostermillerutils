@@ -19,10 +19,11 @@ package com.Ostermiller.util;
 import java.util.Calendar;
 
 /**
-*
-* @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
-* @since ostermillerutils 1.08.00
-*/
+ * Extend years like '99 to 1999 based on dates around the current date.
+ *
+ * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @since ostermillerutils 1.08.00
+ */
 public class YearExtensionAround implements YearExtensionPolicy {
 
 
@@ -40,7 +41,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * <li> 01 to 2001
 	 * </ul>
 	 *
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround NEAREST = new YearExtensionAround(
@@ -60,7 +60,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * </ul>
 	 *
 	 * @param currentYear the current year
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround getNearest(int currentYear){
@@ -82,7 +81,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * <li> 00 to 2000
 	 * </ul>
 	 *
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround LATEST = new YearExtensionAround(
@@ -103,7 +101,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * </ul>
 	 *
 	 * @param currentYear the current year
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround getLatest(int currentYear){
@@ -123,7 +120,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * <li> 99 to 1999
 	 * </ul>
 	 *
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround CENTURY_1900 = new YearExtensionAround(
@@ -141,7 +137,6 @@ public class YearExtensionAround implements YearExtensionPolicy {
 	 * <li> 99 to 2099
 	 * </ul>
 	 *
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public static final YearExtensionAround CENTURY_2000 = new YearExtensionAround(

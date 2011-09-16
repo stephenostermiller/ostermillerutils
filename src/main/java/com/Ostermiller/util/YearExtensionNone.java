@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Stephen Ostermiller
+ * Copyright (C) 2002-2010 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,7 +34,6 @@ public class YearExtensionNone implements YearExtensionPolicy {
 	 * Does NOT extend the year.
 	 *
 	 * @return a two digit year unaltered.
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public int extendYear(int twoDigitYear) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Stephen Ostermiller
+ * Copyright (C) 2010-2011 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
   * This program is free software; you can redistribute it and/or modify
@@ -37,19 +37,14 @@ import java.util.*;
  * <li> Ordinal day of the month numbers (June first or 1st)
  * <li> Ordinal day of the month in several languages (primera, 1o)
  * <li> Locale appropriate parsing for ambiguous ordering (01-02-1999) with set-able locale
- * <li> Day of the week in several languages 
+ * <li> Day of the week in several languages
  * <li> Era in several languages (AD, BC, BCE)
  * <li> Hour minute time (11:52)
  * <li> Hour minute second time (11:52:33)
  * <li> Standard date format with a "T" separating date and time (1997-07-16T19:20)
  * <li> AM/PM in several languages
  * <li> Numeric time zones (-0500)
- * 
- * 
  * </ul>
- * 
- * 
- * Parsing is locale dependent.  
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.08.00
@@ -235,7 +230,6 @@ public class DateTimeParse {
 
 	/**
 	 * Set the default year to use when there is no year in the parsed date.
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public void setDefaultYear(int defaultYear){
@@ -247,14 +241,14 @@ public class DateTimeParse {
 	 * years into full years.  eg. 99 to 1999
 	 * <p>
 	 * The default policy is <code>YearExtensionAround.NEAREST</code>.  Several other
-	 * pre-canned policies are available.
-	 *
-	 * @see com.Ostermiller.util.YearExtensionAround.NEAREST
-	 * @see com.Ostermiller.util.YearExtensionAround.LATEST
-	 * @see com.Ostermiller.util.YearExtensionAround.CENTURY_1999
-	 * @see com.Ostermiller.util.YearExtensionAround.CENTURY_2000
-	 * @see com.Ostermiller.util.YearExtensionNone.YEAR_EXTENSION_NONE
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+	 * policies are implemented:
+	 * <ul>
+	 * <li>YearExtensionAround.NEAREST
+	 * <li>YearExtensionAround.LATEST
+	 * <li>YearExtensionAround.CENTURY_1999
+	 * <li>YearExtensionAround.CENTURY_2000
+	 * <li>YearExtensionNone.YEAR_EXTENSION_NONE
+	 * </ul>
 	 * @since ostermillerutils 1.08.00
 	 */
 	public DateTimeParse setYearExtensionPolicy(YearExtensionPolicy yearExtensionPolicy){
@@ -280,7 +274,6 @@ public class DateTimeParse {
 	 *
 	 * @param dateString String with a date representation.
 	 * @return timestamp represented by the date string, or null if the date could not be parsed.
-	 * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
 	 * @since ostermillerutils 1.08.00
 	 */
 	public Date parse(String dateString){
@@ -302,7 +295,7 @@ public class DateTimeParse {
 			return null;
 		}
 	}
-	
+
 	public DateTimeParse setTimeZone(TimeZone zone){
 		this.defaultZone = zone;
 		return this;
@@ -405,7 +398,7 @@ public class DateTimeParse {
 									start = position;
 									plusMinus = false;
 									state = ZONE_STATE_PLUS_MINUS;
-								} 
+								}
 							} break;
 							case ZONE_STATE_HOUR_SEP:
 							case ZONE_STATE_HOUR: {
@@ -746,7 +739,7 @@ public class DateTimeParse {
 		int second = -1;
 		int millisecond = -1;
 		int amPm = -1;
-        TimeZone zone = null;
+		TimeZone zone = null;
 
 		public Date getDate(){
 			if (hasYear() && !hasMonth()){
@@ -824,7 +817,7 @@ public class DateTimeParse {
 		public boolean hasAmPm(){
 			return amPm != -1;
 		}
-		
+
 		public boolean hasZone(){
 			return zone != null;
 		}
@@ -838,7 +831,7 @@ public class DateTimeParse {
 			era = value;
 			return true;
 		}
-		
+
 		public boolean setZone(TimeZone zone){
 			if (hasZone()) return false;
 			this.zone = zone;

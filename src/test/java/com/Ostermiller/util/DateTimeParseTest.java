@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Stephen Ostermiller
+ * Copyright (C) 2010-2011 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
   * This program is free software; you can redistribute it and/or modify
@@ -642,18 +642,34 @@ public class DateTimeParseTest extends TestCase {
 		assertJustTimeEquals("20:30:00", parse("8:30PM"));
 	}
 	
+	public void testDateTimeOrderTimeFirst(){
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 2055-11-10"));		
+	}
+	
+	public void testDateTimeOrderDateFirst(){
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("2055-11-10 1:02"));		
+	}
+	
+	public void testDateTimeOrderWithSpelledOutDate(){
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 November 10th 2055"));		
+	}
+	
+	public void testDateTimeOrderWithPM(){
+		assertJustDateTimeEquals("2055-11-10 13:02:00", parse("1:02 PM November 10th 2055"));		
+	}
+
 	public void testDateTimeNumericZone(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00+0100"));
 	}
-	
+
 	public void testDateTimeNumericZoneMinus(){
 		assertJustDateTimeEquals("1997-07-16 20:20:00", parse("1997-07-16 19:20:00-0100"));
 	}
-	
+
 	public void testDateTimeNumericZoneSpaceBefore(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +0100"));
 	}
-	
+
 	public void testDateTimeNumericZoneHalfHour(){
 		assertJustDateTimeEquals("1997-07-16 17:50:00", parse("1997-07-16 19:20:00+0130"));
 	}
@@ -661,19 +677,19 @@ public class DateTimeParseTest extends TestCase {
 	public void testDateTimeNumericZoneColon(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00+01:00"));
 	}
-	
+
 	public void testDateTimeNumericZoneSpaceBeforeWithColon(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +01:00"));
 	}
-	
+
 	public void testDateTimeNumericZoneSpaceInsteadOfColon(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 +01 00"));
 	}
-	
+
 	public void testDateTimeNumericZoneSpaceAfterPlus(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16 19:20:00 + 01:00"));
 	}
-	
+
 	public void testDateTimeNumericZoneSeparatedT(){
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16T19:20+01:00"));
 	}
@@ -699,7 +715,7 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateEquals("2001-01-01", parse("two thousand one"));
 		assertJustDateEquals("2001-01-01", parse("two thousand and two"));
 	}
-		
+
 	public void testDateTime(){
 		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("November 5, 1994, 8:15:30 am, US Eastern Standard Time"));
 		assertJustDateTimeEquals("1994-11-05 08:15:30", parse("1994-11-05T13:15:30Z"));
