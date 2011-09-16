@@ -13,6 +13,14 @@ Version History of com.Ostermiller.util Java Utilities
   whenever new utilities are added.  The final number is reserved for bug fix
   releases.
 
+    * Version 1.08.00
+
+        * New date/time parser: {{{./DateTimeParser.html}DateTimeParser}}
+
+        * Source control repository converted to git
+
+        * Build system converted to maven
+
     * Version 1.07.01
 
         * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=237}The flush() method isn't synchronized}}
