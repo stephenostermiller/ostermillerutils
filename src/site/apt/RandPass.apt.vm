@@ -7,9 +7,9 @@
 
 Random Password Generator
 
-    * {{{src/RandPass.java.html}RandPass.java Source Code}}
+    * {{{./src/RandPass.java.html}RandPass.java Source Code}}
 
-    * {{{javadoc/RandPass.html}RandPass Javadoc}}
+    * {{{./javadoc/RandPass.html}RandPass Javadoc}}
 
   Generate random passwords of arbitrary length and arbitrary alphabet.
 
@@ -22,7 +22,7 @@ Random Password Generator
 
 *Java Applet
 
-  You may {{{RandPassApplet.html}run this program as an
+  You may {{{./RandPassApplet.html}run this program as an
   applet}} in your web browser.
 
 *Command Line Application

@@ -7,9 +7,9 @@
 
 String Tokenizer
 
-    * {{{src/StringTokenizer.java.html}StringTokenizer.java Source Code}}
+    * {{{./src/StringTokenizer.java.html}StringTokenizer.java Source Code}}
 
-    * {{{javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
+    * {{{./javadoc/StringTokenizer.html}StringTokenizer Javadoc}}
 
   A drop in replacement for the java.util.StringTokenizer class.  Because Sun is introducing a regular expression package in the Merlin release of java, StringTokenizer has become a legacy class and they have stopped making enhancements to it.
 

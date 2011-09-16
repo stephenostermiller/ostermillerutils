@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001-2010 Stephen Ostermiller
+ * Copyright (C) 2001-2011 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -78,7 +78,7 @@ public class StringHelper {
 		sb.append(s);
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Pre-pend zeros to the given integer to make a string
 	 * of the given length.
@@ -94,7 +94,7 @@ public class StringHelper {
 	 * @return padded String.
 	 *
 	 * @since ostermillerutils 1.08.00
-	 */	
+	 */
 	public static String prepad(int i, int length){
 		return prepad(Integer.toString(i), length, '0');
 	}

@@ -53,9 +53,9 @@ Comma Separated Values (CSV)
 
 Labeled CSV Parser
 
-    * {{{src/LabeledCSVParser.java.html}LabeledCSVParser.java Source Code}}
+    * {{{./src/LabeledCSVParser.java.html}LabeledCSVParser.java Source Code}}
 
-    * {{{javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
+    * {{{./javadoc/LabeledCSVParser.html}LabeledCSVParser Javadoc}}
 
   Decorates either any flavor of CSV parser such that the first row read is a
   row of labels.  Data in each row can be read by column name.
@@ -66,9 +66,9 @@ Labeled CSV Parser
 
 CSV Parse (CSV Reader Interface)
 
-    * {{{src/CSVParse.java.html}CSVParse.java Source Code}}
+    * {{{./src/CSVParse.java.html}CSVParse.java Source Code}}
 
-    * {{{javadoc/CSVParse.html}CSVParse Javadoc}}
+    * {{{./javadoc/CSVParse.html}CSVParse Javadoc}}
 
   Common interface for either the UNIX style CSV reader (CSVParser) or the Excel style CSV reader
   (ExcelCSVParser).
@@ -79,9 +79,9 @@ CSV Parse (CSV Reader Interface)
 
 CSV Print (CSV Writer Interface)
 
-    * {{{src/CSVPrint.java.html}CSVPrint.java Source Code}}
+    * {{{./src/CSVPrint.java.html}CSVPrint.java Source Code}}
 
-    * {{{javadoc/CSVPrint.html}CSVPrint Javadoc}}
+    * {{{./javadoc/CSVPrint.html}CSVPrint Javadoc}}
 
   Common interface for either the UNIX style CSV writer (CSVPrinter) or the Excel style CSV writer
   (ExcelCSVPrinter).
@@ -92,9 +92,9 @@ CSV Print (CSV Writer Interface)
 
 CSV Printer (UNIX Style CSV Writer)
 
-    * {{{src/CSVPrinter.java.html}CSVPrinter.java Source Code}}
+    * {{{./src/CSVPrinter.java.html}CSVPrinter.java Source Code}}
 
-    * {{{javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
+    * {{{./javadoc/CSVPrinter.html}CSVPrinter Javadoc}}
 
   This class makes it easy to output CSV.  Given values, it will automatically
   determine if they need to be quoted and escape special characters.  Comments
@@ -106,9 +106,9 @@ CSV Printer (UNIX Style CSV Writer)
 
 CSV Parser (UNIX Style CSV Reader)
 
-    * {{{src/CSVParser.java.html}CSVParser.java Source Code}}
+    * {{{./src/CSVParser.java.html}CSVParser.java Source Code}}
 
-    * {{{javadoc/CSVParser.html}CSVParser Javadoc}}
+    * {{{./javadoc/CSVParser.html}CSVParser Javadoc}}
 
   This class makes it easy to input CSV.  Given a stream, it will parse the
   stream and return the fields as strings, the lines as string arrays, or the
@@ -120,9 +120,9 @@ CSV Parser (UNIX Style CSV Reader)
 
 Excel CSV Printer (Microsoft Excel Style CSV Writer)
 
-    * {{{src/ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
+    * {{{./src/ExcelCSVPrinter.java.html}ExcelCSVPrinter.java Source Code}}
 
-    * {{{javadoc/ExcelCSVPrinter.html}ExcelCSVPrinter Javadoc}}
+    * {{{./javadoc/ExcelCSVPrinter.html}ExcelCSVPrinter Javadoc}}
 
 *Example
 
@@ -130,9 +130,9 @@ Excel CSV Printer (Microsoft Excel Style CSV Writer)
 
 Excel CSV Parser (Microsoft Excel Style CSV Reader)
 
-    * {{{src/ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
+    * {{{./src/ExcelCSVParser.java.html}ExcelCSVParser.java Source Code}}
 
-    * {{{javadoc/ExcelCSVParser.html}ExcelCSVParser Javadoc}}
+    * {{{./javadoc/ExcelCSVParser.html}ExcelCSVParser Javadoc}}
 
 *Example
 
@@ -155,9 +155,9 @@ CSV Character Sets
 
 CSV Lexer
 
-    * {{{src/CSVLexer.lex.html}CSVLexer.lex Source Code}}
+    * {{{./src/CSVLexer.lex.html}CSVLexer.lex Source Code}}
 
-    * {{{javadoc/CSVLexer.html}CSVLexer Javadoc}}
+    * {{{./javadoc/CSVLexer.html}CSVLexer Javadoc}}
 
   The lexer (CSVLexer) created using {{{http://www.jflex.de/}JFlex}} is still
   available in the download and is still supported.  In fact,  CSVParser uses

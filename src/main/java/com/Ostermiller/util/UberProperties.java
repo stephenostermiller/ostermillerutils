@@ -663,7 +663,7 @@ public class UberProperties {
 	 * Add the properties from the reader to this
 	 * UberProperties.
 	 *
-	 * @param in Reader containing properties.
+	 * @param reader Reader containing properties.
 	 * @param add whether parameters should add to parameters with the same name or replace them.
 	 * @throws IOException if an error occurs when reading.
 	 *

@@ -7,9 +7,9 @@
 
 Significant Figures
 
-    * {{{src/SignificantFigures.java.html}SignificantFigures.java Source Code}}
+    * {{{./src/SignificantFigures.java.html}SignificantFigures.java Source Code}}
 
-    * {{{javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
+    * {{{./javadoc/SignificantFigures.html}SignificantFigures Javadoc}}
 
   A Java number class for figuring out how many significant figures each of the
   numbers in a calculation has and displaying the result appropriately.

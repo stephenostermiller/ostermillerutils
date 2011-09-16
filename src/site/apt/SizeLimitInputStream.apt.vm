@@ -7,9 +7,9 @@
 
 Size Limit Input Stream
 
-    * {{{src/SizeLimitInputStream.java.html}SizeLimitInputStream.java Source Code}}
+    * {{{./src/SizeLimitInputStream.java.html}SizeLimitInputStream.java Source Code}}
 
-    * {{{javadoc/SizeLimitInputStream.html}SizeLimitInputStream Javadoc}}
+    * {{{./javadoc/SizeLimitInputStream.html}SizeLimitInputStream Javadoc}}
 
   A stream filter that will read only a specified amount before closing.
 

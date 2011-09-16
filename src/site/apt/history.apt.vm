@@ -21,7 +21,7 @@ Version History of com.Ostermiller.util Java Utilities
 
     * Version 1.07.00
 
-        * New command line parser: {{{CmdLn.html}CmdLn}}
+        * New command line parser: {{{./CmdLn.html}CmdLn}}
 
         * Extensive code cleanup to reduce lint warnings.
 

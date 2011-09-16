@@ -18,18 +18,18 @@ NoClose Streams
 
 NoCloseStream
 
-    * {{{src/NoCloseStream.java.html}NoCloseStream.java Source Code}}
+    * {{{./src/NoCloseStream.java.html}NoCloseStream.java Source Code}}
 
-    * {{{javadoc/NoCloseStream.html}NoCloseStream Javadoc}}
+    * {{{./javadoc/NoCloseStream.html}NoCloseStream Javadoc}}
 
   Interface for all four of the following classes.
 
 NoCloseInputStream
 
 
-    * {{{src/NoCloseInputStream.java.html}NoCloseInputStream.java Source Code}}
+    * {{{./src/NoCloseInputStream.java.html}NoCloseInputStream.java Source Code}}
 
-    * {{{javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
+    * {{{./javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}
 
 *Example
 
@@ -37,9 +37,9 @@ NoCloseInputStream
 
 NoCloseOutputStream
 
-    * {{{src/NoCloseOutputStream.java.html}NoCloseOutputStream.java Source Code}}
+    * {{{./src/NoCloseOutputStream.java.html}NoCloseOutputStream.java Source Code}}
 
-    * {{{javadoc/NoCloseOutputStream.html}NoCloseOutputStream Javadoc}}
+    * {{{./javadoc/NoCloseOutputStream.html}NoCloseOutputStream Javadoc}}
 
 *Example
 
@@ -47,9 +47,9 @@ NoCloseOutputStream
 
 NoCloseReader
 
-    * {{{src/NoCloseReader.java.html}NoCloseReader.java Source Code}}
+    * {{{./src/NoCloseReader.java.html}NoCloseReader.java Source Code}}
 
-    * {{{javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
+    * {{{./javadoc/NoCloseReader.html}NoCloseReader Javadoc}}
 
 *Example
 
@@ -57,9 +57,9 @@ NoCloseReader
 
 NoCloseWriter
 
-    * {{{src/NoCloseWriter.java.html}NoCloseWriter.java Source Code}}
+    * {{{./src/NoCloseWriter.java.html}NoCloseWriter.java Source Code}}
 
-    * {{{javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
+    * {{{./javadoc/NoCloseWriter.html}NoCloseWriter Javadoc}}
 
 *Example
 

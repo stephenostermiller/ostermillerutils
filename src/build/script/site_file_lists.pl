@@ -65,7 +65,7 @@ for my $file (sort @files){
       $javadocHref = "../doc/$classpath$barename.html";
       $javadocAptLink = "    * {{{../javadoc/$barename.html}$barename Javadoc}}";
       $javadocMenuList .= "        <item name=\"$barename\" href=\"/javadoc/$barename.html\" />\n";
-      $javadocList .= "    * {{{javadoc/$barename.html}$barename Javadoc}}\n\n";
+      $javadocList .= "    * {{{./javadoc/$barename.html}$barename Javadoc}}\n\n";
       $javadocFile = "src/site/xdoc/javadoc/$barename.xml";
     }
   }

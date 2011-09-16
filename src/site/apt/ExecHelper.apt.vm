@@ -7,9 +7,9 @@
 
 Helper Methods for Runtime.exec
 
-    * {{{src/ExecHelper.java.html}ExecHelper.java Source Code}}
+    * {{{./src/ExecHelper.java.html}ExecHelper.java Source Code}}
 
-    * {{{javadoc/ExecHelper.html}ExecHelper Javadoc}}
+    * {{{./javadoc/ExecHelper.html}ExecHelper Javadoc}}
 
   Utilities to make executing other programs from Java easier.
 

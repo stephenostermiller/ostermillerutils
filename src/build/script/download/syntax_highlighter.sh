@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (C) 2010 Stephen Ostermiller
+# http://ostermiller.org/contact.pl?regarding=Java+Utilities
 
 BASE=`pwd`
 

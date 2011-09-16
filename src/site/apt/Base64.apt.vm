@@ -7,9 +7,9 @@
 
 Base64 Java Library
 
-    * {{{src/Base64.java.html}Base64.java Source Code}}
+    * {{{./src/Base64.java.html}Base64.java Source Code}}
 
-    * {{{javadoc/Base64.html}Base64 Javadoc}}
+    * {{{./javadoc/Base64.html}Base64 Javadoc}}
 
   Base64 encoding and decoding of data from Java.  Encode and decode methods
   for Strings, byte arrays, and streams.
@@ -79,7 +79,7 @@ Encode or decode using the base64 format.
     * English
 
   Translations gladly accepted.  Please translate
-  {{{src/Base64.properties.html}Base64.properties}}.
+  {{{./src/Base64.properties.html}Base64.properties}}.
 	You may want to use: {{{http://attesoro.org/}Attesoro -
   A Java Translation Editor}}
 

@@ -11,9 +11,9 @@ Concatenation Streams
 
 ConcatInputStream
 
-    * {{{src/ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
+    * {{{./src/ConcatInputStream.java.html}ConcatInputStream.java Source Code}}
 
-    * {{{javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
+    * {{{./javadoc/ConcatInputStream.html}ConcatInputStream Javadoc}}
 
   Combines multiple byte stream sources into a single byte stream.
 
@@ -23,9 +23,9 @@ ConcatInputStream
 
 ConcatReader
 
-    * {{{src/ConcatReader.java.html}ConcatReader.java Source Code}}
+    * {{{./src/ConcatReader.java.html}ConcatReader.java Source Code}}
 
-    * {{{javadoc/ConcatReader.html}ConcatReader Javadoc}}
+    * {{{./javadoc/ConcatReader.html}ConcatReader Javadoc}}
 
   Combines multiple character stream sources into a single character stream.
 

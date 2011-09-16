@@ -7,9 +7,9 @@
 
 Browser Opener
 
-    * {{{src/Browser.java.html}Browser.java Source Code}}
+    * {{{./src/Browser.java.html}Browser.java Source Code}}
 
-    * {{{javadoc/Browser.html}Browser Javadoc}}
+    * {{{./javadoc/Browser.html}Browser Javadoc}}
 
   Open a browser from a Java application on Windows, Unix, or Macintosh.
 
