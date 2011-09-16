@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001-2010 Stephen Ostermiller
+ * Copyright (C) 2001-2011 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -77,6 +77,26 @@ public class StringHelper {
 		sb.append(padding);
 		sb.append(s);
 		return sb.toString();
+	}
+
+	/**
+	 * Pre-pend zeros to the given integer to make a string
+	 * of the given length.
+	 * <p>
+	 * If a String is longer than the desired length,
+	 * it will not be truncated, however no padding
+	 * will be added.
+	 * <p>
+	 * The integer is converted to a string in base 10.
+	 *
+	 * @param i Integer to be padded.
+	 * @param length desired length of result.
+	 * @return padded String.
+	 *
+	 * @since ostermillerutils 1.08.00
+	 */
+	public static String prepad(int i, int length){
+		return prepad(Integer.toString(i), length, '0');
 	}
 
 	/**

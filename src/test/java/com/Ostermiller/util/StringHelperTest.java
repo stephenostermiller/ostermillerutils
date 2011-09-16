@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Stephen Ostermiller
+ * Copyright (C) 2010-2011 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -81,6 +81,20 @@ public class StringHelperTest extends TestCase {
 		assertEquals(
 			StringHelper.prepad("a", 8, '-'),
 			"-------a"
+		);
+	}
+
+	public void testPrepadInt(){
+		assertEquals(
+			StringHelper.prepad(456, 5),
+			"00456"
+		);
+	}
+
+	public void testPrepadBigInt(){
+		assertEquals(
+			StringHelper.prepad(456456, 5),
+			"456456"
 		);
 	}
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2010 Stephen Ostermiller
+# Copyright (C) 2010-2011 Stephen Ostermiller
 # http://ostermiller.org/contact.pl?regarding=Java+Utilities
 #
 # This program is free software; you can redistribute it and/or modify
@@ -34,14 +34,17 @@ for file in `find src/ -type f`
 do
   if [ "$file" != "src/build/spell/util.dict" ]
   then
-    trailCount=`grep -c -E '[ 	]+$' $file`
-    if [ $trailCount != 0 ]
+    if [ "${file#*.}" != "png" ]
     then
-      echo "Removing trailing white space from: $file"
-      sed -r -i 's/[ 	]+$//' "$file"
+      trailCount=`grep -c -E '[ 	]+$' $file`
+      if [ "$trailCount" != 0 ]
+      then
+        echo "Removing trailing white space from: $file"
+        sed -r -i 's/[ 	]+$//' "$file"
+      fi
     fi
   fi
 done
 
-find src/*/java -name "*.java" | xargs java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4
+(find src/*/java -name "*.java"; find src/*/jflex -name "*.lex") | xargs java -classpath "$CLASSES" com.Ostermiller.util.Tabs -tv -w 4
 java -classpath "$CLASSES" com.Ostermiller.util.Tabs -s 4 -v -w 4 src/site/snippet/*.java.snippet

@@ -7,9 +7,9 @@
 
 String Helper
 
-    * {{{src/StringHelper.java.html}StringHelper.java Source Code}}
+    * {{{./src/StringHelper.java.html}StringHelper.java Source Code}}
 
-    * {{{javadoc/StringHelper.html}StringHelper Javadoc}}
+    * {{{./javadoc/StringHelper.html}StringHelper Javadoc}}
 
   String manipulation helper utilities for Java.  Methods include padding a
   string to a given length, and splitting a string based on a literal

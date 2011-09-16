@@ -7,9 +7,9 @@
 
 Line Ending Conversion
 
-    * {{{src/LineEnds.java.html}LineEnds.java Source Code}}
+    * {{{./src/LineEnds.java.html}LineEnds.java Source Code}}
 
-    * {{{javadoc/LineEnds.html}LineEnds Javadoc}}
+    * {{{./javadoc/LineEnds.html}LineEnds Javadoc}}
 
   Converts text files so that they can be read by text editors on various systems.  Text editors
   such as Notepad often display squares in place of line endings they can't understand, causing
@@ -71,6 +71,6 @@ LineEnds [-dnrsfvqQ] <files>
 
     * English
 
-  Translations gladly accepted.  Please translate {{{src/LineEnds.properties.html}LineEnds.properties}}.
+  Translations gladly accepted.  Please translate {{{./src/LineEnds.properties.html}LineEnds.properties}}.
   You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
 

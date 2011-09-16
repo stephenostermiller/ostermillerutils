@@ -1,0 +1,52 @@
+  ----
+  Date Parser Java Library
+  ----
+  Stephen Ostermiller;
+  meta-description=Java Library to parse a variety of date formats with little or no configuration;
+  ----
+
+Base64 Java Library
+
+    * {{{./src/DateTimeParse.java.html}DateTimeParse.java Source Code}}
+
+    * {{{./javadoc/DateTimeParse.html}DateTimeParse Javadoc}}
+
+  Parse dates without setting up formatting codes.
+
+*Example
+
+%{code-snippet|brush=java|file=src/site/snippet/ParseDateTimes.java.snippet}
+
+*Internationalization
+
+  included languages:
+
+    * ca
+
+    * da
+
+    * de
+
+    * en
+
+    * es
+
+    * fr
+
+    * it
+
+    * nl
+
+    * pl
+
+    * pr
+
+    * pt
+
+    * ro
+
+    * ru
+
+    * sv
+
+    * tr

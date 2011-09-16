@@ -12,32 +12,32 @@ Basic Iterators and Enumerations
 
 *Convert an Iterator to an Enumeration: IteratorEnumeration
 
-    * {{{src/IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}
+    * {{{./src/IteratorEnumeration.java.html}IteratorEnumeration.java Source Code}}
 
-    * {{{javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
+    * {{{./javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/IteratorToEnumeration.java.snippet}
 
 *Convert an Enumeration to an Iterator: EnumerationIterator
 
-    * {{{src/EnumerationIterator.java.html}EnumerationIterator.java Source Code}}
+    * {{{./src/EnumerationIterator.java.html}EnumerationIterator.java Source Code}}
 
-    * {{{javadoc/EnumerationIterator.html}EnumerationIterator Javadoc}}
+    * {{{./javadoc/EnumerationIterator.html}EnumerationIterator Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/EnumerationToIterator.java.snippet}
 
 *Convert an array to an Enumeration: ArrayEnumeration
 
-    * {{{src/ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
+    * {{{./src/ArrayEnumeration.java.html}ArrayEnumeration.java Source Code}}
 
-    * {{{javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
+    * {{{./javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/ArrayToEnumeration.java.snippet}
 
 *Convert an array to an Iterator: ArrayIterator
 
-    * {{{src/ArrayIterator.java.html}ArrayIterator.java Source Code}}
+    * {{{./src/ArrayIterator.java.html}ArrayIterator.java Source Code}}
 
-    * {{{javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
+    * {{{./javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
 
 %{code-snippet|brush=java|file=src/site/snippet/ArrayToIterator.java.snippet}

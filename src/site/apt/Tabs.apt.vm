@@ -7,9 +7,9 @@
 
 Tabs
 
-    * {{{src/Tabs.java.html}Tabs.java Source Code}}
+    * {{{./src/Tabs.java.html}Tabs.java Source Code}}
 
-    * {{{javadoc/Tabs.html}Tabs Javadoc}}
+    * {{{./javadoc/Tabs.html}Tabs Javadoc}}
 
   Converts tabs to spaces or spaces to tabs at the beginning of each line of
   files.

@@ -1,0 +1,14 @@
+  ----
+  DateTimeParse_tr.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for DateTimeParse_tr.properties from the OstermillerUtils Java utilities.;
+  ----
+
+DateTimeParse_tr.properties Source Code
+
+
+
+
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/DateTimeParse_tr.properties}

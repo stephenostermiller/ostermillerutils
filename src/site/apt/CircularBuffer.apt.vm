@@ -12,9 +12,9 @@ Circular Buffers
 
 Circular Object Buffer
 
-    * {{{src/CircularObjectBuffer.java.html}CircularObjectBuffer.java Source Code}}
+    * {{{./src/CircularObjectBuffer.java.html}CircularObjectBuffer.java Source Code}}
 
-    * {{{javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
+    * {{{./javadoc/CircularObjectBuffer.html}CircularObjectBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for Objects.
 
@@ -30,9 +30,9 @@ Circular Object Buffer
 
 Circular Character Buffer
 
-    * {{{src/CircularCharBuffer.java.html}CircularCharBuffer.java Source Code}}
+    * {{{./src/CircularCharBuffer.java.html}CircularCharBuffer.java Source Code}}
 
-    * {{{javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
+    * {{{./javadoc/CircularCharBuffer.html}CircularCharBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for characters.
   Filling and emptying the buffer is done with standard Java Readers and
@@ -57,9 +57,9 @@ Circular Character Buffer
 
 Circular Byte Buffer
 
-    * {{{src/CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}
+    * {{{./src/CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}
 
-    * {{{javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
+    * {{{./javadoc/CircularByteBuffer.html}CircularByteBuffer Javadoc}}
 
   Implements the circular buffer producer/consumer model for bytes.
   Filling and emptying the buffer is done with standard Java InputStreams and

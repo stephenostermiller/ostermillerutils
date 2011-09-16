@@ -7,9 +7,9 @@
 
 MD5
 
-    * {{{src/MD5.java.html}MD5.java Source Code}}
+    * {{{./src/MD5.java.html}MD5.java Source Code}}
 
-    * {{{javadoc/MD5.html}MD5 Javadoc}}
+    * {{{./javadoc/MD5.html}MD5 Javadoc}}
 
 
   MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for
@@ -38,9 +38,9 @@ MD5
 
 MD5 Input Stream
 
-    * {{{src/MD5InputStream.java.html}MD5InputStream.java Source Code}}
+    * {{{./src/MD5InputStream.java.html}MD5InputStream.java Source Code}}
 
-    * {{{javadoc/MD5InputStream.html}MD5InputStream Javadoc}}
+    * {{{./javadoc/MD5InputStream.html}MD5InputStream Javadoc}}
 
   A filtered input stream that computes an MD5 sum for anything read.
 
@@ -50,9 +50,9 @@ MD5 Input Stream
 
 MD5 Output Stream
 
-    * {{{src/MD5OutputStream.java.html}MD5OutputStream.java Source Code}}
+    * {{{./src/MD5OutputStream.java.html}MD5OutputStream.java Source Code}}
 
-    * {{{javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
+    * {{{./javadoc/MD5OutputStream.html}MD5OutputStream Javadoc}}
 
   A filtered output stream that computes an MD5 sum for anything written.
 

@@ -7,9 +7,9 @@
 
 Straight Stream Reader
 
-    * {{{src/StraightStreamReader.java.html}StraightStreamReader.java Source Code}}
+    * {{{./src/StraightStreamReader.java.html}StraightStreamReader.java Source Code}}
 
-    * {{{javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
+    * {{{./javadoc/StraightStreamReader.html}StraightStreamReader Javadoc}}
 
   An input stream reader that does not do character class translation.  You
   might find this class useful for reading binary files using an API that only

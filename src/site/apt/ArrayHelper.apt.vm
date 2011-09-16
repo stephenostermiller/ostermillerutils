@@ -7,9 +7,9 @@
 
 Helper Methods for Arrays
 
-    * {{{src/ArrayHelper.java.html}ArrayHelper.java Source Code}}
+    * {{{./src/ArrayHelper.java.html}ArrayHelper.java Source Code}}
 
-    * {{{javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
+    * {{{./javadoc/ArrayHelper.html}ArrayHelper Javadoc}}
 
   Methods that are useful when working with arrays.  Contains utilities to
   concatenate arrays, print arrays, and compare arrays.

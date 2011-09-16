@@ -1,0 +1,14 @@
+  ----
+  YearExtensionPolicy.java Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for YearExtensionPolicy.java from the OstermillerUtils Java utilities.;
+  ----
+
+YearExtensionPolicy.java Source Code
+
+
+
+    * {{{../javadoc/YearExtensionPolicy.html}YearExtensionPolicy Javadoc}}
+
+%{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/YearExtensionPolicy.java}

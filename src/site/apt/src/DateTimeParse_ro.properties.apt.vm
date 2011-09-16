@@ -1,0 +1,14 @@
+  ----
+  DateTimeParse_ro.properties Source Code
+  ----
+  Stephen Ostermiller;
+  meta-description=View the source code for DateTimeParse_ro.properties from the OstermillerUtils Java utilities.;
+  ----
+
+DateTimeParse_ro.properties Source Code
+
+
+
+
+
+%{code-snippet|file=src/main/resources/com/Ostermiller/util/DateTimeParse_ro.properties}

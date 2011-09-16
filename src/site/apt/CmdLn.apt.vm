@@ -7,9 +7,9 @@
 
 CmdLn: Java Command Line Parser
 
-    * {{{src/CmdLn.java.html}CmdLn.java Source Code}}
+    * {{{./src/CmdLn.java.html}CmdLn.java Source Code}}
 
-    * {{{javadoc/CmdLn.html}CmdLn Javadoc}}
+    * {{{./javadoc/CmdLn.html}CmdLn Javadoc}}
 
   A command line parser for array of strings passed to Java main methods.
 

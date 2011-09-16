@@ -7,9 +7,9 @@
 
 Uber Properties
 
-    * {{{src/UberProperties.java.html}UberProperties.java Source Code}}
+    * {{{./src/UberProperties.java.html}UberProperties.java Source Code}}
 
-    * {{{javadoc/UberProperties.html}UberProperties Javadoc}}
+    * {{{./javadoc/UberProperties.html}UberProperties Javadoc}}
 
   A replacement for the java.utils.Properties class.  This version can read and
   write properties files that are in the same format but it can handle multiple

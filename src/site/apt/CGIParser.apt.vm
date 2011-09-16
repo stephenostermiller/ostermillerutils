@@ -7,9 +7,9 @@
 
 CGI Query String Parser
 
-    * {{{src/CGIParser.java.html}CGIParser.java Source Code}}
+    * {{{./src/CGIParser.java.html}CGIParser.java Source Code}}
 
-    * {{{javadoc/CGIParser.html}CGIParser Javadoc}}
+    * {{{./javadoc/CGIParser.html}CGIParser Javadoc}}
 
   Parses ampersand and equal sign delimited data from the query string of URLs.
 
