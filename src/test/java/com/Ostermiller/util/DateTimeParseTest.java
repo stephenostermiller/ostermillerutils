@@ -641,21 +641,21 @@ public class DateTimeParseTest extends TestCase {
 		assertJustTimeEquals("08:30:00", parse("8:30AM"));
 		assertJustTimeEquals("20:30:00", parse("8:30PM"));
 	}
-	
+
 	public void testDateTimeOrderTimeFirst(){
-		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 2055-11-10"));		
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 2055-11-10"));
 	}
-	
+
 	public void testDateTimeOrderDateFirst(){
-		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("2055-11-10 1:02"));		
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("2055-11-10 1:02"));
 	}
-	
+
 	public void testDateTimeOrderWithSpelledOutDate(){
-		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 November 10th 2055"));		
+		assertJustDateTimeEquals("2055-11-10 01:02:00", parse("1:02 November 10th 2055"));
 	}
-	
+
 	public void testDateTimeOrderWithPM(){
-		assertJustDateTimeEquals("2055-11-10 13:02:00", parse("1:02 PM November 10th 2055"));		
+		assertJustDateTimeEquals("2055-11-10 13:02:00", parse("1:02 PM November 10th 2055"));
 	}
 
 	public void testDateTimeNumericZone(){
