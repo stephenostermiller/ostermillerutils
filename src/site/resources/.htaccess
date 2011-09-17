@@ -6,7 +6,6 @@ AddType text/x-java;charset=iso-8859-1 java
 AddType text/x-bash;charset=iso-8859-1 sh
 
 # directory index document redirects
-Redirect permanent /utils/index.html http://ostermiller.org/utils/
 Redirect permanent /utils/css/index.html http://ostermiller.org/utils/
 Redirect permanent /utils/src/index.html http://ostermiller.org/utils/source.html
 Redirect permanent /utils/javadoc/index.html http://ostermiller.org/utils/doc.html
