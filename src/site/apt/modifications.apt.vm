@@ -10,7 +10,7 @@ Modifying, Compiling, and Building the com.Ostermiller.util Java utilities
   The com.Ostermiller.util package is open source you can download the
   source code, make modifications, and distribute your changes in accordance
   with the {{{./license.html}license}}.  To get started, choose the "latest
-  source code" from the {{{./downloads.html}downloads}}.  Extract the package
+  source code" from the {{{./download.html}downloads}}.  Extract the package
   and build it with {{{http://maven.apache.org/}Maven}}.
 
 ----------------------------------------

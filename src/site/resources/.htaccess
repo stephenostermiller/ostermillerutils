@@ -90,6 +90,8 @@ Redirect permanent /utils/StringHelper.html: http://ostermiller.org/utils/String
 Redirect permanent /utils/StringHelper.java: http://ostermiller.org/utils/StringHelper.html
 Redirect permanent /utils/StringHelper.java http://ostermiller.org/utils/StringHelper.html
 
+Redirect permanent /utils/downloads.html http://ostermiller.org/utils/download.html
+
 # No longer available
 Redirect permanent /utils/utils.jar http://ostermiller.org/utils/download.html
 Redirect permanent /utils/syntax.css http://ostermiller.org/utils/
