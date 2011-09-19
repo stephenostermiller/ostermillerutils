@@ -22,9 +22,14 @@ if (! -e "pom.xml"){
   exit 1;
 }
 
+if (! -e "target/site/doc/package-list"){
+  print "Javadoc is not generated.  First use:\n";
+  print "mvn site";
+  exit 1;
+}
+
 `mkdir -p src/site/xdoc/javadoc`;
 `mkdir -p src/site/apt/src`;
-
 
 my %sourceMap = ();
 for my $line (split(/\n/, `grep -i '\.java\.html.* Source' src/site/apt/*.apt.vm`)){
@@ -77,8 +82,12 @@ for my $file (sort @files){
   }
   if (! -f "src/site/apt/$barename.apt.vm"){
     $htaccessList .= "Redirect permanent /utils/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
-    $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
-    $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
+    if ($ext ne ".java"){
+        $htaccessList .= "Redirect permanent /utils/javadoc/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
+    }
+    if (! -f "target/site/doc/com/Ostermiller/util/$barename.html"){
+        $htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/src/$srchtmlhref\n";
+    }
   }
 
   $htaccessList .= "Redirect permanent /utils/$srchtmlhref http://ostermiller.org/utils/src/$srchtmlhref\n";

@@ -5,7 +5,7 @@
 	<groupId>com.ostermiller</groupId>
 	<artifactId>ostermillerutils</artifactId>
 	<inceptionYear>2001</inceptionYear>
-	<version>1.08.00</version>
+	<version>DEV</version>
 	<name>Ostermiller Java Utilities</name>
 	<url>http://ostermiller.org/utils/</url>
 	<packaging>jar</packaging>

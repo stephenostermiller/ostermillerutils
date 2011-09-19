@@ -15,7 +15,7 @@ Version History of com.Ostermiller.util Java Utilities
 
     * Version 1.08.00
 
-        * New date/time parser: {{{./DateTimeParser.html}DateTimeParser}}
+        * New date/time parser: {{{./DateTimeParse.html}DateTimeParse}}
 
         * Source control repository converted to git
 
