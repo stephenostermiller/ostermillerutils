@@ -171,6 +171,8 @@ Author | License | Features
 *-----*------*-----*
 Stephen Ostermiller {{{http://ostermiller.org/utils/CSV.html}ostermillerutils CSV and ExcelCSV for Java}} | Open source, GPL | Parses CSV streams into Java Strings or arrays of Strings.
 *-----*------*-----*
+Bytecode Pty Ltd. {{{http://opencsv.sourceforge.net/}opencsv}} | Open source, Apache licence | Parses CSV files into Java Strings or arrays of Strings.
+*-----*------*-----*
 Ricebridge {{{http://www.ricebridge.com/products/csvman/}CSV Manager}} | Commercial, with various license price points. | Parses CSV streams with callback methods when data is found. Single CSV parsing class can be
 configured to parse standard CSV, Excel CSV, or other user specified variants.
 *-----*------*-----*
