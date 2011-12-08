@@ -13,6 +13,10 @@ Version History of com.Ostermiller.util Java Utilities
   whenever new utilities are added.  The final number is reserved for bug fix
   releases.
 
+    * Version 1.08.01
+
+        * Greek translation for browser opener from geogeo.gr
+
     * Version 1.08.00
 
         * New date/time parser: {{{./DateTimeParse.html}DateTimeParse}}

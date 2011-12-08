@@ -23,11 +23,6 @@
 	<scm>
 		<connection>scm:git:ssh://steveo@source.ostermiller.org/git/ostermillerutils.git</connection>
 	</scm>
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>4</version>
-  </parent>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -83,19 +78,6 @@
 								<include>**/LICENSE*</include>
 							</includes>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
