@@ -694,6 +694,10 @@ public class DateTimeParseTest extends TestCase {
 		assertJustDateTimeEquals("1997-07-16 18:20:00", parse("1997-07-16T19:20+01:00"));
 	}
 
+	public void testGermanOrder(){
+		assertJustDateEquals("2000-01-02", parseGerman("02.01.2000"));
+	}
+
 	/* Not supported yet
 
 	public void testSpanishWithSpace(){
@@ -782,9 +786,20 @@ public class DateTimeParseTest extends TestCase {
 	// END TESTS
 
 	private static DateTimeParse getParser(Field[] fieldOrder){
-		DateTimeParse p = new DateTimeParse(Locale.US);
+		return getParser(fieldOrder, null);
+	}
+
+	private static DateTimeParse getParser(Locale locale){
+		return getParser(null, locale);
+	}
+
+	private static DateTimeParse getParser(Field[] fieldOrder, Locale locale){
+		if (locale == null) locale = Locale.US;
+		DateTimeParse p = new DateTimeParse(locale);
 		p.setDefaultYear(1981);
-		p.setFieldOrder(fieldOrder);
+		if (fieldOrder != null){
+			p.setFieldOrder(fieldOrder);
+		}
 		p.setYearExtensionPolicy(YearExtensionAround.CENTURY_1900);
 		p.setTimeZone(TimeZone.getTimeZone("GMT"));
 		return p;
@@ -837,6 +852,14 @@ public class DateTimeParseTest extends TestCase {
 	private static final DateTimeParse PARSER_YEAR_DAY_MONTH = getParser(
 		new Field[]{Field.YEAR, Field.DAY, Field.MONTH}
 	);
+
+	private static final DateTimeParse PARSER_GERMAN = getParser(
+		Locale.GERMANY
+	);
+
+	public static String parseGerman(String date){
+		return formatDate(PARSER_GERMAN.parse(date));
+	}
 
 	public static String parseYearDayMonth(String date){
 		return formatDate(PARSER_YEAR_DAY_MONTH.parse(date));

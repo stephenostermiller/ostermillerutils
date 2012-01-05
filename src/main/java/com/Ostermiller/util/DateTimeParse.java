@@ -187,7 +187,7 @@ public class DateTimeParse {
 				addStrings(allKeys, weekdayWords, prop.getProperty("weekdayWords"));
 				addStringInts(allKeys, eraWords, prop.getProperty("eraWords"));
 				addStringInts(allKeys, monthWords, prop.getProperty("monthWords"));
-				if (fieldOrder == null){
+				if (fieldOrder == null && prop.getProperty("fieldOrder") != null){
 					setFieldOrder(getFieldOrder(prop.getProperty("fieldOrder")));
 				}
 			}
