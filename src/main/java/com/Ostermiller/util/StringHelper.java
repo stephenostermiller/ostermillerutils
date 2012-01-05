@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001-2011 Stephen Ostermiller
+ * Copyright (C) 2001-2012 Stephen Ostermiller
  * http://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
