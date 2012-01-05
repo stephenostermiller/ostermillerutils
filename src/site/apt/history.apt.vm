@@ -13,7 +13,11 @@ Version History of com.Ostermiller.util Java Utilities
   whenever new utilities are added.  The final number is reserved for bug fix
   releases.
 
-    * Version 1.08.01
+    * Version 1.08.02
+
+        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=370}NullPointerException at loading properties in DateTimeParse in German Locale}}
+
+   * Version 1.08.01
 
         * Greek translation for browser opener from geogeo.gr
 
