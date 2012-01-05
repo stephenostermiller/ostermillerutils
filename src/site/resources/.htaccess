@@ -255,6 +255,10 @@ Redirect permanent /utils/Browser_de.html http://ostermiller.org/utils/src/Brows
 Redirect permanent /utils/javadoc/Browser_de.html http://ostermiller.org/utils/src/Browser_de.properties.html
 Redirect permanent /utils/doc/com/Ostermiller/util/Browser_de.html http://ostermiller.org/utils/src/Browser_de.properties.html
 Redirect permanent /utils/Browser_de.properties.html http://ostermiller.org/utils/src/Browser_de.properties.html
+Redirect permanent /utils/Browser_el.html http://ostermiller.org/utils/src/Browser_el.properties.html
+Redirect permanent /utils/javadoc/Browser_el.html http://ostermiller.org/utils/src/Browser_el.properties.html
+Redirect permanent /utils/doc/com/Ostermiller/util/Browser_el.html http://ostermiller.org/utils/src/Browser_el.properties.html
+Redirect permanent /utils/Browser_el.properties.html http://ostermiller.org/utils/src/Browser_el.properties.html
 Redirect permanent /utils/Browser_en.html http://ostermiller.org/utils/src/Browser_en.properties.html
 Redirect permanent /utils/javadoc/Browser_en.html http://ostermiller.org/utils/src/Browser_en.properties.html
 Redirect permanent /utils/doc/com/Ostermiller/util/Browser_en.html http://ostermiller.org/utils/src/Browser_en.properties.html
