@@ -18,13 +18,13 @@
 use strict;
 
 if (! -e "pom.xml"){
-  print "Expected this script to be called from ostermillerutils base directory";
+  print "Expected this script to be called from ostermillerutils base directory\n";
   exit 1;
 }
 
 if (! -e "target/site/doc/package-list"){
   print "Javadoc is not generated.  First use:\n";
-  print "mvn site";
+  print "mvn site\n";
   exit 1;
 }
 
