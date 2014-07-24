@@ -14,8 +14,7 @@
  *
  * See LICENSE.txt for details.
  */
-
- package com.Ostermiller.util;
+package com.Ostermiller.util;
 
 import junit.framework.TestCase;
 

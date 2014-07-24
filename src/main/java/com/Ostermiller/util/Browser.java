@@ -299,11 +299,11 @@ public class Browser {
 				try {
 					Class<?> nSWorkspace;
 						if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
-							 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
-							 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURI().toURL()});
-							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
+							// Mac OS X has NSWorkspace, but it is not in the classpath, add it.
+							ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURI().toURL()});
+							nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
 						} else {
-							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
+							nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
 						}
 						Method sharedWorkspace = nSWorkspace.getMethod("sharedWorkspace", new Class[] {});
 						Object workspace = sharedWorkspace.invoke(null, new Object[] {});
@@ -315,13 +315,13 @@ public class Browser {
 				}
 				if (!success){
 					try {
-						 Class<?> mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
-						 Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
-						 openURL.invoke(null, new Object[] {url});
-						 //com.apple.mrj.MRJFileUtils.openURL(url);
+						Class<?> mrjFileUtils = Class.forName("com.apple.mrj.MRJFileUtils");
+						Method openURL = mrjFileUtils.getMethod("openURL", new Class[] {Class.forName("java.lang.String")});
+						openURL.invoke(null, new Object[] {url});
+						//com.apple.mrj.MRJFileUtils.openURL(url);
 					} catch (Exception x){
-						 System.err.println(x.getMessage());
-						 throw new IOException(labels.getString("failed"));
+						System.err.println(x.getMessage());
+						throw new IOException(labels.getString("failed"));
 					}
 				}
 			} else {
@@ -419,18 +419,18 @@ public class Browser {
 						// seem to show that 1000 milliseconds is enough
 						// time for the browsers I'm using.
 						for (int j=0; j<2; j++){
-							 try {
+							try {
 								Thread.sleep(1000);
-							 } catch (InterruptedException ix){
-								 throw new RuntimeException(ix);
-							 }
+							} catch (InterruptedException ix){
+								throw new RuntimeException(ix);
+							}
 						}
 						if (p.exitValue() == 0){
-							 // this is a weird case.  The browser exited after
-							 // a couple seconds saying that it successfully
-							 // displayed the url.  Either the browser is lying
-							 // or the user closed it *really* quickly.  Oh well.
-							 found = true;
+							// this is a weird case.  The browser exited after
+							// a couple seconds saying that it successfully
+							// displayed the url.  Either the browser is lying
+							// or the user closed it *really* quickly.  Oh well.
+							found = true;
 						}
 					} catch (IOException x){
 						// the command was not a valid command.

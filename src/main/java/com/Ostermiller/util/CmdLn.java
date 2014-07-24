@@ -1061,7 +1061,7 @@ public final class CmdLn {
 	 * @since ostermillerutils 1.07.00
 	 */
 	public void printHelp(PrintWriter out){
-		 printHelp(out, 20, 80);
+		printHelp(out, 20, 80);
 	}
 
 	/**

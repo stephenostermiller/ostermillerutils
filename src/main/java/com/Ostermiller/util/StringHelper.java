@@ -1300,7 +1300,7 @@ public class StringHelper {
 	 *
 	 * @since ostermillerutils 1.02.25
 	 */
-	 public static Pattern getEqualsAnyPattern(String[] terms){
+	public static Pattern getEqualsAnyPattern(String[] terms){
 		StringBuffer sb = new StringBuffer();
 		sb.append("(?s)\\A");
 		buildFindAnyPattern(terms, sb);
@@ -1323,7 +1323,7 @@ public class StringHelper {
 	 *
 	 * @since ostermillerutils 1.02.25
 	 */
-	 public static Pattern getStartsWithAnyPattern(String[] terms){
+	public static Pattern getStartsWithAnyPattern(String[] terms){
 		StringBuffer sb = new StringBuffer();
 		sb.append("(?s)\\A");
 		buildFindAnyPattern(terms, sb);
@@ -1396,7 +1396,7 @@ public class StringHelper {
 	 *
 	 * @since ostermillerutils 1.02.25
 	 */
-	 public static Pattern getEqualsAnyIgnoreCasePattern(String[] terms){
+	public static Pattern getEqualsAnyIgnoreCasePattern(String[] terms){
 		StringBuffer sb = new StringBuffer();
 		sb.append("(?i)(?u)(?s)\\A");
 		buildFindAnyPattern(terms, sb);
@@ -1421,7 +1421,7 @@ public class StringHelper {
 	 *
 	 * @since ostermillerutils 1.02.25
 	 */
-	 public static Pattern getStartsWithAnyIgnoreCasePattern(String[] terms){
+	public static Pattern getStartsWithAnyIgnoreCasePattern(String[] terms){
 		StringBuffer sb = new StringBuffer();
 		sb.append("(?i)(?u)(?s)\\A");
 		buildFindAnyPattern(terms, sb);

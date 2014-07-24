@@ -365,16 +365,16 @@ public class LineEnds {
 		byte[] lineEnding;
 		switch (style) {
 			case STYLE_SYSTEM: {
-				 lineEnding = System.getProperty("line.separator").getBytes();
+				lineEnding = System.getProperty("line.separator").getBytes();
 			} break;
 			case STYLE_RN: {
-				 lineEnding = new byte[]{(byte)'\r',(byte)'\n'};
+				lineEnding = new byte[]{(byte)'\r',(byte)'\n'};
 			} break;
 			case STYLE_R: {
-				 lineEnding = new byte[]{(byte)'\r'};
+				lineEnding = new byte[]{(byte)'\r'};
 			} break;
 			case STYLE_N: {
-				 lineEnding = new byte[]{(byte)'\n'};
+				lineEnding = new byte[]{(byte)'\n'};
 			} break;
 			default: {
 				throw new IllegalArgumentException("Unknown line break style: " + style);

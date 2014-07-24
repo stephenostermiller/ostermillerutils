@@ -15,9 +15,9 @@
  *
  * See LICENSE.txt for details.
  */
- package com.Ostermiller.util;
+package com.Ostermiller.util;
 
- import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 /**
  * The string tokenizer class allows an application to break a string into

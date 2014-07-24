@@ -159,7 +159,7 @@ public class SignificantFigures extends Number {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	 public SignificantFigures(short number){
+	public SignificantFigures(short number){
 		original = Short.toString(number);
 		try {
 			parse(original);

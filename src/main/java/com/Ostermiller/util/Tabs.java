@@ -46,7 +46,7 @@ public class Tabs {
 	 *
 	 * @since ostermillerutils 1.00.00
 	 */
-	 protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Tabs",  Locale.getDefault());
+	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Tabs",  Locale.getDefault());
 
 
 	/**
