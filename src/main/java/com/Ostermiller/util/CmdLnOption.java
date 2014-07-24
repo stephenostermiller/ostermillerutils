@@ -539,7 +539,7 @@ public final class CmdLnOption {
 		int charactersLeft = lineWidth - sb.length();
 		for (int lineNumber=1; descriptionIndex < description.length(); lineNumber++){
 			int endIndex = descriptionIndex + charactersLeft;
-			if (endIndex > description.length()){
+			if (endIndex >= description.length()){
 				endIndex = description.length();
 			} else {
 				if (description.charAt(endIndex) == ' '){

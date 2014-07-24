@@ -36,6 +36,14 @@ public class CmdLnTest extends TestCase {
 		assertEquals("  -h --help  this is the description, it can be long", fullHelpOption.getHelp("--","-",0,80));
 	}
 
+	public void testTextToEdge(){
+		assertEquals("  -h --help  this is the description, it can be long", fullHelpOption.getHelp("--","-",0,52));
+	}
+
+	public void testTextOnePastEdge(){
+		assertEquals("  -h --help  this is the description, it can be\n        long", fullHelpOption.getHelp("--","-",0,51));
+	}
+
 	public void test37CharHelp(){
 		assertEquals("  -h --help  this is the description,\n        it can be long", fullHelpOption.getHelp("--","-",0,37));
 	}
