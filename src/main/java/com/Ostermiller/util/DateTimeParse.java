@@ -645,6 +645,7 @@ public class DateTimeParse {
 						if (!work.setDay(token.getValue())) return false;
 						i.remove();
 					} break;
+					default: break;
 				}
 			}
 		}

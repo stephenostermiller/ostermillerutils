@@ -45,6 +45,7 @@ public class SizeLimitInputStreamTest extends TestCase {
 			assertEquals(2, slis.read());
 			assertEquals(3, slis.read());
 			assertEquals(-1, slis.read());
+			slis.close();
 		} catch (IOException x){
 			throw new RuntimeException(x);
 		}
@@ -64,6 +65,7 @@ public class SizeLimitInputStreamTest extends TestCase {
 			assertEquals(4, slis.read(new byte[4]));
 			assertEquals(1, slis.read(new byte[4]));
 			assertEquals(-1, slis.read());
+			slis.close();
 		} catch (IOException x){
 			throw new RuntimeException(x);
 		}

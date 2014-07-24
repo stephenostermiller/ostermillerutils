@@ -56,6 +56,7 @@ class DateTimeToken {
 			case APOS_YEAR:
 			case ORDINAL_DAY:
 			this.value = Integer.parseInt(text);
+			default: break;
 		}
 	}
 

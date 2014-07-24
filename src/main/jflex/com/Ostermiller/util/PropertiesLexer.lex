@@ -90,9 +90,7 @@ import java.io.*;
 			PropertiesLexer shredder = new PropertiesLexer(in);
 			PropertiesToken t;
 			while ((t = shredder.getNextToken()) != null) {
-				if (true || t.getID() != PropertiesToken.WHITE_SPACE){
-					System.out.println(t);
-				}
+				System.out.println(t);
 			}
 		} catch (IOException e){
 			System.err.println(e.getMessage());

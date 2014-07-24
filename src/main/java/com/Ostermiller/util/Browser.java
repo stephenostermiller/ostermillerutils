@@ -300,7 +300,7 @@ public class Browser {
 					Class<?> nSWorkspace;
 						if (new File("/System/Library/Java/com/apple/cocoa/application/NSWorkspace.class").exists()){
 							 // Mac OS X has NSWorkspace, but it is not in the classpath, add it.
-							 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURL()});
+							 ClassLoader classLoader = new URLClassLoader(new URL[]{new File("/System/Library/Java").toURI().toURL()});
 							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace", true, classLoader);
 						} else {
 							 nSWorkspace = Class.forName("com.apple.cocoa.application.NSWorkspace");
@@ -497,7 +497,7 @@ public class Browser {
 		out.println("</body>");
 		out.println("</html>");
 		out.close();
-		displayURL(shortcut.toURL().toString());
+		displayURL(shortcut.toURI().toURL().toString());
 	}
 
 	/**
@@ -582,7 +582,7 @@ public class Browser {
 		out.println("</body>");
 		out.println("</html>");
 		out.close();
-		displayURL(shortcut.toURL().toString());
+		displayURL(shortcut.toURI().toURL().toString());
 	}
 
 	/**
@@ -651,7 +651,7 @@ public class Browser {
 		out.println("</body>");
 		out.println("</html>");
 		out.close();
-		displayURL(shortcut.toURL().toString());
+		displayURL(shortcut.toURI().toURL().toString());
 	}
 
 	/**
