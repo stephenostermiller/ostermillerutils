@@ -92,53 +92,53 @@ public class CircularBufferTest extends TestCase {
 	private static final int SLEEP_BASE=10;
 	private static final int UP_TO_ADDITIONAL_SLEEP=20;
 
-
 	public void testAll() throws Exception {
 
 		ccbin = ccb.getReader();
 		ccbout = ccb.getWriter();
 		CCBProducer ccbp = new CCBProducer();
 		CCBConsumer ccbc = new CCBConsumer();
-		ccbc.start();
-		ccbp.start();
-		while (ccbc.isAlive() || ccbp.isAlive()){
-			if(System.in.available() > 0){
-				ccbc.interrupt();
-				ccbp.interrupt();
-				return;
-			}
-		}
-		String s1 = tgbaWriter.toString();
-		if (!theGettysburgAddress.equals(s1)){
-			throw new Exception(s1);
-		}
 
 		cbbin = cbb.getInputStream();
 		cbbout = cbb.getOutputStream();
 		CBBProducer cbbp = new CBBProducer();
 		CBBConsumer cbbc = new CBBConsumer();
-		cbbc.start();
-		cbbp.start();
-		while (cbbc.isAlive() || cbbp.isAlive()){
-			if(System.in.available() > 0){
-				cbbc.interrupt();
-				cbbp.interrupt();
-				return;
-			}
-		}
-		assertEqual(pi, piOutputStream.toByteArray());
 
 		COBProducer cobp = new COBProducer();
 		COBConsumer cobc = new COBConsumer();
+
+		// Start all producers and consumers in parallel
+		ccbc.start();
+		ccbp.start();
+		cbbc.start();
+		cbbp.start();
 		cobc.start();
 		cobp.start();
-		while (cobc.isAlive() || cobp.isAlive()){
+
+		// interruptable join of all threads
+		while (ccbc.isAlive() || ccbp.isAlive() || cbbc.isAlive() || cbbp.isAlive() || cobp.isAlive() || cobc.isAlive()){
 			if(System.in.available() > 0){
-				cobc.interrupt();
+				ccbc.interrupt();
+				ccbp.interrupt();
+				cbbc.interrupt();
+				cbbp.interrupt();
 				cobp.interrupt();
+				cobc.interrupt();
 				return;
 			}
+			Thread.sleep(100);
 		}
+
+		// ccb results
+		String s1 = tgbaWriter.toString();
+		if (!theGettysburgAddress.equals(s1)){
+			throw new Exception(s1);
+		}
+
+		// cbb results
+		assertEqual(pi, piOutputStream.toByteArray());
+
+		// cob results
 		String s2 = tgbaWriter2.toString();
 		if (!theGettysburgAddress.equals(s2)){
 			throw new Exception(s2);
