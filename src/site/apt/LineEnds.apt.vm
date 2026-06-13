@@ -73,4 +73,3 @@ LineEnds [-dnrsfvqQ] <files>
 
   Translations gladly accepted.  Please translate {{{./src/LineEnds.properties.html}LineEnds.properties}}.
   You may want to use: {{{http://attesoro.org/}Attesoro - A Java Translation Editor}}
-

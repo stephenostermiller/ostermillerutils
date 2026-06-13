@@ -2,7 +2,7 @@ JAVA_HOME ?= $(shell dirname $(shell dirname $(shell readlink -f $(shell which j
 export JAVA_HOME
 
 .PHONY: all
-all: compile test package doc site
+all: .git/hooks/pre-commit compile test package doc site
 
 .PHONY: build
 build:
@@ -43,3 +43,6 @@ source-jar:
 clean:
 	mvn clean
 	@echo "Build artifacts cleaned."
+
+.git/hooks/pre-commit:
+	pre-commit install

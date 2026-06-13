@@ -21,4 +21,3 @@ mvn package
   however, Maven will take care of them for you and download all needed
   libraries and software.  Upon a successful build, you should find several
   .jar, .zip, .gz, and .bz2 files built in the target directory.
-

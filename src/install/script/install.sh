@@ -118,5 +118,3 @@ then
 else
     echo "$binDir/$Base64 already exists.  Use -f to overwrite."
 fi
-
-

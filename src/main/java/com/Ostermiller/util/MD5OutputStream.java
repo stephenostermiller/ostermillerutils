@@ -116,4 +116,3 @@ public class MD5OutputStream extends FilterOutputStream {
 		return md5.getHashString();
 	}
 }
-
