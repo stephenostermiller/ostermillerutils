@@ -30,7 +30,7 @@ import java.util.*;
  * in a for loop at the same time.  For example the following for
  * loop:
  * <pre>
- * for (int i=0; i<10; i++){
+ * for (int i=0; i&lt;10; i++){
  *    System.out.println("Hello World " + i);
  * }
  * System.out.println("done");
@@ -38,7 +38,7 @@ import java.util.*;
  * To this:
  * <pre>
  * Parallelizer parallelizer = new Parallelizer();
- * for (int i=0; i<10; i++){
+ * for (int i=0; i&lt;10; i++){
  *     final int j = i;
  *     parallelizer.run(
  *         new Runnable(){
@@ -48,6 +48,7 @@ import java.util.*;
  * }
  * parallelizer.join();
  * System.out.println("done");
+ * </pre>
  *
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.

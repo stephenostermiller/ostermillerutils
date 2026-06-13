@@ -968,9 +968,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Indentation is the default twenty, and line width is the default 80.
 	 * Parses the command line if not already parsed.
@@ -991,9 +991,9 @@ public final class CmdLn {
 	 * Print help for the command line options to standard output. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Indentation is the default twenty, and line width is the default eighty.
 	 * Parses the command line if not already parsed.
@@ -1026,9 +1026,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Indentation is the default twenty, and line width is the default eighty.
 	 * Parses the command line if not already parsed.
@@ -1047,9 +1047,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Indentation is the default twenty, and line width is the default eighty.
 	 * Parses the command line if not already parsed.
@@ -1068,9 +1068,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Parses the command line if not already parsed.
 	 *
@@ -1092,9 +1092,9 @@ public final class CmdLn {
 	 * Print help for the command line options to standard output. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Parses the command line if not already parsed.
 	 *
@@ -1113,9 +1113,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Parses the command line if not already parsed.
 	 *
@@ -1135,9 +1135,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Parses the command line if not already parsed.
 	 *
@@ -1157,9 +1157,9 @@ public final class CmdLn {
 	 * Print help for the command line options. Help will be in this format:
 	 * <pre>
 	 * program description
-	 *   --argument -a <?>  argument a description
+	 *   --argument -a &lt;?&gt;  argument a description
 	 *   --another -b       argument b description
-	 *   --third -c <?>     argument c description
+	 *   --third -c &lt;?&gt;     argument c description
 	 * </pre>
 	 * Parses the command line if not already parsed.
 	 *

@@ -71,7 +71,7 @@ import java.util.NoSuchElementException;
  * )
  * </blockquote>
  * <p>
- * </b>Compatibility with <code>java.util.StringTokenizer</code></b>
+ * <b>Compatibility with <code>java.util.StringTokenizer</code></b>
  * <p>
  * In the original version of <code>java.util.StringTokenizer</code>, the method
  * <code>nextToken()</code> left the current position after the returned token,
@@ -326,7 +326,7 @@ public class StringTokenizer implements java.util.Enumeration<String>, java.util
 	 * " \t\n\r\f" as a delimiter set of non-token delimiters, and an empty token
 	 * delimiter set.
 	 * <p>
-	 * Is equivalent to <code>StringTokenizer(text, " \t\n\r\f", null);
+	 * Is equivalent to <code>StringTokenizer(text, " \t\n\r\f", null);</code>
 	 *
 	 * @param text a string to be parsed.
 	 * @throws NullPointerException if text is null.
@@ -405,8 +405,8 @@ public class StringTokenizer implements java.util.Enumeration<String>, java.util
 
 	/**
 	 * Tests if there are more tokens available from this tokenizer's string.
-	 * If this method returns <tt>true</tt>, then a subsequent call to
-	 * <tt>nextToken</tt> with no argument will successfully return a token.
+	 * If this method returns <code>true</code>, then a subsequent call to
+	 * <code>nextToken</code> with no argument will successfully return a token.
 	 * <p>
 	 * The current position is not changed.
 	 *
@@ -1017,13 +1017,16 @@ public class StringTokenizer implements java.util.Enumeration<String>, java.util
 	 * empty tokens are set to be returned, and a comma is the non token
 	 * delimiter, the following table shows how many tokens are in each
 	 * string.<br>
-	 * <table><tr><th>String<th><th>Number of tokens<th></tr>
-	 * <tr><td align=right>"one,two"<td><td>2 - normal case with no empty tokens.<td></tr>
-	 * <tr><td align=right>"one,,three"<td><td>3 including the empty token in the middle.<td></tr>
-	 * <tr><td align=right>"one,"<td><td>2 including the empty token at the end.<td></tr>
-	 * <tr><td align=right>",two"<td><td>2 including the empty token at the beginning.<td></tr>
-	 * <tr><td align=right>","<td><td>2 including the empty tokens at the beginning and the ends.<td></tr>
-	 * <tr><td align=right>""<td><td>1 - all strings will have at least one token if empty tokens are returned.<td></tr></table>
+	 * <table>
+	 * <caption>Token counts by string type</caption>
+	 * <tr><th>String</th><th>Number of tokens</th></tr>
+	 * <tr><td style="text-align:right">"one,two"</td><td>2 - normal case with no empty tokens.</td></tr>
+	 * <tr><td style="text-align:right">"one,,three"</td><td>3 including the empty token in the middle.</td></tr>
+	 * <tr><td style="text-align:right">"one,"</td><td>2 including the empty token at the end.</td></tr>
+	 * <tr><td style="text-align:right">",two"</td><td>2 including the empty token at the beginning.</td></tr>
+	 * <tr><td style="text-align:right">","</td><td>2 including the empty tokens at the beginning and the ends.</td></tr>
+	 * <tr><td style="text-align:right">""</td><td>1 - all strings will have at least one token if empty tokens are returned.</td></tr>
+	 * </table>
 	 *
 	 * @param returnEmptyTokens true iff empty tokens should be returned.
 	 *

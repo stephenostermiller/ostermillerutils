@@ -52,29 +52,60 @@ import java.util.*;
 public class DateTimeParse {
 
 	public enum Field {
+		/**
+		 * Year field in a date
+		 */
 		YEAR,
+		/**
+		 * Month field in a date
+		 */
 		MONTH,
+		/**
+		 * Day field in a date
+		 */
 		DAY
 	}
 
+	/**
+	 * Create a date/time parser using the default locale.
+	 */
 	public DateTimeParse(){
 		this(Locale.getDefault());
 	}
 
+	/**
+	 * Create a date/time parser for the given locale.
+	 * @param locale the locale to use for parsing
+	 */
 	public DateTimeParse(Locale locale){
 		loadResources(locale);
 	}
 
+	/**
+	 * The order in which date fields should be parsed.
+	 */
 	private Field[] fieldOrder = null;
 
+	/**
+	 * Set the order in which date fields should be parsed.
+	 * @param fieldOrder the order of date fields
+	 */
 	public void setFieldOrder(List<Field> fieldOrder){
 		setFieldOrder((Field[])(fieldOrder.toArray(new Field[0])));
 	}
 
+	/**
+	 * Set the order in which date fields should be parsed.
+	 * @param fieldOrder the order of date fields
+	 */
 	public void setFieldOrder(Field[] fieldOrder){
 		this.fieldOrder = copyAndVerify(fieldOrder);
 	}
 
+	/**
+	 * Get the order in which date fields are parsed.
+	 * @return the field order
+	 */
 	public List<Field> getFieldOrder(){
 		List<Field> l = new ArrayList<Field>();
 		for (Field f: fieldOrder){
@@ -296,6 +327,11 @@ public class DateTimeParse {
 		}
 	}
 
+	/**
+	 * Set the time zone for parsing date/time values.
+	 * @param zone the time zone to use
+	 * @return this object for method chaining
+	 */
 	public DateTimeParse setTimeZone(TimeZone zone){
 		this.defaultZone = zone;
 		return this;

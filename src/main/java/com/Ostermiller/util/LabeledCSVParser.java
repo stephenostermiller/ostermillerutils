@@ -33,7 +33,7 @@ import java.util.*;
  * ignore field labels if they happen to be present in a CSV file and are not
  * desired.
  *
- * @author Campbell, Allen T. <allenc28@yahoo.com>
+ * @author Campbell, Allen T. &lt;allenc28@yahoo.com&gt;
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */

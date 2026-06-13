@@ -68,7 +68,7 @@ public class Browser {
 	 * The url is put into the command using MessageFormat, so
 	 * the URL will be specified as {0} in the command.
 	 * Some examples of commands to try might be:<br>
-	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
+	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code><br>
 	 * <code>netscape {0}</code><br>
 	 * These commands are passed in order to exec until something works
 	 * when displayURL is used.
@@ -80,7 +80,7 @@ public class Browser {
 	/**
 	 * Determine appropriate commands to start a browser on the current
 	 * operating system.  On windows: <br>
-	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code></br>
+	 * <code>rundll32 url.dll,FileProtocolHandler {0}</code><br>
 	 * On other operating systems, the "which" command is used to
 	 * test if Mozilla, netscape, and lynx(xterm) are available (in that
 	 * order).

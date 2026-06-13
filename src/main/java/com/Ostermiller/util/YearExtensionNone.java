@@ -24,6 +24,9 @@ package com.Ostermiller.util;
  */
 public class YearExtensionNone implements YearExtensionPolicy {
 
+	/**
+	 * Singleton instance of no year extension policy
+	 */
 	public static final YearExtensionNone YEAR_EXTEND_NONE = new YearExtensionNone();
 
 	private YearExtensionNone(){

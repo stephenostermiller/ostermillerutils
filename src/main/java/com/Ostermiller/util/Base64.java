@@ -892,9 +892,9 @@ public class Base64 {
 	 * Characters that are not part of the Base64 alphabet are ignored
 	 * in the input.
 	 *
-	 * @param bytes The data to decode.
+	 * @param in The data to decode.
 	 * @return Decoded bytes.
-	 * @throws IOException
+	 * @throws IOException if an IO error occurs.
 	 *
 	 * @since ostermillerutils 1.08.03
 	 */

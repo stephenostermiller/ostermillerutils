@@ -27,7 +27,6 @@ import javax.swing.*;
  * More information about this class is available from <a target="_top" href=
  * "http://ostermiller.org/utils/PasswordDialog.html">ostermiller.org</a>.
  *
- * <code>
  * <pre>
  * PasswordDialog p = new PasswordDialog(null, "Test");
  * if(p.showDialog()){
@@ -37,7 +36,6 @@ import javax.swing.*;
  *     System.out.println("User selected cancel");
  * }
  * </pre>
- * </code>
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00

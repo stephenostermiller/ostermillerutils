@@ -29,7 +29,7 @@ import java.io.*;
  * CSV printers should implement.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+ * @author Pierre Dittgen &lt;pierre dot dittgen at pass-tech dot fr&gt;
  * @since ostermillerutils 1.00.00
  */
 public interface CSVPrint {

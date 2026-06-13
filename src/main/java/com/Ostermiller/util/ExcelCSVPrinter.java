@@ -26,7 +26,7 @@ import java.io.*;
  * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @author Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
+ * @author Pierre Dittgen &lt;pierre dot dittgen at pass-tech dot fr&gt;
  * @since ostermillerutils 1.00.00
  */
 public class ExcelCSVPrinter implements CSVPrint {
