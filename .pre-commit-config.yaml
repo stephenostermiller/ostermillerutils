@@ -29,7 +29,13 @@ repos:
         name: Check tab indentation
         entry: src/build/script/check-tab-indentation.sh
         language: script
-        types: [java]
+        files: |
+          (?x)^(
+            .*\.java|
+            .*\.sh|
+            .*\.pl|
+            Makefile
+          )$
       - id: maven-compile
         name: Maven compile
         entry: mvn compile
