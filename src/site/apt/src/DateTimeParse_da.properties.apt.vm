@@ -7,8 +7,4 @@
 
 DateTimeParse_da.properties Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/DateTimeParse_da.properties}

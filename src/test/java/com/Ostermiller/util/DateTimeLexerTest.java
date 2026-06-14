@@ -42,7 +42,6 @@ public class DateTimeLexerTest extends TestCase {
 		assertEquals("M\u00e4r", t.getText());
 	}
 
-
 	private DateTimeToken getFirstToken(String s){
 		try {
 			return new DateTimeLexer(new StringReader(s)).getNextToken();

@@ -7,8 +7,4 @@
 
 Browser_it.properties Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/Browser_it.properties}

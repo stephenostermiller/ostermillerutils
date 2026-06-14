@@ -7,8 +7,4 @@
 
 csv.jflex.skel Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/jflexcsv/com/Ostermiller/util/csv.jflex.skel}

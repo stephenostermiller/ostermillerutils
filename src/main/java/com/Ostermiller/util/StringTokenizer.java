@@ -402,7 +402,6 @@ public class StringTokenizer implements java.util.Enumeration<String>, java.util
 		tokenCount = -1;
 	}
 
-
 	/**
 	 * Tests if there are more tokens available from this tokenizer's string.
 	 * If this method returns <code>true</code>, then a subsequent call to

@@ -26,7 +26,6 @@ NoCloseStream
 
 NoCloseInputStream
 
-
     * {{{./src/NoCloseInputStream.java.html}NoCloseInputStream.java Source Code}}
 
     * {{{./javadoc/NoCloseInputStream.html}NoCloseInputStream Javadoc}}

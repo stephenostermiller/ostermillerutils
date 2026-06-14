@@ -7,8 +7,4 @@
 
 BrowserCommandLexer.lex Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/jflex/com/Ostermiller/util/BrowserCommandLexer.lex}

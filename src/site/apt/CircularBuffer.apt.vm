@@ -54,7 +54,6 @@ Circular Character Buffer
   program hang.  You can get around this by making the buffer infinite size or
   emptying the buffer in another thread.
 
-
 Circular Byte Buffer
 
     * {{{./src/CircularByteBuffer.java.html}CircularByteBuffer.java Source Code}}

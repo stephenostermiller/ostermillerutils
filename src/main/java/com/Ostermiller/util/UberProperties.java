@@ -748,7 +748,6 @@ public class UberProperties {
 		load(in, false);
 	}
 
-
 	/**
 	 * Add the properties from the reader to this
 	 * UberProperties.
@@ -856,7 +855,6 @@ public class UberProperties {
 		writeEscapedISO88591(out, value, TYPE_VALUE);
 		out.write('\n');
 	}
-
 
 	private static void writeProperty(Writer out, String name, String value) throws IOException {
 		writeEscapedText(out, name, TYPE_NAME);

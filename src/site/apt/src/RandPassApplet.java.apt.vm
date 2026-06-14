@@ -7,8 +7,6 @@
 
 RandPassApplet.java Source Code
 
-
-
     * {{{../javadoc/RandPassApplet.html}RandPassApplet Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/RandPassApplet.java}

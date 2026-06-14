@@ -308,7 +308,6 @@ public class CircularObjectBuffer <ElementType> {
 		this.blockingWrite = blockingWrite;
 	}
 
-
 	/**
 	 * Get a single Object from this buffer.  This method should be called
 	 * by the consumer.
@@ -397,7 +396,6 @@ public class CircularObjectBuffer <ElementType> {
 			Thread.sleep(100);
 		}
 	}
-
 
 	/**
 	 * Skip Objects.  This method should be used by the consumer

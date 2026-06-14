@@ -7,8 +7,6 @@
 
 YearExtensionPolicy.java Source Code
 
-
-
     * {{{../javadoc/YearExtensionPolicy.html}YearExtensionPolicy Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/YearExtensionPolicy.java}

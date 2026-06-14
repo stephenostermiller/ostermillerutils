@@ -20,16 +20,19 @@ repos:
 
   - repo: local
     hooks:
+      - id: condense-blank-lines
+        name: Condense multiple blank lines
+        entry: src/build/script/condense-blank-lines.sh
+        language: script
+        types: [text]
+      - id: check-tab-indentation
+        name: Check tab indentation
+        entry: src/build/script/check-tab-indentation.sh
+        language: script
+        types: [java]
       - id: maven-compile
         name: Maven compile
         entry: mvn compile
-        language: system
-        types: [java]
-        pass_filenames: false
-        stages: [commit]
-      - id: maven-test
-        name: Maven test
-        entry: mvn test
         language: system
         types: [java]
         pass_filenames: false

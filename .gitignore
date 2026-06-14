@@ -2,3 +2,7 @@ target
 pom.*
 release.properties
 src/site/xdoc/javadoc/*.java.xml
+*.tmp
+*.log
+*.bak
+*.swp

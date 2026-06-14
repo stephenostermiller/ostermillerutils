@@ -9,6 +9,4 @@ RandPass.properties Source Code
 
     * {{{../RandPass.html}RandPass Documentation and Examples}}
 
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/RandPass.properties}

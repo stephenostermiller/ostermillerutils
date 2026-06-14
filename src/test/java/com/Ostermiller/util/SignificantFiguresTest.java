@@ -18,7 +18,6 @@ package com.Ostermiller.util;
 
 import junit.framework.TestCase;
 
-
 /**
  * Significant Figures regression test.
  */

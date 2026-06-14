@@ -7,8 +7,4 @@
 
 DateTimeToken.java Source Code
 
-
-
-
-
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/DateTimeToken.java}

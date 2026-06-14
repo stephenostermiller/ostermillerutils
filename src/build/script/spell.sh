@@ -17,28 +17,28 @@
 
 if [ ! -e pom.xml ]
 then
-  echo "Expected this script to be called from ostermillerutils base directory"
-  exit 1;
+	echo "Expected this script to be called from ostermillerutils base directory"
+	exit 1;
 fi
 
 DICT=./src/build/spell/util.dict
 
 for file in `(find src -name "*.java" && find src -name "*.java.snippet")`
 do
-  aspell check --mode=ccpp --run-together --ignore 4 -x -p "$DICT" "$file"
-  if [ $? -ne 0 ]
-  then
-    exit $?
-  fi
+	aspell check --mode=ccpp --run-together --ignore 4 -x -p "$DICT" "$file"
+	if [ $? -ne 0 ]
+	then
+		exit $?
+	fi
 done
 
 for file in `(find src -name "*.apt.vm")`
 do
-  aspell check --mode=url --run-together --ignore 4 -x -p "$DICT" "$file"
-  if [ $? -ne 0 ]
-  then
-    exit $?
-  fi
+	aspell check --mode=url --run-together --ignore 4 -x -p "$DICT" "$file"
+	if [ $? -ne 0 ]
+	then
+		exit $?
+	fi
 done
 
 # Sort the dict file

@@ -26,14 +26,14 @@ FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script src/test
   my @years=split(/[ \n]/, `git log --follow "$file" | grep "Date:" | grep -oE ' 20[0-9]{2} ' | sort | uniq | xargs`);
   my $yearCount = scalar @years;
   if ($yearCount == 0){
-    print "No dates found from source control: $file\n";
-    next FILE_IN_LOOP;
+	print "No dates found from source control: $file\n";
+	next FILE_IN_LOOP;
   }
   my $firstYear = $years[0];
   my $lastYear = $years[$yearCount-1];
   my $scmYears = $firstYear;
   if ($firstYear ne $lastYear){
-    $scmYears = "$firstYear-$lastYear";
+	$scmYears = "$firstYear-$lastYear";
   }
   my $contents = &readFile($file);
   my @copyrights = $contents =~ /(Copyright \(C\) \d{4}(?:\-\d{4})? .*)/g;
@@ -41,30 +41,30 @@ FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script src/test
   my $firstYearFound = 0;
   my $lastYearFound = 0;
   for my $copyright (@copyrights){
-    $firstYearFound = 1 if ($copyright =~ /$firstYear/);
-    $lastYearFound = 1 if ($copyright =~ /$lastYear/);
+	$firstYearFound = 1 if ($copyright =~ /$firstYear/);
+	$lastYearFound = 1 if ($copyright =~ /$lastYear/);
   }
   next FILE_IN_LOOP if ($firstYearFound and $lastYearFound);
   if ($copyrightsCount == 0){
-    print "No copyrights found: $file\n";
-    print " Copyright (C) $scmYears Stephen Ostermiller\n";
-    print " http://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
-    print "\n";
-    next FILE_IN_LOOP;
+	print "No copyrights found: $file\n";
+	print " Copyright (C) $scmYears Stephen Ostermiller\n";
+	print " http://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
+	print "\n";
+	next FILE_IN_LOOP;
   }
   if ($copyrightsCount == 1 and $contents =~ /Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/){
-    $contents =~ s/Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/Copyright \(C\) $scmYears Stephen Ostermiller/g;
-    print "Modified copyright dates in: $file\n";
-    &saveFile($file, $contents);
-    next FILE_IN_LOOP;
+	$contents =~ s/Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/Copyright \(C\) $scmYears Stephen Ostermiller/g;
+	print "Modified copyright dates in: $file\n";
+	&saveFile($file, $contents);
+	next FILE_IN_LOOP;
   }
   if ($firstYearFound and $contents =~ /Copyright \(C\) (\d{4})(?:\-\d{4})? Stephen Ostermiller/){
-    my $stephenFirstYear = $1;
-    my $stephenYears = "$stephenFirstYear-$lastYear";
-    $contents =~ s/Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/Copyright \(C\) $stephenYears Stephen Ostermiller/g;
-    print "Modified copyright dates in: $file\n";
-    &saveFile($file, $contents);
-    next FILE_IN_LOOP;
+	my $stephenFirstYear = $1;
+	my $stephenYears = "$stephenFirstYear-$lastYear";
+	$contents =~ s/Copyright \(C\) \d{4}(?:\-\d{4})? Stephen Ostermiller/Copyright \(C\) $stephenYears Stephen Ostermiller/g;
+	print "Modified copyright dates in: $file\n";
+	&saveFile($file, $contents);
+	next FILE_IN_LOOP;
   }
   print "Should be Copyright (C) $scmYears: $file\n";
   print join ("\n", @copyrights);
@@ -76,7 +76,7 @@ sub readFile(){
   my $contents = "";
   open(FILE, $file) or die $!;
   while (my $line = <FILE>){
-    $contents .= $line;
+	$contents .= $line;
   }
   close(FILE);
   return $contents;

@@ -897,7 +897,6 @@ public class Browser {
 		return dialogPanel;
 	}
 
-
 	/**
 	 * A modal dialog that presents configuration option for this class.
 	 *
@@ -937,7 +936,6 @@ public class Browser {
 		 * @since ostermillerutils 1.00.00
 		 */
 		private boolean pressed_OK = false;
-
 
 		/**
 		 * Properties that are used:
@@ -1064,7 +1062,6 @@ public class Browser {
 				super.setVisible(false);
 			}
 		}
-
 
 	}
 

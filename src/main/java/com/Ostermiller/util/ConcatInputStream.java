@@ -29,7 +29,6 @@ import java.util.ArrayList;
  */
 public class ConcatInputStream extends InputStream {
 
-
 	/**
 	 * Current index to inputStreamQueue
 	 *
@@ -142,7 +141,6 @@ public class ConcatInputStream extends InputStream {
 	 * @since ostermillerutils 1.04.00
 	 */
 	private boolean closed = false;
-
 
 	/**
 	 * Create a new input stream that can dynamically accept new sources.

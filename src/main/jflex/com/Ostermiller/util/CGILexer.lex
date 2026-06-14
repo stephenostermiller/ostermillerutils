@@ -82,7 +82,6 @@ import java.io.*;
 		}
 	}
 
-
 	/**
 	 * Return the next token from the cgi data.
 	 *

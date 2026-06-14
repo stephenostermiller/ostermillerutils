@@ -16,7 +16,6 @@
  */
 package com.Ostermiller.util;
 
-
 /**
  *
  * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities

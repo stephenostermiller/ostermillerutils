@@ -129,7 +129,6 @@ public class YearExtensionTest extends TestCase {
 
 	private static final YearExtensionPolicy NEAREST_2000 = YearExtensionAround.getNearest(2000);
 
-
 	public void assertAround2000(int fullYear, int partYear){
 		assertEquals(
 			fullYear,

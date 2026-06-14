@@ -168,7 +168,6 @@ public final class CmdLnOption {
 			throw new IllegalArgumentException("A long name or short name must be specified");
 		}
 
-
 		if (longName == null){
 			this.longNames = new ArrayList<String>(0);
 		} else {

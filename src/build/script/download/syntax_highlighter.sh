@@ -9,13 +9,13 @@ cd /tmp/
 file=`ls -1 syntaxhighlighter*.zip 2>/dev/null | head -n 1`
 if [ "z$file" == "z" ]
 then
-  wget 'http://alexgorbatchev.com/SyntaxHighlighter/download/download.php?sh_current' -O syntaxhighlighter.zip
+	wget 'http://alexgorbatchev.com/SyntaxHighlighter/download/download.php?sh_current' -O syntaxhighlighter.zip
 fi
 file=`ls -1 syntaxhighlighter*.zip 2>/dev/null | head -n 1`
 if [ "z$file" == "z" ]
 then
-  echo "Could not download syntax highlighting libraries"
-  exit 1;
+	echo "Could not download syntax highlighting libraries"
+	exit 1;
 fi
 
 rm -rf syntaxhighlighter*/

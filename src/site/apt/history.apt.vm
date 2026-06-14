@@ -7,7 +7,6 @@
 
 Version History of com.Ostermiller.util Java Utilities
 
-
   The major version number will remain unchanged until backward compatibility
   is severely broken (hopefully never).  The middle number will be incremented
   whenever new utilities are added.  The final number is reserved for bug fix

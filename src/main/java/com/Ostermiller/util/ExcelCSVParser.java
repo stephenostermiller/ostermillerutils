@@ -389,7 +389,6 @@ public class ExcelCSVParser implements CSVParse {
 		return (new ExcelCSVParser(in)).getAllValues();
 	}
 
-
 	/**
 	 * Parse the delimited data from a stream.
 	 *

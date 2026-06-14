@@ -7,8 +7,4 @@
 
 RandPass_en.properties Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/RandPass_en.properties}

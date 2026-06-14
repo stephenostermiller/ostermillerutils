@@ -7,8 +7,4 @@
 
 CSVLexer.lex Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/jflexcsv/com/Ostermiller/util/CSVLexer.lex}

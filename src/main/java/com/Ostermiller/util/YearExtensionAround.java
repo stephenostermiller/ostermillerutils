@@ -26,7 +26,6 @@ import java.util.Calendar;
  */
 public class YearExtensionAround implements YearExtensionPolicy {
 
-
 	private static final int NEAREST_ALLOWED_YEARS_IN_PAST = 50;
 
 	/**

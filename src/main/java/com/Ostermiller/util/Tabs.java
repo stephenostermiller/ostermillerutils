@@ -48,7 +48,6 @@ public class Tabs {
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.Tabs",  Locale.getDefault());
 
-
 	/**
 	 * Can be passed instead of a spaces argument to use tabs instead.
 	 *

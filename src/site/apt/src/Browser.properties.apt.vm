@@ -9,6 +9,4 @@ Browser.properties Source Code
 
     * {{{../Browser.html}Browser Documentation and Examples}}
 
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/Browser.properties}

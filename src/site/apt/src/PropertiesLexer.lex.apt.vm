@@ -7,8 +7,4 @@
 
 PropertiesLexer.lex Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/jflex/com/Ostermiller/util/PropertiesLexer.lex}

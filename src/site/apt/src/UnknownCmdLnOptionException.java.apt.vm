@@ -7,8 +7,6 @@
 
 UnknownCmdLnOptionException.java Source Code
 
-
-
     * {{{../javadoc/UnknownCmdLnOptionException.html}UnknownCmdLnOptionException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/UnknownCmdLnOptionException.java}

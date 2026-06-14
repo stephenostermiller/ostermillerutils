@@ -251,7 +251,6 @@ public class MD5 {
 		return md5.getHashString();
 	}
 
-
 	/**
 	 * Gets the MD5 hash of the given String.
 	 *
@@ -283,7 +282,6 @@ public class MD5 {
 		md5.update(s, enc);
 		return md5.getHashString();
 	}
-
 
 	/**
 	 * Reset the MD5 sum to its initial state.
@@ -550,7 +548,6 @@ public class MD5 {
 			this.bitCount = from.bitCount;
 		}
 	}
-
 
 	/**
 	 * Turns array of bytes into string representing each byte as

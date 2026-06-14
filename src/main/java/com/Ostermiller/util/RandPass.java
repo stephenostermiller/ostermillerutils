@@ -60,7 +60,6 @@ public class RandPass {
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.RandPass",  Locale.getDefault());
 
-
 	/**
 	 * Default length for passwords
 	 *
@@ -459,7 +458,6 @@ public class RandPass {
 		}
 	}
 
-
 	private Vector<Requirement> requirements = null;
 
 	/**
@@ -475,7 +473,6 @@ public class RandPass {
 		if (requirements == null) requirements = new Vector<Requirement>();
 		requirements.add(new Requirement(alphabet, num));
 	}
-
 
 	/**
 	 * Set the alphabet used by this random password generator.

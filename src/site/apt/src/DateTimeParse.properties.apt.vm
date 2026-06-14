@@ -9,6 +9,4 @@ DateTimeParse.properties Source Code
 
     * {{{../DateTimeParse.html}DateTimeParse Documentation and Examples}}
 
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/DateTimeParse.properties}

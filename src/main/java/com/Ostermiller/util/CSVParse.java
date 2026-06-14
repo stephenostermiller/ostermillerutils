@@ -95,7 +95,6 @@ public interface CSVParse {
 	 */
 	public String[][] getAllValues() throws IOException;
 
-
 	/**
 	 * Change this parser so that it uses a new delimiter.
 	 * <p>
@@ -121,7 +120,6 @@ public interface CSVParse {
 	 * @since ostermillerutils 1.02.16
 	 */
 	public void changeQuote(char newQuote) throws BadQuoteException;
-
 
 	/**
 	 * Close any stream upon which this parser is based.

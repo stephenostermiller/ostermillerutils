@@ -1,0 +1,73 @@
+# EditorConfig helps maintain consistent coding styles across different editors and IDEs
+# https://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files - common settings
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Java source files
+[*.java]
+indent_style = tab
+tab_width = 4
+
+# Maven POM and XML files
+[*.xml]
+indent_style = space
+indent_size = 2
+
+# Configuration and template files
+[*.{apt,apt.vm}]
+indent_style = space
+indent_size = 1
+
+# Property files
+[*.properties]
+indent_style = space
+indent_size = 2
+charset = iso-8859-1
+
+# Shell scripts
+[*.sh]
+indent_style = tab
+tab_width = 4
+
+# Perl scripts
+[*.pl]
+indent_style = tab
+tab_width = 4
+
+# Makefile - must use tabs
+[Makefile]
+indent_style = tab
+tab_width = 4
+
+# Flex/JFlex files
+[*.{l,flex,jflex}]
+indent_style = tab
+tab_width = 4
+
+# CSV files
+[*.csv]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Markdown files
+[*.md]
+indent_style = space
+indent_size = 1
+
+# Text files
+[*.txt]
+indent_style = space
+indent_size = 4
+
+# Debian control files
+[control]
+indent_style = space
+indent_size = 1

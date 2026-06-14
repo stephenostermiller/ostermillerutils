@@ -34,15 +34,15 @@ for file in `find src/ -type f`
 do
   if [ "$file" != "src/build/spell/util.dict" ]
   then
-    if [ "${file#*.}" != "png" ]
-    then
-      trailCount=`grep -c -E '[ 	]+$' $file`
-      if [ "$trailCount" != 0 ]
-      then
-        echo "Removing trailing white space from: $file"
-        sed -r -i 's/[ 	]+$//' "$file"
-      fi
-    fi
+	if [ "${file#*.}" != "png" ]
+	then
+	  trailCount=`grep -c -E '[ 	]+$' $file`
+	  if [ "$trailCount" != 0 ]
+	  then
+		echo "Removing trailing white space from: $file"
+		sed -r -i 's/[ 	]+$//' "$file"
+	  fi
+	fi
   fi
 done
 

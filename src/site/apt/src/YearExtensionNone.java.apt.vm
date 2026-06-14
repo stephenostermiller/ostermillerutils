@@ -7,8 +7,6 @@
 
 YearExtensionNone.java Source Code
 
-
-
     * {{{../javadoc/YearExtensionNone.html}YearExtensionNone Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/YearExtensionNone.java}

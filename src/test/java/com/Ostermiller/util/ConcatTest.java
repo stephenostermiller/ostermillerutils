@@ -146,7 +146,6 @@ public class ConcatTest extends TestCase {
 		}
 	}
 
-
 	private static void read(Reader in, char expected) {
 		try {
 			int c = in.read();

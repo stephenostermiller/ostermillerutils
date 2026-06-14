@@ -82,7 +82,6 @@ public class CmdLnResult
 		arguments.add(argument);
 	}
 
-
 	/**
 	 * @return true iff enough arguments have been added (max not exceeded)
 	 *

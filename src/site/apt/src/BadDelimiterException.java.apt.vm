@@ -7,8 +7,6 @@
 
 BadDelimiterException.java Source Code
 
-
-
     * {{{../javadoc/BadDelimiterException.html}BadDelimiterException Javadoc}}
 
 %{code-snippet|brush=java|file=src/main/java/com/Ostermiller/util/BadDelimiterException.java}

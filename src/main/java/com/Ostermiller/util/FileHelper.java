@@ -40,7 +40,6 @@ public class FileHelper {
 	 */
 	protected static ResourceBundle labels = ResourceBundle.getBundle("com.Ostermiller.util.FileHelper",  Locale.getDefault());
 
-
 	/**
 	 * Move a file from one location to another.  An attempt is made to rename
 	 * the file and if that fails, the file is copied and the old file deleted.

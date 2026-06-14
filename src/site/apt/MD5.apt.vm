@@ -11,7 +11,6 @@ MD5
 
     * {{{./javadoc/MD5.html}MD5 Javadoc}}
 
-
   MD5 is a cryptographic one way hash algorithm.  These classes compute MD5 for
   Java Strings, byte arrays, or streams.  MD5 is now considered a weak
   algorithm.  New applications should consider more secure one way hashes.
@@ -30,7 +29,6 @@ MD5
   and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation
   is several times faster and much more memory efficient than Santeri's
   implementation.
-
 
 *Example
 

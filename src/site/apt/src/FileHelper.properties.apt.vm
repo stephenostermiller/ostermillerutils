@@ -9,6 +9,4 @@ FileHelper.properties Source Code
 
     * {{{../FileHelper.html}FileHelper Documentation and Examples}}
 
-
-
 %{code-snippet|file=src/main/resources/com/Ostermiller/util/FileHelper.properties}

@@ -1305,7 +1305,6 @@ public class Base64 {
 		decodeInput(getIntSequence(in), out, true);
 	}
 
-
 	/**
 	 * @param string The data to decode.
 	 * @param enc Character encoding to use when converting from bytes.

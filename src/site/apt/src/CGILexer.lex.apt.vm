@@ -7,8 +7,4 @@
 
 CGILexer.lex Source Code
 
-
-
-
-
 %{code-snippet|file=src/main/jflex/com/Ostermiller/util/CGILexer.lex}
