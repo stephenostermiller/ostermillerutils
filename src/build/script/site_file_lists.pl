@@ -22,17 +22,17 @@ if (! -e "pom.xml"){
 	exit 1;
 }
 
-if (! -e "target/site/doc/package-list"){
+if (! -e "target/javadoc/element-list" && ! -e "target/javadoc/package-list"){
 	print "Javadoc is not generated.  First use:\n";
-	print "mvn site\n";
+	print "mvn javadoc:javadoc\n";
 	exit 1;
 }
 
-`mkdir -p src/site/xdoc/javadoc`;
-`mkdir -p src/site/apt/src`;
+`mkdir -p target/site-template/xdoc/javadoc`;
+`mkdir -p target/site-template/apt/src`;
 
 my %sourceMap = ();
-for my $line (split(/\n/, `grep -i '\.java\.html.* Source' src/site/apt/*.apt.vm`)){
+for my $line (split(/\n/, `grep -i '\.java\.html.* Source' target/site-template/apt/*.apt.vm`)){
 	if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z0-9]([A-Za-z0-9]+)\.java/){
 		my ($webdoc, $javafile) = ($1, $2);
 		if ($webdoc ne "source"){
@@ -94,9 +94,9 @@ for my $file (sort @files){
 	$sourceList .= "    * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
 	$menuList .= "        <item name=\"$basename\" href=\"/src/$srchtmlhref\" />\n";
 
-	&createSrcFile($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname);
+	&createSrcFile("target/site-template/apt/src/$basename.apt.vm", $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname);
 	if ($javadocHref){
-		&createJavadocFile($javadocFile, $barename, $javadocHref, $docXdocLink, $srcXdocLink);
+		&createJavadocFile("target/site-template/xdoc/javadoc/$barename.xml", $barename, $javadocHref, $docXdocLink, $srcXdocLink);
 	}
 }
 
@@ -125,12 +125,6 @@ for my $file (sort @files){
 			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html http://ostermiller.org/utils/\n";
 	}
 }
-
-&replaceInFile("src/site/apt/source.apt.vm", "GENERATED SOURCES LIST", $sourceList);
-&replaceInFile("src/site/apt/doc.apt.vm", "GENERATED JAVADOC LIST", $javadocList);
-&replaceInFile("src/site/site.xml", "GENERATED SOURCES MENU", $menuList);
-&replaceInFile("src/site/site.xml", "GENERATED JAVADOC MENU", $javadocMenuList);
-&replaceInFile("src/site/resources/.htaccess", "GENERATED HTACCESS LIST", $htaccessList);
 
 sub createSrcFile(){
 	my ($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname) = @_;
@@ -175,7 +169,7 @@ sub createJavadocFile(){
 $docXdocLink
 $srcXdocLink
 			</ul>
-			<iframe src=\"$javadocHref\" width=\"100%\" height=\"800\"></iframe>
+			<iframe src=\"$javadocHref\" width=\"100%\" height=\"20000\" onload=\"this.style.height=(this.contentWindow.document.body.scrollHeight)+'px'\"></iframe>
 		</section>
 	</body>
 </document>

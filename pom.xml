@@ -123,6 +123,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>2.1.1</version>
+				<configuration>
+					<siteDirectory>${project.build.directory}/site-template</siteDirectory>
+				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>com.anasoft.os</groupId>
@@ -148,6 +151,21 @@
 					<filtering>false</filtering>
 				</configuration>
 				<executions>
+					<execution>
+						<id>srcSiteToGenerated</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site-template</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/site</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
 					<execution>
 						<id>archivesToSite</id>
 						<phase>site</phase>
@@ -265,6 +283,26 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>generate-site-files</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>perl</executable>
+							<arguments>
+								<argument>src/build/script/site_file_lists.pl</argument>
+							</arguments>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
