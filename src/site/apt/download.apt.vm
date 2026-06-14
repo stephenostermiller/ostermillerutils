@@ -58,6 +58,14 @@ Download com.Ostermiller.util Java Utilities
 
     * {{{http://ostermiller.org/utils/ostermillerutils_1_04_03_for_kaffe.jar}ostermillerutils_1_04_03_for_kaffe.jar}}
 
+**Java 1.5
+
+  The latest version of these utilties to support Java 1.5.
+
+  A single jar file containing both classes and source is available:
+
+    * {{{http://ostermiller.org/utils/ostermillerutils_1_07_00.jar}ostermillerutils_1_07_00.jar}}
+
 **Java 1.4
 
   The utilities have specifically been modified to be used with Java 1.4.

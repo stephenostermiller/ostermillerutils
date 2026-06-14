@@ -36,10 +36,9 @@ repos:
             .*\.pl|
             Makefile
           )$
-      - id: maven-compile
-        name: Maven compile
-        entry: mvn compile
+      - id: build-and-test
+        name: Build and test
+        entry: make target/test
         language: system
-        types: [java]
         pass_filenames: false
         stages: [commit]

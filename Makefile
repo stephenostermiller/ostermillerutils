@@ -1,43 +1,38 @@
 JAVA_HOME ?= $(shell dirname $(shell dirname $(shell readlink -f $(shell which java))))
 export JAVA_HOME
+VERSION := $(shell cat VERSION.txt)
 
 .PHONY: all
-all: .git/hooks/pre-commit compile test package doc site
+all: .git/hooks/pre-commit target/test target/site
 
 .PHONY: build
 build:
 	mvn compile
 
-.PHONY: compile
-compile:
-	mvn compile
+target/classes: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+	mvn compile && touch target/classes
 
-.PHONY: test
-test: build
-	mvn test
+target/test: target/classes
+	mvn surefire:test && touch target/test
 
-.PHONY: package
-package: build
-	mvn package
+target/ostermillerutils-$(VERSION).jar: target/classes
+	mvn jar:jar -Drevision=$(VERSION)
 
-.PHONY: doc
-doc javadoc:
-	mvn javadoc:jar javadoc:javadoc
+target/ostermillerutils-$(VERSION)-sources.jar: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+	mvn source:jar -Drevision=$(VERSION)
 
-.PHONY: javadoc
-javadoc: doc
+target/ostermillerutils-$(VERSION)-bin.zip: target/ostermillerutils-$(VERSION).jar target/ostermillerutils-$(VERSION)-sources.jar
+	mvn assembly:single -Drevision=$(VERSION)
 
-.PHONY: site
-site:
-	mvn site
+target/javadoc: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+	mvn javadoc:javadoc@javadoc && touch target/javadoc
+
+target/site: target/javadoc target/ostermillerutils-$(VERSION)-bin.zip $(shell find src/site -type f 2>/dev/null)
+	mvn site:site jar:jar@randpassjar resources:copy-resources@archivesToSite resources:copy-resources@javadocToSite -Drevision=$(VERSION) && touch target/site
 
 .PHONY: verify
 verify:
 	mvn verify
-
-.PHONY: source-jar
-source-jar:
-	mvn source:jar
 
 .PHONY: clean
 clean:
@@ -45,4 +40,4 @@ clean:
 	@echo "Build artifacts cleaned."
 
 .git/hooks/pre-commit:
-	pre-commit install
+	command -v pre-commit >/dev/null && pre-commit install || true

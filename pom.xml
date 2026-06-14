@@ -5,7 +5,7 @@
 	<groupId>com.ostermiller</groupId>
 	<artifactId>ostermillerutils</artifactId>
 	<inceptionYear>2001</inceptionYear>
-	<version>DEV</version>
+	<version>${revision}</version>
 	<name>Ostermiller Java Utilities</name>
 	<url>http://ostermiller.org/utils/</url>
 	<packaging>jar</packaging>
@@ -170,6 +170,21 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>javadocToSite</id>
+						<phase>site</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site/doc</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/javadoc</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
 						<id>licenseToClasses</id>
 						<phase>package</phase>
 						<goals>
@@ -210,6 +225,16 @@
 							<goal>jar</goal>
 						</goals>
 						<phase>package</phase>
+					</execution>
+					<execution>
+						<id>javadoc</id>
+						<goals>
+							<goal>javadoc</goal>
+						</goals>
+						<configuration>
+							<reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
+							<destDir>javadoc</destDir>
+						</configuration>
 					</execution>
 					<execution>
 						<id>doc</id>
@@ -277,5 +302,6 @@
 		<m2st-syntaxHighlighter-urlBase>syntax</m2st-syntaxHighlighter-urlBase>
 		<m2st-syntaxHighlighter-brushFiles>shBrushJava.js</m2st-syntaxHighlighter-brushFiles>
 		<m2st-syntaxHighlighter-themeCssFile>shTheme.css</m2st-syntaxHighlighter-themeCssFile>
+		<revision>DEV</revision>
 	</properties>
 </project>
