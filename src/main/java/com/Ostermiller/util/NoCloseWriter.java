@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2010 Stephen Ostermiller
+ * Copyright (C) 2003-2026 Stephen Ostermiller
  * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,7 +23,7 @@ import java.io.*;
  * More information about this class is available from <a target="_top" href=
  * "https://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
  * <p>
- * This class is designed to wrap a normal writer
+ * This class implements the Decorator design pattern to wrap a normal writer
  * so that it can be passed to methods that write to it
  * and may erroneously close it.  This class is a workaround
  * when the method cannot be modified because it is in a
