@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002-2011 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * Copyright (C) 2003 Carlo Magnaghi <software at tecnosoft dot net>
  *
@@ -26,7 +26,7 @@ import java.util.*;
  * Properties can be saved to a stream or loaded from a stream. Each key and
  * its corresponding value in the property list is a string.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/UberProperties.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/UberProperties.html">ostermiller.org</a>.
  * <p>
  * A property list can contain another property list as its "defaults"; this
  * second property list is searched if the property key is not found in the
@@ -103,7 +103,7 @@ import java.util.*;
  * string.
  * </blockquote>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class UberProperties {

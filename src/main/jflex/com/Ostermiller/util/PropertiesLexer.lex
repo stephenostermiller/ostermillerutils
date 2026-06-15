@@ -2,7 +2,7 @@
  * edit PropertiesLexer.lex to make changes.  Use JFlex to generate it.
  * To generate PropertiesLexer.java
  * JFlex may be obtained from
- * <a href="http://jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de/">the JFlex website</a>.
  * JFlex 1.4 or later is required.
  * Run:<br>
  * jflex  PropertiesLexer.lex<br>
@@ -12,7 +12,7 @@
 /*
  * Goes with UberProperties
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ import java.io.*;
  *  </CODE>
  *
  * @see PropertiesToken
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 

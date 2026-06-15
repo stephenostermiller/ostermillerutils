@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ package com.Ostermiller.util;
  * of significant figures, adjusting the number of significant
  * figures (including scientific rounding), and displaying the number.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/SignificantFigures.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/SignificantFigures.html">ostermiller.org</a>.
  * <p>
  * When parsing a number to determine the number of significant figures,
  * these rules are used:
@@ -79,7 +79,7 @@ package com.Ostermiller.util;
  * number.setLMSD(leastSD, mostSD);
  * System.out.println(number);</pre>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class SignificantFigures extends Number {

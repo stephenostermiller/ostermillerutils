@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2005-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@ import java.util.*;
 /**
  * Regression test for Parallelizer. More information about this class is
  * available from <a target="_top" href=
- * "http://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller
- *         http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ *         https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
 public class ParallelizerTest extends TestCase {

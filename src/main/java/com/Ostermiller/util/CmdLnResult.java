@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,9 @@ import java.util.*;
  *
  * More information about this class and code samples for suggested use are
  * available from <a target="_top" href=
- * "http://ostermiller.org/utils/CmdLn.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CmdLn.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.07.00
  */
 public class CmdLnResult

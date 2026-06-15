@@ -15,6 +15,6 @@ Straight Stream Reader
   might find this class useful for reading binary files using an API that only
   support Reader and not InputStreams.  One such example is the lexical
   analyzer JFlex.  There is some
-  {{{http://www.jflex.de/manual.html#SECTION00063000000000000000}discussion}}
+  {{{https://www.jflex.de/manual.html#SECTION00063000000000000000}discussion}}
   in its manual about how a class like this might come in handy.  This class
   is included with the binary scanning example that comes with JFlex.

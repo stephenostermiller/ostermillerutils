@@ -1,7 +1,7 @@
 /* BrowserCommandLexer.java is a generated file.  You probably want to
  * edit BrowserCommandLexer to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
- * <a href="http://www.jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de">the JFlex website</a>.
  * Jflex 1.4 or later is required.
  * Run:<br>
  * jflex BrowserCommandLexer<br>
@@ -11,7 +11,7 @@
 /*
  * Tokenize a command line into application and arguments.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import java.io.*;
 /**
  * Tokenize a command line into application and arguments.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 %%

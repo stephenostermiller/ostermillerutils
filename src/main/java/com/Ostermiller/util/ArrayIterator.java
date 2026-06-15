@@ -1,7 +1,7 @@
 /*
  * Converts an array to an iterator.
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,9 @@ import java.util.*;
  * Converts an array to an iterator.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @param <ElementType> Type of array over which to iterate
  * @since ostermillerutils 1.03.00
  */

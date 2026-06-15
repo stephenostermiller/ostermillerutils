@@ -1,7 +1,7 @@
 /*
  * Regression tests for ExecHelper
  * Copyright (C) 2005-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,9 +25,9 @@ import java.io.*;
  * should nothing unless an error occurs.
  *
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/ExecHelper.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/ExecHelper.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.06.00
  */
 public class ExecHelperTest extends TestCase {

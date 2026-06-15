@@ -1,7 +1,7 @@
 /*
  * An InputStreamReader that does no character encoding translations.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import java.io.*;
  * that a StraightStreamReader returns may not be valid Unicode characters but they are
  * guaranteed to be in the 0x00 to 0xFF range.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/StraightStreamReader.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/StraightStreamReader.html">ostermiller.org</a>.
  * <P>
  * Most of the time you want to do character encoding translation when translating bytes to
  * characters.  If you are planning on displaying the text, you should always do this and should
@@ -36,7 +36,7 @@ import java.io.*;
  * For top efficiency, consider wrapping an StraightStreamReader within a BufferedReader. For example:<br>
  * <code>BufferedReader in = new BufferedReader(new StraightStreamReader(System.in));</code>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class StraightStreamReader extends Reader{

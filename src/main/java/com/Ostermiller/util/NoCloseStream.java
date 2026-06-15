@@ -1,7 +1,7 @@
 /*
  * Streams that have a different close mechanism.
  * Copyright (C) 2002-2011 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ import java.io.*;
  * A wrapper for a stream (either input or output)
  * which has a close method with no effect.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.01.00
  */
 public interface NoCloseStream {

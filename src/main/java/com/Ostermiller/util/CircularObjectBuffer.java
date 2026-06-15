@@ -1,7 +1,7 @@
 /*
  * Circular Object Buffer
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@ package com.Ostermiller.util;
 /**
  * Implements the Circular Buffer producer/consumer model for Objects.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CircularObjectBuffer.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CircularObjectBuffer.html">ostermiller.org</a>.
  * <p>
  * This class is thread safe.
  *
  * @see CircularCharBuffer
  * @see CircularByteBuffer
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @param <ElementType> Type of object allowed in this circular buffer
  * @since ostermillerutils 1.00.00
  */

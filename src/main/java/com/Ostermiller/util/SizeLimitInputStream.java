@@ -1,7 +1,7 @@
 /*
  * Input stream wrapper with a byte limit.
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import java.io.*;
  * An input stream wrapper that will read only a set number of bytes from the
  * underlying stream.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
 public class SizeLimitInputStream extends InputStream {

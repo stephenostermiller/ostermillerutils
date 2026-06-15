@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2001-2014 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import java.util.Locale;
  * Implements Base64 encoding and decoding as defined by RFC 2045: "Multi-purpose Internet
  * Mail Extensions (MIME) Part One: Format of Internet Message Bodies" page 23.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
  *
  * <blockquote>
  * <p>The Base64 Content-Transfer-Encoding is designed to represent
@@ -135,7 +135,7 @@ import java.util.Locale;
  * because no hyphen characters are used in the base64 encoding.</p>
  * </blockquote>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class Base64 {
@@ -337,7 +337,7 @@ public class Base64 {
 				case ABOUT:{
 					System.out.println(
 						labels.getString("base64") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (https://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);

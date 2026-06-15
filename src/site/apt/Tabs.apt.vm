@@ -54,4 +54,4 @@ Internationalization
   Translations gladly accepted.  Please translate
   {{{./src/Tabs.properties.html}Tabs.properties}}.
 	You may want to use:
-	{{{http://attesoro.org/}Attesoro - A Java Translation Editor}}.
+	{{{https://attesoro.org/}Attesoro - A Java Translation Editor}}.

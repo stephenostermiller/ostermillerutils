@@ -25,8 +25,8 @@ MD5
   public-key cryptosystem such as RSA.
 
   This class is based on work by
-  {{{http://santtu.iki.fi/md5/}Santeri Paavolainen}}.
-  and {{{http://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation
+  {{{http://santtu.iki.fi/programs/md5/}Santeri Paavolainen}}.
+  and {{{https://www.ietf.org/rfc/rfc1321.txt}RFC1321}}.  This implementation
   is several times faster and much more memory efficient than Santeri's
   implementation.
 

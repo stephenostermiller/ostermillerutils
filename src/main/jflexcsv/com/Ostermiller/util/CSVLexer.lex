@@ -1,7 +1,7 @@
 /* CSVLexer.java is a generated file.  You probably want to
  * edit CSVLexer.lex to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
- * <a href="http://jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de/">the JFlex website</a>.
  * This file was tested to work with jflex 1.4 (and may not
  * work with more recent version because it needs a skeleton file)
  * Run: <br>
@@ -11,7 +11,7 @@
 
 /*
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import java.io.*;
 /**
  * Read files in comma separated value format.
  * More information about this class is available from <a href=
- * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
  * The use of this class is no longer recommended.	It is now recommended that you use
  * com.Ostermiller.util.CSVParser instead.	That class, has a cleaner API, and methods
@@ -69,7 +69,7 @@ import java.io.*;
  * }
  * </pre>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 

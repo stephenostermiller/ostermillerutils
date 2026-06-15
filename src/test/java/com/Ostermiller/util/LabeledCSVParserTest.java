@@ -4,7 +4,7 @@
  * Copyright (C) 2004 Campbell, Allen T. <allenc28@yahoo.com>
  *
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import java.io.*;
  * Tests reading files in comma separated value format with a fist line of labels.
  *
  * @author Campbell, Allen T. <allenc28@yahoo.com>
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
 public class LabeledCSVParserTest extends TestCase {

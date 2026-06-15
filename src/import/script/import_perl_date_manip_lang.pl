@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Copyright (C) 2010 Stephen Ostermiller
-# http://ostermiller.org/contact.pl?regarding=Java+Utilities
+# https://ostermiller.org/contact.pl?regarding=Java+Utilities
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -172,7 +172,7 @@ for my $file (split(/\n/, `ls -1 target/import/datemanip/Date-Manip-*/lib/Date/M
 			print PROP $copyright;
 			print PROP "#\n";
 			print PROP "# Copyright (C) 2010 Stephen Ostermiller\n";
-			print PROP "# http://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
+			print PROP "# https://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
 			print PROP "#\n";
 			print PROP "# This program is free software; you can redistribute it and/or modify\n";
 			print PROP "# it under the terms of the GNU General Public License as published by\n";

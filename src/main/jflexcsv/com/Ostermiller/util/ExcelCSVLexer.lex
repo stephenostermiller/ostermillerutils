@@ -1,7 +1,7 @@
 /* ExcelCSVLexer.java is a generated file.	You probably want to
  * edit ExcelCSVLexer.lex to make changes.	Use JFlex to generate it.
  * JFlex may be obtained from
- * <a href="http://jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de/">the JFlex website</a>.
  * This file was tested to work with jflex 1.4 (and may not
  * work with more recent version because it needs a skeleton file)
  * Run: <br>
@@ -11,7 +11,7 @@
 
 /*
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ import java.io.*;
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
- * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  * <P>
  * Excel CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.
@@ -71,7 +71,7 @@ import java.io.*;
  * This parser does not attempt to fix these excel conversions, but users should be aware
  * of them.</li></ul>
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 

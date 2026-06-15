@@ -4,7 +4,7 @@
  * Copyright (C) 2004 Campbell, Allen T. <allenc28@yahoo.com>
  *
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import java.util.*;
  * desired.
  *
  * @author Campbell, Allen T. &lt;allenc28@yahoo.com&gt;
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00
  */
 public class LabeledCSVParser implements CSVParse {

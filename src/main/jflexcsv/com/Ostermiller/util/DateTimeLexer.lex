@@ -2,7 +2,7 @@
  * edit DateTimeLexer.lex to make changes.  Use JFlex to generate it.
  * To generate DateTimeLexer.java
  * JFlex may be obtained from
- * <a href="http://jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de/">the JFlex website</a>.
  * JFlex 1.4 or later is required.
  * Run:<br>
  * jflex  DateTimeLexer.lex<br>
@@ -11,7 +11,7 @@
 
 /*
  * Copyright (C) 2010-2011 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ import java.io.*;
  *  </CODE>
  *
  * @see DateTimeToken
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 

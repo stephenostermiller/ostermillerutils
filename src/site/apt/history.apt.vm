@@ -14,9 +14,9 @@ Version History of com.Ostermiller.util Java Utilities
 
     * Version 1.08.02
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=370}NullPointerException at loading properties in DateTimeParse in German Locale}}
+        * NullPointerException at loading properties in DateTimeParse in German Locale
 
-   * Version 1.08.01
+    * Version 1.08.01
 
         * Greek translation for browser opener from geogeo.gr
 
@@ -30,9 +30,9 @@ Version History of com.Ostermiller.util Java Utilities
 
     * Version 1.07.01
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=237}The flush() method isn't synchronized}}
+        * The flush() method isn't synchronized
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=236}Mark position invalidated too early.}}
+        * Mark position invalidated too early.
 
     * Version 1.07.00
 
@@ -42,17 +42,17 @@ Version History of com.Ostermiller.util Java Utilities
 
     * Version 1.06.02
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=150}MD5 methods don't close the file}}
+        * MD5 methods don't close the file
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=148}ExecHelper directory not passed into Runtime.exec()}}
+        * ExecHelper directory not passed into Runtime.exec()
 
     * Version 1.06.01
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=5}CSV changeQuote doesn't check if same character is used again}}
+        * CSV changeQuote doesn't check if same character is used again
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=6}String Helper padding methods could be more efficient}}
+        * String Helper padding methods could be more efficient
 
-        * {{{http://bugzilla.ostermiller.com/show_bug.cgi?id=7}CSV line ending character(s) should be settable, not unix \n by default}}
+        * CSV line ending character(s) should be settable, not unix \n by default
 
     * Version 1.06.00
 

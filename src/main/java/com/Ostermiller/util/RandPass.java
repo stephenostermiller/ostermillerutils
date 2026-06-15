@@ -1,7 +1,7 @@
 /*
  * Generate random passwords.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,9 +39,9 @@ import java.util.Vector;
  * may decrease security.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class RandPass {
@@ -375,7 +375,7 @@ public class RandPass {
 				case ABOUT:{
 					System.out.println(
 						labels.getString("randpass") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001-2007", "Stephen Ostermiller (https://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);

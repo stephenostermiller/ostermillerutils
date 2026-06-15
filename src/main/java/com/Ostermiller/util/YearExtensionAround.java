@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2010-2011 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ import java.util.Calendar;
 /**
  * Extend years like '99 to 1999 based on dates around the current date.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.08.00
  */
 public class YearExtensionAround implements YearExtensionPolicy {

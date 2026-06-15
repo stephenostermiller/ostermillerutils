@@ -1,7 +1,7 @@
 /*
  * Circular Character Buffer
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import java.io.*;
 /**
  * Implements the Circular Buffer producer/consumer model for characters.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CircularCharBuffer.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CircularCharBuffer.html">ostermiller.org</a>.
  * <p>
  * Using this class is a simpler alternative to using a PipedReader
  * and a PipedWriter. PipedReaders and PipedWriters don't support the
@@ -35,7 +35,7 @@ import java.io.*;
  * @see CircularByteBuffer
  * @see CircularObjectBuffer
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class CircularCharBuffer {

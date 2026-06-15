@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Copyright (C) 2010 Stephen Ostermiller
-# http://ostermiller.org/contact.pl?regarding=Java+Utilities
+# https://ostermiller.org/contact.pl?regarding=Java+Utilities
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ FILE_IN_LOOP: for my $file (split(/\n/, `find src/main src/build/script src/test
 	if ($copyrightsCount == 0){
 	print "No copyrights found: $file\n";
 	print " Copyright (C) $scmYears Stephen Ostermiller\n";
-	print " http://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
+	print " https://ostermiller.org/contact.pl?regarding=Java+Utilities\n";
 	print "\n";
 	next FILE_IN_LOOP;
 	}

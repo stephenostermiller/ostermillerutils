@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * Copyright (C) 2003 Pierre Dittgen <pierre dot dittgen at pass-tech dot fr>
  *
@@ -23,9 +23,9 @@ import java.io.*;
 /**
  * Print values as a comma separated list.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @author Pierre Dittgen &lt;pierre dot dittgen at pass-tech dot fr&gt;
  * @since ostermillerutils 1.00.00
  */

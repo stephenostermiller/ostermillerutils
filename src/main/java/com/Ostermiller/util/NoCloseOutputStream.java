@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ import java.io.*;
 /**
  * An output stream with a close method with no effect.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
  * <p>
  * This class is designed to wrap a normal output stream
  * so that it can be passed to methods that write to it
@@ -29,7 +29,7 @@ import java.io.*;
  * when the method cannot be modified because it is in a
  * library.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.01.00
  */
 public class NoCloseOutputStream extends OutputStream implements NoCloseStream {

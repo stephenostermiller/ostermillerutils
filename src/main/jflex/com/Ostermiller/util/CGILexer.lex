@@ -1,7 +1,7 @@
 /* CGILexer.java is a generated file.  You probably want to
  * edit CGILexer.lex to make changes.  Use JFlex to generate it.
  * JFlex may be obtained from
- * <a href="http://jflex.de">the JFlex website</a>.
+ * <a href="https://www.jflex.de/">the JFlex website</a>.
  * JFlex 1.4 or later is required.
  * Run:<br>
  * jflex CGILexer.lex<br>
@@ -11,7 +11,7 @@
 /*
  * Parse CGI query data.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,11 +32,11 @@ import java.io.*;
 /**
  * Parses query string data from a CGI request into name value pairs.
  * <p>
- * This class has a <a href="http://ostermiller.org/utils/CGIParser.html">website</a>
+ * This class has a <a href="https://ostermiller.org/utils/CGIParser.html">website</a>
  * where more information and examples are
  * available.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 %%

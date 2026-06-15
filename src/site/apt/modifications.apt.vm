@@ -11,13 +11,13 @@ Modifying, Compiling, and Building the com.Ostermiller.util Java utilities
   source code, make modifications, and distribute your changes in accordance
   with the {{{./license.html}license}}.  To get started, choose the "latest
   source code" from the {{{./download.html}downloads}}.  Extract the package
-  and build it with {{{http://maven.apache.org/}Maven}}.
+  and build it with {{{https://maven.apache.org/}Maven}}.
 
 ----------------------------------------
 mvn package
 ----------------------------------------
 
-  There are several build dependencies such as {{{http://jflex.de/}JFlex}},
+  There are several build dependencies such as {{{https://www.jflex.de/}JFlex}},
   however, Maven will take care of them for you and download all needed
   libraries and software.  Upon a successful build, you should find several
   .jar, .zip, .gz, and .bz2 files built in the target directory.

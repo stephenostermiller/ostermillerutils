@@ -1,7 +1,7 @@
 /*
  * Contact Streams Regression test.
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ import java.io.*;
 /**
  * Regression test for Concatenation Streams.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Conact.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Conact.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00
  */
 public class ConcatTest extends TestCase {

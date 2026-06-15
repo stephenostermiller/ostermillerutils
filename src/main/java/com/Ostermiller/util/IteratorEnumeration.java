@@ -1,7 +1,7 @@
 /*
  * Converts an iterator to an enumerator.
  * Copyright (C) 2004-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * Copyright (C) 2006 Jonathan Faivre-Vuillin
  * public dot lp at free dot fr
  *
@@ -26,9 +26,9 @@ import java.util.*;
  * Converts an iterator to an enumerator.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @param <ElementType> Type of element being enumerated
  * @since ostermillerutils 1.03.00
  */

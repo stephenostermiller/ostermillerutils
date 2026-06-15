@@ -4,7 +4,7 @@
  * Copyright (C) 2007 Stu Thompson stu.comp -at- mailworks.org
  *
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * See LICENSE.txt for details.
  *
  * The original work by Santeri Paavolainen can be found at
- * http://santtu.iki.fi/md5/
+ * http://santtu.iki.fi/programs/md5/
  *
  * This Java class has been derived from the RSA Data Security, Inc. MD5
  * Message-Digest Algorithm and its reference implementation.
@@ -31,7 +31,7 @@ import java.io.*;
 /**
  * MD5 hash generator.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
  * <p>
  * This class takes as input a message of arbitrary length and produces
  * as output a 128-bit "fingerprint" or "message digest" of the input.
@@ -48,8 +48,8 @@ import java.io.*;
  * @see MD5OutputStream
  * @see MD5InputStream
  *
- * @author Santeri Paavolainen http://santtu.iki.fi/md5/
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Santeri Paavolainen http://santtu.iki.fi/programs/md5/
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class MD5 {

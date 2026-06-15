@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Random+Password+Generator+Applet
+ * https://ostermiller.org/contact.pl?regarding=Random+Password+Generator+Applet
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import java.awt.event.*;
 /**
  * An applet that will let the user generate random passwords.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.02.00
  */
 public class RandPassApplet extends JApplet {
@@ -158,7 +158,7 @@ public class RandPassApplet extends JApplet {
 		return (
 			"Title: Random Password Generator\n" +
 			"Author: Stephen Ostermiller\n" +
-			"http://ostermiller.org/contact.pl?regarding=Random+Password+Generator+Applet\n" +
+			"https://ostermiller.org/contact.pl?regarding=Random+Password+Generator+Applet\n" +
 			"Generates secure random passwords."
 		);
 	}

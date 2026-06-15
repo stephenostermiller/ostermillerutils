@@ -1,9 +1,8 @@
 /*
  * Copyright (C) 2004-2005 Matt Conway
- * http://simplygenius.com/
 
  * Copyright (C) 2005-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,10 +50,10 @@ import java.util.*;
  * </pre>
  *
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.
  *
- * @author Matt Conway - http://simplygenius.com/
- * @author Stephen Ostermiller - http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Matt Conway
+ * @author Stephen Ostermiller - https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.05.00
  */
 public class Parallelizer

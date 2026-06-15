@@ -2,7 +2,7 @@
  * Copyright (C) 1996 Santeri Paavolainen, Helsinki Finland
  *
  * Copyright (C) 2002-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * See LICENSE.txt for details.
  *
  * The original work by Santeri Paavolainen can be found a
- * http://santtu.iki.fi/md5/
+ * http://santtu.iki.fi/programs/md5/
  */
 package com.Ostermiller.util;
 
@@ -26,7 +26,7 @@ import java.io.*;
 /**
  * Implements MD5 functionality on a stream.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/MD5.html">ostermiller.org</a>.
  * <p>
  * This class produces a 128-bit "fingerprint" or "message digest" for
  * all data read from this stream.
@@ -43,8 +43,8 @@ import java.io.*;
  * @see MD5
  * @see MD5OutputStream
  *
- * @author Santeri Paavolainen http://santtu.iki.fi/md5/
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Santeri Paavolainen http://santtu.iki.fi/programs/md5/
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class MD5InputStream extends FilterInputStream {

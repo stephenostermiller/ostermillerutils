@@ -1,7 +1,7 @@
 /*
  * Adjusts line endings.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@ import java.util.Locale;
  * Stream editor to alter the line separators on text to match
  * that of a given platform.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class LineEnds {
@@ -126,7 +126,7 @@ public class LineEnds {
 				case ABOUT:{
 					System.out.println(
 						labels.getString("lineends") + " -- " + labels.getString("purpose.message") + "\n" +
-						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001", "Stephen Ostermiller (http://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
+						MessageFormat.format(labels.getString("copyright"), (Object[])new String[] {"2001", "Stephen Ostermiller (https://ostermiller.org/contact.pl?regarding=Java+Utilities)"}) + "\n\n" +
 						labels.getString("license")
 					);
 					System.exit(0);

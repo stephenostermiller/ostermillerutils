@@ -7,7 +7,7 @@
 	<inceptionYear>2001</inceptionYear>
 	<version>${revision}</version>
 	<name>Ostermiller Java Utilities</name>
-	<url>http://ostermiller.org/utils/</url>
+	<url>https://ostermiller.org/utils/</url>
 	<packaging>jar</packaging>
 	<description>
 		Open source (GPL) Java utilities maintained by Stephen Ostermiller with
@@ -16,7 +16,7 @@
 	<licenses>
 		<license>
 			<name>GNU General Public License, version 2</name>
-			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+			<url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -35,12 +35,12 @@
 		<repository>
 			<id>central</id>
 			<name>Maven Repository Switchboard</name>
-			<url>http://repo1.maven.org/maven2</url>
+			<url>https://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>com.anasoft.os.repository.releases</id>
 			<name>ANASOFT OpenSource releases</name>
-			<url>http://anasoft-os-repo.googlecode.com/svn/repository/releases</url>
+			<url>https://anasoft-os-repo.googlecode.com/svn/repository/releases</url>
 		</repository>
 	</repositories>
 	<build>
@@ -230,10 +230,10 @@
 					<show>public</show>
 					<nohelp>true</nohelp>
 					<bottom><![CDATA[
-						<p>Copyright &#169; {inceptionYear}-{currentYear} by <a href="http://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>
+						<p>Copyright &#169; {inceptionYear}-{currentYear} by <a href="https://ostermiller.org/contact.pl?regarding=Java+Utilities">Stephen Ostermiller</a></p>
 					]]></bottom>
 					<header><![CDATA[
-						<h1><a target=\"_top\" href="http://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>
+						<h1><a target=\"_top\" href="https://ostermiller.org/utils/">com.Ostermiller.util</a> Java Utilities</h1>
 					]]></header>
 				</configuration>
 				<executions>
@@ -323,10 +323,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<issueManagement>
-		<system>Bugzilla</system>
-		<url>https://bugzilla.ostermiller.com/</url>
-	</issueManagement>
 	<developers>
 		<developer>
 			<name>Stephen Ostermiller</name>

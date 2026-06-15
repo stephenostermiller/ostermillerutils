@@ -1,7 +1,7 @@
 /*
  * Control a web browser from your java application.
  * Copyright (C) 2001-2010 Stephen Ostermiller
- * http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * Copyright (C) 2005 Johann N. Loefflmann <jonelo@jonelo.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,9 +30,9 @@ import javax.swing.*;
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
  * More information about this class is available from <a target="_top" href=
- * "http://ostermiller.org/utils/Browser.html">ostermiller.org</a>.
+ * "https://ostermiller.org/utils/Browser.html">ostermiller.org</a>.
  *
- * @author Stephen Ostermiller http://ostermiller.org/contact.pl?regarding=Java+Utilities
+ * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00
  */
 public class Browser {
@@ -684,9 +684,9 @@ public class Browser {
 			if (Browser.dialogConfiguration(null)){
 				if (args.length == 0){
 					Browser.displayURLs(new String[]{
-						"http://www.google.com/",
-						"http://dmoz.org/",
-						"http://ostermiller.org",
+						"https://www.google.com/",
+						"https://example.com/",
+						"https://ostermiller.org",
 					}, "fun");
 				} else if (args.length == 1){
 					Browser.displayURL(args[0], "fun");

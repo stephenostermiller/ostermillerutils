@@ -79,7 +79,7 @@ Encode or decode using the base64 format.
 
   Translations gladly accepted.  Please translate
   {{{./src/Base64.properties.html}Base64.properties}}.
-	You may want to use: {{{http://attesoro.org/}Attesoro -
+	You may want to use: {{{https://attesoro.org/}Attesoro -
   A Java Translation Editor}}
 
 *Links
@@ -87,13 +87,9 @@ Encode or decode using the base64 format.
 *-----*-----*-----*
 Author | License| Features
 *-----*-----*-----*
-Stephen Ostermiller {{{http://ostermiller.org/utils/Base64.html}com.Ostermiller.util.Base64}} | Open source, GPL | Encodes and decodes strings, byte arrays, files, and streams from static methods.
+Stephen Ostermiller {{{https://ostermiller.org/utils/Base64.html}com.Ostermiller.util.Base64}} | Open source, GPL | Encodes and decodes strings, byte arrays, files, and streams from static methods.
 *-----*-----*-----*
-Robert W. Harder {{{http://iharder.sourceforge.net/current/java/base64/}Base64}} | Open source, public domain | Encodes and decodes strings, byte arrays, and objects from static methods.  It will encode and decode streams if you instantiate a Base64.InputStream or a Base64.OutputStream.
+Robert W. Harder {{{https://iharder.sourceforge.net/current/java/base64/}Base64}} | Open source, public domain | Encodes and decodes strings, byte arrays, and objects from static methods.  It will encode and decode streams if you instantiate a Base64.InputStream or a Base64.OutputStream.
 *-----*-----*-----*
-Roedy Green {{{http://mindprod.com/jgloss/base64.html}Java Glossary}}, {{{http://mindprod.com/products1.html#BASE64}com.mindprod.base64.base64}} | Open source, freeware (except military) | Encodes from byte arrays to strings, decodes from strings to byte arrays.
-*-----*-----*-----*
-Tom Daley {{{http://www.javaworld.com/javaworld/javatips/jw-javatip36-p2.html}JavaWorld Tip}} | unknown | Annotated code and nifty graphic that shows how Base64 encoding works. Supports byte array to byte array operations.
-*-----*-----*-----*
-Sinotar {{{http://www.sinotar.com/download/base64/README.html}com.sinotar.algorithm.Base64}} | Open source, free only for personal use. | Encodes from byte arrays to strings, decodes from strings to byte arrays.
+Roedy Green {{{https://www.mindprod.com/jgloss/base64.html}Java Glossary}}, {{{https://www.mindprod.com/products1.html#BASE64}com.mindprod.base64.base64}} | Open source, freeware (except military) | Encodes from byte arrays to strings, decodes from strings to byte arrays.
 *-----*-----*-----*
