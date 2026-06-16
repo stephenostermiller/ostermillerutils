@@ -202,6 +202,26 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>releasesToSite</id>
+						<phase>site</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>${basedir}/releases</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
 						<id>licenseToClasses</id>
 						<phase>package</phase>
 						<goals>
@@ -300,6 +320,20 @@
 							<executable>perl</executable>
 							<arguments>
 								<argument>src/build/script/site_file_lists.pl</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-utils-jar-to-site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>sh</executable>
+							<arguments>
+								<argument>-c</argument>
+								<argument>cp ${project.build.directory}/${project.artifactId}-${project.version}.jar ${project.build.directory}/site/utils.jar</argument>
 							</arguments>
 						</configuration>
 					</execution>

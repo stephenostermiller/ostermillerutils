@@ -25,7 +25,7 @@ import junit.framework.TestCase;
  * Unit test for NoCloseOutputStream.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
- * @since ostermillerutils 1.08.02
+ * @since ostermillerutils 1.08.03
  */
 public class NoCloseOutputStreamTest extends TestCase {
 

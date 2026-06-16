@@ -28,6 +28,12 @@ Version History of com.Ostermiller.util Java Utilities
   whenever new utilities are added.  The final number is reserved for bug fix
   releases.
 
+    * Version 1.08.03
+
+        * New unit tests for no close streams
+
+        * Documentation updates
+
     * Version 1.08.02
 
         * NullPointerException at loading properties in DateTimeParse in German Locale

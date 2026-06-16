@@ -45,7 +45,7 @@ target/javadoc: $(shell find src/main -type f \( -name '*.java' -o -name '*.jfle
 	mvn javadoc:javadoc@javadoc && touch target/javadoc
 
 target/site: target/javadoc target/ostermillerutils-$(VERSION)-bin.zip $(shell find src/site -type f 2>/dev/null) src/build/script/site_file_lists.pl src/build/script/post_process_html.pl
-	mvn resources:resources@srcSiteToGenerated exec:exec@generate-site-files site:site jar:jar@randpassjar resources:copy-resources@archivesToSite resources:copy-resources@javadocToSite exec:exec@post-process-html -Drevision=$(VERSION) && touch target/site
+	mvn resources:resources@srcSiteToGenerated exec:exec@generate-site-files site:site jar:jar@randpassjar exec:exec@copy-utils-jar-to-site resources:copy-resources@archivesToSite resources:copy-resources@javadocToSite resources:copy-resources@releasesToSite exec:exec@post-process-html -Drevision=$(VERSION) && touch target/site
 
 .PHONY: clean
 clean:

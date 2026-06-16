@@ -1,0 +1,3 @@
+[submodule "releases"]
+	path = releases
+	url = source.ostermiller.org:/git/ostermillerutils-releases.git
