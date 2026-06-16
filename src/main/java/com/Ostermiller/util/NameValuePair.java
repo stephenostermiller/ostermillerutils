@@ -24,7 +24,7 @@ import java.net.URLEncoder;
  * Represents a name value pair as would be used as a CGI parameter.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.03.00

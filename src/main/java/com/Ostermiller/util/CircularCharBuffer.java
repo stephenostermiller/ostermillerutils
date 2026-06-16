@@ -22,7 +22,7 @@ import java.io.*;
 /**
  * Implements the Circular Buffer producer/consumer model for characters.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/CircularCharBuffer.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CircularCharBuffer.html">ostermiller.org</a>.
  * <p>
  * Using this class is a simpler alternative to using a PipedReader
  * and a PipedWriter. PipedReaders and PipedWriters don't support the

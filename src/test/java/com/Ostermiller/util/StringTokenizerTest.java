@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 /**
  * A regression test for com.Ostermiller.util.StringTokenizer.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/StringTokenizer.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00

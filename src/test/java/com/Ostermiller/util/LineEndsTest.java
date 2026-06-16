@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Unit test for LineEnds.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/LineEnds.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/LineEnds.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller
  *         https://ostermiller.org/contact.pl?regarding=Java+Utilities

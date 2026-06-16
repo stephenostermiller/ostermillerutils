@@ -26,25 +26,25 @@ site: target/site
 .git/hooks/pre-commit:
 	command -v pre-commit >/dev/null && pre-commit install || true
 
-target/classes: .git/hooks/pre-commit $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+target/classes: .git/hooks/pre-commit $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \))
 	mvn compile && touch target/classes
 
-target/test: target/classes
+target/test: target/classes $(shell find src/test -type f -name '*.java')
 	mvn surefire:test && touch target/test
 
 target/ostermillerutils-$(VERSION).jar: target/classes
 	mvn jar:jar -Drevision=$(VERSION)
 
-target/ostermillerutils-$(VERSION)-sources.jar: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+target/ostermillerutils-$(VERSION)-sources.jar: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \))
 	mvn source:jar -Drevision=$(VERSION)
 
 target/ostermillerutils-$(VERSION)-bin.zip: target/ostermillerutils-$(VERSION).jar target/ostermillerutils-$(VERSION)-sources.jar
 	mvn assembly:single -Drevision=$(VERSION)
 
-target/javadoc: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \) 2>/dev/null)
+target/javadoc: $(shell find src/main -type f \( -name '*.java' -o -name '*.jflex' -o -name '*.jflexcsv' \))
 	mvn javadoc:javadoc@javadoc && touch target/javadoc
 
-target/site: target/javadoc target/ostermillerutils-$(VERSION)-bin.zip $(shell find src/site -type f 2>/dev/null) src/build/script/site_file_lists.pl src/build/script/post_process_html.pl
+target/site: target/javadoc target/ostermillerutils-$(VERSION)-bin.zip $(shell find src/site -type f) src/build/script/site_file_lists.pl src/build/script/post_process_html.pl
 	mvn resources:resources@srcSiteToGenerated exec:exec@generate-site-files site:site jar:jar@randpassjar exec:exec@copy-utils-jar-to-site resources:copy-resources@archivesToSite resources:copy-resources@javadocToSite resources:copy-resources@releasesToSite exec:exec@post-process-html -Drevision=$(VERSION) && touch target/site
 
 .PHONY: clean

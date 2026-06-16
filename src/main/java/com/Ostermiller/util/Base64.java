@@ -25,7 +25,7 @@ import java.util.Locale;
  * Implements Base64 encoding and decoding as defined by RFC 2045: "Multi-purpose Internet
  * Mail Extensions (MIME) Part One: Format of Internet Message Bodies" page 23.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/Base64.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/Base64.html">ostermiller.org</a>.
  *
  * <blockquote>
  * <p>The Base64 Content-Transfer-Encoding is designed to represent

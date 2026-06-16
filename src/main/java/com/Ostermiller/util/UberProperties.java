@@ -26,7 +26,7 @@ import java.util.*;
  * Properties can be saved to a stream or loaded from a stream. Each key and
  * its corresponding value in the property list is a string.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/UberProperties.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/UberProperties.html">ostermiller.org</a>.
  * <p>
  * A property list can contain another property list as its "defaults"; this
  * second property list is searched if the property key is not found in the

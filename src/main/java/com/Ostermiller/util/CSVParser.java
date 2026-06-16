@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Read files in comma separated value format.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  *
  * CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.

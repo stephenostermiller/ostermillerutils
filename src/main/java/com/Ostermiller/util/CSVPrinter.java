@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Print values as a comma separated list.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @author Pierre Dittgen &lt;pierre dot dittgen at pass-tech dot fr&gt;

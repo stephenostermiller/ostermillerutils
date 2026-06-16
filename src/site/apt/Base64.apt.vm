@@ -103,7 +103,7 @@ Encode or decode using the base64 format.
 *-----*-----*-----*
 Author | License| Features
 *-----*-----*-----*
-Stephen Ostermiller {{{https://ostermiller.org/utils/Base64.html}com.Ostermiller.util.Base64}} | Open source, GPL | Encodes and decodes strings, byte arrays, files, and streams from static methods.
+Stephen Ostermiller {{{https://utils.ostermiller.org/Base64.html}com.Ostermiller.util.Base64}} | Open source, GPL | Encodes and decodes strings, byte arrays, files, and streams from static methods.
 *-----*-----*-----*
 Robert W. Harder {{{https://iharder.sourceforge.net/current/java/base64/}Base64}} | Open source, public domain | Encodes and decodes strings, byte arrays, and objects from static methods.  It will encode and decode streams if you instantiate a Base64.InputStream or a Base64.OutputStream.
 *-----*-----*-----*

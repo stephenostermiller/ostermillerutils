@@ -30,7 +30,7 @@ import javax.swing.*;
 /**
  * Allows URLs to be opened in the system browser on Windows and Unix.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/Browser.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/Browser.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00

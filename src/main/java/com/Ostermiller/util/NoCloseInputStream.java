@@ -21,7 +21,7 @@ import java.io.*;
 /**
  * An input stream with a close method with no effect.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/NoCloseStream.html">ostermiller.org</a>.
  * <p>
  * This class implements the Decorator design pattern to wrap a normal input stream
  * so that it can be passed to methods that read from it

@@ -25,7 +25,7 @@ import javax.swing.*;
 /**
  * A modal dialog that asks the user for a user name and password.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/PasswordDialog.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/PasswordDialog.html">ostermiller.org</a>.
  *
  * <pre>
  * PasswordDialog p = new PasswordDialog(null, "Test");

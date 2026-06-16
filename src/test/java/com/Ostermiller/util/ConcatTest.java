@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Regression test for Concatenation Streams.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/Conact.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/Conact.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00

@@ -23,7 +23,7 @@ import java.io.*;
  * A wrapper for a stream (either input or output)
  * which has a close method with no effect.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/NoCloseStream.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/NoCloseStream.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.01.00

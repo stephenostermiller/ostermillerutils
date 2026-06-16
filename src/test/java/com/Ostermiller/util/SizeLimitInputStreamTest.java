@@ -22,7 +22,7 @@ import java.io.*;
 /**
  * Regression test for SizeLimitInputStreams.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/SizeLimitInputStream.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/SizeLimitInputStream.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.04.00

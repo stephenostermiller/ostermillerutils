@@ -21,7 +21,7 @@ package com.Ostermiller.util;
  *
  * More information about this class and code samples for suggested use are
  * available from <a target="_top" href=
- * "https://ostermiller.org/utils/CmdLn.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CmdLn.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.07.00

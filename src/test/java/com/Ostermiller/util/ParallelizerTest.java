@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Regression test for Parallelizer. More information about this class is
  * available from <a target="_top" href=
- * "https://ostermiller.org/utils/Parallelizer.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/Parallelizer.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller
  *         https://ostermiller.org/contact.pl?regarding=Java+Utilities

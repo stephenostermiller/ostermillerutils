@@ -23,7 +23,7 @@ import java.util.Vector;
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  * <P>
  * Excel CSV is a file format used as a portable representation of a database. The file
  * format is described by RFC 4180.

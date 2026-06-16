@@ -2,7 +2,7 @@
 
 Open source (GPL) Java utilities maintained by Stephen Ostermiller with help from many contributors.
 
-**Visit the official website: https://ostermiller.org/utils/** for pre-compiled downloads and full documentation.
+**Visit the official website: https://utils.ostermiller.org/** for pre-compiled downloads and full documentation.
 
 ## Building
 

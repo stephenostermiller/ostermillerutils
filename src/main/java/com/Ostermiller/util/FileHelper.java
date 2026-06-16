@@ -26,7 +26,7 @@ import java.util.Locale;
 /**
  * Utilities for File manipulation.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/FileHelper.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/FileHelper.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00

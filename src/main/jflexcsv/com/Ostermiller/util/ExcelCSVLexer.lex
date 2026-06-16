@@ -33,7 +33,7 @@ import java.io.*;
  * Read files in comma separated value format as outputted by the Microsoft
  * Excel Spreadsheet program.
  * More information about this class is available from <a href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  * <P>
  * Excel CSV is a file format used as a portable representation of a database.
  * Each line is one entry or record and the fields in a record are separated by commas.

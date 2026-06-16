@@ -32,7 +32,7 @@ import java.io.*;
 /**
  * Read files in comma separated value format.
  * More information about this class is available from <a href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  *
  * The use of this class is no longer recommended.	It is now recommended that you use
  * com.Ostermiller.util.CSVParser instead.	That class, has a cleaner API, and methods

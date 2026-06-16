@@ -39,7 +39,7 @@ import java.util.Vector;
  * may decrease security.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/RandPass.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/RandPass.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @since ostermillerutils 1.00.00

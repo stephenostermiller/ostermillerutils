@@ -24,7 +24,7 @@ import java.util.*;
  * Converts an Enumeration to an iterator.
  * <p>
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/Iterator_Enumeration.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/Iterator_Enumeration.html">ostermiller.org</a>.
  *
  * @author Stephen Ostermiller https://ostermiller.org/contact.pl?regarding=Java+Utilities
  * @param <ElementType> type of object over which to iterate

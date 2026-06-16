@@ -81,16 +81,16 @@ for my $file (sort @files){
 		$docXdocLink = "        <li><a href=\"../$webDoc.html\">$webDoc Documentation and Examples</a></li>";
 	}
 	if (! -f "src/site/apt/$barename.apt.vm"){
-		$htaccessList .= "Redirect permanent /utils/$barename.html https://ostermiller.org/utils/src/$srchtmlhref\n";
+		$htaccessList .= "Redirect permanent /utils/$barename.html https://utils.ostermiller.org/src/$srchtmlhref\n";
 		if ($ext ne ".java"){
-				$htaccessList .= "Redirect permanent /utils/javadoc/$barename.html https://ostermiller.org/utils/src/$srchtmlhref\n";
+				$htaccessList .= "Redirect permanent /utils/javadoc/$barename.html https://utils.ostermiller.org/src/$srchtmlhref\n";
 		}
 		if (! -f "target/site/doc/com/Ostermiller/util/$barename.html"){
-				$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html https://ostermiller.org/utils/src/$srchtmlhref\n";
+				$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html https://utils.ostermiller.org/src/$srchtmlhref\n";
 		}
 	}
 
-	$htaccessList .= "Redirect permanent /utils/$srchtmlhref https://ostermiller.org/utils/src/$srchtmlhref\n";
+	$htaccessList .= "Redirect permanent /utils/$srchtmlhref https://utils.ostermiller.org/src/$srchtmlhref\n";
 	$sourceList .= "    * {{{./src/$srchtmlhref}$basename Source Code}}\n\n";
 	$menuList .= "        <item name=\"$basename\" href=\"/src/$srchtmlhref\" />\n";
 
@@ -113,16 +113,16 @@ for my $file (sort @files){
 			} else {
 				$barenametests =~ s/Test/Tests/g;
 			}
-			$htaccessList .= "Redirect permanent /utils/$barenametest.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/javadoc/$barenametest.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametest.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/$barenametests.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/javadoc/$barenametests.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametests.html https://ostermiller.org/utils/\n";
+			$htaccessList .= "Redirect permanent /utils/$barenametest.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/javadoc/$barenametest.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametest.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/$barenametests.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/javadoc/$barenametests.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barenametests.html https://utils.ostermiller.org/\n";
 	} else {
-			$htaccessList .= "Redirect permanent /utils/$barename.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/javadoc/$barename.html https://ostermiller.org/utils/\n";
-			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html https://ostermiller.org/utils/\n";
+			$htaccessList .= "Redirect permanent /utils/$barename.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/javadoc/$barename.html https://utils.ostermiller.org/\n";
+			$htaccessList .= "Redirect permanent /utils/doc/com/Ostermiller/util/$barename.html https://utils.ostermiller.org/\n";
 	}
 }
 

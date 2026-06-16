@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Read files in comma separated value format.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/CSV.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/CSV.html">ostermiller.org</a>.
  * This interface is designed to be set of general methods that all
  * CSV parsers should implement.
  *

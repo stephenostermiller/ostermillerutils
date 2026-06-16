@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
  * The string tokenizer class allows an application to break a string into
  * tokens.
  * More information about this class is available from <a target="_top" href=
- * "https://ostermiller.org/utils/StringTokenizer.html">ostermiller.org</a>.
+ * "https://utils.ostermiller.org/StringTokenizer.html">ostermiller.org</a>.
  * <p>
  * The tokenization method is much simpler than the one used by the
  * <code>StreamTokenizer</code> class. The <code>StringTokenizer</code> methods
