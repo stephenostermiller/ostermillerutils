@@ -47,13 +47,18 @@ Download com.Ostermiller.util Java Utilities
 
   The source release contains the source code for the project and the website.
   See the {{{./modifications.html} build instructions}} to be able to compile the
-  utilities yourself.  Choose one of the following:
+  utilities yourself.
+
+  Choose one of the following release packages:
 
     * {{{./ostermillerutils-${project.version}-project.tar.bz2}ostermillerutils-${project.version}-project.tar.bz2}}
 
     * {{{./ostermillerutils-${project.version}-project.tar.gz}ostermillerutils-${project.version}-project.tar.gz}}
 
     * {{{./ostermillerutils-${project.version}-project.zip}ostermillerutils-${project.version}-project.zip}}
+
+  You can also clone the source code from GitHub at
+  {{{https://github.com/stephenostermiller/ostermillerutils}https://github.com/stephenostermiller/ostermillerutils}}.
 
 *Older releases for specific runtime environments
 

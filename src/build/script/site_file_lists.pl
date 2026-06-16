@@ -32,7 +32,7 @@ if (! -e "target/javadoc/element-list" && ! -e "target/javadoc/package-list"){
 `mkdir -p target/site-template/apt/src`;
 
 my %sourceMap = ();
-for my $line (split(/\n/, `grep -i '\.java\.html.* Source' target/site-template/apt/*.apt.vm`)){
+for my $line (split(/\n/, `grep -i '\.java\.html.* Source' target/site-template/apt/*.apt.vm 2>/dev/null`)){
 	if ($line =~ /([^\/]+)\.apt\.vm.*[^A-Za-z0-9]([A-Za-z0-9]+)\.java/){
 		my ($webdoc, $javafile) = ($1, $2);
 		if ($webdoc ne "source"){
@@ -128,7 +128,16 @@ for my $file (sort @files){
 
 sub createSrcFile(){
 	my ($srcAptVmFile, $basename, $docAptLink, $javadocAptLink, $brush, $mavenrootname) = @_;
+	my ($dir) = $srcAptVmFile =~ /^(.*)\//;
+	`mkdir -p $dir`;
 	open (FILE, ">$srcAptVmFile") or die $?;
+
+	# Determine file extension for Doxia syntax highlighting
+	my $ext = "";
+	if ($mavenrootname =~ /\.([^.]+)$/) {
+		$ext = $1;
+	}
+
 	print FILE "  ----
 	$basename Source Code
 	----
@@ -142,7 +151,7 @@ $docAptLink
 
 $javadocAptLink
 
-\%{code-snippet$brush|file=$mavenrootname}
+%{snippet|file=$mavenrootname}
 ";
 
 	close (FILE);
@@ -151,6 +160,8 @@ $javadocAptLink
 
 sub createJavadocFile(){
 	my ($javadocFile, $barename, $javadocHref, $docXdocLink, $srcXdocLink) = @_;
+	my ($dir) = $javadocFile =~ /^(.*)\//;
+	`mkdir -p $dir`;
 	open (FILE, ">$javadocFile") or die $?;
 	print FILE "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <document xmlns=\"http://maven.apache.org/XDOC/2.0\"
@@ -169,7 +180,7 @@ sub createJavadocFile(){
 $docXdocLink
 $srcXdocLink
 			</ul>
-			<iframe src=\"$javadocHref\" width=\"100%\" height=\"20000\" onload=\"this.style.height=(this.contentWindow.document.body.scrollHeight)+'px'\"></iframe>
+			<iframe src=\"$javadocHref\" style=\"width:100%;height:4000px;\" onload=\"var self=this;var retries=0;var checkHeight=function(){try{var doc=self.contentDocument;if(!doc)throw new Error('No contentDocument');var mainContent=doc.querySelector('main')||doc.querySelector('[role=main]')||doc.querySelector('.contentContainer')||doc.querySelector('body');var h=mainContent?Math.max(mainContent.scrollHeight,mainContent.offsetHeight):0;if(h&gt;500){self.style.height=h+50+'px'}else if(retries++&lt;50){setTimeout(checkHeight,200)}}catch(e){if(retries++&lt;50)setTimeout(checkHeight,200)}};checkHeight()\"></iframe>
 		</section>
 	</body>
 </document>

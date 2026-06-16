@@ -51,7 +51,7 @@ NoCloseInputStream
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/NoCloseInputStream.java.snippet}
+%{snippet|file=src/site/snippet/NoCloseInputStream.java.snippet}
 
 NoCloseOutputStream
 
@@ -61,7 +61,7 @@ NoCloseOutputStream
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/NoCloseOutputStream.java.snippet}
+%{snippet|file=src/site/snippet/NoCloseOutputStream.java.snippet}
 
 NoCloseReader
 
@@ -71,7 +71,7 @@ NoCloseReader
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/NoCloseReader.java.snippet}
+%{snippet|file=src/site/snippet/NoCloseReader.java.snippet}
 
 NoCloseWriter
 
@@ -81,4 +81,4 @@ NoCloseWriter
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/NoCloseWriter.java.snippet}
+%{snippet|file=src/site/snippet/NoCloseWriter.java.snippet}

@@ -45,4 +45,4 @@ Helper Methods for Runtime.exec
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/ExecHelper.java.snippet}
+%{snippet|file=src/site/snippet/ExecHelper.java.snippet}

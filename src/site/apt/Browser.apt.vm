@@ -53,7 +53,7 @@ Browser Opener
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/BrowserOpen.java.snippet}
+%{snippet|file=src/site/snippet/BrowserOpen.java.snippet}
 
 * GUI Configuration
 

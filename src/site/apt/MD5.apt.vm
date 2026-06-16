@@ -48,7 +48,7 @@ MD5
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/MD5HelloWorld.java.snippet}
+%{snippet|file=src/site/snippet/MD5HelloWorld.java.snippet}
 
 MD5 Input Stream
 
@@ -60,7 +60,7 @@ MD5 Input Stream
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/MD5InputStreamExample.java.snippet}
+%{snippet|file=src/site/snippet/MD5InputStreamExample.java.snippet}
 
 MD5 Output Stream
 
@@ -72,7 +72,7 @@ MD5 Output Stream
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/MD5OutputStreamExample.java.snippet}
+%{snippet|file=src/site/snippet/MD5OutputStreamExample.java.snippet}
 
 *Security Alert
 

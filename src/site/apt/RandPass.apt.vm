@@ -34,7 +34,7 @@ Random Password Generator
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/RandPassGenerate.java.snippet}
+%{snippet|file=src/site/snippet/RandPassGenerate.java.snippet}
 
 *Java Applet
 

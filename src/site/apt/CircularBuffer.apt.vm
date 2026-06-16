@@ -36,7 +36,7 @@ Circular Object Buffer
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/CircularObjects.java.snippet}
+%{snippet|file=src/site/snippet/CircularObjects.java.snippet}
 
   This example only works because "Hello World" is one object.  If you try to
   write more objects than the size of the buffer, the buffer will block until
@@ -62,7 +62,7 @@ Circular Character Buffer
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/CircularCharacters.java.snippet}
+%{snippet|file=src/site/snippet/CircularCharacters.java.snippet}
 
   This example only works because "Hello World" is short.  If you try to write
   more data than the size of the buffer, the buffer will block until space
@@ -88,7 +88,7 @@ Circular Byte Buffer
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/CircularBytes.java.snippet}
+%{snippet|file=src/site/snippet/CircularBytes.java.snippet}
 
   This example only works because "Hello World" is short.  If you try to write
   more data than the size of the buffer, the buffer will block until space is

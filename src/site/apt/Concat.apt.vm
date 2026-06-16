@@ -35,7 +35,7 @@ ConcatInputStream
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/ConcatInputPrepend.java.snippet}
+%{snippet|file=src/site/snippet/ConcatInputPrepend.java.snippet}
 
 ConcatReader
 
@@ -47,4 +47,4 @@ ConcatReader
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/ConcatReaderPrepend.java.snippet}
+%{snippet|file=src/site/snippet/ConcatReaderPrepend.java.snippet}

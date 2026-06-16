@@ -1,0 +1,16 @@
+/* Fix breadcrumb height to contain links properly */
+#breadcrumbs,
+.breadcrumb, pre {
+	background-color: inherit;
+}
+
+/* Fix javadoc iframe flex-header overlay issue */
+iframe {
+	display: block !important;
+}
+
+/* Ensure content inside javadoc iframe has space for fixed header */
+body iframe {
+	width: 100%;
+	height: auto;
+}

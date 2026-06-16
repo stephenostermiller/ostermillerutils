@@ -34,13 +34,13 @@ Significant Figures
 
   Multiplying numbers using significant figures.
 
-%{code-snippet|brush=java|file=src/site/snippet/SigFigMultiplying.java.snippet}
+%{snippet|file=src/site/snippet/SigFigMultiplying.java.snippet}
 
 *Example
 
   Adding numbers using significant figures.
 
-%{code-snippet|brush=java|file=src/site/snippet/SigFigAdding.java.snippet}
+%{snippet|file=src/site/snippet/SigFigAdding.java.snippet}
 
 *See also
 

@@ -34,4 +34,4 @@ Helper Methods for Arrays
 
   Concatenate two arrays into a single longer array
 
-%{code-snippet|brush=java|file=src/site/snippet/ArrayHelperCat.java.snippet}
+%{snippet|file=src/site/snippet/ArrayHelperCat.java.snippet}

@@ -31,7 +31,7 @@ Base64 Java Library
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/ParseDateTimes.java.snippet}
+%{snippet|file=src/site/snippet/ParseDateTimes.java.snippet}
 
 *Internationalization
 

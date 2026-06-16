@@ -32,7 +32,7 @@ Basic Iterators and Enumerations
 
     * {{{./javadoc/IteratorEnumeration.html}IteratorEnumeration Javadoc}}
 
-%{code-snippet|brush=java|file=src/site/snippet/IteratorToEnumeration.java.snippet}
+%{snippet|file=src/site/snippet/IteratorToEnumeration.java.snippet}
 
 *Convert an Enumeration to an Iterator: EnumerationIterator
 
@@ -40,7 +40,7 @@ Basic Iterators and Enumerations
 
     * {{{./javadoc/EnumerationIterator.html}EnumerationIterator Javadoc}}
 
-%{code-snippet|brush=java|file=src/site/snippet/EnumerationToIterator.java.snippet}
+%{snippet|file=src/site/snippet/EnumerationToIterator.java.snippet}
 
 *Convert an array to an Enumeration: ArrayEnumeration
 
@@ -48,7 +48,7 @@ Basic Iterators and Enumerations
 
     * {{{./javadoc/ArrayEnumeration.html}ArrayEnumeration Javadoc}}
 
-%{code-snippet|brush=java|file=src/site/snippet/ArrayToEnumeration.java.snippet}
+%{snippet|file=src/site/snippet/ArrayToEnumeration.java.snippet}
 
 *Convert an array to an Iterator: ArrayIterator
 
@@ -56,4 +56,4 @@ Basic Iterators and Enumerations
 
     * {{{./javadoc/ArrayIterator.html}ArrayIterator Javadoc}}
 
-%{code-snippet|brush=java|file=src/site/snippet/ArrayToIterator.java.snippet}
+%{snippet|file=src/site/snippet/ArrayToIterator.java.snippet}

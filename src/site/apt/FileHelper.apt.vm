@@ -34,4 +34,4 @@ File Helper
 
   Move the file "source.txt" to "destination.txt"
 
-%{code-snippet|brush=java|file=src/site/snippet/FileHelperMove.java.snippet}
+%{snippet|file=src/site/snippet/FileHelperMove.java.snippet}

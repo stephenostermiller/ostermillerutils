@@ -122,25 +122,24 @@
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>2.1.1</version>
+				<version>3.12.1</version>
 				<configuration>
 					<siteDirectory>${project.build.directory}/site-template</siteDirectory>
+					<outputFormat>xhtml5</outputFormat>
+					<attributes>
+						<disabledModules>poweredBy</disabledModules>
+					</attributes>
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>com.anasoft.os</groupId>
-						<artifactId>m2st-doxia-macros</artifactId>
-						<version>2.0</version>
-					</dependency>
-					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-sink-api</artifactId>
-						<version>1.1.3</version>
+						<version>1.12.0</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-core</artifactId>
-						<version>1.1.3</version>
+						<version>1.12.0</version>
 					</dependency>
 				</dependencies>
             </plugin>
@@ -304,6 +303,19 @@
 							</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>post-process-html</id>
+						<phase>post-site</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>perl</executable>
+							<arguments>
+								<argument>src/build/script/post_process_html.pl</argument>
+							</arguments>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
@@ -332,10 +344,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
-		<m2st-renderDefaultPoweredByLogoIfNotSpecified>false</m2st-renderDefaultPoweredByLogoIfNotSpecified>
-		<m2st-syntaxHighlighter-urlBase>syntax</m2st-syntaxHighlighter-urlBase>
-		<m2st-syntaxHighlighter-brushFiles>shBrushJava.js</m2st-syntaxHighlighter-brushFiles>
-		<m2st-syntaxHighlighter-themeCssFile>shTheme.css</m2st-syntaxHighlighter-themeCssFile>
 		<revision>DEV</revision>
 	</properties>
 </project>

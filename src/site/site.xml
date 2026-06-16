@@ -2,17 +2,18 @@
 <project name="OstermillerUtils Java Utilities">
 
   <skin>
-    <groupId>com.anasoft.os</groupId>
-    <artifactId>m2st-stylus-ext-skin</artifactId>
-    <version>2.0</version>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.11.2</version>
   </skin>
 
   <publishDate position="none"/>
   <version position="none"/>
+  <poweredBy />
 
   <body>
     <links>
-      <item name="Home" href="./" />
+      <item name="Home" href="/" />
       <item name="Download" href="/download.html" />
       <item name="Install" href="/install.html" />
       <item name="Components" href="components.html"/>
@@ -24,14 +25,15 @@
     </links>
 
     <menu name="OstermillerUtils">
+      <item name="Home" href="/" />
       <item name="Download" href="/download.html" />
-      <item name="Installation Instructions" href="/install.html" />
+      <item name="Installation" href="/install.html" />
       <item name="Components" href="components.html"/>
       <item name="JavaDoc" href="/doc.html"/>
       <item name="Browse Source Code" href="/source.html" />
       <item name="Bugs and Features" href="/bugs.html" />
       <item name="Version History" href="/history.html" />
-      <item name="Compile Modifications" href="/modifications.html" />
+      <item name="Compiling" href="/modifications.html" />
       <item name="Contributors" href="/contributors.html" />
       <item name="License" href="/licenseFAQ.html" />
     </menu>

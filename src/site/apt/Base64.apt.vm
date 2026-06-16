@@ -40,7 +40,7 @@ Base64 Java Library
 
   Use base64 to add a basic authentication to an HTTP request
 
-%{code-snippet|brush=java|file=src/site/snippet/Base64BasicAuthentication.java.snippet}
+%{snippet|file=src/site/snippet/Base64BasicAuthentication.java.snippet}
 
 *Base64 is not Encryption
 

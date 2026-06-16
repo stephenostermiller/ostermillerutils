@@ -44,4 +44,4 @@ Parallelizer Thread Control
 
 *Example
 
-%{code-snippet|brush=java|file=src/site/snippet/ParallelizerExample.java.snippet}
+%{snippet|file=src/site/snippet/ParallelizerExample.java.snippet}

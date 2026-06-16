@@ -29,4 +29,4 @@ OstermillerUtils License
 
 *Full License
 
-%{code-snippet|file=LICENSE.txt}
+%{snippet|file=LICENSE.txt}

@@ -41,12 +41,12 @@ demo command line application
 
 *Option Enum
 
-%{code-snippet|brush=java|file=src/site/snippet/CmdLnOptionEnum.java.snippet}
+%{snippet|file=src/site/snippet/CmdLnOptionEnum.java.snippet}
 
 *Call Back to Listeners
 
-%{code-snippet|brush=java|file=src/site/snippet/CmdLnCallBack.java.snippet}
+%{snippet|file=src/site/snippet/CmdLnCallBack.java.snippet}
 
 *Options by Name
 
-%{code-snippet|brush=java|file=src/site/snippet/CmdLnByName.java.snippet}
+%{snippet|file=src/site/snippet/CmdLnByName.java.snippet}
